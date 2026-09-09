@@ -276,11 +276,8 @@ def lathe(atlas: Atlas, profile, sides, offset, paint=None, rot=0.0,
             "smooth": smooth}
 
 
-def build(name: str, parts: list[dict], atlas: Atlas, image_name: str | None = None):
-    """One object from many boxes, one material, one atlas.
-
-    `parts` are dicts of {size, offset, rects} in texel units.
-    """
+def _mesh_of(name, parts, atlas):
+    """Mesh data for a list of parts, in texel units. Shared by build/build_rig."""
     verts, faces, uvs = [], [], []
     smooth = []
     for p in parts:
@@ -295,8 +292,19 @@ def build(name: str, parts: list[dict], atlas: Atlas, image_name: str | None = N
         smooth.extend([p.get("smooth", False)] * len(f))
         verts.extend(v); faces.extend(f); uvs.extend(u)
 
+    return verts, faces, uvs, smooth
+
+
+def _mesh_object(name, verts, faces, uvs, smooth, origin=(0.0, 0.0, 0.0)):
+    """A mesh object whose ORIGIN sits at `origin` (texel units).
+
+    Putting the origin at a joint is what lets a limb be rotated by setting
+    rotation_euler instead of rebuilding its geometry every frame.
+    """
+    ox, oy, oz = origin
     me = bpy.data.meshes.new(name)
-    me.from_pydata([(x * TEXEL, y * TEXEL, z * TEXEL) for x, y, z in verts], [], faces)
+    me.from_pydata([((x - ox) * TEXEL, (y - oy) * TEXEL, (z - oz) * TEXEL)
+                    for x, y, z in verts], [], faces)
     me.update()
     uvl = me.uv_layers.new(name="UVMap")
     for i, uv in enumerate(uvs):
@@ -305,11 +313,13 @@ def build(name: str, parts: list[dict], atlas: Atlas, image_name: str | None = N
     # smooth (a rounded toon head, say) can ask for it per part
     for poly, sm in zip(me.polygons, smooth):
         poly.use_smooth = bool(sm)
-
     obj = bpy.data.objects.new(name, me)
     bpy.context.collection.objects.link(obj)
+    obj.location = (ox * TEXEL, oy * TEXEL, oz * TEXEL)
+    return obj
 
-    img = atlas.image(image_name or f"{name}Atlas")
+
+def _pixel_material(name, img):
     mat = bpy.data.materials.new(f"{name}Mat")
     mat.use_nodes = True
     nt = mat.node_tree
@@ -321,9 +331,46 @@ def build(name: str, parts: list[dict], atlas: Atlas, image_name: str | None = N
     nt.links.new(tex.outputs["Color"], bsdf.inputs["Base Color"])
     bsdf.inputs["Roughness"].default_value = 0.92
     bsdf.inputs["Specular IOR Level"].default_value = 0.06
-    me.materials.append(mat)
+    return mat
+
+
+def build(name: str, parts: list[dict], atlas: Atlas, image_name: str | None = None):
+    """One object from many boxes, one material, one atlas."""
+    verts, faces, uvs, smooth = _mesh_of(name, parts, atlas)
+    obj = _mesh_object(name, verts, faces, uvs, smooth)
+    img = atlas.image(image_name or f"{name}Atlas")
+    obj.data.materials.append(_pixel_material(name, img))
     obj["texel_atlas"] = img.name
     return obj
+
+
+def build_rig(name: str, groups: dict, atlas: Atlas, image_name: str | None = None):
+    """Several objects sharing ONE atlas, each with its origin at a joint.
+
+    `groups` maps a limb name to {"parts": [...], "pivot": (x, y, z)}. Every
+    limb becomes its own object parented to a root empty, so posing a walk is
+    setting rotation_euler on five objects rather than rebuilding the mesh each
+    frame - which is also exactly how N64-era characters were rigged.
+
+    Returns (root, {limb: obj}).
+    """
+    img = atlas.image(image_name or f"{name}Atlas")
+    mat = _pixel_material(name, img)
+    root = bpy.data.objects.new(f"{name}Root", None)
+    root.empty_display_size = 0.2
+    bpy.context.collection.objects.link(root)
+
+    limbs = {}
+    for limb, spec in groups.items():
+        verts, faces, uvs, smooth = _mesh_of(f"{name}_{limb}", spec["parts"], atlas)
+        o = _mesh_object(f"{name}_{limb}", verts, faces, uvs, smooth,
+                         origin=spec.get("pivot", (0.0, 0.0, 0.0)))
+        o.data.materials.append(mat)
+        o.parent = root
+        o["texel_atlas"] = img.name
+        limbs[limb] = o
+    root["texel_atlas"] = img.name
+    return root, limbs
 
 
 def part(atlas: Atlas, size, offset, paint=None, rot=0.0, pivot=None,

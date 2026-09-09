@@ -189,6 +189,87 @@ def n64(name: str = "N64"):
 
 
 # --------------------------------------------------------------------------
+# a walking rig - what the marketing shots need instead of a sprite card
+# --------------------------------------------------------------------------
+HIP_Z, SHOULDER_Z = 8.0, 21.0
+
+
+def walk_pose(f: int, n: int = 8) -> dict:
+    """Angles for one frame of an 8-frame walk, in radians.
+
+    Legs counter-swing, the free arm counter-swings against them, and the body
+    bobs twice a cycle - once per footfall. The torch arm does NOT swing: it is
+    holding something up, and swinging it reads as a jog rather than a carry.
+    """
+    ph = 2.0 * math.pi * (f % n) / n
+    swing = math.sin(ph)
+    return {
+        "leg_l": math.radians(24.0) * swing,
+        "leg_r": math.radians(-24.0) * swing,
+        "arm_l": math.radians(-17.0) * swing,
+        "bob": abs(math.cos(ph)) * 0.6,          # texels
+    }
+
+
+def character_walk(name: str = "Walker", atlas_size: int = 128):
+    """The clean pixel low-poly figure, split into limbs that can be posed.
+
+    Returns (root, limbs, hand) - `hand` is where a torch goes, in the ROOT's
+    space, so a prop parented to the root travels with the character.
+    """
+    a = M.Atlas(atlas_size)
+    _skin_pal(a)
+    head = [(0, 0), (4.4, 0.6), (5.0, 2.4), (4.9, 5.6), (3.6, 7.4), (0, 8.0)]
+    groups = {
+        "body": {"parts": [
+            M.part(a, (8, 5, 11), (0, 0, 15.5), _tunic, top=(9, 5)),
+            M.part(a, (7, 5, 4), (0, 0, 8), _tunic, top=(8, 5)),
+            M.lathe(a, head, 9, (0, 0, 21), _headwrap),
+        ], "pivot": (0.0, 0.0, 0.0)},
+        "leg_l": {"parts": [
+            M.part(a, (3, 4, 8), (-2.0, 0, 4), _limb, top=(4, 4)),
+            M.part(a, (4, 6, 2), (-2.0, -0.6, 1), _boot),
+        ], "pivot": (-2.0, 0.0, HIP_Z)},
+        "leg_r": {"parts": [
+            M.part(a, (3, 4, 8), (2.0, 0, 4), _limb, top=(4, 4)),
+            M.part(a, (4, 6, 2), (2.0, -0.6, 1), _boot),
+        ], "pivot": (2.0, 0.0, HIP_Z)},
+        "arm_l": {"parts": [
+            M.part(a, (3, 3, 10), (-5.4, 0, 16), _limb, top=(4, 4)),
+        ], "pivot": (-5.4, 0.0, SHOULDER_Z)},
+        # the torch arm is baked raised; it is a carry, not a swing
+        "arm_r": {"parts": [
+            M.part(a, (3, 3, 10), (5.4, 0, 16), _limb, top=(4, 4),
+                   rot=M.ARM_SWING, pivot=(5.4, 0, SHOULDER_Z)),
+        ], "pivot": (5.4, 0.0, SHOULDER_Z)},
+    }
+    root, limbs = M.build_rig(name, groups, a, image_name=f"{name}Atlas")
+    # Arms hang off the TORSO, not the root, so the body's bob carries them -
+    # and anything held in the hand - while the feet stay planted. Parenting
+    # them to the root left the torch hanging still while the arm bobbed under
+    # it. build_rig puts the body's origin at (0,0,0), so no rebind maths.
+    for limb in ("arm_l", "arm_r"):
+        limbs[limb].parent = limbs["body"]
+    hand = _hand_point()
+    root["texel_hand"] = hand
+    root["texel_height"] = 29 * M.TEXEL
+    root["texel_mount"] = limbs["body"].name
+    return root, limbs, hand
+
+
+def pose_walk(limbs: dict, f: int, n: int = 8) -> None:
+    """Apply one frame of the cycle. Cheap enough to call per rendered frame."""
+    p = walk_pose(f, n)
+    for limb in ("leg_l", "leg_r", "arm_l"):
+        if limb in limbs:
+            limbs[limb].rotation_euler = (p[limb], 0.0, 0.0)
+    # only the torso moves: the arms and anything in the hand are parented to
+    # it, and the legs are not, which is what a walk actually looks like
+    if "body" in limbs:
+        limbs["body"].location = (0.0, 0.0, p["bob"] * M.TEXEL)
+
+
+# --------------------------------------------------------------------------
 # 2: voxel - cubes, per-voxel colour, NO uv texture
 # --------------------------------------------------------------------------
 _NB = ((1, 0, 0), (-1, 0, 0), (0, 1, 0), (0, -1, 0), (0, 0, 1), (0, 0, -1))
