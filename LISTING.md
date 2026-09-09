@@ -2,7 +2,9 @@
 
 **Status: LIVE.** Published 2026-09-09 at https://z3er1n.itch.io/texel
 (game 4991926, slug `texel`, classification Tool, $9.95, AI disclosure
-Yes + Code + Graphics).
+Yes + Code + Graphics). Page theme = the shared Pixelkiln store theme
+(`node automation/itch_theme.mjs --slug texel`) so it reads as one shop with
+the packs, not a stray white page.
 
 ---
 
