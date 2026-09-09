@@ -334,11 +334,17 @@ def _pixel_material(name, img):
     return mat
 
 
-def build(name: str, parts: list[dict], atlas: Atlas, image_name: str | None = None):
-    """One object from many boxes, one material, one atlas."""
+def build(name: str, parts: list[dict], atlas: Atlas, image_name: str | None = None,
+          image=None):
+    """One object from many boxes, one material, one atlas.
+
+    Pass `image` to hang the model on an image the CALLER owns and keeps
+    updating - which is how the painting reveals work: the same live image is on
+    the canvas plane and on the model, so they cannot drift apart.
+    """
     verts, faces, uvs, smooth = _mesh_of(name, parts, atlas)
     obj = _mesh_object(name, verts, faces, uvs, smooth)
-    img = atlas.image(image_name or f"{name}Atlas")
+    img = image if image is not None else atlas.image(image_name or f"{name}Atlas")
     obj.data.materials.append(_pixel_material(name, img))
     obj["texel_atlas"] = img.name
     return obj
@@ -371,6 +377,20 @@ def build_rig(name: str, groups: dict, atlas: Atlas, image_name: str | None = No
         limbs[limb] = o
     root["texel_atlas"] = img.name
     return root, limbs
+
+
+def tile_part(atlas: Atlas, size, offset, paint=None) -> dict:
+    """A cube whose SIX faces each show the whole canvas.
+
+    A tile is not an atlas: it is one image meant to repeat, so every face gets
+    the full 0..1 UV rather than its own slot. Nothing is allocated - the tile
+    owns the canvas.
+    """
+    rects = {f: (0, 0, atlas.size, atlas.size) for f in _CORNERS}
+    if paint:
+        paint(atlas, rects, size)
+    return {"size": size, "offset": offset, "rects": rects,
+            "rot": 0.0, "pivot": None, "top": None}
 
 
 def part(atlas: Atlas, size, offset, paint=None, rot=0.0, pivot=None,

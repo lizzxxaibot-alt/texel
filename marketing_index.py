@@ -79,8 +79,9 @@ GROUPS = [
         ("promo/steps-tavern.mp4", ""),
         ("promo/texel-sword.mp4", ""), ("promo/texel-shield.mp4", ""),
     ]),
-    ("Asset turntables", "Ten objects painted in Texel, each spinning. Drop-in "
-     "posts - one a day is nearly two weeks of content.", [
+    ("Painting reveals", "Ten objects appearing stroke by stroke - the canvas on "
+     "the left, the object it lands on on the right. Nothing rotates: these are "
+     "reveals, not turntables. Drop-in posts, one a day.", [
         ("gallery/contact-sheet.png", "all ten at once"),
         ("gallery/texel-reel.mp4", "all ten, 29s"),
         ("gallery/", ""),
