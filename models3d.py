@@ -206,16 +206,93 @@ def _box_geom(size, offset, rects, atlas_size, vbase, rot=0.0, pivot=None,
     return verts, faces, uvs
 
 
+def _lathe_geom(profile, sides, offset, rects, atlas_size, vbase,
+                rot=0.0, pivot=None):
+    """A surface of revolution: rings of (radius, z) spun `sides` times.
+
+    Boxes cannot make a head, a helmet, a barrel or a limb that reads as round.
+    A profile of (radius, z) pairs covers all of them, and at 6-10 sides it is
+    still unmistakably low-poly. A radius of 0 at either end closes the cap
+    without needing an n-gon.
+
+    UVs are cylindrical: u wraps once around the strip, v runs up the profile.
+    """
+    ox, oy, oz = offset
+    rx, ry, rw, rh = rects["SIDE"]
+    S = float(atlas_size)
+    rings, verts = [], []
+    for r, z in profile:
+        ring = []
+        for i in range(sides):
+            a = 2.0 * math.pi * i / sides
+            ring.append(len(verts))
+            verts.append((ox + math.cos(a) * r, oy + math.sin(a) * r, oz + z))
+        rings.append(ring)
+
+    faces, uvs = [], []
+    n = len(profile)
+    for k in range(n - 1):
+        lo, hi = rings[k], rings[k + 1]
+        r_lo, r_hi = profile[k][0], profile[k + 1][0]
+        for i in range(sides):
+            j = (i + 1) % sides
+            # ring 0 is the BOTTOM of the profile and must land on the BOTTOM
+            # row of the strip. Mapping it to ry directly puts it at the top of
+            # the canvas rect, which paints every lathed part upside down.
+            v1 = 1.0 - (ry + rh * (1.0 - k / (n - 1))) / S
+            v0 = 1.0 - (ry + rh * (1.0 - (k + 1) / (n - 1))) / S
+            u0 = (rx + rw * i / sides) / S
+            u1 = (rx + rw * (i + 1) / sides) / S
+            if r_lo <= 1e-6:                       # closed bottom: a fan
+                faces.append((vbase + lo[i], vbase + hi[j], vbase + hi[i]))
+                uvs.extend([(u0, v1), (u1, v0), (u0, v0)])
+            elif r_hi <= 1e-6:                     # closed top
+                faces.append((vbase + lo[i], vbase + lo[j], vbase + hi[i]))
+                uvs.extend([(u0, v1), (u1, v1), (u0, v0)])
+            else:
+                faces.append((vbase + lo[i], vbase + lo[j],
+                              vbase + hi[j], vbase + hi[i]))
+                uvs.extend([(u0, v1), (u1, v1), (u1, v0), (u0, v0)])
+
+    if rot:
+        pv = pivot or (ox, oy, oz)
+        verts = [_rotx(v, pv, rot) for v in verts]
+    return verts, faces, uvs
+
+
+def lathe(atlas: Atlas, profile, sides, offset, paint=None, rot=0.0,
+          pivot=None, smooth=False) -> dict:
+    """Allocate a cylindrical strip for a lathed part and paint into it."""
+    span = max(z for _r, z in profile) - min(z for _r, z in profile)
+    rmax = max(r for r, _z in profile)
+    w = max(sides * max(1, int(round(2 * math.pi * rmax / sides))), sides)
+    h = max(int(round(span)), 2)
+    ox, oy = atlas.alloc(w, h)
+    rects = {"SIDE": (ox, oy, w, h)}
+    if paint:
+        paint(atlas, rects, (rmax, sides, span))
+    return {"kind": "lathe", "profile": profile, "sides": sides,
+            "offset": offset, "rects": rects, "rot": rot, "pivot": pivot,
+            "smooth": smooth}
+
+
 def build(name: str, parts: list[dict], atlas: Atlas, image_name: str | None = None):
     """One object from many boxes, one material, one atlas.
 
     `parts` are dicts of {size, offset, rects} in texel units.
     """
     verts, faces, uvs = [], [], []
+    smooth = []
     for p in parts:
-        v, f, u = _box_geom(p["size"], p["offset"], p["rects"], atlas.size,
-                            len(verts), p.get("rot", 0.0), p.get("pivot"),
-                            p.get("top"))
+        if p.get("kind") == "lathe":
+            v, f, u = _lathe_geom(p["profile"], p["sides"], p["offset"],
+                                  p["rects"], atlas.size, len(verts),
+                                  p.get("rot", 0.0), p.get("pivot"))
+        else:
+            v, f, u = _box_geom(p["size"], p["offset"], p["rects"], atlas.size,
+                                len(verts), p.get("rot", 0.0), p.get("pivot"),
+                                p.get("top"))
+        smooth.extend([p.get("smooth", False)] * len(f))
         verts.extend(v); faces.extend(f); uvs.extend(u)
 
     me = bpy.data.meshes.new(name)
@@ -224,8 +301,10 @@ def build(name: str, parts: list[dict], atlas: Atlas, image_name: str | None = N
     uvl = me.uv_layers.new(name="UVMap")
     for i, uv in enumerate(uvs):
         uvl.data[i].uv = uv
-    for poly in me.polygons:
-        poly.use_smooth = False          # pixel art is flat-shaded, always
+    # flat by default - pixel art wants faceted forms - but a style that shades
+    # smooth (a rounded toon head, say) can ask for it per part
+    for poly, sm in zip(me.polygons, smooth):
+        poly.use_smooth = bool(sm)
 
     obj = bpy.data.objects.new(name, me)
     bpy.context.collection.objects.link(obj)
