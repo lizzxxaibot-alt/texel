@@ -87,6 +87,12 @@
   .foot b{color:var(--text);font-weight:600}
   .foot .url{font-size:11px;letter-spacing:.1em;text-transform:uppercase;
              color:var(--dim);opacity:.72}
+  /* bare: the headline and footer are marketing copy, and on a store page the
+     description carries those words as real text. What is left is the diagram. */
+  body.bare{height:470px}
+  body.bare .head, body.bare .foot{display:none}
+  body.bare .rows{margin-top:0}
+  body.bare .frame{padding:34px 31px}
 </style>
 
 <div class="frame">
@@ -125,6 +131,11 @@
 </div>
 
 <script>
+const BARE = new URLSearchParams(location.search).has("bare");
+if (BARE) {
+  document.documentElement.style.setProperty("--bare", "1");
+  document.body.classList.add("bare");
+}
 const T = 12;
 // A gallery uses frame 1 as the static thumbnail, and frame 1 used to be two
 // empty canvases - the one frame that says nothing. So open on the finished

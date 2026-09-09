@@ -1,0 +1,58 @@
+<!doctype html><meta charset="utf-8">
+<title>Texel store banner</title>
+<!--
+  The banner the itch description opens with. Aseprite's page does the same
+  thing: a wide branded header, then a very short body. This is the ONE place
+  type belongs on an image - it is a wordmark, not a caption on a screenshot.
+
+  The backdrop is the actual product output, darkened, so the banner shows what
+  the tool makes while it says what it is.
+-->
+<style>
+  @font-face{font-family:'YoungSerif';src:url('../../../brand/fonts/YoungSerif-Regular.ttf') format('truetype')}
+  @font-face{font-family:'Inter';src:url('../../../brand/fonts/Inter.ttf') format('truetype')}
+  :root{--text:#f2e6c8; --dim:#c3b79e; --ember:#ff9c3f; --gold:#e7b23a}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:1280px;height:340px;overflow:hidden}
+  body{position:relative;background:#141317;font-family:'Inter',sans-serif;
+    -webkit-font-smoothing:antialiased}
+
+  .bg{position:absolute;inset:0;background-image:url('store/clean/05_tiles.png');
+    background-size:cover;background-position:64% 46%;filter:saturate(1.02)}
+  /* the art has to sit UNDER the type, not fight it */
+  .veil{position:absolute;inset:0;
+    background:
+      linear-gradient(90deg,rgba(20,19,23,.98) 0%,rgba(20,19,23,.95) 38%,rgba(20,19,23,.62) 58%,rgba(20,19,23,.14) 100%),
+      linear-gradient(180deg,rgba(20,19,23,.22),rgba(20,19,23,.48))}
+  .glow{position:absolute;inset:0;
+    background:radial-gradient(680px 300px at 16% 34%,rgba(255,156,63,.16),transparent 66%)}
+
+  .in{position:absolute;inset:0;padding:0 62px;display:flex;flex-direction:column;
+    justify-content:center}
+  .kick{font-size:13px;letter-spacing:.26em;text-transform:uppercase;
+    color:var(--gold);font-weight:600}
+  h1{font-family:'YoungSerif',Georgia,serif;font-size:88px;line-height:.98;
+    color:var(--text);font-weight:400;margin-top:12px;letter-spacing:-.01em}
+  .rule{width:96px;height:4px;background:var(--ember);margin:20px 0 18px;
+    border-radius:2px}
+  .say{font-size:21px;color:var(--text);max-width:31ch;line-height:1.42}
+  .say b{color:var(--ember);font-weight:600}
+  .meta{position:absolute;left:62px;bottom:26px;display:flex;gap:9px}
+  .chip{font-size:12px;letter-spacing:.09em;text-transform:uppercase;
+    color:var(--dim);border:1px solid rgba(242,230,200,.22);border-radius:999px;
+    padding:6px 13px;background:rgba(20,19,23,.55)}
+  .chip b{color:var(--gold);font-weight:600}
+</style>
+<div class="bg"></div><div class="veil"></div><div class="glow"></div>
+<div class="in">
+  <div class="kick">A Blender add-on &middot; by Pixelkiln</div>
+  <h1>Texel</h1>
+  <div class="rule"></div>
+  <div class="say">Pixel art, painted <b>on the model</b> &mdash; and animated.</div>
+</div>
+<div class="meta">
+  <span class="chip"><b>94</b> tools</span>
+  <span class="chip">Blender <b>4.2+</b></span>
+  <span class="chip"><b>GPL-3.0</b> &middot; source included</span>
+  <span class="chip">updates <b>free forever</b></span>
+</div>
