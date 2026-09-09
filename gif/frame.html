@@ -43,9 +43,9 @@
   .meta b{color:var(--text);font-weight:600;font-variant-numeric:tabular-nums}
 
   /* ---------- rows ---------- */
-  .rows{margin-top:26px;display:flex;flex-direction:column;gap:16px}
-  .row{display:flex;align-items:center;gap:18px}
-  .lab{width:124px;text-align:right;flex:none}
+  .rows{margin-top:32px;display:flex;flex-direction:column;gap:22px}
+  .row{display:flex;align-items:center;gap:24px}
+  .lab{width:118px;text-align:right;flex:none}
   .labname{font-size:12.5px;font-weight:600;letter-spacing:.01em;color:var(--dim)}
   .labname i{font-style:normal;display:block;font-size:10px;letter-spacing:.15em;
              text-transform:uppercase;margin-top:3px;color:var(--dim);opacity:.72}
@@ -58,7 +58,7 @@
   .row.on  .labstat b{color:var(--gold)}
 
   /* ---------- canvas ---------- */
-  .cv{position:relative;width:696px;height:168px;flex:none;
+  .cv{position:relative;width:696px;height:156px;flex:none;
       border:1px solid var(--line);
       background-color:#191820;
       background-image:
@@ -74,7 +74,10 @@
   .row.on.done .cv{border-color:rgba(255,156,63,.55)}
 
   .t{position:absolute;width:12px;height:12px;background:var(--text)}
-  .t.bad{background:var(--bad)}
+  .t.bad{background:var(--bad);box-shadow:inset 0 0 0 2px rgba(20,19,23,.5)}
+  /* the texel the filter is still holding back - real, not yet committed.
+     Drawn faint so both rows reach the same column at every instant. */
+  .t.prov{background:rgba(242,230,200,.45)}
   .cur{position:absolute;width:12px;height:12px;z-index:3;
        box-shadow:0 0 0 2px var(--ember), 0 0 12px 3px rgba(255,156,63,.42)}
 
@@ -90,7 +93,7 @@
   <div class="head">
     <div>
       <div class="kicker">Texel &middot; Pixel Perfect</div>
-      <h1>Same drag. <em>No joints to fix.</em></h1>
+      <h1>Same drag. <em>One texel thick.</em></h1>
     </div>
     <div class="meta">
       <div><b id="mEv">0</b> mouse events</div>
@@ -123,45 +126,51 @@
 
 <script>
 const T = 12;
-let D = null, LEAD = 6, TAIL = 8;
+// A gallery uses frame 1 as the static thumbnail, and frame 1 used to be two
+// empty canvases - the one frame that says nothing. So open on the finished
+// comparison, beat, then redraw it: payoff, method, payoff.
+const POSTER = 12, BLANK = 3, TAIL = 6;
+let D = null;
 
 async function boot(){
   // the shooter injects __DATA (file:// forbids fetch); a plain browser fetches
   D = window.__DATA || await (await fetch('stroke.json')).json();
-  window.TOTAL = LEAD + D.frames + TAIL;
-  document.getElementById('mEv').textContent = D.events;
+  window.TOTAL = POSTER + BLANK + D.frames + TAIL;
   setFrame(0);
   window.__ready = true;
 }
 
-function paint(el, pts, bad){
+function paint(el, pts, bad, prov){
   const b = bad ? new Set(bad.map(p => p[0] + ',' + p[1])) : null;
   let html = '';
   for (const [x, y] of pts){
     const k = b && b.has(x + ',' + y) ? 't bad' : 't';
     html += `<div class="${k}" style="left:${x*T}px;top:${y*T}px"></div>`;
   }
+  if (prov) html += `<div class="t prov" style="left:${prov[0]*T}px;top:${prov[1]*T}px"></div>`;
   el.innerHTML = html;
   return el;
 }
 
 function setFrame(f){
-  const drawing = f >= LEAD && f < LEAD + D.frames;
-  const done    = f >= LEAD + D.frames;
-  const step    = drawing ? f - LEAD : (done ? D.frames - 1 : -1);
+  const start = POSTER + BLANK;
+  const drawing = f >= start && f < start + D.frames;
+  const done    = f < POSTER || f >= start + D.frames;
+  const blank   = f >= POSTER && f < start;
+  const step    = drawing ? f - start : (done ? D.frames - 1 : -1);
 
-  const off = step < 0 ? [] : D.off[step];
-  const on  = step < 0 ? [] : D.on[step];
-  const bad = step < 0 ? [] : D.corner_steps[step];
+  const off = blank ? [] : D.off[step];
+  const on  = blank ? [] : D.on[step];
+  const bad = blank ? [] : D.corner_steps[step];
 
-  paint(document.getElementById('cOff'), off, bad);
-  paint(document.getElementById('cOn'),  on,  null);
+  paint(document.getElementById('cOff'), off, bad, null);
+  paint(document.getElementById('cOn'),  on,  null, drawing ? D.prov[step] : null);
 
-  // cursor sits on the texel the mouse is over, on both canvases, and lifts
+  // the cursor sits on the texel the mouse is over, on both canvases, and lifts
   // when the button comes up. During the drag ON trails it by one texel - that
   // is the feature, not a rendering slip: the last point stays provisional
   // until the next event proves it is not a corner.
-  if (!done && step < D.lift){
+  if (drawing && step < D.lift){
     const c = D.cursor[Math.max(step, 0)];
     for (const id of ['cOff','cOn']){
       const d = document.createElement('div');
@@ -175,6 +184,7 @@ function setFrame(f){
   document.getElementById('nOff').textContent = bad.length;
   document.getElementById('nOn').textContent  = 0;
   document.getElementById('mTx').textContent  = off.length;
+  document.getElementById('mEv').textContent  = blank ? 0 : D.seen[step];
   document.getElementById('rOn').classList.toggle('done', done);
 }
 boot();

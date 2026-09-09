@@ -371,5 +371,4 @@ measured, not assumed.
 - `dist/texel-0.1.0.zip` — install-verified in Blender 4.5.9
 
 ## Still to make before upload
-- A short GIF of a pixel-perfect stroke being drawn (the marquee feature, and it demos in 3 seconds)
 - The density readout mid-measurement, as a still
