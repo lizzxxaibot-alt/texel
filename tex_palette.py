@@ -55,7 +55,11 @@ class TEXEL_OT_palette_load(Operator, ImportHelper):
             self.report({"WARNING"}, "No colours found in that file")
             return {"CANCELLED"}
         n = _apply(context, cols)
-        self.report({"INFO"}, f"{name}: {n} colours")
+        # The sidebar status line is where every other operator reports, and it
+        # is the only feedback a user sees after the toast fades. A fetch that
+        # says nothing there looks like a fetch that did nothing.
+        context.scene.texel.status = f"Lospec '{name}': {n} colours"
+        self.report({"INFO"}, context.scene.texel.status)
         return {"FINISHED"}
 
 
@@ -161,7 +165,11 @@ class TEXEL_OT_palette_lospec(Operator):
             self.report({"WARNING"}, "That palette is empty")
             return {"CANCELLED"}
         n = _apply(context, cols)
-        self.report({"INFO"}, f"{name}: {n} colours")
+        # The sidebar status line is where every other operator reports, and it
+        # is the only feedback a user sees after the toast fades. A fetch that
+        # says nothing there looks like a fetch that did nothing.
+        context.scene.texel.status = f"Lospec '{name}': {n} colours"
+        self.report({"INFO"}, context.scene.texel.status)
         return {"FINISHED"}
 
 

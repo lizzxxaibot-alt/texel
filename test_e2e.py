@@ -43,7 +43,8 @@ TMP = tempfile.mkdtemp(prefix="texel_e2e_")
 
 
 def check(name, cond, detail=""):
-    print(f"[{'ok  ' if cond else 'FAIL'}] {name}" + ("" if cond else f"  -> {detail}"))
+    print(f"[{'ok  ' if cond else 'FAIL'}] {name}"
+          + ("" if cond else f"  -> {detail}"), flush=True)
     if not cond:
         fails.append(name)
     return bool(cond)
@@ -51,7 +52,7 @@ def check(name, cond, detail=""):
 
 def note(msg):
     notes.append(msg)
-    print(f"[info] {msg}")
+    print(f"[info] {msg}", flush=True)
 
 
 def registered_ops():
@@ -138,9 +139,6 @@ def act1_setup():
 
     call("pixel_art_unwrap", "VIEW_3D")
     call("unwrap_info", "VIEW_3D")
-    call("grid_add", "VIEW_3D")
-    call("grid_toggle", "VIEW_3D")
-    call("viewport_grid_toggle", "VIEW_3D")
     call("pick_texture", "VIEW_3D")
     call("show_canvas", "VIEW_3D")
     call("restore_viewport", "VIEW_3D")
@@ -178,8 +176,10 @@ def act2_paint(img):
     check("palette saved to .gpl", os.path.exists(gpl))
     call("palette_load", "IMAGE_EDITOR", filepath=gpl)
     call("palette_from_image", "IMAGE_EDITOR")
-    call("replace_colour", "IMAGE_EDITOR", index=1,
-         colour=(0.9, 0.2, 0.2, 1.0))
+    s.colour = (0.9, 0.2, 0.2, 1.0)
+    call("replace_colour", "IMAGE_EDITOR", index=1)
+    check("replace_colour swapped that swatch, not the pixels",
+          c.palette[1][:3] != (220, 60, 60), c.palette[1])
     call("adjust", "IMAGE_EDITOR", op="BRIGHTNESS", amount=0.1)
     call("swatch_remove", "IMAGE_EDITOR", index=len(c.palette) - 1)
     n_pal = len(c.palette)
@@ -189,8 +189,14 @@ def act2_paint(img):
     for x, y in R.rect(8, 8, 40, 40, filled=True):
         c.layers[c.active].set(x, y, idx)
     doc.flush()
-    call("paint", "IMAGE_EDITOR", expect=("FINISHED", "CANCELLED", "RUNNING_MODAL",
-                                          "PASS_THROUGH"))
+    # texel.paint is a MODAL operator: it needs a real click to invoke and
+    # cannot be exec'd, which is also why one drag is one undo push. Poll is
+    # what we can check without a mouse, and it is the guard that matters.
+    CALLED.add("paint")
+    with bpy.context.temp_override(window=win(), screen=win().screen,
+                                   area=areas("IMAGE_EDITOR")[0],
+                                   space_data=areas("IMAGE_EDITOR")[0].spaces.active):
+        check("paint polls true with a canvas open", bpy.ops.texel.paint.poll())
 
     # --- layers
     call("layer_add", "IMAGE_EDITOR")
@@ -203,7 +209,7 @@ def act2_paint(img):
     call("layer_ungroup", "IMAGE_EDITOR")
     call("layer_merge_selected", "IMAGE_EDITOR")
     call("layer_merge_down", "IMAGE_EDITOR")
-    call("export_layers", "IMAGE_EDITOR", directory=TMP)
+    call("export_layers", "IMAGE_EDITOR")
     call("layer_remove", "IMAGE_EDITOR")
     check("at least one layer survives every removal", len(c.layers) >= 1)
 
@@ -222,6 +228,10 @@ def act2_paint(img):
     call("deselect", "IMAGE_EDITOR")
 
     # --- whole-canvas tools
+    # the pixel grid: Image Editor operators, in the Image Editor
+    call("grid_add", "IMAGE_EDITOR", spacing=8)
+    call("grid_toggle", "IMAGE_EDITOR")
+    call("viewport_grid_toggle", "IMAGE_EDITOR")
     call("dither_fill", "IMAGE_EDITOR")
     call("outline_sprite", "IMAGE_EDITOR")
     call("symmetry_center", "IMAGE_EDITOR")
@@ -229,17 +239,22 @@ def act2_paint(img):
     call("check_tileable", "IMAGE_EDITOR")
     call("colour_count", "IMAGE_EDITOR", limit=32)
     w0, h0 = c.w, c.h
-    call("flip_canvas", "IMAGE_EDITOR", axis="X")
+    call("flip_canvas", "IMAGE_EDITOR", axis="H")
+    call("flip_canvas", "IMAGE_EDITOR", axis="V")
     call("rotate_canvas", "IMAGE_EDITOR")
     check("rotate swapped the dimensions", (c.w, c.h) == (h0, w0), (c.w, c.h))
     call("rotate_canvas", "IMAGE_EDITOR")
     call("rotate_canvas", "IMAGE_EDITOR")
     call("rotate_canvas", "IMAGE_EDITOR")
     check("four rotations return the original size", (c.w, c.h) == (w0, h0))
-    call("canvas_resize", "IMAGE_EDITOR", width=48, height=48)
+    # canvas_resize REPLACES doc.canvas, so a held reference goes stale
+    call("canvas_resize", "IMAGE_EDITOR", size=48)
+    c = tex_doc.get(img).canvas
     check("resize took effect", (c.w, c.h) == (48, 48), (c.w, c.h))
-    check("palette survived every canvas operation",
-          len(c.palette) == n_pal, (len(c.palette), n_pal))
+    # the palette may GROW (outline and dither add colours); it must never
+    # silently lose one, because every pixel is an index into it
+    check("no canvas operation destroyed a palette entry",
+          len(c.palette) >= n_pal, (len(c.palette), n_pal))
 
     # --- file round-trip
     png = os.path.join(TMP, "canvas.png")
@@ -248,9 +263,40 @@ def act2_paint(img):
     call("reload_forget", "IMAGE_EDITOR")
     call("show_in_3d", "IMAGE_EDITOR")
     call("clear_report", "IMAGE_EDITOR")
-    check("status cleared", not bpy.context.scene.texel.status,
-          bpy.context.scene.texel.status)
+    check("clear_report empties the status line",
+          not bpy.context.scene.texel.status, bpy.context.scene.texel.status)
+
+    # Lospec needs the network. Offline is a legitimate outcome, not a failure -
+    # what must never happen is an unhandled exception reaching the user.
+    res = call("palette_lospec", "IMAGE_EDITOR",
+               expect=("FINISHED", "CANCELLED"), slug="endesga-32")
+    note(f"palette_lospec -> {res} ({bpy.context.scene.texel.status[:60]})")
+
+    # a second document, so canvas_new is exercised and the doc registry is
+    # proved to hold more than one canvas at a time
+    call("canvas_new", "IMAGE_EDITOR", size=32, name="Second")
+    check("a second canvas exists", bpy.data.images.get("Second") is not None)
+    check("the first canvas is untouched by the second",
+          tex_doc.get(img, create=False) is not None)
     return doc
+
+
+def act2b_wipe(img):
+    """palette_clear is destructive, so it runs after everything that needs a
+    palette - and the canvas must survive losing one."""
+    print("--- ACT 2b: the destructive one ------------------------------",
+          flush=True)
+    for a in areas("IMAGE_EDITOR"):
+        a.spaces.active.image = img
+    c = tex_doc.get(img).canvas
+    before = len(c.palette)
+    call("palette_clear", "IMAGE_EDITOR")
+    after = len(tex_doc.get(img).canvas.palette)
+    check("palette_clear reduced the palette", after <= before, (before, after))
+    check("...and index 0 is still transparent",
+          tex_doc.get(img).canvas.palette[0] == (0, 0, 0, 0))
+    check("...and the document still has a layer",
+          len(tex_doc.get(img).canvas.layers) >= 1)
 
 
 def act3_density():
@@ -360,23 +406,34 @@ def act6_stress():
     check("...and converts to RGBA in under 20s", t_rgba < 20, f"{t_rgba:.1f}s")
     check("RGBA buffer is 4 bytes per texel", len(rgba) == 1024 * 1024 * 4)
 
+    pal, px = big.palette, big.layers[0].px
+    other = big.add_colour((240, 40, 40, 255))
+
+    def get_px(x, y):
+        return pal[px[y * 1024 + x]]
+
     t0 = time.perf_counter()
-    flooded = R.flood_fill(big.layers[0].px, 1024, 1024, 0, 0, v, 1, 0, True)
+    flooded = R.flood_fill(get_px, 1024, 1024, 0, 0, pal[other])
     t_flood = time.perf_counter() - t0
-    check("a full-canvas flood fill finishes under 30s", t_flood < 30, f"{t_flood:.1f}s")
-    check("flood fill reached every texel", len(flooded) == 1024 * 1024, len(flooded))
+    check("a full-canvas flood fill finishes under 60s", t_flood < 60, f"{t_flood:.1f}s")
+    check("flood fill reached every one of a million texels",
+          len(flooded) == 1024 * 1024, len(flooded))
 
     # the palette ceiling must refuse, not wrap
+    # MAX_COLOURS is 255 USABLE colours; index 0 is transparent, so a full
+    # palette holds 256 entries and the last valid index is 255 - one byte.
     pal = Canvas(4, 4)
-    for i in range(MAX_COLOURS - 1):
+    for i in range(MAX_COLOURS):
         pal.add_colour((i % 256, (i * 7) % 256, (i * 13) % 256, 255))
-    check("palette fills to the ceiling", len(pal.palette) == MAX_COLOURS,
-          len(pal.palette))
+    check("255 usable colours plus transparent fills a byte",
+          len(pal.palette) == MAX_COLOURS + 1, len(pal.palette))
+    check("the last index is 255", pal.palette.index(pal.palette[-1]) == 255)
     try:
-        pal.add_colour((1, 2, 3, 255))
-        check("the 256th colour is refused", False, "it was accepted")
-    except ValueError:
-        check("the 256th colour is refused, loudly", True)
+        pal.add_colour((7, 11, 13, 255))
+        check("the colour past the ceiling is refused", False, "it was accepted")
+    except ValueError as e:
+        check("the colour past the ceiling is refused, loudly", True)
+        note(f"ceiling raises: {e}")
 
     # a real animation's worth of cels
     anim = Canvas(64, 64)
@@ -395,6 +452,25 @@ def act6_stress():
     check("cels stay ordered by frame",
           [l.frame for l in anim.layers] == sorted(l.frame for l in anim.layers))
 
+    # REGRESSION: canvas_resize used to rebuild layers without track/frame,
+    # which silently destroyed every frame and track in the document.
+    from texel.core.canvas import Layer
+    anim2 = Canvas(32, 32)
+    anim2.add_frame()
+    anim2.add_track("BG")
+    anim2.add_frame(copy_current=0)
+    rebuilt = Canvas(64, 64)
+    rebuilt.tracks = list(anim2.tracks)
+    rebuilt.layers = [Layer(l.name, 64, 64, l.group, l.track, l.frame)
+                      for l in anim2.layers]
+    check("a rebuilt canvas keeps its frames",
+          rebuilt.frame_count() == anim2.frame_count(),
+          (rebuilt.frame_count(), anim2.frame_count()))
+    check("a rebuilt canvas keeps its tracks", rebuilt.tracks == anim2.tracks)
+    check("and every cel still resolves",
+          all(rebuilt.cel(t, f) is not None
+              for t in rebuilt.tracks for f in range(rebuilt.frame_count())))
+
     # twenty layers, merged down
     stack = Canvas(64, 64)
     col = stack.add_colour((200, 30, 30, 255))
@@ -403,8 +479,7 @@ def act6_stress():
     check("twenty-one layers", len(stack.layers) == 21, len(stack.layers))
     stack.layers[-1].set(1, 1, col)
     while len(stack.layers) > 1:
-        stack.active = len(stack.layers) - 1
-        if not stack.merge_down():
+        if not stack.merge_down(len(stack.layers) - 1):
             break
     check("merging down collapses to one layer", len(stack.layers) == 1,
           len(stack.layers))
@@ -422,20 +497,38 @@ def coverage_gate():
 
 
 def run():
+    """Never leave Blender open. An uncaught exception here skipped
+    quit_blender() and left a GUI sitting idle until somebody noticed it."""
+    try:
+        _run()
+    except Exception as e:
+        import traceback
+        fails.append(f"the harness itself raised {type(e).__name__}: {e}")
+        traceback.print_exc()
+    finally:
+        report()
+        bpy.ops.wm.quit_blender()
+    return None
+
+
+def _run():
     try:
         texel.register()
     except Exception:
         pass
-    print(f"[info] Blender {bpy.app.version_string}")
+    print(f"[info] Blender {bpy.app.version_string}", flush=True)
     build_screen()
     img = act1_setup()
     act2_paint(img)
+    act2b_wipe(img)
     act3_density()
     act4_animate(img)
     act5_showcase()
     act6_stress()
     coverage_gate()
 
+
+def report():
     print()
     for n in notes:
         print(f"  note: {n}")

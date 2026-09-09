@@ -392,11 +392,22 @@ class TEXEL_OT_canvas_resize(_DocOp):
         old = d.canvas
         new = Canvas(self.size, self.size)
         new.palette = list(old.palette)
+        # Carry the cel model across. Rebuilding layers WITHOUT track and frame
+        # silently destroyed every frame and track in the document - three
+        # frames of animation became a still image with no warning and no undo
+        # that made sense. Found by the end-to-end suite; it is the worst class
+        # of bug this product could ship, because the loss is invisible until
+        # you look for the work you already did.
+        new.tracks = list(getattr(old, "tracks", []))
+        holds = getattr(old, "frame_holds", None)
+        if isinstance(holds, list):
+            new.frame_holds = list(holds)
         sx = self.size / old.w
         sy = self.size / old.h
         new.layers = []
         for src in old.layers:
-            dst = type(src)(src.name, self.size, self.size, src.group)
+            dst = type(src)(src.name, self.size, self.size, src.group,
+                            src.track, src.frame)
             dst.visible, dst.opacity, dst.locked = src.visible, src.opacity, src.locked
             for y in range(self.size):
                 for x in range(self.size):

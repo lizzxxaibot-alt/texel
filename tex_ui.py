@@ -328,6 +328,11 @@ class TEXEL_PT_canvas(_Base, Panel):
         row.operator("texel.custom_brush_add", text="Brush From Selection", icon="ADD")
         row.operator("texel.custom_brush_remove", text="", icon="REMOVE")
         col.separator()
+        row = col.row(align=True)
+        row.operator("texel.grid_add", text="Grid Layer", icon="GRID")
+        row.operator("texel.grid_toggle", text="", icon="HIDE_OFF")
+        col.operator("texel.viewport_grid_toggle", icon="MESH_GRID")
+        col.separator()
         col.operator("texel.show_in_3d", icon="VIEW3D")
 
 
@@ -365,13 +370,12 @@ class TEXEL_PT_setup(_Base, Panel):
         row.operator("texel.restore_viewport", text="", icon="LOOP_BACK")
         col.separator()
         row = col.row(align=True)
-        row.operator("texel.grid_add", text="Grid Layer", icon="GRID")
-        row.operator("texel.grid_toggle", text="", icon="HIDE_OFF")
-        col.operator("texel.viewport_grid_toggle", icon="MESH_GRID")
-        col.separator()
-        row = col.row(align=True)
         row.operator("texel.pick_texture", text="Pick Texture", icon="EYEDROPPER")
         row.operator("texel.show_canvas", text="", icon="IMAGE_DATA")
+        # The pixel-grid buttons are NOT here: all three poll for an Image
+        # Editor, so in this panel they would render permanently greyed out.
+        # They live in the Canvas panel on the 2D side. Found by the end-to-end
+        # suite, which is the only thing that actually presses every button.
 
 
 class TEXEL_PT_zones(_Base, Panel):
