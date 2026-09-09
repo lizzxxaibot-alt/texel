@@ -28,6 +28,8 @@ import bpy
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
+import models3d as M3  # noqa: E402
+import styles3d as S3  # noqa: E402
 sys.path.insert(0, os.path.dirname(HERE))
 
 argv = sys.argv[sys.argv.index("--") + 1:] if "--" in sys.argv else ["dungeon"]
@@ -283,6 +285,41 @@ def box(name, loc, size, mat, rot=(0, 0, 0)):
     return o
 
 
+def walker3d(loc=(0, 0, 0), face=0.0, scale=1.42):
+    """The torchbearer as REAL GEOMETRY that walks, replacing the sprite card.
+
+    `card()` below is still right for banners and other genuinely flat props.
+    It was wrong for the character: a 3D scene with a cardboard person in it
+    reads as cheap, and it contradicts what the tool is for.
+
+    Returns (root, limbs, firelight). Call styles3d.pose_walk(limbs, frame) per
+    frame and move `root`; the torch, flame and its light are parented to the
+    torso, so they travel and bob with him.
+    """
+    root, limbs, hand = S3.character_walk()
+    hx, hy, hz = hand
+    mount = limbs["body"]
+
+    t = M3.prop("torch")
+    t.parent = mount
+    t.location = (hx, hy, hz - 0.34)
+    fl = M3.flame("Flame", scale=0.85)
+    fl.parent = mount
+    fl.location = (hx, hy, hz + 0.70)
+
+    d = bpy.data.lights.new("TorchFire", "POINT")
+    d.color, d.energy, d.shadow_soft_size = (1.0, 0.62, 0.28), 150, 0.3
+    lo = bpy.data.objects.new("TorchFire", d)
+    lo.parent = mount
+    lo.location = (hx, hy, hz + 0.78)
+    bpy.context.collection.objects.link(lo)
+
+    root.location = loc
+    root.rotation_euler = (0, 0, math.radians(face))
+    root.scale = (scale, scale, scale)
+    return root, limbs, d
+
+
 def card(name, loc, size, image, rot=(math.radians(90), 0, 0), unlit=True):
     """A sprite on a plane.
 
@@ -446,7 +483,6 @@ def shot_dungeon():
     floor, _ = paint("Flagstone", flagstone)
     wall, _ = paint("Blockwall", blocks)
     pill, _ = paint("Fluted", fluted)
-    walk = build_walk()
     clear()
 
     m_f, m_w, m_p = (mat_of("F", floor), mat_of("W", wall), mat_of("P", pill))
@@ -475,8 +511,7 @@ def shot_dungeon():
     banner, _ = paint("Banner", cloth, check=False)
     for i, x in enumerate((-6.0, 10.0)):              # outlined banner props
         card(f"Banner{i}", (x, 1.82, 2.0), (1.5, 2.6), banner)
-    walker, tex = card("Walker", (0, 0, 1.7), (3.4, 3.4), walk[0])
-    torch = light("Torch", "POINT", (0, 0, 2), (1.0, 0.62, 0.26), 105)
+    walker, wlimbs, wfire = walker3d((0, 0, 0), face=90, scale=1.12)
     for i, x in enumerate((-6.0, 2.0, 10.0)):         # the sconces are lit
         light(f"Wall{i}", "POINT", (x, 1.2, 2.55), (1.0, 0.66, 0.34), 26)
     light("Room", "POINT", (5.8, 5.4, 2.4), (1.0, 0.7, 0.4), 260)  # through the arch
@@ -489,12 +524,10 @@ def shot_dungeon():
     def move(i, t):
         f = (i // HOLD) % 8
         p = A.pose(f)
-        tex.image = walk[f]
+        S3.pose_walk(wlimbs, f)
         x = -4.5 + (STRIDE / (8 * HOLD)) * i
-        walker.location = (x, 0.0, 1.70)
-        torch.location = (x + (p["tx"] - A.SIZE / 2) * (3.4 / A.SIZE), -0.12,
-                          1.70 + (A.SIZE / 2 - p["ty"]) * (3.4 / A.SIZE))
-        torch.data.energy = 150 + 45 * p["lick"]
+        walker.location = (x, 0.0, 0.0)          # he stands ON the floor now
+        wfire.energy = 150 + 45 * p["lick"]      # the light rides his hand
         cam.location = (x - 4.2 + 0.9 * t, -7.6 + 1.1 * t, 3.2 - 0.5 * t)
         tgt.location = (x + 0.9, 0.4, 1.6)
     return move
@@ -506,7 +539,6 @@ def shot_temple():
     floor, _ = paint("Marble", lambda c, L: flagstone(c, L, (196, 188, 172, 255)))
     wall, _ = paint("Sandstone", lambda c, L: blocks(c, L, (198, 166, 116, 255)))
     trim, _ = paint("Jade", lambda c, L: fluted(c, L, (72, 116, 104, 255)))
-    walk = build_walk()
     clear()
 
     m_f, m_w, m_t = mat_of("F", floor), mat_of("W", wall), mat_of("T", trim)
@@ -527,8 +559,8 @@ def shot_temple():
         solid.append(box(f"Crate{i}", (x, y, s / 2), (s, s, s), m_w))
     density(solid, 52.0)
 
-    walker, tex = card("Walker", (0, 0, 1.9), (3.4, 3.4), walk[0])
-    torch = light("Torch", "POINT", (0, 0, 2.4), (1.0, 0.64, 0.3), 140)
+    walker, wlimbs, wfire = walker3d((0, 0, 0), face=90)
+    wfire.energy = 190
     for i, (x, y) in enumerate(((-6, -6), (6, -6), (-6, 6), (6, 6))):
         light(f"Brazier{i}", "POINT", (x, y, 3.4), (1.0, 0.7, 0.38), 120)
     light("Shaft", "AREA", (0, 0, 9), (1.0, 0.9, 0.72), 1500, (0, 0, 0), size=4)
@@ -539,14 +571,11 @@ def shot_temple():
     def move(i, t):
         f = (i // HOLD) % 8
         p = A.pose(f)
-        tex.image = walk[f]
+        S3.pose_walk(wlimbs, f)
         # he crosses the chamber toward the dais while the camera arcs
         wx = -7.5 + 7.5 * t
-        walker.location = (wx, -1.2, 1.9)
-        walker.rotation_euler = (math.radians(90), 0, 0)
-        torch.location = (wx + (p["tx"] - A.SIZE / 2) * (3.4 / A.SIZE), -1.35,
-                          1.9 + (A.SIZE / 2 - p["ty"]) * (3.4 / A.SIZE))
-        torch.data.energy = 190 + 55 * p["lick"]
+        walker.location = (wx, -1.2, 0.0)
+        wfire.energy = 190 + 55 * p["lick"]
         a = math.radians(236 + 22 * t)
         r = 15.0 - 1.8 * t
         cam.location = (math.cos(a) * r, math.sin(a) * r, 8.2 - 1.2 * t)
@@ -609,7 +638,6 @@ def shot_hangar():
 def shot_market():
     """Top-down adventure exterior. A huge ground and hand-sized props, every
     one of them at 24 px/unit, so nothing looks like it came from another game."""
-    walk = build_walk()
     ground, _ = paint("Dirt", lambda c, L: flagstone(c, L, (150, 124, 92, 255)))
     wood, _ = paint("Timber", lambda c, L: blocks(c, L, (146, 104, 62, 255), 8, 16))
     cloth_img, _ = paint("Awning", lambda c, L: blocks(c, L, (172, 78, 72, 255),
@@ -645,7 +673,7 @@ def shot_market():
                              (sz, sz, sz), m_w))
     density(solid, 44.0)
 
-    walker, wtex = card("Walker", (0.6, -8, 1.7), (3.4, 3.4), walk[0])
+    walker, wlimbs, wfire = walker3d((0.6, -8, 0), face=180)
     light("Sun", "SUN", (0, 0, 20), (1.0, 0.78, 0.52), 5.0,
           (math.radians(64), 0, math.radians(34)))
     light("Sky", "AREA", (0, 0, 22), (0.5, 0.64, 1.0), 700, size=30)
@@ -655,9 +683,9 @@ def shot_market():
 
     def move(i, t):
         f = (i // HOLD) % 8
-        wtex.image = walk[f]
+        S3.pose_walk(wlimbs, f)
         wy = -9.0 + 13.0 * t                      # he walks up the street
-        walker.location = (0.6, wy, 1.7)
+        walker.location = (0.6, wy, 0.0)
         a = math.radians(-98 + 20 * t)
         r = 12.0 - 1.6 * t
         cam.location = (math.cos(a) * r, math.sin(a) * r + wy * 0.55,
