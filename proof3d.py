@@ -161,6 +161,40 @@ def torchbearer():
     return ch, torch, fl
 
 
+def styles():
+    """The two candidate looks, same lighting, same texture pipeline.
+
+    Left: voxel - stacked cubes. It works, and it is what most pixel-art 3D
+    games use, but it reads as a Minecraft skin.
+    Right: low-poly - every part tapered, so the silhouette is a flared robe
+    under a pointed hood. Same pixels, different geometry.
+    """
+    reset()
+    ground()
+    key_light()
+
+    for maker, x, turn in ((M.character, -1.15, 24), (M.character_hooded, 1.15, -20)):
+        ch = maker()
+        hx, hy, hz = ch["texel_hand"]
+        t = M.prop("torch")
+        t.parent = ch
+        t.location = (hx, hy, hz - 0.34)
+        fl = M.flame("Flame", scale=0.85)
+        fl.parent = ch
+        fl.location = (hx, hy, hz + 0.70)
+        li = bpy.data.lights.new("Fire", "POINT")
+        li.energy, li.color, li.shadow_soft_size = 150, (1.0, 0.62, 0.28), 0.28
+        lo = bpy.data.objects.new("Fire", li)
+        lo.parent = ch
+        lo.location = (hx, hy, hz + 0.78)
+        bpy.context.collection.objects.link(lo)
+        ch.location = (x, 0, 0)
+        ch.rotation_euler = (0, 0, math.radians(turn))
+
+    camera((0, -8.6, 2.7), (0, 0, 1.5), lens=50)
+    render(os.path.join(HERE, "shots", "proof3d_styles"), res=(1400, 800))
+
+
 def hero():
     """The character alone, filling the frame - the thing being judged."""
     reset()
@@ -222,6 +256,7 @@ def ab():
 
 if __name__ == "__main__":
     os.makedirs(os.path.join(HERE, "shots"), exist_ok=True)
+    styles()
     hero()
     sheet()
     ab()

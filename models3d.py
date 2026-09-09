@@ -125,9 +125,17 @@ class Atlas:
             self.px(rect, [(w - 1, i) for i in range(h)], idx)
 
     def image(self, name: str):
-        img = bpy.data.images.get(name)
-        if img:
-            bpy.data.images.remove(img)
+        """Never reuse or delete a name another material may still hold.
+
+        This used to remove any existing image of the same name first. Put two
+        torches in one scene and the second one deleted the first one's texture,
+        leaving that material pointing at nothing - which Cycles renders as
+        magenta. Take the next free name instead.
+        """
+        base, n = name, 1
+        while name in bpy.data.images:
+            name = f"{base}.{n:03d}"
+            n += 1
         img = bpy.data.images.new(name, self.c.w, self.c.h, alpha=True)
         img.pixels.foreach_set(self.c.to_blender_floats())
         img.update()
@@ -158,20 +166,29 @@ def _rotx(pt, pivot, ang):
     return (pt[0], pivot[1] + y * c - z * sn, pivot[2] + y * sn + z * c)
 
 
-def _box_geom(size, offset, rects, atlas_size, vbase, rot=0.0, pivot=None):
-    """Vertices, faces and per-loop UVs for one box, in texel units."""
+def _box_geom(size, offset, rects, atlas_size, vbase, rot=0.0, pivot=None,
+              top=None):
+    """Vertices, faces and per-loop UVs for one box, in texel units.
+
+    `top` is the (width, depth) of the TOP face. Make it smaller than the
+    bottom and the box becomes a frustum - a tapered sleeve, a flared robe, a
+    pointed hood. Cubes alone can only ever produce the Minecraft silhouette,
+    so this is the one parameter that separates "voxel" from "low-poly".
+    """
     w, d, h = size
+    tw, td = top if top else (w, d)
     ox, oy, oz = offset
     hx, hy, hz = w / 2.0, d / 2.0, h / 2.0
+    tx, ty = tw / 2.0, td / 2.0
     verts = [
         (ox - hx, oy - hy, oz - hz),  # 0 front bottom left
         (ox + hx, oy - hy, oz - hz),  # 1 front bottom right
-        (ox + hx, oy - hy, oz + hz),  # 2 front top right
-        (ox - hx, oy - hy, oz + hz),  # 3 front top left
+        (ox + tx, oy - ty, oz + hz),  # 2 front top right
+        (ox - tx, oy - ty, oz + hz),  # 3 front top left
         (ox - hx, oy + hy, oz - hz),  # 4 back bottom left
         (ox + hx, oy + hy, oz - hz),  # 5 back bottom right
-        (ox + hx, oy + hy, oz + hz),  # 6 back top right
-        (ox - hx, oy + hy, oz + hz),  # 7 back top left
+        (ox + tx, oy + ty, oz + hz),  # 6 back top right
+        (ox - tx, oy + ty, oz + hz),  # 7 back top left
     ]
     if rot:
         pv = pivot or (ox, oy, oz)
@@ -197,7 +214,8 @@ def build(name: str, parts: list[dict], atlas: Atlas, image_name: str | None = N
     verts, faces, uvs = [], [], []
     for p in parts:
         v, f, u = _box_geom(p["size"], p["offset"], p["rects"], atlas.size,
-                            len(verts), p.get("rot", 0.0), p.get("pivot"))
+                            len(verts), p.get("rot", 0.0), p.get("pivot"),
+                            p.get("top"))
         verts.extend(v); faces.extend(f); uvs.extend(u)
 
     me = bpy.data.meshes.new(name)
@@ -229,18 +247,22 @@ def build(name: str, parts: list[dict], atlas: Atlas, image_name: str | None = N
     return obj
 
 
-def part(atlas: Atlas, size, offset, paint=None, rot=0.0, pivot=None) -> dict:
+def part(atlas: Atlas, size, offset, paint=None, rot=0.0, pivot=None,
+         top=None) -> dict:
     """Allocate atlas space for a box and let a painter fill it.
 
     `rot` swings the box around `pivot` in the YZ plane, which is what turns a
-    hanging arm into a raised one without needing an armature.
+    hanging arm into a raised one without needing an armature. `top` gives the
+    (width, depth) of the top face - set it smaller than the bottom and the part
+    tapers, which is the whole difference between a voxel look and a low-poly
+    one.
     """
     w, d, h = size
     rects = atlas.box_rects(w, d, h)
     if paint:
         paint(atlas, rects, size)
     return {"size": size, "offset": offset, "rects": rects,
-            "rot": rot, "pivot": pivot}
+            "rot": rot, "pivot": pivot, "top": top}
 
 
 # --------------------------------------------------------------------------
@@ -367,6 +389,82 @@ def character(name: str = "Torchbearer"):
     # the grip point, in the character's own space: bottom of the right sleeve.
     # Published so props can be parented into the hand rather than guessed at.
     obj["texel_hand"] = (5.5 * TEXEL, -7.778 * TEXEL, 28.778 * TEXEL)
+    obj["texel_height"] = 29 * TEXEL
+    return obj
+
+
+def _paint_robe(a, rects, size):
+    P = a.P
+    for f in _CORNERS:
+        a.shade(rects[f], P["cloak"])
+    for f in ("FRONT", "BACK", "LEFT", "RIGHT"):
+        r = rects[f]
+        w, h = r[2], r[3]
+        for x in range(2, w - 1, 5):
+            a.px(r, [(x, y) for y in range(h // 4, h - 1)], P["cloak_d"][2])
+        a.px(r, [(x, h - 1) for x in range(w)], P["cloak_d"][0])
+        a.px(r, [(x, h - 2) for x in range(w)], P["cloak_d"][1])
+
+
+def _paint_hood(a, rects, size):
+    P = a.P
+    for f in _CORNERS:
+        a.shade(rects[f], P["cloak_d"])
+    for f in ("FRONT", "LEFT", "RIGHT", "BACK"):
+        r = rects[f]
+        a.px(r, [(x, r[3] - 1) for x in range(r[2])], P["ink"])   # brow shadow
+
+
+def _paint_face(a, rects, size):
+    """A recessed face: dark, with two lit eyes. No Minecraft mouth."""
+    P = a.P
+    for f in _CORNERS:
+        a.fill(rects[f], P["ink"])
+    fr = rects["FRONT"]
+    w, h = fr[2], fr[3]
+    a.px(fr, [(x, y) for x in range(w) for y in range(h // 2, h)], P["skin"][0])
+    for ex in (1, w - 2):
+        a.px(fr, [(ex, h // 2)], P["fire"][4])
+
+
+def _paint_sleeve(a, rects, size):
+    P = a.P
+    for f in _CORNERS:
+        a.shade(rects[f], P["cloak"])
+    for f in ("FRONT", "BACK", "LEFT", "RIGHT"):
+        r = rects[f]
+        a.px(r, [(x, 2) for x in range(r[2])], P["cloak_d"][1])
+
+
+def character_hooded(name: str = "Wanderer"):
+    """A hooded low-poly figure - tapered, not cubic.
+
+    Answers the obvious objection to the blocky character: pixel-art 3D does
+    NOT have to be voxel. Every part here is a frustum, so the silhouette is a
+    flared robe under a pointed hood rather than six stacked cubes, and it does
+    not read as a Minecraft skin. Same texture pipeline, same flat shading, same
+    nearest-neighbour filtering - only the geometry changed.
+    """
+    a = Atlas(128)
+    _pal(a)
+    parts = [
+        # robe, flared to the floor
+        part(a, (15, 12, 14), (0, 0, 7), _paint_robe, top=(9, 7)),
+        part(a, (9, 7, 7), (0, 0, 17.5), _paint_robe, top=(8, 6)),
+        # a shoulder cape, which is what breaks the "box man" read at a glance
+        part(a, (13, 11, 3), (0, 0, 20.5), _paint_hood, top=(9, 8)),
+        # hood: tapers almost to a point
+        part(a, (10, 9, 8), (0, 0.6, 25), _paint_hood, top=(3, 3)),
+        part(a, (5, 1, 4), (0, -4.2, 24), _paint_face),
+        # sleeves taper to the wrist: bottom is the cuff, top the shoulder
+        part(a, (3, 3, 10), (-5.4, 0, 16), _paint_sleeve, top=(5, 5)),
+        part(a, (3, 3, 10), (5.4, 0, 16), _paint_sleeve, top=(5, 5),
+             rot=ARM_SWING, pivot=(5.4, 0, 21)),
+    ]
+    obj = build(name, parts, a, image_name=f"{name}Atlas")
+    hy = -(11 - 21) * math.sin(ARM_SWING)
+    hz = 21 + (11 - 21) * math.cos(ARM_SWING)
+    obj["texel_hand"] = (5.4 * TEXEL, hy * TEXEL, hz * TEXEL)
     obj["texel_height"] = 29 * TEXEL
     return obj
 
