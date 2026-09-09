@@ -37,6 +37,58 @@ check("pixel_perfect result is a clean diagonal", pp == [(0,0),(1,1),(2,2),(3,3)
 check("pixel_perfect no-op on pure diagonal", R.pixel_perfect(d) == d)
 check("pixel_perfect no-op on straight run", R.pixel_perfect(R.line(0,0,4,0)) == R.line(0,0,4,0))
 
+# --- PerfectStroke: the filter as the live paint loop actually uses it.
+# This block exists because the filter passing its own tests was not enough.
+# tex_paint stamps and never clears, so it used to commit the filter's
+# provisional last point, and a 420-event drag landed the SAME 69 texels with
+# the toggle on as with it off. The feature was a no-op on the one tool it
+# advertises. What follows drives the shipped object, not a copy of it.
+import math
+
+def hand_drag(n=420, zoom=8):
+    """A human diagonal, sampled per mouse event and floored to texels."""
+    out = []
+    for i in range(n):
+        t = i / (n - 1)
+        sx, sy = 6 + t * 46 * zoom, 8 + (t * 22 + 2.2 * math.sin(t * 7.0)) * zoom
+        out.append((int(sx // zoom), int(sy // zoom)))
+    return out
+
+def replay(events, perfect):
+    """What tex_paint's modal loop commits, in order, for one drag."""
+    st = R.PerfectStroke(events[0], perfect)
+    painted = [events[0]]
+    for e in events[1:]:
+        painted.extend(st.add(e))
+    painted.extend(st.end())
+    return st, painted
+
+ev = hand_drag()
+st_on,  on  = replay(ev, True)
+st_off, off = replay(ev, False)
+walked = st_on.trail
+
+check("the simulated drag is a staircase (so the test can fail)", has_L(walked),
+      f"{len(walked)} texels")
+check("PerfectStroke ON leaves no L-corner", not has_L(on), has_L(on))
+check("PerfectStroke ON matches the one-shot filter", on == R.pixel_perfect(walked),
+      f"{len(on)} vs {len(R.pixel_perfect(walked))}")
+# OFF hands back each joined segment whole, so consecutive segments share a
+# point. _commit stamps, which is idempotent, so the duplicates cost nothing -
+# compare what lands on the canvas.
+check("PerfectStroke ON paints FEWER texels than OFF (it is not a no-op)",
+      len(set(on)) < len(set(off)), f"on={len(set(on))} off={len(set(off))}")
+check("PerfectStroke OFF covers the untouched walk", set(off) == set(walked),
+      f"{len(set(off))} vs {len(walked)}")
+check("PerfectStroke keeps both endpoints", on[0] == walked[0] and on[-1] == walked[-1])
+check("PerfectStroke never hands the same texel out twice", len(on) == len(set(on)))
+check("PerfectStroke ignores an event that stays in one texel",
+      R.PerfectStroke((3, 3)).add((3, 3)) == [])
+check("PerfectStroke joins a gap when events skip texels",
+      R.PerfectStroke((0, 0)).add((6, 0)) + R.PerfectStroke((0, 0), True).end() != [])
+one = R.PerfectStroke((2, 2))
+check("a stroke that never moves still commits nothing extra", one.end() == [])
+
 # --- rect
 check("rect outline 3x3 = 8 px", len(R.rect(0,0,2,2)) == 8, R.rect(0,0,2,2))
 check("rect filled 3x3 = 9 px", len(R.rect(0,0,2,2,filled=True)) == 9)

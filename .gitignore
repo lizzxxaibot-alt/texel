@@ -6,6 +6,8 @@ promo/
 store/stills/
 gallery/
 shots/panels/
+shots/workspace.png
+gif/frames/
 
 # build output
 dist/
@@ -23,3 +25,4 @@ gui_versions.log
 first_run.log
 compare_run.log
 pas_alone.log
+gif/palette.png

@@ -194,9 +194,10 @@ No. It is a Blender add-on and it runs inside Blender, on your existing scene.
 **Which Blender versions?**
 **4.2 and newer**, and that is measured rather than declared. The full suite -
 16 of them, including the one that invokes all 94 operators - is run against
-**4.2.23, 4.5.9 and 5.2.1**: the oldest LTS we support, the current LTS, and the newest
-release. All three pass. If it breaks on a version we claim, that is a bug and
-it gets fixed.
+**4.2.23** (the oldest LTS we support), **4.5.9 LTS**, **5.2.1**, and the
+**Microsoft Store 5.2.1** build as well, because that one installs add-ons to a
+different place than every other Blender and deserved its own run. All four
+pass. If it breaks on a version we claim, that is a bug and it gets fixed.
 
 **Does it need anything else installed?**
 No. Pure Python against Blender's own API — no numpy, nothing to compile, no

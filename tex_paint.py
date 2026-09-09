@@ -114,7 +114,7 @@ class TEXEL_OT_paint(Operator):
             return {"FINISHED"}
 
         self.start = start
-        self.trail = [start]
+        self.stroke = R.PerfectStroke(start, s.pixel_perfect)
         self.preview_undo = None
         if s.tool in {"PENCIL", "ERASER"}:
             self._commit(context, [start])
@@ -131,7 +131,9 @@ class TEXEL_OT_paint(Operator):
         if event.type in {"RIGHTMOUSE", "ESC"}:
             if s.tool not in {"PENCIL", "ERASER"}:
                 self.doc.canvas.layers[self.doc.canvas.active].px = self.snapshot
-                self.doc.flush()
+            else:
+                self._commit(context, self.stroke.end())   # never end a texel short
+            self.doc.flush()
             return {"CANCELLED"}
 
         if event.type == "MOUSEMOVE":
@@ -139,15 +141,13 @@ class TEXEL_OT_paint(Operator):
             if cur is None:
                 return {"RUNNING_MODAL"}
             if s.tool in {"PENCIL", "ERASER"}:
-                if cur != self.trail[-1]:
-                    # join the gap since the last event, then clean the joint.
-                    # We filter the whole tail, not just the new segment: a
-                    # corner can straddle two events, and filtering per-segment
-                    # would leave exactly those joints behind.
-                    seg = R.line(*self.trail[-1], *cur)
-                    tail = self.trail[-2:] + seg[1:]
-                    self.trail.extend(seg[1:])
-                    self._commit(context, R.pixel_perfect(tail) if s.pixel_perfect else seg)
+                # PerfectStroke joins the gap since the last event and hands
+                # back only the texels that can no longer change. Anything it
+                # withholds is still provisional: committing it here would
+                # stamp a corner we cannot rub out afterwards.
+                new = self.stroke.add(cur)
+                if new:
+                    self._commit(context, new)
             else:
                 layer = self.doc.canvas.layers[self.doc.canvas.active]
                 layer.px = bytearray(self.snapshot)
@@ -155,6 +155,8 @@ class TEXEL_OT_paint(Operator):
             return {"RUNNING_MODAL"}
 
         if event.type == "LEFTMOUSE" and event.value == "RELEASE":
+            if s.tool in {"PENCIL", "ERASER"}:
+                self._commit(context, self.stroke.end())   # the tail is final now
             self.doc.flush()
             return {"FINISHED"}
         return {"RUNNING_MODAL"}

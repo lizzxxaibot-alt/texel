@@ -151,6 +151,9 @@ fixes indefinitely. New feature work becomes demand-led, from the support queue
 3. Gate: all 16 suites green, `core/` coverage still 100%, `build.py` clean,
    and **`bash test_versions.sh` green on every installed Blender** - the
    store page claims 4.2+, so one version passing is not evidence for it.
+   Then **`python store_check.py`**, which runs the same suites inside the
+   Microsoft Store build: it is a different install path, it is how a lot of
+   Windows users get Blender, and its ACL means no other script can reach it.
    **Any red gate = no ship.**
 4. Bump `blender_manifest.toml` and `bl_info` together (`build.py` fails if they
    disagree). Rebuild the zip.

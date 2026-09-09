@@ -279,10 +279,29 @@ three is not a given. `test_e2e` - all 94 operators - is green on all three too.
 now part of `texel-release`'s gate. Adding a version is dropping a portable
 folder in `tools/`.
 
-**Still one operating system.** Three Blender versions, Windows only. The page
-now says exactly that rather than implying more. Also untested: the Microsoft
-Store build - its WindowsApps ACL refuses to run the exe from a script, and
-that is a common way Windows users install Blender.
+**Still one operating system.** Windows only. The page now says exactly that
+rather than implying more.
+
+## The Microsoft Store build is no longer untested
+
+It was the last untested install path, and a common one. `blender.exe --python`
+answers **"Access is denied"** - the WindowsApps ACL - which is why every script
+here skipped it.
+
+The way in is Blender's own startup folder: it imports every `.py` in the user
+`scripts/startup/`, and the app *can* be launched through the shell app alias.
+`store_check.py` drops a runner there, launches, runs one suite, quits, reads
+the report, repeats, and deletes the runner afterwards.
+
+The first attempt found nothing at all, which turned out to be the useful part:
+the Store build is an **MSIX package, so its `%APPDATA%` is redirected** into
+`%LOCALAPPDATA%\Packages\BlenderFoundation.Blender_*\LocalCache\Roaming\`.
+A buyer on the Store build has their add-ons somewhere other than where every
+"where are my add-ons" answer online points. That is now in START-HERE.html.
+
+**11 of 11 pass in the Store build**, GUI suites included, `test_install`
+included. With the three portable versions that is **44 Blender suite-runs
+across 4 builds**, all green.
 
 ## Blocked on the user
 1. **Price** - reference asks $29.90, AssetDrop asks $4.95. Recommend $14.95.
@@ -290,6 +309,29 @@ that is a common way Windows users install Blender.
    this product's substance is code. Recommend **Yes + Code + Graphics**.
 3. **Name** - confirm `Texel` before the itch slug is claimed.
 
+## The marquee feature was a no-op, and 16 green suites did not notice
+
+Building the promo GIF meant replaying a real freehand drag through the shipped
+code. It painted **the same 69 texels with Pixel Perfect on as with it off**,
+when the filter says 47.
+
+`pixel_perfect` needs one point of lookahead, so its last point is provisional -
+the next mouse event can prove it a corner. But `tex_paint._commit` only ever
+stamps; it cannot take a texel back. So the provisional point was painted
+immediately and, by the time the filter knew better, it was permanent. Every
+corner survived. The filter's own tests passed the whole time, because they
+tested the filter, not the loop calling it.
+
+Fixed by moving the incremental discipline into the tested layer:
+`core.raster.PerfectStroke` hands out only points that can no longer change and
+releases the held one on mouse-up. The stroke now trails the cursor by one
+texel while drawing, which is what pixel-perfect mode does in every editor that
+has one. `test_raster` drives the shipped object over a 460-event drag; the
+prefix-stability the fix rests on was checked over every prefix of 4,000 random
+walks.
+
+Third data-loss-class bug found by looking at output rather than exit codes,
+after `canvas_resize` and the workspace rename.
+
 ## Remaining before upload
-- a 3-second GIF of a pixel-perfect stroke (the marquee feature, demos instantly)
 - a still of the density readout mid-measurement

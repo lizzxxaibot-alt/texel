@@ -66,6 +66,63 @@ def pixel_perfect(pts: list[Point]) -> list[Point]:
     return out
 
 
+class PerfectStroke:
+    """A freehand drag that stays pixel-perfect *while it is being drawn*.
+
+    `pixel_perfect` needs one point of lookahead: its last point is always
+    provisional, because the next mouse event can prove it a corner. A painting
+    pipeline that only ever stamps cannot take a texel back, so committing that
+    provisional point makes the corner permanent - and the filter becomes a
+    no-op. It was one: a 420-event drag painted the same 69 texels with the
+    toggle on as with it off, when the filter says 47.
+
+    This holds the provisional point back and hands out only what is final:
+
+        st = PerfectStroke(start, perfect=True)
+        for texel in mouse_events:
+            paint(st.add(texel))     # points that can no longer change
+        paint(st.end())              # the held-back tail, on mouse-up
+
+    The cost is that the stroke trails the cursor by one texel until the button
+    comes up, which is what pixel-perfect mode does in every editor that has
+    one. With perfect=False nothing is held and `add` returns the raw segment.
+    """
+
+    def __init__(self, start: Point, perfect: bool = True) -> None:
+        self.trail: list[Point] = [start]
+        self.perfect = perfect
+        self._emitted = 1               # start is committed by the caller
+
+    @property
+    def last(self) -> Point:
+        return self.trail[-1]
+
+    def add(self, pt: Point) -> list[Point]:
+        """Advance to `pt`, joining any gap. Returns newly-final texels."""
+        if pt == self.trail[-1]:
+            return []
+        seg = line(*self.trail[-1], *pt)
+        self.trail.extend(seg[1:])
+        if not self.perfect:
+            return seg
+        f = pixel_perfect(self.trail)
+        return self._take(f, len(f) - 1)
+
+    def end(self) -> list[Point]:
+        """Mouse-up: the last point is final now, so release it."""
+        if not self.perfect:
+            return []
+        f = pixel_perfect(self.trail)
+        return self._take(f, len(f))
+
+    def _take(self, f: list[Point], end: int) -> list[Point]:
+        if end <= self._emitted:
+            return []
+        out = f[self._emitted:end]
+        self._emitted = end
+        return out
+
+
 def rect(x0: int, y0: int, x1: int, y1: int, filled: bool = False) -> list[Point]:
     lo_x, hi_x = (x0, x1) if x0 <= x1 else (x1, x0)
     lo_y, hi_y = (y0, y1) if y0 <= y1 else (y1, y0)
