@@ -1,6 +1,8 @@
 # Texel — itch.io listing copy
 
-**Status: DRAFT, not uploaded. Needs the user's decisions marked ⚠ below.**
+**Status: LIVE.** Published 2026-09-09 at https://z3er1n.itch.io/texel
+(game 4991926, slug `texel`, classification Tool, $9.95, AI disclosure
+Yes + Code + Graphics).
 
 ---
 
