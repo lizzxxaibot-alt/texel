@@ -1,0 +1,136 @@
+<!doctype html><meta charset="utf-8">
+<title>Texel store slide</title>
+<!--
+  One store-gallery slide, chosen by ?slot=g2. Rendered to 1280x720 so every
+  image in the gallery is the same shape - a gallery of mixed aspect ratios
+  reads as a pile of files rather than a sequence.
+
+  The art is never cropped to fit: it is contained, and the panel carries the
+  caption. Cropping a render to a shape is how you lose the thing it was
+  composed around.
+-->
+<style>
+  @font-face{font-family:'YoungSerif';src:url('../../../brand/fonts/YoungSerif-Regular.ttf') format('truetype')}
+  @font-face{font-family:'Inter';src:url('../../../brand/fonts/Inter.ttf') format('truetype')}
+  :root{
+    --bg:#141317; --bg2:#1b1a21; --line:rgba(242,230,200,.14);
+    --text:#f2e6c8; --dim:#ab9f8a; --ember:#ff9c3f; --gold:#e7b23a;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:1280px;height:720px;overflow:hidden}
+  body{background:
+      radial-gradient(900px 420px at 78% -16%,rgba(255,156,63,.10),transparent 60%),
+      var(--bg);
+    color:var(--text);font-family:'Inter',system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;display:flex;flex-direction:column}
+
+  header{padding:30px 44px 0;display:flex;align-items:flex-end;
+    justify-content:space-between;gap:30px;flex:none}
+  .kicker{font-size:12px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--gold);font-weight:600}
+  h1{font-family:'YoungSerif',Georgia,serif;font-size:34px;line-height:1.1;
+    margin-top:9px;font-weight:400;max-width:22ch}
+  h1 em{font-style:normal;color:var(--ember)}
+  .say{font-size:14.5px;color:var(--dim);line-height:1.6;max-width:40ch;
+    text-align:right;flex:none}
+  .say b{color:var(--text);font-weight:600}
+
+  /* The frame hugs the art rather than the art filling a fixed frame. A fixed
+     2.33 panel letterboxed the tall sources and left dead space under the wide
+     ones - and cropping to fit cut the character out of the temple shot. */
+  .wrap{flex:1;margin:20px 44px 24px;display:flex;align-items:center;
+    justify-content:center;min-height:0}
+  .art{border:1px solid var(--line);border-radius:12px;overflow:hidden;
+    max-width:100%;max-height:100%;display:flex;background:#101015;
+    box-shadow:0 1px 0 rgba(255,255,255,.03) inset, 0 16px 34px rgba(0,0,0,.4)}
+  .art img{max-width:100%;max-height:100%;display:block;object-fit:contain}
+  .art.pixel img{image-rendering:pixelated}
+
+  footer{padding:0 44px 22px;display:flex;justify-content:space-between;
+    font-size:11.5px;color:var(--dim);letter-spacing:.09em;
+    text-transform:uppercase;flex:none;opacity:.8}
+  footer b{color:var(--gold);font-weight:600}
+</style>
+
+<header>
+  <div>
+    <div class="kicker" id="k"></div>
+    <h1 id="h"></h1>
+  </div>
+  <div class="say" id="s"></div>
+</header>
+<div class="wrap"><div class="art" id="a"><img id="i" alt=""></div></div>
+<footer>
+  <div>Texel &middot; a Blender add-on by Pixelkiln</div>
+  <div><b>$9.95</b> &middot; mintworks.cc/texel</div>
+</footer>
+
+<script>
+// slot -> art + words. Order here is the order they go on the store page.
+const SLOTS = {
+  g2: {
+    img: "store/shot_market.png", mode: "fill",
+    k: "What you make",
+    h: "Pixel art, painted <em>on the model</em>.",
+    s: "Every texture in this street was drawn in Blender with Texel. " +
+       "<b>44 px per unit</b> on every surface &mdash; measured, not eyeballed."
+  },
+  g3: {
+    img: "store/stills/ui_showcase_02.png", mode: "fill",
+    k: "It is a real add-on",
+    h: "Lives in Blender. <em>Not a separate app.</em>",
+    s: "Its own workspace, its own sidebar tab, <b>94 tools</b>. " +
+       "Install the zip, press N, start painting."
+  },
+  g4: {
+    img: "store/page_src/atlas_model.png", mode: "contain pixel",
+    k: "The core of it",
+    h: "Paint the texture. <em>Watch the model wear it.</em>",
+    s: "One image, every face. Nearest-neighbour, so a texel stays a " +
+       "<b>hard square</b> instead of a smudge."
+  },
+  g5: {
+    img: "store/shot_temple.png", mode: "fill",
+    k: "Seamless tiles",
+    h: "One 64px tile. <em>A whole floor. No seam.</em>",
+    s: "Texel scores the seam before you commit it. This one measures " +
+       "<b>100%</b> &mdash; the number is in the panel, not in the copy."
+  },
+  g6: {
+    img: "store/shot_hangar.png", mode: "fill",
+    k: "Indexed colour",
+    h: "One texture. <em>Three palettes. Instant.</em>",
+    s: "Colour is an index, not a pixel. Swap the palette and every surface " +
+       "in the scene changes at once."
+  },
+  g7: {
+    img: "store/animates_1280x720.png", mode: "contain",
+    k: "It animates too",
+    h: "Frames and tracks, <em>like cel animation</em>.",
+    s: "Tracks down, frames across. Export a <b>sheet plus JSON</b>, or a GIF. " +
+       "Bound to Blender's timeline &mdash; spacebar plays it."
+  },
+  g8: {
+    img: "gallery/contact-sheet.png", mode: "contain",
+    k: "Ten worked examples",
+    h: "Every prop, <em>painted stroke by stroke</em>.",
+    s: "The texture on the left, the model wearing it on the right. " +
+       "Ten short videos ship with the page."
+  },
+  g9: {
+    img: "store/page_src/envs_grid.png", mode: "contain",
+    k: "Range",
+    h: "Cavern, corridor, ruins, shrine, tavern.",
+    s: "Five environments, all built from Texel's own tiles. " +
+       "Nothing here came from an asset pack."
+  },
+};
+const slot = new URLSearchParams(location.search).get("slot") || "g2";
+const d = SLOTS[slot];
+document.getElementById("k").innerHTML = d.k;
+document.getElementById("h").innerHTML = d.h;
+document.getElementById("s").innerHTML = d.s;
+document.getElementById("i").src = d.img;
+document.getElementById("a").className = "art" + (d.mode && d.mode.includes("pixel") ? " pixel" : "");
+window.__slots = Object.keys(SLOTS);
+</script>
