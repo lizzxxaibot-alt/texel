@@ -212,6 +212,47 @@ two releases that land beat one ambitious release that slips twice — and becau
 stalling at v0.3 still leaves buyers with three real releases instead of half a
 dope sheet.
 
+## The end-to-end suite, and the data loss it found
+
+Fifteen suites now. The fifteenth, `test_e2e.py`, exists because of a number:
+**fourteen suites were green with 100% coverage of `core/`, and 20 of the 94
+operators had never been called by any of them.** The pure-Python half was
+proved and the Blender half was assumed.
+
+It walks the product in a real GUI — setup, paint, palettes, layers, selection,
+density, zones, animation, export, showcase — then stresses it, and **fails if
+any registered operator goes uninvoked**. A new operator with no test now breaks
+the build the day it is written.
+
+### What it found
+
+1. **`canvas_resize` destroyed the animation.** It rebuilt every layer as
+   `Layer(name, w, h, group)` and never passed `track` or `frame` — the two
+   arguments the cel model lives in. Measured before the fix:
+   `frames=3 tracks=['BG','Main'] cels=6` → `frames=0 tracks=[] cels=0`.
+   Silent, no error, no sensible undo. A buyer resizes a sprite, does not look
+   at the frame grid for ten minutes, and has lost the afternoon. It now carries
+   `tracks`, `frame_holds` and per-layer `track`/`frame`, with a regression test.
+   **`canvas_resize` was one of the 20 operators nothing had ever called** — it
+   was written, shipped in the zip, and never once executed.
+2. **Three pixel-grid buttons could never be pressed.** Added to the 3D Setup
+   panel; all three poll for an Image Editor. Moved to the Canvas panel.
+3. **`palette_lospec` fetched 32 colours and said nothing.** The sidebar status
+   line is the only feedback left after the toast fades.
+
+### Eight of the twelve first-run failures were the test's own fault
+Worth recording, because taking them at face value would have meant "fixing"
+correct code: `flip_canvas` is `H`/`V` not `X`/`Y`; `canvas_resize` takes one
+square `size`; `replace_colour` takes an index and reads the colour from the
+scene; `export_layers` makes Blender images rather than files; `merge_down`
+takes an index; `flood_fill` takes a `get_px` callable; and **the palette
+ceiling is 255 *usable* colours plus transparent — 256 entries, one byte,
+exactly right.** That last one I nearly filed as a product bug. Same failure
+mode as the ellipse metric that first reported "theirs wins 5-0".
+
+Timings on a 1024×1024 canvas: fill 0.18s, `to_rgba` 0.16s, full-canvas flood
+fill 0.60s over a million texels.
+
 ## Blocked on the user
 1. **Price** - reference asks $29.90, AssetDrop asks $4.95. Recommend $14.95.
 2. **AI disclosure** - the packs answer "Yes + Graphics" would be FALSE here;

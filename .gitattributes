@@ -1,0 +1,9 @@
+# The source is written with LF and Blender does not care either way. Without
+# this, git rewrites every file to CRLF on checkout and the next diff is the
+# whole repository.
+* text=auto eol=lf
+*.png binary
+*.gif binary
+*.mp4 binary
+*.zip binary
+*.ttf binary

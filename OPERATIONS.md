@@ -36,7 +36,7 @@ from `list_scheduled_tasks`, not from here.**
   pack never does ("does it work on 4.2?", "my UVs are wrong"), and an unanswered
   question on a paid tool is worse than no post at all.
 - **Release is weekly, not daily**, because a version bump every day is noise and
-  the gate (12 suites + install test) is the expensive part.
+  the gate (15 suites + install test) is the expensive part.
 - **Watch does no work.** Same rule as `pixelkiln-watch`: a watchguard that
   starts fixing things stops being able to judge.
 
