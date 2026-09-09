@@ -105,7 +105,7 @@ def flat_card(name, image_name, loc, size=1.6):
     return o
 
 
-def render(path, res=None):
+def render(path, res=None, transparent=False):
     sc = bpy.context.scene
     sc.render.engine = "CYCLES"
     try:
@@ -120,7 +120,7 @@ def render(path, res=None):
     sc.cycles.samples = SAMPLES
     sc.cycles.use_denoising = True
     sc.render.resolution_x, sc.render.resolution_y = res or RES
-    sc.render.film_transparent = False
+    sc.render.film_transparent = bool(transparent)
     sc.view_settings.look = "AgX - Base Contrast"
     sc.world = bpy.data.worlds.new("W")
     sc.world.use_nodes = True

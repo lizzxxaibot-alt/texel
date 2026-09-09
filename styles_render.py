@@ -23,6 +23,7 @@ if HERE not in sys.path:
     sys.path.insert(0, HERE)
 
 import models3d as M                                          # noqa: E402
+import styles3d as S                                          # noqa: E402
 import proof3d as P3                                          # noqa: E402
 
 RES = (760, 1000)
@@ -65,50 +66,61 @@ def torch_in_hand(ch, scale=0.85):
     bpy.context.collection.objects.link(lo)
 
 
-def shot(name, builder, turn=22, lift=0.0, pad=1.45):
-    """Build one style and frame it from its own height, on transparency."""
+# far enough back for the raised torch AND the flame above it: the first
+# fixed camera framed the body and guillotined every torch
+CAM = (-1.35, -5.25, 2.05)
+LOOK = (0.0, 0.0, 1.52)
+LENS = 58.0
+
+
+def shot(name, builder, turn=22, lift=0.0, pad=1.45, native=None, torch=True,
+         face_camera=False):
+    """Build one style and shoot it from a FIXED camera, on transparency.
+
+    Framing from each object's own bounds made the styles different sizes on
+    the sheet - the one without a torch got blown up to fill the frame - and a
+    size difference reads as a style difference. Every character is built to
+    about the same height, so one camera serves all five and the comparison is
+    about the art.
+    """
     P3.reset()
     light()
     ch = builder()
+    if face_camera:
+        # a billboard is a plane. Off-axis it renders as a LINE, which is what
+        # the first sheet showed. Turn it to face the camera, which is what a
+        # billboard does every frame in an actual game.
+        turn = math.degrees(math.atan2(CAM[0], -CAM[1]))
     ch.rotation_euler = (0, 0, math.radians(turn))
-    torch_in_hand(ch)
+    if torch:
+        torch_in_hand(ch)
 
-    # frame from the object's real bounds, not a guessed camera position - the
-    # styles are different heights and a fixed camera crops some and shrinks
-    # others, which would read as a style difference
-    bpy.context.view_layer.update()
-    zs, xs = [], []
-    for o in bpy.data.objects:
-        if o.type != "MESH":
-            continue
-        for c in o.bound_box:
-            w = o.matrix_world @ __import__("mathutils").Vector(c)
-            zs.append(w.z); xs.append(w.x)
-    top, bot = max(zs), min(zs)
-    height = max(top - bot, 0.4) * pad
-    mid = (top + bot) / 2.0 + lift
+    P3.camera(CAM, LOOK, lens=LENS)
 
-    aspect = RES[0] / RES[1]
-    lens = 58.0
-    vfov = 2.0 * math.atan((36.0 / max(aspect, 1e-6) / 2.0) / lens) if aspect < 1 \
-        else 2.0 * math.atan(18.0 / lens)
-    dist = (height / 2.0) / math.tan(vfov / 2.0)
-    # aim dead at the middle of the bounds: offsetting the camera up pushed the
-    # subject low and clipped the hem on the taller styles
-    cam = P3.camera((-dist * 0.26, -dist * 0.95, mid + height * 0.02),
-                    (0, 0, mid), lens=lens)
-
-    sc = bpy.context.scene
-    sc.render.film_transparent = True
-    P3.render(os.path.join(HERE, "shots", f"style_{name}"), res=RES)
-    sc.render.film_transparent = False
-    return cam
+    # A style whose look IS its output resolution gets rendered at that
+    # resolution. Upscaling happens afterwards, nearest, so the pixels stay
+    # square - which is the whole PS1 signature.
+    #
+    # Transparency has to be passed THROUGH: proof3d.render set
+    # film_transparent = False itself, so setting it here was overwritten and
+    # every "transparent" render came out with an opaque world behind it.
+    P3.render(os.path.join(HERE, "shots", f"style_{name}"), res=native or RES,
+              transparent=True)
 
 
-# style key -> (builder, turn, note). Filled in once the five are decided.
+# The five styles this audience actually ships, ranked by itch.io tag counts
+# pulled 2026-09-09. `native` is the resolution the style is rendered AT before
+# being upscaled - a PS1 output 320x240 and nothing about that is optional if
+# the look is going to be honest.
 STYLES = {
-    "voxel": (M.character, 24),
-    "lowpoly": (M.character_hooded, -20),
+    "psx":       dict(build=S.psx, turn=24, native=(256, 337), torch=True,
+                      degrade=True),
+    "voxel":     dict(build=S.voxel, turn=26, native=None, torch=False),
+    # billboard has its torch drawn into the sprite, and must face the lens
+    "billboard": dict(build=S.billboard, turn=0, native=None, torch=False,
+                      face_camera=True),
+    "lowpoly":   dict(build=S.lowpoly, turn=22, native=None, torch=True),
+    "n64":       dict(build=S.n64, turn=-22, native=(456, 600), torch=True),
 }
 
 
@@ -120,9 +132,11 @@ def main():
         if key not in STYLES:
             print(f"  ! unknown style {key!r}; have {sorted(STYLES)}", flush=True)
             continue
-        builder, turn = STYLES[key][0], STYLES[key][1]
+        st = STYLES[key]
         print(f"  {key}", flush=True)
-        shot(key, builder, turn=turn)
+        shot(key, st["build"], turn=st["turn"], native=st.get("native"),
+             torch=st.get("torch", True),
+             face_camera=st.get("face_camera", False))
     print("STYLES RENDER DONE", flush=True)
 
 

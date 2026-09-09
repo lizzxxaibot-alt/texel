@@ -1,0 +1,172 @@
+<!doctype html><meta charset="utf-8">
+<title>Texel &mdash; five character styles</title>
+<style>
+  @font-face{font-family:'YoungSerif';src:url('../../../brand/fonts/YoungSerif-Regular.ttf') format('truetype')}
+  @font-face{font-family:'Inter';src:url('../../../brand/fonts/Inter.ttf') format('truetype')}
+  :root{
+    --bg:#141317; --bg2:#1b1a21; --panel:#1e1d25; --line:rgba(242,230,200,.14);
+    --text:#f2e6c8; --dim:#ab9f8a; --ember:#ff9c3f; --gold:#e7b23a; --bad:#e0563f;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:1960px;height:1156px;overflow:hidden}
+  body{background:
+      radial-gradient(1400px 560px at 70% -14%,rgba(255,156,63,.09),transparent 62%),
+      var(--bg);
+    color:var(--text);font-family:'Inter',system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;padding:46px 44px 40px}
+
+  header{display:flex;align-items:flex-end;justify-content:space-between;
+    padding-bottom:22px;border-bottom:1px solid var(--line)}
+  .kicker{font-size:13px;letter-spacing:.17em;text-transform:uppercase;
+    color:var(--gold);font-weight:600}
+  h1{font-family:'YoungSerif',Georgia,serif;font-size:39px;line-height:1.1;
+    margin-top:11px;font-weight:400}
+  h1 em{font-style:normal;color:var(--ember)}
+  .src{text-align:right;font-size:13px;color:var(--dim);line-height:1.7;max-width:44ch}
+  .src b{color:var(--text);font-weight:600}
+
+  .row{margin-top:30px;display:grid;grid-template-columns:repeat(5,1fr);gap:18px}
+  .card{background:var(--bg2);border:1px solid var(--line);border-radius:12px;
+    display:flex;flex-direction:column;overflow:hidden}
+  .card.fit{border-color:rgba(255,156,63,.42)}
+  .art{height:452px;display:flex;align-items:flex-end;justify-content:center;
+    background:linear-gradient(180deg,rgba(255,255,255,.022),transparent 62%)}
+  .art img{max-height:440px;width:auto;display:block}
+  .art img.nn{image-rendering:pixelated}
+  .body{padding:18px 20px 20px;border-top:1px solid var(--line);flex:1;
+    display:flex;flex-direction:column}
+  .rank{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
+  h2{font-family:'YoungSerif',Georgia,serif;font-size:24px;font-weight:400;
+    margin-top:6px;line-height:1.15}
+  .count{margin-top:12px;font-size:13px;color:var(--text)}
+  .count b{color:var(--gold);font-size:19px;font-variant-numeric:tabular-nums}
+  .count span{color:var(--dim)}
+  .games{margin-top:11px;font-size:12.5px;color:var(--dim);line-height:1.55}
+  .games b{color:var(--text);font-weight:600}
+  .recipe{margin-top:12px;padding-top:12px;border-top:1px solid var(--line);
+    font-size:12px;color:var(--dim);line-height:1.6}
+  .verdict{margin-top:auto;padding-top:14px;font-size:12.5px;line-height:1.5}
+  .chip{display:inline-block;font-size:11px;letter-spacing:.11em;
+    text-transform:uppercase;font-weight:600;padding:5px 11px;border-radius:999px;
+    margin-bottom:8px}
+  .chip.y{background:rgba(255,156,63,.16);color:var(--ember);
+    border:1px solid rgba(255,156,63,.42)}
+  .chip.n{background:rgba(224,86,63,.13);color:var(--bad);
+    border:1px solid rgba(224,86,63,.36)}
+  .verdict p{color:var(--dim)}
+
+  footer{margin-top:26px;padding-top:18px;border-top:1px solid var(--line);
+    display:flex;justify-content:space-between;font-size:12.5px;color:var(--dim)}
+  footer b{color:var(--text);font-weight:600}
+  .url{font-size:11px;letter-spacing:.1em;text-transform:uppercase;opacity:.72}
+</style>
+
+<header>
+  <div>
+    <div class="kicker">Texel &middot; who this is for</div>
+    <h1>Five ways this audience makes characters &mdash;
+      <em>and where Texel belongs</em>.</h1>
+  </div>
+  <div class="src">
+    Every figure below was modelled and textured with <b>Texel's own raster
+    core</b>, under identical lighting and one camera. Ranking is
+    <b>itch.io tag counts pulled 2026&#8209;09&#8209;09</b>, not taste.
+  </div>
+</header>
+
+<div class="row">
+
+  <div class="card fit">
+    <div class="art"><img class="nn" src="shots/styles/psx.png" alt="PS1-style character"></div>
+    <div class="body">
+      <div class="rank">Most common</div>
+      <h2>PS1 / PSX retro</h2>
+      <div class="count"><b>6,407</b> <span>games &middot; 2,398 asset packs</span></div>
+      <div class="games"><b>Lethal Company</b>, <b>Signalis</b>, Crow Country,
+        Paratopic</div>
+      <div class="recipe">500&ndash;3,000 tris. One 64&ndash;128px atlas, nearest
+        filtering, flat shading. The look is finished at render time: affine
+        texture warp, vertex jitter, dithering, 320&times;240 output.</div>
+      <div class="verdict"><span class="chip y">Texel fits &mdash; best</span>
+        <p>Needs it most. The warp shader changes how the texture reads on the
+          model, so you cannot paint it blind in Aseprite and guess.</p></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="art"><img src="shots/styles/voxel.png" alt="Voxel character"></div>
+    <div class="body">
+      <div class="rank">2nd</div>
+      <h2>Voxel</h2>
+      <div class="count"><b>3,068</b> <span>games &middot; 967 asset packs</span></div>
+      <div class="games"><b>Bonfire Peaks</b>, Cube World, Trove &middot;
+        563 itch games tagged made&#8209;with&#8209;MagicaVoxel</div>
+      <div class="recipe">A grid of cubes, typically 64&sup3;. Colour is assigned
+        <b>per cube</b> in MagicaVoxel or Blockbench and baked to vertex colours
+        or a palette strip on export.</div>
+      <div class="verdict"><span class="chip n">Not Texel's job</span>
+        <p>There is no UV texture to paint. Saying otherwise would be selling
+          you something the tool does not do.</p></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="art"><img class="nn" src="shots/styles/billboard.png" alt="Billboard sprite character"></div>
+    <div class="body">
+      <div class="rank">3rd</div>
+      <h2>Billboard / 2.5D</h2>
+      <div class="count"><b>594</b> <span>games (fps + pixel&#8209;art)</span></div>
+      <div class="games"><b>Nightmare Reaper</b>, Hedon &middot; the HD&#8209;2D
+        family (Octopath Traveler) above it</div>
+      <div class="recipe">Not geometry at all. A camera&#8209;facing plane wearing
+        a hand&#8209;drawn sheet, 32&ndash;64px a frame, with pre&#8209;drawn
+        angles swapped as the camera orbits.</div>
+      <div class="verdict"><span class="chip n">Half &mdash; sheet only</span>
+        <p>Texel can paint the sprite sheet in the Image Editor, but there is no
+          model to paint <em>on</em>. This is the one style where a flat card is
+          the right answer.</p></div>
+    </div>
+  </div>
+
+  <div class="card fit">
+    <div class="art"><img class="nn" src="shots/styles/lowpoly.png" alt="Clean pixel-textured low-poly character"></div>
+    <div class="body">
+      <div class="rank">4th</div>
+      <h2>Clean pixel low&#8209;poly</h2>
+      <div class="count"><b>&mdash;</b> <span>not separable from PSX on itch</span></div>
+      <div class="games"><b>Anodyne 2: Return to Dust</b> &mdash; low-poly
+        overworld, 2D pixel interiors</div>
+      <div class="recipe">The same mesh and the same atlas as PSX, minus the
+        corruption. No warp, no jitter, no dither &mdash; crisp and stable, so
+        shading can carry more of the work.</div>
+      <div class="verdict"><span class="chip y">Texel fits &mdash; best</span>
+        <p>Identical mechanic: a UV-mapped low-poly mesh wearing a small painted
+          texture. Exactly what the tool is.</p></div>
+    </div>
+  </div>
+
+  <div class="card fit">
+    <div class="art"><img src="shots/styles/n64.png" alt="N64-style character"></div>
+    <div class="body">
+      <div class="rank">5th</div>
+      <h2>N64 retro</h2>
+      <div class="count"><b>182</b> <span>games</span></div>
+      <div class="games"><b>Corn Kidz 64</b></div>
+      <div class="recipe">N64 hardware had perspective-correct mapping and
+        subpixel precision, so no warp and no jitter. The signature is
+        <b>Gouraud shading</b> and a <b>bilinear-filtered</b> low-res texture
+        &mdash; soft, not blocky. Segmented rigid parts.</div>
+      <div class="verdict"><span class="chip y">Texel fits</span>
+        <p>Same mechanic as PSX and clean low-poly, on a smaller population.</p></div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div><b>Worth knowing:</b> itch's plain <b>low-poly</b> tag returns 26,715
+    games &mdash; but the packs that dominate it (Synty POLYGON, KayKit) carry
+    <b>no pixel texture at all</b>. That is a different, larger audience Texel
+    has nothing to sell to.</div>
+  <div class="url">mintworks.cc/texel</div>
+</footer>
