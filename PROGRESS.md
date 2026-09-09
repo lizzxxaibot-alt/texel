@@ -303,11 +303,34 @@ A buyer on the Store build has their add-ons somewhere other than where every
 included. With the three portable versions that is **44 Blender suite-runs
 across 4 builds**, all green.
 
-## Blocked on the user
-1. **Price** - reference asks $29.90, AssetDrop asks $4.95. Recommend $14.95.
-2. **AI disclosure** - the packs answer "Yes + Graphics" would be FALSE here;
-   this product's substance is code. Recommend **Yes + Code + Graphics**.
-3. **Name** - confirm `Texel` before the itch slug is claimed.
+## Launch decisions - settled 2026-09-09
+1. **Price: $9.95** launch, escalating to $14.95 at v0.4 and $19.95 at v1.0,
+   announced in advance. Every update free to everyone who ever bought.
+2. **AI disclosure: Yes**, ticking **Code and Graphics** on itch's form. The
+   written line is one sentence and never explains itself:
+   *"Mintworks is an AI company - Texel's code and artwork were built with AI
+   assistance."*
+3. **Name: Texel**, slug `texel`, product "Texel by Pixelkiln".
+
+## Marketing assets
+
+**135 publishable files, 142 MB, 34 videos (4.5 minutes).** `marketing_index.py`
+measures every one and writes `MARKETING.html` - the whole library on one page,
+grouped by destination, videos playable with poster frames. Regenerate it rather
+than keeping a list by hand.
+
+| | files | |
+|---|---|---|
+| Store listing | 15 | cover, thumbnail, five gallery scenes, the stroke GIF |
+| Product page | 13 | already live on mintworks.cc/texel |
+| Cinematic video | 13 | the 30s reel plus ten scene clips |
+| How it is made | 11 | screen-recorded build-ups |
+| Asset turntables | 22 | ten objects, each spinning - two weeks of posts |
+| Still library | 57 | harvested frames for ads and thumbnails |
+
+154 working intermediates are excluded on purpose. One dead file:
+`promo/texel-walkthrough.mp4` is 2 frames long - `walkthrough.py` produced a
+truncated clip and nothing links to it.
 
 ## The marquee feature was a no-op, and 16 green suites did not notice
 

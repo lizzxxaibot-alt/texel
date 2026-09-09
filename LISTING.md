@@ -312,37 +312,30 @@ and places no restriction on your textures, commercial use included.
 
 ---
 
-## ⚠ Decisions needed before upload
+## Decisions - settled 2026-09-09
 
-### 1. Price
-The nearest comparable Blender add-on asks **$29.90**. AssetDrop currently asks
-$4.95, which is a sixth of what this market bears.
-**Recommendation: $14.95**, or $9.95 as a launch price. High enough to signal a
-real tool, below the incumbent, and roughly 3× AssetDrop, which the store data
-says we have been underpricing.
+### 1. Price: **$9.95**
+Launch price. The nearest comparable Blender add-on asks $29.90; AssetDrop asks
+$4.95. **The price rises at named milestones, announced in advance** - $14.95 at
+v0.4 (engine export), $19.95 at v1.0 (tweening and the dope sheet). Everyone who
+buys at $9.95 gets every one of those updates free.
 
-### 2. AI disclosure — READ THIS, IT DIFFERS FROM THE PACKS
-itch asks which parts of a project are AI-generated: Graphics, Sound, Text, Code.
+### 2. AI disclosure: **Yes**
+On itch's form, tick **Yes**, and tick **Code** and **Graphics** - the code was
+written with AI assistance and the cover art was generated. Ticking Graphics
+only, the way the pixel-art packs do, would be a false declaration here, because
+this product's substance is code.
 
-Our standing answer for the **pixel art packs** is **Yes + Graphics only**
-(settled 2026-08-25). **That answer would be false here.** Texel's source code
-was written with AI assistance, so the honest answer for this project is
-**Yes + Code**, and **Graphics** as well because the cover art was generated.
+The written disclosure stays **one line** and never explains itself:
 
-Claiming Graphics-only on a product whose substance is code would be a false
-declaration on a form we are on record telling other routines never to soften.
-**Recommendation: tick Yes, Code and Graphics.**
+> Mintworks is an AI company - Texel's code and artwork were built with AI
+> assistance.
 
-### 3. Name
-`Texel` is precise — texel density is the whole problem the tool solves — and
-does not collide with the reference product. Confirm before the URL is claimed,
-because the itch slug is painful to change afterwards.
+That line goes on the itch page, the Gumroad page and mintworks.cc/texel. It
+does not get expanded into a paragraph justifying the pipeline anywhere.
 
----
-
-## Prose AI disclosure for the page (one sentence, per house rule)
-> Texel was built with AI assistance; every feature described here was tested in
-> Blender 4.5 and the test suite ships in the repository.
+### 3. Name: **Texel** - confirmed
+Slug `texel`, product "Texel by Pixelkiln".
 
 ## Devlog opener (for launch)
 `Texel 0.1.0 — pixel art painting for Blender, with texel density that actually gets measured`
