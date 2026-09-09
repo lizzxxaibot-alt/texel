@@ -1,0 +1,18 @@
+# Rendered media. Big, binary, and reproducible from the scripts in this repo
+# (gameshots.py -> promo/shot-*.mp4, harvest_stills.py -> store/stills/).
+# Git keeps every version of a binary forever, so ~140 MB of MP4s would bloat
+# the clone permanently for something a re-render regenerates.
+promo/
+store/stills/
+gallery/
+shots/panels/
+
+# build output
+dist/
+__pycache__/
+*.pyc
+.coverage
+
+# run logs
+e2e.log
+*.log

@@ -1,0 +1,25 @@
+schema_version = "1.0.0"
+
+id = "texel"
+version = "0.1.0"
+name = "Texel"
+tagline = "Pixel-perfect pixel art painting, layers and texel density"
+maintainer = "Mintworks <hello@mintworks.cc>"
+type = "add-on"
+
+website = "https://mintworks.cc"
+
+tags = ["Paint", "UV"]
+
+blender_version_min = "4.2.0"
+
+license = [
+  "SPDX:GPL-3.0-or-later",
+]
+
+copyright = [
+  "2026 Mintworks",
+]
+
+[permissions]
+files = "Import and save palettes and canvases"

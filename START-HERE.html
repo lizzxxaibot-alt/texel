@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Texel — start here</title>
+<!--
+  Ships INSIDE the zip. It has to work with no internet, no fonts to download
+  and no build step, because the moment a buyer needs it is the moment the
+  download finished and nothing has worked yet. So: one file, system fonts,
+  no requests. The prettier, always-current version lives at mintworks.cc/texel
+  and this page links to it rather than pretending to be it.
+-->
+<style>
+  :root{
+    --bg:#14131a; --panel:#1c1b23; --panel2:#232129; --line:#33303c;
+    --text:#eee7d8; --dim:#a99f8d; --ember:#ff9c3f; --gold:#e7b23a;
+    --ok:#6fd4ab; --warn:#ffb454;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--text);line-height:1.65;
+    font-family:"Segoe UI",-apple-system,BlinkMacSystemFont,Roboto,Helvetica,Arial,sans-serif;
+    padding:40px 20px 80px}
+  main{max-width:760px;margin:0 auto}
+  code,kbd,pre{font-family:"Cascadia Mono",Consolas,"SF Mono",Menlo,monospace}
+
+  header{border-bottom:1px solid var(--line);padding-bottom:28px;margin-bottom:36px}
+  h1{font-size:2.4rem;letter-spacing:.01em}
+  h1 span{color:var(--ember)}
+  .sub{color:var(--dim);margin-top:8px;font-size:1.05rem}
+  .ver{display:inline-block;margin-top:14px;background:var(--gold);color:#141317;
+    font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+    padding:4px 9px;border-radius:3px}
+
+  h2{margin:44px 0 4px;font-size:1.35rem}
+  h2 .n{color:var(--ember);font-variant-numeric:tabular-nums;margin-right:10px}
+  h3{margin:26px 0 6px;font-size:1.02rem;color:var(--gold)}
+  p{margin:10px 0}
+  ul,ol{margin:10px 0 10px 22px}
+  li{margin:6px 0}
+  a{color:var(--ember)}
+  strong{color:#fff}
+
+  .panel{background:var(--panel);border:1px solid var(--line);border-radius:8px;
+    padding:18px 20px;margin:18px 0}
+  .panel.warn{border-color:#5a4526;background:#221c14}
+  .panel.ok{border-color:#2c5546;background:#141f1b}
+  .lbl{font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--dim);margin-bottom:6px}
+  kbd{background:var(--panel2);border:1px solid var(--line);border-bottom-width:2px;
+    border-radius:4px;padding:1px 6px;font-size:.86em}
+  pre{background:#0f0e14;border:1px solid var(--line);border-radius:6px;
+    padding:12px 14px;overflow-x:auto;font-size:.88rem;color:#cfc6b2}
+  table{border-collapse:collapse;width:100%;margin:14px 0;font-size:.94rem}
+  th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+  th{background:var(--panel2);color:var(--dim);font-weight:600;
+    font-size:.78rem;letter-spacing:.06em;text-transform:uppercase}
+  footer{margin-top:56px;padding-top:24px;border-top:1px solid var(--line);
+    color:var(--dim);font-size:.9rem}
+</style>
+</head>
+<body>
+<main>
+
+<header>
+  <h1>Texel<span>.</span></h1>
+  <div class="sub">Pixel art painted on the model, in Blender — and animated.</div>
+  <div class="ver">v0.1.0 &nbsp;·&nbsp; Pixelkiln</div>
+</header>
+
+<p><strong>Thank you for buying this.</strong> It is a small tool from a small
+studio, and every update you will ever get is included — you will not be asked
+for money again.</p>
+
+<p>This page is offline and ships in the zip. The current version, with the
+changelog and the roadmap, is at
+<a href="https://mintworks.cc/texel">mintworks.cc/texel</a>.</p>
+
+
+<h2><span class="n">1</span>Install it</h2>
+
+<ol>
+  <li>Keep <code>texel-0.1.0.zip</code> <strong>zipped</strong>. Blender wants the
+    zip, not the folder inside it.</li>
+  <li>Open Blender. <strong>Edit &rarr; Preferences &rarr; Add-ons</strong>.</li>
+  <li>Top-right <strong>&#9662; &rarr; Install from Disk…</strong> and pick the zip.
+    <br><span style="color:var(--dim)">On Blender 4.2–4.4 the button is
+    <strong>Install…</strong> in the same place.</span></li>
+  <li>It enables itself. If it does not, tick the checkbox next to
+    <strong>Texel</strong>.</li>
+</ol>
+
+<div class="panel ok">
+  <div class="lbl">How you know it worked</div>
+  Open the <strong>Image Editor</strong> or a <strong>3D Viewport</strong>, press
+  <kbd>N</kbd> to open the sidebar, and look for a <strong>Texel</strong> tab
+  down the right-hand edge. That tab is the whole add-on.
+</div>
+
+<div class="panel warn">
+  <div class="lbl">If the tab is not there</div>
+  Nine times out of ten the sidebar is closed — press <kbd>N</kbd> inside the
+  editor, not over a menu. If it still is not there, the add-on did not enable:
+  go back to Preferences, search <em>Texel</em>, and read the error under the
+  entry. Send me that error and I will tell you what it means.
+</div>
+
+
+<h2><span class="n">2</span>Your first five minutes</h2>
+
+<p>Do this once and the rest of the tool explains itself.</p>
+
+<h3>Paint a texture on a model</h3>
+<ol>
+  <li>In the 3D viewport sidebar, <strong>Texel &rarr; Setup &rarr; Add 1m
+    Cube</strong>. That one button makes the cube, an image, a material and a UV
+    map, and sets the texture filter to <strong>Closest</strong> so your texels
+    stay square instead of being blurred.
+    <br><span style="color:var(--dim)">Bringing your own model? Unwrap it, then
+    use <strong>Pick Texture</strong> to point Texel at its image.</span></li>
+  <li>Pick a colour and a tool (Pencil is fine) and draw on the cube in the
+    viewport. Strokes land where you point, resolved through the UVs.</li>
+  <li>Open an Image Editor beside it to see the flat canvas update as you paint.</li>
+</ol>
+
+<h3>Fix the thing you came here for</h3>
+<ol>
+  <li>Select a few objects. <strong>Texel Density &rarr; Detect Density</strong>
+    reports the pixels-per-unit across them — average, range, spread.</li>
+  <li>Set a target (24–48 px/unit suits most games) and hit
+    <strong>Apply Density</strong>. Every face is rescaled to the same texel size.</li>
+  <li><strong>Snap UVs to Pixels</strong> afterwards kills half-texel seams.</li>
+</ol>
+
+<h3>Animate a sprite</h3>
+<ol>
+  <li>In the Image Editor sidebar: <strong>Sprite &rarr; Add Frame</strong>,
+    four times.</li>
+  <li><strong>Add Track</strong> with <em>Behind</em> ticked for a background. Now
+    one frame holds a character <em>and</em> its backdrop, on separate cels.</li>
+  <li>Draw on each cel in the grid. Turn on <strong>onion skin</strong> to see the
+    neighbouring frames of the track you are editing.</li>
+  <li><strong>Play</strong> binds it to Blender's own timeline — spacebar plays it.</li>
+  <li><strong>Export Sheet + JSON</strong>, or <strong>GIF</strong> if you have
+    ffmpeg.</li>
+</ol>
+
+
+<h2><span class="n">3</span>The things that trip people up</h2>
+
+<table>
+  <tr><th>What you see</th><th>What it is</th></tr>
+  <tr>
+    <td>The texture looks blurry / smudged</td>
+    <td>The image texture is interpolating. <strong>Add 1m Cube</strong> sets
+      <em>Closest</em> for you; if you made the material yourself, set the Image
+      Texture node's interpolation to <strong>Closest</strong>.</td>
+  </tr>
+  <tr>
+    <td>Pixels are bigger on some faces than others</td>
+    <td>That is texel density drift, and it is the whole reason this tool exists.
+      <strong>Apply Density</strong> on every object with the same target.</td>
+  </tr>
+  <tr>
+    <td>&ldquo;Palette full (255 colours)&rdquo;</td>
+    <td>The canvas is indexed and holds 255 colours plus transparent. It refuses
+      rather than silently quantising your art. Reduce colours, or start a new
+      canvas.</td>
+  </tr>
+  <tr>
+    <td>Painting does nothing in the viewport</td>
+    <td>The object needs UVs and an image texture. Run <strong>Add 1m Cube</strong>, or assign your own image to the material.</td>
+  </tr>
+  <tr>
+    <td>Export GIF is greyed out or errors</td>
+    <td>GIF needs <strong>ffmpeg</strong> on your PATH. Sheet and JSON export do
+      not — use those instead if you would rather not install it.</td>
+  </tr>
+  <tr>
+    <td>How much does one undo take back?</td>
+    <td>Undo is per <em>action</em>, through Blender's own stack — one
+      <kbd>Ctrl</kbd>+<kbd>Z</kbd> takes back a whole fill — which is one
+      action, so that is right. Painting is modal, so one drag is one undo
+      step.</td>
+  </tr>
+  <tr>
+    <td>Where are the keyboard shortcuts?</td>
+    <td>There are: <kbd>B</kbd> pencil, <kbd>E</kbd> eraser, <kbd>L</kbd> line,
+      <kbd>U</kbd> rect, <kbd>C</kbd> ellipse, <kbd>F</kbd> fill, <kbd>I</kbd>
+      picker, <kbd>M</kbd> mirror, <kbd>D</kbd> paint in the Image Editor, and
+      <kbd>D</kbd> to paint in the 3D viewport. Rebind any of them in
+      <strong>Preferences &rarr; Keymap</strong>, search &ldquo;texel&rdquo;.</td>
+  </tr>
+</table>
+
+
+<h2><span class="n">4</span>What is in the download</h2>
+
+<table>
+  <tr><th>File</th><th>What it is</th></tr>
+  <tr><td><code>texel-0.1.0.zip</code></td><td>The add-on. Install this one.</td></tr>
+  <tr><td><code>START-HERE.html</code></td><td>This page.</td></tr>
+  <tr><td><code>README.md</code></td><td>Every operator, what it does, and the design notes behind the awkward decisions.</td></tr>
+  <tr><td><code>ROADMAP.md</code></td><td>What is coming, when, and what it will cost (nothing, to you).</td></tr>
+  <tr><td><code>LICENSE.txt</code></td><td>GPL-3.0-or-later. Covers the add-on, never your artwork.</td></tr>
+</table>
+
+<div class="panel">
+  <div class="lbl">On the licence, plainly</div>
+  Every Blender add-on that uses <code>bpy</code> must be GPL — that is Blender's
+  licence, not a choice I made. It means the source is in the zip and you may
+  modify and pass it on. <strong>It puts no restriction on the art you make with
+  it.</strong> Sell your sprites, your packs, your game. No royalty, no
+  attribution.
+</div>
+
+
+<h2><span class="n">5</span>Updates</h2>
+
+<p><strong>Every update is free, forever.</strong> No paid v2, no subscription,
+no pro tier.</p>
+
+<table>
+  <tr><th>Version</th><th>What it adds</th><th>Target</th></tr>
+  <tr><td><strong>v0.2</strong> Brush</td>
+      <td>Dither patterns and dithered gradients, custom stamps, radial
+        symmetry, selection transforms, tablet pressure</td>
+      <td>26 Sep 2026</td></tr>
+  <tr><td><strong>v0.3</strong> Tileset</td>
+      <td>Tileset slicing, a tile palette to stamp from, per-tileset seam
+        checking, edge-wrap painting, autotile generator</td>
+      <td>17 Oct 2026</td></tr>
+  <tr><td><strong>v0.4</strong> Handoff</td>
+      <td>One-click Godot, Unity and Aseprite export; animation tags; batch
+        export</td>
+      <td>14 Nov 2026</td></tr>
+  <tr><td><strong>v0.5</strong> Lit</td>
+      <td>Normal, emission and AO maps generated from the indexed art;
+        per-index material slots</td>
+      <td>12 Dec 2026</td></tr>
+  <tr><td><strong>v1.0</strong> Studio</td>
+      <td>Tweening between key cels, a dope sheet, a project file</td>
+      <td>30 Jan 2027</td></tr>
+</table>
+
+<p><span style="color:var(--dim)"><strong>Ordered easiest first</strong> — a
+young tool has to prove it ships. Dates are targets, not promises. A release that
+misses one says so in its devlog rather than quietly moving the date. And what
+buyers ask for outranks this list — three people asking for the same thing beats
+a plan written before anyone bought it, so if something here matters to you,
+say so.</span></p>
+
+<p>New versions appear on the same itch download page you used — the purchase
+link in your email keeps working, and itch emails you when a new build is
+uploaded. Install the new zip the same way; Blender replaces the old one.</p>
+
+<p>The price on the store page rises at named milestones. <strong>You are never
+asked for the difference.</strong></p>
+
+
+<h2><span class="n">6</span>Getting help</h2>
+
+<table>
+  <tr><th>You want to</th><th>Do this</th></tr>
+  <tr><td>Report a bug</td>
+      <td>Comment on the itch page. Say your Blender version and what you did.
+        Every report is reproduced against the shipped zip before it is answered,
+        and you are told which version fixes it.</td></tr>
+  <tr><td>Ask for a feature</td>
+      <td>Same place. Requests are tallied, and the tally reorders the roadmap —
+        three people asking beats a plan written before anyone bought it.</td></tr>
+  <tr><td>Ask a question</td>
+      <td>Same place. Comments are read every day.</td></tr>
+  <tr><td>Get a refund</td>
+      <td>Ask. It is granted — no interrogation, no retention pitch.</td></tr>
+</table>
+
+<div class="panel warn">
+  <div class="lbl">If it crashed or lost work</div>
+  Say so explicitly in your report. Crashes and data loss jump the queue and ship
+  as a patch rather than waiting for the next feature release.
+</div>
+
+
+<footer>
+  <p><strong>Texel</strong> by Pixelkiln · v0.1.0 ·
+     <a href="https://mintworks.cc/texel">mintworks.cc/texel</a></p>
+  <p style="margin-top:10px">Texel was built with AI assistance; every feature
+     described here was tested in Blender 4.5.9 and the test suite ships in the
+     repository.</p>
+</footer>
+
+</main>
+</body>
+</html>

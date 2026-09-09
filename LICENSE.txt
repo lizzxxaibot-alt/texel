@@ -1,0 +1,15 @@
+Texel - License
+
+Copyright (c) 2026 Mintworks
+
+As an add-on built on the Blender Python API, Texel is licensed under the GNU
+General Public License v3 or later (GPL-3.0-or-later), the same license family
+as Blender itself. Full text: https://www.gnu.org/licenses/gpl-3.0.html
+
+You may use, study, modify and redistribute this add-on under those terms,
+including commercially. If you redistribute a modified version you must keep it
+under the GPL and make the source available.
+
+Artwork you create with Texel is yours. This license covers the add-on only,
+and places no restriction whatsoever on the textures, sprites or palettes you
+make with it - commercial use included.
