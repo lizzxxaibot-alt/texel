@@ -1,0 +1,23 @@
+<p><strong>Thank you.</strong> Here is the whole of it in about two minutes.</p>
+<p><strong>Install</strong></p>
+<ol>
+<li>Keep <code>texel-0.1.0.zip</code> <strong>zipped</strong>. Blender wants the zip, not the folder inside it.</li>
+<li>In Blender: <strong>Edit &rarr; Preferences &rarr; Get Extensions</strong>, then the small arrow at the top right &rarr; <strong>Install from Disk&hellip;</strong></li>
+<li>Pick the zip. Texel enables itself.</li>
+</ol>
+<p>The older route works too, if that is the one you know: <strong>Edit &rarr; Preferences &rarr; Add-ons</strong> &rarr; the arrow at the top right &rarr; <strong>Install from Disk&hellip;</strong> The zip ships as both a Blender extension and a classic add-on, and both routes were run against 4.2.23, 4.5.9 and 5.2.1 before this page was written. Nothing else to install &mdash; no numpy, no compiler, no account, no internet.</p>
+<p><strong>Did it work?</strong></p>
+<p>Open an <strong>Image Editor</strong> or a <strong>3D Viewport</strong>, press <strong>N</strong> for the sidebar, and look for a <strong>Texel</strong> tab down the right-hand edge. That tab is the whole add-on.</p>
+<p>No tab? Nine times out of ten the sidebar is shut &mdash; press N with the mouse inside the editor, not over a menu. If it still is not there, open <strong>Preferences &rarr; Add-ons</strong>, search <em>Texel</em>, and read the error under the entry. Send me that error and I will tell you what it means.</p>
+<p><em>Installed Blender from the Microsoft Store?</em> That build is tested and works. Windows redirects its add-on folder, so if you ever go looking for the files by hand they are under <code>%LOCALAPPDATA%\Packages\BlenderFoundation.Blender_*\LocalCache\Roaming\</code> and not the <code>%APPDATA%\Blender Foundation\</code> path most guides give.</p>
+<p><strong>Your first five minutes</strong></p>
+<p>In the 3D viewport sidebar: <strong>Texel &rarr; Setup &rarr; Add 1m Cube</strong>. One button makes the cube, an image, a material and a UV map, and sets the texture filter to Closest so your texels stay square. Pick a colour, pick <strong>Pencil</strong>, and draw straight onto the cube.</p>
+<p>Then the thing you probably came for: select some objects, <strong>Texel Density &rarr; Detect Density</strong> to see the pixels-per-unit you actually have, set a target (24&ndash;48 px/unit suits most games), and <strong>Apply Density</strong> to put every face on the same texel size. <strong>Snap UVs to Pixels</strong> afterwards removes half-texel seams.</p>
+<p>Open <code>texel/START-HERE.html</code> from inside the zip for the guided version, with the animation and tiling walkthroughs.</p>
+<p><strong>What you need</strong></p>
+<p>Blender 4.2 or newer. Measured against 4.2.23, 4.5.9, 5.2.1 and the Microsoft Store build &mdash; all four pass. Built and tested on Windows: it is platform-independent Python, but I have not tested macOS or Linux and will not claim it. GIF export needs ffmpeg on PATH; sheet and JSON export need nothing.</p>
+<p><strong>Updates are free, forever</strong></p>
+<p>Pixelkiln ships Texel every Wednesday. Come back to this download page, or find it in your itch.io library, and the newest zip is there. No v2, no subscription, no pro tier &mdash; the price rises at named milestones, but never for anyone who already owns it.</p>
+<p><strong>Something is wrong, or something is missing</strong></p>
+<p>Comment on the itch page. Every bug report is reproduced against the shipped zip before it is answered, and you are told which version fixes it. Anything that crashes or loses work jumps the queue. Feature requests are tallied, and the tally reorders the roadmap.</p>
+<p>Texel is GPL-3.0. The full source is in the zip you just downloaded, and your artwork is yours, commercial use included.</p>

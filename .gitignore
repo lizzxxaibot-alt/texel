@@ -31,3 +31,6 @@ MARKETING.html
 _posters/
 MARKETING.html
 gif/_assets.json
+
+# Render sweeps for the store background: 4-6 MB PNGs, one keeper each.
+store/theme/_bg_src/
