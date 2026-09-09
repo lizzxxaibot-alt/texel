@@ -5,7 +5,13 @@ from bpy.props import (BoolProperty, EnumProperty, FloatProperty,
 
 TOOLS = [
     ("PENCIL",  "Pencil",  "Freehand, one texel per sample", "GREASEPENCIL", 0),
-    ("ERASER",  "Eraser",  "Freehand erase to transparent",  "PANEL_CLOSE",  1),
+    # PANEL_CLOSE draws an X - a close button, not an eraser. Checked by
+    # rendering the candidates and looking, not by reading identifiers: the
+    # other six are fine, because IPO_LINEAR draws a line, MESH_PLANE a square,
+    # MESH_CIRCLE a circle and SNAP_FACE a filled square, whatever their names
+    # suggest.
+    ("ERASER",  "Eraser",  "Freehand erase to transparent",
+     "EVENT_TABLET_ERASER", 1),
     ("LINE",    "Line",    "Straight line, drag to place",   "IPO_LINEAR",   2),
     ("RECT",    "Rect",    "Rectangle, drag to place",       "MESH_PLANE",   3),
     ("ELLIPSE", "Ellipse", "Ellipse, drag to place",         "MESH_CIRCLE",  4),

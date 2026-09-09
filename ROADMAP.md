@@ -149,7 +149,9 @@ fixes indefinitely. New feature work becomes demand-led, from the support queue
 2. Build it. Write tests **first** where the behaviour is checkable in pure
    Python (`core/`), which is most of it.
 3. Gate: all 16 suites green, `core/` coverage still 100%, `build.py` clean,
-   `test_install.py` passes in Blender 4.5.9. **Any red gate = no ship.**
+   and **`bash test_versions.sh` green on every installed Blender** - the
+   store page claims 4.2+, so one version passing is not evidence for it.
+   **Any red gate = no ship.**
 4. Bump `blender_manifest.toml` and `bl_info` together (`build.py` fails if they
    disagree). Rebuild the zip.
 5. Upload to itch, write the devlog, hand the marketing beat to

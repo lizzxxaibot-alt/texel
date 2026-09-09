@@ -253,6 +253,37 @@ mode as the ellipse metric that first reported "theirs wins 5-0".
 Timings on a 1024×1024 canvas: fill 0.18s, `to_rgba` 0.16s, full-canvas flood
 fill 0.60s over a million texels.
 
+## Compatibility: a claim turned into a fact
+
+The manifest said `blender_version_min = "4.2.0"` and the store page repeated
+it. That claim had been tested against exactly one build - 4.5.9 - which makes
+it a claim, not a fact, and CLAUDE.md is explicit: never claim compatibility
+that was not tested.
+
+Blender 4.2.23 and 5.2.1 were downloaded (from the dotsrc mirror; blender.org
+itself refuses scripted requests behind Cloudflare) and the whole gate was run
+against all three:
+
+| | 4.2.23 | 4.5.9 | 5.2.1 |
+|---|---|---|---|
+| 6 headless suites | pass | pass | pass |
+| install test | pass | pass | pass |
+| 4 GUI suites | pass | pass | pass |
+
+**33 of 33.** Oldest supported LTS, current LTS, newest release. `test_keys` is
+the one worth noting: it measures our shortcuts against each Blender's own
+~3,000-item keymap, and those change between releases, so it passing on all
+three is not a given. `test_e2e` - all 94 operators - is green on all three too.
+
+`test_versions.sh` and `run_gui_versions.sh` make it repeatable, and both are
+now part of `texel-release`'s gate. Adding a version is dropping a portable
+folder in `tools/`.
+
+**Still one operating system.** Three Blender versions, Windows only. The page
+now says exactly that rather than implying more. Also untested: the Microsoft
+Store build - its WindowsApps ACL refuses to run the exe from a script, and
+that is a common way Windows users install Blender.
+
 ## Blocked on the user
 1. **Price** - reference asks $29.90, AssetDrop asks $4.95. Recommend $14.95.
 2. **AI disclosure** - the packs answer "Yes + Graphics" would be FALSE here;

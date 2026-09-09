@@ -104,6 +104,31 @@ def coverage_check():
     print(f"[{'ok  ' if not phantom else 'FAIL'}] no panel references a missing operator")
 
 
+def icon_check():
+    """Every icon name must exist. Blender does not raise on a bad one - the
+    button just draws blank - so a typo ships silently and forever.
+
+    This does not check whether an icon MEANS the right thing; that needs eyes.
+    Doing it by reading identifiers is how PANEL_CLOSE, which draws an X, sat on
+    the eraser, and how five icons that were fine got called wrong.
+    """
+    import re
+    valid = {i.identifier for i in
+             bpy.types.UILayout.bl_rna.functions["prop"]
+             .parameters["icon"].enum_items}
+    used = set(re.findall(r'icon="([A-Z_0-9]+)"',
+                          io.open(os.path.join(HERE, "tex_ui.py"),
+                                  encoding="utf-8").read()))
+    from texel.tex_props import TOOLS
+    used |= {t[3] for t in TOOLS}
+    bad = sorted(used - valid - {"NONE"})
+    print(f"[info] {len(used)} distinct icons used", flush=True)
+    print(f"[{'ok  ' if not bad else 'FAIL'}] every icon name exists in Blender"
+          + ("" if not bad else f"  -> {bad}"), flush=True)
+    if bad:
+        state["fails"].append(f"invalid icon names: {bad}")
+
+
 import io  # noqa: E402  (used by coverage_check)
 
 
@@ -167,6 +192,7 @@ STEPS = [
 def tick():
     if not state["ready"]:
         coverage_check()
+        icon_check()
         state["img"] = setup()
         state["ready"] = True
         return 0.2

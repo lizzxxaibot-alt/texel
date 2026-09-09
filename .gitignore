@@ -16,3 +16,10 @@ __pycache__/
 # run logs
 e2e.log
 *.log
+
+# per-version gate output
+versions.log
+gui_versions.log
+first_run.log
+compare_run.log
+pas_alone.log
