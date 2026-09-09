@@ -148,7 +148,7 @@ fixes indefinitely. New feature work becomes demand-led, from the support queue
    of it, not the whole version.
 2. Build it. Write tests **first** where the behaviour is checkable in pure
    Python (`core/`), which is most of it.
-3. Gate: all 15 suites green, `core/` coverage still 100%, `build.py` clean,
+3. Gate: all 16 suites green, `core/` coverage still 100%, `build.py` clean,
    `test_install.py` passes in Blender 4.5.9. **Any red gate = no ship.**
 4. Bump `blender_manifest.toml` and `bl_info` together (`build.py` fails if they
    disagree). Rebuild the zip.

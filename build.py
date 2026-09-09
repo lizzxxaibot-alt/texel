@@ -17,7 +17,8 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 DIST = os.path.join(HERE, "dist")
 
 INCLUDE_FILES = ("blender_manifest.toml", "LICENSE.txt", "README.md",
-                 "START-HERE.html", "ROADMAP.md")
+                 "START-HERE.html", "ROADMAP.md",
+                 "workspace.blend")
 INCLUDE_PY = ("__init__.py", "tex_props.py", "tex_doc.py", "tex_pick.py",
               "tex_paint.py", "tex_layers.py", "tex_density.py",
               "tex_palette.py", "tex_select.py", "tex_zones.py",
