@@ -1,6 +1,7 @@
 # Texel — itch.io listing copy
 
 **Status: LIVE.** Published 2026-09-09 at https://z3er1n.itch.io/texel
+(**v0.2.0** shipped 2026-09-09: selection transforms.)
 (game 4991926, slug `texel`, classification Tool, $9.95, AI disclosure
 Yes + Code + Graphics). Page theme = the shared Pixelkiln store theme
 (`node automation/itch_theme.mjs --slug texel`) so it reads as one shop with
@@ -48,7 +49,7 @@ it animates the sprites too.
 
 ### What you actually get
 
-**94 operators.** The nearest comparable add-on ships 67.
+**95 operators.** The nearest comparable add-on ships 67.
 
 **Paint on the model.** Strokes in the 3D viewport are raycast onto the mesh and
 resolved through its UVs, so the texel you hit is the texel you meant. Pencil,
@@ -125,7 +126,11 @@ character in the videos on this page was exported exactly that way.
 A locked, faint **reference layer** to trace over. **Trim to Content** to crop a
 canvas to its artwork. A **colour count** that tells you how far over your palette
 budget you are. Per-layer opacity. Selection, copy, paste and outline that
-remaps through the destination palette instead of guessing.
+remaps through the destination palette instead of guessing. **Flip, rotate and
+scale a selection** by nearest neighbour - there is nothing to interpolate
+between two palette indices - and the mask turns with the art, so a magic-wand
+selection survives a rotation as its own shape rather than as a rectangle.
+*(New in v0.2.0.)*
 
 ---
 
@@ -138,7 +143,7 @@ this page for your own asset, on your own store page, without building a set.
 
 ---
 
-### Not in v0.1 — and which update brings it
+### Not in v0.2 — and which update brings it
 
 Nothing here is a maybe. Each is a named release with a target date, and **every
 one of them is free to you** if you buy today.
@@ -148,9 +153,8 @@ two releases that land beat one ambitious one that slips twice.
 
 | Not yet | Arrives in | Target |
 |---|---|---|
-| Dither patterns, dithered gradients, custom stamps, radial symmetry | **v0.2 — the next release** | 26 Sep 2026 |
-| Selection transforms (rotate / scale / flip, nearest-neighbour) | **v0.2 — the next release** | 26 Sep 2026 |
-| Drawing-tablet pressure mapped to brush size | **v0.2 — the next release** | 26 Sep 2026 |
+| Dither patterns, dithered gradients, custom stamps, radial symmetry | **v0.2.1 — the next release** | 26 Sep 2026 |
+| Drawing-tablet pressure mapped to brush size | **v0.2.1 — the next release** | 26 Sep 2026 |
 | Tileset slicing, a tile palette to stamp from, edge-wrap painting | **v0.3** | 17 Oct 2026 |
 | Autotile / 47-tile blob generator | **v0.3** | 17 Oct 2026 |
 | One-click Godot, Unity and Aseprite export | **v0.4** | 14 Nov 2026 |
@@ -197,7 +201,7 @@ No. It is a Blender add-on and it runs inside Blender, on your existing scene.
 
 **Which Blender versions?**
 **4.2 and newer**, and that is measured rather than declared. The full suite -
-16 of them, including the one that invokes all 94 operators - is run against
+16 of them, including the one that invokes all 95 operators - is run against
 **4.2.23** (the oldest LTS we support), **4.5.9 LTS**, **5.2.1**, and the
 **Microsoft Store 5.2.1** build as well, because that one installs add-ons to a
 different place than every other Blender and deserved its own run. All four
@@ -265,7 +269,7 @@ stomped, and a test re-runs that measurement on every release.
 
 **Does it work with a drawing tablet?**
 Today a tablet works as a mouse — **pressure is not mapped to anything.**
-Pressure-to-size ships in **v0.2, the next release, targeted 26 September**.
+Pressure-to-size ships in **v0.2.1, the next release, targeted 26 September**.
 
 **How big can a canvas be?**
 Up to 4096×4096. The canvas is indexed — one byte per texel — so a 512×512 layer

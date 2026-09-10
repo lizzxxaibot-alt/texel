@@ -1,6 +1,7 @@
 # Texel by Pixelkiln — upgrade schedule
 
-**Written 2026-09-09. v0.1.0 is built and install-verified; it has not shipped.**
+**Written 2026-09-09. Last ticked 2026-09-09 by `texel-release`.**
+**v0.1.0 and v0.2.0 are live at https://z3er1n.itch.io/texel.**
 
 This is the promise the store page makes and the queue `texel-release` works
 from. It exists because **update cadence is the retention mechanic** — the same
@@ -55,8 +56,9 @@ shipping something untested.** If a gate fails, the release slips and the devlog
 says so.
 
 ### v0.1.0 — "Launch" · target 2026-09-12
-**Status: BUILT. Blocked on three user decisions** (price, AI disclosure, name
-— see `LISTING.md`).
+**SHIPPED 2026-09-09**, three days early. The three blocking decisions (price
+$9.95, AI disclosure Yes + Code + Graphics, name Texel) were settled the same
+day and are recorded in `LISTING.md`.
 
 94 operators. Painting on the model and the flat canvas, pixel-perfect strokes,
 texel density measure/apply/snap, density zones, indexed canvas, palettes
@@ -66,15 +68,22 @@ renders, cel animation (tracks × frames), sprite tools, GIF + sheet + JSON
 export — and **keyboard shortcuts**, pulled forward from v0.2 because a paint
 tool without them reads as a prototype in the first thirty seconds.
 
-### v0.2.0 — "Brush" · target 2026-09-26
-**The cheapest release on the list, and the one you feel every minute.** Almost
-all of it is drawing code over an indexed buffer — the part of this codebase
-that is already at 100% coverage with no Blender API surface to fight.
+### v0.2.0 — "Brush" · **SHIPPED 2026-09-09**, seventeen days early
+A **partial** release, which the header of this file says is normal: the slice
+that was ready shipped rather than waiting for the rest of the version.
+- ✅ **Selection transforms — rotate, scale, flip — nearest-neighbour, no
+  resampling.** `core.tools.scale_nearest` and `core.select.transform_region`,
+  operator `texel.selection_transform`. The mask is transformed with the art, so
+  a magic-wand selection survives a rotation as its own shape; the result is
+  centred on the box it replaced rather than pinned to a corner.
+
+The rest of "Brush" moves to **v0.2.1**, keeping the original 26 Sep target.
+
+### v0.2.1 — "Brush", the rest · target 2026-09-26
 - Dither patterns as a brush mode; Bayer and hand-authored masks
 - Gradient tool that dithers between two palette indices instead of blending
 - Custom stamp from a selection
 - Mirror Y and radial symmetry
-- Selection transforms — rotate, scale, flip — nearest-neighbour, no resampling
 - Tablet pressure mapped to brush size
 
 ### v0.3.0 — "Tileset" · target 2026-10-17

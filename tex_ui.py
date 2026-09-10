@@ -296,6 +296,20 @@ class TEXEL_PT_select(_Base, Panel):
         row.operator("texel.select_grow", text="Grow", icon="FULLSCREEN_ENTER")
         row.operator("texel.selection_outline", text="Outline", icon="MESH_CIRCLE")
         col.separator()
+        # Two per row, and every one of them labelled. An icon-only rotate
+        # button next to a labelled Flip reads as an arrow you have to hover to
+        # identify, which is the sidebar equivalent of not shipping the feature.
+        for a, b in ((("FLIP_H", "Flip X", "MOD_MIRROR"),
+                      ("FLIP_V", "Flip Y", "MOD_MIRROR")),
+                     (("ROT_CW", "Rotate CW", "LOOP_FORWARDS"),
+                      ("ROT_CCW", "Rotate CCW", "LOOP_BACK"))):
+            row = col.row(align=True)
+            for mode, label, icon in (a, b):
+                row.operator("texel.selection_transform", text=label,
+                             icon=icon).mode = mode
+        col.operator("texel.selection_transform", text="Scale Selection",
+                     icon="FULLSCREEN_ENTER").mode = "SCALE"
+        col.separator()
         row = col.row(align=True)
         row.operator("texel.clipboard_cut", text="Cut", icon="X")
         row.operator("texel.clipboard_copy", text="Copy", icon="COPYDOWN")

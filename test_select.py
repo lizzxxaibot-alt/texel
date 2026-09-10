@@ -225,6 +225,116 @@ for _nm, _base in (("black", (0,0,0,255)), ("white", (255,255,255,255)),
     _l = [0.2126*a+0.7152*b+0.0722*c for a,b,c,_d in _r]
     check(f"ramp from {_nm} still runs dark to light", _l == sorted(_l))
 
+# ------------------------------------------------- v0.2 selection transforms
+print()
+
+# scale_nearest: the only correct filter on an indexed buffer
+src = bytearray([1, 2, 3, 4])
+check("scale to the same size is a no-op", list(T.scale_nearest(src, 2, 2, 2, 2)) == [1, 2, 3, 4])
+up = T.scale_nearest(src, 2, 2, 4, 4)
+check("2x upscale turns each texel into a 2x2 block",
+      list(up) == [1, 1, 2, 2, 1, 1, 2, 2, 3, 3, 4, 4, 3, 3, 4, 4], list(up))
+check("upscale invents no index outside the source",
+      set(up) <= set(src))
+# corner sampling would return [1, 3]; centre sampling is half a destination
+# texel to the right, and a corner-biased downscale shifts the whole image
+check("downscale samples texel centres, not corners",
+      list(T.scale_nearest(bytearray([1, 2, 3, 4]), 4, 1, 2, 1)) == [2, 4],
+      list(T.scale_nearest(bytearray([1, 2, 3, 4]), 4, 1, 2, 1)))
+check("downscale to one texel keeps a real index",
+      list(T.scale_nearest(src, 2, 2, 1, 1)) == [4], list(T.scale_nearest(src, 2, 2, 1, 1)))
+check("a zero size is clamped to one texel", len(T.scale_nearest(src, 2, 2, 0, 0)) == 1)
+check("3x upscale of one texel is 9 of it",
+      list(T.scale_nearest(bytearray([7]), 1, 1, 3, 3)) == [7] * 9)
+
+# transform_region: flip with no selection uses the layer's own bounds
+from core.select import TRANSFORMS, transform_region
+L2 = Layer("t", 6, 6)
+L2.set(1, 1, 1)
+L2.set(2, 1, 2)
+r = transform_region(L2, None, "FLIP_H")
+check("flip returns (written, w, h)", r == (2, 2, 1), r)
+check("flip with no selection mirrors the layer's content bounds",
+      (L2.get(1, 1), L2.get(2, 1)) == (2, 1), (L2.get(1, 1), L2.get(2, 1)))
+
+# rotate: a vertical bar becomes a horizontal one, centred on the box it left
+L3 = Layer("t", 6, 6)
+for i, y in enumerate((1, 2, 3)):
+    L3.set(2, y, i + 1)
+sel3 = Selection(6, 6)
+sel3.add_rect(2, 1, 2, 3)
+r = transform_region(L3, sel3, "ROT_CW")
+check("rotating a 1x3 gives a 3x1", r == (3, 3, 1), r)
+check("rotate CW reverses the bar",
+      [L3.get(x, 2) for x in (1, 2, 3)] == [3, 2, 1], [L3.get(x, 2) for x in (1, 2, 3)])
+check("the rotated result is centred on the box it replaced",
+      L3.get(2, 1) == 0 and L3.get(2, 3) == 0)
+check("the selection follows the rotation", sel3.bounds() == (1, 2, 3, 2), sel3.bounds())
+transform_region(L3, sel3, "ROT_CCW")
+check("CW then CCW restores the texels",
+      [L3.get(2, y) for y in (1, 2, 3)] == [1, 2, 3], [L3.get(2, y) for y in (1, 2, 3)])
+check("CW then CCW restores the selection", sel3.bounds() == (2, 1, 2, 3), sel3.bounds())
+
+L3b = Layer("t", 6, 6)
+L3b.set(1, 1, 5)
+L3b.set(2, 1, 6)
+transform_region(L3b, None, "FLIP_V")
+check("vertical flip of a single row leaves it in place",
+      (L3b.get(1, 1), L3b.get(2, 1)) == (5, 6))
+
+# scale: a 2x2 patch at 2x covers 4x4 and the selection grows with it
+L4 = Layer("t", 8, 8)
+for i, (x, y) in enumerate(((2, 2), (3, 2), (2, 3), (3, 3))):
+    L4.set(x, y, i + 1)
+sel4 = Selection(8, 8)
+sel4.add_rect(2, 2, 3, 3)
+r = transform_region(L4, sel4, "SCALE", 2.0)
+check("2x scale writes 16 texels over a 4x4 box", r == (16, 4, 4), r)
+check("the scaled block is centred on the old box",
+      (L4.get(1, 1), L4.get(4, 1), L4.get(1, 4), L4.get(4, 4)) == (1, 2, 3, 4),
+      (L4.get(1, 1), L4.get(4, 1), L4.get(1, 4), L4.get(4, 4)))
+check("scale takes the selection with it", sel4.count() == 16, sel4.count())
+r = transform_region(L4, sel4, "SCALE", 0.5)
+check("scaling back down returns a 2x2", r == (4, 2, 2), r)
+check("the round trip restores the art",
+      [L4.get(x, y) for x, y in ((2, 2), (3, 2), (2, 3), (3, 3))] == [1, 2, 3, 4],
+      [L4.get(x, y) for x, y in ((2, 2), (3, 2), (2, 3), (3, 3))])
+
+# the MASK is transformed, not reset to a bounding box - an L stays an L
+L5 = Layer("t", 6, 6)
+L5.set(2, 2, 1)
+L5.set(3, 2, 2)
+sel5 = Selection(6, 6)
+sel5.add_points([(2, 2), (3, 2), (2, 3)])       # (2,3) is selected but transparent
+n5, _w5, _h5 = transform_region(L5, sel5, "FLIP_H")
+check("a transparent selected texel is carried but not counted", n5 == 2, n5)
+check("the flipped mask mirrors the shape, it does not become a rectangle",
+      (3, 3) in sel5 and (2, 3) not in sel5, sorted(
+          (x, y) for y in range(6) for x in range(6) if (x, y) in sel5))
+check("the flip moved the art", (L5.get(2, 2), L5.get(3, 2)) == (2, 1),
+      (L5.get(2, 2), L5.get(3, 2)))
+
+check("an empty layer has nothing to transform",
+      transform_region(Layer("e", 4, 4), None, "FLIP_H") is None)
+check("an empty selection falls back to the layer",
+      transform_region(L5, Selection(6, 6), "FLIP_H") is not None)
+
+L6 = Layer("t", 4, 4)
+L6.set(1, 1, 3)
+before6 = bytes(L6.px)
+L6.locked = True
+check("a locked layer is not transformed",
+      transform_region(L6, None, "FLIP_H")[0] == 0 and bytes(L6.px) == before6)
+
+try:
+    transform_region(L2, None, "SPIN")
+    check("an unknown transform raises", False)
+except ValueError:
+    check("an unknown transform raises", True)
+
+check("every transform mode is reachable",
+      set(TRANSFORMS) == {"FLIP_H", "FLIP_V", "ROT_CW", "ROT_CCW", "SCALE"})
+
 print()
 if fails:
     print(f"{len(fails)} FAILED: {fails}")

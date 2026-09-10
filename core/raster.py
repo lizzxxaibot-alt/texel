@@ -93,10 +93,6 @@ class PerfectStroke:
         self.perfect = perfect
         self._emitted = 1               # start is committed by the caller
 
-    @property
-    def last(self) -> Point:
-        return self.trail[-1]
-
     def add(self, pt: Point) -> list[Point]:
         """Advance to `pt`, joining any gap. Returns newly-final texels."""
         if pt == self.trail[-1]:

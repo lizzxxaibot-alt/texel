@@ -10,7 +10,7 @@ Texel fixes both, inside Blender, with no round trip. Then it keeps going: it an
 
 WHAT YOU ACTUALLY GET
 
-94 operators. The nearest comparable add-on ships 67.
+95 operators. The nearest comparable add-on ships 67.
 
 Paint on the model. Strokes in the 3D viewport are raycast onto the mesh and resolved through its UVs, so the texel you hit is the texel you meant. Pencil, eraser, line, rectangle, ellipse, flood fill, colour picker — square, round or diamond brush at any size — with Pixel Perfect on by default, so a shallow diagonal is a clean 1px line instead of a staircase. Mirror X and Y while you paint and do half the work.
 
@@ -46,12 +46,12 @@ so texels stay square (needs ffmpeg)
 Hiding a track is an export. Draw the character and its scenery in one document, hide the scenery tracks, save — the same file hands you the finished frame *and* the sprite on transparent, with no second copy to keep in sync. Every character in the videos on this page was exported exactly that way.
 
 FOR 2D SPRITE WORK SPECIFICALLY
-A locked, faint reference layer to trace over. Trim to Content to crop a canvas to its artwork. A colour count that tells you how far over your palette budget you are. Per-layer opacity. Selection, copy, paste and outline that remaps through the destination palette instead of guessing.
+A locked, faint reference layer to trace over. Trim to Content to crop a canvas to its artwork. A colour count that tells you how far over your palette budget you are. Per-layer opacity. Selection, copy, paste and outline that remaps through the destination palette instead of guessing. Flip, rotate and scale a selection by nearest neighbour — there is nothing to interpolate between two palette indices, and the mask turns with the art rather than collapsing to a rectangle. (New in v0.2.)
 
 PRESENT IT WITHOUT LEAVING BLENDER
 Showcase builds a lit studio around your asset — six lighting presets (golden hour, torch, cool, noon, ice, studio), four camera moves, bounded fog, nearest-neighbour filtering forced on every texture so nothing is ever blurred — and renders a still or a clip. The point is that you can make the images on this page for your own asset, on your own store page, without building a set.
 
-NOT IN V0.1 — AND WHICH UPDATE BRINGS IT
+NOT IN V0.2 — AND WHICH UPDATE BRINGS IT
 
 Nothing here is a maybe. Each is a named release with a target date, and every one of them is free to you if you buy today.
 
@@ -59,9 +59,8 @@ Releases are ordered easiest first. A young tool has to prove it ships, and two 
 
 | Not yet | Arrives in | Target |
 |---|---|---|
-| Dither patterns, dithered gradients, custom stamps, radial symmetry | v0.2 — the next release | 26 Sep 2026 |
-| Selection transforms (rotate / scale / flip, nearest-neighbour) | v0.2 — the next release | 26 Sep 2026 |
-| Drawing-tablet pressure mapped to brush size | v0.2 — the next release | 26 Sep 2026 |
+| Dither patterns, dithered gradients, custom stamps, radial symmetry | v0.2.1 — the next release | 26 Sep 2026 |
+| Drawing-tablet pressure mapped to brush size | v0.2.1 — the next release | 26 Sep 2026 |
 | Tileset slicing, a tile palette to stamp from, edge-wrap painting | v0.3 | 17 Oct 2026 |
 | Autotile / 47-tile blob generator | v0.3 | 17 Oct 2026 |
 | One-click Godot, Unity and Aseprite export | v0.4 | 14 Nov 2026 |

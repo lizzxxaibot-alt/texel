@@ -11,7 +11,7 @@ on the Blender Python API must be.
 bl_info = {
     "name": "Texel",
     "author": "Mintworks",
-    "version": (0, 1, 0),
+    "version": (0, 2, 0),
     "blender": (4, 2, 0),
     "location": "Image Editor / 3D Viewport > Sidebar (N) > Texel",
     "description": "Pixel-perfect pixel art painting, layers and texel density",

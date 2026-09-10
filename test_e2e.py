@@ -214,12 +214,25 @@ def act2_paint(img):
     check("at least one layer survives every removal", len(c.layers) >= 1)
 
     # --- selection + clipboard
+    w_before_tx, h_before_tx = c.w, c.h
     call("select_all", "IMAGE_EDITOR")
     call("select_colour", "IMAGE_EDITOR")
     call("select_linked", "IMAGE_EDITOR")
     call("select_grow", "IMAGE_EDITOR")
     call("select_invert", "IMAGE_EDITOR")
     call("selection_outline", "IMAGE_EDITOR")
+    # v0.2 transforms: a flip is its own inverse, so the pair must be a no-op
+    before_tx = bytes(c.layers[c.active].px)
+    call("selection_transform", "IMAGE_EDITOR", mode="FLIP_H")
+    call("selection_transform", "IMAGE_EDITOR", mode="FLIP_H")
+    check("flipping a selection twice restores it",
+          bytes(c.layers[c.active].px) == before_tx)
+    call("selection_transform", "IMAGE_EDITOR", mode="FLIP_V")
+    call("selection_transform", "IMAGE_EDITOR", mode="ROT_CW")
+    call("selection_transform", "IMAGE_EDITOR", mode="ROT_CCW")
+    call("selection_transform", "IMAGE_EDITOR", mode="SCALE", factor=0.5)
+    check("the canvas is unchanged in size by a selection transform",
+          (c.w, c.h) == (w_before_tx, h_before_tx), (c.w, c.h))
     call("clipboard_copy", "IMAGE_EDITOR")
     call("clipboard_cut", "IMAGE_EDITOR")
     call("clipboard_paste", "IMAGE_EDITOR")

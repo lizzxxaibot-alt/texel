@@ -158,3 +158,26 @@ def make_ramp(base: RGBA, steps: int = 5, hue_shift: float = -12.0,
         nr, ng, nb = colorsys.hsv_to_rgb(nh, ns, nv)
         out.append((round(nr * 255), round(ng * 255), round(nb * 255), a))
     return out
+
+
+def scale_nearest(px: bytearray, w: int, h: int, nw: int, nh: int) -> bytearray:
+    """Resample an indexed buffer by nearest neighbour.
+
+    Nearest is not a compromise on an indexed canvas, it is the only correct
+    filter. Every texel is an INDEX, so averaging 3 and 5 gives you index 4 -
+    an unrelated colour that may not even be in the same ramp. There is nothing
+    to interpolate.
+
+    Sampled from the centre of each destination texel rather than its corner:
+    corner sampling biases the whole image half a destination texel toward the
+    origin, which at 2x on a 16px sprite is a visible one-texel shift.
+    """
+    nw, nh = max(1, int(nw)), max(1, int(nh))
+    out = bytearray(nw * nh)
+    for y in range(nh):
+        sy = ((y * 2 + 1) * h) // (nh * 2)      # < h for every y < nh, so no clamp
+        row = px[sy * w:(sy + 1) * w]
+        base = y * nw
+        for x in range(nw):
+            out[base + x] = row[((x * 2 + 1) * w) // (nw * 2)]
+    return out

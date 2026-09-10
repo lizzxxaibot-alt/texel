@@ -2,7 +2,13 @@
 # (gameshots.py -> promo/shot-*.mp4, harvest_stills.py -> store/stills/).
 # Git keeps every version of a binary forever, so ~140 MB of MP4s would bloat
 # the clone permanently for something a re-render regenerates.
-promo/
+# `promo/` is ignored for the MEDIA. QUEUE.md and POSTED.md live there too and
+# are hand-kept text that no script regenerates - two routines read them, so
+# losing them loses the marketing state. Git will not descend into an ignored
+# DIRECTORY, so the pattern has to be `promo/*` for the negations to work.
+promo/*
+!promo/QUEUE.md
+!promo/POSTED.md
 store/stills/
 gallery/
 shots/panels/

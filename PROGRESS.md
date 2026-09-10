@@ -358,3 +358,77 @@ after `canvas_resize` and the workspace rename.
 
 ## Remaining before upload
 - a still of the density readout mid-measurement
+
+---
+
+## v0.2.0 — selection transforms, shipped 2026-09-09
+
+The first release after launch, and a **partial** one on purpose: the selection
+transform slice of "Brush" was finished and gated, so it went out seventeen days
+before the v0.2 target instead of waiting for dither, stamps, symmetry and
+tablet pressure. Those moved to v0.2.1, which keeps the original 26 Sep date.
+
+**What it is.** `core.tools.scale_nearest` and `core.select.transform_region`,
+plus one operator, `texel.selection_transform`, with five buttons in the Select
+panel. 94 operators became 95.
+
+Three decisions inside it that are visible to the user:
+
+1. **The result is centred on the box it replaced.** Anchoring at a corner makes
+   a rotated sprite walk across the canvas every time the button is pressed.
+   Four rotations now return the art to where it started, and `test_select`
+   checks the CW/CCW round trip on both the texels and the mask.
+2. **The mask is transformed with the art**, not reset to the new bounding box.
+   A magic-wand selection that survives a flip as a rectangle is a different
+   selection, and the next operation would spill outside the shape.
+3. **Downscaling samples texel centres, not corners.** Corner sampling biases
+   the whole image half a destination texel toward the origin - a visible
+   one-texel shift on a 16px sprite. The test that catches it is one line:
+   a 4-wide row halved must be `[2, 4]`, not `[1, 3]`.
+
+### Dead code, found by the coverage gate rather than by reading
+
+`core/` came back at **99.5%** on the first gated run, and the missing line was
+not new: `PerfectStroke.last` was a property **nothing in the product, the tests
+or the promo scripts had ever called**. So the coverage gate was already red at
+HEAD and v0.1.0 shipped without anyone noticing. Deleted rather than tested,
+which the release brief says is the preferred answer. Back to 100%.
+
+### The panel shipped once with two unlabelled buttons
+
+The first layout put all five transforms in one row, which made Rotate CW and
+Rotate CCW icon-only - two small arrows wedged between labelled buttons, where
+the only way to tell them apart is to hover. **Every automated gate passed on
+that layout**, because a button with no text is not a broken button. It was
+found the way these always are: by taking a screenshot of the real sidebar and
+looking at it. Relaid out as two-per-row with every button labelled, matching
+the rhythm the rest of that panel already used, and the whole gate was re-run
+from scratch on the corrected code before anything was uploaded a second time.
+
+### An automation bug that took the page's download offline
+
+`itch_upload.mjs --hide <name>` hides a superseded build. Re-uploading a
+corrected zip under the **same filename** made `--hide texel-0.2.0.zip` match the
+row that had just been created: itch replaces a same-named upload rather than
+keeping both, so the new build was hidden and the product page briefly offered
+**no download at all**. Caught by the script's own post-save reload, and by
+re-fetching the public page - the check that exists precisely because a UI
+success message is not evidence. `itch_upload.mjs` now refuses `--hide` for any
+filename uploaded in the same run and says why.
+
+### The gate, in full, on the code that shipped
+5 headless suites · `core/` at 100.0% (997 statements, 0 missed) · 6 headless
+Blender suites · the panel-draw traceback check (empty) · 4 GUI suites ·
+`test_e2e` reporting **95 registered, 95 invoked** · `build.py` · `test_install`
+against the built zip - all of it green on **4.2.23, 4.5.9, 5.2.1 and the
+Microsoft Store 5.2.1 build** (`store_check.py`: 11 of 11).
+
+### Marketing asset
+`promo/transform/texel-0.2.0-selection-transforms.png`, built by
+`transform_card.py` -> `card.html` -> `render.mjs` at 2x. Every panel is real
+output from `transform_region`, and the sprite is a frame of the walk cycle
+Texel painted for the launch video, so "made with Texel" is true of both halves.
+The first cut showed a **2x** scale, which forced a window four times the sprite
+and left three of the four panels ~80% empty checkerboard - at a 315px itch
+thumbnail only one panel still read. Showing a **half** scale instead inverts
+that: three panels fill their frame and the small one is the point being made.

@@ -5,7 +5,7 @@ from bpy.types import Operator
 
 from . import tex_doc
 from .core import adjust as A
-from .core.select import Clip, Selection
+from .core.select import Clip, Selection, transform_region
 
 _CLIP: Clip | None = None
 
@@ -186,6 +186,53 @@ class TEXEL_OT_clipboard_paste(_DocOp):
         return {"FINISHED"}
 
 
+
+# --------------------------------------------------------------- transforming
+TRANSFORM_MODES = [
+    ("FLIP_H", "Flip X", "Mirror the selection left to right"),
+    ("FLIP_V", "Flip Y", "Mirror the selection top to bottom"),
+    ("ROT_CW", "Rotate CW", "Turn the selection a quarter turn clockwise"),
+    ("ROT_CCW", "Rotate CCW", "Turn the selection a quarter turn anticlockwise"),
+    ("SCALE", "Scale", "Resize the selection by nearest neighbour"),
+]
+
+
+class TEXEL_OT_selection_transform(_DocOp):
+    bl_idname = "texel.selection_transform"
+    bl_label = "Transform Selection"
+    bl_description = ("Flip, rotate or scale the selected texels in place. "
+                      "Nearest neighbour only - there is nothing to interpolate "
+                      "between two palette indices")
+
+    mode: EnumProperty(name="Transform", items=TRANSFORM_MODES, default="FLIP_H")
+    factor: FloatProperty(name="Factor", default=2.0, min=0.05, max=16.0,
+                          description="Scale multiplier. 2 doubles the selection")
+
+    def invoke(self, context, event):
+        if self.mode == "SCALE":
+            return context.window_manager.invoke_props_dialog(self)
+        return self.execute(context)
+
+    def draw(self, context):
+        self.layout.prop(self, "factor")
+
+    def execute(self, context):
+        d = _doc(context)
+        layer = d.canvas.layers[d.canvas.active]
+        if layer.locked:
+            self.report({"WARNING"}, "The active layer is locked")
+            return {"CANCELLED"}
+        res = transform_region(layer, _sel(d), self.mode, self.factor)
+        if res is None:
+            self.report({"WARNING"}, "Nothing selected, and the layer is empty")
+            return {"CANCELLED"}
+        n, w, h = res
+        d.flush()
+        label = dict((m[0], m[1]) for m in TRANSFORM_MODES)[self.mode]
+        self.report({"INFO"}, f"{label}: {n} texels, now {w}x{h}")
+        return {"FINISHED"}
+
+
 # ---------------------------------------------------------------- adjustments
 ADJUSTMENTS = [
     ("BRIGHTNESS", "Brightness", "Lighten or darken"),
@@ -245,7 +292,7 @@ class TEXEL_OT_adjust(_DocOp):
 CLASSES = (TEXEL_OT_select_all, TEXEL_OT_deselect, TEXEL_OT_select_invert,
            TEXEL_OT_select_linked, TEXEL_OT_select_colour, TEXEL_OT_select_grow,
            TEXEL_OT_clipboard_copy, TEXEL_OT_clipboard_cut, TEXEL_OT_clipboard_paste,
-           TEXEL_OT_adjust)
+           TEXEL_OT_selection_transform, TEXEL_OT_adjust)
 
 
 def register():
