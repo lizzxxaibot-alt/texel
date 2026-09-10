@@ -1,6 +1,6 @@
 [run]
 source = core
-omit = */test_*.py, */compare.py, */demo_*.py, */build.py, */count_ops.py
+omit = */test_*.py, */demo_*.py, */build.py, */count_ops.py
 [report]
 show_missing = True
 skip_covered = False

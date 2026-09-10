@@ -91,10 +91,78 @@ Three to five, never a wall.
    "top-down RPG street" — the buyer is searching for their own game.
 5. **Reply more than you post.** Answering a real question in someone else's
    thread outperforms a promo post, and it is how the account stops reading as
-   a billboard.
+   a billboard. This is the whole reach strategy — see §3a.
 
 **Never:** promise earnings, imply an endorsement, post the same visual twice
 inside 21 days, or post a feature that is not in the shipped zip.
+
+---
+
+## 3a. Reach comes from replies, not from more posts
+
+**The measurement that settles this (2026-09-09):** posts about pixel art in
+Blender can take **~874 likes** on Bluesky. Ours take **6-18**. That gap is the
+size of the topic's audience, not the quality of our posts — the people
+interested in this are on the platform in numbers we are not reaching.
+
+**The gap cannot be closed by posting more.** `marketing_plan.md` caps the whole
+account at 3-4 posts a week and Texel only gets four days of it; on 2026-09-09
+the account was already at **6 posts in 7 days** and a queued beat had to move.
+Posting is a rationed channel with a hard ceiling.
+
+**Replies have no ceiling.** They put us in front of people who are already
+talking about the exact problem, on their post, in their audience's feed, at the
+moment they care. Two useful replies reach more of the right people than a fifth
+post reaches of the wrong ones.
+
+**So the target is a floor, not a nice-to-have: two genuine replies every run,
+and more is better. A run that posts nothing and replies twice is a successful
+run.**
+
+### The voice — a peer in the community, never a salesperson
+
+Every one of these is a rule, because the failure mode is drifting into pitch:
+
+1. **Answer as someone who hit the same problem**, not as someone with a product.
+   The test before sending: *would this reply be worth reading if we sold
+   nothing?* If no, do not send it.
+2. **Supportive and friendly by default.** People are showing work in progress.
+   Meet them where they are, be glad about what is working, and never open by
+   correcting.
+3. **Never pushy.** No pitch, no link, no "we built a tool for that" — **do not
+   mention Texel at all** unless the question is literally what Texel does. If
+   someone asks what we make, answer plainly once and stop.
+4. **Specific beats supportive-generic.** "Nice work!" costs nothing and returns
+   nothing. Bring a number, a setting name, a file path, a thing that was
+   measured. The reply that lands is the one that saves them an afternoon.
+5. **Verify before answering** (§3 of `CLAUDE.md` applies to replies too). The
+   2026-09-09 Aseprite answer was checked against Aseprite's own source before it
+   was sent, not recalled from memory — that is the standard.
+6. **Never correct someone publicly on something that does not cost them
+   anything.** If they are wrong in a way that will cost them work, give the
+   useful part without the correction framing.
+7. **Never argue, never DM, never quote-post to disagree.** If a thread turns
+   into an argument, leave it.
+8. **Silence is free.** A thread we cannot genuinely add to gets nothing. There
+   is no quota of replies worth a bad one.
+9. **Never reply in another pixel-art-in-Blender product's threads** — standing
+   rule, `promo/POSTED.md`. They are the highest-engagement threads available and
+   they are all off limits, because anything we say in them reads as sniping
+   whether or not Texel is named.
+
+### What this is not an argument for
+
+The reach gap says **reply more**. It does **not** say post more, price
+differently, position against anyone, or monitor another account. Texel is not
+in a rivalry with anything and is not derived from anything; other people's
+numbers are only ever evidence about how big a topic is.
+
+### Logging
+
+Every reply goes in `promo/POSTED.md` under **Replies**, with the thread, what
+was actually said, and the live URL — verified on the public AppView, never on
+the poster's own success message. The log is what makes "two per run" auditable
+instead of aspirational.
 
 ---
 

@@ -6,24 +6,66 @@ the asset it should use. Tick a row when it goes out and record it in
 
 **Rule inherited from `OPERATIONS.md` §3:** never post a feature that is not in
 the uploaded zip. Everything queued below is in `dist/texel-0.2.0.zip`, which is
-live.
+live — re-verified 2026-09-09 by listing `bl_idname` out of the shipped archive:
+**95 operators, `texel.selection_transform` among them** (0.1.0 had 94, which is
+why the launch post's "94 tools" was right when it was written).
 
-| Queued | Beat | Asset | Angle | Posted |
-|---|---|---|---|---|
-| 2026-09-09 | **v0.2.0 release note** (Wed slot) | `promo/transform/texel-0.2.0-selection-transforms.png` | The four-panel card: flip / rotate / scale, nearest neighbour. Lead with the release, link the devlog. Numbers, not adjectives — "414 texels. Still 414 after a flip and after a rotate. 103 after a half scale, because whole texels are dropped rather than blended." | |
-| 2026-09-09 | **Show the problem before the product** (Mon slot) | `promo/transform/scale.png` + `promo/transform/original.png` | Two images: the same sprite halved by nearest neighbour next to what a bilinear resample does to indexed art — the second one comes back with colours that were never in the palette. **Needs a new visual** — the bilinear half does not exist yet and must not be faked; render it with `PIL Image.BILINEAR` on the same sprite, or drop the beat. | |
-| 2026-09-09 | **The mask turns with the art** (Fri slot) | `promo/transform/rot_cw.png` | The detail nobody advertises: a magic-wand selection survives a rotation as its own shape, not as the rectangle it fitted inside. Aimed at people who have been burned by this in another editor. | |
+---
+
+## The Wed 2026-09-09 slot was spent before this file was read
+
+`texel-marketing`'s 09-09 run did **not** post the v0.2.0 release note, and the
+row was moved to Friday rather than fired late. Reasons, in order:
+
+1. The **v0.1.0 launch post went out 14 minutes earlier** (19:15 local /
+   00:15 UTC). Two posts about the same product a quarter-hour apart, the second
+   announcing a version bump on the first, reads as a bot.
+2. The account was **already over its ceiling**. `marketing_plan.md` allows 3–4
+   Bluesky posts a week; the trailing 7 days held **6** (09-03, 09-05, 09-08 ×2,
+   09-09 ×2). `POSTED.md` had written this guard down before the launch even
+   went out.
+
+**A release note one day late costs nothing. A feed that posts twice an hour
+costs the audience.** The Friday slot is the release note's, and the sprite beat
+that would have had Friday moves to Monday behind it.
+
+---
+
+| Queued | Slot | Beat | Asset | Angle | Posted |
+|---|---|---|---|---|---|
+| 2026-09-09 | **Fri 09-11** | **v0.2.0 release note** *(moved from Wed 09-09, see above)* | `promo/transform/texel-0.2.0-selection-transforms.png` | The four-panel card: flip / rotate / scale, nearest neighbour. Lead with the release, link the devlog. Numbers, not adjectives — **"414 texels. Still 414 after a flip and after a rotate. 103 after a half scale, because whole texels are dropped rather than blended."** All four counts re-measured off the PNGs 2026-09-09 and exact. | |
+| 2026-09-09 | **Mon 09-14** | **Show the problem before the product** — ~~needs a new visual~~ **ASSET NOW EXISTS** | `promo/transform/texel-nearest-vs-bilinear.png` | Built 2026-09-09. The bilinear side is **Pillow's own `Image.BILINEAR` run on the same file**, generated not mocked, and framed as what interpolation does to indexed art rather than as a claim about any product. The card's own headline, after a design-critic pass, is **"Halve a sprite in Texel: no new colours. Halve it with a filter: 118 of them."** — the win leads and the product is named at 42px, because the first version put the failure clause first and never said "Texel" above 13px. Also true and on the card: 112 texels come back at partial alpha, so the outline stops being an edge. **Write the post the same way: what Texel does first.** Per the standing rule in `POSTED.md`, this beat is about what interpolation does to indexed art — it is not a comparison to any product and must not be written as one. | |
+| 2026-09-09 | Wed 09-16 | **The mask turns with the art** | ⚠ **needs a new visual — see collision below** | The detail nobody advertises: a magic-wand selection survives a rotation as its own shape, not as the rectangle it fitted inside. Aimed at people burned by this in another editor. | |
+
+### The Wed 09-16 collision, stated so it is not walked into
+
+The mask beat's asset was `promo/transform/rot_cw.png` — but that image is **one
+of the four panels inside the release card going out on Friday 09-11**. Posting
+it standalone five days later re-shows a visual inside the 21-day window. It
+needs either a genuinely new crop (the selection outline visible against the
+un-rotated bounding box, which is the actual claim and which no current asset
+shows) or a date after **2026-10-02**.
 
 ## Visuals this release earns that do NOT exist yet
 
-- **A bilinear-vs-nearest comparison.** The strongest argument for the feature is
-  the thing it refuses to do, and no asset shows it. Whoever builds it must
-  generate the bilinear side for real (PIL `Image.BICUBIC` on the same sprite),
-  not mock it up — a faked "what the other tool does" is a claim about someone
-  else's product and we do not make those.
+- ~~**A bilinear-vs-nearest comparison.**~~ **BUILT 2026-09-09** —
+  `promo/transform/resample_card.html` → `texel-nearest-vs-bilinear.png`, with
+  `promo/transform/make_resample.py` generating both halves, both palette
+  strips and `resample_facts.json` in one pass, so the picture and the caption
+  cannot disagree. Lint **0 fail** at 1280×720; **design-critic FATAL + 2 SERIOUS
+  fixed** (product name raised into the 42px headline, win clause moved first,
+  stat digits off GeistMono because its slashed zero made "120" read as "129"
+  at feed scale). Re-checked by eye at **380px**, which is mobile feed width.
+  `make_resample.py` re-run and all four PNGs are **byte-identical**, so the soft
+  alpha bleed above the torch is reproducible Pillow output — "generated, not
+  mocked" holds.
 - **A screen recording of the Select panel with the new buttons.** The stills in
   `shots/panels/` were regenerated by this release's `test_panels.py` run, so
   they are current — but the Select panel is `DEFAULT_CLOSED`, so the five new
   buttons are not visible in any of them. Nothing on the store page shows a
   feature we no longer ship, which is the rule that matters; what is missing is
   a shot that shows the feature we now DO ship, being used.
+- **The density readout mid-measurement, as a still.** Carried as outstanding in
+  `LISTING.md` since launch and flagged again in `POSTED.md`. **This is the most
+  differentiating thing the product does and the only headline claim with no
+  picture behind it.** Highest-value asset still missing.

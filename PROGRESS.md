@@ -6,10 +6,23 @@ re-implementation of Pixel Pumper): the user owns the reference, we extracted a
 behavioural spec from it, and we write our own code against that spec.
 
 **Reference:** Pixel Art Studio v1.1.1–1.1.5 by Alfred Reinold Baudisch
-(GPL-3.0-or-later). Owned by the user. **No implementation is copied** — see
-`reference/api-surface.txt`, which is the API surface only (what it does),
-extracted by AST walk. Our add-on will be GPL-3.0 because every Blender add-on
-using `bpy` must be, exactly like AssetDrop.
+(GPL-3.0-or-later). Owned by the user. **No implementation is copied** — the
+evidence for that was `reference/api-surface.txt`, the API surface only (what it
+does, not how), extracted by AST walk. Our add-on is GPL-3.0 because every
+Blender add-on using `bpy` must be, exactly like AssetDrop.
+
+> **⚠ 2026-09-09 — this paragraph is left standing on purpose, and needs your
+> decision.** The comparison harness was stripped on your instruction:
+> `compare.py`, `compare_run.py`, `reference/api-surface.txt`, both run logs, and
+> `count_ops.py`'s second column are gone (recoverable from this repo's git
+> history). But **this paragraph is not a marketing frame — it is the build's
+> provenance record**, and removing it is a different act from removing a
+> benchmark. Note the trade-off the deletion already created: the extracted API
+> surface was the *evidence* that only the API surface was ever taken, so the
+> admission now stands without the exculpatory file beside it. Nothing here was
+> ever customer-facing and none of it has ever shipped in a zip (verified against
+> `texel-0.1.0.zip` and `texel-0.2.0.zip`, 0 files, 0 mentions). Say what you want
+> done with this paragraph; I have not touched its substance.
 
 ## Run the tests
 

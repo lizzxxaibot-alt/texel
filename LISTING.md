@@ -49,7 +49,8 @@ it animates the sprites too.
 
 ### What you actually get
 
-**95 operators.** The nearest comparable add-on ships 67.
+**95 operators**, every one with a button in the sidebar, and nine on keys you
+can rebind in Blender's own keymap editor.
 
 **Paint on the model.** Strokes in the 3D viewport are raycast onto the mesh and
 resolved through its UVs, so the texel you hit is the texel you meant. Pencil,
@@ -322,9 +323,19 @@ and places no restriction on your textures, commercial use included.
 
 ## Decisions - settled 2026-09-09
 
+> **Comparisons to other products were removed from this file on 2026-09-09
+> (user).** Texel is not positioned against anything and is not derived from
+> anything; see the standing rule in `promo/POSTED.md`. Two lines here used to
+> anchor the operator count and the price to another add-on. Neither was ever
+> published - the live page has always carried the sidebar/keymap sentence - but
+> this file is a draft of public copy, so leaving them in was a live risk.
+
 ### 1. Price: **$9.95**
-Launch price. The nearest comparable Blender add-on asks $29.90; AssetDrop asks
-$4.95. **The price rises at named milestones, announced in advance** - $14.95 at
+Launch price, set on **Pixelkiln's own ladder** rather than against anyone
+else's product: the packs run $3.95 to $9.95, UI Forge sits at $9.95, and
+AssetDrop at $4.95. Texel is the largest thing the studio has built, so it takes
+the top of the existing ladder rather than inventing a price point.
+**The price rises at named milestones, announced in advance** - $14.95 at
 v0.4 (engine export), $19.95 at v1.0 (tweening and the dope sheet). Everyone who
 buys at $9.95 gets every one of those updates free.
 
