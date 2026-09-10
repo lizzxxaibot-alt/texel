@@ -21,7 +21,7 @@ Slotted around the six existing Pixelkiln tasks so nothing collides.
 | `texel-support` | daily **08:15** | Every buyer question, comment, bug report, refund request | promise a date, or answer a bug it has not reproduced |
 | `texel-marketing` | daily **15:15** | One Bluesky beat from the calendar; itch page conversion work | reuse a visual inside 21 days |
 | `texel-release` | **Wed 10:00** | Advancing `ROADMAP.md` — build, gate, ship, devlog | ship with a red gate |
-| `texel-funnel` | **Sat 09:30** | Free traffic drivers that lead back to Texel | ship a freebie with no path to the paid page |
+| `texel-funnel` | **Fri 10:00** | Free traffic drivers that lead back to Texel | ship a freebie with no beat to announce it |
 
 `pixelkiln-watch` (06:00) is amended to watch these five as well, so there is
 one watchguard over eleven routines rather than two partial ones.
@@ -180,8 +180,21 @@ useful to someone who never buys, and obviously better if they do.**
 | **Sheet Reader** | MIT snippets that read Texel's `_anim.json` in Godot and Unity | Useless without something producing that JSON |
 | **Showcase Presets** | Extra lighting/camera preset JSON for the Showcase panel | Only loads inside Texel |
 
-**Cadence:** one drop per fortnight, Saturdays, alternating with a
-`#screenshotsaturday` post so the account is not only ever giving things away.
+**Cadence (changed 2026-09-09, user): weekly Fridays through the launch push,
+then the first Friday of the month.** Front-loaded rather than even, because the
+`newest` and `newest/free` feeds are the biggest external source this store has
+(46 + 12 visits, ahead of every other off-site referrer) and a feed slot is
+worth most while the paid page is new and has no ratings. Five drops are
+queued, so the push is about five weeks.
+
+Moved off Saturday because Saturday is `#screenshotsaturday` — the one beat with
+a built-in audience, and a drop should not compete with it.
+
+**Every drop is gated on distribution, not on the calendar.** No marketing beat
+available that week means no drop. The evidence is HUD Vol. 6's free sample: **5
+views, 0 downloads**. An unpromoted free page is not a funnel, and it is not
+free either — itch's storefront grid is newest-first with **no pinning**, so
+every drop pushes Texel and every paid pack one slot further down the shop.
 
 **Measurement:** `funnel/LOG.md` records the free page's views and the Texel
 page's referral bump in the 72h after. A drop that moves nothing twice is
