@@ -12,12 +12,42 @@ asked for the launch devlog and the launch post directly. The beats below were
 `texel-release` later queues a launch beat, it is already spent. *(QUEUE.md
 exists as of 2026-09-09 and is the source from here on.)*
 
+## BlenderArtists — a NEW surface, with its own budget (2026-09-10)
+
+Posted to **Resources → Released Add-ons and Extensions** (category 50 — the
+category was renamed from "Released Scripts and Themes", the old name still
+resolves). Account: `texel`.
+
+**Its rules, read before posting and verified on the site itself:**
+
+- **One self-promotion post per week**, averaged over a rolling 30 days.
+- **Replies to your own promo thread count toward that limit.** Answering three
+  technical questions in the thread spends the week. The policy explicitly
+  softens for people with genuine community involvement, so answering real
+  questions is right — bumping is not.
+- Over the limit gets deleted.
+- The category **requires a tag from the "Free or Commercial" group**. The tags
+  are literally **`free`** and **`commercial`** — there is no `paid` tag, despite
+  the category blurb reading "free or paid" in some places. Texel is tagged
+  `commercial`.
+
+**This budget is separate from the Bluesky ceiling** in `marketing_plan.md` —
+different surface, different audience, different counter. Next BlenderArtists
+self-promo slot is **2026-09-17** at the earliest.
+
+**Not posted, and deliberately: r/blender.** Reddit is blocked from the
+environment these routines run in, so its self-promotion rules could not be read
+at the source. A third-party analytics site claimed a "Paid Product/Service
+Promotion" flair is mandatory; that is not Reddit's own documentation and does
+not meet CLAUDE.md §5. Nobody posts there until the actual rule is read.
+
 ---
 
 | Date | Surface | Beat | Visual(s) | Reusable from | Link |
 |---|---|---|---|---|---|
 | 2026-09-09 | itch devlog | **v0.1.0 launch.** Full feature set of the shipped zip, what is and is not tested, what is not in it yet, the price ladder, the GPL position | none (text only) | — | [devlog 1658358](https://z3er1n.itch.io/texel/devlog/1658358/texel-010-pixel-art-painting-for-blender-with-texel-density-that-actually-gets-measured) |
 | 2026-09-09 | Bluesky | **v0.1.0 launch.** Problem first (pixels change size across the mesh), then the tool | `store/page/03_real-addon.png`, `store/shots_1280x720.png`, `store/animates_1280x720.png` — all three resampled to JPEG q95 4:4:4 for the blob cap | **2026-09-30** | [3mv4rjmevvg2t](https://bsky.app/profile/pixelkiln.bsky.social/post/3mv4rjmevvg2t) |
+| 2026-09-10 | **BlenderArtists** | **Release thread.** Problem first (pixel size drifts across the mesh, staircased diagonals), then the tool, honest Windows-only test scope, GPL position, price ladder | none (text only) | — | [t/1652476](https://blenderartists.org/t/texel-paint-pixel-art-directly-onto-your-models-and-animate-it/1652476) |
 
 **That guard held.** `texel-marketing`'s 09-09 run read this line, checked it
 against the live account rather than trusting it, and did not post: the trailing
