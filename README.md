@@ -3,6 +3,31 @@
 A Blender add-on for painting pixel art directly onto 3D models, with the pixel
 grid respected end to end.
 
+**Two things go wrong when pixel art meets a mesh, and neither is your drawing.**
+The pixel size drifts across the model — a crate at 32 px/unit beside a wall at
+19 px/unit reads as two different games glued together. And shallow diagonals
+come out as staircases, the L-shaped double-texels pixel artists spend their
+lives cleaning up. Texel fixes both inside Blender, with no round trip to a 2D
+editor, then animates the sprites too.
+
+## Get it
+
+**[z3er1n.itch.io/texel](https://z3er1n.itch.io/texel) — $9.95.** Every future
+update is free to anyone who has ever bought it; the price rises at named
+milestones ($14.95 at v0.4, $19.95 at v1.0), announced in advance.
+
+Licensed **GPL-3.0**, and the source ships inside the zip — every Blender add-on
+that uses `bpy` has to be GPL. Buying it pays for the work and the updates, not
+for access to the code.
+
+Built and tested on **Windows** against Blender 4.2.23, 4.5.9 and 5.2.1 plus the
+Microsoft Store build. 95 operators, 100% coverage of `core/`, 16 test suites —
+one of which invokes every operator in a live GUI and fails if any goes uncalled.
+Nothing in it is Windows-specific beyond looking for ffmpeg, so it should run on
+macOS and Linux, but that is untested and not claimed.
+
+Built with AI assistance, including the code and some of the artwork.
+
 ## Install
 
 1. Blender → Edit → Preferences → Add-ons → the ▾ menu → **Install from Disk…**
