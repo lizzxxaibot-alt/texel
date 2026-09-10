@@ -58,14 +58,21 @@ from `list_scheduled_tasks`, not from here.**
 ## 3. The Bluesky content calendar
 
 One post per day, rotating. Same account as Pixelkiln, so Texel posts must not
-crowd out pack posts — **Texel takes Mon/Wed/Fri/Sat, packs keep Tue/Thu/Sun.**
+crowd out pack posts — **Texel takes Mon/Wed/Fri/Sun, packs keep Tue/Thu/Sat.**
 
 | Day | Beat | Asset |
 |---|---|---|
 | **Mon** | One capability, one clip, 6s | a cut from `promo/shot-*.mp4` |
 | **Wed** | Release or WIP note, tied to `texel-release` that morning | devlog screenshot or a diff |
 | **Fri** | Sprite/animation beat | `promo/anim/Torchbearer.gif`, sheet, or a cel-grid crop |
-| **Sat** | `#screenshotsaturday` — the best-looking render of the week | a still from `store/stills/` |
+| **Sun** | The best-looking render of the week | a still from `store/stills/` |
+
+**Saturday moved to Sunday, 2026-09-09.** This table claimed Sat for Texel while
+`pixelkiln/launch/marketing_plan.md` claims Sat for `#screenshotsaturday` on the
+packs. Both routines post to the **same Bluesky account** and neither can see the
+other from inside, so both believed they owned it — `pixelkiln-watch` run 8 caught
+it two days before it landed. The packs' plan predates the split, so Saturday is
+theirs and the hashtag goes with it.
 
 **The asset library, after the 2026-09-09 cleanup:** 24 MP4s in `promo/`, **57
 stills in `store/stills/`** (shot_*, env_*, ui_* — roughly fourteen weeks of
@@ -76,7 +83,7 @@ already been encoded and harvested. Need a new angle? Re-render with
 `gameshots.py`; do not re-post a still early.
 
 **Hashtags that actually reach this audience:** `#gamedev` `#indiedev`
-`#pixelart` `#b3d` `#blender` `#lowpoly` `#gamedevtools` `#screenshotsaturday`.
+`#pixelart` `#b3d` `#blender` `#lowpoly` `#gamedevtools`. **Not `#screenshotsaturday`** - that tag belongs to the packs' Saturday post on the same account.
 Three to five, never a wall.
 
 **The tactics that work for a gamedev tool, in priority order:**
