@@ -7,22 +7,26 @@ behavioural spec from it, and we write our own code against that spec.
 
 **Reference:** Pixel Art Studio v1.1.1–1.1.5 by Alfred Reinold Baudisch
 (GPL-3.0-or-later). Owned by the user. **No implementation is copied** — the
-evidence for that was `reference/api-surface.txt`, the API surface only (what it
-does, not how), extracted by AST walk. Our add-on is GPL-3.0 because every
-Blender add-on using `bpy` must be, exactly like AssetDrop.
+evidence is `reference/api-surface.txt`, the API surface only (what it does, not
+how), extracted by AST walk. Our add-on is GPL-3.0 because every Blender add-on
+using `bpy` must be, exactly like AssetDrop.
 
-> **⚠ 2026-09-09 — this paragraph is left standing on purpose, and needs your
-> decision.** The comparison harness was stripped on your instruction:
-> `compare.py`, `compare_run.py`, `reference/api-surface.txt`, both run logs, and
-> `count_ops.py`'s second column are gone (recoverable from this repo's git
-> history). But **this paragraph is not a marketing frame — it is the build's
-> provenance record**, and removing it is a different act from removing a
-> benchmark. Note the trade-off the deletion already created: the extracted API
-> surface was the *evidence* that only the API surface was ever taken, so the
-> admission now stands without the exculpatory file beside it. Nothing here was
-> ever customer-facing and none of it has ever shipped in a zip (verified against
-> `texel-0.1.0.zip` and `texel-0.2.0.zip`, 0 files, 0 mentions). Say what you want
-> done with this paragraph; I have not touched its substance.
+> **2026-09-09 — settled.** The comparison *harness* was stripped on the user's
+> instruction: `compare.py` (which loaded the reference's rasteriser and diffed
+> its output against ours), `compare_run.py` (which installed and enabled it
+> inside Blender), both run logs, and `count_ops.py`'s second column. The
+> `LISTING.md` lines that anchored our operator count and our price to that
+> product went too; neither had ever been published.
+>
+> **`reference/api-surface.txt` was restored and is kept as the record** — it is
+> the evidence for the "no implementation is copied" claim above, and deleting it
+> would leave that claim standing with nothing behind it. It is frozen, it never
+> ships (verified: 0 files and 0 mentions across both shipped zips), and it must
+> never feed a comparison again. See `reference/README.md`.
+>
+> Texel is not positioned against anything and is not derived from anything
+> (standing rule, `promo/POSTED.md`). This paragraph is a **provenance record**,
+> not a marketing frame, and that is why it stays.
 
 ## Run the tests
 
