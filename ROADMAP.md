@@ -39,12 +39,19 @@ does an ask three or more people have made (`SUPPORT.md` keeps that tally).
 
 | Milestone | Price | Why the step is honest |
 |---|---|---|
-| v0.1 launch | **$9.95** | Below the incumbent's $29.90. An unproven tool from an unknown seller. |
+| v0.1 launch | **$9.95** | The top of Pixelkiln's own ladder. An unproven tool from an unknown seller. |
 | v0.4 "Handoff" ships | **$14.95** | Engine export closes the gap that stops it being a production tool. |
 | v1.0 "Studio" ships | **$19.95** | Tweening + dope sheet + project files. Feature-complete against the brief. |
 
-Still **a third of the incumbent at v1.0**, which is the position: *the one that
-measures texel density, at a price that does not need a discussion.*
+The position never changes with the number: *the one that measures texel
+density, at a price that does not need a discussion.*
+
+> These two lines used to anchor the price to another add-on's $29.90. The
+> standing rule in `promo/POSTED.md` (user, 2026-09-09) is that no listing line
+> **or log entry** frames Texel as competing with or descending from another
+> product, and it was applied to `LISTING.md` the same day but missed here -
+> which matters more, not less, because **this file ships inside the customer
+> zip**. Removed 2026-09-09; it reaches buyers at the next release.
 
 ---
 
