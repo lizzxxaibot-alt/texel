@@ -1,0 +1,23 @@
+{
+  "faces": 18,
+  "texture_px": 32,
+  "before": {
+    "avg": 10.5,
+    "lo": 2.5,
+    "hi": 21.1,
+    "spread": 8.4
+  },
+  "after": {
+    "avg": 10.5,
+    "lo": 10.5,
+    "hi": 10.5,
+    "spread": 1.0
+  },
+  "target": 10.518,
+  "applied": "18 faces set to 10.5 px/unit",
+  "size_ratio": 8.4,
+  "wall_m": 3.2,
+  "crate_m": 0.38,
+  "readout_before": "10.5 px/unit avg  (2.5-21.1, 8.4x spread)",
+  "readout_after": "10.5 px/unit avg  (10.5-10.5, 1.0x spread)"
+}

@@ -1,0 +1,120 @@
+<!doctype html><meta charset="utf-8">
+<title>Texel - texel density, measured</title>
+<style>
+  @font-face{font-family:'YoungSerif';src:url('../../../../../brand/fonts/YoungSerif-Regular.ttf') format('truetype')}
+  @font-face{font-family:'Inter';src:url('../../../../../brand/fonts/Inter.ttf') format('truetype')}
+  /* Product palette, matching every other Texel promo frame (gif/frame.html,
+     promo/transform/resample_card.html). --bad is the failure state, not a
+     second brand colour, and appears only on the failing side. */
+  :root{
+    --bg:#141317; --panel:#1e1d25; --line:rgba(242,230,200,.14);
+    --text:#f2e6c8; --dim:#ab9f8a; --ember:#ff9c3f; --bad:#f0605c;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:1280px;height:720px;overflow:hidden}
+  body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;
+       -webkit-font-smoothing:antialiased}
+  .card{width:1280px;height:720px;padding:32px 48px 28px;display:flex;
+        flex-direction:column;
+        background:
+          radial-gradient(1000px 480px at 82% -18%,rgba(255,156,63,.22),transparent 64%),
+          var(--bg)}
+  .head{display:flex;align-items:flex-end;justify-content:space-between;gap:40px}
+  .kicker{font-size:16px;letter-spacing:.17em;text-transform:uppercase;
+          color:var(--ember);font-weight:600}
+  h1{font-family:'YoungSerif',Georgia,serif;font-size:39px;line-height:1.18;
+     margin-top:12px;font-weight:400;letter-spacing:-.012em;max-width:940px}
+  h1 em{font-style:normal;color:var(--ember)}
+  h1 s{text-decoration:none;color:var(--bad)}
+  .sub{margin-top:12px;font-size:14.5px;color:var(--dim);line-height:1.5;
+       max-width:846px}
+  .meta{text-align:right;font-size:13px;color:var(--dim);line-height:1.8;
+        white-space:nowrap}
+  .meta b{color:var(--text);font-weight:600;font-variant-numeric:tabular-nums}
+
+  .row{margin-top:20px;display:flex;gap:22px;align-items:stretch}
+  .panel{flex:1;background:var(--panel);border:1px solid var(--line);
+         border-radius:10px;padding:16px 20px;display:flex;
+         flex-direction:column;position:relative}
+  .panel.good{border-color:rgba(255,156,63,.55);
+              box-shadow:0 0 0 1px rgba(255,156,63,.18) inset}
+  .panel.bad{border-color:rgba(240,96,92,.45)}
+  .tag{position:absolute;top:-8px;left:18px;font-size:9.5px;font-weight:700;
+       letter-spacing:.14em;padding:3px 9px;border-radius:99px;color:#171216}
+  .good .tag{background:var(--ember)}
+  .bad  .tag{background:var(--bad);color:#1b1213}
+
+  /* Straight Blender viewport pixels, identical crop box on both sides, so the
+     two halves are a comparison rather than two framings. */
+  .stage{width:100%;height:258px;border-radius:6px;overflow:hidden;
+         background:#3b3b3f}
+  .stage img{width:100%;height:100%;object-fit:cover;object-position:50% 46%;
+             display:block}
+
+  .name{margin-top:14px;font-size:19px;font-weight:600;line-height:1.2}
+  .name span{font-weight:400;color:var(--dim);font-size:14px}
+  .facts{margin-top:11px;display:flex;gap:26px;
+         font-variant-numeric:tabular-nums}
+  .fact{line-height:1.3}
+  .fact b{display:block;font-size:31px;font-weight:600;letter-spacing:-.015em}
+  .fact i{display:block;font-style:normal;font-size:10.5px;color:var(--dim);
+          letter-spacing:.07em;text-transform:uppercase;margin-top:3px;
+          font-weight:600}
+  .good .fact.key b{color:var(--ember)}
+  .bad  .fact.key b{color:var(--bad)}
+
+  .foot{margin-top:auto;padding-top:12px;display:flex;align-items:flex-end;
+        justify-content:space-between;gap:32px;font-size:13px;
+        color:var(--dim);line-height:1.5}
+  .foot b{color:var(--text);font-weight:600}
+  .url{color:var(--dim);font-size:13px;white-space:nowrap}
+</style>
+<div class="card">
+  <div class="head">
+    <div>
+      <div class="kicker">Texel &middot; detect &amp; apply density</div>
+      <h1><em>Texel</em> measures how big a texel really is:<br>
+          <s>{{SPREAD_B}}&times; spread</s> across one mesh, then <em>{{SPREAD_A}}&times;</em>.</h1>
+      <div class="sub">A {{WALL}}&nbsp;m wall and a {{CRATE}}&nbsp;m crate share one {{TEX}}&nbsp;px
+        texture on Blender's default cube UVs, and those UVs do not change with a cube's size.
+        So the texels land {{RATIO}}&times; bigger on the wall &mdash; exactly the size ratio.</div>
+    </div>
+    <div class="meta">
+      <div>mesh <b>{{FACES}}</b> faces</div>
+      <div>texture <b>{{TEX}}&times;{{TEX}}</b> px</div>
+      <div>target <b>{{TARGET}}</b> px/unit</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <figure class="panel bad">
+      <div class="tag">BEFORE &mdash; DETECT DENSITY</div>
+      <div class="stage"><img src="before.png" alt="A large wall and a small crate sharing one 32px texture in the Blender viewport. The wall's texels are so large the brick pattern has disappeared into flat slabs of colour, while the small crate beside it still shows readable pixel detail."></div>
+      <div class="name">{{LO_B}}&ndash;{{HI_B}} px/unit <span>&mdash; the same texture, two sizes</span></div>
+      <div class="facts">
+        <div class="fact key"><b>{{SPREAD_B}}&times;</b><i>spread</i></div>
+        <div class="fact"><b>{{LO_B}}</b><i>px/unit, wall</i></div>
+        <div class="fact"><b>{{HI_B}}</b><i>px/unit, crate</i></div>
+      </div>
+    </figure>
+
+    <figure class="panel good">
+      <div class="tag">AFTER &mdash; APPLY DENSITY</div>
+      <div class="stage"><img src="after.png" alt="The same wall and crate after Apply Density. The brickwork now reads at the same pixel size on the large wall as on the small crate; the wall has gained detail and the crate's pixels have grown."></div>
+      <div class="name">{{AVG_A}} px/unit, every face <span>&mdash; measured again</span></div>
+      <div class="facts">
+        <div class="fact key"><b>{{SPREAD_A}}&times;</b><i>spread</i></div>
+        <div class="fact"><b>{{LO_A}}</b><i>px/unit, wall</i></div>
+        <div class="fact"><b>{{HI_A}}</b><i>px/unit, crate</i></div>
+      </div>
+    </figure>
+  </div>
+
+  <div class="foot">
+    <div>It corrects in both directions &mdash; the wall gains detail, the crate's
+      pixels grow. Every figure is printed by <b>texel.density_detect</b> inside
+      Blender. Even the after-figure is a <b>second measurement</b> of the finished
+      mesh, not the {{TARGET}} it was asked for.</div>
+    <div class="url">z3er1n.itch.io/texel</div>
+  </div>
+</div>

@@ -1,0 +1,8 @@
+{
+  "faces": 18,
+  "texture_px": 32,
+  "before": "10.5 px/unit avg  (2.5-21.1, 8.4x spread)",
+  "target": 10.518,
+  "applied": "18 faces set to 10.5 px/unit",
+  "after": "10.5 px/unit avg  (10.5-10.5, 1.0x spread)"
+}

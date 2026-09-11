@@ -383,4 +383,21 @@ measured, not assumed.
 - `dist/texel-0.1.0.zip` — install-verified in Blender 4.5.9
 
 ## Still to make before upload
-- The density readout mid-measurement, as a still
+- ~~The density readout mid-measurement, as a still~~ — **DONE 2026-09-10**, live
+  in the itch gallery as slot 10 (`img.itch.zone/.../EcU1Ox.png`, 2560x1440,
+  fetched back and byte-compared against the local file: pixel-identical).
+  Source `promo/density/` — `density_shot.py` drives a real Blender 4.5.9 and
+  `make_density.py` cuts the crops and substitutes the captions in one pass.
+  **Nothing on it is typed:** three default cubes at 3.2 m / 1.0 m / 0.38 m,
+  joined, one 32 px texture, and `texel.density_detect` reporting
+  **2.5-21.1 px/unit, 8.4x spread** before and **10.5 on every face, 1.0x**
+  after - the after-figure being a *second measurement*, not the 10.52 target.
+  The 8.4x equals the 3.2/0.38 size ratio, and the build asserts that, so the
+  card fails to build if the claim ever stops holding.
+
+  **Blender elides the readout in the sidebar** (`10.5 px/unit av....1, 8.4x
+  spread)`) - the UI region is 280 px and `Region.width` is read-only, so the
+  range and the spread cannot be shown as a panel screenshot at any size. That
+  is why the figures are set as type on the card and the viewport shots carry
+  the result. Worth `texel-release` knowing: the one readout the product is
+  positioned on does not fit the panel it prints in.
