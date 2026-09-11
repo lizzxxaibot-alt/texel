@@ -1,0 +1,103 @@
+<!doctype html><meta charset="utf-8">
+<title>Texel 0.2.0 - selection transforms</title>
+<style>
+  @font-face{font-family:'YoungSerif';src:url('../../../../../brand/fonts/YoungSerif-Regular.ttf') format('truetype')}
+  @font-face{font-family:'Inter';src:url('../../../../../brand/fonts/Inter.ttf') format('truetype')}
+  /* Palette note: these are NOT from brand/tokens.json. They are the Texel
+     product palette already fixed by gif/frame.html, which is what every other
+     Texel promo frame renders in; matching that matters more here than matching
+     the Mintworks token ramp, and drifting from it would be the actual defect.
+     One accent only - the previous pass used --gold and --ember within 30 deg
+     of each other, which at thumbnail size is one orange used four times and
+     therefore no accent at all. */
+  :root{
+    --bg:#141317; --panel:#1e1d25; --line:rgba(242,230,200,.14);
+    --text:#f2e6c8; --dim:#ab9f8a; --ember:#ff9c3f;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:1280px;height:720px;overflow:hidden}
+  body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;
+       -webkit-font-smoothing:antialiased}
+  .card{width:1280px;height:720px;padding:44px 48px;display:flex;
+        flex-direction:column;
+        background:
+          radial-gradient(1000px 480px at 80% -16%,rgba(255,156,63,.24),transparent 64%),
+          var(--bg)}
+  .head{display:flex;align-items:flex-end;justify-content:space-between}
+  .kicker{font-size:13px;letter-spacing:.19em;text-transform:uppercase;
+          color:var(--ember);font-weight:600}
+  h1{font-family:'YoungSerif',Georgia,serif;font-size:42px;line-height:1.1;
+     margin-top:12px;font-weight:400;letter-spacing:-.01em}
+  h1 em{font-style:normal;color:var(--ember)}
+  .meta{text-align:right;font-size:13px;color:var(--dim);line-height:1.8}
+  .meta b{color:var(--text);font-weight:600;font-variant-numeric:tabular-nums}
+  .row{margin-top:38px;display:flex;gap:20px}
+  .panel{flex:1;background:var(--panel);border:1px solid var(--line);
+         border-radius:10px;padding:16px 16px 14px;display:flex;
+         flex-direction:column;align-items:center;position:relative}
+  /* One deliberate break in the grid. Rotate is the panel carrying the claim
+     that is hardest to build and easiest to get wrong - the MASK turning with
+     the art - and it is also the one a stranger is most likely to read as a
+     broken image. Marking it says the pose is on purpose. */
+  .panel.hero{border-color:rgba(255,156,63,.55);
+              box-shadow:0 0 0 1px rgba(255,156,63,.18) inset}
+  .panel.hero::after{content:'THE HARD ONE';position:absolute;top:-8px;
+         left:50%;transform:translateX(-50%);background:var(--ember);
+         color:#171216;font-size:9.5px;font-weight:700;letter-spacing:.14em;
+         padding:3px 9px;border-radius:99px}
+  .stage{width:100%;height:290px;display:flex;align-items:center;
+         justify-content:center;
+         background-image:
+           linear-gradient(45deg,rgba(242,230,200,.045) 25%,transparent 25%,transparent 75%,rgba(242,230,200,.045) 75%),
+           linear-gradient(45deg,rgba(242,230,200,.045) 25%,transparent 25%,transparent 75%,rgba(242,230,200,.045) 75%);
+         background-size:16px 16px;background-position:0 0,8px 8px;
+         border-radius:6px}
+  .stage img{width:230px;height:230px;image-rendering:pixelated}
+  figcaption{margin-top:13px;text-align:center;line-height:1.45}
+  figcaption b{display:block;font-size:17px;font-weight:600;color:var(--text)}
+  figcaption i{display:block;font-style:normal;font-size:12.5px;color:var(--dim);
+               margin-top:3px}
+  figcaption u{display:block;text-decoration:none;font-size:12px;color:var(--dim);
+               margin-top:6px;font-variant-numeric:tabular-nums;
+               letter-spacing:.02em}
+  figcaption u b{color:var(--text);font-weight:600}
+  .foot{margin-top:auto;display:flex;align-items:center;
+        justify-content:space-between;font-size:14.5px;color:var(--text)}
+  .foot b{color:var(--text);font-weight:600}
+  .foot .url{color:var(--dim);font-size:13px}
+</style>
+<div class="card">
+  <div class="head">
+    <div>
+      <div class="kicker">Texel 0.2.0 &middot; shipped 9 Sep 2026</div>
+      <h1>Flip, rotate and scale a selection.<br><em>Nearest neighbour</em>, nothing resampled.</h1>
+    </div>
+    <div class="meta">
+      <div><b>95</b> operators</div>
+      <div>Blender <b>4.2+</b></div>
+      <div><b>$9.95</b> &middot; every update free</div>
+    </div>
+  </div>
+  <div class="row">
+      <figure class="panel">
+        <div class="stage"><img src="original.png" alt="Original"></div>
+        <figcaption><b>Original</b><i>a wand selection, not a box</i><u><b>414</b> texels</u></figcaption>
+      </figure>
+      <figure class="panel">
+        <div class="stage"><img src="flip_h.png" alt="Flip X"></div>
+        <figcaption><b>Flip X</b><i>mirrored, same texels</i><u><b>414</b> texels</u></figcaption>
+      </figure>
+      <figure class="panel hero">
+        <div class="stage"><img src="rot_cw.png" alt="Rotate CW"></div>
+        <figcaption><b>Rotate CW</b><i>the mask turns with it</i><u><b>414</b> texels</u></figcaption>
+      </figure>
+      <figure class="panel">
+        <div class="stage"><img src="scale.png" alt="Scale ½×"></div>
+        <figcaption><b>Scale ½×</b><i>whole texels dropped, never blended</i><u><b>103</b> texels</u></figcaption>
+      </figure>
+  </div>
+  <div class="foot">
+    <div>Every panel produced by <b>core.select.transform_region</b> &mdash; the shipped function, not a mock-up.</div>
+    <div class="url">z3er1n.itch.io/texel</div>
+  </div>
+</div>

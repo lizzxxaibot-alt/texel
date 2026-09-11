@@ -1,0 +1,82 @@
+{
+  "image": "Torchbearer_sheet.png",
+  "frame_width": 64,
+  "frame_height": 64,
+  "columns": 4,
+  "rows": 2,
+  "fps": 12,
+  "frames": [
+    {
+      "index": 0,
+      "x": 0,
+      "y": 0,
+      "w": 64,
+      "h": 64,
+      "hold": 2,
+      "duration_ms": 167
+    },
+    {
+      "index": 1,
+      "x": 64,
+      "y": 0,
+      "w": 64,
+      "h": 64,
+      "hold": 1,
+      "duration_ms": 83
+    },
+    {
+      "index": 2,
+      "x": 128,
+      "y": 0,
+      "w": 64,
+      "h": 64,
+      "hold": 1,
+      "duration_ms": 83
+    },
+    {
+      "index": 3,
+      "x": 192,
+      "y": 0,
+      "w": 64,
+      "h": 64,
+      "hold": 1,
+      "duration_ms": 83
+    },
+    {
+      "index": 4,
+      "x": 0,
+      "y": 64,
+      "w": 64,
+      "h": 64,
+      "hold": 2,
+      "duration_ms": 167
+    },
+    {
+      "index": 5,
+      "x": 64,
+      "y": 64,
+      "w": 64,
+      "h": 64,
+      "hold": 1,
+      "duration_ms": 83
+    },
+    {
+      "index": 6,
+      "x": 128,
+      "y": 64,
+      "w": 64,
+      "h": 64,
+      "hold": 1,
+      "duration_ms": 83
+    },
+    {
+      "index": 7,
+      "x": 192,
+      "y": 64,
+      "w": 64,
+      "h": 64,
+      "hold": 1,
+      "duration_ms": 83
+    }
+  ]
+}

@@ -1,0 +1,143 @@
+<!doctype html><meta charset="utf-8">
+<title>Texel - nearest neighbour vs a filter</title>
+<style>
+  @font-face{font-family:'YoungSerif';src:url('../../../../../brand/fonts/YoungSerif-Regular.ttf') format('truetype')}
+  @font-face{font-family:'Inter';src:url('../../../../../brand/fonts/Inter.ttf') format('truetype')}
+  /* Same product palette as card.html, and for the same reason: every other
+     Texel promo frame renders in it, so matching gif/frame.html matters more
+     here than matching the Mintworks token ramp. One accent only.
+     --bad is the single exception to "one accent" and it is earning it: the
+     two panels are an argument, and an argument whose two sides are the same
+     colour is a grid of pictures. It is not a second brand colour, it is the
+     failure state, and it appears nowhere but on the failing side. */
+  :root{
+    --bg:#141317; --panel:#1e1d25; --line:rgba(242,230,200,.14);
+    --text:#f2e6c8; --dim:#ab9f8a; --ember:#ff9c3f; --bad:#f0605c;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:1280px;height:720px;overflow:hidden}
+  body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;
+       -webkit-font-smoothing:antialiased}
+  .card{width:1280px;height:720px;padding:32px 48px 28px;display:flex;
+        flex-direction:column;
+        background:
+          radial-gradient(1000px 480px at 82% -18%,rgba(255,156,63,.22),transparent 64%),
+          var(--bg)}
+  .head{display:flex;align-items:flex-end;justify-content:space-between;gap:40px}
+  .kicker{font-size:16px;letter-spacing:.17em;text-transform:uppercase;
+          color:var(--ember);font-weight:600}
+  h1{font-family:'YoungSerif',Georgia,serif;font-size:42px;line-height:1.17;
+     margin-top:12px;font-weight:400;letter-spacing:-.012em;max-width:880px}
+  /* The headline is colour-coded to the panels below it, so the sentence and
+     the pictures make the same argument in the same two colours. */
+  h1 em{font-style:normal;color:var(--ember)}
+  h1 s{text-decoration:none;color:var(--bad)}
+  .sub{margin-top:12px;font-size:14.5px;color:var(--dim);line-height:1.5;
+       max-width:660px}
+  .meta{text-align:right;font-size:13px;color:var(--dim);line-height:1.8;
+        white-space:nowrap}
+  .meta b{color:var(--text);font-weight:600;font-variant-numeric:tabular-nums}
+
+  .row{margin-top:24px;display:flex;gap:22px;align-items:stretch}
+  .panel{flex:1;background:var(--panel);border:1px solid var(--line);
+         border-radius:10px;padding:15px 18px 15px;display:flex;
+         flex-direction:column;position:relative}
+  .panel.good{border-color:rgba(255,156,63,.55);
+              box-shadow:0 0 0 1px rgba(255,156,63,.18) inset}
+  .panel.bad{border-color:rgba(240,96,92,.45)}
+  .tag{position:absolute;top:-8px;left:18px;font-size:9.5px;font-weight:700;
+       letter-spacing:.14em;padding:3px 9px;border-radius:99px;color:#171216}
+  .good .tag{background:var(--ember)}
+  .bad  .tag{background:var(--bad);color:#1b1213}
+
+  .stage{width:100%;height:216px;display:flex;align-items:center;
+         justify-content:center;
+         background-image:
+           linear-gradient(45deg,rgba(242,230,200,.045) 25%,transparent 25%,transparent 75%,rgba(242,230,200,.045) 75%),
+           linear-gradient(45deg,rgba(242,230,200,.045) 25%,transparent 25%,transparent 75%,rgba(242,230,200,.045) 75%);
+         background-size:16px 16px;background-position:0 0,8px 8px;
+         border-radius:6px}
+  /* Both sides are magnified with image-rendering:pixelated, so what you see
+     is the texels that are actually in the file. Smoothing the bilinear side
+     for display would hide the exact thing being reported. */
+  .stage img{width:204px;height:204px;image-rendering:pixelated}
+
+  .name{margin-top:14px;font-size:19px;font-weight:600;line-height:1.2}
+  .name span{font-weight:400;color:var(--dim);font-size:14px}
+  .facts{margin-top:11px;display:flex;gap:24px;
+         font-variant-numeric:tabular-nums}
+  .fact{line-height:1.3}
+  .fact b{display:block;font-size:31px;font-weight:600;letter-spacing:-.015em}
+  .fact i{display:block;font-style:normal;font-size:10.5px;color:var(--dim);
+          letter-spacing:.07em;text-transform:uppercase;margin-top:3px;
+          font-family:'Inter',sans-serif;font-weight:600}
+  .good .fact.key b{color:var(--ember)}
+  .bad  .fact.key b{color:var(--bad)}
+
+  .swatches{margin-top:13px}
+  .swatches img{width:100%;height:15px;image-rendering:pixelated;
+                border-radius:3px;display:block}
+  .swatches i{display:block;font-style:normal;font-size:10.5px;color:var(--dim);
+              margin-top:6px;letter-spacing:.04em}
+
+  .foot{margin-top:auto;padding-top:12px;display:flex;align-items:flex-end;
+        justify-content:space-between;gap:36px;font-size:13.5px;
+        color:var(--dim);line-height:1.5}
+  .foot b{color:var(--text);font-weight:600}
+  .foot .url{color:var(--dim);font-size:13px;white-space:nowrap}
+</style>
+<div class="card">
+  <div class="head">
+    <div>
+      <div class="kicker">Texel &middot; scale a selection</div>
+      <h1>Halve a sprite in <em>Texel</em>: no new colours.<br>
+          Halve it with a filter: <s>118 of them</s>.</h1>
+      <div class="sub">The same 46&times;46 sprite, halved twice. Its palette holds 12 colours,
+        and only one of these two results stays inside it.</div>
+    </div>
+    <div class="meta">
+      <div>source <b>46&times;46</b>, <b>414</b> texels</div>
+      <div>palette <b>12</b> colours</div>
+      <div>both halved to <b>23&times;23</b></div>
+    </div>
+  </div>
+
+  <div class="row">
+    <figure class="panel good">
+      <div class="tag">WHAT TEXEL DOES</div>
+      <div class="stage"><img src="nn_half.png" alt="Half scale by nearest neighbour"></div>
+      <div class="name">Nearest neighbour <span>&mdash; whole texels dropped</span></div>
+      <div class="facts">
+        <div class="fact key"><b>0</b><i>colours off-palette</i></div>
+        <div class="fact"><b>11</b><i>colours total</i></div>
+        <div class="fact"><b>0</b><i>soft-edge texels</i></div>
+      </div>
+      <div class="swatches">
+        <img src="pal_nn.png" alt="Eleven palette swatches">
+        <i>every colour was already in the source palette</i>
+      </div>
+    </figure>
+
+    <figure class="panel bad">
+      <div class="tag">BILINEAR, ON THE SAME FILE</div>
+      <div class="stage"><img src="bl_half.png" alt="Half scale by bilinear resampling"></div>
+      <div class="name">Bilinear <span>&mdash; neighbours averaged together</span></div>
+      <div class="facts">
+        <div class="fact key"><b>118</b><i>colours off-palette</i></div>
+        <div class="fact"><b>120</b><i>colours total</i></div>
+        <div class="fact"><b>112</b><i>soft-edge texels</i></div>
+      </div>
+      <div class="swatches">
+        <img src="pal_bl.png" alt="One hundred and twenty swatches, a smeared gradient">
+        <i>and the outline is no longer a hard edge</i>
+      </div>
+    </figure>
+  </div>
+
+  <div class="foot">
+    <div>The right-hand side is <b>Pillow's own Image.BILINEAR</b> run on the same file &mdash; generated, not mocked up.
+      It is what interpolation does to indexed art, not a claim about anyone's product.
+      Numbers come from <b>make_resample.py</b>, which writes the picture and the caption from one pass.</div>
+    <div class="url">z3er1n.itch.io/texel</div>
+  </div>
+</div>

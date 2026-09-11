@@ -1,0 +1,25 @@
+{
+  "source": "original.png",
+  "source_size": [
+    46,
+    46
+  ],
+  "source_texels": 414,
+  "source_colours": 12,
+  "half_size": [
+    23,
+    23
+  ],
+  "nearest": {
+    "texels": 103,
+    "colours": 11,
+    "colours_not_in_palette": 0,
+    "partial_alpha_texels": 0
+  },
+  "bilinear": {
+    "texels": 165,
+    "colours": 120,
+    "colours_not_in_palette": 118,
+    "partial_alpha_texels": 112
+  }
+}
