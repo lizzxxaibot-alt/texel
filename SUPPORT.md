@@ -22,7 +22,9 @@ placeholder: an empty tally is a real measurement, not a missing one.
 |---|---|---|---|
 | *(nothing asked yet)* | 0 | — | — |
 
-**Top three this run:** none — zero inbound items since launch.
+**Top three this run:** none — zero inbound items since launch (**day 2**, five
+surfaces checked, still nothing asked). The tally has no top three because it has
+no entries; that is a measurement, not an omission.
 
 **Does the tally disagree with `ROADMAP.md`'s order?** No. It cannot yet: there
 is no demand signal at all, so the roadmap's "easiest first" ordering stands
@@ -45,6 +47,7 @@ Three of the same reason is a product bug, not three unhappy people.
 | Date | Who | Bucket | Question | Answer given | Version queued |
 |---|---|---|---|---|---|
 | 2026-09-09 | — | — | *no inbound items; page live for under a day* | — | — |
+| 2026-09-10 | — | — | *no inbound items; 5 surfaces checked (page, 2 devlogs, itch inbox, Bluesky)* | — | — |
 
 ---
 
@@ -52,12 +55,12 @@ Three of the same reason is a product bug, not three unhappy people.
 
 Recorded so a later run does not have to rediscover the access route.
 
-| Surface | How it is read | Result 2026-09-09 |
-|---|---|---|
-| Texel itch page comments | `curl https://z3er1n.itch.io/texel`, then the `game_comments_widget` block | **0 comments.** Widget renders "Leave a comment / Log in with itch.io" — the form is live, so silence is silence, not a broken channel |
-| Texel devlog replies | `curl https://z3er1n.itch.io/texel/devlog` | **404 at 08:15 — no devlogs existed.** The v0.1.0 launch devlog was published later the same day (post 1658358); from the next run this is a live surface with its own comment thread |
-| itch notification inbox | `node automation/itch_notifications.mjs --filter all` | 21 rows, **0 mentioning Texel**. All are Pixelkiln pack board topics, owned by `pixelkiln-itch-boards` |
-| Bluesky mentions/replies | `pixelkiln\tools\pixelkiln_social.ps1 -Mode notifications` (AT Protocol, read-only; app password in `tools\social_creds.json`) | 33 items: 24 likes, 4 reposts, 4 follows, **1 reply**. The reply (@gamebrief, 09-08) is about the Icons Vol. 2 chestplate and was already answered 09-09; it is a pack question, not Texel |
+| Surface | How it is read | Result 2026-09-09 | Result 2026-09-10 |
+|---|---|---|---|
+| Texel itch page comments | `curl https://z3er1n.itch.io/texel`, then the `game_comments_widget` block | **0 comments.** Widget renders "Leave a comment / Log in with itch.io" — the form is live, so silence is silence, not a broken channel | **0 comments.** HTTP 200, 30,530 B; `community_post_list` renders empty |
+| Texel devlog replies | `curl https://z3er1n.itch.io/texel/devlog` | **404 at 08:15 — no devlogs existed.** The v0.1.0 launch devlog was published later the same day (post 1658358); from the next run this is a live surface with its own comment thread | **2 devlogs live, 0 comments on either.** Index 200. Post 1658358 (v0.1.0) and **post 1658363 (v0.2.0, 09-10 00:18 UTC) - a second thread this desk did not know about until today**; both comment lists empty |
+| itch notification inbox | `node automation/itch_notifications.mjs --filter all` | 21 rows, **0 mentioning Texel**. All are Pixelkiln pack board topics, owned by `pixelkiln-itch-boards` | 20 rows, **0 mentioning Texel**. Pack board replies and 5 pack sale rows; **no Texel sale row - still 0 sales** (`texel-watch`'s ledger, not this desk's) |
+| Bluesky mentions/replies | `pixelkiln\tools\pixelkiln_social.ps1 -Mode notifications` (AT Protocol, read-only; app password in `tools\social_creds.json`) | 33 items: 24 likes, 4 reposts, 4 follows, **1 reply**. The reply (@gamebrief, 09-08) is about the Icons Vol. 2 chestplate and was already answered 09-09; it is a pack question, not Texel | 50 items, **2 replies, both packs, both left alone** - parent posts resolved via `getPostThread` before assigning: @gamebrief 09-09 23:54 is the 16x16 sprite/neck-notch thread, @teggy 09-10 07:41 is 3D roof autotiling on **another creator's** post. Neither is Texel -> `pixelkiln-marketing` |
 
 **`automation/itch_comments.mjs` does NOT read comments** — despite the name it
 reads and sets `game[community_type]`, the setting that decides whether a page
@@ -71,7 +74,7 @@ routine will take it.
 
 ---
 
-## Doc disagreement found this run
+## Doc disagreement found 2026-09-09 — RESOLVED, verified 2026-09-10
 
 `ROADMAP.md` opens with *"v0.1.0 is built and install-verified; it has not
 shipped"* and marks v0.1.0 **"Status: BUILT. Blocked on three user decisions."**
@@ -80,6 +83,52 @@ https://z3er1n.itch.io/texel (game 4991926, $9.95, AI disclosure Yes + Code +
 Graphics), all three decisions settled, and the live page returns 200. Left for
 `texel-release` (Wednesday) to tick, since it owns that file — flagged here so
 it is not discovered twice.
+
+**Fixed before Wednesday.** `ROADMAP.md` now opens *"Last ticked 2026-09-09 by
+`texel-release`. v0.1.0 and v0.2.0 are live at https://z3er1n.itch.io/texel."*
+Re-read 2026-09-10; nothing further owed here.
+
+
+---
+
+## The answer key: what is actually in each shipped zip (2026-09-10)
+
+Built because §D of this desk's brief forbids claiming a feature that is not in
+the uploaded zip, and there was no per-version list to check an answer against.
+Counted by installing each **shipped zip** into Blender 4.5.9 `--factory-startup`
+and reading `dir(bpy.ops.texel)` after a real `register()` — an operator that
+fails to register is not an operator, and only registration knows the difference.
+
+| Shipped zip | Registered operators |
+|---|---|
+| `texel-0.1.0.zip` | **94** |
+| `texel-0.2.0.zip` (the only file the live page offers) | **95** |
+
+**The difference is exactly one operator: `texel.selection_transform`.** Set
+difference both ways — 0.2.0 is a strict superset of 0.1.0, nothing was removed.
+The full 95-line list is reproducible with the command above; no operator name
+should be quoted to a buyer from memory or from the working tree.
+
+The counter is saved as **`count_zip_ops.py`** next to the existing
+`count_ops.py` (which counts the *working tree* — the wrong number to quote a
+buyer, and the trap this desk nearly fell into):
+
+```
+blender --background --factory-startup --python count_zip_ops.py -- dist/texel-0.2.0.zip
+```
+
+### The 94-vs-95 question, settled — it is NOT a defect
+
+The live v0.1.0 devlog says *"94 operators"*; the live store page says
+*"95 operators"*. That is the exact shape of T-005, which was a real
+contradiction, so it is worth stating plainly why this one is not:
+
+**Both numbers are correct for the version each describes.** The devlog is a
+v0.1.0 post and 0.1.0 really did register 94; the page sells 0.2.0, which
+registers 95. No edit is owed to either surface, and **a future run should not
+re-open this.** A buyer arriving through the v0.1.0 devlog is also not misled:
+they can only download 0.2.0, which contains every operator that post advertises
+plus one.
 
 ---
 
@@ -104,7 +153,32 @@ is the first inbound-generating event the product has had, so **the next run
 should expect the support queue to stop being empty** and should check the devlog
 comment thread as well as the page.
 
-## Also found, not fixed
+**2026-09-10: it did not.** Still zero inbound on every surface, and the itch
+inbox shows no Texel sale row — 0 downloads, 0 questions, two days in. That
+prediction was wrong and is recorded as wrong rather than quietly dropped: a
+devlog to pack followers does not convert into tool questions.
+
+### One inbound-adjacent signal, and why it is weaker than it looks
+
+Overnight 2026-09-10, hours after the Texel launch post, two **domain-verified**
+Blender press accounts followed @pixelkiln.bsky.social:
+**@blendernation.com** (BlenderNation, 8.3k followers) at 01:30 and
+**@blenderartists.org** (Blender Artists, 9.5k) at 01:00.
+
+Stated straight: **this is thin evidence of editorial interest.** Both follow
+back very liberally — 23.8k and 22.6k accounts followed respectively — so a
+follow from either is close to automatic and should not be reported as "the
+Blender press noticed Texel."
+
+What is *not* thin is what BlenderNation's own bio says: **"To get featured,
+submit your stories here: blendernation.com/submit-news/"** — a named, free,
+open submission channel aimed squarely at Blender add-ons, i.e. exactly Texel's
+buyers rather than Pixelkiln's pixel-art followers. **That is a traffic lead, and
+it belongs to `texel-funnel` (free traffic drivers), not to this desk.** Named
+here and stopped, per the ownership map. This desk opens no ledger row —
+`texel-watch` is the only routine that may.
+
+## Also found 2026-09-09, not fixed then — RESOLVED, verified 2026-09-10
 
 `dist/texel-0.1.0.zip` — the shipped file buyers download — contains a
 `ROADMAP.md` whose first line reads *"v0.1.0 is built and install-verified; it
@@ -112,4 +186,11 @@ has not shipped."* A buyer who opens the zip reads that the thing they just
 bought has not shipped. It is stale rather than false, and correcting it means
 rebuilding and re-uploading the zip, which is `texel-release`'s gate to run, not
 this desk's. **Flagged for Wednesday.**
+
+**Verified closed 2026-09-10, against the live page rather than against the
+claim that closed T-003.** The `uploads` block on https://z3er1n.itch.io/texel
+offers exactly one file — `texel-0.2.0.zip`, 187 kB — so the 0.1.0 zip is no
+longer reachable by any buyer. And the ROADMAP.md *inside* `texel-0.2.0.zip`
+opens with "v0.1.0 and v0.2.0 are live", not the stale line. Both halves checked;
+no buyer can now download a zip that says the product has not shipped.
 
