@@ -2,9 +2,17 @@
 
 Owned by `texel-marketing`. **This is the 21-day reuse guard**: no visual in the
 table below may appear in another Texel post until the "reusable from" date.
-Texel's Bluesky days are **Mon / Wed / Fri / Sat** (packs keep Tue/Thu/Sun),
+Texel's Bluesky days are **Mon / Wed / Fri / Sun** (packs keep Tue / Thu / Sat),
 against `marketing_plan.md`'s ceiling of 3-4 posts a week across the whole
 account, packs included.
+
+*Corrected 2026-09-10: this line read "Mon / Wed / Fri / Sat (packs keep
+Tue/Thu/Sun)", which is the pre-2026-09-09 calendar. **Saturday is the packs'** —
+`pixelkiln/launch/marketing_plan.md` claims it for `#screenshotsaturday`, that
+plan predates the Texel split, and `pixelkiln-watch` run 8 gave Saturday back and
+moved Texel to Sunday. Both routines post to the same account and neither can see
+the other from inside, which is exactly how the collision happened the first
+time; a stale calendar sitting inside the reuse guard is how it happens again.*
 
 Created 2026-09-09 by `texel-support`, out of its normal lane, because the user
 asked for the launch devlog and the launch post directly. The beats below were
@@ -70,6 +78,8 @@ poster's own success message.
 | 2026-09-09 | @unamisden.neocities.org — ripped tilesets from Spriters Resource have a border around every tile, so Aseprite can't grid them | Aseprite's **File > Import Sprite Sheet** already covers it: X/Y is the outer margin, Width/Height the real tile size, and the **Padding** checkbox gives Horizontal/Vertical for the gap between tiles. **Checked against the Aseprite source before answering**, not recalled — `data/widgets/import_sprite_sheet.xml` carries `padding_enabled` + `horizontal_padding`/`vertical_padding`, and `cmd_import_sprite_sheet.cpp:52` subtracts `padding.w * (cols - 1)`, which is what makes it a *between-tiles* gap rather than a margin | [3mv4soa6vdb2c](https://bsky.app/profile/pixelkiln.bsky.social/post/3mv4soa6vdb2c) |
 | 2026-09-09 | @teggy.mastodon.gamedev.place.ap.brid.gy — 3D roof autotiling works, but 1-wide roof peaks need "adjusting some rules" | It is a tile-inventory gap, not a rules gap: a 9-piece terrain set is centre + 4 edges + 4 corners and **none of those is capped on two opposite sides**, so a 1-wide run has no legal member. Straight out of Oakheart — the free sample once shipped 6 of 9 dirt-path pieces and nobody could close a path | [3mv4sof7j3t2t](https://bsky.app/profile/pixelkiln.bsky.social/post/3mv4sof7j3t2t) |
 | 2026-09-09 | @gamebrief.bsky.social — follow-up on the Icons Vol. 2 chestplate: "which change alone moved the needle most?" | **Out of this routine's lane** (a pack question, so `pixelkiln-social`'s) and answered anyway: it arrived 23:54 UTC, after that task's 16:00 run, and would have sat ~19h. Second technical question from the same human peer. Answered honestly that the changes shipped in one commit so **nothing isolates them**, then gave the pick and the reason: at 16x16 the silhouette is read before the interior | [3mv4soofbny2w](https://bsky.app/profile/pixelkiln.bsky.social/post/3mv4soofbny2w) |
+| 2026-09-10 | @kudzuteeth.bsky.social — *"got scared off by UVs and texture painting, all the tuts made me feel stupid, pwease help"* (@maplesyruplush had already answered well, and raised texel density) | The default is not scaled: **a cube unwraps to the same UV size however big the cube is**, so the texture lands coarser on big objects by exactly their size ratio. Given as a measured number rather than a claim — the density card built today read **8.4x** across a 3.2 m box and a 0.38 m box, and 3.2/0.38 = 8.42. Fix named as Blender's own free one, **UV menu ▸ Average Islands Scale**. **Verified in 4.5.9 before sending, and the check changed the answer**: `uv.average_islands_scale` exists with description *"Average the size of separate UV islands, based on their area in 3D space"*, but it has **no default UV-editor keymap** — the Ctrl+A shortcut that gets repeated everywhere is not there, so the reply says "UV menu" and names no shortcut | [3mv6v6smrzd2k](https://bsky.app/profile/pixelkiln.bsky.social/post/3mv6v6smrzd2k) |
+| 2026-09-10 | @modularmesh.bsky.social — *"Succulents are absolutely disgusting to UV unwrap"* (PBR/Substance workflow, not pixel art) | Agreed with the gripe first, then one specific gotcha: **Smart UV Project's Island Margin still defaults to 0.0 in 4.5**, so a mesh with a per-leaf island count gets touching islands that bleed once mipmaps engage. Checked against the operator's RNA in 4.5.9 rather than recalled — `island_margin` default `0.0`, alongside `angle_limit` 66°, `area_weight` 0.0 | [3mv6v6vf4ax2t](https://bsky.app/profile/pixelkiln.bsky.social/post/3mv6v6vf4ax2t) |
 
 ---
 
@@ -88,12 +98,11 @@ poster's own success message.
 - **Alt text is long on purpose** — it is the accessibility floor and it is
   indexed. Describe what is actually in the frame, including the words rendered
   in the image.
-- **There is still no density visual.** `LISTING.md` has flagged "the density
-  readout mid-measurement, as a still" as outstanding since launch, and it is the
-  single most differentiating thing the product does — the one claim with no
-  picture behind it. Highest-value asset left to make. *(Still true on 09-09. The
-  bilinear-vs-nearest card was built instead because it was the one blocking a
-  queued beat; density blocks nothing yet, which is the only reason it lost.)*
+- ~~**There is still no density visual.**~~ **CLEARED 2026-09-10** — `promo/density/texel-density-measured.png`
+  is live as gallery slot 10 and verified pixel-identical off the public URL.
+  It was the only headline claim with no picture of a *result*, and it had
+  outlived two runs that each said so. See ledger row **T-001**. It is queued as
+  the **Sun 09-13** fallback beat behind `texel-funnel`'s first drop.
 - **STANDING RULE (user, 2026-09-09): Texel is not in a rivalry with anything,
   and it is not derived from anything.** No Texel post, reply, listing line or
   log entry frames it as competing with, answering, or descending from another
@@ -119,3 +128,35 @@ poster's own success message.
   been published and the live page says something else. Left in place rather than
   edited here because it sits inside the pricing rationale, which is the user's
   — but it must not reach the store page.
+
+### Which threads are this routine's, decided 2026-09-10
+
+The ownership table gives `pixelkiln-marketing` *"Bluesky replies that are not
+about Texel"*, while this routine's §D orders **two replies every run** and
+forbids mentioning Texel in them. Read flatly those two rules collide, and the
+09-09 run shows the drift: of its three replies, one was an Aseprite
+sprite-sheet question and one was a pack question it flagged as out of lane and
+answered anyway.
+
+**The line drawn here: this routine replies in threads about *Texel's problem* —
+3D, Blender, UVs, texel density, texturing — and leaves 2D pack topics
+(tilesets, sprite sheets, Aseprite-only questions, pack feedback) to the
+Pixelkiln routines.** Both replies above sit on the 3D/UV side. It is a
+proposal, not a ruling: `texel-watch` and `pixelkiln-watch` share an account and
+either can overrule it, but an unwritten edge is how two routines end up doing
+one job.
+
+**Not replied to, and deliberately.** The freshest and highest-engagement
+threads in every search this run belong to another pixel-art-in-Blender product
+account (874 likes on one post). **Standing rule: no replies, no quotes, no
+likes, not used as §D targets.** One further thread was skipped for the same
+reason — a third party resharing that product's itch link, which is that
+product's thread by another route.
+
+**Tooling added this run.** `public.api.bsky.app` answers **403** from this
+machine (Cloudflare), so reply targets could not be found unauthenticated. Two
+read-only modes were added to `pixelkiln	ools\pixelkiln_social.ps1` —
+`-Mode search -Query "..."` and `-Mode thread -ReplyTo at://...` — which go
+through the PDS with the session token and do work. `-Mode thread` is what
+showed that the first target's root was a beginner asking for help rather than
+the snippet the search returned.

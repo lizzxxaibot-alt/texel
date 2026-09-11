@@ -35,7 +35,33 @@ that would have had Friday moves to Monday behind it.
 |---|---|---|---|---|---|
 | 2026-09-09 | **Fri 09-11** | **v0.2.0 release note** *(moved from Wed 09-09, see above)* | `promo/transform/texel-0.2.0-selection-transforms.png` | The four-panel card: flip / rotate / scale, nearest neighbour. Lead with the release, link the devlog. Numbers, not adjectives — **"414 texels. Still 414 after a flip and after a rotate. 103 after a half scale, because whole texels are dropped rather than blended."** All four counts re-measured off the PNGs 2026-09-09 and exact. | |
 | 2026-09-09 | **Mon 09-14** | **Show the problem before the product** — ~~needs a new visual~~ **ASSET NOW EXISTS** | `promo/transform/texel-nearest-vs-bilinear.png` | Built 2026-09-09. The bilinear side is **Pillow's own `Image.BILINEAR` run on the same file**, generated not mocked, and framed as what interpolation does to indexed art rather than as a claim about any product. The card's own headline, after a design-critic pass, is **"Halve a sprite in Texel: no new colours. Halve it with a filter: 118 of them."** — the win leads and the product is named at 42px, because the first version put the failure clause first and never said "Texel" above 13px. Also true and on the card: 112 texels come back at partial alpha, so the outline stops being an edge. **Write the post the same way: what Texel does first.** Per the standing rule in `POSTED.md`, this beat is about what interpolation does to indexed art — it is not a comparison to any product and must not be written as one. | |
+| 2026-09-10 | **Sun 09-13** | **RESERVED for `texel-funnel`'s first drop** — see the note below. Fallback if the funnel does not ship: **the density card**, the claim the whole positioning rests on and the only headline claim that had no picture of a *result* | `promo/density/texel-density-measured.png` | Built 2026-09-10 clearing **T-001**. Two Blender viewport screenshots, identical crop box, plus a second measurement of the finished mesh. Lead with the measurement: **"A 3.2 m wall and a 0.38 m crate, one 32 px texture, Blender's default cube UVs. Detect Density read 2.5–21.1 px/unit across 18 faces — 8.4× spread, which is exactly the size ratio between the two objects. Apply Density, measure again: 10.5 on every face, 1.0×."** Every figure is printed by `texel.density_detect`; `make_density.py` writes the crops and the captions in one pass so they cannot disagree. Name the genre — this is the bug that makes a corridor wall look mushy next to the crates in it. | |
 | 2026-09-09 | Wed 09-16 | **The mask turns with the art** | ⚠ **needs a new visual — see collision below** | The detail nobody advertises: a magic-wand selection survives a rotation as its own shape, not as the rectangle it fitted inside. Aimed at people burned by this in another editor. | |
+
+### Sunday 09-13 exists, and it is the funnel's — written down 2026-09-10 (T-007)
+
+`texel-funnel` makes its **first ever run on Fri 09-11** and section B gates it on
+*"`texel-marketing` has a free slot in the next two days"*. From inside that
+routine the window looked shut: **Fri 09-11** is the v0.2.0 release note,
+**Sat 09-12** is barred (it is `#screenshotsaturday` on the packs, and the
+funnel's own §B says never to schedule against it), and **Sun 09-13** appeared
+nowhere in this file at all. A routine reading QUEUE.md cannot tell "unclaimed"
+from "does not exist", so the gate would have failed on a slot that was free the
+whole time.
+
+It is now written down. **The Sunday slot is the funnel's if it ships**; the
+density card is the fallback so the slot is never spent on nothing.
+
+**The cost, stated rather than hidden.** With Sunday filled, the account posts
+**Fri 09-11 (Texel) · Sat 09-12 (packs) · Sun 09-13 (Texel) · Mon 09-14 (Texel)**
+— four in four days, against `marketing_plan.md`'s ceiling of **3–4 posts a
+week across the whole account, packs included**. That is at the ceiling, not
+under it. So **Mon 09-14 is the one that gives way**: whoever runs on Monday
+counts the trailing 7 days on the live account first, exactly as the 09-09 run
+did, and moves the nearest-vs-bilinear beat to Wed 09-16 if the count is already
+at 4. Sunday does not get dropped to protect Monday — a drop with no
+announcement is the failure the funnel's gate exists to prevent, and the
+bilinear card keeps.
 
 ### The Wed 09-16 collision, stated so it is not walked into
 
