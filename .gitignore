@@ -10,9 +10,29 @@ promo/*
 !promo/QUEUE.md
 !promo/POSTED.md
 !promo/*_draft.md
+# ...and the GENERATORS, added 2026-09-10. The rationale at the top of this file
+# is that promo media is "reproducible from the scripts in this repo" - but the
+# scripts were ignored too, so it was not true of anything under promo/: a fresh
+# clone could not rebuild the resample card or the density card. The .py/.html
+# under here is hand-written source that no script regenerates, same category as
+# QUEUE.md above. The _facts.json files are kept because they are what the
+# captions are substituted from, and a card whose numbers cannot be re-derived
+# is exactly the thing these generators exist to prevent. Media stays ignored.
+!promo/*/
+promo/*/*
+!promo/*/*.py
+!promo/*/*.html
+!promo/*/*.json
 store/stills/
 gallery/
 shots/panels/
+# Raw Blender viewport screenshots, added 2026-09-10 by pixelkiln-backup.
+# density_shot.py writes shots/density/*.png with bpy.ops.screen.screenshot
+# and re-running it reproduces them byte-identically, so they are build
+# artifacts in the same category as shots/panels/ above - 7.4 MB of them,
+# in a PUBLIC repo. shots/density/facts.json is NOT ignored: make_density.py
+# reads it as its input, so it is the record the card's numbers come from.
+shots/density/*.png
 shots/workspace.png
 gif/frames/
 
