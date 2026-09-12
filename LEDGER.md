@@ -20,3 +20,4 @@ Created **2026-09-10**, the first watch run after Texel went live on 2026-09-09.
 | date | views | downloads | sales | revenue | conv% | note |
 |---|---|---|---|---|---|---|
 | 2026-09-10 | 36 | 0 | 0 | $0.00 | 0.00% | **Baseline row.** Page ~36 h old. Store ledger reads $63.70 / 11 payments and **contains no Texel row** — the 0 is confirmed against the ledger, not only against Project totals. 0 ratings, 0 collections. |
+| 2026-09-11 | 46 | 0 | 0 | $0.00 | 0.00% | **+10 views in 24 h.** Store ledger unchanged at $63.70 / 11 payments, **still no Texel row** — 0 confirmed against `/dashboard/purchases`, not only Project totals. 0 ratings, 0 collections. Two rows is not a trend; the conversion rule needs 200+ views (~2026-09-26 at this rate) and the 14-day rule needs 30 days live (~2026-10-09). |
