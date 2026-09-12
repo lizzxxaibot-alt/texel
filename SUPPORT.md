@@ -22,9 +22,16 @@ placeholder: an empty tally is a real measurement, not a missing one.
 |---|---|---|---|
 | *(nothing asked yet)* | 0 | — | — |
 
-**Top three this run:** none — zero inbound items since launch (**day 2**, five
-surfaces checked, still nothing asked). The tally has no top three because it has
-no entries; that is a measurement, not an omission.
+**Top three this run:** none — zero inbound items since launch (**day 3**, five
+surfaces checked every day, still nothing asked). The tally has no top three
+because it has no entries; that is a measurement, not an omission.
+
+**What three empty days actually measure.** Not "buyers are satisfied" — there
+are **no buyers**: 0 sales and 0 downloads, so no one has yet been in a position
+to ask anything. A silent support queue on a product with zero installs carries
+**no information about the product at all**, only about its traffic. This desk
+will keep reporting nothing until the top of the funnel moves, and that is
+`texel-funnel`'s and `texel-marketing`'s lane, not this one.
 
 **Does the tally disagree with `ROADMAP.md`'s order?** No. It cannot yet: there
 is no demand signal at all, so the roadmap's "easiest first" ordering stands
@@ -48,6 +55,7 @@ Three of the same reason is a product bug, not three unhappy people.
 |---|---|---|---|---|---|
 | 2026-09-09 | — | — | *no inbound items; page live for under a day* | — | — |
 | 2026-09-10 | — | — | *no inbound items; 5 surfaces checked (page, 2 devlogs, itch inbox, Bluesky)* | — | — |
+| 2026-09-11 | — | — | *no inbound items; same 5 surfaces checked. Page 0 comments, both devlogs 0, itch inbox 0 of 20 rows, Bluesky 0 of 25 items* | — | — |
 
 ---
 
@@ -55,12 +63,40 @@ Three of the same reason is a product bug, not three unhappy people.
 
 Recorded so a later run does not have to rediscover the access route.
 
-| Surface | How it is read | Result 2026-09-09 | Result 2026-09-10 |
-|---|---|---|---|
-| Texel itch page comments | `curl https://z3er1n.itch.io/texel`, then the `game_comments_widget` block | **0 comments.** Widget renders "Leave a comment / Log in with itch.io" — the form is live, so silence is silence, not a broken channel | **0 comments.** HTTP 200, 30,530 B; `community_post_list` renders empty |
-| Texel devlog replies | `curl https://z3er1n.itch.io/texel/devlog` | **404 at 08:15 — no devlogs existed.** The v0.1.0 launch devlog was published later the same day (post 1658358); from the next run this is a live surface with its own comment thread | **2 devlogs live, 0 comments on either.** Index 200. Post 1658358 (v0.1.0) and **post 1658363 (v0.2.0, 09-10 00:18 UTC) - a second thread this desk did not know about until today**; both comment lists empty |
-| itch notification inbox | `node automation/itch_notifications.mjs --filter all` | 21 rows, **0 mentioning Texel**. All are Pixelkiln pack board topics, owned by `pixelkiln-itch-boards` | 20 rows, **0 mentioning Texel**. Pack board replies and 5 pack sale rows; **no Texel sale row - still 0 sales** (`texel-watch`'s ledger, not this desk's) |
-| Bluesky mentions/replies | `pixelkiln\tools\pixelkiln_social.ps1 -Mode notifications` (AT Protocol, read-only; app password in `tools\social_creds.json`) | 33 items: 24 likes, 4 reposts, 4 follows, **1 reply**. The reply (@gamebrief, 09-08) is about the Icons Vol. 2 chestplate and was already answered 09-09; it is a pack question, not Texel | 50 items, **2 replies, both packs, both left alone** - parent posts resolved via `getPostThread` before assigning: @gamebrief 09-09 23:54 is the 16x16 sprite/neck-notch thread, @teggy 09-10 07:41 is 3D roof autotiling on **another creator's** post. Neither is Texel -> `pixelkiln-marketing` |
+**Restructured 2026-09-11.** This table was gaining a column a day, which would
+be unreadable within a week. It now holds the **access route and the latest
+result**; per-day outcomes live in the Log above, and the two prior findings that
+still carry information are kept as history below the table.
+
+| Surface | How it is read | Result 2026-09-11 |
+|---|---|---|
+| Texel itch page comments | `curl https://z3er1n.itch.io/texel`, then the `game_comments_widget` block | **0 comments.** HTTP 200, 30,963 B. Comment form live ("Log in with itch.io to leave a comment"); the post list is an unfilled JS template (`{{up_score}}` mustaches still literal) |
+| Texel devlog replies | `curl https://z3er1n.itch.io/texel/devlog`, then **`curl -L` each post URL** | **2 devlogs live, 0 comments on either.** Index 200. Post 1658358 (v0.1.0, 32,578 B) and 1658363 (v0.2.0, 30,405 B); zero `id="post-N"` in both, comment form present in both |
+| itch notification inbox | `node automation/itch_notifications.mjs --filter all` | 20 rows, **0 mentioning Texel**. Pack board replies, follows and 4 pack sale rows; **no Texel sale row — still 0 sales** (`texel-watch`'s ledger, not this desk's) |
+| Bluesky mentions/replies | `pixelkiln\tools\pixelkiln_social.ps1 -Mode notifications` (AT Protocol, read-only; app password in `tools\social_creds.json`) | 25 items, **1 reply** — @teggy 2026-09-10 07:41, the same 3D-roof-autotiling item yesterday's run already resolved to **another creator's** post and assigned to `pixelkiln-marketing`. Not Texel, left untouched. Zero Texel mentions |
+
+### Two traps found while reading these surfaces
+
+**Grepping the page for `community_post` counts CSS, not comments.** The Texel
+page HTML contains **11** literal `community_post` strings at offsets 6250–7105
+and every one of them is a selector in the inlined stylesheet
+(`.game_comments_widget .community_post .post_footer a{…}`). A raw count reads as
+"11 comments" on a page with none. Count `id="post-N"` or `<div class="community_post"`
+instead — this desk nearly logged a phantom queue on day 3.
+
+**A devlog post URL must be fetched with `curl -L`.** The short form
+`/texel/devlog/<id>/x` returns **301** with a zero-byte body, which parses as "0
+comments" for the same reason an unplugged microphone is quiet. Follow the
+redirect, or use the full slug from the index.
+
+### History worth keeping
+
+- **2026-09-09:** the devlog index was **404** at 08:15 — no devlogs existed yet;
+  the v0.1.0 launch post was published later that day, turning a dead surface
+  into a live one.
+- **2026-09-10:** post 1658363 (v0.2.0, published 00:18 UTC) was discovered by
+  this desk rather than announced to it — **a devlog can appear between runs, so
+  the index is re-read every run rather than the known post list.**
 
 **`automation/itch_comments.mjs` does NOT read comments** — despite the name it
 reads and sets `game[community_type]`, the setting that decides whether a page
