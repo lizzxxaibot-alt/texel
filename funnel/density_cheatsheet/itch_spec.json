@@ -1,0 +1,19 @@
+{
+  "title": "Texel Density Cheatsheet",
+  "slug": "texel-density-cheatsheet",
+  "tagline": "Free one-page PDF: how many texture pixels per metre for pixel art on 3D models, with the arithmetic shown.",
+  "classification": "assets",
+  "tags": ["pixel-art", "blender", "3d", "textures", "low-poly", "gamedev", "reference", "tutorial"],
+  "ai_parts": ["ai_graphics", "ai_code", "ai_text"],
+  "files": [
+    "C:/Users/opule/Desktop/Make_Money/app_ventures/gumroad/texel/funnel/density_cheatsheet/texel-density-cheatsheet.pdf",
+    "C:/Users/opule/Desktop/Make_Money/app_ventures/gumroad/texel/funnel/density_cheatsheet/texel-density-cheatsheet-letter.pdf",
+    "C:/Users/opule/Desktop/Make_Money/app_ventures/gumroad/texel/funnel/density_cheatsheet/texel-density-cheatsheet-source.zip"
+  ],
+  "cover": "C:/Users/opule/Desktop/Make_Money/app_ventures/gumroad/texel/funnel/density_cheatsheet/cover.png",
+  "screenshots": [
+    "C:/Users/opule/Desktop/Make_Money/app_ventures/gumroad/texel/funnel/density_cheatsheet/shot_sheet.png",
+    "C:/Users/opule/Desktop/Make_Money/app_ventures/gumroad/texel/funnel/density_cheatsheet/shot_table.png"
+  ],
+  "description": "Pixel art on a 3D model only works when every object resolves at the same number of texture pixels per world unit. Get that number wrong and one wall in a corridor reads crisp while the crate in front of it reads mushy - same texture, same distance.\n\nThis is a one-page PDF that gives you the number.\n\nWHAT IS ON IT\n\n- The formula, in both its full form and the one you will actually use.\n- A density ladder: 8 / 16 / 32 / 64 / 128 px per unit, and what a 1.8 m character, a 1 m floor tile and a 0.5 m prop resolve to at each.\n- A grid of 8 real object sizes from a 0.4 m crate to a 12 m building facade, with the exact pixel count each needs at four densities and the power-of-two texture to actually use.\n- Why density drifts across a scene by default, and why the spread comes out as exactly the size ratio of your objects.\n- The correction, with a worked example.\n- Four things that quietly make the number a lie - unapplied scale, non-uniform scale, linear filtering, mixed texture sizes.\n\nA4 and US Letter, both one page. No email, no sign-up, no newsletter.\n\nWHY THE NUMBERS ARE TRUSTWORTHY\n\nNothing on the sheet is typed in. Every figure is computed by running Texel's own texel-density code, and the build refuses to produce a PDF if any of it stops holding:\n\n- The everyday formula printed on the sheet is asserted equal to the full one across a range of sizes and texture resolutions. It is a simplification, not an approximation.\n- The drift section predicts the spread from object sizes alone and checks it against what Blender actually measured on that scene - a 3.2 m wall and a 0.38 m crate, 18 faces, one 32 px texture, 8.4x spread. Prediction and measurement agree.\n- The worked correction is round-tripped through the density formula and must land on the target.\n\nThe generator is in the download, together with the maths file it runs, so you can check all of that yourself rather than believing it.\n\nLICENCE\n\nThe PDF and the generator are CC0 - public domain. Use them, change them, print them, put them in your studio wiki, no attribution needed. The one file that is not CC0 is uvmap.py, which is part of Texel and stays GPL-3.0-or-later; the README says so plainly.\n\nAI DISCLOSURE\n\nBuilt with AI assistance, like the rest of Pixelkiln's work. The arithmetic is not a language model's opinion - it is Texel's own code, run.\n\nMade by Pixelkiln. The add-on that measures and applies this for you inside Blender: https://z3er1n.itch.io/texel"
+}

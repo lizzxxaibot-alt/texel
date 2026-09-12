@@ -1,0 +1,123 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="_fonts.css">
+<style>
+  /* Density Cheatsheet — itch.io cover, 630x500 (shown ~315x250 in the grid).
+
+     GENERATED from funnel/density_cheatsheet/cover.tpl.html by make_cover.py;
+     the three texture sizes come out of tables.json, so this cover and the PDF
+     cannot disagree. Edit the template, never the generated file.
+
+     It is deliberately a SIBLING of brand/html/itch_cover_texel.html: same
+     ember/gold top band, same charcoal ground, same closing spec bar. That band
+     is what says "tool family, not another pack" at 315px. What differs is the
+     job — this one is free, so the band leads with FREE rather than with the
+     category, and the hero is three real numbers rather than a render, because
+     a cheatsheet's promise is the answer it saves you working out.
+
+     Rejected: cropping the PDF itself into the cover. At 315px wide the sheet's
+     8-pt table is a grey smear; three numbers at 46px are readable. The full
+     grid is what the download is for. */
+  :root {
+    --char:#141317; --char2:#1d1c22; --cream:#f2e6c8;
+    --ember:#ff9c3f; --ember-d:#c96a24; --gold:#e7b23a; --quiet:#a89d89;
+    --hero:#fff8ec;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { width:630px; height:500px; overflow:hidden; }
+  .stage { position:relative; width:630px; height:500px; overflow:hidden;
+    background:
+      radial-gradient(560px 340px at 18% 16%, rgba(255,156,63,.16), transparent 62%),
+      radial-gradient(460px 320px at 94% 96%, rgba(231,178,58,.10), transparent 60%),
+      linear-gradient(168deg, var(--char2), var(--char) 72%); }
+  .grain { position:absolute; inset:0; opacity:.4; pointer-events:none; mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E"); }
+
+  /* ---- the band that says "tool family" ---- */
+  .bar { position:absolute; left:0; right:0; top:0; height:52px; z-index:7;
+    background:linear-gradient(90deg, var(--ember), var(--gold));
+    display:flex; align-items:center; justify-content:space-between;
+    padding:0 32px;
+    font:16px/1 'PlexMonoBold', ui-monospace, monospace; letter-spacing:.15em;
+    color:var(--char); text-transform:uppercase; }
+
+  /* ---- the name ---- */
+  .head { position:absolute; left:32px; right:216px; top:72px; z-index:6; }
+  .kicker { font:16px/1 'PlexMonoBold', ui-monospace, monospace; color:var(--ember);
+    letter-spacing:.16em; text-transform:uppercase; }
+  .name { margin-top:12px; font:58px/.95 'YoungSerif', Georgia, serif;
+    color:var(--hero); letter-spacing:.004em;
+    text-shadow: 0 4px 0 rgba(0,0,0,.5), 0 14px 30px rgba(0,0,0,.6); }
+  .name em { font-style:normal; color:var(--ember); font-size:50px; }
+  .sub { margin-top:16px; font:16px/1.35 'PlexMono', ui-monospace, monospace;
+    color:var(--cream); letter-spacing:.02em; }
+
+  /* No border, no box, no rounded tile. chip_crate.png is keyed and feathered
+     by make_chip.py so the crate dissolves into the ground - a bordered corner
+     tile holding an isometric render is the thumbnail signature of every voxel
+     pack on the newest feed, and this card has to read as a reference sheet.
+     Exported at 312px = 156 CSS px at render.mjs's 2x, so it draws 1:1. */
+  .chip { position:absolute; right:32px; top:80px; width:156px; height:156px;
+    z-index:5; }
+  .chip img { display:block; width:100%; height:100%; image-rendering:pixelated;
+    filter:brightness(1.14) saturate(1.22)
+           drop-shadow(0 3px 2px rgba(0,0,0,.9))
+           drop-shadow(0 10px 14px rgba(0,0,0,.7)); }
+
+  /* ---- the answer, at a size the grid thumbnail can read ---- */
+  .panel { position:absolute; left:32px; right:32px; bottom:76px; z-index:6;
+    background:rgba(10,9,12,.62); border:2px solid rgba(255,156,63,.42);
+    border-radius:4px; padding:12px 16px 16px; }
+  .plabel { font:14px/1 'PlexMonoBold', ui-monospace, monospace;
+    color:var(--gold); letter-spacing:.14em; text-transform:uppercase; }
+  .row { display:flex; justify-content:space-between; margin-top:12px; gap:12px; }
+  .cell { flex:1; }
+  .what { font:15px/1.2 'PlexMono', ui-monospace, monospace; color:var(--cream);
+    white-space:nowrap; }
+  .size { margin-top:4px; font:15px/1 'PlexMono', ui-monospace, monospace;
+    color:var(--quiet); }
+  .tex { margin-top:8px; font:54px/1 'YoungSerif', Georgia, serif;
+    color:var(--hero); }
+  .tex span { margin-left:4px; font:15px/1 'PlexMono', ui-monospace, monospace;
+    color:var(--ember); letter-spacing:.06em; }
+
+  /* ---- the spec line every Pixelkiln cover closes on ---- */
+  .spec { position:absolute; left:0; right:0; bottom:0; height:52px; z-index:7;
+    display:flex; align-items:center; justify-content:center; gap:24px;
+    background:rgba(10,9,12,.86); border-top:2px solid rgba(255,156,63,.55);
+    font:18px/1 'PlexMono', ui-monospace, monospace; letter-spacing:.07em;
+    color:var(--quiet); text-transform:uppercase; }
+  .spec b { color:var(--gold); font-weight:400; }
+</style>
+</head>
+<body>
+  <div class="stage">
+    <div class="bar"><span>Free download</span><span>Pixelkiln</span></div>
+
+    <div class="chip"><img src="../../app_ventures/gumroad/texel/funnel/density_cheatsheet/chip_crate.png" alt=""></div>
+
+    <div class="head">
+      <div class="kicker">Texture math, worked out</div>
+      <div class="name">Density<br><em>cheatsheet</em></div>
+      <div class="sub">Stop guessing texture sizes.</div>
+    </div>
+
+    <div class="panel">
+      <div class="plabel">At {{D}} px/unit, use</div>
+      <div class="row">
+      {{CELLS}}
+      </div>
+    </div>
+
+    <div class="spec">
+      <span><b>One</b> page</span>
+      <span><b>{{ROWS}}</b> object sizes</span>
+      <span><b>CC0</b></span>
+    </div>
+
+    <div class="grain"></div>
+  </div>
+</body>
+</html>
