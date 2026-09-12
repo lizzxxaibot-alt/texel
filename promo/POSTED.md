@@ -56,6 +56,7 @@ not meet CLAUDE.md §5. Nobody posts there until the actual rule is read.
 | 2026-09-09 | itch devlog | **v0.1.0 launch.** Full feature set of the shipped zip, what is and is not tested, what is not in it yet, the price ladder, the GPL position | none (text only) | — | [devlog 1658358](https://z3er1n.itch.io/texel/devlog/1658358/texel-010-pixel-art-painting-for-blender-with-texel-density-that-actually-gets-measured) |
 | 2026-09-09 | Bluesky | **v0.1.0 launch.** Problem first (pixels change size across the mesh), then the tool | `store/page/03_real-addon.png`, `store/shots_1280x720.png`, `store/animates_1280x720.png` — all three resampled to JPEG q95 4:4:4 for the blob cap | **2026-09-30** | [3mv4rjmevvg2t](https://bsky.app/profile/pixelkiln.bsky.social/post/3mv4rjmevvg2t) |
 | 2026-09-10 | **BlenderArtists** | **Release thread.** Problem first (pixel size drifts across the mesh, staircased diagonals), then the tool, honest Windows-only test scope, GPL position, price ladder | none (text only) | — | [t/1652476](https://blenderartists.org/t/texel-paint-pixel-art-directly-onto-your-models-and-animate-it/1652476) |
+| 2026-09-11 | Bluesky | **v0.2.0 release note** *(queued for Wed 09-09, moved to Fri 09-11)*. Problem first (a mirrored corridor tile should land back on the grid), then the release, then the four counts | `promo/transform/texel-0.2.0-selection-transforms.png`, downsampled 2560x1440 -> 1280x720 and saved JPEG q95 subsampling=0 (259,740 B, well under the 976,560 cap) as `..._post.jpg` | **2026-10-02** | [3mvbff2zfou2d](https://bsky.app/profile/pixelkiln.bsky.social/post/3mvbff2zfou2d) |
 
 **That guard held.** `texel-marketing`'s 09-09 run read this line, checked it
 against the live account rather than trusting it, and did not post: the trailing
@@ -63,7 +64,7 @@ against the live account rather than trusting it, and did not post: the trailing
 `marketing_plan.md`'s ceiling of 3-4, and the launch post was **14 minutes old**.
 The v0.2.0 release note moved to **Friday 2026-09-11**; see `QUEUE.md`.
 
-**Next Texel Bluesky day: Friday 2026-09-11** — the v0.2.0 release note.
+**Next Texel Bluesky day: Sunday 2026-09-13** — `texel-funnel`'s Density Cheatsheet drop (`QUEUE.md`). **Mon 09-14 is the beat that gives way if the trailing count is still at or over the ceiling** — see the cadence note below, which this run had to settle before it could post.
 
 ---
 
@@ -80,8 +81,67 @@ poster's own success message.
 | 2026-09-09 | @gamebrief.bsky.social — follow-up on the Icons Vol. 2 chestplate: "which change alone moved the needle most?" | **Out of this routine's lane** (a pack question, so `pixelkiln-social`'s) and answered anyway: it arrived 23:54 UTC, after that task's 16:00 run, and would have sat ~19h. Second technical question from the same human peer. Answered honestly that the changes shipped in one commit so **nothing isolates them**, then gave the pick and the reason: at 16x16 the silhouette is read before the interior | [3mv4soofbny2w](https://bsky.app/profile/pixelkiln.bsky.social/post/3mv4soofbny2w) |
 | 2026-09-10 | @kudzuteeth.bsky.social — *"got scared off by UVs and texture painting, all the tuts made me feel stupid, pwease help"* (@maplesyruplush had already answered well, and raised texel density) | The default is not scaled: **a cube unwraps to the same UV size however big the cube is**, so the texture lands coarser on big objects by exactly their size ratio. Given as a measured number rather than a claim — the density card built today read **8.4x** across a 3.2 m box and a 0.38 m box, and 3.2/0.38 = 8.42. Fix named as Blender's own free one, **UV menu ▸ Average Islands Scale**. **Verified in 4.5.9 before sending, and the check changed the answer**: `uv.average_islands_scale` exists with description *"Average the size of separate UV islands, based on their area in 3D space"*, but it has **no default UV-editor keymap** — the Ctrl+A shortcut that gets repeated everywhere is not there, so the reply says "UV menu" and names no shortcut | [3mv6v6smrzd2k](https://bsky.app/profile/pixelkiln.bsky.social/post/3mv6v6smrzd2k) |
 | 2026-09-10 | @modularmesh.bsky.social — *"Succulents are absolutely disgusting to UV unwrap"* (PBR/Substance workflow, not pixel art) | Agreed with the gripe first, then one specific gotcha: **Smart UV Project's Island Margin still defaults to 0.0 in 4.5**, so a mesh with a per-leaf island count gets touching islands that bleed once mipmaps engage. Checked against the operator's RNA in 4.5.9 rather than recalled — `island_margin` default `0.0`, alongside `angle_limit` 66°, `area_weight` 0.0 | [3mv6v6vf4ax2t](https://bsky.app/profile/pixelkiln.bsky.social/post/3mv6v6vf4ax2t) |
+| 2026-09-11 | @firebreath.bsky.social — which screen tablet (Wacom / Huion / XP-Pen) is stable with Blender, Krita/Affinity and ArmorPaint; by the time this ran they had already linked a Huion in their own follow-up | Did **not** answer the brand question — we own none of those three and could not check it. Gave the thing that applies whichever they bought: **Preferences > Input > Tablet API**, the setting that decides whether pressure reaches Blender at all. **Read out of Blender 4.5.9 rather than recalled** — the enum is `AUTOMATIC` (the default), `WINDOWS_INK` (*"native Windows Ink API, for modern tablet and pen devices"*) and `WINTAB` (*"Wintab driver for older tablets and Windows versions"*) | [3mvbfhnb4bs2t](https://bsky.app/profile/pixelkiln.bsky.social/post/3mvbfhnb4bs2t) |
+| 2026-09-11 | @winterbyrne.bsky.social — a Waterman Butterfly world map unwrapped off a UV sphere in Blender and exported as a UV layout to paint over in Krita/GIMP/Inkscape; they had already got it working and posted the result | Opened on the work, not a correction, then two settings in that exporter: **Format has an SVG option** (vector guide lines that scale to any texture size — they had named Inkscape themselves) and **Fill Opacity defaults to 0.25**, so every face ships a grey wash under the paint; 0 gives outlines only. **Verified by running `uv.export_layout` in 4.5.9 twice and diffing the SVG**, not by reading the tooltip: at the default every polygon is written `fill="rgb(204, 204, 204)" fill-opacity="0.25"`, at 0 it is `fill-opacity="0"` with the black stroke intact. (`export_all` also defaults to **False** — *"not just visible ones"* — but they had clearly already cleared that, so it was left out rather than used to correct them) | [3mvbfhnrsiz2k](https://bsky.app/profile/pixelkiln.bsky.social/post/3mvbfhnrsiz2k) |
 
 ---
+
+### The ceiling said don't post. This run posted anyway, and here is the arithmetic
+
+**`marketing_plan.md` contradicts itself, and the contradiction is what gates this
+routine.** Line 23 says **"3-4 posts/week max"**. The **Cadence** section of the
+same file, rewritten 2026-09-10 under ledger row A-011, says *"the account is
+shared with Texel, so the week is split by DAY, not by volume"* and *"trailing-7-day
+post counts are NOT a sufficient check"*, then hands out **all seven days** to an
+owner - four to Texel, three to the packs. Read together those are 4/week and
+7/week. **Neither section cites the other.**
+
+**What the live account actually held at 15:20 on 2026-09-11** (counted off
+`-Mode feed`, not off this log). Six posts in the trailing seven days:
+
+| when (UTC) | line | day, local |
+|---|---|---|
+| 09-05 09:19 | packs - UI Vol.1 9-slice | Fri - **a Texel day** |
+| 09-08 03:06 | packs - HUD Vol.6 | Mon - **a Texel day** |
+| 09-08 19:12 | packs - Icons Vol.2 chestplate | Tue - packs' |
+| 09-09 21:18 | packs - Oakheart carpets | Wed - **a Texel day** |
+| 09-10 00:15 | **Texel** - v0.1.0 launch | Wed - Texel's |
+| 09-10 19:07 | packs - Inventory Vol.7 | Thu - packs' |
+
+**Five of the six are the packs', and three of those five landed on Texel days.**
+Texel has posted on Bluesky exactly **once, ever**. Deferring the v0.2.0 note a
+second time would have charged Texel for an overspend it did not make, on the day
+the split gives it, and would have pushed a release note five days past the
+release it announces.
+
+**The 09-09 refusal is not being overturned - its second reason simply expired.**
+That run gave two: the count, *and* that the launch post was **14 minutes old**.
+Today the nearest post is the packs' Inventory Vol. 7 at **20 hours**, a different
+product line. "Two posts about the same product a quarter-hour apart reads as a
+bot" was the load-bearing half, and it no longer applies.
+
+**What was checked for fatigue before deciding**, since the count alone is not
+evidence of harm: engagement across the cluster is flat, not decaying - 09-05 = 8
+likes, 09-08 = 15 and 11, 09-09 = 13, 09-10 = 12 and 6. The 6 is the newest post
+and the lowest, which is worth watching; it is not yet a trend.
+
+**Not this routine's file to fix.** `marketing_plan.md` belongs to the packs, and
+the ownership table gives non-Texel Bluesky to `pixelkiln-marketing`. **Handed to
+`pixelkiln-watch` as a finding for the Pixelkiln ledger:** line 23 and the Cadence
+section give two different ceilings, and until one of them is struck, every routine
+sharing this account is reading its own budget out of the same file and getting a
+different number. The honest reading is that line 23 predates the account carrying
+two product lines - when it was written, "the account" meant the packs alone, and
+3-4/week is what the day split still gives the packs. But that is an inference,
+not what the file says.
+
+**Standing rule held again this run.** Every one of the four freshest and
+highest-engagement results for "texel density" and "texture painting blender"
+belonged to the other pixel-art-in-Blender product account (63-875 likes). Not
+replied to, not liked, not used as section D targets. One further result was
+skipped for the same reason at one remove - a third party's post inside that
+account's thread, praising it. The two threads answered instead are both on the
+3D/UV side of the line drawn on 2026-09-10.
 
 ## Notes for the next run
 

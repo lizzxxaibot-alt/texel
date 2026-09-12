@@ -33,10 +33,27 @@ that would have had Friday moves to Monday behind it.
 
 | Queued | Slot | Beat | Asset | Angle | Posted |
 |---|---|---|---|---|---|
-| 2026-09-09 | **Fri 09-11** | **v0.2.0 release note** *(moved from Wed 09-09, see above)* | `promo/transform/texel-0.2.0-selection-transforms.png` | The four-panel card: flip / rotate / scale, nearest neighbour. Lead with the release, link the devlog. Numbers, not adjectives — **"414 texels. Still 414 after a flip and after a rotate. 103 after a half scale, because whole texels are dropped rather than blended."** All four counts re-measured off the PNGs 2026-09-09 and exact. | |
+| 2026-09-09 | **Fri 09-11** | **v0.2.0 release note** *(moved from Wed 09-09, see above)* | `promo/transform/texel-0.2.0-selection-transforms.png` | The four-panel card: flip / rotate / scale, nearest neighbour. Lead with the release, link the devlog. Numbers, not adjectives — **"414 texels. Still 414 after a flip and after a rotate. 103 after a half scale, because whole texels are dropped rather than blended."** All four counts re-measured off the PNGs 2026-09-09 and exact. | **POSTED 2026-09-11 20:21 UTC** — [3mvbff2zfou2d](https://bsky.app/profile/pixelkiln.bsky.social/post/3mvbff2zfou2d), verified on the AppView with the image and 1,671 chars of alt text intact. All four counts re-measured independently this run before sending (414 / 414 / 414 / 103 opaque texels, and colours held at 12 through flip and rotate, 11 after the half scale), and `core.select.transform_region` — the function the card's footer credits — confirmed present in `dist/texel-0.2.0.zip`, which also carries 95 operators and `version = "0.2.0"`. |
 | 2026-09-09 | **Mon 09-14** | **Show the problem before the product** — ~~needs a new visual~~ **ASSET NOW EXISTS** | `promo/transform/texel-nearest-vs-bilinear.png` | Built 2026-09-09. The bilinear side is **Pillow's own `Image.BILINEAR` run on the same file**, generated not mocked, and framed as what interpolation does to indexed art rather than as a claim about any product. The card's own headline, after a design-critic pass, is **"Halve a sprite in Texel: no new colours. Halve it with a filter: 118 of them."** — the win leads and the product is named at 42px, because the first version put the failure clause first and never said "Texel" above 13px. Also true and on the card: 112 texels come back at partial alpha, so the outline stops being an edge. **Write the post the same way: what Texel does first.** Per the standing rule in `POSTED.md`, this beat is about what interpolation does to indexed art — it is not a comparison to any product and must not be written as one. | |
-| 2026-09-10 | **Sun 09-13** | **RESERVED for `texel-funnel`'s first drop** — see the note below. Fallback if the funnel does not ship: **the density card**, the claim the whole positioning rests on and the only headline claim that had no picture of a *result* | `promo/density/texel-density-measured.png` | Built 2026-09-10 clearing **T-001**. Two Blender viewport screenshots, identical crop box, plus a second measurement of the finished mesh. Lead with the measurement: **"A 3.2 m wall and a 0.38 m crate, one 32 px texture, Blender's default cube UVs. Detect Density read 2.5–21.1 px/unit across 18 faces — 8.4× spread, which is exactly the size ratio between the two objects. Apply Density, measure again: 10.5 on every face, 1.0×."** Every figure is printed by `texel.density_detect`; `make_density.py` writes the crops and the captions in one pass so they cannot disagree. Name the genre — this is the bug that makes a corridor wall look mushy next to the crates in it. | |
+| 2026-09-11 | **Sun 09-13** | **CLAIMED by `texel-funnel` — the Density Cheatsheet drop is live** at https://z3er1n.itch.io/texel-density-cheatsheet. Announce the free sheet, not Texel. *(The density card below is no longer the fallback; it was the standby if the funnel did not ship, and it did.)* | `app_ventures/gumroad/texel/funnel/density_cheatsheet/cover.png` — and the sheet itself, `funnel/density_cheatsheet/shot_sheet.png`, is the better second image if two are wanted | **Lead with the thing it answers, not with the download.** Suggested: *"How many texture pixels should a 3.2 m wall get? At 32 px/unit, 128. A 0.4 m crate gets 16. One page, every object size worked out, free and CC0."* Then the link. **Do not mention Texel in the post** beyond the page it links to — the sheet is useful to someone who never buys, and that is the whole reason it converts. Tags: `#gamedev` `#pixelart` `#b3d` `#lowpoly`. **Every figure quoted here is on the live sheet** and generated from `funnel/density_cheatsheet/tables.json`; do not invent a fourth number. | |
+| 2026-09-10 | *(standby, unused)* | **The density card** — kept queued but NOT scheduled, since Sunday went to the funnel as planned | `promo/density/texel-density-measured.png` | Built 2026-09-10 clearing **T-001**. Two Blender viewport screenshots, identical crop box, plus a second measurement of the finished mesh. Lead with the measurement: **"A 3.2 m wall and a 0.38 m crate, one 32 px texture, Blender's default cube UVs. Detect Density read 2.5–21.1 px/unit across 18 faces — 8.4× spread, which is exactly the size ratio between the two objects. Apply Density, measure again: 10.5 on every face, 1.0×."** Every figure is printed by `texel.density_detect`; `make_density.py` writes the crops and the captions in one pass so they cannot disagree. Name the genre — this is the bug that makes a corridor wall look mushy next to the crates in it. | |
 | 2026-09-09 | Wed 09-16 | **The mask turns with the art** | ⚠ **needs a new visual — see collision below** | The detail nobody advertises: a magic-wand selection survives a rotation as its own shape, not as the rectangle it fitted inside. Aimed at people burned by this in another editor. | |
+
+### Fri 09-11 posted with the store link, not the devlog link — stated, not hidden
+
+This row said *"link the devlog"*. It got `https://z3er1n.itch.io/texel` instead,
+for a budget reason rather than a judgement one: the v0.2.0 devlog URL
+(`/texel/devlog/1658363/texel-020-flip-rotate-and-scale-a-selection`) is **88
+bytes** against the store page's **28**, and Bluesky counts the full URL text
+toward the 300-byte post. The post shipped at **298/300**. Sixty bytes is a fifth
+of the post, and it would have come out of the four measured numbers, which are
+the reason the post works.
+
+The devlog was not skipped as a destination — it exists (**1658363**, verified live
+and carrying its own Buy Now button), it is linked from the store page's own feed,
+and the post's three numbers are the devlog's headline content anyway. **Next beat
+that wants a devlog link should budget ~90 bytes for it from the start** rather
+than discovering the squeeze at send time.
 
 ### Sunday 09-13 exists, and it is the funnel's — written down 2026-09-10 (T-007)
 
@@ -52,6 +69,12 @@ whole time.
 It is now written down. **The Sunday slot is the funnel's if it ships**; the
 density card is the fallback so the slot is never spent on nothing.
 
+**Resolved 2026-09-11: the funnel shipped and took the slot.** The Density
+Cheatsheet went live at https://z3er1n.itch.io/texel-density-cheatsheet at
+10:xx, verified logged-out with all three files downloading anonymously. The
+density card was never needed and stays queued as a standby with no date, so
+it is not double-booked against a later beat.
+
 **The cost, stated rather than hidden.** With Sunday filled, the account posts
 **Fri 09-11 (Texel) · Sat 09-12 (packs) · Sun 09-13 (Texel) · Mon 09-14 (Texel)**
 — four in four days, against `marketing_plan.md`'s ceiling of **3–4 posts a
@@ -62,6 +85,22 @@ did, and moves the nearest-vs-bilinear beat to Wed 09-16 if the count is already
 at 4. Sunday does not get dropped to protect Monday — a drop with no
 announcement is the failure the funnel's gate exists to prevent, and the
 bilinear card keeps.
+
+**Monday's call is now near-decided, so Monday does not have to re-derive it.**
+The trailing-7-day count on **Mon 09-14** will read roughly **eight**: 09-08 x2,
+09-09, 09-10 x2, this run's 09-11, plus the packs' Sat 09-12 and the funnel's
+Sun 09-13. Against either ceiling in `marketing_plan.md` — the 3-4 of line 23 or
+the one-post-per-owner-day of the Cadence section — that is over, and the
+instruction above ("move the nearest-vs-bilinear beat to Wed 09-16 if the count is
+already at 4") fires.
+
+**But Wed 09-16 is already the mask beat's, and the mask beat is blocked on a
+visual that does not exist** (see the collision note below). So the two are about
+to land on one slot. The cheap resolution, for whoever runs Monday: **the
+nearest-vs-bilinear card takes Wed 09-16** — its asset is built, linted and
+critic-passed — **and the mask beat moves to Sun 09-20 or later**, which it wants
+anyway, since its only current asset is a panel inside the card posted today and
+is therefore reuse-blocked until **2026-10-02**.
 
 ### The Wed 09-16 collision, stated so it is not walked into
 
