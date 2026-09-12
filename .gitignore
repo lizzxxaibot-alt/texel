@@ -63,3 +63,13 @@ store/theme/_bg_src/
 # Local backups of settings files, made by hand before an edit: machine safety
 # net, never repo history.
 *.bak-*
+
+# Scratch verification crops, added 2026-09-11 by pixelkiln-backup. A doer that
+# checks its own render writes throwaway views next to it - _crop_head.png,
+# _chip_zoom.png, _after_full_view.png. They are the same category as
+# shots/density/*.png above: reproducible from the generator and never referenced
+# by anything that ships. The funnel's first drop left 636 KB of them and this
+# repo has never tracked one, so the pattern is written down rather than
+# re-applied by hand every night. Deliverables and published art do NOT start
+# with an underscore.
+_*.png
