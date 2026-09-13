@@ -22,16 +22,25 @@ placeholder: an empty tally is a real measurement, not a missing one.
 |---|---|---|---|
 | *(nothing asked yet)* | 0 | — | — |
 
-**Top three this run:** none — zero inbound items since launch (**day 3**, five
+**Top three this run:** none — zero inbound items since launch (**day 4**, five
 surfaces checked every day, still nothing asked). The tally has no top three
 because it has no entries; that is a measurement, not an omission.
 
-**What three empty days actually measure.** Not "buyers are satisfied" — there
+**What four empty days actually measure.** Not "buyers are satisfied" — there
 are **no buyers**: 0 sales and 0 downloads, so no one has yet been in a position
 to ask anything. A silent support queue on a product with zero installs carries
 **no information about the product at all**, only about its traffic. This desk
 will keep reporting nothing until the top of the funnel moves, and that is
 `texel-funnel`'s and `texel-marketing`'s lane, not this one.
+
+**Day 4 added one number worth separating from the silence.** The Texel 0.2.0
+Bluesky card posted 2026-09-11 20:21 UTC now reads **10 likes, 1 repost, 0
+replies** — the repost is from @blenderbot.bsky.social, a Blender-audience bot.
+It is the first Texel post to get any reach at all, and it still produced
+**zero questions and zero sales**. Reach without a question is a funnel reading,
+not a support one, so it is named here and left to `texel-marketing` /
+`texel-funnel`; this desk records it only because it is the cleanest evidence
+yet that the empty queue is an audience problem and not a product one.
 
 **Does the tally disagree with `ROADMAP.md`'s order?** No. It cannot yet: there
 is no demand signal at all, so the roadmap's "easiest first" ordering stands
@@ -56,6 +65,7 @@ Three of the same reason is a product bug, not three unhappy people.
 | 2026-09-09 | — | — | *no inbound items; page live for under a day* | — | — |
 | 2026-09-10 | — | — | *no inbound items; 5 surfaces checked (page, 2 devlogs, itch inbox, Bluesky)* | — | — |
 | 2026-09-11 | — | — | *no inbound items; same 5 surfaces checked. Page 0 comments, both devlogs 0, itch inbox 0 of 20 rows, Bluesky 0 of 25 items* | — | — |
+| 2026-09-12 | — | — | *no inbound items; same 5 surfaces checked. Page 0 comments, both devlogs 0, itch inbox 0 Texel rows of 20, Bluesky 0 Texel mentions of 25. The one new reply (@firebreath, thanking us for a Blender tablet-API tip) is not about Texel — `pixelkiln-marketing`'s lane, left untouched* | — | — |
 
 ---
 
@@ -68,14 +78,22 @@ be unreadable within a week. It now holds the **access route and the latest
 result**; per-day outcomes live in the Log above, and the two prior findings that
 still carry information are kept as history below the table.
 
-| Surface | How it is read | Result 2026-09-11 |
+| Surface | How it is read | Result 2026-09-12 |
 |---|---|---|
-| Texel itch page comments | `curl https://z3er1n.itch.io/texel`, then the `game_comments_widget` block | **0 comments.** HTTP 200, 30,963 B. Comment form live ("Log in with itch.io to leave a comment"); the post list is an unfilled JS template (`{{up_score}}` mustaches still literal) |
-| Texel devlog replies | `curl https://z3er1n.itch.io/texel/devlog`, then **`curl -L` each post URL** | **2 devlogs live, 0 comments on either.** Index 200. Post 1658358 (v0.1.0, 32,578 B) and 1658363 (v0.2.0, 30,405 B); zero `id="post-N"` in both, comment form present in both |
-| itch notification inbox | `node automation/itch_notifications.mjs --filter all` | 20 rows, **0 mentioning Texel**. Pack board replies, follows and 4 pack sale rows; **no Texel sale row — still 0 sales** (`texel-watch`'s ledger, not this desk's) |
-| Bluesky mentions/replies | `pixelkiln\tools\pixelkiln_social.ps1 -Mode notifications` (AT Protocol, read-only; app password in `tools\social_creds.json`) | 25 items, **1 reply** — @teggy 2026-09-10 07:41, the same 3D-roof-autotiling item yesterday's run already resolved to **another creator's** post and assigned to `pixelkiln-marketing`. Not Texel, left untouched. Zero Texel mentions |
+| Texel itch page comments | `curl https://z3er1n.itch.io/texel`, then the `game_comments_widget` block | **0 comments.** HTTP 200, 30,967 B. Comment form live; the post list is still an unfilled JS template (`{{up_score}}` mustaches literal). The `uploads` block offers exactly one file, `texel-0.2.0.zip` |
+| Texel devlog replies | `curl https://z3er1n.itch.io/texel/devlog`, then **`curl -L` each post URL** | **2 devlogs live, 0 comments on either.** Index 200, 19,794 B, no third post. Post 1658358 (v0.1.0, 32,581 B) and 1658363 (v0.2.0, 30,408 B); zero `id="post-N"` in both, comment form present in both |
+| itch notification inbox | `node automation/itch_notifications.mjs --filter all` | 20 rows, **0 mentioning Texel**. Pack board replies, 2 follows and 4 pack sale rows (UI Vol.1 ×2, Starter Bundle, Oakheart); **no Texel sale row — still 0 sales** (`texel-watch`'s ledger, not this desk's) |
+| Bluesky mentions/replies | `pixelkiln\tools\pixelkiln_social.ps1 -Mode notifications` (AT Protocol, read-only; app password in `tools\social_creds.json`) | 25 items, **1 new reply** — @firebreath 2026-09-11 20:29, and `-Mode thread` shows it is a "Thank you! :D" closing **our own outreach reply about Blender's Preferences > Input > Tablet API**. Not about Texel, and it needs no answer; `pixelkiln-marketing`'s lane, left untouched. The @teggy item from 2026-09-10 is unchanged. Zero Texel mentions, 4 days running |
 
-### Two traps found while reading these surfaces
+### Three traps found while reading these surfaces
+
+**`<div class="community_post` without the closing quote matches the empty
+container.** Added 2026-09-12: the note below says to count
+`<div class="community_post"` — drop that final quote and the pattern also
+matches `<div class="community_post_list_widget …>`, the *empty* widget that
+wraps the post list. This run got `1` from the loose form on a page with zero
+comments, and looked at the match before believing it. Keep the closing quote,
+or count `id="post-N"`, which has no such twin.
 
 **Grepping the page for `community_post` counts CSS, not comments.** The Texel
 page HTML contains **11** literal `community_post` strings at offsets 6250–7105
