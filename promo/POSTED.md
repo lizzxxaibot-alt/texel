@@ -83,6 +83,8 @@ poster's own success message.
 | 2026-09-10 | @modularmesh.bsky.social — *"Succulents are absolutely disgusting to UV unwrap"* (PBR/Substance workflow, not pixel art) | Agreed with the gripe first, then one specific gotcha: **Smart UV Project's Island Margin still defaults to 0.0 in 4.5**, so a mesh with a per-leaf island count gets touching islands that bleed once mipmaps engage. Checked against the operator's RNA in 4.5.9 rather than recalled — `island_margin` default `0.0`, alongside `angle_limit` 66°, `area_weight` 0.0 | [3mv6v6vf4ax2t](https://bsky.app/profile/pixelkiln.bsky.social/post/3mv6v6vf4ax2t) |
 | 2026-09-11 | @firebreath.bsky.social — which screen tablet (Wacom / Huion / XP-Pen) is stable with Blender, Krita/Affinity and ArmorPaint; by the time this ran they had already linked a Huion in their own follow-up | Did **not** answer the brand question — we own none of those three and could not check it. Gave the thing that applies whichever they bought: **Preferences > Input > Tablet API**, the setting that decides whether pressure reaches Blender at all. **Read out of Blender 4.5.9 rather than recalled** — the enum is `AUTOMATIC` (the default), `WINDOWS_INK` (*"native Windows Ink API, for modern tablet and pen devices"*) and `WINTAB` (*"Wintab driver for older tablets and Windows versions"*) | [3mvbfhnb4bs2t](https://bsky.app/profile/pixelkiln.bsky.social/post/3mvbfhnb4bs2t) |
 | 2026-09-11 | @winterbyrne.bsky.social — a Waterman Butterfly world map unwrapped off a UV sphere in Blender and exported as a UV layout to paint over in Krita/GIMP/Inkscape; they had already got it working and posted the result | Opened on the work, not a correction, then two settings in that exporter: **Format has an SVG option** (vector guide lines that scale to any texture size — they had named Inkscape themselves) and **Fill Opacity defaults to 0.25**, so every face ships a grey wash under the paint; 0 gives outlines only. **Verified by running `uv.export_layout` in 4.5.9 twice and diffing the SVG**, not by reading the tooltip: at the default every polygon is written `fill="rgb(204, 204, 204)" fill-opacity="0.25"`, at 0 it is `fill-opacity="0"` with the black stroke intact. (`export_all` also defaults to **False** — *"not just visible ones"* — but they had clearly already cleared that, so it was left out rather than used to correct them) | [3mvbfhnrsiz2k](https://bsky.app/profile/pixelkiln.bsky.social/post/3mvbfhnrsiz2k) |
+| 2026-09-12 | @freddifish.bsky.social — *"is this type of texture work (Cloverpit) possible without Substance Painter? I hate Adobe so much"* (16 likes, root of the thread; @sasvel.itch.io had guessed Blender could do it but said "can't say personally") | Answered the question actually asked — yes, with no Adobe — and closed sasvel's stated uncertainty rather than correcting it. The one setting that decides the look: **the Image Texture node's Interpolation**, which **defaults to `Linear`** and smooths a deliberately small map straight back out; `Closest` keeps the texels hard. **Read out of Blender 4.5.9 rather than recalled** — `ShaderNodeTexImage.interpolation` default is `'Linear'` and the enum is `Linear / Closest / Cubic / Smart`. Nothing was claimed about how Cloverpit itself was made, because that was not checkable | [3mvdvtigovx26](https://bsky.app/profile/pixelkiln.bsky.social/post/3mvdvtigovx26) |
+| 2026-09-12 | @navnoise.bsky.social — *"A pipe thing / Getting the hang of texture painting in blender"*, alt text "A grime covered pipe" (4 likes, **0 replies**, so ours is the only one in it) | Opened on the work, not a correction: the grime streaks follow the form instead of sitting on top of it. Then one thing that bites later — **Texture Paint's Bleed (Tool Settings ▸ Options) defaults to 2 px**, enough to hide island seams on a 1k map and not on a 4k one. **Verified in 4.5.9**: `ImagePaint.seam_bleed` default `2`, description *"Extend paint beyond the faces' UVs to reduce seams (in pixels, slower)"*. Deliberately a different fact from the 09-10 Smart-UV-Project `island_margin` answer, which is the adjacent trap and was already spent | [3mvdvtniwvu2f](https://bsky.app/profile/pixelkiln.bsky.social/post/3mvdvtniwvu2f) |
 
 ---
 
@@ -220,3 +222,135 @@ read-only modes were added to `pixelkiln	ools\pixelkiln_social.ps1` —
 through the PDS with the session token and do work. `-Mode thread` is what
 showed that the first target's root was a beginner asking for help rather than
 the snippet the search returned.
+
+
+---
+
+## Sat 2026-09-12 — a packs day, so nothing was posted about Texel. Section D + E run.
+
+**No Texel post, by the calendar and not by omission.** Saturday is the packs'
+(`#screenshotsaturday`, `marketing_plan.md`); Texel takes Mon/Wed/Fri/Sun. No beat
+was consumed from `QUEUE.md` — **Sun 09-13 is still `texel-funnel`'s cheatsheet
+drop**, and Mon 09-14 still carries the cadence decision already written down for it.
+
+**Ledger: no `texel-marketing` rows were open.** T-008 is `texel-release`'s, T-002
+is `HUMAN`. Nothing to clear and nothing to refuse.
+
+### Two replies, both verified on the public AppView
+
+Logged in the table above. `public.api.bsky.app` answered **200** from this machine
+this run — the **403 recorded on 2026-09-10 was transient, not a standing block** — so
+both replies were confirmed against the real AppView (parent URI, full text, byte
+count) rather than against the PDS or the script's success line. Worth knowing next
+run: the unauthenticated path works again, and it is the stronger check.
+
+**Standing rule held again, and it cost the best targets.** Every high-engagement
+result for "texel density" and "texture painting blender" this run belonged to the
+other pixel-art-in-Blender product account (880 and 16 likes, plus four promo
+posts). **Not replied to, not liked, not used as §D targets.** One further post was
+skipped at one remove — a third party inside that account's thread saying "addons
+like yours help" — same precedent as 09-10 and 09-11. Also skipped deliberately:
+`@johanpeitz.com`'s picoCAD 2 launch (**397 likes**, the highest-reach thread
+available all run). picoCAD is not a Blender add-on, so the letter of the rule does
+not reach it — but it *is* a pixel-art 3D texturing tool, and anything a tool
+account says in its launch thread reads as sniping. Rule 9's reason applies even
+where its letter does not.
+
+### The listing page was changed — the gallery order, and one tag
+
+**§E's conversion trigger did NOT fire.** `LEDGER.md` reads **51 views, 0 sales,
+0 downloads** at 2026-09-12; the rule needs 200+ views (~09-20). These changes were
+made on the weekly Saturday check, **not** on conversion evidence, and that
+distinction should survive into whatever `texel-watch` concludes at 200 views.
+
+**Nothing was contaminated by changing it now.** 0 sales on 51 views has a
+confidence interval containing every plausible conversion rate — there was no
+baseline worth protecting, only a first image a `design-critic` pass called FATAL.
+
+**The gallery was reordered to `02,03,01,10,06,04,05,08,07,09`** (ids
+`29883177,29883185,29883174,29902828,29883200,29883192,29883196,29883208,29883203,29883248`)
+after that pass returned **VERDICT: ITERATE** with 1 FATAL and 2 SERIOUS:
+
+- **FATAL — the first slot did not say what the product is.** The old hero was the
+  animated pixel-perfect stroke demo: a zigzag line on a dark grid. **No Blender
+  chrome, no viewport, no mesh.** The tagline promises "paint pixel art straight
+  onto your models in Blender", and the one image that renders large showed no
+  model. The new hero is the pixel-textured character on the cobbled street — the
+  only asset showing mesh + Blender render + pixel art at once, and it still reads
+  at thumbnail size. The stroke GIF keeps prime real estate at **slot 3**, where its
+  motion still lands but now as "problem 1, solved" rather than an abstraction.
+- **SERIOUS — the most differentiating claim was last.** The density card (8.4x
+  spread then 1.0x, measured) is the only image answering *why does this need a
+  dedicated tool*, and it sat at position 10 behind a thumbnail strip. **Now
+  position 4**, inside the top four where it is actually seen.
+- **SERIOUS — the gallery did not follow the description's own argument.** The copy
+  sequences two claims (staircase strokes, then texel size drift); the gallery gave
+  claim 1 cold and claim 2 as an afterthought. The new order runs *what is it → is
+  it really Blender → problem 1 → problem 2*.
+- POLISH, also applied: slot04 (the four frame-state renders) now sits directly
+  behind slot06 (the Frames panel that produces them) instead of orphaned, and the
+  sci-fi corridor — the least differentiated asset — is correctly last.
+
+**Verified logged-out, not in the editor.** `itch_shots_manage.mjs` reported OK after
+its own full reload; the public page was then re-fetched (HTTP 200, 30,973 B) and the
+ten `screenshot_list` hrefs base64-decoded to confirm the order really is
+`29883177, 29883185, 29883174, 29902828, …` in public.
+
+**One tag added: `textures`** — now 3D, Animation, Blender, Pixel Art, Sprites,
+**Textures**, confirmed live logged-out. Five of ten slots were in use on a page
+whose actual problem is 51 views in three days, and `textures` is on itch's own
+suggested-tag list and is literally what the product paints.
+
+**Four candidate tags were rejected on purpose**, recorded so it is not
+re-litigated. itch's quality guidelines say *"do not use unrelated tags or
+classifications to promote your game"* and *"prefer using a suggested tag"* (read at
+the source this run: `itch.io/docs/creators/quality-guidelines`). `low-poly` — Texel
+neither requires nor targets low-poly; our demo art merely is. `unity` / `godot` —
+the sheet+JSON export is engine-agnostic, and Texel is not a tool for either.
+`retro` / `psx` — an aesthetic association, not what the add-on does. Each would
+plausibly buy traffic; each is the kind of reach that gets a page delisted, and
+CLAUDE.md §5 rates that a liability rather than a venture. **`modeling` and `tool`
+were skipped too** — the second because itch tells you not to tag what the metadata
+page already classifies, and Category is already **Tool**.
+
+**AI disclosure survived both saves and was checked, not assumed** —
+`{yes: true, graphics: true, text: false, code: true}` after the tag write.
+
+### The other three §E checks came back clean
+
+- **Tagline still true.** *"Paint pixel art straight onto your models in Blender.
+  Texel density, seamless tiles, cel animation, sheet + JSON export."* Every clause
+  ships in `dist/texel-0.2.0.zip`. It does not mention the v0.2.0 selection
+  transforms, which is a field-length choice rather than a staleness problem.
+- **Description still leads with the problem.** The problem lands in sentence two,
+  inside the first 40 words: *"the two things that go wrong when 2D pixel art meets
+  a mesh: strokes that come out as staircases, and pixels that change size from one
+  face to the next."*
+- **A suspected mojibake on the live page was checked and is NOT one.** The
+  description rendered as `Blender � and animates it` in this run's console. The raw
+  bytes are `Blender &mdash; and animates it`, and the page decodes as UTF-8 with
+  **zero U+FFFD**. It was the Windows console codepage, not the store page.
+  Recorded because the next run will see the same artefact and must not "fix" a live
+  sales page over it.
+
+### Fixed in this routine's own SKILL.md — it contradicted itself two lines apart
+
+The §A table still read `| Sat | #screenshotsaturday — the best render of the week |`
+while the prose **directly above it** said Saturday moved to Sunday on 2026-09-09 and
+belongs to the packs, and §A's own first line said *"Texel takes Mon / Wed / Fri /
+Sun."* A run reading only the table — the normal way to read a calendar — would have
+posted Texel on a Saturday **using the packs' hashtag, on the shared account**: the
+exact collision `pixelkiln-watch` run 8 caught before it landed. This run hit it and
+had to resolve it from the prose.
+
+The row now reads `| Sun | The best-looking render of the week |`, and
+`#screenshotsaturday` is struck from the §A hashtag list (which had also listed it
+as *allowed*) with a pointer to `OPERATIONS.md` §3, where it is already banned for
+Texel. `#lowpoly` replaces it — it is in OPERATIONS.md's list and was missing here.
+**This changes no policy**; it makes the file agree with its own prose and with the
+document it tells you to read first. Backup at `SKILL.md.bak`.
+
+This is the same defect class the 2026-09-09 routine audit was opened for
+(`pixelkiln-marketing` both forbidding and prescribing Reddit two lines apart), and
+**it is now the third instance** — so it is worth `texel-watch` asking whether the
+calendar should live in exactly one file rather than being restated in three.
