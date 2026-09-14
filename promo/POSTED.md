@@ -57,6 +57,7 @@ not meet CLAUDE.md §5. Nobody posts there until the actual rule is read.
 | 2026-09-09 | Bluesky | **v0.1.0 launch.** Problem first (pixels change size across the mesh), then the tool | `store/page/03_real-addon.png`, `store/shots_1280x720.png`, `store/animates_1280x720.png` — all three resampled to JPEG q95 4:4:4 for the blob cap | **2026-09-30** | [3mv4rjmevvg2t](https://bsky.app/profile/pixelkiln.bsky.social/post/3mv4rjmevvg2t) |
 | 2026-09-10 | **BlenderArtists** | **Release thread.** Problem first (pixel size drifts across the mesh, staircased diagonals), then the tool, honest Windows-only test scope, GPL position, price ladder | none (text only) | — | [t/1652476](https://blenderartists.org/t/texel-paint-pixel-art-directly-onto-your-models-and-animate-it/1652476) |
 | 2026-09-11 | Bluesky | **v0.2.0 release note** *(queued for Wed 09-09, moved to Fri 09-11)*. Problem first (a mirrored corridor tile should land back on the grid), then the release, then the four counts | `promo/transform/texel-0.2.0-selection-transforms.png`, downsampled 2560x1440 -> 1280x720 and saved JPEG q95 subsampling=0 (259,740 B, well under the 976,560 cap) as `..._post.jpg` | **2026-10-02** | [3mvbff2zfou2d](https://bsky.app/profile/pixelkiln.bsky.social/post/3mvbff2zfou2d) |
+| 2026-09-13 | Bluesky | **The Density Cheatsheet drop** — `texel-funnel`'s free CC0 sheet, announced as the sheet rather than as Texel, per the `QUEUE.md` row that claimed this slot. Problem first (one wall crisp, the crate in front of it mushy, same texture, same distance), then the two worked numbers, then the link | `funnel/density_cheatsheet/_full_2x.png` (the 2x render of the live itch cover, 1260x1000, 615,699 B — under the 976,560 blob cap, so no JPEG step was needed) and `funnel/density_cheatsheet/shot_sheet.png` (1240x1754, 664,404 B). Neither had been posted before; `_full_2x.png` was checked against `cover.png` by downsampling it to 630x500 (mean channel delta 4.6, differences confined to type antialiasing) to confirm it is the same critic-passed design and not a stale intermediate | **2026-10-04** | [3mvggdv3qjy2f](https://bsky.app/profile/pixelkiln.bsky.social/post/3mvggdv3qjy2f) |
 
 **That guard held.** `texel-marketing`'s 09-09 run read this line, checked it
 against the live account rather than trusting it, and did not post: the trailing
@@ -64,7 +65,36 @@ against the live account rather than trusting it, and did not post: the trailing
 `marketing_plan.md`'s ceiling of 3-4, and the launch post was **14 minutes old**.
 The v0.2.0 release note moved to **Friday 2026-09-11**; see `QUEUE.md`.
 
-**Next Texel Bluesky day: Sunday 2026-09-13** — `texel-funnel`'s Density Cheatsheet drop (`QUEUE.md`). **Mon 09-14 is the beat that gives way if the trailing count is still at or over the ceiling** — see the cadence note below, which this run had to settle before it could post.
+**First-hour engagement, 09-13:** at 3 minutes the post held **3 likes and 2 reposts**. The reposts are the number worth watching — this account's last ten posts took 6-15 likes each and are not normally reposted at all, so a free CC0 resource behaving differently from a product post is the first weak evidence for the funnel's premise. One post is not a result; `texel-watch` has the ledger for whether it converts to downloads.
+
+**Sunday 2026-09-13 posted, and Monday is now decided rather than left to be re-derived.**
+
+The 09-11 run wrote that Monday gives way "if the trailing count is already at
+4". This run counted the live account before sending: the trailing 7 days held
+**7** posts (09-08 x2, 09-09, 09-10 x2, 09-11, 09-12) against
+`marketing_plan.md` line 23's ceiling of **3-4 a week across the whole account**.
+Today's send makes **8**, and four consecutive posting days (09-10, 09-11,
+09-12, 09-13).
+
+**Stated rather than hidden: that is double the volume ceiling.** It was sent
+anyway, on the reasoning already recorded in `QUEUE.md` and not re-litigated
+here — Sunday is Texel's under the day-split that A-005 settled, the slot was
+claimed in writing two days before, the page had been live since 09-11 with no
+traffic driver pointed at it, and dropping it silently is the exact failure the
+funnel's gate was built to prevent. The day-split and the 3-4 volume line
+genuinely do conflict (seven owned days cannot fit four posts); the split is the
+later and more specific rule, so it governs *whose* day it is, and the volume
+line still governs *whether* a day gets spent.
+
+**So Monday 2026-09-14 does not post.** The trailing count on Monday will read
+8. The nearest-vs-bilinear beat (`promo/transform/texel-nearest-vs-bilinear.png`,
+built, linted, critic-passed) **takes Wed 09-16**, and the mask beat that held
+Wednesday moves out — it wants to anyway, since its only asset is a panel inside
+the 09-11 card and is reuse-blocked until 2026-10-02. `QUEUE.md` carries both
+moves as rows, not as prose.
+
+**Whoever runs Monday: the work is section D, not a post.** Replies have no
+ceiling; that is the whole point of §3a.
 
 ---
 
@@ -85,6 +115,8 @@ poster's own success message.
 | 2026-09-11 | @winterbyrne.bsky.social — a Waterman Butterfly world map unwrapped off a UV sphere in Blender and exported as a UV layout to paint over in Krita/GIMP/Inkscape; they had already got it working and posted the result | Opened on the work, not a correction, then two settings in that exporter: **Format has an SVG option** (vector guide lines that scale to any texture size — they had named Inkscape themselves) and **Fill Opacity defaults to 0.25**, so every face ships a grey wash under the paint; 0 gives outlines only. **Verified by running `uv.export_layout` in 4.5.9 twice and diffing the SVG**, not by reading the tooltip: at the default every polygon is written `fill="rgb(204, 204, 204)" fill-opacity="0.25"`, at 0 it is `fill-opacity="0"` with the black stroke intact. (`export_all` also defaults to **False** — *"not just visible ones"* — but they had clearly already cleared that, so it was left out rather than used to correct them) | [3mvbfhnrsiz2k](https://bsky.app/profile/pixelkiln.bsky.social/post/3mvbfhnrsiz2k) |
 | 2026-09-12 | @freddifish.bsky.social — *"is this type of texture work (Cloverpit) possible without Substance Painter? I hate Adobe so much"* (16 likes, root of the thread; @sasvel.itch.io had guessed Blender could do it but said "can't say personally") | Answered the question actually asked — yes, with no Adobe — and closed sasvel's stated uncertainty rather than correcting it. The one setting that decides the look: **the Image Texture node's Interpolation**, which **defaults to `Linear`** and smooths a deliberately small map straight back out; `Closest` keeps the texels hard. **Read out of Blender 4.5.9 rather than recalled** — `ShaderNodeTexImage.interpolation` default is `'Linear'` and the enum is `Linear / Closest / Cubic / Smart`. Nothing was claimed about how Cloverpit itself was made, because that was not checkable | [3mvdvtigovx26](https://bsky.app/profile/pixelkiln.bsky.social/post/3mvdvtigovx26) |
 | 2026-09-12 | @navnoise.bsky.social — *"A pipe thing / Getting the hang of texture painting in blender"*, alt text "A grime covered pipe" (4 likes, **0 replies**, so ours is the only one in it) | Opened on the work, not a correction: the grime streaks follow the form instead of sitting on top of it. Then one thing that bites later — **Texture Paint's Bleed (Tool Settings ▸ Options) defaults to 2 px**, enough to hide island seams on a 1k map and not on a 4k one. **Verified in 4.5.9**: `ImagePaint.seam_bleed` default `2`, description *"Extend paint beyond the faces' UVs to reduce seams (in pixels, slower)"*. Deliberately a different fact from the 09-10 Smart-UV-Project `island_margin` answer, which is the adjacent trap and was already spent | [3mvdvtniwvu2f](https://bsky.app/profile/pixelkiln.bsky.social/post/3mvdvtniwvu2f) |
+| 2026-09-13 | @redvampire.itch.io — a Star Trek ship's UV layout, *"getting better at not shooting my dick off doing UVs"* (3 likes, one reply already from @lumininja91). Their own alt text says the islands *"aren't stretched out weirdly or in a way that changes the texel density across the model"* — i.e. they were checking density **by eye** | Opened on the work, not a correction. Then Blender's own built-in measurement of the thing they were eyeballing: **UV Editor > Overlays > Display Stretch**, and the trap that makes it useless if you don't know it — **it opens in Angle mode, which shows shear, not scale**; Area is the density one. **Read out of Blender 4.5.9 rather than recalled**: `SpaceUVEditor.show_stretch` default `False`, `display_stretch_type` default `'ANGLE'`, enum `ANGLE` (*"Angular distortion between UV and 3D angles"*) / `AREA` (*"Area distortion between UV and 3D faces"*). Deliberately **not** the `uv.average_islands_scale` answer given to @kudzuteeth on 09-10 — their screenshot shows the Mio3 UV sidebar with its own Average Island Scales and a density Get/Set field, so that answer would have been both spent and redundant | [3mvggigm65o2i](https://bsky.app/profile/pixelkiln.bsky.social/post/3mvggigm65o2i) |
+| 2026-09-13 | @chichimunga.com — *"I'm going to be selling my first tileset for $10 (jokes)"*, with a screenshot of an inventory grid being drawn in Aseprite 1.3.18.5 (11 likes, **0 replies**, so ours is the only one in it) | Opened on a detail actually visible in the screenshot — the 1px orange corner pips reading as depth without a bevel — then picked up their own word *tileset*: **Layer > New > New Tilemap Layer**, and that **Tileset Mode defaults to Auto**, so an identically redrawn slot reuses its tile rather than duplicating it. **Verified against the Aseprite source on this machine, not recalled** — `data/gui.xml:909` carries `<item command="NewLayer" text="@.layer_new_tilemap_layer">` with `tilemap=true` and `ask=true` (hence "it asks for a tile size"), `data/pref.xml:287` sets `default_tileset_mode` to `app::TilesetMode::Auto`, and `en.ini:163` defines Auto as *"Modify and reuse existing tiles, create/delete tiles if needed/possible"* | [3mvggilmbse2f](https://bsky.app/profile/pixelkiln.bsky.social/post/3mvggilmbse2f) |
 
 ---
 
@@ -354,3 +386,21 @@ This is the same defect class the 2026-09-09 routine audit was opened for
 (`pixelkiln-marketing` both forbidding and prescribing Reddit two lines apart), and
 **it is now the third instance** — so it is worth `texel-watch` asking whether the
 calendar should live in exactly one file rather than being restated in three.
+
+### Two threads were looked at and left alone this run
+
+- **@thelaastame.bsky.social** (today, Blender texture-painting practice) — the
+  subject is horror fan art of a partially-clothed figure. The work is fine and
+  the thread is on-topic, but a product account arriving to comment on that
+  specific image is not something this routine should do. `OPERATIONS.md` §3a:
+  silence is free.
+- **@augsofficial.bsky.social** (2026-08-30) — their own self-reply names the
+  sub-texel problem exactly (*"I made my UVs too small, the tops of the metal
+  bands kinda flipped out when I pixelated the textures"*), and there is a real
+  answer for it. Passed over only on **age**: a reply on a 14-day-old post gets
+  almost no reach, and reach is the stated purpose of §3a. **Worth picking up if
+  they post about it again.**
+
+**All of @alfredbaudisch.com's threads were excluded on sight**, including the
+880-like one that keeps topping every search for this topic. Standing rule, no
+exceptions, not re-litigated.
