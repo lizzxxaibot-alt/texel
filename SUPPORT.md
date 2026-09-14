@@ -22,31 +22,54 @@ placeholder: an empty tally is a real measurement, not a missing one.
 |---|---|---|---|
 | *(nothing asked yet)* | 0 | — | — |
 
-**Top three this run:** none — zero inbound items since launch (**day 4**, five
-surfaces checked every day, still nothing asked). The tally has no top three
+**Top three this run:** none — zero inbound items since launch (**day 5**, and
+**six** surfaces checked today rather than five). The tally has no top three
 because it has no entries; that is a measurement, not an omission.
 
-**What four empty days actually measure.** Not "buyers are satisfied" — there
-are **no buyers**: 0 sales and 0 downloads, so no one has yet been in a position
-to ask anything. A silent support queue on a product with zero installs carries
-**no information about the product at all**, only about its traffic. This desk
-will keep reporting nothing until the top of the funnel moves, and that is
-`texel-funnel`'s and `texel-marketing`'s lane, not this one.
+**What five empty days actually measure.** Not "buyers are satisfied" — there
+are still **no buyers**: 58 views, 0 downloads, 0 sales on Texel itself, so no
+one has yet been in a position to ask anything about the add-on. A silent
+support queue on a product with zero installs carries **no information about the
+product**, only about its traffic.
 
-**Day 4 added one number worth separating from the silence.** The Texel 0.2.0
-Bluesky card posted 2026-09-11 20:21 UTC now reads **10 likes, 1 repost, 0
-replies** — the repost is from @blenderbot.bsky.social, a Blender-audience bot.
-It is the first Texel post to get any reach at all, and it still produced
-**zero questions and zero sales**. Reach without a question is a funnel reading,
-not a support one, so it is named here and left to `texel-marketing` /
-`texel-funnel`; this desk records it only because it is the cleanest evidence
-yet that the empty queue is an audience problem and not a product one.
+**Day 5 is the first day that statement needs a caveat, and it is worth stating
+precisely rather than overselling.** `texel-funnel`'s **Texel Density
+Cheatsheet** now has **17 views / 11 downloads** — so for the first time, real
+people hold a Texel-branded file, and **11 of them asked nothing**. That is a
+genuinely new fact, but it is weak evidence about the add-on: a free one-page
+PDF is a read-once artifact that generates few questions from anybody, and
+nothing in it is a piece of software that can fail. It moves the needle from
+"nobody has anything to ask about" to "nobody has anything to ask about *the
+paid tool*", and no further.
 
-**Does the tally disagree with `ROADMAP.md`'s order?** No. It cannot yet: there
-is no demand signal at all, so the roadmap's "easiest first" ordering stands
-unchallenged on its own reasoning rather than on evidence. **The first three
-questions Texel ever receives are worth more than the whole plan**, so they get
-logged the day they arrive.
+**A new sixth surface follows from that, permanently.** The cheatsheet page has
+a live comment form, and it is the only Texel-branded thing anyone has actually
+downloaded — so it is now read every run and is in the surfaces table below. See
+the ownership note attached to that row: **reading it is safe, answering on it
+is not yet settled.**
+
+**Three Bluesky replies arrived since the last run and all three were triaged
+out.** Recorded individually below, because two of them are near-misses that a
+later run could plausibly grab by mistake — and one of them is on a thread this
+venture owns:
+
+| Reply | Why it is not a support item |
+|---|---|
+| @alimabsoute 2026-09-12 19:24 (reply **and** quote) — *"'I shipped a fix that was also wrong' is the part worth locking in"* | The root post is the **Icons Vol. 2 v1.4** card. A pack, not Texel. `pixelkiln-marketing`'s lane, left untouched |
+| @winterbyrne 2026-09-12 15:01 — *"Ooh! Good point!"* | Closes our tip about the **UV-layout exporter's SVG format and Fill Opacity**. Blender advice, no Texel content. Not this desk's |
+| @freddifish 2026-09-13 00:09 — *"cool, I'm excited to try some of this stuff out"* | **The near-miss worth reading carefully.** It closes an outreach reply logged in **Texel's own `promo/POSTED.md` (line 86)** — so by *thread ownership* it is a Texel thread, and the person is dead-centre in Texel's buyer profile (wants crunchy texture work in Blender, hates Adobe). It is still **not a support item**: Texel was never named by either side, and the reply contains **no question, no bug, no request and no refund** — it triages into none of the five buckets. Answering it would mean *introducing* the product into a thread that has not asked about it, which is a marketing act in a support voice. **Left for `texel-marketing`, whose thread it is, and named loudly here so it is not lost** |
+
+**The rule the @freddifish row establishes, for later runs:** a thread being
+*ours* does not make it *this desk's*. The test is whether an item asks
+something, not who posted the parent.
+
+**Does the tally disagree with `ROADMAP.md`'s order?** No — and it still cannot.
+There is no demand signal of any kind, so the roadmap's "easiest first" ordering
+stands on its own reasoning rather than on evidence. This is the fifth run in a
+row that sentence has been true, which is worth naming: **the tally is the most
+valuable thing this desk produces and it has produced nothing yet**, because the
+input it needs is buyers, not effort. **The first three questions Texel ever
+receives outrank the whole plan**, so they get logged the day they arrive.
 
 ## Refund reasons
 
@@ -66,6 +89,7 @@ Three of the same reason is a product bug, not three unhappy people.
 | 2026-09-10 | — | — | *no inbound items; 5 surfaces checked (page, 2 devlogs, itch inbox, Bluesky)* | — | — |
 | 2026-09-11 | — | — | *no inbound items; same 5 surfaces checked. Page 0 comments, both devlogs 0, itch inbox 0 of 20 rows, Bluesky 0 of 25 items* | — | — |
 | 2026-09-12 | — | — | *no inbound items; same 5 surfaces checked. Page 0 comments, both devlogs 0, itch inbox 0 Texel rows of 20, Bluesky 0 Texel mentions of 25. The one new reply (@firebreath, thanking us for a Blender tablet-API tip) is not about Texel — `pixelkiln-marketing`'s lane, left untouched* | — | — |
+| 2026-09-13 | — | — | *no inbound items; **6** surfaces checked (page, 2 devlogs, itch inbox, Bluesky, + the new cheatsheet page). Texel page 0 comments, both devlogs 0, cheatsheet page 0, itch inbox 0 Texel rows of 20, Bluesky 0 Texel mentions. 3 new Bluesky replies, all three triaged out (table above). A Bluesky **search** for the Texel URL was run for the first time — 0 third-party mentions* | — | — |
 
 ---
 
@@ -78,12 +102,43 @@ be unreadable within a week. It now holds the **access route and the latest
 result**; per-day outcomes live in the Log above, and the two prior findings that
 still carry information are kept as history below the table.
 
-| Surface | How it is read | Result 2026-09-12 |
+| Surface | How it is read | Result 2026-09-13 |
 |---|---|---|
-| Texel itch page comments | `curl https://z3er1n.itch.io/texel`, then the `game_comments_widget` block | **0 comments.** HTTP 200, 30,967 B. Comment form live; the post list is still an unfilled JS template (`{{up_score}}` mustaches literal). The `uploads` block offers exactly one file, `texel-0.2.0.zip` |
-| Texel devlog replies | `curl https://z3er1n.itch.io/texel/devlog`, then **`curl -L` each post URL** | **2 devlogs live, 0 comments on either.** Index 200, 19,794 B, no third post. Post 1658358 (v0.1.0, 32,581 B) and 1658363 (v0.2.0, 30,408 B); zero `id="post-N"` in both, comment form present in both |
-| itch notification inbox | `node automation/itch_notifications.mjs --filter all` | 20 rows, **0 mentioning Texel**. Pack board replies, 2 follows and 4 pack sale rows (UI Vol.1 ×2, Starter Bundle, Oakheart); **no Texel sale row — still 0 sales** (`texel-watch`'s ledger, not this desk's) |
-| Bluesky mentions/replies | `pixelkiln\tools\pixelkiln_social.ps1 -Mode notifications` (AT Protocol, read-only; app password in `tools\social_creds.json`) | 25 items, **1 new reply** — @firebreath 2026-09-11 20:29, and `-Mode thread` shows it is a "Thank you! :D" closing **our own outreach reply about Blender's Preferences > Input > Tablet API**. Not about Texel, and it needs no answer; `pixelkiln-marketing`'s lane, left untouched. The @teggy item from 2026-09-10 is unchanged. Zero Texel mentions, 4 days running |
+| Texel itch page comments | `curl https://z3er1n.itch.io/texel`, then the `game_comments_widget` block | **0 comments.** HTTP 200, 31,028 B. Zero `id="post-N"` and zero `<div class="community_post"`. The `uploads` block still offers exactly one file, `texel-0.2.0.zip` |
+| Texel devlog replies | `curl https://z3er1n.itch.io/texel/devlog`, then **`curl -L` each post URL** | **2 devlogs live, 0 comments on either.** Index 200, 19,792 B, still no third post. Post 1658358 (32,641 B) and 1658363 (30,469 B); zero `id="post-N"` in both, comment form live in both |
+| itch notification inbox | `node automation/itch_notifications.mjs --filter all` | 20 rows, **0 mentioning Texel or the cheatsheet**. Pack board replies, follows and pack sale rows only; **no Texel sale row — still 0 sales** (`texel-watch`'s ledger, not this desk's) |
+| Bluesky mentions/replies | `pixelkiln\tools\pixelkiln_social.ps1 -Mode notifications`, then **`-Mode thread` on every reply before judging it** (AT Protocol, read-only; app password in `tools\social_creds.json`) | 30 items, **3 new replies — @alimabsoute, @winterbyrne, @freddifish. All three read in full thread context and all three triaged out**; see the table above for which lane each belongs to. Zero Texel mentions, **5 days running** |
+| **Texel Density Cheatsheet page** *(new 2026-09-13)* | `curl https://z3er1n.itch.io/texel-density-cheatsheet`, same counting rules as the Texel page | **0 comments.** HTTP 200, 26,549 B, zero `id="post-N"`, **"Leave a comment" form live**. Serves `texel-density-cheatsheet-letter.pdf` + `-source.zip`. **Added because 11 people have downloaded it — it is the only Texel-branded file anyone actually holds.** *Ownership caveat below* |
+| **Bluesky public search** *(new 2026-09-13)* | `-Mode search -Query 'z3er1n.itch.io/texel'`, and `'texel pixelkiln'` | **0 third-party mentions.** The only posts carrying the Texel URL are our own two (3mv4rjmevvg2t, 3mvbff2zfou2d). Added because notifications only show people who **tag us**, so a buyer complaining into the void was previously invisible to this desk. *Trap below* |
+
+
+**Reading the cheatsheet page is safe. Answering on it is not yet settled, and
+this desk did not settle it unilaterally.** The ownership map gives *"Texel
+comments"* to this desk, but it also gives *"Texel free traffic drivers"* to
+`texel-funnel` — and on the Pixelkiln side the analogous rule attaches page
+comments to whoever owns the listing, which here would be the funnel. Both
+readings are defensible.
+
+**Nothing turns on it today** — the page has zero comments — so the cheapest
+correct move was taken: **read it** (a missed buyer question costs more than a
+duplicated read, and reading changes nothing), **and stop short of claiming the
+right to reply.** If a comment ever lands there, the owner must be settled
+before anyone answers, because two routines answering one comment six hours
+apart is exactly the failure the ownership map was written to end. Raising it is
+`texel-watch`'s job; this desk may not open a ledger row.
+
+### The trap on the new Bluesky search route
+
+**"texel" is a standard graphics term, not our brand.** A bare `-Mode search
+-Query texel` returns mostly unrelated posts, and — more importantly — several
+of the top hits are people discussing **a different, pre-existing Blender texel-density
+add-on**. Those are not support items, not leads, and **not to be engaged with
+under any circumstances**: the standing no-rivalry rule forbids interacting with
+rival pixel-art-in-Blender accounts or framing Texel against another product.
+They were read, identified, and left alone this run.
+
+Search on **`z3er1n.itch.io/texel`** (our URL, unambiguous) and
+**`texel pixelkiln`** (brand-qualified) instead. Both were clean today.
 
 ### Three traps found while reading these surfaces
 
