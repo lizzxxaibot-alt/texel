@@ -22,54 +22,65 @@ placeholder: an empty tally is a real measurement, not a missing one.
 |---|---|---|---|
 | *(nothing asked yet)* | 0 | — | — |
 
-**Top three this run:** none — zero inbound items since launch (**day 5**, and
-**six** surfaces checked today rather than five). The tally has no top three
-because it has no entries; that is a measurement, not an omission.
+**Top three this run:** none — zero inbound items since launch (**day 6**, six
+surfaces checked). The tally has no top three because it has no entries; that is
+a measurement, not an omission.
 
-**What five empty days actually measure.** Not "buyers are satisfied" — there
-are still **no buyers**: 58 views, 0 downloads, 0 sales on Texel itself, so no
-one has yet been in a position to ask anything about the add-on. A silent
-support queue on a product with zero installs carries **no information about the
-product**, only about its traffic.
+**What six empty days actually measure.** Not "buyers are satisfied" — there are
+still **no buyers**: 63 views, 0 downloads, 0 sales on Texel itself, so no one
+has yet been in a position to ask anything about the add-on. A silent support
+queue on a product with zero installs carries **no information about the
+product**, only about its traffic. Today's itch inbox makes that concrete: it
+holds **three sale rows** (UI Forge $7.46, Oakheart $2.00, UI Pack Vol. 1 $5.21)
+and **none of them is Texel's** — the shop is taking money, the tool is not.
 
-**Day 5 is the first day that statement needs a caveat, and it is worth stating
-precisely rather than overselling.** `texel-funnel`'s **Texel Density
-Cheatsheet** now has **17 views / 11 downloads** — so for the first time, real
-people hold a Texel-branded file, and **11 of them asked nothing**. That is a
-genuinely new fact, but it is weak evidence about the add-on: a free one-page
-PDF is a read-once artifact that generates few questions from anybody, and
-nothing in it is a piece of software that can fail. It moves the needle from
-"nobody has anything to ask about" to "nobody has anything to ask about *the
-paid tool*", and no further.
+**The day-5 cheatsheet caveat is now a day older, and it got weaker, not
+stronger.** `texel-funnel`'s **Texel Density Cheatsheet** is at **23 views / 11
+downloads** — **+6 views and +0 downloads in 24 h** (`LEDGER.md` 09-14). So the
+number of people holding a Texel-branded file did not move today, and **the same
+11 have still asked nothing**. Stated straight: this is not "silence from a
+growing audience", it is silence from a population that stopped growing. It
+remains weak evidence about the add-on for the reason given yesterday — a free
+one-page PDF is a read-once artifact that generates few questions from anybody,
+and nothing in it is software that can fail.
 
-**A new sixth surface follows from that, permanently.** The cheatsheet page has
-a live comment form, and it is the only Texel-branded thing anyone has actually
-downloaded — so it is now read every run and is in the surfaces table below. See
-the ownership note attached to that row: **reading it is safe, answering on it
-is not yet settled.**
+**The sixth surface is permanent.** The cheatsheet page has a live comment form
+and it is the only Texel-branded thing anyone has actually downloaded, so it is
+read every run. See the ownership note attached to that row: **reading it is
+safe, answering on it is not yet settled.**
 
-**Three Bluesky replies arrived since the last run and all three were triaged
-out.** Recorded individually below, because two of them are near-misses that a
-later run could plausibly grab by mistake — and one of them is on a thread this
-venture owns:
+**Two Bluesky replies arrived since the last run; both were triaged out, and
+both are on the same thread.** Recorded because the thread is a near-miss of a
+kind not yet in this file — it is a *pixel-art-tooling* conversation, which is
+the closest thing to Texel's subject that has ever appeared in the inbox:
 
 | Reply | Why it is not a support item |
 |---|---|
-| @alimabsoute 2026-09-12 19:24 (reply **and** quote) — *"'I shipped a fix that was also wrong' is the part worth locking in"* | The root post is the **Icons Vol. 2 v1.4** card. A pack, not Texel. `pixelkiln-marketing`'s lane, left untouched |
-| @winterbyrne 2026-09-12 15:01 — *"Ooh! Good point!"* | Closes our tip about the **UV-layout exporter's SVG format and Fill Opacity**. Blender advice, no Texel content. Not this desk's |
-| @freddifish 2026-09-13 00:09 — *"cool, I'm excited to try some of this stuff out"* | **The near-miss worth reading carefully.** It closes an outreach reply logged in **Texel's own `promo/POSTED.md` (line 86)** — so by *thread ownership* it is a Texel thread, and the person is dead-centre in Texel's buyer profile (wants crunchy texture work in Blender, hates Adobe). It is still **not a support item**: Texel was never named by either side, and the reply contains **no question, no bug, no request and no refund** — it triages into none of the five buckets. Answering it would mean *introducing* the product into a thread that has not asked about it, which is a marketing act in a support voice. **Left for `texel-marketing`, whose thread it is, and named loudly here so it is not lost** |
+| @chichimunga.com 2026-09-13 20:40 — *"Thank you! I didn't know Aseprite had that… I will implement your suggestion"* | Closes a Pixelkiln outreach reply about **Aseprite 1.3 tilemap layers** on their tileset post. Thanks, not a question. **Aseprite advice, no Texel content** — `pixelkiln-marketing`'s lane, left untouched |
+| @guacgamedev.bsky.social 2026-09-13 20:50 — *"Me neither. Aseprite continues to be the best"* | A bystander agreeing on the **same thread**. **The one worth reading twice:** it is a third party volunteering that Aseprite is the best pixel-art tool, which is adjacent to Texel's whole pitch — and it is still **not a support item**, because it asks nothing and names nothing of ours. Answering it would mean *introducing* Texel into a thread that did not ask, which is marketing in a support voice — the exact line the @freddifish row drew |
 
-**The rule the @freddifish row establishes, for later runs:** a thread being
-*ours* does not make it *this desk's*. The test is whether an item asks
-something, not who posted the parent.
+**The rule both rows sit under, established by @freddifish and confirmed today:**
+a thread being *ours* does not make it *this desk's*, and a thread being
+*on-topic* does not either. The test is whether an item **asks something**.
 
 **Does the tally disagree with `ROADMAP.md`'s order?** No — and it still cannot.
 There is no demand signal of any kind, so the roadmap's "easiest first" ordering
-stands on its own reasoning rather than on evidence. This is the fifth run in a
-row that sentence has been true, which is worth naming: **the tally is the most
-valuable thing this desk produces and it has produced nothing yet**, because the
-input it needs is buyers, not effort. **The first three questions Texel ever
-receives outrank the whole plan**, so they get logged the day they arrive.
+(v0.2.1 "Brush, the rest" → v0.3.0 "Tileset" → v0.4.0 "Handoff") stands on its
+own reasoning rather than on evidence. This is the **sixth** run in a row that
+sentence has been true, which is worth naming rather than repeating quietly:
+**the tally is the most valuable thing this desk produces and it has produced
+nothing in six days**, because the input it needs is buyers, not effort. **The
+first three questions Texel ever receives outrank the whole plan**, so they get
+logged the day they arrive.
+
+**Six is the point at which the right conclusion should be said out loud: the
+empty tally is a verdict on traffic, not on support.** Nothing this desk can do
+changes it — answering faster, checking a seventh surface, or writing a longer
+entry here would all be effort aimed at the wrong constraint. The surfaces stay
+checked daily because a missed first question is expensive and the check is
+cheap; but the number that has to move first is **downloads**, and that belongs
+to `texel-funnel` and `texel-marketing`. Said plainly so no later run mistakes
+this file's length for progress.
 
 ## Refund reasons
 
@@ -90,6 +101,7 @@ Three of the same reason is a product bug, not three unhappy people.
 | 2026-09-11 | — | — | *no inbound items; same 5 surfaces checked. Page 0 comments, both devlogs 0, itch inbox 0 of 20 rows, Bluesky 0 of 25 items* | — | — |
 | 2026-09-12 | — | — | *no inbound items; same 5 surfaces checked. Page 0 comments, both devlogs 0, itch inbox 0 Texel rows of 20, Bluesky 0 Texel mentions of 25. The one new reply (@firebreath, thanking us for a Blender tablet-API tip) is not about Texel — `pixelkiln-marketing`'s lane, left untouched* | — | — |
 | 2026-09-13 | — | — | *no inbound items; **6** surfaces checked (page, 2 devlogs, itch inbox, Bluesky, + the new cheatsheet page). Texel page 0 comments, both devlogs 0, cheatsheet page 0, itch inbox 0 Texel rows of 20, Bluesky 0 Texel mentions. 3 new Bluesky replies, all three triaged out (table above). A Bluesky **search** for the Texel URL was run for the first time — 0 third-party mentions* | — | — |
+| 2026-09-14 | — | — | *no inbound items; 6 surfaces checked. Texel page 0 comments, both devlogs 0, cheatsheet page 0, itch inbox **0 Texel rows of 20** (3 sale rows, none Texel), Bluesky 0 Texel mentions, 3 brand-qualified searches 0 third-party posts. 2 new Bluesky replies, both on one Aseprite thread, both triaged out (table above)* | — | — |
 
 ---
 
@@ -102,14 +114,14 @@ be unreadable within a week. It now holds the **access route and the latest
 result**; per-day outcomes live in the Log above, and the two prior findings that
 still carry information are kept as history below the table.
 
-| Surface | How it is read | Result 2026-09-13 |
+| Surface | How it is read | Result 2026-09-14 |
 |---|---|---|
-| Texel itch page comments | `curl https://z3er1n.itch.io/texel`, then the `game_comments_widget` block | **0 comments.** HTTP 200, 31,028 B. Zero `id="post-N"` and zero `<div class="community_post"`. The `uploads` block still offers exactly one file, `texel-0.2.0.zip` |
-| Texel devlog replies | `curl https://z3er1n.itch.io/texel/devlog`, then **`curl -L` each post URL** | **2 devlogs live, 0 comments on either.** Index 200, 19,792 B, still no third post. Post 1658358 (32,641 B) and 1658363 (30,469 B); zero `id="post-N"` in both, comment form live in both |
-| itch notification inbox | `node automation/itch_notifications.mjs --filter all` | 20 rows, **0 mentioning Texel or the cheatsheet**. Pack board replies, follows and pack sale rows only; **no Texel sale row — still 0 sales** (`texel-watch`'s ledger, not this desk's) |
-| Bluesky mentions/replies | `pixelkiln\tools\pixelkiln_social.ps1 -Mode notifications`, then **`-Mode thread` on every reply before judging it** (AT Protocol, read-only; app password in `tools\social_creds.json`) | 30 items, **3 new replies — @alimabsoute, @winterbyrne, @freddifish. All three read in full thread context and all three triaged out**; see the table above for which lane each belongs to. Zero Texel mentions, **5 days running** |
-| **Texel Density Cheatsheet page** *(new 2026-09-13)* | `curl https://z3er1n.itch.io/texel-density-cheatsheet`, same counting rules as the Texel page | **0 comments.** HTTP 200, 26,549 B, zero `id="post-N"`, **"Leave a comment" form live**. Serves `texel-density-cheatsheet-letter.pdf` + `-source.zip`. **Added because 11 people have downloaded it — it is the only Texel-branded file anyone actually holds.** *Ownership caveat below* |
-| **Bluesky public search** *(new 2026-09-13)* | `-Mode search -Query 'z3er1n.itch.io/texel'`, and `'texel pixelkiln'` | **0 third-party mentions.** The only posts carrying the Texel URL are our own two (3mv4rjmevvg2t, 3mvbff2zfou2d). Added because notifications only show people who **tag us**, so a buyer complaining into the void was previously invisible to this desk. *Trap below* |
+| Texel itch page comments | `curl https://z3er1n.itch.io/texel`, then the `game_comments_widget` block | **0 comments.** HTTP 200, 31,030 B. Zero `id="post-N"` and zero `<div class="community_post"`. The `uploads` block still offers exactly one file, `texel-0.2.0.zip`. **The one-line AI disclosure is live on the page** and itch's own **AI Disclosure** info row renders — §6 verified, not assumed |
+| Texel devlog replies | `curl https://z3er1n.itch.io/texel/devlog`, then **`curl -L` each post URL** | **2 devlogs live, 0 comments on either.** Index 200, 19,794 B, still no third post. Post 1658358 (32,642 B) and 1658363 (30,469 B); zero `id="post-N"` in both, comment form live in both. Post URLs were re-read from the index, not from the known list |
+| itch notification inbox | `node automation/itch_notifications.mjs --filter all` | 20 rows, **0 mentioning Texel or the cheatsheet** (0 literal matches). Pack board replies, follows, and **3 pack sale rows — UI Forge $7.46, Oakheart $2.00, UI Pack Vol. 1 $5.21, none of them Texel's**; still 0 Texel sales (`texel-watch`'s ledger, not this desk's). **First run to need the re-run rule below** |
+| Bluesky mentions/replies | `pixelkiln\tools\pixelkiln_social.ps1 -Mode notifications`, then **`-Mode thread` on every reply before judging it** (AT Protocol, read-only; app password in `tools\social_creds.json`) | 23 items (**count them — 25 is the script's `-Limit` default, not a result**), **exactly 2 reply rows: @chichimunga, @guacgamedev. Both read in full thread context (they are the same thread) and both triaged out**; see the table above. Zero Texel mentions, **6 days running**. **Flag name: `-Mode thread` takes `-ReplyTo`, not `-Uri`** — this run lost a call to that guess |
+| **Texel Density Cheatsheet page** *(new 2026-09-13)* | `curl https://z3er1n.itch.io/texel-density-cheatsheet`, same counting rules as the Texel page | **0 comments.** HTTP 200, 26,549 B (byte-identical to yesterday), zero `id="post-N"`, **"Leave a comment" form live**. Its itch **AI Disclosure** info row renders too. **Still 11 downloads — +0 in 24 h — and still 0 questions from those 11.** *Ownership caveat below* |
+| **Bluesky public search** *(new 2026-09-13)* | `-Mode search -Query 'z3er1n.itch.io/texel'`, and `'texel pixelkiln'` | **0 third-party mentions**, on **three** queries now (`z3er1n.itch.io/texel`, `texel pixelkiln`, `texel-density-cheatsheet`). Every hit is one of our own three posts. The cheatsheet drop post (3mvggdv3qjy2f) shows **15 likes, 0 replies** — liked, never asked about. *Trap below* |
 
 
 **Reading the cheatsheet page is safe. Answering on it is not yet settled, and
@@ -139,6 +151,42 @@ They were read, identified, and left alone this run.
 
 Search on **`z3er1n.itch.io/texel`** (our URL, unambiguous) and
 **`texel pixelkiln`** (brand-qualified) instead. Both were clean today.
+
+### The collector trap found 2026-09-14: exit 0 is not evidence of an empty inbox
+
+**`itch_notifications.mjs` printed nothing and exited 0, and that was not an
+empty inbox — it was an unread one.** The first attempt this run produced 110
+bytes, all of it a single stderr line — `[lock] profile busy: login.mjs (pid
+44368) is using it` — and then `exited with code 0` with **no JSON at all**. The
+script's contract (line 50) is that a successful read always prints a JSON
+object; a signed-out read exits **2** with `[!] Not signed in`. Neither happened,
+so the run proved nothing either way. Re-run once the profile was free, it
+returned **4,271 bytes and 20 rows**.
+
+**This is the `curl` 301 trap in a new costume, and it is the more dangerous
+one,** because the first form at least returns a zero-byte body you can notice.
+Here a desk that logged "0 notifications" off exit code 0 would have written a
+clean empty day into the tally on the strength of a run that never reached the
+inbox. **Confirm `rowCount` in the JSON before recording a zero.** A collector
+that cannot show you what it read has not read anything.
+
+### This desk's 08:15 slot collides with the browser profile, every run
+
+Three different scripts held the Playwright profile lock during this run —
+`itch_crosslink.mjs` (pid 28564), then `login.mjs` (pid 44368), then
+`itch_upload.mjs` (pid 23304). The lock did its job and made this desk wait
+rather than race; the wait was **~5 minutes**.
+
+**The part worth knowing is what happens after ten.** `lib.mjs` sets
+`LOCK_WAIT_MS = 10 min` and is deliberately **fail-open**: past that it logs
+"continuing anyway" and opens Chrome regardless — which is precisely the
+"Opening in existing browser session" / "browser has been closed" failure the
+lock was written to prevent. For a read-only desk that costs a garbage read, and
+per the trap above a garbage read is indistinguishable from a quiet one. **So:
+if the lock message appears, check the JSON, and re-run after the lock clears
+rather than trusting the fail-open pass.** Named here rather than opened as a
+ledger row — scheduling is not this desk's surface, and `texel-watch` is the only
+routine that may open one.
 
 ### Three traps found while reading these surfaces
 
@@ -286,6 +334,31 @@ buyers rather than Pixelkiln's pixel-art followers. **That is a traffic lead, an
 it belongs to `texel-funnel` (free traffic drivers), not to this desk.** Named
 here and stopped, per the ownership map. This desk opens no ledger row —
 `texel-watch` is the only routine that may.
+
+## Found 2026-09-14 while checking the disclosure — named, and stopped
+
+**Two of the three surfaces `LISTING.md` commits the AI disclosure to do not
+exist.** Line 353 says the one-line disclosure *"goes on the itch page, the
+Gumroad page and mintworks.cc/texel."* Checked all three today:
+
+| Surface named in `LISTING.md` | Reality, 2026-09-14 |
+|---|---|
+| itch page | **Live and correct.** The line renders verbatim on `z3er1n.itch.io/texel`, and itch's own **AI Disclosure** info row is present |
+| `mintworkscc.gumroad.com/l/texel` | **HTTP 404.** No Gumroad listing exists |
+| `mintworks.cc/texel` | **HTTP 200 that is not a Texel page.** It serves the generic Mintworks homepage — title *"Mintworks — digital goods, hand-finished"*, **zero** literal `texel` matches, 3,967 bytes **byte-for-byte identical to `/definitely-not-a-real-page-xyz`**. A catch-all, not a page |
+
+**Stated precisely, because the overstated version is tempting and wrong: this
+is not a §6 honesty breach.** Where there is no page there is nothing for a
+disclosure to be missing from, and the one surface that actually sells Texel
+carries the disclosure correctly — verified above rather than assumed. What it
+*is* is **`LISTING.md` describing a distribution footprint the product does not
+have**, which matters because the same document is what a later run will read to
+decide where Texel is published.
+
+**Not this desk's to fix.** Listing health is `texel-watch`'s row and Gumroad
+listing decisions are `texel-marketing`'s; this desk may not open a ledger row.
+Recorded loudly here so it is not re-derived, exactly as the BlenderNation lead
+was.
 
 ## Also found 2026-09-09, not fixed then — RESOLVED, verified 2026-09-10
 

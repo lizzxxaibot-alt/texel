@@ -6,6 +6,246 @@ in `../ACTIONS.md` and handed to a named owner.
 
 ---
 
+## 2026-09-14 — run 5
+
+**VERDICT: HEALTHY, with one finding.** Every listing check passes against the
+live page, the description's one hard number still matches the shipped zip, and
+all four doers produced a real artifact. The store ledger moved for the first
+time since this log opened — **$63.70 / 11 → $71.16 / 12 payments — and none of
+it is Texel's**, verified by summing all twelve amounts rather than by trusting
+the headline. Texel is at **63 views, 0 downloads, 0 sales** on day 5. The
+finding is not the listing: **`texel-funnel`'s first drop has reached the end of
+its 72-hour window, the numbers miss the bar the drop set for itself, and the
+routine that owns that verdict does not run for another four days** — opened as
+**T-009**.
+
+### Action ledger — first, per the file's own rule
+
+**Opened this run: 1 (T-009). Closed this run: 0.**
+
+| id | age | owner |
+|---|---|---|
+| T-002 | **5 days** | **HUMAN** |
+| T-008 | **3 days** | `texel-release` |
+| T-009 | 0 days | `texel-funnel` |
+
+**T-008 crosses the 3-day freeze line today.** From here `texel-release` may do
+nothing else until it clears the row or writes a dated refusal. Its next slot is
+**Wed 09-16 15:05 UTC**, when the row will be 5 days old — the dated prediction
+runs 3 and 4 both made, now due.
+
+**T-002 is re-verified this run, not carried on yesterday's word.**
+`/dashboard/payouts` still reads *"You need to provide us with your tax
+information in order to initiate a payout"*, with **PayPal and Payoneer both
+unconnected**. The balance behind it **rose for the first time in five days** —
+**2 pending $7.67 + 10 available $49.79 = $57.46**, against $51.20 yesterday.
+That $6.26 is the net of the 12th payment, a **UI Forge** sale; **none of the
+$57.46 is Texel's and none of it can move.** It crosses the **7-day toast line
+on 2026-09-16**.
+
+**T-009 is opened rather than noted, and run 4 declined the same thing for a
+reason that has since expired.** Run 4 wrote *"no ledger row, and that is a
+judgement rather than an omission"* — because the cumulative rows fix the window
+boundary, so the reading could not be lost. That argument was about **preserving
+the data** and it still holds. What has changed is that the window has now
+**closed** and the numbers are **in**, drop 2 is scheduled for the same run that
+must write drop 1's result, and an unjudged first drop followed by a second one
+is the exact shape of a funnel that never measures itself. The row's *done when*
+is verifiable by someone else and does not require this routine to touch the
+funnel's work.
+
+Nothing was closed because nothing was closeable: no doer has written evidence
+against T-008, and T-002 is `HUMAN` and demonstrably still open.
+
+### ALERTS
+
+**None.** Nothing about the listing, the numbers or the roadmap needs action
+today. The funnel finding is an **open row with a named owner**, not an alert —
+nothing is broken, a result is unwritten.
+
+### A. Listing health — all clear, re-checked against the live page
+
+Read logged out from `https://z3er1n.itch.io/texel` — **HTTP 200, 31,034 bytes**.
+
+| Check | Result |
+|---|---|
+| Public and **published**, not draft | PASS — info table reads `Status: Released`, `Category: Tool`, `Author: Pixelkiln`, `Published: 09 September 2026 @ 22:19 UTC`. Zero occurrences of `draft`/`Draft` in the document |
+| Price matches `ROADMAP.md`'s current milestone | PASS — **$9.95** (`itemprop="price"` = `$9.95 USD`, buy row agrees). The v0.1 launch tier; the step to $14.95 is gated on v0.4 "Handoff", unshipped |
+| Download file present, matches `dist/texel-*.zip` | PASS — serving **`texel-0.2.0.zip`, 187 kB**; local `dist/texel-0.2.0.zip` is **192,284 B = 187.8 KiB**. **0.1.0 is not offered** |
+| AI disclosure reads Yes + Code + Graphics | PASS — `AI Disclosure = AI Assisted, Code, Graphics` |
+| Devlogs live | PASS — index **200**, both linked at their full slugs. The **URL trap holds**: bare `/devlog/1658363` is **404**, the full slug is **200**, and the page's own link carries the real slug (`texel-020-flip-rotate-and-scale-a-selection`) |
+| Comment form live, queue empty | PASS — **0 posts.** Counted by run 4's id-independent method: `community_post` appears **13** times and `class="community_post "` — the actual post markup — **0** times |
+| Gallery | PASS — **10 images**, unchanged from yesterday, stroke GIF still at slot 3 |
+
+**The claim that burned us on launch day (T-005) was re-checked, not assumed.**
+The live description says **"95 operators"**; **"94 operators" appears 0 times**,
+and no other operator count appears anywhere on the page.
+
+### The density card is verified by looking at it, not by matching a string
+
+Run 4 recorded the density card (T-001's closing evidence) as asset **`EcU1Ox`**
+at slot 4. **Today slot 4's token is `ccWArU`, and that is not a regression.**
+
+itch's image URLs are `img.itch.zone/<base64>/<size>/<token>.png`. The token is
+**per size variant**: `EcU1Ox` is the token for `/original/`, `ccWArU` is the
+token for the `/347x500/` thumbnail the page actually renders. Both resolve
+(**200**, 849,338 B and 56,360 B) and both decode to the same base64 payload,
+**`image/4991926/29902828`** — which is also the **only** id on the page outside
+the `29883174–29883248` launch batch, i.e. the one image uploaded after launch.
+
+Two fetches of the page minutes apart returned **identical** tokens, so unlike
+run 4's `community_post_list_*` finding these are not per-render. **But a future
+run must compare the decoded `image/<project>/<id>`, not the token** — a run
+checking for the literal `EcU1Ox` against the rendered page would report the
+density card missing from a gallery that still has it.
+
+**And it was confirmed by eye rather than by identifier.** The 2560×1440 original
+was downloaded and read: it is the DETECT & APPLY DENSITY card — *"8.4× spread
+across one mesh, then 1.0×"*, the before/after renders, `2.5 / 21.1` against
+`10.5 / 10.5` px/unit, `z3er1n.itch.io/texel` in the corner. **T-001 stays
+closed.**
+
+### B. The numbers
+
+| date | views | downloads | sales | revenue | conv% |
+|---|---|---|---|---|---|
+| 2026-09-10 | 36 | 0 | 0 | $0.00 | 0.00% |
+| 2026-09-11 | 46 | 0 | 0 | $0.00 | 0.00% |
+| 2026-09-12 | 51 | 0 | 0 | $0.00 | 0.00% |
+| 2026-09-13 | 58 | 0 | 0 | $0.00 | 0.00% |
+| **2026-09-14** | **63** | **0** | **0** | **$0.00** | **0.00%** |
+
+**+5 views in 24 h.** The four deltas are **10, 5, 7, 5** and this routine still
+draws no shape from them — five rows is not a 7-day trend and the first honest
+weekly comparison is **2026-09-17**. The figure worth stating is the **mean:
+6.75 views/day** since the 09-10 baseline, revised down from yesterday's 7.3.
+Ratings **0**, collections **1** (unchanged — yesterday's first collection did
+not become a second).
+
+**The store ledger moved, and the first thing to establish was whether any of it
+was Texel's. It is not.** `/dashboard/purchases` reads **$71.16 gross, 12
+payments, $5.91 average, $8.92 max, $2.00 tip revenue**, up from $63.70 / 11.
+Checked two ways rather than assumed:
+
+- the page text contains **0 case-insensitive matches for `texel`**;
+- the twelve individual payment amounts — $7.46, $2.00, $5.21, $8.92, $5.21,
+  $7.46, $5.21, $5.21, $7.46, $5.21, $6.95, $4.86 — **sum to exactly $71.16**, so
+  the ledger is fully accounted for with no Texel row hiding in it.
+
+Project totals agrees independently: `Texel | 63 | 0 | - | 0 payments | 0
+ratings | 1 collection`. The 12th payment is **UI Forge Vol. 5**, already
+attributed by `pixelkiln-watch` run 13. **Texel's revenue is $0.00 on day 5 and
+the instrument that would show otherwise was read directly.**
+
+**Neither zero-sales rule can fire yet, and both dates moved slightly.**
+Conversion (under 0.5% after 200+ views) needs **137 more views** — at 6.75/day,
+**~2026-10-04**. The 14-consecutive-days rule needs **30 days live**: published
+**2026-09-09 22:19 UTC**, so **2026-10-09**. Calling 0/63 a listing problem today
+would be inventing a finding out of a sample this routine's own brief calls too
+small.
+
+### The funnel drop's window closed on this row — the numbers, not the verdict
+
+`funnel/LOG.md` wrote its own test down **before** the fact, which is why this is
+reportable at all rather than arguable after it:
+
+> *"What would make this drop a success: Texel's own page taking materially more
+> than ~30 views over the 72 h. What would make it theatre: the cheatsheet
+> collecting downloads while Texel's line stays at +10/day."*
+
+| | measured |
+|---|---|
+| Texel views, 09-11 row → 09-14 row (a clean 72 h interval) | **46 → 63 = +17** |
+| implied rate over the window | **5.67/day**, against the **+10/day** baseline the funnel recorded |
+| Density Cheatsheet | **23 views / 11 downloads / 2 collections** — **+6 views, +0 downloads** in 24 h |
+| Texel downloads, sales, revenue | **0 / 0 / $0.00** |
+
+**Stated precisely, because the interval is not exactly the drop's own window.**
+The drop went up at **09-11 15:07 UTC** and the 09-11 ledger row was read at
+**~11:53 UTC**, about **3 h before it**; today's row was read at **11:53 UTC**,
+about **3 h before** the drop's nominal close. So the 72 hours are a full 72
+hours, shifted ~3 h earlier than the drop's. Nothing about a +17-vs-~30 gap turns
+on three hours.
+
+**One caveat the funnel is owed, and it cuts in the funnel's favour.** The
+"+10/day baseline" it wrote down was **a single interval** (36→46) and happens to
+be the **highest** of the four days ever measured; the four-day mean is 6.75.
+Against that fairer baseline the honest reading is **no detectable change either
+way**, not a decline. **Both readings agree the drop produced no lift**, and
+against the bar the drop set for itself in advance it **misses**.
+
+**This routine records those numbers and stops.** The verdict, the row in
+`funnel/LOG.md`, and the retire-or-repeat call are `texel-funnel`'s — T-009.
+
+### C. Did the other four produce?
+
+Read from `list_scheduled_tasks`, then checked against the artifact — running is
+not producing.
+
+| Routine | Last run (UTC) | Age | Artifact | Verdict |
+|---|---|---|---|---|
+| `texel-support` | 2026-09-13 13:23 | 22.5 h | `SUPPORT.md` advanced — a dated **day-5** entry, an explicit zero-inbound line across **six** surfaces (the cheatsheet page added as a permanent sixth), three Bluesky replies individually triaged out with reasons, and a first-ever **Bluesky public search** for the Texel URL returning 0 third-party mentions | **PRODUCED** |
+| `texel-marketing` | 2026-09-13 20:19 | 15.5 h | `promo/POSTED.md` carries the **Sun 09-13** Bluesky post with both asset paths, byte sizes, the reuse date (**2026-10-04**) and the live post id `3mvggdv3qjy2f` — the funnel's drop announced as the sheet, from the `QUEUE.md` row that claimed the slot. It also **states the ceiling it broke** (8 posts in 7 days against 3-4) rather than hiding it | **PRODUCED** |
+| `texel-release` | 2026-09-09 23:53 | **4.6 days** | weekly routine, `nextRunAt` **2026-09-16 15:05 UTC**. See below | **ON SCHEDULE** |
+| `texel-funnel` | 2026-09-11 15:07 | **2.9 days** | weekly routine, `nextRunAt` **2026-09-18 15:06 UTC**. `funnel/LOG.md` carries drop 1 with its page live (**HTTP 200**), its baseline recorded before the fact and its success test written in advance — the reason section B could be judged at all. Its **unfilled result row is T-009**, not a production failure | **ON SCHEDULE** |
+
+**Two routines are over 48 h and neither is an alert — the rule defect is now on
+its third run.** This routine's brief says *"No run in 48 h → ALERT"*, and both
+`texel-release` (`0 10 * * 3`) and `texel-funnel` (`0 10 * * 5`) are **weekly by
+design** in `OPERATIONS.md` §1. Read literally the rule fires against two healthy
+routines on most days of the week. Runs 3 and 4 both surfaced the one-clause fix
+— *"or within one scheduled interval, whichever is longer"* — and it has not been
+applied. **Said in one line and not re-argued**; re-describing it every morning
+is what this log's own rule forbids.
+
+### D. Is the roadmap slipping?
+
+**No.** Next unshipped target is **v0.2.1 "Brush", the rest — 2026-09-26**,
+**12 days out**, outside the 7-day flag window. `ROADMAP.md` was last ticked
+2026-09-09 (v0.2.0, shipped seventeen days early). `texel-release` gets two
+Wednesday slots (**09-16**, **09-23**) before the date is close — though the
+09-16 one opens with T-008 frozen in front of it.
+
+### Standing, already surfaced to the user, one line each
+
+**ADDENDUM 2026-09-14, later the same day: the user said do both, and both are
+done and verified. Neither is standing any more — run 6 must not re-raise them.**
+
+- `texel-release`'s description now reads **"all 16 suites plus the install
+  test"**, confirmed back out of `list_scheduled_tasks` and in the frontmatter of
+  its own `SKILL.md` line 3 (the description is stored there, so one edit fixed
+  both places). **The wrong count lived only in the description** — the body of
+  that file never states a total, only sub-counts ("three suites run headless",
+  "the three GUI suites", "the four GUI suites"), so nothing else needed
+  touching. `ls test_*.py` re-counted: **16**.
+- This routine's 48-hour rule now reads **"No run in 48h, or within one scheduled
+  interval, whichever is longer"**, with the interval to be read from the task's
+  own `cronExpression` rather than from `OPERATIONS.md` (whose times are nominal
+  and drift), and a line naming `texel-release` `0 10 * * 3` and `texel-funnel`
+  `0 10 * * 5` as the two that kept tripping it. A weekly routine is late only
+  once its **next** slot has passed without a run.
+
+**Only T-002 is still the user's**, and it is the one no routine may ever touch.
+
+*The original two lines, left as written:*
+
+- **`texel-release`'s task description still says *"all 15 suites"*; the gate is
+  16** (`ROADMAP.md`, and `ls test_*.py` returns exactly 16). Re-confirmed live in
+  `list_scheduled_tasks` this run. No ledger row is possible — only the user can
+  edit a routine's description. Raised in run 4, unchanged.
+- **The 48-hour rule needs the "or one scheduled interval" clause** (section C).
+  Raised in runs 3 and 4, unchanged.
+
+### E. In one line
+
+Day 5: healthy page, correct price, correct file, correct disclosure, 63 views,
+one collection, no downloads, no sales, no questions — the store took its 12th
+payment and **not one cent of the $71.16 is Texel's** — and the first free drop
+reached the end of its window **below the bar it set itself**, which is now
+`texel-funnel`'s row to answer.
+
+---
+
 ## 2026-09-13 — run 4
 
 **VERDICT: HEALTHY.** Every listing check passes against the live page, the
