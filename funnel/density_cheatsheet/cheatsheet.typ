@@ -29,12 +29,13 @@
     #grid(columns: (1fr, auto),
       align: (left, right),
       [Made by Pixelkiln · Released CC0 — use it, print it, put it in your wiki],
-      [z3er1n.itch.io/texel],
+      [#link("https://z3er1n.itch.io/texel")[z3er1n.itch.io/texel]],
     )
   ],
 )
 #set text(font: "Newsreader 16pt", size: 8.9pt, fill: ink)
 #set par(leading: 0.48em, justify: false)
+#show link: it => underline(text(fill: ember, it))
 
 #let mono(x) = text(font: "IBM Plex Mono", size: 8.4pt, x)
 #let lbl(x) = text(font: "Sora", size: 7.4pt, fill: gold, weight: 600,
@@ -242,6 +243,6 @@
       text(font: "Sora", size: 8pt, weight: 600, fill: charc)[
         Texel measures and applies this for you],
       align(right, text(font: "IBM Plex Mono", size: 7.6pt, fill: ember)[
-        z3er1n.itch.io/texel]))],
+        #link("https://z3er1n.itch.io/texel")[z3er1n.itch.io/texel]]))],
   )
 ]

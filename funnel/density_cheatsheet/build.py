@@ -2,7 +2,7 @@
 
   python funnel/density_cheatsheet/build.py      (run from texel/)
 
-Four gates, each of which could fail and has:
+Five gates, each of which could fail and has:
 
   1. make_tables.py runs core/uvmap.py out of the SHIPPED zip and asserts the
      simplified formula printed on the sheet is exactly the full one, and that
@@ -29,6 +29,7 @@ PDF = os.path.join(HERE, "texel-density-cheatsheet.pdf")
 PDF_LETTER = os.path.join(HERE, "texel-density-cheatsheet-letter.pdf")
 
 ALLOWED = ("Newsreader16pt", "IBMPlexMono", "Sora", "YoungSerif")
+TARGET = "z3er1n.itch.io/texel"
 SUBSET = re.compile(r"^/[A-Z]{6}\+")
 
 
@@ -59,6 +60,24 @@ def compile_sheet(out, paper):
     if len(doc.pages) != 1:
         sys.exit("FAIL: " + name + " is " + str(len(doc.pages)) + " pages; the"
                  " sheet prints ONE-PAGE REFERENCE on itself")
+
+    # Gate 5. The sheet is a funnel: if the product URL on it is not clickable,
+    # the handoff does not exist. Drop 1 shipped with ZERO link annotations -
+    # the URL was set as plain text twice - and its 72 h window closed at +17
+    # Texel views against a ~30 bar. CLAUDE.md §3 names this exact check
+    # ("PDFs: count link annotations") and it was skipped. Never again silently.
+    links = []
+    for page in doc.pages:
+        for a in (page.get("/Annots") or []):
+            o = a.get_object()
+            if o.get("/Subtype") == "/Link":
+                links.append(str(o.get("/A", {}).get("/URI", "")))
+    hits = [u for u in links if TARGET in u]
+    if not hits:
+        sys.exit("FAIL: " + name + " has no clickable link to " + TARGET
+                 + " (" + str(len(links)) + " link annotations total)."
+                 " A funnel sheet whose URL is dead ink is not a funnel.")
+    print("      %d link annotation(s), %d to %s" % (len(links), len(hits), TARGET))
 
     box = doc.pages[0].mediabox
     print("ok: %-38s 1 page, %.0fx%.0f pt, %.0f kB"
