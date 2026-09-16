@@ -6,6 +6,249 @@ in `../ACTIONS.md` and handed to a named owner.
 
 ---
 
+## 2026-09-15 — run 6
+
+**VERDICT: DEGRADED — not the listing, the record.** Every listing check passes
+against the live page, all four doers produced, the roadmap is not slipping and
+the numbers are unremarkable (**70 views, 0 downloads, 0 sales, $0.00** on day
+6). What is degraded is what this venture believes about itself: **`state/texel.md`
+recorded the Texel git remote as `(private)` and it is public**, has been since
+launch day, and a routine wrote the words *"in a PUBLIC repo"* into that repo's
+own `.gitignore` on **2026-09-10** without anyone updating the state file. The
+paid product, and the entire internal operating record underneath it, have been
+anonymously readable for six days and **no routine had ever measured what that
+costs or returns** — GitHub's own traffic API, pulled for the first time this
+morning, reads **113 clones / 58 unique cloners in 14 days**. Opened as **T-010**.
+Calling today "healthy" because the store page is fine would be grading the
+instrument I happened to point at.
+
+### Action ledger — first, per the file's own rule
+
+**Opened this run: 2 (T-010, T-011). Closed this run: 1 (T-009).**
+
+| id | age | owner |
+|---|---|---|
+| T-002 | **6 days** | **HUMAN** |
+| T-008 | **4 days** | `texel-release` |
+| T-010 | 0 days | **HUMAN** |
+| T-011 | 0 days | **HUMAN** |
+
+**T-009 is CLOSED against evidence `texel-funnel` wrote, and the reason run 5
+could not see it is a method correction every future run needs.**
+`list_scheduled_tasks` gives `texel-funnel` `lastRunAt` **2026-09-11T15:07Z** —
+that is a **start** time. `list_task_runs` gives the same session
+`last_activity_at` **2026-09-14T13:34Z**. The run was still alive three days
+later and filled drop 1's row at **13:33Z on 09-14, 100 minutes after run 5
+opened T-009 at 11:53Z**. The row was right when written and was cleared the same
+day. **Read `last_activity_at`, not `lastRunAt`, before judging whether a routine
+has finished.** What the funnel wrote is the real thing and not a shrug: the row
+is filled from the two `LEDGER.md` readings the row demanded (**46 → 63 = +17**),
+it says *"drop 1 missed its own bar"* in words, it reports **8** stranger
+file-grabs rather than the flattering 11 because three were `dl_check.mjs`, and
+it **corrects its own pre-registered bar downward** — "~30" was one day's +10
+extrapolated as a rate, the honest bar was ~20, and the drop misses either way.
+
+**T-002 is re-verified this run, not carried on yesterday's word.**
+`/dashboard/payouts` still reads *"You need to provide us with your tax
+information in order to initiate a payout"*, with **PayPal and Payoneer both
+unconnected**. Balance **unchanged at $57.46** (2 pending $7.67 + 10 available
+$49.79). **None of it is Texel's and none of it can move.** It crosses the 7-day
+toast line **tomorrow, 2026-09-16**.
+
+**T-008 is 4 days old; cited, not re-described.** `texel-release` opens
+**tomorrow, Wed 09-16 15:05 UTC**, at which point it is 5 days old and past the
+3-day freeze, so clearing it or writing a dated refusal is the first thing that
+run does. The dated prediction runs 3, 4 and 5 all made comes due tomorrow.
+
+### ALERTS
+
+**One, and it is T-010.** The product a buyer pays $9.95 for, and every internal
+file this venture keeps, are on a public repo that the state record called
+private, pushed to nightly by `pixelkiln-backup`. Owner **HUMAN** — repo
+visibility is an account-level outward-facing setting and no routine may touch
+one. Detail and the recommendation are in `ACTIONS.md`; not restated here.
+
+**T-011 is a row, not an alert** — `texel-marketing` caught its own calendar
+contradicting itself before it could post Texel on the packs' Saturday, fixed its
+own file, and handed the structural question here by name. Third instance of the
+class; nothing is currently broken.
+
+### A. Listing health — all clear, re-checked against the live page
+
+Read logged out from `https://z3er1n.itch.io/texel` — **HTTP 200, 31,024 bytes**.
+
+| Check | Result |
+|---|---|
+| Public and **published**, not draft | PASS — info table reads `Status: Released`, `Category: Tool`, `Author: Pixelkiln`, `Published: 5 days ago`. **Zero** occurrences of `draft`/`Draft` in the document |
+| Price matches `ROADMAP.md`'s current milestone | PASS — **$9.95** (`itemprop="price"` = `$9.95 USD`), and it is the **only** dollar figure anywhere on the page. The v0.1 launch tier; the step to $14.95 is gated on v0.4 "Handoff", unshipped |
+| Download file present, matches `dist/texel-*.zip` | PASS — serving **`texel-0.2.0.zip`, 187 kB**, the only file offered; local `dist/texel-0.2.0.zip` is **192,284 B = 187.8 KiB**. **0.1.0 is not offered** |
+| AI disclosure reads Yes + Code + Graphics | PASS — `AI Disclosure = AI Assisted, Code, Graphics` |
+| Devlogs live | PASS — index **200**, both linked at their full slugs and both **200**. The **URL trap holds**: bare `/devlog/1658363` is **404** |
+| Comment form live, queue empty | PASS — **0 posts.** `community_post` appears **13** times, `class="community_post "` — the actual post markup — **0** times |
+| Gallery | PASS — **10 images**, unchanged, stroke GIF at slot 3 |
+
+**The claim that burned us on launch day (T-005) was re-checked, not assumed.**
+The live description says **"95 operators"**; **"94 operators" appears 0 times**,
+and `95 operators` is the only operator/tool count on the page.
+
+**The density card was checked run 5's way — by decoded id, not by token.**
+Slot 4 decodes to **`image/4991926/29902828`**, the same payload run 5 verified by
+eye, and the only id on the page outside the `29883174–29883248` launch batch. The
+`/347x500/` token is `ccWArU` again. T-001 stays closed.
+
+**One page-level fact worth recording and not acting on.** `itch.io/game/summary/4991926`
+lists **both** `texel-0.1.0.zip` and `texel-0.2.0.zip` as uploads, each at **0
+downloads**. Only 0.2.0 is reachable from the public page — verified above — so
+no buyer can get the stale zip, and with 0 sales there is no buyer to test the
+purchase view against. Noted so a later run does not rediscover it as an alarm.
+
+### B. The numbers
+
+| date | views | downloads | sales | revenue | conv% |
+|---|---|---|---|---|---|
+| 2026-09-10 | 36 | 0 | 0 | $0.00 | 0.00% |
+| 2026-09-11 | 46 | 0 | 0 | $0.00 | 0.00% |
+| 2026-09-12 | 51 | 0 | 0 | $0.00 | 0.00% |
+| 2026-09-13 | 58 | 0 | 0 | $0.00 | 0.00% |
+| 2026-09-14 | 63 | 0 | 0 | $0.00 | 0.00% |
+| **2026-09-15** | **70** | **0** | **0** | **$0.00** | **0.00%** |
+
+**+7 views in 24 h.** The five deltas are **10, 5, 7, 5, 7** and this routine
+still draws no shape from them — six rows is not a 7-day trend, and the first
+honest weekly comparison is **2026-09-17**, two days out. The figure worth
+stating is the **mean: 6.8 views/day** since the 09-10 baseline, essentially flat
+against yesterday's 6.75. Ratings **0**; collections **1**, unchanged for a third
+day.
+
+**The store ledger did not move, and that was checked rather than assumed.**
+`/dashboard/purchases` reads **$71.16 gross, 12 payments, $5.91 average, $8.92
+max, $2.00 tip revenue** — identical to yesterday. The twelve amounts — $7.46,
+$2.00, $5.21, $8.92, $5.21, $7.46, $5.21, $5.21, $7.46, $5.21, $6.95, $4.86 —
+**sum to exactly $71.16**, and the page carries **0 case-insensitive matches for
+`texel`**, so no Texel row is hiding in it. Project totals agrees independently:
+`Texel | 70 | 0 | - | 0 payments | 0 ratings | 1 collection`. **Texel's revenue is
+$0.00 on day 6.**
+
+**Neither zero-sales rule can fire yet.** Conversion (under 0.5% after 200+ views)
+needs **130 more views** — at 6.8/day, **~2026-10-04**. The 14-consecutive-days
+rule needs **30 days live**: published 2026-09-09 22:19 UTC, so **2026-10-09**.
+
+#### Texel's OWN referrer table, read for the first time
+
+Nobody had opened `itch.io/game/summary/4991926`, so every judgement about where
+Texel's traffic comes from has until now been inferred off the store-wide table,
+which cannot say which project a visit landed on.
+
+| referrer | visits |
+|---|---|
+| `itch.io/tools/new-and-popular` | 9 |
+| `blenderartists.org` | 8 |
+| `itch.io/tools/newest` | 5 |
+| `duckduckgo.com` | 5 |
+| `itch.io/` | 4 |
+| `itch.io/tools/tag-3d` | 2 |
+| **`z3er1n.itch.io/texel-density-cheatsheet`** | **1** |
+| `github.com/lizzxxaibot-alt/texel` | 1 |
+| seven more, 1 each | 7 |
+
+**41 of 70 views are attributed; ~29 arrive unattributed.** Two things follow and
+neither is this routine's verdict to draw:
+
+- **The cheatsheet has referred exactly one visit, lifetime.** That is drop 1's
+  referral number and it belongs in `texel-funnel`'s Friday call, alongside the
+  fact that the link it was missing was only fixed on 09-14. Recorded, not judged.
+- **`itch.io/tools/*` is the single largest source at 16 combined**, ahead of
+  every off-site referrer. Texel is being found by people browsing itch's Tools
+  category. Listing conversion is `texel-marketing`'s row; the number is handed
+  over, not acted on.
+
+**Sibling reading for `texel-funnel`: Texel Density Cheatsheet 26 views / 15
+downloads / 2 collections** — **+3 views and +4 downloads**, the first download
+movement since the drop, and **at least one of those four is ours**: the funnel
+re-downloaded the re-uploaded PDF on 09-14 to verify the link fix against live
+bytes. Stated that way rather than as "+4 strangers", for the same reason the
+funnel itself reported 8 rather than 11.
+
+### The finding that changed today's verdict, and the review that reshaped it
+
+Full detail is **T-010**; the ledger is the record and this is the summary.
+
+`state/texel.md` said the Texel remote was **private**. It is not, and three
+independent checks say so: the GitHub API returns `"private": false`,
+`raw.githubusercontent.com` serves `LEDGER.md` to an anonymous request, and
+**itch's own referrer table logs a visit arriving from that repo** — something a
+private repo cannot produce. **Corrected in `state/texel.md` this run**, with the
+evidence; correcting the record is the one thing this routine is permitted to fix.
+
+**What I was about to record, and why it was wrong.** The first draft opened a
+narrow row about the internal documents being public and **declined to open one
+about the source being free**, reasoning that GPL-3.0 permits redistribution and
+`OPERATIONS.md` §7 already says so. Per `CLAUDE.md` §0 that went to
+`venture-critic` before being written down. **`VERDICT: REOPEN`, two FATALs, both
+correct:**
+
+1. **The evidence offered could not have failed in the direction that mattered.**
+   Citing "1 visit referred from GitHub to itch" as proof the repo is net-positive
+   uses an instrument that can only see people who came *to* itch — structurally
+   blind to the person who clones and never visits. GitHub exposes the missing
+   number to the repo owner and it had not been pulled. **It has now been:**
+   **113 clones / 58 unique cloners in 14 days**, against **5 repo page views**
+   and **1 onward click**. 58 cloners against 5 pageviews is the shape of
+   automated mirroring, not 58 people choosing a free copy — **but GitHub does not
+   say who cloned, and this routine cannot close that gap.** What the number does
+   settle is that the claim "it refers more than it costs" had nothing behind it.
+2. **§7 was being stretched.** It rules on a *buyer* redistributing after
+   purchase. What is in front of this routine is the *seller* operating a free
+   zero-friction mirror that predates every sale, homepage-linked to the paid
+   page, live since launch day against 0 sales. Citing a ruling on one question to
+   close a different one is exactly the preference-in-a-finding's-costume that
+   review exists to catch.
+
+So it is **one row, not two**, the source half is **not** pre-cleared, and the row
+carries a specific recommendation rather than an open-ended "decide whether" —
+because 0 stars and 0 forks means this is the cheapest it will ever be to change.
+A third critic point is accepted here rather than in the ledger: the store page
+says *"Full source, GPL-3.0"* and names no URL, so a buyer is told the licence and
+not told a free copy exists at an address we control. **That is not a §6 breach**
+— §6 requires the licence be stated plainly and it is — but it is a disclosure
+question the user should answer deliberately rather than by default.
+
+### C. Did the other four produce?
+
+Read from `list_scheduled_tasks`, **and cross-read against `list_task_runs` this
+run**, because `lastRunAt` is a start time and run 5 was misled by it.
+
+| Routine | Last start (UTC) | Age | Artifact | Verdict |
+|---|---|---|---|---|
+| `texel-support` | 2026-09-14 13:23 | 22.5 h | `SUPPORT.md` advanced — a dated 09-14 entry checking all three surfaces `LISTING.md` commits the AI disclosure to, finding the itch one correct and the other two non-existent, and **stating precisely why that is a stale document rather than a §6 breach** | **PRODUCED** |
+| `texel-marketing` | 2026-09-14 20:19 | 15.6 h | **Posted nothing and that is a pass**, per `OPERATIONS.md` §3a. `promo/POSTED.md` carries **two** logged replies with live post ids — [3mvix2yb3e22z](https://bsky.app/profile/pixelkiln.bsky.social/post/3mvix2yb3e22z) (`uv.pack_islands` margin defaults, read out of Blender 4.5.9 `--factory-startup`) and [3mvix36455z2i](https://bsky.app/profile/pixelkiln.bsky.social/post/3mvix36455z2i) (the measured AgX shift, authored 204,26,26 → 191,38,14) — hitting the two-reply floor exactly. It also records `venture-critic` **stopping its own attempt to reverse Monday's stand-down on a miscounted feed**, and two threads deliberately left alone | **PRODUCED** |
+| `texel-release` | 2026-09-09 23:53 | 5.5 days | weekly, `0 10 * * 3`; `nextRunAt` **2026-09-16 15:05 UTC** — its next slot has not passed | **ON SCHEDULE** |
+| `texel-funnel` | 2026-09-11 15:07 **(start)** | last activity **2026-09-14 13:34** | weekly, `0 10 * * 5`; `nextRunAt` **2026-09-18 15:06 UTC**. `funnel/LOG.md` carries drop 1, its filled result row, and the re-ship that made the sheet's URL clickable | **ON SCHEDULE** |
+
+**No misfire to talk down this run.** The amended rule — *"48h, or one scheduled
+interval, whichever is longer"* — is in this routine's brief since 2026-09-14 and
+both weekly routines clear it cleanly. Runs 3, 4 and 5 each spent a section on
+this; run 6 spends a sentence, which is the point of the fix.
+
+### D. Is the roadmap slipping?
+
+**No.** Next unshipped target is **v0.2.1 "Brush", the rest — 2026-09-26**,
+**11 days out**, outside the 7-day flag window. `ROADMAP.md` was last ticked
+2026-09-09 (v0.2.0, seventeen days early) and is untouched since. `texel-release`
+gets **two** Wednesday slots before the date — **09-16** and **09-23** — though
+09-16 opens with T-008 frozen in front of it.
+
+### E. In one line
+
+Day 6: correct page, correct price, correct file, correct disclosure, 70 views,
+one collection, no downloads, no sales, no questions, no roadmap slip — and the
+one thing that moved is that **this venture's record was wrong about its own
+product being public, while 58 unique cloners took a free copy of a $9.95 tool
+that has sold nothing**, which is a decision for the user and not a fix for a
+routine.
+
+---
+
 ## 2026-09-14 — run 5
 
 **VERDICT: HEALTHY, with one finding.** Every listing check passes against the
