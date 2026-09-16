@@ -407,3 +407,121 @@ calendar should live in exactly one file rather than being restated in three.
 **All of @alfredbaudisch.com's threads were excluded on sight**, including the
 880-like one that keeps topping every search for this topic. Standing rule, no
 exceptions, not re-litigated.
+
+---
+
+## Tue 2026-09-15 — a packs day, so nothing was posted about Texel. Section D run.
+
+**No Texel post, by the calendar and not by omission.** Tuesday is the packs'
+(`OPERATIONS.md` §3: Texel takes Mon/Wed/Fri/Sun). **No beat was consumed from
+`QUEUE.md`** — the nearest-vs-bilinear card still holds **Wed 09-16**, which is
+tomorrow, and the mask beat is still blocked on a visual with no date.
+
+**The ledger was cleared first and it was empty.** `ACTIONS.md` carries four open
+rows — T-002, T-010 and T-011 owned by `HUMAN`, T-008 owned by `texel-release`.
+**None is `texel-marketing`'s**, so nothing was frozen and nothing was touched.
+T-011 is this routine's own 09-14 handoff about the calendar living in three
+files; it is the user's to rule on and was left alone.
+
+**§E is not due.** The listing check is Saturday's; last run 2026-09-12.
+
+### Two replies, both verified on the public AppView
+
+| Date | Thread | What was said | Link |
+|---|---|---|---|
+| 2026-09-15 | @neswest.bsky.social — revisiting an old scene, *"need to clean up texel density … and bring it all back into unreal next"* (#blender #gamedev #unrealengine, **19 likes and 0 replies** — nobody had answered in 20 hours, and ours is the only reply in it). No image alt text was exposed on the post, so **nothing was claimed about how it looks** | The cause that hides in an old scene rather than a new one: **non-uniform object scale**. `uv.unwrap` lays UVs out on the *un-scaled* mesh — Blender prints it itself, *"Object has non-uniform scale, unwrap will operate on a non-scaled version of the mesh"* — so a prop stretched on one axis keeps the UV island of the shape before the stretch. **Measured, not asserted** (script in the session scratchpad, seams marked on every edge so the unwrap is exact rather than the failed single-island fallback): a 2 m cube at object scale **(4,1,1)** unwraps to **42.62 px/m on the unstretched faces and 21.31 on the stretched ones — a 2.000× spread** at a 256 map; `Ctrl+A ▸ Scale` then re-unwrap gives **25.58 px/m on every face, 1.000×**. Identical in **4.5.9 and 5.2.1**. Deliberately **not** the 09-10 `uv.average_islands_scale` answer or the 09-13 Display-Stretch one — both spent, and neither sees this, because the UVs are internally consistent for a mesh that is not the shape on screen | [3mvlhd6dwun2f](https://bsky.app/profile/pixelkiln.bsky.social/post/3mvlhd6dwun2f) |
+| 2026-09-15 | @fuyukarasu.xyz — *"anyways I'm learning uv unwrapping and texturing"*, alt text *"low poly 3D model of Hatsune Miku dressed similarly to Red Pokemon … the rest being placeholders made in Blender's texture paint mode"* (4 likes, **0 replies**). Their parent post puts them on **Blender 5**, so the fact was checked in 5.2.1 rather than 4.5.9 | Opened on the concept they described themselves, then the Texture Paint default that costs a beginner an afternoon of flat placeholder fills: **Normal Falloff is ON by default at 80°**, so faces turning away from the view take less paint and a flat colour arrives with a soft edge nobody asked for. **Read out of Blender 5.2.1 with `--factory-startup` rather than recalled** — `ImagePaint.use_normal_falloff` default `True`, `normal_angle` default `80`, description *"Paint most on faces pointing towards the view according to this angle"*. The UI path was checked in Blender's own scripts, not guessed: `space_view3d_toolbar.py:915` defines `VIEW3D_PT_tools_brush_falloff_normal`, label **Normal Falloff**, `bl_parent_id = VIEW3D_PT_tools_brush_falloff` and `bl_options = {'DEFAULT_CLOSED'}` — hence "a collapsed sub-panel under Tool ▸ Falloff", which is why nobody finds it. Deliberately a different fact from the 09-12 `seam_bleed` answer, which lives in the neighbouring **Options** panel (`:1354`) and was already spent | [3mvlhd6xmq22o](https://bsky.app/profile/pixelkiln.bsky.social/post/3mvlhd6xmq22o) |
+
+### A reply this run nearly sent was false, and the test is what caught it
+
+**Recorded because the next run will be tempted by the same sentence.** The
+first draft for @neswest was the folk rule *"apply your scale or your texel
+density is wrong"*. Tested before sending, and it is **wrong as stated**:
+
+| case | per-face spread | density |
+|---|---|---|
+| uniform scale (4,4,4), **not** applied | **1.000×** | 10.65 px/m |
+| uniform scale (4,4,4), applied | **1.000×** | 10.65 px/m |
+| non-uniform (4,1,1), **not** applied | **2.000×** | 21.31 / 42.62 |
+| non-uniform (4,1,1), applied | **1.000×** | 25.58 |
+
+**Uniform scale costs nothing** — unwrap normalises the island to the UV bounds
+either way, so the whole-object density changes with object size but stays even
+across faces. It is **only** non-uniform scale that skews it, which is why the
+reply says "stretched 4x on one axis" and not "apply your scale".
+
+**A second near-miss, for the same file.** The first version of the test
+unwrapped a cube with **no seams**; Blender answered *"Unwrap failed to solve 1
+of 1 island(s)"* and the numbers came out of the fallback, showing an identical
+2.000× spread before and after Apply Scale — i.e. the measurement said the fix
+does not work. **The warning line was the only thing separating a real result
+from a confident wrong one.** Marking every edge as a seam made each face its
+own island and the effect appeared cleanly.
+
+**And a version claim that did not survive:** the draft angle *"Blender 5
+changed the Unwrap default, so the tutorials are stale"* is false.
+`bpy.ops.uv.unwrap`'s RNA `method` default is **`CONFORMAL` in both 4.5.9 and
+5.2.1**, with `margin` 0.001, `margin_method` `SCALED`, `correct_aspect` True and
+`iterations` 10 identical across the two. Nothing to say there; it was dropped.
+
+### Threads looked at and left alone this run
+
+- **@johanpeitz.com — picoCAD 2 launch** (2026-09-11, **411 likes, 6 replies**,
+  by far the highest-reach on-topic thread available that is not the off-limits
+  account). Left alone deliberately. It is a **product launch thread for an
+  adjacent paid pixel-art 3D tool**, and a product account arriving in it has no
+  reading that is not piggybacking, whether or not Texel is named. The standing
+  rule names pixel-art-*in-Blender* products specifically and picoCAD is a
+  standalone modeller, so this is **not** that rule firing — it is §3a rule 8,
+  silence is free, applied on its own merits. Noted here so the next run does not
+  re-derive it as an opportunity.
+- **@nostalgianinja.com** (2026-09-12, texturing stream announcement, 3 likes) —
+  on topic and friendly, but a "live now" post has nothing to answer; a reply
+  three days after the stream ended reaches nobody.
+- **@lvnatav.bsky.social** (2026-09-15) — *"low poly, low res textures and
+  texture warping? we're feeling daring today"* is a joke between friends, not a
+  question. Nothing to add that would not land as a lecture.
+- **@alfredbaudisch.com** — every thread excluded on sight as always, including
+  the 883-like one that still tops the `texel density` search. Standing rule, no
+  exceptions, not re-litigated. **Two further posts were excluded by the same
+  route**: @smlcaptain and @puppiesandanime reposting that product's itch link.
+
+### The ceiling count, recounted — for tomorrow's Wed 09-16 slot
+
+**Taken as a real count, not a paraphrase of the feed** — `getAuthorFeed` through
+the PDS with `filter=posts_no_replies`, which is the only way to separate
+top-level posts from the §D replies that inflate every other view of this
+account. (`-Mode feed` in `pixelkiln_social.ps1` still hits `$PublicAPI` and
+still 403s from this machine; the snippet used is in the session scratchpad.)
+
+**7 top-level posts in the trailing 7 days**, at 2026-09-15T20:24Z:
+
+| UTC | local | owner of the day | posted by | beat |
+|---|---|---|---|---|
+| 09-09 21:18Z | Wed 16:18 | **Texel** | packs | Oakheart carpets |
+| 09-10 00:15Z | Wed 19:15 | Texel | Texel | v0.1.0 launch |
+| 09-10 19:07Z | Thu 14:07 | packs | packs | Inventory Vol. 7 |
+| 09-11 20:21Z | Fri 15:21 | Texel | Texel | v0.2.0 |
+| 09-12 19:10Z | Sat 14:10 | packs | packs | Icons Vol. 2 fix |
+| 09-13 20:22Z | Sun 15:22 | Texel | Texel | Density Cheatsheet |
+| 09-15 19:09Z | Tue 14:09 | packs | packs | Godot theme slots |
+
+**Two corrections to what this file said on 09-14, both against the recount:**
+
+1. **Mon 09-14 is empty — neither routine posted at top level.** The Texel
+   stand-down held, and the packs did not take the day either.
+2. **The packs are at 4 in the trailing 7 days, not 5.** The 09-14 section called
+   them "5 against a cap of 3, two of those on Texel's days". On today's window
+   it is **4, one of them on a Texel day** (09-09). The earlier figure was
+   counted over a different, earlier window and is not wrong for that window —
+   but it must not be carried forward as a standing charge against another
+   routine. **Texel is at 3, every one on a Texel day**, unchanged.
+
+**What this does NOT do is decide tomorrow.** By 09-16 15:19 local the window
+rolls past the 09-09 21:18Z packs post, so the count will read **6** before
+anything is sent and **7** after — over the 3-4 line, compliant with the
+one-post-per-owner-day line, which is the same genuine conflict recorded on
+09-13 and not re-litigated here. **The Wed 09-16 run must recount for itself
+before it sends.** That is the whole lesson of the 09-14 FATAL: the arithmetic
+was read off a paraphrase and was false on its own preferred evidence. A number
+in this file is 24 hours old by the time the next run reads it.
