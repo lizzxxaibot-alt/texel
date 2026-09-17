@@ -25,7 +25,27 @@ INCLUDE_PY = ("__init__.py", "tex_props.py", "tex_doc.py", "tex_pick.py",
               "tex_setup.py", "tex_extra.py", "tex_tools.py", "tex_showcase.py", "tex_sprite.py", "tex_anim.py", "tex_keys.py",
               "tex_ui.py")
 CORE_PY = ("__init__.py", "raster.py", "canvas.py", "uvmap.py", "palette.py",
-           "select.py", "adjust.py", "tools.py")
+           "select.py", "adjust.py", "tools.py", "report.py")
+
+
+def check_nothing_left_behind() -> None:
+    """Every source module on disk must be in a list above.
+
+    These lists are hand-written, and a hand-written list of files is a bug
+    waiting for the next module. core/report.py was added in v0.2.1, tex_ui.py
+    imported it, and the first zip built without it - an add-on that installs
+    and then fails to import. `test_install.py` would have caught it, but only
+    after the zip existed; this catches it at the point the list went stale.
+    """
+    stale = []
+    for f in sorted(os.listdir(os.path.join(HERE, "core"))):
+        if f.endswith(".py") and f not in CORE_PY:
+            stale.append(f"core/{f}")
+    for f in sorted(os.listdir(HERE)):
+        if f.startswith("tex_") and f.endswith(".py") and f not in INCLUDE_PY:
+            stale.append(f)
+    if stale:
+        sys.exit(f"source files exist but are not in build.py's lists: {stale}")
 
 
 def read_version() -> str:
@@ -49,6 +69,7 @@ def check_bl_info(version: str) -> None:
 def main() -> None:
     version = read_version()
     check_bl_info(version)
+    check_nothing_left_behind()
 
     missing = [f for f in INCLUDE_PY if not os.path.exists(os.path.join(HERE, f))]
     missing += [f"core/{f}" for f in CORE_PY
