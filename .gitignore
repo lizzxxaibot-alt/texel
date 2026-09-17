@@ -73,3 +73,18 @@ store/theme/_bg_src/
 # re-applied by hand every night. Deliverables and published art do NOT start
 # with an underscore.
 _*.png
+
+# Raw T-008 reproduction frames, added 2026-09-16 by pixelkiln-backup.
+# repro_t008.py drives a real GUI Blender and screenshots the whole window;
+# shots/t008/ came out at 15 MB across 37 files, of which 15 are ~930 KB
+# full-window frames (f0-f3, sidebar, settle/shot_*, and the 4.2.23 rerun).
+# They are reproducible by re-running the script, exactly like shots/density/
+# *.png and shots/panels/ above, and this repo is PUBLIC.
+# The CROPS ARE KEPT and that is deliberate -- ~1.3 MB of region-only captures
+# that promo/POSTED.md names as the v0.2.1 before/after library, and a crop is
+# what the reproduction actually proves: the panel is the evidence, the window
+# around it is not.
+shots/t008/f?_*.png
+shots/t008/*/f?_*.png
+shots/t008/sidebar*.png
+shots/t008/settle/shot_*.png
