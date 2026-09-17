@@ -162,6 +162,44 @@ with bpy.context.temp_override(area=area, region=r3d, space_data=area.spaces.act
 check("shortcuts_restore", bpy.ops.texel.shortcuts_restore() == {"FINISHED"})
 check("defaults really restored", bpy.context.scene.texel.tool == "PENCIL")
 
+
+# ---- radial symmetry reaches the real stroke, not just the maths ------------
+# core.raster.symmetry_points is tested headlessly; what that cannot show is
+# whether the paint path reads scene.texel.symmetry at all. A property that is
+# drawn, saved and ignored looks identical from outside.
+#
+# `_commit` is not reachable from a test: a registered Operator cannot be
+# instantiated in Python (bpy_struct.__new__ raises), and an uncaught raise here
+# makes Blender quit with status 0 and NO summary line - i.e. a silently
+# skipped suite. That was reproduced while writing this. `stroke_points` is the
+# module-level function `_commit` delegates to, and it takes the real property
+# group.
+from texel.tex_paint import stroke_points
+
+st = bpy.context.scene.texel
+st.mirror_x, st.mirror_y = False, False
+
+st.symmetry = 1
+check("symmetry off leaves one texel one texel",
+      stroke_points(st, [(2, 8)], 17, 17) == [(2, 8)],
+      stroke_points(st, [(2, 8)], 17, 17))
+
+st.symmetry = 8
+lit = stroke_points(st, [(2, 8)], 17, 17)
+check("symmetry=8 turns one texel into eight", len(lit) == 8, lit)
+check("all eight sit the same distance from the centre",
+      len({round(((x - 8) ** 2 + (y - 8) ** 2) ** 0.5, 3) for x, y in lit}) == 1,
+      sorted(lit))
+check("the original texel is among them", (2, 8) in lit, sorted(lit))
+check("the scene properties reach core.raster unchanged",
+      lit == R.symmetry_points([(2, 8)], 17, 17, False, False, 8), lit)
+
+st.mirror_x, st.symmetry = True, 4
+check("radial 4 with Mirror X is eight-fold",
+      len(stroke_points(st, [(3, 5)], 17, 17)) == 8,
+      stroke_points(st, [(3, 5)], 17, 17))
+st.mirror_x, st.symmetry = False, 1
+
 texel.unregister()
 print()
 if fails:

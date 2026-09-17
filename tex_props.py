@@ -43,6 +43,10 @@ class TexelSettings(bpy.types.PropertyGroup):
                              description="Fill only the connected region")
     mirror_x: BoolProperty(name="Mirror X", default=False)
     mirror_y: BoolProperty(name="Mirror Y", default=False)
+    symmetry: IntProperty(
+        name="Radial", default=1, min=1, max=16,
+        description="Repeat each stroke this many times around the canvas "
+                    "centre. 1 is off")
     target_density: FloatProperty(
         name="Texel Density", default=32.0, min=0.001, soft_max=512.0,
         description="Pixels per world unit to aim for")

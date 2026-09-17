@@ -215,6 +215,61 @@ check("even sizes work too", len(R.brush_mask(4, "ROUND")) > 0)
 check("unknown shape falls back to square",
       len(R.brush_mask(5, "NONSENSE")) == 25)
 
+# ------------------------------------------------------------- symmetry
+# Mirror lived in tex_paint as _mirrored() and was therefore only testable by
+# opening Blender. Radial joins it here, in core, where a rotation that lands
+# one texel off can be caught by arithmetic instead of by eye.
+
+W = H = 9                                   # odd, so the centre is a real texel
+CENTRE = (4, 4)
+
+check("no symmetry returns the stroke unchanged",
+      R.symmetry_points([(1, 2)], W, H, False, False, 1) == [(1, 2)])
+check("mirror X reflects across the vertical axis",
+      R.symmetry_points([(1, 2)], W, H, True, False, 1) == [(1, 2), (7, 2)])
+check("mirror Y reflects across the horizontal axis",
+      R.symmetry_points([(1, 2)], W, H, False, True, 1) == [(1, 2), (1, 6)])
+check("both mirrors give four points",
+      len(R.symmetry_points([(1, 2)], W, H, True, True, 1)) == 4,
+      R.symmetry_points([(1, 2)], W, H, True, True, 1))
+
+# 4-fold radial on an odd canvas: a quarter turn about the centre texel takes
+# (1, 4) -> (4, 7) -> (7, 4) -> (4, 1). Written out rather than computed, so the
+# test fails if the rotation direction or the centre ever changes.
+four = R.symmetry_points([(1, 4)], W, H, False, False, 4)
+check("4-fold radial gives four distinct points", len(four) == 4, four)
+check("4-fold radial hits the expected texels",
+      sorted(four) == [(1, 4), (4, 1), (4, 7), (7, 4)], four)
+check("the original point comes first", four[0] == (1, 4), four)
+
+check("a point on the centre stays one point",
+      R.symmetry_points([CENTRE], W, H, False, False, 6) == [CENTRE],
+      R.symmetry_points([CENTRE], W, H, False, False, 6))
+
+# n-fold must produce at most n copies, and exactly n when off-centre
+for n in (2, 3, 5, 8, 12):
+    got = R.symmetry_points([(0, 4)], W, H, False, False, n)
+    check(f"{n}-fold makes no duplicates", len(got) == len(set(got)), got)
+    check(f"{n}-fold makes at most {n} points", len(got) <= n, got)
+
+check("radial and mirror compose",
+      len(R.symmetry_points([(1, 2)], W, H, True, True, 4)) > 4,
+      R.symmetry_points([(1, 2)], W, H, True, True, 4))
+
+check("every returned point is inside the canvas",
+      all(0 <= x < W and 0 <= y < H
+          for x, y in R.symmetry_points([(0, 0), (8, 8)], W, H, True, True, 7)))
+
+# an even canvas has no centre texel; the axis falls between two, which is why
+# w - 1 - x is the mirror and (w - 1) / 2 is the pivot
+check("even canvas mirrors to the far edge",
+      R.symmetry_points([(0, 0)], 8, 8, True, False, 1) == [(0, 0), (7, 0)])
+
+check("a multi-texel stroke keeps its own order",
+      R.symmetry_points([(1, 1), (2, 2)], W, H, False, False, 1) == [(1, 1), (2, 2)])
+check("segments below 1 are treated as off",
+      R.symmetry_points([(1, 2)], W, H, False, False, 0) == [(1, 2)])
+
 print()
 if fails:
     print(f"{len(fails)} FAILED: {fails}"); sys.exit(1)

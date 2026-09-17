@@ -23,15 +23,19 @@ def _stamp(layer, x, y, idx, size, w, h, shape="SQUARE"):
         layer.set(x + dx, y + dy, idx)
 
 
-def _mirrored(pts, w, h, mx, my):
-    out = list(pts)
-    if mx:
-        out += [(w - 1 - x, y) for x, y in pts]
-    if my:
-        out += [(x, h - 1 - y) for x, y in pts]
-    if mx and my:
-        out += [(w - 1 - x, h - 1 - y) for x, y in pts]
-    return out
+
+
+def stroke_points(s, pts, w, h):
+    """Every texel a stroke touches, after mirror and radial symmetry.
+
+    Module level on purpose. A registered Operator cannot be instantiated from
+    Python - `TEXEL_OT_paint()` raises `bpy_struct.__new__(struct): expected a
+    single argument` - so a test cannot reach `_commit` directly, and an
+    uncaught raise there makes Blender quit with status 0 and no summary line.
+    Reading the scene properties here instead is what a headless suite can call
+    with a real property group.
+    """
+    return R.symmetry_points(pts, w, h, s.mirror_x, s.mirror_y, s.symmetry)
 
 
 class TEXEL_OT_paint(Operator):
@@ -71,7 +75,7 @@ class TEXEL_OT_paint(Operator):
         layer = self.doc.canvas.layers[self.doc.canvas.active]
         w, h = self.doc.canvas.w, self.doc.canvas.h
         idx = 0 if s.tool == "ERASER" else self.colour_index
-        for x, y in _mirrored(pts, w, h, s.mirror_x, s.mirror_y):
+        for x, y in stroke_points(s, pts, w, h):
             _stamp(layer, x, y, idx, s.brush_size, w, h, s.brush_shape)
         self.doc.flush()
 

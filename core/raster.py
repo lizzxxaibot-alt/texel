@@ -9,6 +9,8 @@ corner pixel by hand. We do it in code.
 """
 from __future__ import annotations
 
+import math
+
 Point = tuple[int, int]
 
 
@@ -331,4 +333,50 @@ def flood_fill(get_px, w: int, h: int, sx: int, sy: int, target, tolerance: int 
             for ny in (y - 1, y + 1):
                 if 0 <= ny < h and not seen[ny * w + xx] and match(get_px(xx, ny)):
                     stack.append((xx, ny))
+    return out
+
+
+def symmetry_points(pts, w: int, h: int, mirror_x: bool = False,
+                    mirror_y: bool = False, segments: int = 1) -> list[Point]:
+    """Every texel a stroke touches once symmetry is applied.
+
+    Mirroring reflects across the canvas axes; `segments` rotates the stroke
+    about the canvas centre that many times, evenly. Both compose - four-fold
+    radial with mirror X is eight-fold, which is how a mandala or a tileable
+    rosette is actually painted.
+
+    The pivot is ((w - 1) / 2, (h - 1) / 2), i.e. the centre TEXEL on an odd
+    canvas and the seam between two on an even one. That is the same centre the
+    mirror uses (w - 1 - x), so turning both on does not paint two slightly
+    different shapes.
+
+    Results are deduplicated and clipped to the canvas. Duplicates are not
+    harmless: a stroke is stamped with a brush mask, and stamping the same texel
+    twice is only a no-op while every stamp is opaque.
+    """
+    out: list[Point] = []
+    seen = set()
+    cx, cy = (w - 1) / 2.0, (h - 1) / 2.0
+    turns = [0.0]
+    if segments > 1:
+        turns += [2.0 * math.pi * k / segments for k in range(1, segments)]
+    for t in turns:
+        cos_t, sin_t = math.cos(t), math.sin(t)
+        for x, y in pts:
+            dx, dy = x - cx, y - cy
+            rx = cx + dx * cos_t - dy * sin_t
+            ry = cy + dx * sin_t + dy * cos_t
+            base = (int(round(rx)), int(round(ry)))
+            cands = [base]
+            if mirror_x:
+                cands.append((w - 1 - base[0], base[1]))
+            if mirror_y:
+                cands.append((base[0], h - 1 - base[1]))
+            if mirror_x and mirror_y:
+                cands.append((w - 1 - base[0], h - 1 - base[1]))
+            for p in cands:
+                if p in seen or not (0 <= p[0] < w and 0 <= p[1] < h):
+                    continue
+                seen.add(p)
+                out.append(p)
     return out
