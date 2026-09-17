@@ -8,7 +8,7 @@ import bmesh
 import bpy
 from bpy.types import Operator
 
-from .core import uvmap
+from .core import report, uvmap
 
 
 def _active_mesh(context):
@@ -88,11 +88,13 @@ class TEXEL_OT_density_detect(_MeshOp):
             self.report({"WARNING"}, "No faces with both UV and world area")
             return {"CANCELLED"}
         lo, hi, avg = min(vals), max(vals), sum(vals) / len(vals)
-        spread = hi / lo if lo > 0 else 0.0
-        context.scene.texel.status = (
-            f"{avg:.1f} px/unit avg  ({lo:.1f}-{hi:.1f}, {spread:.1f}x spread)")
+        # One measurement per line: the sidebar is 280 px and a single row of
+        # this ate the range and the spread to an ellipsis. See core/report.py.
+        context.scene.texel.status = report.density_status(lo, hi, avg)
         context.scene.texel.target_density = round(avg, 3)
-        self.report({"INFO"}, context.scene.texel.status)
+        # The Info editor draws at full width and does not elide, so the log
+        # keeps all three measurements on one line.
+        self.report({"INFO"}, context.scene.texel.status.replace("\n", "  "))
         return {"FINISHED"}
 
 

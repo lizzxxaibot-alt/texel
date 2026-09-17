@@ -2,6 +2,30 @@
 import bpy
 from bpy.types import Panel
 from . import tex_doc
+from .core import report
+
+
+def _draw_status(layout, text):
+    """The status readout, one measurement per row.
+
+    `layout.label()` middle-elides anything wider than its row and `Region.width`
+    is read-only, so a 41-character density readout came out of a 280 px sidebar
+    as "10.5 px/unit av....1, 8.4x spread)" - average intact, range and spread
+    replaced by dots. Wrapping happens in core/report.py where it can be tested
+    without Blender; this only draws the lines it hands back.
+
+    The dismiss button sits on the first row, and BLANK1 keeps the continuation
+    rows indented under the text rather than under the icon.
+    """
+    lines = report.status_lines(text)
+    if not lines:
+        return
+    box = layout.column(align=True)
+    row = box.row(align=True)
+    row.label(text=lines[0], icon="INFO")
+    row.operator("texel.clear_report", text="", icon="X")
+    for extra in lines[1:]:
+        box.label(text=extra, icon="BLANK1")
 
 
 def _draw_tools(layout, s):
@@ -24,6 +48,7 @@ def _draw_tools(layout, s):
     r = col.row(align=True)
     r.prop(s, "mirror_x", toggle=True)
     r.prop(s, "mirror_y", toggle=True)
+    col.prop(s, "symmetry")
     col.operator("texel.shortcuts_restore", text="Restore Defaults", icon="LOOP_BACK")
 
 
@@ -240,9 +265,7 @@ class TEXEL_PT_density(_Base, Panel):
         col.operator("texel.snap_uvs", icon="SNAP_ON")
         if s.status:
             col.separator()
-            row = col.row(align=True)
-            row.label(text=s.status, icon="INFO")
-            row.operator("texel.clear_report", text="", icon="X")
+            _draw_status(col, s.status)
 
 
 class TEXEL_PT_showcase(_Base, Panel):

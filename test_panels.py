@@ -186,6 +186,20 @@ STEPS = [
                                        "showcase_move", "STILL")),
     ("status set", lambda img: setattr(bpy.context.scene.texel, "status",
                                        "a status line to dismiss")),
+    # The real density readout, which is three lines. The short one above only
+    # ever drew the single-row branch, which is how T-008 - the readout eliding
+    # to "10.5 px/unit av....1, 8.4x spread)" - survived every gate this suite
+    # has. Look at the screenshot: all three numbers must be readable.
+    ("long status", lambda img: setattr(bpy.context.scene.texel, "status",
+                                        "10.5 px/unit average\n"
+                                        "range 2.5 - 21.1\n8.4x spread")),
+    # The same state again, changing nothing. This suite screenshots inside the
+    # tick that sets the state, so a panel that grows by two rows is caught
+    # mid-relayout and the next sub-panel header draws over the text. The real
+    # operator does not do that - shots/t008/crop_f0 is clean on the first frame
+    # after texel.density_detect - so this step is the evidence that the
+    # overlap in the shot before it belongs to the harness and not the product.
+    ("long status settled", lambda img: None),
 ]
 
 

@@ -27,9 +27,19 @@ BOX = (700, 730, 1800, 1254)          # 1100x524
 facts = json.load(open(os.path.join(SHOTS, "facts.json"), encoding="utf-8"))
 
 
+# Two readout formats, because v0.2.1 changed the one the add-on prints. The
+# old single line elided in the sidebar (T-008) and was replaced by three lines
+# - same three numbers, same order, so the card is unaffected. Both are accepted
+# rather than one: shots/density/facts.json on disk still holds the old strings,
+# and re-shooting a Blender scene to satisfy a regex would be the tail wagging.
+OLD = re.compile(r"([\d.]+) px/unit avg\s+\(([\d.]+)-([\d.]+), ([\d.]+)x spread\)")
+NEW = re.compile(r"([\d.]+) px/unit average[\s\n]+range ([\d.]+) - ([\d.]+)"
+                 r"[\s\n]+([\d.]+)x spread")
+
+
 def parse(line):
-    """'10.5 px/unit avg  (2.5-21.1, 8.4x spread)' -> dict of floats."""
-    m = re.match(r"([\d.]+) px/unit avg\s+\(([\d.]+)-([\d.]+), ([\d.]+)x spread\)", line)
+    """A density readout, either format -> dict of floats."""
+    m = OLD.match(line) or NEW.match(line)
     if not m:
         raise SystemExit(f"unparseable readout: {line!r}")
     avg, lo, hi, spread = (float(g) for g in m.groups())
