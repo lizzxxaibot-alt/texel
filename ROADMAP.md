@@ -1,12 +1,18 @@
 # Texel by Pixelkiln — upgrade schedule
 
-**Written 2026-09-09. Last ticked 2026-09-09 by `texel-release`.**
-**v0.1.0 and v0.2.0 are live at https://z3er1n.itch.io/texel.**
+**Written 2026-09-09. Last ticked 2026-09-16 by `texel-release`.**
+**v0.1.0, v0.2.0 and v0.2.1 are live at https://z3er1n.itch.io/texel.**
 
 This is the promise the store page makes and the queue `texel-release` works
 from. It exists because **update cadence is the retention mechanic** — the same
 lesson the LimeZu playbook taught the pack business, applied to a tool. A
 Blender add-on that ships once is dead in three months.
+
+One correction to that, made 2026-09-16 because it was borrowed without
+checking: **Texel has no buyers yet, so there is nobody to retain.** The audience
+for these releases is the person who has not bought it, reading a page with a
+track record on it. That is still a reason to ship on the dates; it is a
+different reason, and the file should say which one it is using.
 
 ---
 
@@ -84,14 +90,68 @@ that was ready shipped rather than waiting for the rest of the version.
   a magic-wand selection survives a rotation as its own shape; the result is
   centred on the box it replaced rather than pinned to a corner.
 
-The rest of "Brush" moves to **v0.2.1**, keeping the original 26 Sep target.
+The rest of "Brush" moves to **v0.2.2**, keeping the original 26 Sep target.
+(It was v0.2.1 until 2026-09-16, when a patch took that number.)
 
-### v0.2.1 — "Brush", the rest · target 2026-09-26
-- Dither patterns as a brush mode; Bayer and hand-authored masks
-- Gradient tool that dithers between two palette indices instead of blending
-- Custom stamp from a selection
-- Mirror Y and radial symmetry
-- Tablet pressure mapped to brush size
+### v0.2.1 — "Readout" · **SHIPPED 2026-09-16**
+A patch, and it took the 0.2.1 number that "Brush, the rest" was holding -
+which is why that release is now **v0.2.2 below, with its 26 Sep target
+unchanged.** Renumbering rather than slipping: no dated promise moved.
+
+- ✅ **The density readout fits the sidebar.** It printed as one 41-character
+  line, and Blender middle-elides anything wider than its row, so a 280 px
+  N-panel showed `10.5 px/unit av....1, 8.4x spread)` - the average survived and
+  the range and the spread were replaced by dots. `Region.width` is read-only,
+  so no window size fixed it; the string had to shrink instead. Now three lines,
+  one measurement each. Reproduced on 4.5.9 before the fix and re-shot after, at
+  UI scale 1.0 and 1.5.
+- ✅ `build.py` now fails when a source module exists but is missing from its
+  file lists. The first 0.2.1 zip built without `core/report.py` in it.
+- ✅ **Radial symmetry.** One drag repeats up to sixteen times around the canvas
+  centre, and it composes with the mirrors - radial 4 with Mirror X is eight-fold.
+  `core.raster.symmetry_points`, which also took over the mirror maths that had
+  been sitting in `tex_paint` where no headless test could reach it. No new
+  operator: it is a property on the existing stroke.
+
+**The density readout is the feature the product is positioned on, and it had
+been unreadable in the panel that prints it since launch.** It was named twice by
+other routines before it was owned, which is the part worth not repeating.
+
+> Radial was not in the original plan for this release, and the honest reason it
+> is here is that `venture-critic` returned FATAL on the first version of the
+> scope call. That version said "none of the remaining Brush items is a small
+> slice" without checking any of them. Two things were wrong: **Mirror Y has
+> shipped since v0.1.0** and this file was simply stale in listing it as
+> outstanding, and radial symmetry reduces to one pure function over the points
+> a stroke already produces. The gate was being paid for the bugfix either way,
+> so the marginal cost was the feature, not a second gate.
+
+### v0.2.2 — "Brush", the rest · target 2026-09-26
+Four items, not five - **Mirror Y was never outstanding** (shipped in v0.1.0;
+this list was stale) and **radial symmetry shipped in v0.2.1**. Each remaining
+item is priced against the code that already exists, because "too big" was
+asserted once here without anyone checking:
+
+- **Dither patterns as a brush mode**; Bayer and hand-authored masks.
+  *Medium.* The density masks exist inside `TEXEL_OT_dither_fill`
+  (`tex_extra.py`) but are inline in that operator and keyed on absolute x/y.
+  Lifting them into `core` and consulting them per stamp touches the modal paint
+  path and the tool enum.
+- **Gradient tool that dithers between two palette indices** instead of blending.
+  *Large.* Needs a two-point drag interaction that does not exist yet, plus a
+  ramp-to-dither mapping on top of the item above.
+- **Custom stamp from a selection.** *Medium.* Stamp storage on the doc, a new
+  operator, UI, and paint-path integration.
+- **Tablet pressure mapped to brush size.** *Small-to-medium, and unverifiable
+  here* - `event.pressure` always reads 1.0 from a mouse, so the gate can prove
+  the plumbing and cannot prove the feel. That is worth saying out loud before
+  it is claimed on the page.
+
+**Is 26 Sep still reachable?** One release run remains before it (Wed 23 Sep).
+One run does not carry a Medium, a Large and two Mediums. So the honest reading
+is that v0.2.2 ships **partial on 26 Sep** - the dither brush mode, most likely -
+with the rest moving to v0.2.3. That is the normal pattern on this roadmap and
+it is written down now rather than discovered on the day.
 
 ### v0.3.0 — "Tileset" · target 2026-10-17
 **Medium: new data structures, but still all our own code.**
@@ -164,7 +224,7 @@ fixes indefinitely. New feature work becomes demand-led, from the support queue
    of it, not the whole version.
 2. Build it. Write tests **first** where the behaviour is checkable in pure
    Python (`core/`), which is most of it.
-3. Gate: all 16 suites green, `core/` coverage still 100%, `build.py` clean,
+3. Gate: all 17 suites green, `core/` coverage still 100%, `build.py` clean,
    and **`bash test_versions.sh` green on every installed Blender** - the
    store page claims 4.2+, so one version passing is not evidence for it.
    Then **`python store_check.py`**, which runs the same suites inside the

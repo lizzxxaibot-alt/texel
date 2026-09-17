@@ -57,7 +57,10 @@ Press **N** for the sidebar, then the **Texel** tab. It appears in both the
 
 **Pixel Perfect** (on by default) removes the L-shaped corner texels a freehand
 drag leaves behind, so a shallow diagonal comes out as a clean 1px line instead
-of a staircase with fat joints. **Mirror X / Y** paints symmetrically.
+of a staircase with fat joints. **Mirror X / Y** paints symmetrically, and
+**Radial** repeats each stroke that many times around the canvas centre - set it
+to 8 and one drag draws a rosette. The two compose: radial 4 with Mirror X is
+eight-fold.
 
 In the 3D viewport, strokes are raycast onto the mesh and resolved through its
 UVs, so you paint where you point.
