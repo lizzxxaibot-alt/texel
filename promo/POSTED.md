@@ -58,6 +58,7 @@ not meet CLAUDE.md §5. Nobody posts there until the actual rule is read.
 | 2026-09-10 | **BlenderArtists** | **Release thread.** Problem first (pixel size drifts across the mesh, staircased diagonals), then the tool, honest Windows-only test scope, GPL position, price ladder | none (text only) | — | [t/1652476](https://blenderartists.org/t/texel-paint-pixel-art-directly-onto-your-models-and-animate-it/1652476) |
 | 2026-09-11 | Bluesky | **v0.2.0 release note** *(queued for Wed 09-09, moved to Fri 09-11)*. Problem first (a mirrored corridor tile should land back on the grid), then the release, then the four counts | `promo/transform/texel-0.2.0-selection-transforms.png`, downsampled 2560x1440 -> 1280x720 and saved JPEG q95 subsampling=0 (259,740 B, well under the 976,560 cap) as `..._post.jpg` | **2026-10-02** | [3mvbff2zfou2d](https://bsky.app/profile/pixelkiln.bsky.social/post/3mvbff2zfou2d) |
 | 2026-09-13 | Bluesky | **The Density Cheatsheet drop** — `texel-funnel`'s free CC0 sheet, announced as the sheet rather than as Texel, per the `QUEUE.md` row that claimed this slot. Problem first (one wall crisp, the crate in front of it mushy, same texture, same distance), then the two worked numbers, then the link | `funnel/density_cheatsheet/_full_2x.png` (the 2x render of the live itch cover, 1260x1000, 615,699 B — under the 976,560 blob cap, so no JPEG step was needed) and `funnel/density_cheatsheet/shot_sheet.png` (1240x1754, 664,404 B). Neither had been posted before; `_full_2x.png` was checked against `cover.png` by downsampling it to 630x500 (mean channel delta 4.6, differences confined to type antialiasing) to confirm it is the same critic-passed design and not a stale intermediate | **2026-10-04** | [3mvggdv3qjy2f](https://bsky.app/profile/pixelkiln.bsky.social/post/3mvggdv3qjy2f) |
+| 2026-09-16 | Bluesky | **Nearest-vs-bilinear — problem first.** Queued 2026-09-09 for Mon 09-14, stood down there on the account-saturation ground, and landed on Wed 09-16 exactly as `QUEUE.md` planned. Sent as "what interpolation does to indexed art", **not** as a comparison to any product — the footer names `Pillow.Image.BILINEAR` as the right-hand generator, which is a library function, not a rival | `promo/transform/texel-nearest-vs-bilinear.png`, **252,034 B at 1280x720** — under the 976,560 blob cap, so no JPEG step was needed and the posted bytes are the linted bytes. Every image the card displays (`nn_half_texel.png`, `bl_half.png`, `pal_nn_texel.png`, `pal_bl.png`) was unposted; `original.png` is not displayed, only quoted as figures | **2026-10-07** | [3mvnxwghjbm2c](https://bsky.app/profile/pixelkiln.bsky.social/post/3mvnxwghjbm2c) |
 
 **That guard held.** `texel-marketing`'s 09-09 run read this line, checked it
 against the live account rather than trusting it, and did not post: the trailing
@@ -525,3 +526,83 @@ one-post-per-owner-day line, which is the same genuine conflict recorded on
 before it sends.** That is the whole lesson of the 09-14 FATAL: the arithmetic
 was read off a paraphrase and was false on its own preferred evidence. A number
 in this file is 24 hours old by the time the next run reads it.
+
+---
+
+## Run 2026-09-16 (Wednesday, a Texel day)
+
+### Two replies, both verified on the public AppView
+
+| date | thread | what was said | url |
+|---|---|---|---|
+| 2026-09-16 | @hauntedwolfmaive.bsky.social — *"lately ive been trying to have a lil more fun with my texturing process and 90% of it has just been UV unwrapping by projecting from view and tweaking them from there,,, its SO scuffed but it works and i like how these models have turned out :3"* (**13 likes, 0 replies** in three days, so ours is the only one in it). Their own alt text is unusually rich and was used rather than the render — *"the belly button is just a slice of the collar bone texture"* | Opened on the detail **they** flagged, and affirmed it rather than correcting — they like the result, so a correction would have been the wrong opening. Then the default that sits under the exact technique they named: **`uv.project_from_view` has `orthographic` OFF by default**, so a perspective viewport rides along into the UVs; it is a tickbox in the F9 Adjust Last Operation panel. **Read out of Blender 4.5.9 LTS with `--factory-startup` rather than recalled** — `orthographic` default `False` (*"Use orthographic projection"*), alongside `camera_bounds` `True`, `correct_aspect` `True`, `clip_to_bounds` `False`, `scale_to_bounds` `False`. Deliberately a different operator from every spent answer: not `average_islands_scale` (09-10), not `smart_project`'s `island_margin` (09-10), not `pack_islands` (09-14), not the non-uniform-scale unwrap (09-15) | [3mvnxtiqmsz2g](https://bsky.app/profile/pixelkiln.bsky.social/post/3mvnxtiqmsz2g) |
+| 2026-09-16 | @erodozer.moe — *"I am out here just not giving a fuck, moving UVs for each face individually, and reusing sections that look about right instead unwrapping things as they're shaped. I am not a trained 3d artist"* (**13 likes, 0 replies**, so ours is the only one in it) | Self-deprecating post, so the reply **legitimises the technique first** — reusing sections is atlasing, and shipped props do it deliberately — then names the one real cost: overlap breaks baking, because AO wants unique texel space. The escape hatch is a second UV map kept only for the bake. **Measured rather than recalled**: `me.uv_layers.new()` was called in a loop in 4.5.9 `--factory-startup` and **returns `None` on the 8th add**, so a mesh carries exactly **8 UV maps** — a check that could have failed and would have changed the number in the reply. (`scene.render.bake.margin` default `16`, `margin_type` `ADJACENT_FACES`, read in the same run but left out of the reply as one fact too many) | [3mvnxtnzyjc2o](https://bsky.app/profile/pixelkiln.bsky.social/post/3mvnxtnzyjc2o) |
+
+Both re-fetched from `app.bsky.feed.getPostThread` on the public AppView after sending: correct author, correct parent handle, full text intact.
+
+### Threads looked at and left alone this run
+
+- **@alfredbaudisch.com — every thread, including the 883-like one** (*"Imagine Aseprite or another #pixelart program inside Blender?"*, 26 replies) and the 09-15 and 09-16 posts. This is the other pixel-art-in-Blender product and it is **off limits under the standing no-rivalry rule**, which is exactly why it keeps surfacing at the top of every search this routine runs: it is the highest-engagement account on the topic. Not replied to, not named in any post, not quoted. **Also skipped: @obsurveyor and @nostalgianinja replies that sit inside those threads** — the rule is the thread, not just the account.
+- **@tiotiohan** (*"Real life UV unwrapping"*, 8 likes) — a visual joke, nothing genuine to add.
+- **@blooink.neocities.org** (*"UV unwrapping is a pain though"*) — 0 likes, 0 replies; the honest answer is one of the two facts already spent above, and repeating a spent fact into a dead thread is volume, not reach.
+
+### What went out, and the two false premises `venture-critic` made this run delete first
+
+**POSTED 2026-09-16 20:25:44 UTC** — [3mvnxwghjbm2c](https://bsky.app/profile/pixelkiln.bsky.social/post/3mvnxwghjbm2c),
+**293/300 bytes**, re-fetched from the public AppView after sending: the image is attached
+(`app.bsky.embed.images#view`, 1280x720), **1,525 characters of alt text intact**, 4 facets
+(one link, three tags). All four figures were re-checked against `resample_facts.json`
+before sending — 118 off-palette, 112 partial-alpha, 11 colours, 103 texels — and
+`core.select.transform_region`, the function the card credits, was confirmed **present in
+the live `dist/texel-0.2.0.zip`** by reading the archive rather than the roadmap.
+
+`venture-critic` returned **VERDICT: REOPEN** on the draft decision — not against posting
+the card, which it re-verified independently and found sound, but against **two premises in
+the reasoning that were false and would have gone into this file as fact.** Both are
+corrected here rather than quietly dropped, because the whole point of the 09-14 entry two
+sections up is that a wrong number in this file survives to mislead the next run.
+
+**FATAL 1 — the run nearly recorded that the v0.2.1 beat lost on quality. It lost on legality.**
+The draft reasoning said radial symmetry "deserves a purpose-built visual" and was "not
+perishable." That is a judgement about a post that **was never lawful to write**: §B's hard
+ban is *never show a feature that is not in the uploaded zip*, and v0.2.1 is not uploaded
+(see the new section in `QUEUE.md`). Had the Friday row been filed as "blocked on a visual",
+a future run could have built a beautiful radial card on schedule and posted it **while the
+zip was still unshipped** — walking into the exact ban this run avoided by accident of
+checking. The Friday row now gates on **the live upload widget naming `texel-0.2.1.zip`
+first, and the visual second.**
+
+**FATAL 2 — the ceiling count was wrong in the self-serving direction, and is restated here properly.**
+The draft said the account held **5 posts** and that the saturation ground had "cleared."
+That used calendar-day buckets over the last 7 local days, which is **not this venture's
+established method** — every prior check in this file uses a **rolling 168-hour window on
+the live feed**. On that method, at a 15:15 CDT run on 09-16 (cutoff 09-09 20:15Z), the
+window holds **7**: 09-09 21:18Z, 09-10 00:15Z, 09-10 19:07Z, 09-11 20:21Z, 09-12 19:10Z,
+09-13 20:22Z, 09-15 19:09Z. The bucket method conveniently dropped the two 09-09 posts that
+a rolling window still counts. **It is the same defect as the 09-14 FATAL, mirrored:** that
+run miscounted to justify *not* posting, this one miscounted to justify posting.
+
+**The action was still right, on a reason the draft never gave.** The count of 7 is not a
+breach, because `marketing_plan.md` **retired the 3-4/week line in writing** — *"Volume is
+governed by the day-split in Cadence below, not by a weekly number"* — and the day-split
+permits one item per owned day, so 7 owned days admit 7 posts. **Wednesday is Texel's, and
+it was unspent.** Texel has used **2 of its 4** owned days (09-11 Fri, 09-13 Sun); the packs
+held 09-10, 09-12, 09-15, and `pixelkiln-marketing` ran today at 19:06Z and **correctly did
+not post on a Texel day**. So the honest sentence is *"the day-split governs and Wednesday
+was free"*, per the 09-13 precedent — **not** *"the ceiling has cleared"*, which was false.
+
+**SERIOUS — a visual library was declared absent without opening the folder.**
+The draft asserted there was no asset for the v0.2.1 beat. `shots/t008/` had been created
+by `texel-release` at 13:02-13:12 **the same day** and holds a full before/after set for the
+density-readout fix — `repro_top.png`, `repro_density.png`, `crop_sidebar.png`,
+`crop_sidebar_1.50.png`, `after_15.png`, `after_density.png` and a `settle/` sequence.
+**Precisely: those are readout-fix captures, not radial-symmetry ones**, so the claim "no
+radial asset exists" survives — but the claim that the readout half was "a weak outbound
+post" was **asserted without checking**, and it was the move that let radial be called the
+marketable half. `ROADMAP.md` calls the readout *"the feature the product is positioned on"*.
+Moot today because the whole beat is barred, but the ranking could have been wrong.
+
+**NOTE, recorded because it is the run's one real save:** checking the live store page
+before drafting a release note is what caught the unshipped zip. Trusting `ROADMAP.md`'s
+tick would have produced a post advertising radial symmetry to an audience that cannot
+download it.

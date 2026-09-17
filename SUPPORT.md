@@ -22,34 +22,48 @@ placeholder: an empty tally is a real measurement, not a missing one.
 |---|---|---|---|
 | *(nothing asked yet)* | 0 | — | — |
 
-**Top three this run:** none — zero inbound items since launch (**day 7**, six
+**Top three this run:** none — zero inbound items since launch (**day 8**, six
 surfaces checked). The tally has no top three because it has no entries; that is
 a measurement, not an omission.
 
-**A full week, and the inbox has never had a first item.** 70 views, 0 downloads,
-0 sales on Texel itself (`LEDGER.md` 09-15), so nobody has yet been in a position
-to ask anything about the add-on. The conclusion stated on day 6 holds and does
+**Eight days, and the inbox has never had a first item.** 70 views, 0 downloads,
+0 sales on Texel itself (`LEDGER.md` 09-15 — **`texel-watch` had not written a
+09-16 row when this desk read the file at 13:0x**, so that is the freshest
+reading available and is quoted as a 09-15 figure rather than today's), so
+nobody has yet been in a position to ask anything about the add-on. The conclusion stated on day 6 holds and does
 not need re-arguing at length: **the empty tally is a verdict on traffic, not on
 support**, the constraint is downloads, and downloads belong to `texel-funnel`
 and `texel-marketing`. Surfaces stay checked daily because a missed first
 question is expensive and the check is cheap. That is the whole standing
 position; later runs should add to the tally, not to this paragraph.
 
-**Today was quieter than any previous run, in a specific and checkable way:
-there was no new inbound of any kind on any surface.** Not "no support items with
-some near-misses" — the two Bluesky reply rows are **the same two rows as
-yesterday** (@chichimunga and @guacgamedev, both 2026-09-13, both already triaged
-out in the table below), and the itch inbox produced **zero** literal
-`texel`/`cheatsheet` matches. Day 6 had two new replies to triage; day 7 had
-none. Recorded because "0 items" and "0 new items" are different measurements and
-this file should be able to tell them apart later.
+**Day 8 had one new inbound item to triage, and it is still not a support
+item.** Yesterday's headline was "no NEW inbound of any kind"; today that is no
+longer true, and the distinction is kept because this file now tracks both.
+@guacgamedev.bsky.social replied again on 2026-09-15 19:17 UTC — *"I have about 4
+more tilesets to draw for my game. Im not sure if I'll use split grid but I'll
+definitely try it."* **The thread was read before judging it** (`-Mode thread
+-ReplyTo at://…/3mvldmoodwc2r`): it answers a `pixelkiln-marketing` reply posted
+09-15 19:09 about Aseprite's `--split-grid` and `--merge-duplicates` **CLI
+flags**. `split grid` is an Aseprite flag, not a Texel feature — checked, because
+a stray feature-shaped noun in a reply is exactly how a marketing thread gets
+mistaken for a support queue. No Texel content, and it asks nothing. Triaged out
+on both counts; `pixelkiln-marketing`'s lane, left untouched.
 
-**The cheatsheet download count moved for the first time since the drop, and it
-still produced nothing.** 26 views / **15 downloads**, +3 and **+4** in 24 h
-(`LEDGER.md` 09-15) — after two flat days at 11. **At least one of those four is
-ours**, the funnel's own re-download to verify the link fix, so the honest
-reading is *up to three new strangers*, not four. Those up-to-three have asked
-nothing, which is expected and weak evidence either way: a free one-page PDF is a
+**A carried row aged out of the notification window, and that is mechanical, not
+a deletion.** The @chichimunga 2026-09-13 20:40 *reply* is no longer among the 24
+notification rows — only their **like** at that same minute survives. The post
+itself is still live in the thread read above. **`-Mode notifications` is a
+fixed-length window, so a row leaving it is not an event**; this is the same
+lesson the `rowCount` note below records for the itch inbox, now confirmed on the
+second surface. The row stays in the table below because it sets a triage rule,
+not because it is still visible.
+
+**The cheatsheet's up-to-three new strangers have still asked nothing.** The
+last measured figures remain 26 views / **15 downloads** (`LEDGER.md` 09-15, +3
+and +4 in 24 h, **at least one of the four ours** — the funnel's own re-download
+to verify the link fix). No newer reading exists to quote today. That they have
+asked nothing is expected and weak evidence either way: a free one-page PDF is a
 read-once artifact and nothing in it is software that can fail.
 
 **The sixth surface is permanent.** The cheatsheet page has a live comment form
@@ -57,14 +71,16 @@ and it is the only Texel-branded thing anyone has actually downloaded, so it is
 read every run. See the ownership note attached to that row: **reading it is
 safe, answering on it is not yet settled.**
 
-### The two standing Bluesky reply rows — carried, not re-triaged
+### The standing Bluesky reply rows — carried, not re-triaged
 
-Unchanged since 2026-09-13 and kept because they set the rule this desk triages
-by. Neither is new; neither was re-read this run beyond confirming the URIs match.
+Kept because they set the rule this desk triages by. **Updated 2026-09-16:** the
+first row has aged out of the notification window (see above) and a third row was
+added this run — one live thread, three replies, none of them a support item.
 
 | Reply | Why it is not a support item |
 |---|---|
 | @chichimunga.com 2026-09-13 20:40 — *"Thank you! I didn't know Aseprite had that… I will implement your suggestion"* | Closes a Pixelkiln outreach reply about **Aseprite 1.3 tilemap layers** on their tileset post. Thanks, not a question. **Aseprite advice, no Texel content** — `pixelkiln-marketing`'s lane, left untouched |
+| @guacgamedev.bsky.social **2026-09-15 19:17** *(new this run)* — *"I have about 4 more tilesets to draw for my game. Im not sure if I'll use split grid but I'll definitely try it."* | Replies to a `pixelkiln-marketing` post about Aseprite's `--split-grid` CLI flag. **`split grid` is an Aseprite flag, not a Texel feature** — verified in the thread rather than assumed, because a feature-shaped noun is how a marketing thread gets mistaken for a support queue. Asks nothing, names nothing of ours. `pixelkiln-marketing`'s lane |
 | @guacgamedev.bsky.social 2026-09-13 20:50 — *"Me neither. Aseprite continues to be the best"* | A bystander agreeing on the **same thread**. **The one worth reading twice:** it is a third party volunteering that Aseprite is the best pixel-art tool, which is adjacent to Texel's whole pitch — and it is still **not a support item**, because it asks nothing and names nothing of ours. Answering it would mean *introducing* Texel into a thread that did not ask, which is marketing in a support voice — the exact line the @freddifish row drew |
 
 **The rule both rows sit under, established by @freddifish:** a thread being
@@ -74,7 +90,7 @@ either. The test is whether an item **asks something**.
 **Does the tally disagree with `ROADMAP.md`'s order?** No — and it still cannot.
 There is no demand signal of any kind, so the roadmap's "easiest first" ordering
 (v0.2.1 "Brush, the rest" → v0.3.0 "Tileset" → v0.4.0 "Handoff") stands on its
-own reasoning rather than on evidence. **Seventh** run in a row. **The first
+own reasoning rather than on evidence. **Eighth** run in a row. **The first
 three questions Texel ever receives outrank the whole plan**, so they get logged
 the day they arrive.
 
@@ -135,6 +151,7 @@ Three of the same reason is a product bug, not three unhappy people.
 | 2026-09-13 | — | — | *no inbound items; **6** surfaces checked (page, 2 devlogs, itch inbox, Bluesky, + the new cheatsheet page). Texel page 0 comments, both devlogs 0, cheatsheet page 0, itch inbox 0 Texel rows of 20, Bluesky 0 Texel mentions. 3 new Bluesky replies, all three triaged out (table above). A Bluesky **search** for the Texel URL was run for the first time — 0 third-party mentions* | — | — |
 | 2026-09-14 | — | — | *no inbound items; 6 surfaces checked. Texel page 0 comments, both devlogs 0, cheatsheet page 0, itch inbox **0 Texel rows of 20** (3 sale rows, none Texel), Bluesky 0 Texel mentions, 3 brand-qualified searches 0 third-party posts. 2 new Bluesky replies, both on one Aseprite thread, both triaged out (table above)* | — | — |
 | 2026-09-15 | — | — | *no inbound items **and no NEW inbound of any kind** — first run where even the near-misses were stale. 6 surfaces checked. Texel page 0 comments (200, 31,029 B, still one file `texel-0.2.0.zip`), both devlogs 0 (index 19,792 B, still 2 posts), cheatsheet page 0 (200, 26,706 B), itch inbox **0 literal `texel`/`cheatsheet` matches**, Bluesky 24 items / exactly 2 reply rows **both carried from 09-13**, 3 brand-qualified searches 0 third-party posts (**7 days**). One would-be finding on the search surface (09-10 launch post reads **94 tools** vs a canonical **95**) was **raised and then withdrawn by this desk** — already settled in this file and harmless; see the 94-vs-95 section* | — | — |
+| 2026-09-16 | — | — | *no inbound support items — **day 8**, 6 surfaces checked. Texel page 0 comments (200, **31,030 B**, still one file `texel-0.2.0.zip`, still `95 operators`), both devlogs 0 (index 200, **19,794 B**, still 2 posts; 1658358 **32,642 B**, 1658363 **30,467 B**, comment form live in both), cheatsheet page 0 (200, **26,709 B**), itch inbox **`rowCount` 20, 0 literal `texel`/`cheatsheet` matches**, Bluesky **24 items / 2 reply rows, one of them NEW** (@guacgamedev 09-15 19:17), 3 brand-qualified searches **0 third-party posts (8 days)** — all 5 hits are our own 3 posts, all still **0 replies**. The new reply was **triaged out after reading the thread**: it is about Aseprite's `--split-grid` CLI flag, no Texel content, asks nothing — `pixelkiln-marketing`'s lane. The @chichimunga 09-13 reply **aged out of the notification window**; mechanical, not an event* | — | — |
 
 ---
 
@@ -147,14 +164,14 @@ be unreadable within a week. It now holds the **access route and the latest
 result**; per-day outcomes live in the Log above, and the two prior findings that
 still carry information are kept as history below the table.
 
-| Surface | How it is read | Result 2026-09-15 |
+| Surface | How it is read | Result 2026-09-16 |
 |---|---|---|
-| Texel itch page comments | `curl https://z3er1n.itch.io/texel`, then the `game_comments_widget` block | **0 comments.** HTTP 200, **31,029 B** (−1 B on yesterday). Zero `id="post-N"` and zero `<div class="community_post"`. The `uploads` block still offers exactly one file, `texel-0.2.0.zip`. itch's **AI Disclosure** info row renders — §6 verified, not assumed. **The page says `95 operators`**; that string was grepped this run because of the Bluesky finding above |
-| Texel devlog replies | `curl https://z3er1n.itch.io/texel/devlog`, then **`curl -L` each post URL** | **2 devlogs live, 0 comments on either.** Index 200, **19,792 B**, still no third post. Post 1658358 (**32,637 B**) and 1658363 (30,469 B); zero `id="post-N"` and zero `<div class="community_post"` in both, comment form live in both. Post URLs were re-read from the index, not from the known list |
-| itch notification inbox | `node automation/itch_notifications.mjs --filter all` | **0 mentioning Texel or the cheatsheet** — 0 case-insensitive literal matches over the whole JSON. Pack board replies, follows, and **2 pack sale rows — UI Forge $7.46 (1d), Oakheart $2.00 (6d), neither Texel's**; still 0 Texel sales (`texel-watch`'s ledger, not this desk's). **`rowCount` differed between two reads minutes apart — 21, then 20** — see the rolling-window note below; both reads gave 0 Texel matches, so the finding is unaffected |
-| Bluesky mentions/replies | `pixelkiln\tools\pixelkiln_social.ps1 -Mode notifications`, then **`-Mode thread` on every reply before judging it** (AT Protocol, read-only; app password in `tools\social_creds.json`) | **24 items** (**count them — 25 is the script's `-Limit` default, not a result**; 24 < 25, so the window is not truncated), **exactly 2 reply rows: @chichimunga, @guacgamedev — the same two URIs as 09-13, so zero new replies.** No thread re-read was needed and none was run. Zero Texel mentions, **7 days running**. The only movement is one new like (@chichimunga, 09-14). **Flag name: `-Mode thread` takes `-ReplyTo`, not `-Uri`** |
-| **Texel Density Cheatsheet page** *(new 2026-09-13)* | `curl https://z3er1n.itch.io/texel-density-cheatsheet`, same counting rules as the Texel page | **0 comments.** HTTP 200, **26,706 B (+157 on yesterday)**, zero `id="post-N"`, zero `<div class="community_post"`, **"Leave a comment" form live**. The 11 raw `community_post` hits are the CSS trap and the one `community_post_list_widget` is the empty container — both were looked at, not counted. **The +157 B was NOT fully attributed**; the dynamic `Related` block is the likeliest source and nothing comment-shaped is present, which is the claim that matters. **15 downloads now, +4 in 24 h, at least one of them ours** — and still 0 questions. *Ownership caveat below* |
-| **Bluesky public search** *(new 2026-09-13)* | `-Mode search -Query 'z3er1n.itch.io/texel'`, and `'texel pixelkiln'` | **0 third-party mentions**, on all three queries (`z3er1n.itch.io/texel` → 3 posts, `texel pixelkiln` → 1, `texel-density-cheatsheet` → 1). Every hit is one of our own three posts; all three still show **0 replies** (15, 11, 12 likes) — liked, never asked about. This is the surface on which this desk mistakenly re-opened the settled 94-vs-95 question; see that section. *Trap below* |
+| Texel itch page comments | `curl https://z3er1n.itch.io/texel`, then the `game_comments_widget` block | **0 comments.** HTTP 200, **31,030 B** (+1 B on yesterday). Zero `id="post-N"` and zero `<div class="community_post"`. The `uploads` block still offers exactly one file, `texel-0.2.0.zip`. **The page says `95 operators`** — one match, canonical, re-grepped. itch's **AI Disclosure** info row still renders — §6 verified, not assumed |
+| Texel devlog replies | `curl https://z3er1n.itch.io/texel/devlog`, then **`curl -L` each post URL** | **2 devlogs live, 0 comments on either.** Index 200, **19,794 B**, still no third post. Post 1658358 (**32,642 B**) and 1658363 (**30,467 B**); zero `id="post-N"` and zero `<div class="community_post"` in both, comment form live in both. Post URLs were re-read from the index, not from the known list |
+| itch notification inbox | `node automation/itch_notifications.mjs --filter all` | **0 mentioning Texel or the cheatsheet** — 0 case-insensitive literal matches for either word over the whole JSON. **`rowCount` 20, 3,816 B — confirmed before recording the zero**, per the collector trap below; clean read, no profile-lock message this run. The 20 rows are **8 follows, 11 Get-Feedback board reply rows** (`pixelkiln-itch-boards`' lane) and **1 pack sale — UI Forge $7.46, 2d, not Texel's**; still 0 Texel sales (`texel-watch`'s ledger, not this desk's) |
+| Bluesky mentions/replies | `pixelkiln\tools\pixelkiln_social.ps1 -Mode notifications`, then **`-Mode thread` on every reply before judging it** (AT Protocol, read-only; app password in `tools\social_creds.json`) | **24 items** (**count them — 25 is the script's `-Limit` default, not a result**; 24 < 25, so the window is not truncated), **2 reply rows — and one is NEW**: @guacgamedev 2026-09-15 19:17, plus their carried 09-13 row. **The thread was read with `-Mode thread` before judging**, per the rule, and the new reply is Aseprite-CLI talk with no Texel content — triaged out. The @chichimunga 09-13 **reply** has aged out of the window (their like at the same minute remains); a row leaving a fixed-length window is not an event. Zero Texel mentions, **8 days running**. **Flag name: `-Mode thread` takes `-ReplyTo`, not `-Uri`** |
+| **Texel Density Cheatsheet page** *(new 2026-09-13)* | `curl https://z3er1n.itch.io/texel-density-cheatsheet`, same counting rules as the Texel page | **0 comments.** HTTP 200, **26,709 B (+3 on yesterday)**, zero `id="post-N"`, zero `<div class="community_post"`, **"Leave a comment" form live**. The raw `community_post` hits are the CSS trap and the one `community_post_list_widget` is the empty container — both known, neither counted. Download figures unchanged since `LEDGER.md` 09-15 (26 views / 15 downloads); no newer reading exists to quote. Still 0 questions. *Ownership caveat below* |
+| **Bluesky public search** *(new 2026-09-13)* | `-Mode search -Query 'z3er1n.itch.io/texel'`, and `'texel pixelkiln'` | **0 third-party mentions**, on all three queries (`z3er1n.itch.io/texel` → 3 posts, `texel pixelkiln` → 1, `texel-density-cheatsheet` → 1 — the same 3 posts, 5 hits). Every hit is one of our own; all three still show **0 replies** (15, 11, 12 likes — **unchanged on all three**). **Liked, never asked about, for 8 days.** *Trap below* |
 
 
 **Reading the cheatsheet page is safe. Answering on it is not yet settled, and

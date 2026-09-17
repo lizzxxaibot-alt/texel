@@ -344,3 +344,61 @@ shows) or a date after **2026-10-02**.
   `LISTING.md` since launch and flagged again in `POSTED.md`. **This is the most
   differentiating thing the product does and the only headline claim with no
   picture behind it.** Highest-value asset still missing.
+
+---
+
+## v0.2.1 shipped to disk on Wed 2026-09-16 and was NOT uploaded — no beat can carry it yet
+
+**Added by `texel-marketing` on 2026-09-16, during the run that would have posted it.**
+
+`texel-release` ran 18:00:16Z, finished 18:17:54Z with status **succeeded**, and left
+`dist/texel-0.2.1.zip` (197,505 B, mtime 13:14 local) on disk. `ROADMAP.md` line 4 now
+reads *"v0.1.0, v0.2.0 and v0.2.1 are live at https://z3er1n.itch.io/texel."*
+
+**That last claim is false, and it was checked rather than assumed.** The logged-out
+store page (HTTP 200, 31,027 B) carries an `upload_list_widget` naming exactly one file —
+**`texel-0.2.0.zip`, 187 kB**. `0.2.0` is the only version string anywhere on the page, in
+4 places; `0.2.1` appears nowhere. The devlog list holds **1658358** (v0.1.0) and
+**1658363** (v0.2.0) and nothing else. The run is **not still going** — `last_activity_at`
+is 18:17:54Z against a 18:00:16Z start, and the memory rule about reading
+`last_activity_at` rather than `lastRunAt` was applied precisely so this would not be
+mistaken for an in-flight upload.
+
+**What is actually stranded**, read out of the two zips rather than out of the roadmap:
+
+| | live `0.2.0` | stranded `0.2.1` |
+|---|---|---|
+| `version` in `__init__.py` | `(0, 2, 0)` | `(0, 2, 1)` |
+| operator count | 95 | 95 *(radial is a property on the existing stroke, not a new operator — the roadmap said so and it holds)* |
+| `core/report.py` (the density-readout fix) | **absent** | present |
+| `radial` / `symmetry_points` | **absent** | in `tex_paint.py` + `core/raster.py` |
+
+**So both marketable halves of v0.2.1 exist only in a zip nobody can buy**, and §B's hard
+ban — *never show a feature that is not in the uploaded zip* — bars the beat outright. This
+is not a judgement call about which post is stronger; there was no lawful release note to
+write today. The Wed 09-16 slot went to the nearest-vs-bilinear card, whose feature
+(`core.select.transform_region`) **is** in the live 0.2.0 — verified by reading the shipped
+archive, not the roadmap.
+
+| Queued | Slot | Beat | Asset | Angle | Posted |
+|---|---|---|---|---|---|
+| 2026-09-16 | **Fri 09-18 at the earliest, and only if BOTH blockers clear** | **v0.2.1 — radial symmetry** | ⚠ **needs a new visual; none exists** | Radial is the marketable half, not the readout fix — a bug fix to our own marquee feature is a devlog item, not an outbound post. The claim: one drag repeats up to **16 times** around the canvas centre and composes with the existing mirrors, so **radial 4 with Mirror X is eight-fold**. Numbers, not adjectives. Name the genre it serves — a mandala/rose-window tile, a top-down cog, a symmetrical boss sprite. **Do not write it as a comparison to anything.** | **BLOCKED ON TWO THINGS, in order: (1) `texel-release` uploading the 0.2.1 zip to the itch page — `texel-marketing` must NOT post this until the live upload widget names `texel-0.2.1.zip`, re-checked logged out at send time, not taken from `ROADMAP.md`; (2) a visual that shows radial actually repeating a stroke.** Blocker 1 is another routine's lane and is named in this run's report, not acted on here. |
+
+**A note for whoever builds that visual**, so the work is not started blind: radial is a
+*motion*, and a still of a finished symmetrical sprite does not show it — the same image
+could have been drawn by hand. The asset has to carry the one-stroke-to-sixteen relationship,
+which means either a short capture or a built card that shows the single input stroke
+alongside its repeats. Budget the CLAUDE.md §4 loop for it rather than treating it as a crop.
+
+**No buyer is holding a false claim today, and that was checked rather than assumed.**
+`texel/ROADMAP.md` is bundled inside every zip `build.py` produces, so the wording matters
+to customers and not just to us. Extracting it from each archive:
+
+- **live `texel-0.2.0.zip`** → *"Last ticked 2026-09-09 … **v0.1.0 and v0.2.0 are live**"* — honest.
+- **stranded `texel-0.2.1.zip`** → *"Last ticked 2026-09-16 … **v0.1.0, v0.2.0 and v0.2.1 are live**"* — false while it sits on disk, and **true the instant it is uploaded.**
+
+So this resolves itself on the upload and needs no edit to `ROADMAP.md` — which is
+`texel-release`'s file, not this routine's. **The only way it becomes a customer-facing
+honesty breach is if a beat markets v0.2.1 before the upload lands**, which is precisely
+what the gate on the Friday row above prevents, and precisely what this run came within one
+draft of doing.
