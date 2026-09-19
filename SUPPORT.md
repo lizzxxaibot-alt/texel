@@ -22,14 +22,14 @@ placeholder: an empty tally is a real measurement, not a missing one.
 |---|---|---|---|
 | *(nothing asked yet)* | 0 | — | — |
 
-**Top three this run:** none — zero inbound items since launch (**day 8**, six
-surfaces checked). The tally has no top three because it has no entries; that is
-a measurement, not an omission.
+**Top three this run:** none — zero inbound items since launch (**day 11**, six
+surfaces checked; **day 10** is a fleet-outage gap, see below). The tally has no
+top three because it has no entries; that is a measurement, not an omission.
 
-**Eight days, and the inbox has never had a first item.** 70 views, 0 downloads,
-0 sales on Texel itself (`LEDGER.md` 09-15 — **`texel-watch` had not written a
-09-16 row when this desk read the file at 13:0x**, so that is the freshest
-reading available and is quoted as a 09-15 figure rather than today's), so
+**Nine days, and the inbox has never had a first item.** 74 views, 0 downloads,
+0 sales on Texel itself (`LEDGER.md` 09-17, written 13:32 local this run — the
+first fresh same-day reading this desk has had in three runs; note **09-16 has a
+`NO READING TAKEN` gap row**, so +4 is a two-day delta that cannot be split), so
 nobody has yet been in a position to ask anything about the add-on. The conclusion stated on day 6 holds and does
 not need re-arguing at length: **the empty tally is a verdict on traffic, not on
 support**, the constraint is downloads, and downloads belong to `texel-funnel`
@@ -37,9 +37,31 @@ and `texel-marketing`. Surfaces stay checked daily because a missed first
 question is expensive and the check is cheap. That is the whole standing
 position; later runs should add to the tally, not to this paragraph.
 
-**Day 8 had one new inbound item to triage, and it is still not a support
-item.** Yesterday's headline was "no NEW inbound of any kind"; today that is no
-longer true, and the distinction is kept because this file now tracks both.
+**Day 9 again had exactly one new inbound item, and it is again not a support
+item.** Two runs running, the near-miss is a Blender/Aseprite craft reply on a
+`pixelkiln-marketing` thread. The day-8 item is kept below because it set the
+triage rule; the new one is added to the same table.
+
+**The new one was worth a verification, and that is the part with value.**
+@hauntedwolfmaive.bsky.social replied *"wqhat"* on 2026-09-16 21:29 UTC. The
+thread was read before judging it (`-Mode thread -ReplyTo at://…/3mvo3hluilc2w`):
+they had posted about UV-unwrapping by Project From View, and a
+`pixelkiln-marketing` reply at 20:24 told them **Orthographic is OFF by default
+in that operator, so viewport perspective rides into the UVs**. *"wqhat"* is
+astonishment at that claim, not a question to us — but **a one-word shock reply
+is the cheapest possible signal that our account may have just said something
+false on a shared brand**, so the claim was checked rather than waved through:
+
+```
+blender --background --factory-startup --python <read uv.project_from_view RNA>
+→ BLENDER 4.5.9 LTS · orthographic default= False
+```
+
+**The tip is correct.** No §6 finding, nothing owed to that thread, and it stays
+`pixelkiln-marketing`'s to answer. Recorded because the *method* generalises:
+when a reply to our own account expresses surprise at a factual claim, verify
+the claim even though the reply is out of lane — that check costs one command and
+is the only cheap moment to catch a wrong statement before it is quoted back.
 @guacgamedev.bsky.social replied again on 2026-09-15 19:17 UTC — *"I have about 4
 more tilesets to draw for my game. Im not sure if I'll use split grid but I'll
 definitely try it."* **The thread was read before judging it** (`-Mode thread
@@ -71,16 +93,79 @@ and it is the only Texel-branded thing anyone has actually downloaded, so it is
 read every run. See the ownership note attached to that row: **reading it is
 safe, answering on it is not yet settled.**
 
+## Day 11: this desk missed a day, and the question that raises was answered rather than waved off
+
+**No scheduled task on this machine ran at all on 2026-09-18.** `LEDGER.md`'s
+09-18 row records the same ~35 h hole (2026-09-17T18:38Z → 2026-09-19T05:40Z)
+across all 14 tasks in the fleet, so this is the tenth run on the eleventh day.
+Not a failure of this desk, and not this desk's to fix — but it creates a
+question only this desk can answer, because it is a question about the inbox.
+
+**Two of the six surfaces are rolling windows that silently drop rows.** The
+itch inbox has a fixed `rowCount` (the 09-14 and 09-15 trap notes below), and
+Bluesky notifications are a fixed-length window (confirmed 09-17, when a carried
+reply aged out of it). **So a support item that arrived during the missed day
+could in principle have aged past the window's edge before today's read, and the
+tally would record a clean empty day off a read that could not have seen it.**
+That is the same shape as the exit-0 trap: a collector reporting cleanly on
+something it never reached.
+
+**Checked, not assumed — read the oldest row in each window and see how far back
+it reaches:**
+
+| Rolling surface | Oldest row today | Reaches back to | Covers 2026-09-18? |
+|---|---|---|---|
+| itch notifications (`rowCount` 20) | `9d` — ages present are 14h, 2d, 3d, 4d, 5d, 6d, 7d, 8d, 9d | **2026-09-10** | **Yes**, by 8 days |
+| Bluesky notifications (23 items) | `2026-09-13T22:22:53Z` | **2026-09-13** | **Yes**, by 5 days |
+
+**Both windows are deeper than the gap, so the missed day cost nothing and the
+zero recorded today is a real zero.** The other four surfaces are persistent
+(page HTML, two devlog pages, the cheatsheet page, and the Bluesky search index),
+so they cannot lose an item to a skipped run at all.
+
+**The generalisation, which is the part worth keeping:** after any missed run,
+measure the window depth before recording a zero — one read of the oldest
+timestamp settles it. A run gap is only an evidence gap where the window is
+shallower than the gap, and on these two surfaces it is not.
+
+## The stranded v0.2.1 has not yet become an honesty problem on the marketing surface — checked this run
+
+`ACTIONS.md` **T-012** is open and unchanged: the logged-out page still offers
+**exactly one file, `texel-0.2.0.zip`** (HTTP 200, 31,025 B, re-read this run),
+while `dist/texel-0.2.1.zip` sits unuploaded since 09-16. The **LIVE-ZIP RULE**
+below governs how this desk answers under that.
+
+**The risk the rule exists to catch is a public claim promising a feature no
+buyer can download**, and that is a §6 question, which is this desk's to rule on
+even though the post surface is `texel-marketing`'s. So all four live Bluesky
+posts were re-read this run and checked against the two stranded features:
+
+| Post | Claims | Stranded feature promised? |
+|---|---|---|
+| 09-16 20:25 (7 likes) | drops whole texels, 11 colours vs 118 | **No** — core paint behaviour, in the live 0.2.0 |
+| 09-13 20:22 (15 likes) | the free cheatsheet, 8 sizes / 4 densities | **No** — not about the add-on |
+| 09-11 20:21 (11 likes) | v0.2.0 flip/rotate/scale, nearest neighbour | **No** — that *is* the live version |
+| 09-10 00:15 (12 likes) | launch, "94 tools, $9.95" | **No** — and the 94 is settled below |
+
+**Zero of the four mention radial symmetry or the three-line density readout.**
+So T-012's non-upload has produced no §6 breach on the public surface yet, and
+the containment `texel-marketing` put in place on 09-16 — refusing to post the
+v0.2.1 beat until the upload lands — is holding. **This is a check to repeat, not
+a conclusion to bank**: the first Texel post that names either feature while the
+page still serves 0.2.0 is a live §6 finding, and the Mon/Wed/Fri/Sun beat
+calendar means one can appear between any two runs of this desk.
+
 ### The standing Bluesky reply rows — carried, not re-triaged
 
-Kept because they set the rule this desk triages by. **Updated 2026-09-16:** the
-first row has aged out of the notification window (see above) and a third row was
-added this run — one live thread, three replies, none of them a support item.
+Kept because they set the rule this desk triages by. **Updated 2026-09-17:** a
+fourth row was added this run, on a **second** live thread — four replies across
+two threads, none of them a support item.
 
 | Reply | Why it is not a support item |
 |---|---|
 | @chichimunga.com 2026-09-13 20:40 — *"Thank you! I didn't know Aseprite had that… I will implement your suggestion"* | Closes a Pixelkiln outreach reply about **Aseprite 1.3 tilemap layers** on their tileset post. Thanks, not a question. **Aseprite advice, no Texel content** — `pixelkiln-marketing`'s lane, left untouched |
 | @guacgamedev.bsky.social **2026-09-15 19:17** *(new this run)* — *"I have about 4 more tilesets to draw for my game. Im not sure if I'll use split grid but I'll definitely try it."* | Replies to a `pixelkiln-marketing` post about Aseprite's `--split-grid` CLI flag. **`split grid` is an Aseprite flag, not a Texel feature** — verified in the thread rather than assumed, because a feature-shaped noun is how a marketing thread gets mistaken for a support queue. Asks nothing, names nothing of ours. `pixelkiln-marketing`'s lane |
+| @hauntedwolfmaive.bsky.social **2026-09-16 21:29** *(new this run)* — *"wqhat"* | Reacts to a `pixelkiln-marketing` reply about **`uv.project_from_view`'s Orthographic default** on their own UV-unwrapping post. **No Texel content; it is not even a question** — an interjection of surprise. The claim it reacts to was **verified true against Blender 4.5.9** anyway (see above), so there is no §6 defect hiding behind it. `pixelkiln-marketing`'s lane |
 | @guacgamedev.bsky.social 2026-09-13 20:50 — *"Me neither. Aseprite continues to be the best"* | A bystander agreeing on the **same thread**. **The one worth reading twice:** it is a third party volunteering that Aseprite is the best pixel-art tool, which is adjacent to Texel's whole pitch — and it is still **not a support item**, because it asks nothing and names nothing of ours. Answering it would mean *introducing* Texel into a thread that did not ask, which is marketing in a support voice — the exact line the @freddifish row drew |
 
 **The rule both rows sit under, established by @freddifish:** a thread being
@@ -89,10 +174,17 @@ either. The test is whether an item **asks something**.
 
 **Does the tally disagree with `ROADMAP.md`'s order?** No — and it still cannot.
 There is no demand signal of any kind, so the roadmap's "easiest first" ordering
-(v0.2.1 "Brush, the rest" → v0.3.0 "Tileset" → v0.4.0 "Handoff") stands on its
-own reasoning rather than on evidence. **Eighth** run in a row. **The first
-three questions Texel ever receives outrank the whole plan**, so they get logged
-the day they arrive.
+stands on its own reasoning rather than on evidence. **Ninth** run in a row. **The
+first three questions Texel ever receives outrank the whole plan**, so they get
+logged the day they arrive.
+
+**The order this desk quotes changed under it, and the old wording is corrected
+rather than left to rot.** Runs 1–8 wrote that chain as *v0.2.1 "Brush, the rest"
+→ v0.3.0 → v0.4.0*. On 2026-09-16 `texel-release` shipped a patch that **took the
+0.2.1 number**, so "Brush, the rest" is now **v0.2.2, target 26 Sep, its date
+unmoved**. The tally still disagrees with nothing; but a desk that keeps quoting
+a version number that has been reassigned will eventually promise a buyer the
+wrong release, which is a §6 problem arriving by a side door.
 
 ---
 
@@ -152,6 +244,9 @@ Three of the same reason is a product bug, not three unhappy people.
 | 2026-09-14 | — | — | *no inbound items; 6 surfaces checked. Texel page 0 comments, both devlogs 0, cheatsheet page 0, itch inbox **0 Texel rows of 20** (3 sale rows, none Texel), Bluesky 0 Texel mentions, 3 brand-qualified searches 0 third-party posts. 2 new Bluesky replies, both on one Aseprite thread, both triaged out (table above)* | — | — |
 | 2026-09-15 | — | — | *no inbound items **and no NEW inbound of any kind** — first run where even the near-misses were stale. 6 surfaces checked. Texel page 0 comments (200, 31,029 B, still one file `texel-0.2.0.zip`), both devlogs 0 (index 19,792 B, still 2 posts), cheatsheet page 0 (200, 26,706 B), itch inbox **0 literal `texel`/`cheatsheet` matches**, Bluesky 24 items / exactly 2 reply rows **both carried from 09-13**, 3 brand-qualified searches 0 third-party posts (**7 days**). One would-be finding on the search surface (09-10 launch post reads **94 tools** vs a canonical **95**) was **raised and then withdrawn by this desk** — already settled in this file and harmless; see the 94-vs-95 section* | — | — |
 | 2026-09-16 | — | — | *no inbound support items — **day 8**, 6 surfaces checked. Texel page 0 comments (200, **31,030 B**, still one file `texel-0.2.0.zip`, still `95 operators`), both devlogs 0 (index 200, **19,794 B**, still 2 posts; 1658358 **32,642 B**, 1658363 **30,467 B**, comment form live in both), cheatsheet page 0 (200, **26,709 B**), itch inbox **`rowCount` 20, 0 literal `texel`/`cheatsheet` matches**, Bluesky **24 items / 2 reply rows, one of them NEW** (@guacgamedev 09-15 19:17), 3 brand-qualified searches **0 third-party posts (8 days)** — all 5 hits are our own 3 posts, all still **0 replies**. The new reply was **triaged out after reading the thread**: it is about Aseprite's `--split-grid` CLI flag, no Texel content, asks nothing — `pixelkiln-marketing`'s lane. The @chichimunga 09-13 reply **aged out of the notification window**; mechanical, not an event* | — | — |
+| 2026-09-17 | — | — | *no inbound support items — **day 9**, 6 surfaces checked. Texel page 0 comments (200, **31,026 B**, still one file `texel-0.2.0.zip`, still `95 operators`, AI Disclosure row live), both devlogs 0 (index 200, **19,794 B**, still 2 posts — **no devlog for the 09-16 v0.2.1 release**; 1658358 **32,643 B**, 1658363 **30,469 B**, comment form live in both), cheatsheet page 0 (200, **26,707 B**), itch inbox **`rowCount` 20, 3,714 B, 0 literal `texel`/`cheatsheet` matches** (9 follows, 10 board rows, 1 non-Texel pack sale), Bluesky **23 items / 2 reply rows, one of them NEW** (@hauntedwolfmaive 09-16 21:29, *"wqhat"*), 3 brand-qualified searches **0 third-party posts (9 days)** — 6 hits, all our own **4** posts (one new, 09-16), **all 4 still 0 replies**. The new reply was **triaged out after reading the thread**: a Project-From-View UV thread, no Texel content, not a question — `pixelkiln-marketing`'s lane. **The Blender claim it reacted to was verified true on 4.5.9 anyway** (`uv.project_from_view.orthographic` default `False`), so no §6 finding hides behind it. **The run's real output is not an inbound item: `texel-0.2.1.zip` was counted and diffed, and it registers the SAME 95 operators as 0.2.0 — the version counter no longer distinguishes versions. The live page serves 0.2.0, so the readout fix and radial symmetry that `ROADMAP.md` marks ✅ SHIPPED are in NO zip a buyer can download** — see **THE LIVE-ZIP RULE**. Not this desk's to fix; named and stopped* | — | — |
+| 2026-09-18 | — | — | ***NO RUN. This desk did not fire.*** No scheduled task on this machine ran at all on 2026-09-18 — a ~35 h fleet-wide hole (2026-09-17T18:38Z → 2026-09-19T05:40Z) also recorded in `LEDGER.md`'s 09-18 gap row. Logged as a gap rather than left blank, because a missing row and an empty row mean different things. **Whether the gap hid an inbound item was tested on 09-19, not assumed** — both rolling surfaces reach back past it* | — | — |
+| 2026-09-19 | — | — | *no inbound support items — **day 11**, 6 surfaces checked, first run after the 09-18 outage. Texel page 0 comments (200, **31,025 B**, still one file `texel-0.2.0.zip`, still `95 operators`, AI Disclosure row live), both devlogs 0 (index 200, **19,793 B**, still 2 posts — **still no devlog for v0.2.1**; 1658358 **32,643 B**, 1658363 **30,469 B**, comment form live in both), cheatsheet page 0 (200, **26,704 B**, form live), itch inbox **`rowCount` 20, 3,718 B, 0 literal `texel`/`cheatsheet` matches** (9 follows, 10 board rows, 1 non-Texel pack sale — UI Forge $7.46, now 5d), Bluesky **23 items, 2 reply rows, BOTH CARRIED — first run since 09-14 with no new reply of any kind**; the only new notification is a like (@matchstick345, 09-19 05:52Z), which asks nothing. 3 brand-qualified searches **0 third-party posts (11 days)** — 4 hits, all our own 4 posts, **all 4 still 0 replies**, 45 likes total. **Two real outputs, neither of them an inbound item:** (a) the 09-18 outage was tested against both rolling windows and **neither is shallow enough to have dropped an item** — itch reaches 9d to 09-10, Bluesky to 09-13 — so today's zero is a real zero; (b) all four live Bluesky posts were checked against the two features stranded by T-012 and **none promises either**, so the non-upload has not yet breached §6 in public* | — | — |
 
 ---
 
@@ -164,14 +259,14 @@ be unreadable within a week. It now holds the **access route and the latest
 result**; per-day outcomes live in the Log above, and the two prior findings that
 still carry information are kept as history below the table.
 
-| Surface | How it is read | Result 2026-09-16 |
+| Surface | How it is read | Result 2026-09-19 |
 |---|---|---|
-| Texel itch page comments | `curl https://z3er1n.itch.io/texel`, then the `game_comments_widget` block | **0 comments.** HTTP 200, **31,030 B** (+1 B on yesterday). Zero `id="post-N"` and zero `<div class="community_post"`. The `uploads` block still offers exactly one file, `texel-0.2.0.zip`. **The page says `95 operators`** — one match, canonical, re-grepped. itch's **AI Disclosure** info row still renders — §6 verified, not assumed |
-| Texel devlog replies | `curl https://z3er1n.itch.io/texel/devlog`, then **`curl -L` each post URL** | **2 devlogs live, 0 comments on either.** Index 200, **19,794 B**, still no third post. Post 1658358 (**32,642 B**) and 1658363 (**30,467 B**); zero `id="post-N"` and zero `<div class="community_post"` in both, comment form live in both. Post URLs were re-read from the index, not from the known list |
-| itch notification inbox | `node automation/itch_notifications.mjs --filter all` | **0 mentioning Texel or the cheatsheet** — 0 case-insensitive literal matches for either word over the whole JSON. **`rowCount` 20, 3,816 B — confirmed before recording the zero**, per the collector trap below; clean read, no profile-lock message this run. The 20 rows are **8 follows, 11 Get-Feedback board reply rows** (`pixelkiln-itch-boards`' lane) and **1 pack sale — UI Forge $7.46, 2d, not Texel's**; still 0 Texel sales (`texel-watch`'s ledger, not this desk's) |
-| Bluesky mentions/replies | `pixelkiln\tools\pixelkiln_social.ps1 -Mode notifications`, then **`-Mode thread` on every reply before judging it** (AT Protocol, read-only; app password in `tools\social_creds.json`) | **24 items** (**count them — 25 is the script's `-Limit` default, not a result**; 24 < 25, so the window is not truncated), **2 reply rows — and one is NEW**: @guacgamedev 2026-09-15 19:17, plus their carried 09-13 row. **The thread was read with `-Mode thread` before judging**, per the rule, and the new reply is Aseprite-CLI talk with no Texel content — triaged out. The @chichimunga 09-13 **reply** has aged out of the window (their like at the same minute remains); a row leaving a fixed-length window is not an event. Zero Texel mentions, **8 days running**. **Flag name: `-Mode thread` takes `-ReplyTo`, not `-Uri`** |
-| **Texel Density Cheatsheet page** *(new 2026-09-13)* | `curl https://z3er1n.itch.io/texel-density-cheatsheet`, same counting rules as the Texel page | **0 comments.** HTTP 200, **26,709 B (+3 on yesterday)**, zero `id="post-N"`, zero `<div class="community_post"`, **"Leave a comment" form live**. The raw `community_post` hits are the CSS trap and the one `community_post_list_widget` is the empty container — both known, neither counted. Download figures unchanged since `LEDGER.md` 09-15 (26 views / 15 downloads); no newer reading exists to quote. Still 0 questions. *Ownership caveat below* |
-| **Bluesky public search** *(new 2026-09-13)* | `-Mode search -Query 'z3er1n.itch.io/texel'`, and `'texel pixelkiln'` | **0 third-party mentions**, on all three queries (`z3er1n.itch.io/texel` → 3 posts, `texel pixelkiln` → 1, `texel-density-cheatsheet` → 1 — the same 3 posts, 5 hits). Every hit is one of our own; all three still show **0 replies** (15, 11, 12 likes — **unchanged on all three**). **Liked, never asked about, for 8 days.** *Trap below* |
+| Texel itch page comments | `curl https://z3er1n.itch.io/texel`, then the `game_comments_widget` block | **0 comments.** HTTP 200, **31,025 B** (−1 B on 09-17; byte drift on this page has been ±4 for two weeks and is not a signal). Zero `id="post-N"` and zero `<div class="community_post"`. The `uploads` block **still offers exactly one file, `texel-0.2.0.zip`** — **third consecutive run**, with `dist/texel-0.2.1.zip` still unuploaded; see **THE LIVE-ZIP RULE** and `ACTIONS.md` T-012. **The page says `95 operators`** — one match, canonical, re-grepped. itch's **AI Disclosure** info row still renders — §6 verified, not assumed |
+| Texel devlog replies | `curl https://z3er1n.itch.io/texel/devlog`, then **`curl -L` each post URL** | **2 devlogs live, 0 comments on either.** Index 200, **19,793 B** (−1 B), still no third post — **v0.2.1 shipped on 09-16 and still has no devlog**, consistent with it not being on the page either (T-012 condition (b), `texel-release`'s). Post 1658358 (**32,643 B**) and 1658363 (**30,469 B**), both byte-identical to 09-17; zero `id="post-N"` and zero `<div class="community_post"` in both, comment form live in both. Post URLs were re-read from the index, not from the known list |
+| itch notification inbox | `node automation/itch_notifications.mjs --filter all` | **0 mentioning Texel or the cheatsheet** — 0 case-insensitive literal matches for either word over the whole JSON. **`rowCount` 20, 3,718 B — confirmed before recording the zero**, per the collector trap below; clean read, no profile-lock message. The 20 rows are **9 follows, 10 Get-Feedback board reply rows** (`pixelkiln-itch-boards`' lane, one of them new at 14h) and **1 pack sale — UI Forge $7.46, now 5d, still not Texel's**. **New use of this read: the row ages run 14h, 2d, 3d, 4d, 5d, 6d, 7d, 8d, 9d, so the window reaches back to 09-10** — which is how the 09-18 outage was cleared |
+| Bluesky mentions/replies | `pixelkiln\tools\pixelkiln_social.ps1 -Mode notifications`, then **`-Mode thread` on every reply before judging it** (AT Protocol, read-only; app password in `tools\social_creds.json`) | **23 items** (**count them — 25 is the script's `-Limit` default, not a result**; 23 < 25, so the window is not truncated), **2 reply rows and BOTH ARE CARRIED** — @hauntedwolfmaive 09-16 and @guacgamedev 09-15, already triaged out in the table above. **First run since 09-14 with no new reply at all**, so nothing needed a `-Mode thread` read this time. The single new notification is a **like** (@matchstick345.bsky.social, 2026-09-19 05:52:30Z) — a like asks nothing and is not a support item. Zero Texel mentions, **11 days running**. Oldest item 2026-09-13T22:22:53Z, i.e. the window is 5 days deep. **Flag name: `-Mode thread` takes `-ReplyTo`, not `-Uri`** |
+| **Texel Density Cheatsheet page** *(new 2026-09-13)* | `curl https://z3er1n.itch.io/texel-density-cheatsheet`, same counting rules as the Texel page | **0 comments.** HTTP 200, **26,704 B (−3 on 09-17)**, zero `id="post-N"`, zero `<div class="community_post"`, **"Leave a comment" form live**. The raw `community_post` hits are the CSS trap and the one `community_post_list_widget` is the empty container — both known, neither counted. `LEDGER.md` 09-19 reads **40 views / 18 downloads / 2 collections** — **+3 views and +0 downloads** in the two days the paid page took **+1**. Still **0 questions from any of the 18**, which is the only part this desk rules on; the traffic asymmetry is `texel-funnel`'s. *Ownership caveat below* |
+| **Bluesky public search** *(new 2026-09-13)* | `-Mode search -Query 'z3er1n.itch.io/texel'`, and `'texel pixelkiln'` | **0 third-party mentions**, on all three queries (`z3er1n.itch.io/texel` → **4** posts, unchanged since 09-17; `texel pixelkiln` → 1, `texel-density-cheatsheet` → 1). Every hit is one of our own; **all four show 0 replies** (7, 15, 11, 12 likes). **Liked 45 times, asked about zero times, for 11 days.** All four were additionally checked this run against the two features stranded by T-012 — none promises either. *Trap below* |
 
 
 **Reading the cheatsheet page is safe. Answering on it is not yet settled, and
@@ -323,10 +418,76 @@ Counted by installing each **shipped zip** into Blender 4.5.9 `--factory-startup
 and reading `dir(bpy.ops.texel)` after a real `register()` — an operator that
 fails to register is not an operator, and only registration knows the difference.
 
-| Shipped zip | Registered operators |
+| Shipped zip | Registered operators | Reachable by a buyer today? |
+|---|---|---|
+| `texel-0.1.0.zip` | **94** | No — superseded 2026-09-09 |
+| `texel-0.2.0.zip` | **95** | **YES — this is the only file the live page offers** |
+| `texel-0.2.1.zip` *(counted 2026-09-17)* | **95** — *identical set to 0.2.0, zero added, zero removed* | **No. Built 2026-09-16, never uploaded** |
+
+### 2026-09-17: the operator count stopped being the thing that distinguishes a version, and that is a trap for this desk
+
+**`texel-0.2.1.zip` registers the same 95 operators as `texel-0.2.0.zip` — the
+set difference is empty in both directions.** That is not a build error; it
+matches what `ROADMAP.md` says of the radial feature, *"No new operator: it is a
+property on the existing stroke."* Counted the same way as the rows above, by
+installing the zip into Blender 4.5.9 `--factory-startup` and reading
+`dir(bpy.ops.texel)` after a real `register()`.
+
+**So the counter that settled T-005 and the 94-vs-95 question cannot tell 0.2.0
+and 0.2.1 apart.** From v0.2.1 onward, operator count is evidence of *nothing*
+about which version a buyer has. Diff the module contents instead — that is what
+the next section does.
+
+### THE LIVE-ZIP RULE, 2026-09-17 — read this before answering any feature question
+
+**`ROADMAP.md` line 4 says "v0.1.0, v0.2.0 and v0.2.1 are live at
+https://z3er1n.itch.io/texel." The live page serves `texel-0.2.0.zip` and
+nothing else** — the `uploads` block was re-read logged-out this run (HTTP 200,
+31,026 B) and offers exactly one file. `dist/texel-0.2.1.zip` (197,505 B) exists
+only on this disk.
+
+**Three things `ROADMAP.md` marks ✅ SHIPPED are therefore not obtainable by
+anybody**, verified by unpacking both zips rather than by reading the changelog:
+
+| Claimed shipped in v0.2.1 | In the live `0.2.0` zip? |
 |---|---|
-| `texel-0.1.0.zip` | **94** |
-| `texel-0.2.0.zip` (the only file the live page offers) | **95** |
+| The three-line density readout (the T-008 fix) | **No** — `core/report.py` is absent from the 0.2.0 zip entirely |
+| Radial symmetry | **No** — `symmetry_points` is defined 0 times; zero files mention `radial` |
+| `build.py` file-list guard | Build tooling, never shipped to a buyer either way |
+
+**The rule this desk answers under, until the page serves otherwise:** §D
+forbids claiming a feature that is not in the uploaded zip, and *uploaded* means
+**on the itch page**, not **in `dist/`**. Until `texel-0.2.1.zip` is live,
+the honest answer to *"is the density readout fixed?"* and *"does it do radial
+symmetry?"* is **"not in the version you can download yet"** — and that stays
+true no matter how many ✅ ticks `ROADMAP.md` carries. **A support answer is
+sourced from the live page's file, never from the roadmap.**
+
+**Two things this is NOT, stated so a later run does not re-litigate them.**
+(1) It is **not** a §6 honesty breach: the live *store page* claims 95 operators
+and v0.2.0, which is exactly what it delivers, and it advertises neither radial
+nor the readout fix — checked, not assumed. Nobody is promised more than they
+receive. (2) The `ROADMAP.md` **inside** `texel-0.2.1.zip` reading *"v0.2.1 are
+live"* is **not** a repeat of T-003. T-003 was a *shipped* file contradicting
+reality; this file is unshipped, and its line becomes true at the moment it is
+uploaded. It is pre-written, not false. **Do not open either as a finding.**
+
+**Not this desk's to fix, and no ledger row opened here.** Getting 0.2.1 onto
+the page is `texel-release`'s lane and listing health is `texel-watch`'s —
+and watch has already seen it: the `LEDGER.md` row for 2026-09-17 (written
+13:32 local, while this desk was running) says *"THE LISTING IS ONE VERSION
+BEHIND WHAT WAS BUILT"* and cites **`ACTIONS.md` T-012**. **T-012 did not exist
+in `ACTIONS.md` when this desk last re-checked it at 13:36 local** (file unmodified since
+09-15 06:59). That is recorded as a timestamp, **not as a defect**: a scheduled
+run can keep acting for hours after it writes its report, so the row is most
+likely still in flight. A later run should check whether T-012 landed before
+treating its absence as anything.
+
+**The part that IS this desk's:** T-008's fix existing in `dist/` does not clear
+T-008, whose *done when* is a readout legible **in the sidebar** for someone
+running the add-on. Nobody is running it. Judging that is `texel-watch`'s call,
+not this desk's — named here only because this desk counted the zips and would
+otherwise be the reason a wrong answer got given.
 
 **The difference is exactly one operator: `texel.selection_transform`.** Set
 difference both ways — 0.2.0 is a strict superset of 0.1.0, nothing was removed.
