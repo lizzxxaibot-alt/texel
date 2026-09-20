@@ -606,3 +606,282 @@ Moot today because the whole beat is barred, but the ranking could have been wro
 before drafting a release note is what caught the unshipped zip. Trusting `ROADMAP.md`'s
 tick would have produced a post advertising radial symmetry to an audience that cannot
 download it.
+
+---
+
+## Run 2026-09-19 (Saturday, a PACKS day — no Texel post, by the calendar)
+
+**This run fired at 01:15 local, not 15:15.** The machine was down from
+2026-09-17T18:38Z to 2026-09-19T05:40Z and Task Scheduler fired every missed slot
+in one burst on wake — all **14** tasks carry a `lastRunAt` inside 05:40-06:14Z.
+So this is a catch-up for the missed **Fri 09-18** slot, and this routine's own
+Saturday slot still fires later today at 20:18Z.
+
+**Nothing was posted about Texel, and that is the calendar working, not a
+failure.** §A gives Tue/Thu/Sat to the packs. A catch-up firing at 01:15 on a
+Saturday is still a Saturday post on a **shared account** — the timestamp is what
+the audience sees, not the slot it was owed to. Saturday is also
+`#screenshotsaturday` on the packs' plan, and `pixelkiln-marketing` took the same
+catch-up burst, so posting here is precisely the collision the 2026-09-09 day
+split was created to stop.
+
+**Nothing was lost to the outage either, and that was checked rather than
+assumed.** The only beat queued for Fri 09-18 was **v0.2.1 — radial symmetry**,
+and it is barred on blocker (1): the live logged-out page must name
+`texel-0.2.1.zip` first. Re-read this run, logged out — **HTTP 200, 31,026 B, and
+the upload widget still names `texel-0.2.0.zip, 187 kB`**, with `0.2.1` appearing
+nowhere on the page. `ACTIONS.md` **T-012** is still open and is
+`texel-release`'s. So the Friday slot had no lawful beat in it with or without
+the outage.
+
+### Two replies, both verified on the public AppView
+
+| date | thread | what was said | url |
+|---|---|---|---|
+| 2026-09-19 | @13-23games.bsky.social — *"Stepping out of my comfort zone to try this pixel art 3D texture on Blender for the first time. It's a WIP, but it's finally giving Petal the visual redesign it needed."* (**10 likes, 0 replies**, so ours is the only one in it). Two viewport shots of an arched stone door with planked wooden leaves and a red keyhole plate; **neither image carries alt text**, so both were downloaded and looked at rather than judged off the post text | Opened on what is working and is genuinely the best part of the render — the carved arch band and the keyhole plate holding up at that size — then the single default that catches every first-timer: **`ShaderNodeTexImage.interpolation` defaults to `'Linear'`**, so Blender smooths between texels; `'Closest'` gives hard edges. **Read out of Blender 4.5.9 LTS under `--factory-startup` rather than recalled** — the RNA property's own default is `'Linear'` and the enum offers `['Linear','Closest','Cubic','Smart']`. Framed as a default that gets everyone, not as a correction, per §3a rule 6. Deliberately a different fact from every spent answer: not `average_islands_scale`, not `island_margin`, not `pack_islands`, not the non-uniform-scale unwrap, not `project_from_view`'s `orthographic`, not the 8-UV-map ceiling | [3mvu24kb3qc2i](https://bsky.app/profile/pixelkiln.bsky.social/post/3mvu24kb3qc2i) |
+| 2026-09-19 | @leapopen.bsky.social — *"I created my first 8-directional character & animation pack using Blender pixel rendering! I plan to release more characters sharing this same animation set for upcoming 2nd and 3rd packs."* (**24 likes, 1 reply** — that one reply is *"Wait you can do this in blender now?!!??!!"*, an unanswered question from a third party) | Affirmed the actual structural decision they made — one animation set shared across a character series is what makes packs 2 and 3 cheap — then the render setting that is expensive to discover **after** three packs are rendered: **`scene.render.filter_size` defaults to 1.50 px**, which antialiases sprite edges soft, and its minimum is **0.01**. **Measured in 4.5.9 `--factory-startup`**: default `1.5`, subtype `PIXEL`, soft min `0.00999999...`, soft max `10.0`, and it holds at 1.5 across `BLENDER_EEVEE_NEXT`, `CYCLES` and `BLENDER_WORKBENCH`, so the advice is engine-independent — a check that could have failed. Timed to be useful *before* the next two packs are rendered rather than after | [3mvu24p76sr2g](https://bsky.app/profile/pixelkiln.bsky.social/post/3mvu24p76sr2g) |
+
+Both re-fetched from `app.bsky.feed.getPostThread` after sending: correct author
+(`pixelkiln.bsky.social`), correct parent handle and rkey, full text intact at
+244 and 260 bytes. Neither mentions Texel, neither carries a link, neither pitches.
+
+**A judgement recorded so a later run does not re-derive it: @leapopen sells
+pixel-art asset packs on itch, which overlaps Pixelkiln's own shelf, and the
+reply was sent anyway.** The standing no-rivalry rule names *pixel-art-in-Blender
+**products*** — tools that stand where Texel stands — and its stated reason is
+that anything said in those threads reads as sniping. A render setting handed to
+a sprite-pack maker, with no product named and no link, does not carry that
+reading. If a later run disagrees, the rule to change is in `OPERATIONS.md` §3a.9.
+
+### Threads looked at and left alone this run
+
+- **@alfredbaudisch.com — every thread**, including the 888-like *"Imagine
+  Aseprite or another #pixelart program inside Blender?"* and the 09-15, 09-16
+  and 09-18 posts. Off limits under the standing no-rivalry rule; still the
+  highest-engagement account the topic has, which is why it heads every search.
+  **Also skipped: @obsurveyor and @nostalgianinja**, whose posts this run sit
+  inside or point at those threads — the rule is the thread, not just the account.
+- **@neswest.bsky.social** (*"Need to clean up texel density"*, 19 likes) —
+  **already carries our 09-15 reply.** Replying twice in one thread is volume,
+  not reach.
+- **@doctorsolo.bsky.social** (*"Mr. Seller … model him in 3D using BLENDER"*,
+  09-17) — genuinely on topic, but the post is **text-only with no embed**; the
+  work is behind a YouTube link. Nothing specific could be said about art that
+  was not looked at, and specific-beats-supportive-generic is the rule.
+- **@augsofficial.bsky.social** (*"painting the texture right onto the model"*,
+  16 likes) — three weeks old, and the thread is tagged `#aisucks`. Not a rule
+  breach to answer honestly, but a stale post is a poor place to spend the one
+  fact it would cost.
+- **@molegato.com** (92 likes, `#lowpoly #b3d #pixelart`) — the highest-reach
+  on-topic thread available this run, and **nothing genuine to add**: a finished
+  commission showcase where every honest reply is "nice work". Silence is free.
+
+### §E, the Saturday listing check — two changes made, and a FATAL from `venture-critic` behind one of them
+
+**The conversion gate in §E did NOT fire.** It reads *"under 0.5% after 200+
+views"*; `LEDGER.md` has **75 views, 0 sales, 0.00%**. So the changes below are
+not the gate firing — they are the unconditional weekly check finding two things.
+Both were put to `venture-critic` **before** being acted on (CLAUDE.md §0), which
+returned **VERDICT: REOPEN** with one FATAL. The FATAL was correct and is the
+reason the first change happened at all.
+
+#### 1. The listing claimed a release cadence it had not kept. Removed.
+
+`store/listing_short.html` line 17 read, and the live page carried verbatim:
+
+> **A weekly release cycle.** Pixelkiln ships Texel every Wednesday, and every
+> update is free forever — no v2, no subscription, no pro tier.
+
+**The public release record is two devlogs, `1658358` and `1658363`, both dated
+2026-09-09.** Wednesday **2026-09-16** shipped nothing to buyers: v0.2.1 was
+built, gated and left on disk (`ACTIONS.md` **T-012**). So the sentence was
+**1 Wednesday out of 2** on a live, paying-customer page.
+
+**This run's first draft deferred the fix**, on the reasoning that it was an
+overstatement-under-strain that would only become false if Wed 09-23 also passed,
+and that the real fix was the upload, which is `texel-release`'s lane.
+**`venture-critic` returned FATAL on exactly that and was right on both halves:**
+
+1. *"The claim is false today, not becoming false."* There is nothing noisy about
+   one verified miss already on the record, and the draft borrowed the
+   noise-rejection discipline it correctly applied to the 7-vs-4-click CTR figure
+   and misapplied it here, where it bought nothing but delay.
+2. *"That's a category error."* `texel-release` owns the cadence and the upload;
+   **`texel-marketing` owns the sentence in the listing copy** — §E says so — and
+   this run was already editing that description. The lane argument was a reason
+   not to act dressed as a rule.
+
+**Now live, verified logged-out:** *"**Every update free, forever.** No v2, no
+subscription, no pro tier. The price rises at named milestones, but never for
+anyone who already owns it."* The cadence promise is gone; the two things that
+are true and entirely within our control are kept. **A broken promise was not
+replaced with a shakier boast** — "two releases in ten days" is technically true
+and would have been worse, since both landed on the same day.
+
+Applied with `itch_desc_replace.mjs --game 4991926`, 2/2 replacements, no stale
+strings after a clean reload. **Re-read on the public logged-out page**
+(HTTP 200, 31,112 B, up from 31,026): `every Wednesday` **absent**,
+`A weekly release cycle` **absent**, `Every update free, forever` **present**.
+
+**Named here, not acted on, because it is another routine's:** the cadence itself
+is still missed. `texel-release` runs Wed 2026-09-23 and owns T-012, T-008 and
+T-013. Removing the claim makes the page honest; it does not make the release
+happen.
+
+#### 2. The gallery led with a beauty render. The density card leads now.
+
+Slot 1 was `29883177` — a 1280×720 render of a torchbearer on a cobbled street.
+It is a good render and it says **nothing**: no UI, no text, no number, nothing
+identifying it as Blender, as a tool, or as ours. On a **Tool** listing the first
+gallery image was indistinguishable from any low-poly asset pack.
+
+Slot 4 was `29902828`, the density card built for **T-001** — the only asset in
+the gallery that states a problem, a product and a measured result in one frame
+(*"8.4× spread across one mesh, then 1.0×"*, 2.5–21.1 px/unit → 10.5 on every
+face). `ROADMAP.md:137` calls the density readout *"the feature the product is
+positioned on"*. It cleared the §4 loop at round 3, SHIP, zero FATAL, zero SERIOUS.
+
+**Both images were downloaded and looked at before the call, not judged off
+filenames** — and the first attempt to read the order off the page thumbnails was
+wrong (it put the card at slot 10). The identity was then settled properly: the
+public slot-4 URL's base64 path decodes to `image/4991926/29902828.png`.
+
+Moved with `itch_shots_manage.mjs --game 4991926 --top 29902828`. **One move, so
+every other image kept its relative order** — verified in the returned array
+(`29883177, 29883185, 29883174, 29883200, …` unchanged behind it) and again on
+the public page. **Reverting is one command: `--top 29883177`.**
+
+#### 3. and 4. Two things checked and deliberately left alone
+
+- **The cover image stays.** It is what drives the impressions→CTR number
+  `texel-watch` handed to this lane, and the only evidence against it is
+  **433→261 impressions at 1.62%→1.53% CTR — which is 7 clicks against 4.**
+  Watch's own critic already returned FATAL on reading that as a trend. Rendered
+  at the shelf size of **315×250** and looked at this run: the name, *"PIXEL ART,
+  PAINTED ON THE MODEL"*, the *"A BLENDER ADD-ON"* bar and the
+  *"95 TOOLS · BLENDER 4.2+ · GPL-3.0 SOURCE"* footer all stay legible; only the
+  two panel captions are lost, and the before/after reading survives without them.
+  `venture-critic` called this the strongest reasoning in the run. Nothing to fix.
+- **The description opening stays, and NOT on attribution grounds.** The draft
+  deferred it to avoid changing two variables at once; `venture-critic` returned
+  **SERIOUS** on that, because the same memo also argued *"nothing currently
+  works, so there is no winning variant to protect"* — and both cannot be true.
+  **The contradiction resolves against the attribution argument:** at ~4 views a
+  day with the 200-view mark projected between **2026-10-12 and 2027-05-27**,
+  single-variable discipline on this page is buying nothing that could be read
+  back. So the opening is judged **on merit and found adequate**: §B's
+  problem-before-product rule governs *posts*; a storefront's first line has to
+  say what the thing is, and the problem is named in sentence 2. If a later run
+  disagrees, it should change it because it is worse copy, not to isolate a signal
+  that cannot be measured.
+
+**Tagline: TRUE, re-verified against the zip that is actually live**, not against
+`ROADMAP.md`. All four claims in *"Texel density, seamless tiles, cel animation,
+sheet + JSON export"* resolve inside `dist/texel-0.2.0.zip`
+(`density_detect`/`density_apply`, seam/tile-wrap, 181 cel-animation matches,
+sheet and JSON export), and its **95 operators** match the description's "95".
+
+**Tags unchanged:** `3D, Animation, Blender, Pixel Art, Sprites, Textures`, plus
+the AI disclosure `AI Assisted (Code, Graphics)`.
+
+**One narrative correction `venture-critic` asked for, recorded so it is not
+repeated:** this run must **not** treat *"the page is ageing off itch's new
+shelves"* as settled. Flat shelf-referred visits (9/8/6/5, unchanged since 09-17)
+against a 40% impressions fall is equally consistent with `texel-watch`'s
+own-channels-went-dark hypothesis, and with small-n noise. **The third reading on
+2026-09-24 separates them.** Half of that dark window is this routine's: no Texel
+beat has gone out since **2026-09-16**.
+
+---
+
+## Run 2026-09-19 15:19 local / 20:19Z (Saturday, a PACKS day — the second run of this date)
+
+**This is the routine's real Saturday slot.** The 01:15 run earlier today was the
+catch-up for the missed **Fri 09-18** slot after the ~35 h outage, and it said in
+writing that this slot would still fire. Both runs are logged separately rather
+than merged, because they made different decisions on different evidence.
+
+**Nothing posted about Texel, and that is the calendar, not a failure.** §A gives
+Tue/Thu/Sat to the packs, and Saturday is `#screenshotsaturday` on
+`pixelkiln/launch/marketing_plan.md`. Section D was the whole agenda.
+
+**Ledger: clear.** `ACTIONS.md` has no OPEN row owned by `texel-marketing`.
+T-008, T-012 and T-013 are `texel-release`'s; T-017 is `texel-funnel`'s; T-002,
+T-010, T-011, T-015 and T-016 are `HUMAN`. Nothing to do and nothing to refuse.
+
+### Two replies, both verified on the public AppView
+
+| date | thread | what was said | url |
+|---|---|---|---|
+| 2026-09-19 | @harper.puppy-pa.ws — **T2** of a numbered texture-optimisation thread for `#secondlife` creators, opened *"from someone with 6 years of AAA art QA experience"* (root **17 likes**; T2 itself 4 likes, 0 replies, so ours is the only one in it). T2 reads: *"Consistent texel density is important, but only when on contiguous faces or material types … give it less space on the UVs and save yourself some texture memory."* Whole thread (T1–T6) fetched with `-Mode thread` before answering, so the reply answers the series and not a search snippet | Their point is about **when** density consistency matters; the reply adds **how to see where it diverges**, so it extends rather than corrects. The UV editor's **Display Stretch** overlay maps distortion per face, and **two defaults get in the way**: `show_stretch` is **`False`** (off), and `display_stretch_type` defaults to **`ANGLE`** — angular distortion — when **`AREA`** is the mode that tracks texel density. **Read out of Blender 4.5.9 LTS under `--factory-startup`, not recalled**: defaults `False` and `'ANGLE'`, enum `['ANGLE','AREA']`, UI labels *"Display Stretch"* / *"Angle"* / *"Area"* pulled from the RNA itself. A check that could have failed. Different fact from every spent answer — not `average_islands_scale` (09-10), `island_margin` (09-10), `pack_islands` (09-14), the non-uniform-scale unwrap (09-15), `project_from_view`'s `orthographic` (09-16), the 8-UV-map ceiling (09-16), `ShaderNodeTexImage.interpolation` (09-19 01:15) or `filter_size` (09-19 01:15) | [3mvvj73tep42k](https://bsky.app/profile/pixelkiln.bsky.social/post/3mvvj73tep42k) |
+| 2026-09-19 | @multipaldev.bsky.social — *"Flat texture to textured. #blender #b3d #postal #gamedev"* (**11 likes**), two images whose **author-written alt text** states the workflow: *"Flat textures, just basic colors."* → *"After UV unwrapping and drawing textures in Aseprite."* Their self-reply describes exporting the UV map and using it as a **frame layer in Aseprite** | Affirmed the technique, then the one default that quietly costs them: **`uv.export_layout` defaults to `size = (1024, 1024)`** regardless of the texture actually being painted (and `opacity = 0.25`, `mode = 'PNG'`). Exporting at the real texture size is what puts the guide lines on true texel edges. **Verified two ways rather than recalled**: the operator's RNA defaults read in 4.5.9 `--factory-startup`, and — because the PNG path cannot run headless (`GPUOffScreen` raises *"GPU functions for drawing are not available in background mode"*, so the end-to-end export was **attempted and failed**) — the mechanism was confirmed from the exporter's own source, `addons_core/io_mesh_uv_layout/export_uv_png.py`, which renders into a `GPUOffScreen(width, height)` and maps UV 0–1 across that whole buffer. **The failed check is recorded rather than glossed** | [3mvvj7a4lll26](https://bsky.app/profile/pixelkiln.bsky.social/post/3mvvj7a4lll26) |
+
+Both re-fetched with `-Mode thread` after sending: correct author
+(`pixelkiln.bsky.social`), correct parent, full text intact at 262 and 279 bytes
+(cap 300). Neither mentions Texel, neither carries a link, neither pitches.
+
+**A placement decision, recorded because the alternative was tempting.**
+@multipaldev's self-reply says *"I know there's an add-on where you can paint on
+the model in real time but, just can't get it to work."* That is the closest
+thing to an opening for a pitch this routine has seen, and **it was not taken** —
+§3a.3 bars mentioning Texel unless the question is literally what Texel does, and
+this is not a question. The reply went to the **root**, not to that self-reply,
+so it cannot read as an answer to the add-on sentence; the root's own alt text
+already establishes the UV→Aseprite workflow the fact serves.
+
+### Threads looked at and left alone this run
+
+- **@alfredbaudisch.com — every thread**, which is most of the top of every
+  search (Pixel Art Studio 1.2, the bundle, the 7-year-old Blender bug).
+  Off limits under the standing no-rivalry rule. **Also skipped for the same
+  reason: @obsurveyor and @pepbut**, both of whom are recommending that product —
+  the rule is the thread, not just the account.
+- **@scrollboss.bsky.social** (**48 likes**, the highest-reach on-topic thread
+  available) — *"my 3D toy aisles aren't done with AI … I have no interest in
+  using AI."* Pixelkiln discloses AI assistance on every page it sells from.
+  A reply that stayed silent about that would be dishonest by omission, and one
+  that raised it would start the argument §3a.7 bars. **Silence is free.**
+- **@skywindkitsune.bsky.social** (Aseprite tilesets, *"not knowing any of the
+  fancy tricks of the pros"*) — a genuine opening, but it is **2D pack territory**
+  and belongs to the Pixelkiln routines under the 2026-09-10 line. Named here so
+  `pixelkiln-marketing` can take it; not answered.
+- **@dat-koosh.bsky.social** (today, pixel art → 3D in Blender) — on topic, but
+  the post carries unrelated sexual content. Not a thread to put the brand in.
+- **@13-23games** and **@leapopen** — **already answered at 01:15 today.**
+  Replying twice in one thread is volume, not reach.
+- **@zironix.bsky.social** (13 likes, today, a gradient-texture tool UI update) —
+  not barred by the no-rivalry rule, which names pixel-art-in-Blender products,
+  but there is nothing specific to add to another toolmaker's UI screenshot.
+
+### §E, the Saturday listing check — NOT re-run, and the 01:15 changes were verified instead
+
+**The weekly §E check was done in full at 01:15 today**, by this routine, on this
+date. Re-running it eight hours later would be the same routine doing one job
+twice — the failure the ownership table exists to stop, on a different axis. What
+this run did instead was **confirm the changes held**, since a landed itch edit
+can read stale for minutes (and the 01:15 run verified immediately after writing).
+
+Re-read logged-out, `curl`, no cookies — **HTTP 200, 31,110 B**:
+
+- *"A weekly release cycle"* and *"every Wednesday"*: **absent** (0 matches).
+- *"Every update free, forever"*: **present**.
+- **Gallery slot 1 is `29902828`**, the density card — decoded from the
+  base64 `img.itch.zone` paths, not read off thumbnails, which is how the 01:15
+  run got this wrong on its first attempt. Order behind it intact:
+  `29883177, 29883185, 29883174, 29883200, …`
+- **A count that looked wrong and was not.** A first pass found **9** gallery
+  assets against the 10 on record. The missing one is **`29883174.gif`** — the
+  png-only pattern could not see it. **10 assets, 11 `<img>` tags, reconciled.**
+  Recorded because a checker that cannot tokenize what it is looking for reads as
+  clean forever.
+
+**T-012 re-confirmed open, and it is not this routine's.** The live upload widget
+still names **`texel-0.2.0.zip`** and the string `0.2.1` appears **nowhere** on
+the page. The queued **v0.2.1 radial-symmetry** beat stays barred on blocker (1).
+
+### What is queued
+
+**Sun 2026-09-20 — the Texel day — is claimed and ready**: `texel-funnel`'s
+**Texel Material Palettes** drop, live at `z3er1n.itch.io/texel-material-palettes`,
+with the asset, the angle and the four figures already fixed in `QUEUE.md`.
+Tomorrow's run sends it and re-verifies the figures at send time.

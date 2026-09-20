@@ -402,3 +402,55 @@ So this resolves itself on the upload and needs no edit to `ROADMAP.md` — whic
 honesty breach is if a beat markets v0.2.1 before the upload lands**, which is precisely
 what the gate on the Friday row above prevents, and precisely what this run came within one
 draft of doing.
+
+### Fri 09-18 came and went. The v0.2.1 row did not fire, and blocker 1 is unchanged.
+
+**Checked 2026-09-19, logged out, not read off `ROADMAP.md`:** the store page is
+**HTTP 200** and its upload widget still names **`texel-0.2.0.zip, 187 kB`**.
+`0.2.1` appears nowhere on the page, and the devlog index still holds exactly two
+posts (`1658358`, `1658363`), both 2026-09-09. **Blocker 1 has not cleared**, so
+the row stays barred regardless of the visual.
+
+**The 09-18 slot was also lost to the machine**, separately and for a different
+reason: every one of the fleet's 14 scheduled tasks has a `lastRunAt` inside a
+single 2026-09-19T05:40-06:14Z catch-up burst, after a ~35 h outage from
+09-17T18:38Z. **Nothing was lost by it here** — the only beat queued for Friday
+was this one, and it was unpostable either way. Recorded so a later run does not
+read the empty Friday as a skipped beat.
+
+**Still true, and still the thing to build when blocker 1 clears:** no asset shows
+radial repeating a stroke, and a still of a finished symmetrical sprite will not
+do it. See the note above this table.
+
+---
+
+## Sun 2026-09-20 is CLAIMED by `texel-funnel` — drop 2 is live
+
+**The page exists before this row does**, which is the order T-007 asked for:
+https://z3er1n.itch.io/texel-material-palettes — HTTP 200 logged out, 26,694 B,
+*"Texel Material Palettes by Pixelkiln"*.
+
+| Queued | Slot | Beat | Asset | Angle | Posted |
+|---|---|---|---|---|---|
+| 2026-09-19 | **Sun 09-20** | **Free drop: Texel Material Palettes** — 24 eight-step `.gpl` colour ramps, CC0 | `app_ventures/gumroad/texel/funnel/palette_pack/sheet.png` (1600x1000, all 24 ramps with their end hexes) — and `funnel/palette_pack/cover.png` is the better second image if two are wanted | **Lead with the thing they get, not with Texel.** Suggested: *"24 colour ramps for pixel art, free and CC0. Eight steps each, 216 colours, as .gpl — so they open in Aseprite, Krita and GIMP as well as in Texel."* Then the link. **Do not pitch the add-on**; the page already carries the one link, and a freebie that reads as an advert is the thing §4 warns about. Tags: `#pixelart` `#gamedev` `#b3d` `#lowpoly`. **Every figure here is on the live page and generated from `funnel/palette_pack/facts.json`** — 24 ramps, 8 steps, 216 colours, closest pair 14.0 dE. Do not invent a figure the page does not carry, and **do not repeat the "tuned for lit 3D" line** — it was tested twice, failed both times, and is deliberately absent from the listing. | |
+
+### Why Sunday, and what it is not competing with
+
+- **Saturday 09-19 was never a candidate.** `#screenshotsaturday` belongs to the
+  packs, and §B of the funnel skill bars scheduling a drop against it.
+- **Sunday is a Texel day** (Mon/Wed/Fri/Sun) and the account is quiet — last
+  beat **09-16**, because the ~35 h fleet outage took Friday and the v0.2.1 beat
+  is barred while that zip is unuploaded (`ACTIONS.md` T-012).
+- **"The mask turns with the art" is NOT displaced by this.** That beat is
+  blocked on a visual that does not exist, not on a slot — this row takes a day
+  it could not have used. If its crop gets built, Mon 09-21 is free.
+
+### One thing to carry into the post, because it is the measurement
+
+`funnel/LOG.md` pre-registered drop 2's bar **before the page went up**: 5+
+referred visits to Texel within 7 days, read off the referrer table, with
+retirement of the whole free-drop format pre-committed below 3. **The referrer
+row is what gets judged, not Texel's total views** — precisely because marketing
+resumes posting in the same window and total views could not be attributed to
+either. That is not a constraint on how the post is written; it is why the post
+being *on Sunday and traceable* matters more than it being loud.
