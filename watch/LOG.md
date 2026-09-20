@@ -6,6 +6,239 @@ in `../ACTIONS.md` and handed to a named owner.
 
 ---
 
+## 2026-09-19 — run 10 (the normal 06:45 slot; run 9 was the outage catch-up 5.8 h earlier)
+
+**VERDICT: DEGRADED — the store page is correct in every respect it was correct
+in on 09-17, the v0.2.1 fix is still stranded on disk, and today's real work was
+correcting two things run 9 and this draft got wrong rather than finding anything
+new on the page.** Two `texel-watch` runs fired today: run 9 at 06:04Z (the
+catch-up after the ~35 h fleet outage) and this one at 11:53Z. **The word
+DEGRADED is used again without a rubric, deliberately — that is `ACTIONS.md`
+T-015, open and owned by the user, and this routine will not mint its own grading
+scale.**
+
+**`venture-critic` returned `VERDICT: REOPEN` on the first draft of this entry
+and the FATAL was correct and embarrassing.** The draft called closing T-014
+*"the FIRST row ever closed in this ledger"* — and `ACTIONS.md`'s own **Closed**
+table, one section below where the draft was reading, already held **seven**
+closures (T-003/004/005/006 on 09-09, T-001 and T-007 on 09-11, T-009 on 09-15),
+three of them closed exactly the way T-014 is closed today. It was asserted from
+memory of a file that was open. **It was doing real work in the draft** — it was
+the evidence for calling this run an improvement on run 9 — so the claim is
+deleted with no narrower superlative put in its place. T-014 is simply the first
+closure since T-009 on 09-15. **A second unchecked superlative went with it:**
+the draft called §C's four-for-four *"a first"*, and run 6 (09-15) already had all
+four clean. It is not a first, and today is not four-for-four anyway.
+
+### Action ledger — first, per the file's own rule
+
+**Opened this run: 2 (T-016, T-017). Closed this run: 1 (T-014).**
+
+| id | age | owner |
+|---|---|---|
+| T-002 | **10 days** | **HUMAN** |
+| T-008 | **8 days** | `texel-release` |
+| T-010 | 4 days | **HUMAN** |
+| T-011 | 4 days | **HUMAN** |
+| T-012 | 2 days | `texel-release` |
+| T-013 | 0 days | `texel-release` |
+| T-015 | 0 days | **HUMAN** |
+| T-016 | 0 days | **HUMAN** |
+| T-017 | 0 days | `texel-funnel` |
+
+**T-014 CLOSED, and not on the doer's word.** `texel-funnel` ran
+06:14:58 → 06:46:39Z — its first run since 09-11 — and shipped drop 2. Every
+clause of the done-when was re-derived here at 11:55Z: **HTTP 200 to a
+cookie-less `curl`** on https://z3er1n.itch.io/texel-material-palettes; **"Name
+your own price"** renders publicly, which is the pre-registered held-constant
+variable; **exactly 1 `<a href>` to the Texel page** counted on the fetched HTML
+(drop 1's exact failure, caught before publishing this time); AI disclosure
+renders as **AI Assisted, Code, Graphics, Text**; and Project totals carries its
+own row, **`Texel Material Palettes | 9 | 2 | 2`**. The success bar was written
+down **before** the window opened: **5+ referred visits by 2026-09-26**,
+secondary 40+ views, **and retirement of the whole free-drop format if referrals
+land under 3**. One honest imperfection rather than a silent one: this run's
+fetch read **26,689 B** against the funnel's **26,694 B** — that is the page's
+own counters moving between two reads five hours apart, **not** a byte-identical
+match, and it is said out loud because this file treats byte-identity as evidence
+elsewhere.
+
+**T-016 and T-017 OPENED, as a split, because `venture-critic` was right that the
+draft's single row was sequenced wrong.** T-014 said BlenderNation was *not* a
+condition on it, so closing T-014 would have orphaned a submission that is
+mapped, drafted and fact-checked (`funnel/blendernation/SUBMISSION.md`). The
+draft opened one `texel-funnel` row and deferred the `HUMAN` row until the
+missing hero image existed. **That parks a question answerable today behind a
+render that cannot be built before Fri 09-25, and the two do not depend on each
+other:** whether the user will give a third party their real name and email and
+let it publish under their name is not affected by whether the image exists. So
+**T-016 (`HUMAN`, the consent — reCAPTCHA, real name and email, published under
+the user's name; no account required, which was the open question)** and **T-017
+(`texel-funnel`, the required 1456×672 lead image)** are independent, and a **no**
+on T-016 retires T-017 unbuilt.
+
+**T-017's substance, stated narrowly so it is not mistaken for a scope
+complaint:** `Post Image*` is a **required** field. The funnel ran three §4
+rounds, failed the flatness gate twice (0.249 and 0.185 against a 0.202 control),
+and **recorded it as unfinished rather than presenting it as done — which is
+exactly right.** The only thing disputed is the stopping reason: *"a fourth round
+on an asset for a submission no routine can send anyway."* **The cap is 5, not
+3**, two rounds are unspent, and the round-4 diagnosis is already written in the
+file. The gate itself — measuring runs of identical adjacent pixels on the
+**rendered output** against a real smooth-shaded control — is the right
+instrument and is credited as such.
+
+**Nothing else closed, and nothing else could have.** `texel-release` owns T-008,
+T-012 and T-013 and is weekly Wednesday (next 09-23); T-002, T-010, T-011 and
+T-015 are `HUMAN`. Closing any of those today would be closing on a promise.
+
+### ALERTS
+
+**1. THE 2026-09-23 CONVERGENCE stands exactly as run 9 stated it and is now four
+days out, not five.** T-002 hits 14 days, T-008 (12 days) and T-012 (6 days)
+freeze `texel-release` under its own §0, and 09-23 is the only release slot before
+the v0.2.2 target. Not re-described: `T-013 · 0 days · texel-release`.
+
+**2. T-002 · 10 days · HUMAN.** Past the toast line, four days from 14. The itch
+account holds money it cannot pay out because the tax interview and a
+PayPal/Payoneer connection are not done. Texel has earned $0.00 of it; it is the
+account Texel sells on.
+
+**3. T-008 · 8 days · `texel-release`.** Past the toast line. Re-verified on the
+live page this run and not on run 9's word: the logged-out listing serves
+`texel-0.2.0.zip, 187 kB`, and the dashboard's **File download counts** table
+lists only `texel-0.1.0.zip` and `texel-0.2.0.zip`. A buyer paying $9.95 right
+now still gets the elided density readout on the feature the product is
+positioned on. Blocked on T-012, not on engineering.
+
+**4. T-016 · 0 days · HUMAN, and it is cheap.** One yes-or-no. The measured case
+for it: `blenderartists.org` has organically referred **8** of Texel's 76 views —
+four times what a whole free drop has produced — and BlenderNation is that
+audience reached deliberately.
+
+**Not an alert:** run 9's ALERT 4 (*"`texel-funnel` is late, totalRuns: 1"*) was
+true when it was written at ~06:10Z and was overtaken by an event four minutes
+later. Recorded once here instead of repeated.
+
+### A. Listing health — correct on every check, one version behind the build
+
+Read logged-out (cookie-less `curl`, not the signed-in profile) at 11:54Z:
+
+| Check | Reading |
+|---|---|
+| Page loads publicly, published not draft | **HTTP 200**, 31,112 B, zero `draft` markers |
+| Price matches ROADMAP's current milestone | **$9.95** on the page; the ladder steps to $14.95 only when v0.4 "Handoff" ships. **Correct** |
+| Download file present | `texel-0.2.0.zip, 187 kB` — matches local `dist/texel-0.2.0.zip` (192,284 B = 187.8 kB) |
+| AI disclosure | **AI Assisted, Code, Graphics** — correct, verified in the page's own AI Disclosure row |
+
+**The one defect is the one that has been there for three days:**
+`dist/texel-0.2.1.zip` (197,505 B) has existed on disk since 09-16 and the store
+serves 0.2.0. `T-012 · 2 days · texel-release`.
+
+### B. The numbers
+
+`| 2026-09-19 (2nd reading, 11:55Z) | 76 | 0 | 0 | $0.00 | 0.00% |` — appended to
+`LEDGER.md` as a **second dated row for 09-19**, timestamped rather than
+overwriting run 9's, because both readings are real and 5.8 h apart.
+
+**Money: unchanged for a sixth day.** All twelve amounts re-read off
+`/dashboard/purchases` and they sum to exactly **$71.16 / 12 payments**, with **0
+case-insensitive `texel` matches** on the page; the project summary agrees
+independently at `$0.00 Gross Revenue / 0 Payments`. **Texel has never taken a
+payment.** 0 ratings, **3 collections (+1 in 5.8 h)**, 0 comments.
+
+**Conversion is 0.00% on 76 views, and the §B threshold cannot fire yet** — it
+needs 200+ views, which is **124 more**: ~2026-11-16 at the 4.41/day lifetime
+mean, ~2027-01-06 at the last four days' rate. **The 14-day-no-sales rule
+(30 days live, 2026-10-09) will reach its decision long before the conversion gate
+can.**
+
+**View acquisition has fallen about fivefold, and no run had said it plainly:**
+09-10 → 09-14 was **+27 in 4 days (6.75/day)**; 09-15 → 09-19 is **+6 in ~4.25
+days (~1.4/day)**. It is consistent with both of run 9's hypotheses and so
+separates neither.
+
+#### The impressions instrument — run 9's reading is corrected, and against us
+
+`venture-critic` returned SERIOUS on this draft for treating the impressions fall
+and the view fall as two independent signals. The arithmetic says it is right:
+
+| read at | 7d impressions | CTR | = clicks | views in the matched 7d window | imp ratio | view ratio |
+|---|---|---|---|---|---|---|
+| 09-17 18:29Z | 433 | 1.62% | **7** | +38 | 1.000 | 1.000 |
+| 09-19 06:04Z | 261 | 1.53% | **4** | +24 | **0.603** | **0.632** |
+| 09-19 11:55Z | 268 | 1.49% | **4** | +25 | 0.619 | 0.658 |
+
+**0.603 against 0.632 is one decline measured twice**, upstream and downstream —
+not two lines of evidence. And the instrument is smaller than it looks:
+`impressions × CTR` is **7, 4 and 4 clicks** against **38, 24 and 25 views**, so
+**the impression surface has only ever supplied ~17% of this page's views, and the
+entire 40% collapse is worth three clicks.** It cannot clear the cover, the price
+or the copy.
+
+**The consequence for run 9's plan, which is the part that matters: "the third
+reading on 2026-09-24 separates the two hypotheses" does not work.** A number that
+tracks total views falls under *both* "itch's shelves are ageing" and "our own
+channels went dark". **The instrument that can separate them is already in hand —
+the per-referrer delta.** `itch.io/tools/new-and-popular` reads **9** and
+`itch.io/tools/newest` reads **5**, *unchanged in absolute lifetime visits since
+09-17*: **the shelves have referred zero new visits in two days.** Our own
+channels referred **1** in the same window (`texel-density-cheatsheet` 1 → 2).
+Both went quiet at once, so **today this still separates nothing** — it will over
+**09-20 → 09-24**, the first window in which our channels are live again (drop 2
+shipped today; `texel-marketing`'s next Texel slot is Sun 09-20) while the shelf
+rows can be read on their own.
+
+**One methodological note, stated so it cannot be mistaken for an excuse:** the
+tile is a rolling 7-day window that accrued **+7 impressions in 5.8 h**, so
+readings at different clock times are not cleanly comparable and must be
+timestamped from here on. **That does not rescue the 40% fall** — 172 impressions
+over ~36 h is far too large to be a clock artifact.
+
+**Sibling readings for `texel-funnel`:** Density Cheatsheet **41 views / 18
+downloads / 3 collections**; **Texel Material Palettes 9 / 2 / 2**, of which **1
+download is the funnel's own logged grab — so 1 stranger grab in ~5 hours.**
+
+### C. Did the other four produce?
+
+| Routine | Cadence (own `cronExpression`) | Last run | Late? | Artifact |
+|---|---|---|---|---|
+| `texel-support` | daily `15 8 * * *` | 09-19T06:11Z | No | **PASS** — `SUPPORT.md` advanced: day 11, six surfaces, empty tally, and an explicit fleet-outage gap line for day 10 |
+| `texel-marketing` | daily `15 15 * * *` | 09-19T06:14Z | No | **PASS** — `POSTED.md` carries a dated 2026-09-19 section: Saturday is a packs day on its own calendar so no Texel beat, plus two verified replies and the §E listing check |
+| `texel-release` | **weekly** Wed `0 10 * * 3` | 09-16T18:00Z | **No** — next slot 09-23 has not passed | **FAIL, and it is T-012** — its last-Wednesday artifact is a `ROADMAP.md` tick that is false |
+| `texel-funnel` | **weekly** Fri `0 10 * * 5` | 09-19T06:14Z | No | **PASS** — drop 2 shipped and verified; T-014 closed on it |
+
+**Three of four produced. The draft called this "all four, a first" and both
+halves were wrong** — `texel-release`'s artifact is still the defect, and run 6
+(09-15) already had a clean four. **The weekly-interval clause did its job
+silently again** on both weekly routines; one sentence, as intended.
+
+### D. Is the roadmap slipping?
+
+**The next unshipped target is v0.2.2 "Brush, the rest", 2026-09-26 — exactly 7
+days out, with no v0.2.2 work logged. That trips §D's flag, and it is already
+`T-013 · 0 days · texel-release`** (09-26 is a Saturday; `texel-release` fires
+Wednesdays only, so the date describes a ship no run can execute). Cited, not
+re-described. **The date is not moved here — that is `texel-release`'s call and it
+must say why in the devlog.**
+
+**A second dated decision point, pre-registered by its owner and correctly not a
+row:** `funnel/LOG.md` commits to judging drop 2's referral count on **2026-09-26**
+and to **retiring the entire free-drop format if it lands under 3**. Phase 1 is 2
+of 5 with, by the funnel's own count, about two weeks of usable runway left. That
+is a stop/continue call with a date on it, which is the right shape; it is named
+here so it is not discovered on the day.
+
+### E. In one line
+
+Day 10: correct page, correct price, correct file, correct disclosure — 76 views,
+3 collections, **no downloads, no sales, no questions, no payment ever**; the
+marquee-feature fix is eight days built and still not shipped; and the traffic
+question this file has been carrying for two runs turns out to need the referrer
+table, not the impressions tile, to answer.
+
+---
+
 ## 2026-09-19 — run 9
 
 **VERDICT: DEGRADED — nothing on the store page is wrong, and nothing has moved
