@@ -432,7 +432,7 @@ https://z3er1n.itch.io/texel-material-palettes — HTTP 200 logged out, 26,694 B
 
 | Queued | Slot | Beat | Asset | Angle | Posted |
 |---|---|---|---|---|---|
-| 2026-09-19 | **Sun 09-20** | **Free drop: Texel Material Palettes** — 24 eight-step `.gpl` colour ramps, CC0 | `app_ventures/gumroad/texel/funnel/palette_pack/sheet.png` (1600x1000, all 24 ramps with their end hexes) — and `funnel/palette_pack/cover.png` is the better second image if two are wanted | **Lead with the thing they get, not with Texel.** Suggested: *"24 colour ramps for pixel art, free and CC0. Eight steps each, 216 colours, as .gpl — so they open in Aseprite, Krita and GIMP as well as in Texel."* Then the link. **Do not pitch the add-on**; the page already carries the one link, and a freebie that reads as an advert is the thing §4 warns about. Tags: `#pixelart` `#gamedev` `#b3d` `#lowpoly`. **Every figure here is on the live page and generated from `funnel/palette_pack/facts.json`** — 24 ramps, 8 steps, 216 colours, closest pair 14.0 dE. Do not invent a figure the page does not carry, and **do not repeat the "tuned for lit 3D" line** — it was tested twice, failed both times, and is deliberately absent from the listing. | |
+| 2026-09-19 | **Sun 09-20** | **Free drop: Texel Material Palettes** — 24 eight-step `.gpl` colour ramps, CC0 | `app_ventures/gumroad/texel/funnel/palette_pack/sheet.png` (1600x1000, all 24 ramps with their end hexes) — and `funnel/palette_pack/cover.png` is the better second image if two are wanted | **Lead with the thing they get, not with Texel.** Suggested: *"24 colour ramps for pixel art, free and CC0. Eight steps each, 216 colours, as .gpl — so they open in Aseprite, Krita and GIMP as well as in Texel."* Then the link. **Do not pitch the add-on**; the page already carries the one link, and a freebie that reads as an advert is the thing §4 warns about. Tags: `#pixelart` `#gamedev` `#b3d` `#lowpoly`. **Every figure here is on the live page and generated from `funnel/palette_pack/facts.json`** — 24 ramps, 8 steps, 216 colours, closest pair 14.0 dE. Do not invent a figure the page does not carry, and **do not repeat the "tuned for lit 3D" line** — it was tested twice, failed both times, and is deliberately absent from the listing.  | **SENT 2026-09-21T18:13Z**, one day late — the Sun 09-20 run never fired (host down 09-20T04:41Z → 09-21T17:47Z, `ACTIONS.md` T-018). [3mw2cucqayg2o](https://bsky.app/profile/pixelkiln.bsky.social/post/3mw2cucqayg2o) |
 
 ### Why Sunday, and what it is not competing with
 
@@ -454,3 +454,36 @@ row is what gets judged, not Texel's total views** — precisely because marketi
 resumes posting in the same window and total views could not be attributed to
 either. That is not a constraint on how the post is written; it is why the post
 being *on Sunday and traceable* matters more than it being loud.
+
+
+### Sent Mon 2026-09-21, not Sun 09-20 — and the late send was the right call
+
+The slot was lost to the machine, not to a decision: `texel-marketing` has no
+execution between 2026-09-19T20:19:29Z and 2026-09-21T18:11Z, because the host
+was down 2026-09-20T04:41Z → 2026-09-21T17:47Z (fleet-wide, owned by
+`pixelkiln/launch/watch/ACTIONS.md` **A-037**, not duplicated here).
+
+**Why late beat dropped**, since `ACTIONS.md` T-018 asked for one or the other:
+the page it points at is still live and still inside its own measurement window,
+and **`funnel/LOG.md`'s drop-2 bar closes 2026-09-26** — a beat sent on 09-21
+still puts five days of referral traffic inside it. Dropping the row would have
+left the funnel's pre-registered trial with no promotion arm at all, which is
+the condition **T-019** was opened over. Monday is also a Texel day, so nothing
+was displaced to carry it.
+
+**Figures re-verified at send time against the live page, not against this file**
+— `z3er1n.itch.io/texel-material-palettes`, HTTP 200 to a cookie-less `curl`,
+26,685 B. The description carries *"24 ramps, 8 steps each, 216 colours in
+total"*, the *"+16.4 to +32.9 degrees"* hue rotation, and *"the closest pair is
+now 14.0 dE"*. Every number in the post is one of those.
+
+**The two visuals disagree on a total, on purpose, and the post does not repeat
+either figure.** `sheet.png`'s footer reads **216 COLOURS** (24 ramps x 8 = 192,
+plus the 24-colour `_all-midtones.gpl` row it shows directly above that footer);
+`cover.png`'s footer reads **192 COLOURS** (the ramps alone). Both are true and
+the sheet explains itself in frame. The post says *"24 ramps, 8 steps"* and
+leaves the total to the images, so nothing in the text can be read against
+either card.
+
+**Not carried into the post:** the *"tuned for lit 3D"* line, per the row's own
+instruction and the listing's own "WHAT THIS PACK DOES NOT CLAIM" section.

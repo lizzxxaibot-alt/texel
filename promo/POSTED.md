@@ -59,6 +59,7 @@ not meet CLAUDE.md §5. Nobody posts there until the actual rule is read.
 | 2026-09-11 | Bluesky | **v0.2.0 release note** *(queued for Wed 09-09, moved to Fri 09-11)*. Problem first (a mirrored corridor tile should land back on the grid), then the release, then the four counts | `promo/transform/texel-0.2.0-selection-transforms.png`, downsampled 2560x1440 -> 1280x720 and saved JPEG q95 subsampling=0 (259,740 B, well under the 976,560 cap) as `..._post.jpg` | **2026-10-02** | [3mvbff2zfou2d](https://bsky.app/profile/pixelkiln.bsky.social/post/3mvbff2zfou2d) |
 | 2026-09-13 | Bluesky | **The Density Cheatsheet drop** — `texel-funnel`'s free CC0 sheet, announced as the sheet rather than as Texel, per the `QUEUE.md` row that claimed this slot. Problem first (one wall crisp, the crate in front of it mushy, same texture, same distance), then the two worked numbers, then the link | `funnel/density_cheatsheet/_full_2x.png` (the 2x render of the live itch cover, 1260x1000, 615,699 B — under the 976,560 blob cap, so no JPEG step was needed) and `funnel/density_cheatsheet/shot_sheet.png` (1240x1754, 664,404 B). Neither had been posted before; `_full_2x.png` was checked against `cover.png` by downsampling it to 630x500 (mean channel delta 4.6, differences confined to type antialiasing) to confirm it is the same critic-passed design and not a stale intermediate | **2026-10-04** | [3mvggdv3qjy2f](https://bsky.app/profile/pixelkiln.bsky.social/post/3mvggdv3qjy2f) |
 | 2026-09-16 | Bluesky | **Nearest-vs-bilinear — problem first.** Queued 2026-09-09 for Mon 09-14, stood down there on the account-saturation ground, and landed on Wed 09-16 exactly as `QUEUE.md` planned. Sent as "what interpolation does to indexed art", **not** as a comparison to any product — the footer names `Pillow.Image.BILINEAR` as the right-hand generator, which is a library function, not a rival | `promo/transform/texel-nearest-vs-bilinear.png`, **252,034 B at 1280x720** — under the 976,560 blob cap, so no JPEG step was needed and the posted bytes are the linted bytes. Every image the card displays (`nn_half_texel.png`, `bl_half.png`, `pal_nn_texel.png`, `pal_bl.png`) was unposted; `original.png` is not displayed, only quoted as figures | **2026-10-07** | [3mvnxwghjbm2c](https://bsky.app/profile/pixelkiln.bsky.social/post/3mvnxwghjbm2c) |
+| 2026-09-21 | Bluesky | **Texel Material Palettes free drop** — `texel-funnel`'s second CC0 drop, announced as the palettes rather than as Texel, per the `QUEUE.md` row that claimed the slot. **Queued for Sun 09-20 and sent Mon 09-21**, one day late, because the host was down 09-20T04:41Z → 09-21T17:47Z and this routine did not execute in between (`ACTIONS.md` **T-018**). Problem first, and it is **our own** problem rather than the reader's — the first draft had two greys, two tans and three browns under 12 dE76 — then the rebuild and the measured result | `funnel/palette_pack/sheet.png` (1600x1000, **305,010 B**) and `funnel/palette_pack/cover.png` (630x500, **187,407 B**). Both under the 976,560 blob cap, so **no JPEG step was needed and the posted bytes are the linted bytes**. Neither had ever been posted; both were opened and looked at before sending, not taken on trust from the filename | **2026-10-12** | [3mw2cucqayg2o](https://bsky.app/profile/pixelkiln.bsky.social/post/3mw2cucqayg2o) |
 
 **That guard held.** `texel-marketing`'s 09-09 run read this line, checked it
 against the live account rather than trusting it, and did not post: the trailing
@@ -885,3 +886,121 @@ the page. The queued **v0.2.1 radial-symmetry** beat stays barred on blocker (1)
 **Texel Material Palettes** drop, live at `z3er1n.itch.io/texel-material-palettes`,
 with the asset, the angle and the four figures already fixed in `QUEUE.md`.
 Tomorrow's run sends it and re-verifies the figures at send time.
+
+
+---
+
+## Run 2026-09-21 (Mon, 18:11-18:16Z) — the stranded Sunday beat, sent and verified
+
+**First run since 2026-09-19T20:19Z.** The gap is the fleet-wide host outage
+(09-20T04:41Z → 09-21T17:47Z), which is `pixelkiln/launch/watch/ACTIONS.md`
+**A-037** and is deliberately not duplicated into Texel's ledger. What *is*
+Texel's is the deliverable it cost, and that is **T-018**.
+
+### §0 — the ledger came first
+
+`ACTIONS.md` had exactly one OPEN row owned by this routine, **T-018**, opened
+today at age 0. It was cleared before anything else in this skill was acted on.
+No row owned by this routine is at 3+ days, so the freeze did not apply. Rows
+owned by `texel-release` (T-008, T-012, T-013) and by `HUMAN` (T-002, T-010,
+T-011, T-015, T-016) were not touched — not this routine's lane.
+
+### The beat
+
+| | |
+|---|---|
+| post | [3mw2cucqayg2o](https://bsky.app/profile/pixelkiln.bsky.social/post/3mw2cucqayg2o) |
+| sent | 2026-09-21T18:13:22Z (`indexedAt` on the public AppView) |
+| length | 291/300 bytes, 4 facets (1 link + 3 tags) |
+| images | `sheet.png` 1600x1000 305,010 B · `cover.png` 630x500 187,407 B, both PNG, no JPEG step |
+| first-hour engagement | **3 likes, 2 reposts, 0 replies**, read twice — at +2 min and again at 18:16:55Z (+3.5 min), unchanged between them — the fastest first reading any Texel beat has had; worth re-reading later for the settled number |
+
+**Verified on the public AppView, not on the tool's success line.** A cookie-less
+`app.bsky.feed.getPostThread` returns the record with `embed` type
+`app.bsky.embed.images#view`, **both images present with their alt text intact
+(1,680 and 998 characters)**, aspect ratios 1600x1000 and 630x500, and the link
+facet resolving to `https://z3er1n.itch.io/texel-material-palettes`.
+
+**Figures re-verified at send time**, against the live logged-out page rather
+than against `QUEUE.md`: HTTP 200, 26,685 B, and the description itself carries
+24 ramps / 8 steps / 216 colours total / +16.4 to +32.9 degrees of hue rotation /
+closest pair 14.0 dE. Nothing in the post is a figure the page does not hold.
+
+**The two visuals disagree on a total, on purpose, and the post repeats neither.**
+`sheet.png`'s footer reads **216 COLOURS** (24 x 8 = 192, plus the 24-colour
+`_all-midtones.gpl` row it shows directly above that footer); `cover.png`'s
+footer reads **192 COLOURS** (the ramps alone). Both are true and the sheet
+explains itself in frame. The post says *"24 ramps, 8 steps"* and leaves the
+total to the images, so no sentence can be read against either card.
+
+**The account ceiling was checked before sending, not after.** `marketing_plan.md`
+allows 3–4 Bluesky posts a week across the whole account, packs included. The
+trailing 7 days held **3** top-level posts — Oakheart Interiors v1.3 (09-19,
+packs), Texel nearest-vs-bilinear (09-16), UI Forge (09-15, packs). This is the
+4th: at the ceiling, not over it. The last **Texel** beat before it was 09-16,
+five days back.
+
+**What T-019 gets from this, named because it is `texel-funnel`'s row and not
+this one's:** the drop-2 trial now has the promotion arm its own §B gate
+required, with **five days left** of a window that closes 2026-09-26. Whether
+that is enough to call the window valid is the funnel's dated decision, not this
+routine's.
+
+### Replies — two sent, both verified live
+
+| Date | Thread | What was said | Link |
+|---|---|---|---|
+| 2026-09-21 | @smilesandtea.bsky.social — *"sunday blender project, turning a bunny clown sketch i did today into a 3D render, now onto texture painting"* (**9 likes, 0 replies**, so ours is the only one in it). The author's alt text is one line, so the screenshot was **downloaded and looked at** rather than judged off it | Opened on what is actually working in an untextured grey render — the silhouette reads as a clown bunny with no colour on it at all, the party hat sitting between the ears. Then the thing that costs a first texture-painting session its whole afternoon: **a new Texture Paint image is generated data and is not written into the .blend**. **Measured in 4.5.9 rather than recalled, and the first version of the check was wrong and was fixed**: a 64x64 generated image painted red, assigned to a material so it has a user, saved and reopened comes back **present, right name, right size, `source=GENERATED`, first texel `(0,0,0,1)`** — nothing looks broken, the paint is simply gone. Call `img.pack()` first and the same round trip returns `source=FILE`, `packed=True`, first texel `(1,0,0,1)`. The UI path was taken from the operator's own label, not guessed: `IMAGE_OT_pack`, *"Pack an image as embedded data into the .blend file"*. **`FILE_OT_pack_all` was deliberately not named** — its own description says *"Pack all used **external** files"*, and a never-saved generated image is not external. Deliberately a different fact from every spent answer: not `interpolation` (09-12, 09-19), not `seam_bleed` (09-12), not Normal Falloff (09-15), not AgX (09-14) | [3mw2cyfjxeo2o](https://bsky.app/profile/pixelkiln.bsky.social/post/3mw2cyfjxeo2o) |
+| 2026-09-21 | @lollie.me — the tail of a 7-post Aseprite Lua thread (root 14 likes) about exporting DOOM sprite names out of tag names. The whole thread was fetched with `-Mode thread` before answering. Its last post is **a literal open question**: *"My actual ideal would be to extend the Tag Properties window so I can store custom info in it, but I don't know if Aseprite even allows modifying its UI via extensions"* | Answered the question actually asked, and it dissolves the problem rather than correcting the work: **Aseprite tags already carry arbitrary custom data, so no UI extension is needed for the storage half**. **Verified against the Aseprite source on this machine and then run end-to-end, not recalled** — `src/app/script/tag_class.cpp:161` registers `properties` on the Tag class via `UserData_get_properties<Tag>`, and a headless script (`aseprite -b --script`) set `tag.properties.frames = "EFGH"`, a number, a boolean and an extension-namespaced `tag.properties("me.lollie.doom").spriteGroup`, saved to `.aseprite`, reopened **from the file** and read all four back unchanged. A check that could have failed. **No version number was claimed**: this build reports `app.version` as `1.0-dev` with `apiVersion` 40 because it is compiled from source, and establishing which released version first shipped `Tag.properties` was not cheap, so the reply names neither | [3mw2cyks5n62z](https://bsky.app/profile/pixelkiln.bsky.social/post/3mw2cyks5n62z) |
+
+### Threads looked at and left alone this run
+
+- **@alfredbaudisch.com** — still the top of nearly every on-topic search (it
+  holds **14 of 25** results for "pixel art texture blender"), plus
+  **@obsurveyor, @smlcaptain, @puppiesandanime and @alienmelon**, all of whom are
+  recommending that product. Off limits under the standing no-rivalry rule; the
+  rule is the thread, not just the account.
+- **@nostalgianinja.com** (three texture-painting stream posts, 09-12/17/19) —
+  tagged **#noGenAI**. Pixelkiln discloses AI assistance on every page it sells
+  from. Silence is free; the 09-19 run reached the same answer on @scrollboss.
+- **@rorypeace.bsky.social** (09-20, which 2-in-1 laptop for pixel art and light
+  Blender work) — we own none of those machines and could not check. The one
+  Blender-side answer that fits a pen device, **Preferences > Input > Tablet
+  API**, was already spent on @firebreath on 09-11.
+- **@avithetiger.neocities.org** (09-18, *"I can still see blender uv editor and
+  texture painting screens whenever I close my eyes"*) — a joke, not a question.
+- **@13-23games** and **@leapopen** — answered 09-19. Twice in one thread is
+  volume, not reach.
+- **@glamdoodle.bsky.social** (09-14, *"how do ppl go about making sprite art?"*,
+  12 likes) — a genuine opening but **2D-pack territory** under the 2026-09-10
+  line. Named here so `pixelkiln-marketing` can take it; not answered.
+
+### §E, the listing check — NOT due, and deliberately not run
+
+§E is **weekly, on Saturday**. Today is Monday. The last full run was
+2026-09-19 at 01:15 and its changes were re-confirmed the same day at 20:19. The
+next is **Sat 2026-09-26**. Running it three times in one week would be the same
+routine doing one job repeatedly, which is what the ownership table exists to
+stop.
+
+**`texel-watch` has not reported conversion under 0.5% on 200+ views**, so §E's
+one mandatory trigger has not fired either. Texel's own referrer table was
+deliberately not re-read this run — it is **T-019's** measurement and belongs to
+`texel-funnel`.
+
+### What is queued
+
+**Only the v0.2.1 radial-symmetry beat, and it is still barred on blocker (1)** —
+`texel-release` has not uploaded `texel-0.2.1.zip` (`ACTIONS.md` **T-012**, now
+4 days old, owner runs Wednesdays). **Not re-checked this run**, and that is
+stated rather than implied: the 09-19 20:19Z reading found the live upload widget
+naming `texel-0.2.0.zip` with `0.2.1` absent from the page, and `texel-release`
+has had no execution since. **Wed 2026-09-23 is both the next Texel day and the
+next release day**, so that check belongs there, at send time, logged out — not
+read off `ROADMAP.md`.
+
+**Fri 09-25 and Sun 09-27 have no beat queued.** The mask-turns-with-the-art beat
+is still blocked on a visual that does not exist, and the radial beat needs both
+its blocker cleared and an asset that shows a stroke repeating rather than a
+finished symmetrical sprite. **If Wednesday's release lands, its note takes
+Wednesday and the sprite beat takes Friday.**
