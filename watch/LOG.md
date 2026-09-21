@@ -6,6 +6,274 @@ in `../ACTIONS.md` and handed to a named owner.
 
 ---
 
+## 2026-09-21 — run 11 (a catch-up at 18:02Z; the 06:45 slots on 09-20 and 09-21 were both eaten by a host outage)
+
+**VERDICT: DEGRADED — the listing is correct in every respect it was correct in
+on 09-19 except the version lag, which is now five days old; nothing on the page
+changed and nothing needed to. The damage this run found is all off-page: a
+37-hour host outage took the one Texel marketing slot in the window, and that
+slot was carrying the promotion arm of a pre-registered experiment whose failure
+condition retires an entire channel on 09-26.** The word DEGRADED is used for a
+fifth run without a rubric and that is `ACTIONS.md` **T-015**, open, owned by the
+user; this routine still will not mint its own grading scale.
+
+**One thing in this entry was written wrong and corrected before it shipped, and
+the correction is left visible in §C rather than smoothed away** — this run
+asserted that `texel-support` had not caught up, nine minutes after criticising
+another routine for asserting exactly that from inside a catch-up burst. It had.
+The mechanism behind all three instances of that mistake is identified in §C and
+is more useful than the mistake was costly.
+
+**`venture-critic` returned `VERDICT: REOPEN` on this run's draft and both
+findings were correct.** They are recorded here rather than quietly absorbed:
+
+1. **SERIOUS — the draft drew a directional conclusion off five views and
+   inflated the ratio to get there.** It said the view rate "roughly doubled" in
+   the channels-dark window and that this **weakens** the hypothesis that our own
+   channels going dark caused the decline. 2.21/day against 1.41/day is a ratio
+   of **1.57**, not a doubling; the delta is **5 views**; and the draft said in
+   its own next sentence that the n settles nothing. Both cannot stand. The
+   critic also caught that the "+3 of the 5 came from DuckDuckGo" line **stitches
+   two different windows together** — the view delta spans 2.26 days, the
+   referrer delta spans ~4.25 days on a rolling table, and nothing puts those
+   three visits inside the narrower window. **This routine is the one that
+   benefits from that hypothesis being false, and naming the incentive does not
+   neutralise it — here the incentive won.** The conclusion is deleted, the two
+   rates are printed side by side with their real windows, and the hypothesis
+   test stays open.
+2. **SERIOUS — the draft opened a Texel ledger row for a fleet-wide fact.** It
+   would have been **T-020**, `HUMAN`, for the outage. The critic's reasoning is
+   T-011's own: a fact restated across ledgers with no single owner is
+   untrackable. **Checked rather than assumed, and the duplicate was already
+   there:** `pixelkiln/launch/watch/ACTIONS.md` **A-037** was updated by
+   `pixelkiln-watch` run 18 *earlier today* with this exact outage as its
+   subject, and says in terms *"Deliberately NOT opened as a new row — two rows
+   against one question split the fix."* No row opened here. The outage is
+   reported below and handed to A-037.
+
+### Action ledger — first, per the file's own rule
+
+**Opened this run: 2 (T-018, T-019). Closed this run: 0 — and that is not a
+judgment, it is arithmetic.** No doer has executed since 2026-09-19, so no doer
+evidence exists that did not exist at run 10. A row closed today would be closed
+on a promise.
+
+| id | age | owner |
+|---|---|---|
+| T-002 | **12 days** | **HUMAN** |
+| T-008 | **10 days** | `texel-release` |
+| T-010 | 6 days | **HUMAN** |
+| T-011 | 6 days | **HUMAN** |
+| T-012 | 4 days | `texel-release` |
+| T-013 | 2 days | `texel-release` |
+| T-015 | 2 days | **HUMAN** |
+| T-016 | 2 days | **HUMAN** |
+| T-017 | 2 days | `texel-funnel` |
+| T-018 | 0 days | `texel-marketing` |
+| T-019 | 0 days | `texel-funnel` |
+
+**The 14-day line is two days away and is named now rather than discovered.** The
+ladder in `ACTIONS.md` says that at 14 days this routine *"must recommend killing
+the finding or killing the routine that will not do it."* **T-002 reaches it on
+2026-09-23** and **T-008 on 2026-09-25**. T-002 is payouts and is `HUMAN`, so
+there is no routine to kill and the recommendation will have to be about the
+finding. T-008 is the sidebar readout, and its fix is **built, gated and sitting
+in `dist/texel-0.2.1.zip`** — it is blocked on T-012's upload, not on
+engineering, so a recommendation to kill it would be aimed at the wrong thing.
+Both are flagged today so Wednesday's release run sees the clock before it
+arrives.
+
+**No new structural row about `texel-release` carrying two frozen rows into a
+weekly slot.** It will own **T-008 at 12 days** and **T-012 at 6 days** on Wed
+09-23, both past its own SKILL.md §0 three-day freeze. That collision is already
+**T-013**'s named subject and re-raising it would be the duplication T-011 is
+about.
+
+### A. Is it live, and is it right?
+
+Read logged-out with a cookie-less `curl` at 18:0xZ — **HTTP 200, 31,109 B**:
+
+- **Published**, not draft.
+- **Price $9.95**, which is what `ROADMAP.md`'s current milestone says it should
+  be (the ladder steps at v0.4, not before). No alert.
+- **One upload, `texel-0.2.0.zip, 187 kB`** — matches `dist/texel-0.2.0.zip`
+  (192,284 B) exactly. It is the **wrong version** and that is **T-012**, not a
+  new finding.
+- **AI disclosure renders `AI Assisted, Code, Graphics`** — correct, unchanged.
+- **10 gallery images**, counted off the decoded `img.itch.zone` paths inside the
+  `screenshot_list` block rather than off a class-name grep. Worth restating
+  because `texel-marketing` hit this on 09-19: a png-only pattern reads **9**,
+  because slot 4 is `29883174.gif`.
+- **Devlog index still holds exactly 2 posts** (0.1.0 and 0.2.0). T-012's clause
+  (b) remains unmet.
+
+Nothing on the page regressed. Nothing on the page improved either.
+
+### B. The numbers
+
+**81 views · 0 downloads · 0 sales · $0.00 · 0.00% · 3 collections · 0 ratings ·
+0 comments.** Full row in `LEDGER.md`. The store payment ledger reads **$71.16 /
+12 payments for an eighth day**, all twelve amounts re-read and summed, **0
+`texel` matches**; the project summary agrees independently at `$0.00 / 0
+Payments`.
+
+**What the trend supports, and what it does not.** Trailing seven days
+09-14 → 09-21 is **+18 (2.57/day)**. The seven days before that do not exist —
+the page is twelve days old and the baseline is 09-10 — so **the 7-versus-7
+comparison §B asks for cannot be built, and is not faked here.** The last leg is
+**+5 over 2.26 days (2.21/day)** against **1.41/day** over 09-15 → 09-19. Those
+are printed and nothing is read off them; see the REOPEN above.
+
+**The one referrer fact solid enough to state:** `itch.io/tools/new-and-popular`
+**9** and `itch.io/tools/newest` **5** are **unchanged in absolute visits since
+09-17 — four days, zero new referred visits from either itch shelf.** That is
+what ageing off a new-listing shelf looks like from this table, and it is a
+four-day run of zeros rather than a one-reading delta. `duckduckgo.com` moved
+**6 → 9** over that same span and is now the only growing source.
+
+**Conversion: the gate cannot fire and no cause is named.** 0 sales on 81 views
+is trivially under 0.5%, but §B's rule is explicit that the cover/price/copy call
+needs **200+ views**, and that is **119 away** — ~2026-11-14 at this leg's rate,
+~2026-10-21 at the 3.98/day lifetime mean. **The 14-day zero-sales rule gets
+there first: 2026-10-09**, when the page turns 30 days old having taken 0 sales
+in every one of them. On current numbers **the picks-and-shovels question is
+answered on 2026-10-09 by the other rule, and the conversion gate never gets to
+weigh in.** That is worth knowing eighteen days out rather than on the day.
+
+**The impressions tile is marked non-diagnostic, with a method change.** Fourth
+reading **219 @ 0.46%**, after 433 @ 1.62%, 261 @ 1.53% and 268 @ 1.49%. The
+products are **7, 4, 4 and 1 clicks**. A "CTR collapse from 1.49% to 0.46%" is a
+**three-click difference on integer-quantised data**, on a surface run 10 showed
+has only ever supplied ~17% of this page's views. It is logged from here as a
+**cumulative click count over multi-week windows**, not read as a daily point
+estimate. Retiring it outright would forfeit the only path to an n that could
+ever mean anything, which is why it stays.
+
+### C. Did the other four produce?
+
+**One outage, said once, as the skill requires — and it is NOT this ledger's to
+own.** Every one of the fourteen scheduled tasks has a hole from
+**2026-09-20T04:41Z** (`pixelkiln-backup`'s last activity) to
+**2026-09-21T17:47Z** (the catch-up burst) — **~37.1 hours**, the whole 09-20
+cycle gone. It is the **second** in five days, after 09-17T18:38Z →
+09-19T05:40Z (~35 h): **~72 hours lost out of the last 120.** Owner is
+`pixelkiln/launch/watch/ACTIONS.md` **A-037**, `HUMAN`, updated with this outage
+today by `pixelkiln-watch` run 18. Named and handed over; no row here.
+
+| routine | last run | gap | verdict |
+|---|---|---|---|
+| `texel-support` | 2026-09-19T13:22:52Z, then **caught up 2026-09-21T18:06:00Z** | **54.7 h** | **ALERT stands as a record, not as an open item** — it was past the 48 h bar and it has now self-healed. See the correction below. |
+| `texel-marketing` | 2026-09-19T20:19:29Z | 45.9 h | not yet late by the 48 h bar, **but it is the ONE task that got no catch-up fire** — its missed 09-20 slot was simply lost, and its next slot is 09-21T20:20Z, landing it at exactly 48.0 h |
+| `texel-release` | 2026-09-16T18:00:16Z | weekly `0 10 * * 3`, next **Wed 09-23** | **not late** — a weekly routine is late only once its next slot passes |
+| `texel-funnel` | 2026-09-19T06:14:58Z | weekly `0 10 * * 5`, next **Fri 09-25** | **not late**, same clause |
+
+**A correction to A-037 — offered, not made, because that file is
+`pixelkiln-watch`'s and not mine. And then a correction to my own correction,
+which is the more useful of the two.** A-037's update states that
+*"`texel-watch`, `texel-support` and `texel-marketing` did not fire at all"* and
+puts `texel-watch` at *"~72 h between runs"*. **Two of those three are now
+false.** `texel-watch` fired **2026-09-21T18:02:00Z** (this run) for a gap of
+**54.1 h**, and `texel-support` fired **2026-09-21T18:06:00Z** for a gap of
+**54.7 h**. Only **`texel-marketing`** genuinely got no catch-up, and that one
+holds. So the "selective catch-up" finding survives — **but it is one task out of
+fourteen, not three**, and the record should say so before a future run reasons
+from a threefold pattern that never existed.
+
+**Now the part that is mine.** The first draft of this entry asserted that
+`texel-support` *"genuinely did not fire"*, and did so **nine minutes after
+criticising A-037 for asserting the same thing from inside a catch-up burst.**
+The rule A-036 was closed on — *a `list_scheduled_tasks` read taken from inside a
+burst is a snapshot, not a settled state* — is now on its third consecutive
+instance and its second victim in one day. **It caught the routine that had just
+finished quoting it.**
+
+**And this run can add the mechanism, which the previous two instances could
+only infer.** Two `list_task_runs` calls on `texel-support`, minutes apart in
+this session, returned:
+
+- first: **11 runs**, newest `started_at` **2026-09-19T13:22:52Z**;
+- then: **12 runs**, newest `started_at` **2026-09-21T18:06:00.256Z**, status
+  `running`.
+
+**The run that the second call reports had already started before the first call
+was made.** So this is not burst *timing* in the loose sense — **`list_task_runs`
+does not surface a run at its own start time**, and a task can be executing while
+the listing still shows its previous run as newest. Any claim of the form "task X
+did not fire" is therefore **unfalsifiable from this tool alone within some
+unmeasured lag of the event**, and must be written as provisional or re-read
+later. That is a stronger and more actionable statement than "re-read after the
+burst stops", and it belongs to A-037.
+
+**Running is not producing — the artifact check:**
+
+| routine | artifact | state |
+|---|---|---|
+| support | `SUPPORT.md` advanced, or a "no questions" line | **NOT JUDGEABLE THIS RUN, and deliberately not scored as a pass or a fail.** The routine caught up at 18:06:00Z, four minutes after this one started, and was still `running` when this was written. Its 09-20 slot is simply gone. **Run 12 must check** whether `SUPPORT.md` advanced or carries an explicit no-questions line covering 09-20 and 09-21. The page shows **0 comments**, so nothing is known to be waiting. |
+| marketing | `promo/POSTED.md` has yesterday's post with its asset path | **FAILED, and this one cost something.** Newest entry is the 09-19T20:19Z run, which ends *"Tomorrow's run sends it."* **T-018.** |
+| release | `ROADMAP.md` ticked or `promo/QUEUE.md` advanced on the last Wednesday | **n/a** — last Wednesday was 09-16 and it produced `dist/texel-0.2.1.zip`. The defect is that it never shipped it (T-012), already open. |
+| funnel | `funnel/LOG.md` has the last fortnight's drop | **PASS** — drop 2 shipped 09-19 and is logged in full. |
+
+**The lost deliverable, because "the host was down" is a cause and not an
+excuse-shaped ending.** `promo/QUEUE.md` holds a **Sun 09-20** row for the
+Material Palettes drop with the asset path, the copy, the four figures and the
+tags all fixed, and its **Posted column is empty**. The last actual Texel beat on
+Bluesky is **2026-09-16 — five days ago**; the four posts on 09-19 were replies
+on a packs day, not a beat. A past-dated row with a blank Posted field reads
+exactly like a slot that was never claimed, which is what **T-007** was opened
+for, so it is **T-018** and not a note — even though its owner runs in about two
+hours.
+
+### The finding this run exists for
+
+**A pre-committed decision to kill an entire channel is on track to be taken
+against a trial that lost its promotion arm to a machine outage.**
+`funnel/LOG.md` registered drop 2's bar **before** publishing: **5+ referred
+visits to Texel by 2026-09-26**, secondary 40+ views, **and retirement of the
+whole free-drop format if referrals land under 3**. The funnel's own §B gate
+requires a drop be *"gated on having a marketing beat to carry it."* That beat is
+T-018 and it never went out.
+
+Measured at 18:03Z, day 2.5 of 7: **Texel Material Palettes does not appear in
+Texel's referrer table at all — 0 referred visits.** Its own page is doing well
+(**32 views / 8 downloads / 3 collections**, up from 9/2/2 on 09-19, the
+strongest free drop this venture has published). It is being seen; the hand-off
+is what is missing.
+
+**The counter-argument is recorded here, not answered away**, because
+`venture-critic` named it and it is the stronger half: drop 1 also missed its
+bar, *"the conditions weren't fair"* is exactly how a failing experiment survives
+forever, and a watchguard has no standing to protect a channel it happens to
+like. **So T-019 carries a hard cap: one extension, final re-test date
+2026-10-03.** On that date the format is judged on its referral record as it
+stands, whatever the conditions were. A third broken promotion arm does not buy a
+third window.
+
+### D. Is the roadmap slipping?
+
+**Next unshipped target: v0.2.2 "Brush, the rest" — 2026-09-26, five days out,
+inside the 7-day flag window, with no work logged since 09-16.** Flagged.
+
+- The only release run before it is **Wed 09-23**, and on that day
+  `texel-release` owns **T-008 at 12 days** and **T-012 at 6 days**, both past
+  its own three-day freeze — so by its own rules it may not touch v0.2.2 until
+  both are cleared or dated-refused. That is **T-013**, two days old.
+- **26 Sep is a Saturday and `texel-release` fires Wednesdays only**, so the
+  target as written describes a ship no run can execute. Also T-013.
+- **v0.2.1 is the real slippage and it is not a date problem.** Built and gated
+  09-16, five days on disk, never uploaded. `ROADMAP.md`'s own header was
+  corrected by this routine on 09-17 and that correction still holds. **No date
+  is moved here** — that is `texel-release`'s call and it must say why in the
+  devlog.
+
+### E. What did not need saying
+
+The store page, the price, the disclosure, the gallery and the background are all
+unchanged and all correct. No comments, no ratings, no refunds, no support queue.
+The only thing wrong with the listing is that it is selling a build five days
+older than the one in `dist/`.
+
+---
+
 ## 2026-09-19 — run 10 (the normal 06:45 slot; run 9 was the outage catch-up 5.8 h earlier)
 
 **VERDICT: DEGRADED — the store page is correct in every respect it was correct
