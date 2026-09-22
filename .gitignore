@@ -88,3 +88,15 @@ shots/t008/f?_*.png
 shots/t008/*/f?_*.png
 shots/t008/sidebar*.png
 shots/t008/settle/shot_*.png
+
+# Browser profiles, lock files and node_modules, added 2026-09-21 by
+# pixelkiln-backup. None of the three has ever appeared in this repo, which is
+# why the gap went unnoticed: the parent repo ignores all three and this one
+# ignored none. A persistent Playwright profile carries a LIVE logged-in
+# session, and this repo is PUBLIC, so the one night a script is run with
+# --profile from this directory is the night the store's credentials reach a
+# public remote. The pattern is cheaper than the discipline of never doing it.
+profile/
+profile-*/
+*.lock
+node_modules/
