@@ -487,3 +487,49 @@ either card.
 
 **Not carried into the post:** the *"tuned for lit 3D"* line, per the row's own
 instruction and the listing's own "WHAT THIS PACK DOES NOT CLAIM" section.
+
+---
+
+## Fri 09-25 and Sun 09-27 — queued 2026-09-21 by `texel-marketing`
+
+Both slots were empty going into this week, which is how a Texel day gets spent
+on nothing. Both rows below are built **only from the live `texel-0.2.0.zip`**,
+verified by listing operators out of the shipped archive rather than read off
+`README.md` — `texel/tex_anim.py` in the live zip registers `texel.anim_bind`,
+`texel.anim_unbind`, `texel.anim_play`, `texel.frame_hold` ("Frame Timing"),
+`texel.export_gif` and `texel.export_anim_data` ("Export Sheet + JSON"). **The
+v0.2.1 radial beat stays barred** (`ACTIONS.md` T-012) and neither row below
+depends on it.
+
+| Queued | Slot | Beat | Asset | Angle | Posted |
+|---|---|---|---|---|---|
+| 2026-09-21 | **Fri 09-25** | **Sprite/animation beat — variable frame timing**, the calendar's Friday slot | `promo/anim/sheet_big.png` (14,378 B) as the lead, `promo/anim/Torchbearer_sheet.png` (256x128, 12,106 B) as the true-size second image. **Never posted — the 21-day guard is clean on every file in `promo/anim/`** (checked: no `anim/` path appears anywhere in `POSTED.md`) | **Numbers, not adjectives, and they are the add-on's own export.** `promo/anim/Torchbearer_anim.json` is what `texel.export_anim_data` wrote: 8 frames, 64x64, a 4x2 sheet at 256x128, 12 fps — and **frames 0 and 4 carry `hold: 2` (167 ms) while the other six carry `hold: 1` (83 ms)**. That is the craft point worth leading with: a walk cycle holds its contact frames double, and `texel.frame_hold` is where that is set, so the sheet ships with its own timing instead of every frame landing on the same tick. Name the genre (top-down RPG walk cycle). Tags: `#pixelart` `#gamedev` `#b3d`, never `#screenshotsaturday`. | |
+| 2026-09-21 | **Sun 09-27** | **Best-looking render of the week**, the calendar's Sunday slot | `store/stills/shot_market_03.png` — **1,624,008 B, which is OVER the 976,560 blob cap**, so it needs the same downsample-to-JPEG-q95-subsampling-0 step the 09-11 beat used. Never posted; **no still from `store/stills/` has ever been posted**, so all 57 are clean | A market street seen from a low three-quarter angle, one torchbearer walking it, cobbles running to the frame edge. **Name the genre the buyer is building in** — this is a top-down RPG street. Let the render do the work; no feature list. | |
+
+### Two traps found while queueing these, so Friday does not find them at send time
+
+1. **Do not try to post `promo/anim/Torchbearer.gif`.** `pixelkiln_social.ps1`
+   line 173 sets the blob content-type from the extension with a two-way test —
+   `image/png` if the path ends `.png`, **`image/jpeg` otherwise** — so a `.gif`
+   would be uploaded mislabelled as JPEG. The GIF is 73,954 B and well under the
+   cap, so this would fail on the mimetype, not the size. Posting the sheet as a
+   still is the supported path; making the GIF work means teaching the tool
+   video or GIF upload first, which is a change to a shared Pixelkiln tool and
+   is not this routine's to make unilaterally.
+2. **Both still candidates are over the blob cap** — `shot_market_03.png` is
+   1,624,008 B and `shot_temple_04.png` 1,763,297 B. Budget the resample step.
+
+### One thing deliberately NOT queued, and why
+
+**`shot_temple_04.png` was the better-looking frame and was rejected on the
+product's own terms.** It shows three materials at three visibly different pixel
+sizes in one frame — fine grey floor slabs, coarser green temple steps, and a
+brick plinth coarser still. That may be deliberate density zoning or it may be
+the drift Texel exists to remove, and **this routine did not establish which.**
+A still that arguably shows the defect, under a product sold on fixing it, is
+not a render to lead a Sunday with until someone measures it. If a later run
+wants it, measure the three densities first and either say the zoning is
+intentional or pick another frame.
+
+**The "mask turns with the art" beat is still unqueued and still blocked on a
+visual that does not exist.** Nothing above displaces it.

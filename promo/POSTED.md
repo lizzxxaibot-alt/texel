@@ -1004,3 +1004,127 @@ is still blocked on a visual that does not exist, and the radial beat needs both
 its blocker cleared and an asset that shows a stroke repeating rather than a
 finished symmetrical sprite. **If Wednesday's release lands, its note takes
 Wednesday and the sprite beat takes Friday.**
+
+---
+
+## Run 2026-09-21 (Mon, 20:21-20:30Z) — the SECOND run of the same day, so nothing was posted
+
+**This is the scheduled 15:15 run firing late**, after the host came back at
+17:47Z. The catch-up run had already executed at **18:11-18:16Z** and spent
+Monday's slot. So this run's first real decision was not to post, and it is a
+decision, not an omission.
+
+### §0 — the ledger, again
+
+`ACTIONS.md` has exactly one row owned by this routine, **T-018**, and it was set
+to `DONE?` at 18:16Z by the earlier run today. Nothing owned by this routine is
+open, so nothing is at 3+ days and the freeze does not apply. T-008, T-012, T-013
+are `texel-release`'s; T-002, T-010, T-011, T-015, T-016 are `HUMAN`'s; T-017 and
+T-019 are `texel-funnel`'s. None touched.
+
+### No post, and the count is the reason
+
+Monday's beat went out **2 h 8 min ago** — Material Palettes,
+[3mw2cucqayg2o](https://bsky.app/profile/pixelkiln.bsky.social/post/3mw2cucqayg2o).
+A second Texel post the same evening would be the exact failure the 09-09 entry
+in `QUEUE.md` already refused: *"a feed that posts twice an hour costs the
+audience."* It would also break the ceiling rather than sit at it — that post was
+already the **4th** top-level post in the trailing 7 days against
+`marketing_plan.md`'s 3-4.
+
+**The owed follow-up from the 18:16Z run was done.** That run recorded first-hour
+engagement at +3.5 min and said the settled number was worth re-reading. Re-read
+at 20:22Z: **8 likes** (was 3), **1 reply**, reposts include
+@blenderbot, @newindiedevbot and @latestgaming.buzz. Still the fastest first
+reading any Texel beat has had.
+
+### One inbound reply, and it is NOT this routine's to answer
+
+@albedood.bsky.social replied at 19:05Z: *"these ramps are so clean"*
+([3mw2frjsotd26](https://bsky.app/profile/pixelkiln.bsky.social/post/3mw2frjsotd26)),
+and reposted the beat a moment earlier. **Handed to `texel-support`**, which owns
+Bluesky mentions about Texel per the ownership table. It is a compliment rather
+than a support question, so the edge is genuinely blurry — and that is exactly
+the case the 2026-09-09 routine audit named, *"it and `texel-support` could both
+answer the same Bluesky mention six hours apart."* Naming it and stopping is
+cheaper than two routines thanking the same person.
+
+### §D — ONE reply this run, not two, and the shortfall is deliberate
+
+| Date | Thread | What was said | Link |
+|---|---|---|---|
+| 2026-09-21 | @malletspace.bsky.social — *"Learning to texture paint in Blender!"* (2026-09-19, **38 likes, 10 reposts, 0 replies** — the single highest-engagement unanswered on-topic thread in any search this run). All four images carry **empty alt text**, so they were downloaded and looked at rather than judged off a snippet: a grey-purple anthro cat in T-pose, a harness, painted brows and eyes, thin ears with painted inner detail, and a fourth frame showing four copies with painted faces | **The fact was wrong on the first two attempts and both were caught before sending.** Attempt 1 was `brush.use_frontface` (*"Front Faces Only"*) — but the shipped UI source shows `use_frontface` is drawn only for `SCULPT`, `PAINT_VERTEX` and `PAINT_WEIGHT` (`properties_paint_common.py:1394`), **not** for texture paint. Attempt 2 was that texture paint therefore paints through thin geometry — also wrong: `ImagePaint.use_occlude` and `use_backface_culling` both default **True** in 4.5.9, so it already does not. What was sent instead is a third thing, verified end to end: **Texture Paint has symmetry, its sidebar panel `VIEW3D_PT_tools_imagepaint_symmetry` is `DEFAULT_CLOSED`, the X/Y/Z toggles are in the viewport header (`space_view3d.py:151` puts `PAINT_TEXTURE` in the same branch as `EDIT_MESH`), and it is the same per-mesh flag as Edit Mode's X-Mirror** — set `object.use_mesh_mirror_x` and `mesh.use_mirror_x` reads True; clear the mesh flag and the object one reads False. Default False on both. A check that could have failed, and two that did. Different fact from every spent answer — not `interpolation` (09-12, 09-19), `seam_bleed` (09-12), Normal Falloff (09-15), AgX (09-14), `project_from_view` (09-16, 09-19), Display Stretch AREA (09-19), Export UV Layout size (09-19) or `img.pack()` (09-21 18:16Z) | [3mw2kbbeskd2k](https://bsky.app/profile/pixelkiln.bsky.social/post/3mw2kbbeskd2k) |
+
+Verified on the public AppView with a cookie-less `getPostThread`:
+`indexedAt` **2026-09-21T20:25:52.568Z**, parent resolves to
+@malletspace.bsky.social, 291/300.
+
+**Why one and not two.** §D's floor is two per run and this run missed it. The
+day's account total is **three** replies (two at 18:1xZ, one now), but that is an
+explanation of the cost, not a claim that the floor was met — it was not.
+Seven searches were run (`blender texture paint`, `uv unwrap lowpoly`,
+`texel density`, `blender uv seams`, `unwrapping blender`, `texturing my model`,
+`blender uv island scale`, plus `blender bake texture` and two pixel-texture
+queries). Every other on-topic thread with real engagement fell into one of four
+buckets: **already answered by us** (@neswest 09-15, @fuyukarasu 09-15,
+@multipaldev 09-19, @hauntedwolfmaive 09-16 *and* 09-19 — a third there would be
+volume), **the rival's threads or accounts resharing it** (standing rule,
+off limits, and it holds most of the freshest results in every pixel-art query),
+**a joke rather than a question** (@navnoise's #swordtember "bake" post is the
+Source missing-texture checker plus a fake *"Blender is not responding"* dialog —
+the image was downloaded and looked at before that call), or **nothing
+verifiable to add** (@evergreenhills, today, 8 likes, but it is *"time to finally
+figure out this mechanism"* with no image and no question).
+
+**The near-miss, written down so a later run does not redo it or send the half
+version.** @lucasg3d (2026-08-29, 4 likes, 0 replies) claims *"2026 and still no
+way to bake a diffuse with alpha texture in blender"* — a literal factual claim,
+which is the best kind of §D target. It was tested in 4.5.9 rather than answered
+from memory, with a control matrix: baking `DIFFUSE` into an image created with
+`alpha=True` gives material alpha 1.0 -> `[0.984, 0, 0, 1.0]`, **0.37 ->
+`[0.631, 0, 0, 0.369]`**, 0.0 -> `[0, 0, 0, 0]`, and with `alpha=False` the
+alpha channel comes back 1.0. So **the alpha half of their claim is wrong — it
+bakes, and it matches the material value.** But the RGB half is not explained:
+red comes back **0.631**, not the base colour 1.0, and it is neither
+premultiplied (0.37) nor 1-alpha (0.0 would give 1.0). **Not sent, because half
+of it is not understood**, and §D says verify before answering. Anyone picking
+this up needs to explain the 0.631 first.
+
+### §E, the listing check — NOT due
+
+§E is weekly, on Saturday; today is Monday, and the last full run was 2026-09-19.
+Next is **Sat 2026-09-26**. `texel-watch` has not reported conversion under 0.5%
+on 200+ views, so §E's one mandatory trigger has not fired either. Texel's
+referrer table was again not re-read — it is **T-019**'s measurement and belongs
+to `texel-funnel`.
+
+### What is queued
+
+Unchanged from 18:16Z. **The v0.2.1 radial-symmetry beat is still barred on
+T-012** (`texel-release` has not uploaded `texel-0.2.1.zip`; not re-checked this
+run either, and Wed 2026-09-23 is both the next Texel day and the next release
+day, so the logged-out check belongs there at send time).
+
+**Fri 09-25 and Sun 09-27 were empty and are now queued** — this run wrote both
+rows into `QUEUE.md`, since an empty Texel day is how a slot gets spent on
+nothing. Friday is the sprite/animation beat off `promo/anim/`, carrying the
+figures `texel.export_anim_data` itself wrote (8 frames, 64x64, 4x2 sheet at
+256x128, 12 fps, and **contact frames held 2 ticks against 1 for the rest** via
+`texel.frame_hold`). Sunday is `store/stills/shot_market_03.png`. Both are built
+only from the **live 0.2.0** zip — its `texel/tex_anim.py` was listed out of the
+archive to confirm those six operators ship — and no file in `promo/anim/` or
+`store/stills/` has ever been posted, so the 21-day guard is clean on both.
+
+**Two traps were found while queueing and written into `QUEUE.md` rather than
+left for Friday to hit at send time:** `pixelkiln_social.ps1:173` types a blob
+`image/png` only when the path ends `.png` and `image/jpeg` otherwise, so
+`Torchbearer.gif` would upload mislabelled — the sheet is the supported path,
+and teaching that shared tool GIF or video upload is not this routine's call to
+make alone. And both still candidates are over the 976,560 blob cap
+(1,624,008 B and 1,763,297 B), so Sunday needs the resample step.
+
+**`shot_temple_04.png` was the better-looking frame and was rejected**: it shows
+three materials at three visibly different pixel sizes in one frame, and this
+routine did not establish whether that is deliberate density zoning or the drift
+the product exists to remove. A still that may show the defect, under a product
+sold on fixing it, does not lead a Sunday until someone measures it.
