@@ -6,6 +6,267 @@ in `../ACTIONS.md` and handed to a named owner.
 
 ---
 
+## 2026-09-23 — run 12 (catch-up at 13:39Z; the 06:45 slot was eaten by a host outage, and 2026-09-22 was lost entirely)
+
+**VERDICT: DEGRADED — the listing is correct on every axis this routine checks
+except one, and that one is now seven days old: a buyer paying $9.95 today still
+downloads `texel-0.2.0.zip` while the fix for the product's marquee feature sits
+built and unuploaded on disk. Off-page, `devlog.rss` has emitted no release
+signal in 13 days, the two itch shelves have referred zero new visits in six, and
+view acquisition over the first honest six-versus-six window this page has been
+old enough to carry is running at 0.35x.** The word DEGRADED is used for a sixth
+run without a rubric; that is `ACTIONS.md` **T-015**, open, owned by the user, and
+this routine still will not mint its own grading scale.
+
+**`venture-critic` returned `VERDICT: REOPEN` on this run's draft with one FATAL
+and three SERIOUS findings. All four were correct and all four are acted on, not
+absorbed:**
+
+1. **FATAL — the draft made the same small-n directional claim this routine has
+   now been reopened for on four consecutive runs.** It read the 09-21 → 09-23
+   window as *"early evidence against the channels-dark hypothesis"* off **+2
+   views**, and listed three reasons its own n could not carry that in the same
+   breath. The critic also caught the part that matters more: **the channel that
+   resumed on 09-21 is a Material Palettes beat — a sibling free product — while
+   the Texel channel the hypothesis is actually about has been dark since
+   2026-09-16.** Testing a Palettes beat against Texel's view count is a weaker
+   test than the question it was being used to settle. The conclusion is deleted;
+   the numbers are printed side by side in `LEDGER.md` and nothing is read off
+   them; and §B below states plainly that **run 10's separating experiment has
+   still not started its real arm.**
+2. **SERIOUS — the draft leaned on 83 views while its own measurements block
+   recorded 82 one minute earlier.** Reconciled rather than smoothed: both
+   sources were re-read at 13:49Z and **both read 83**, so the 83rd view landed
+   inside the 79-second gap between the first two reads. 83 is authoritative.
+   A paragraph claiming more rigour than its predecessors does not get to carry
+   an unresolved ±1.
+3. **SERIOUS — the draft proposed opening a row with no owner.** The impressions
+   tile stopped rendering a CTR; the draft wanted a row for it and conceded in
+   the same sentence that the owner might be *"nobody"*. An itch dashboard UI
+   change has no owner a ledger row can name, and run 11 set the precedent of
+   handling this exact instrument in prose. **No row opened**; recorded as a
+   method note in `LEDGER.md`.
+4. **SERIOUS — the draft suspended the ladder's 7-day and 14-day rungs with no
+   end condition.** The precedent it cited (`STATE.md` run 19) binds its own
+   suspension to **A-032** closing; the draft dropped that boundary. An unbounded
+   exemption is how a rule stops biting, and this file already carries two rows
+   (T-011, T-015) opened for that shape of defect. The suspension in `ACTIONS.md`
+   now names A-032 and says the rungs resume at the rows' **true ages**, with no
+   credit for the suspension.
+
+### Action ledger — first, per the file's own rule
+
+**Opened this run: 0. Closed this run: 2 — T-018, and T-002 re-filed store-wide on
+the user's instruction (see the amendment below).**
+
+**Closed — T-018** (`texel-marketing`, 2 days old). The Material Palettes beat
+was sent, not dropped. Closed on evidence **re-verified independently of the
+doer's write-up**: a cookie-less `app.bsky.feed.getPostThread` against
+`at://pixelkiln.bsky.social/app.bsky.feed.post/3mw2cucqayg2o` returns the post
+live, author `pixelkiln.bsky.social`, `createdAt` **2026-09-21T18:13:21.516Z**,
+`app.bsky.embed.images` with alt text intact — every field matching what
+`promo/POSTED.md` claims. Closing on the doer's own success line would not have
+been a close.
+
+**Nothing else closed, and that is arithmetic rather than leniency.** The only
+doer to execute since run 11 is `texel-marketing`, and its 09-21 20:21Z run
+posted nothing. No new doer evidence exists for any other row.
+
+**Not opened, deliberately:** the 2026-09-22 fleet outage (**A-037** owns it,
+fleet-wide — a second row against one question splits the fix) and the broken
+escalation channel (**A-032**). Both are named here and stop here.
+
+**Open rows at the close of the run — `id · age · owner`, not re-described.**
+**T-002 was on this list when the run started, at 14 d; it is not on it now.**
+
+| id | age | owner |
+|---|---|---|
+| T-008 | **12 d** | `texel-release` |
+| T-010 | 8 d | **HUMAN** |
+| T-011 | 8 d | **HUMAN** |
+| T-012 | 6 d | `texel-release` |
+| T-013 | 4 d | `texel-release` |
+| T-015 | 4 d | **HUMAN** |
+| T-016 | 4 d | **HUMAN** |
+| T-017 | 4 d | `texel-funnel` |
+| T-019 | 2 d | `texel-funnel` |
+
+**T-002 hit the 14-day rung today and the answer was NEITHER kill — and the user
+then acted on the alternative the same day, so this paragraph is the reasoning
+behind a decision that has since been carried out, not a standing
+recommendation.** The full
+reasoning is on the row; the half worth repeating here is the structural one:
+**T-002 is mis-filed.** It sits in Texel's ledger, where Texel has earned $0.00,
+so on age alone it looks like a dead row worth killing — while the money it
+actually blocks is the packs' — **$61.72 across 13 payments, $57.46 of it already
+payable**, re-measured at 13:58Z after this paragraph was drafted against the
+**$51.20 / 11** `STATE.md` had been carrying stale since 2026-09-09, and `pixelkiln/launch/watch/ACTIONS.md` has
+**no payout or tax row at all** (grepped this run, not assumed). The one ledger
+row in the business covering the itch payout setup is filed against the one
+venture it does not concern. **Re-filing it store-wide was named here as
+`pixelkiln-watch`'s to do, and this routine stopped — then the user instructed it
+to carry the re-filing out. It is now `A-041`.**
+
+**Four of the nine remaining open rows are `HUMAN` and none of them has ever
+reached a human.** `PushNotification` was called this run and returned *"Mobile push not
+sent (Remote Control inactive)"*.
+
+**AMENDMENT, later the same run — the user acted on the T-002 recommendation and
+it was carried out.** The re-filing is no longer a recommendation this routine
+handed to another; it is done, and this entry says so rather than leaving a
+reader to discover the row missing.
+
+- **`pixelkiln/launch/watch/ACTIONS.md` A-041 opened**, owner `HUMAN`, carrying
+  the payout blocker store-wide.
+- **T-002 closed here as re-filed, not dropped.** Nine rows now open in this
+  ledger; four of them `HUMAN`.
+- **The figures were re-measured on the way over rather than handed across as
+  inherited text, and the inherited ones were wrong.** `/dashboard/payouts` read
+  **2026-09-23T13:58:54Z**: **Pending 1 / $4.26, Available 12 / $57.46** —
+  **$61.72 across 13 payments, of which $57.46 is already past itch's 7-day hold
+  and payable the moment the account can receive it.** `STATE.md` had been
+  carrying **$51.20 / 11** since 2026-09-09: it had been tracking the payment
+  count and never the balance. Corrected in place, which is the one edit to that
+  file this routine is allowed to make.
+- Both blockers were read off the live page, not assumed: the Initiate New Payout
+  control is replaced by *"You need to provide us with your tax information"*,
+  and **neither PayPal nor Payoneer is connected**.
+- **A-041 was also added to `STATE.md`'s human-asks table**, which
+  `pixelkiln-watch` run 19 created because it is the file `MEMORY.md` mandates
+  reading at session start and the ledger is not. Attributed in place. Leaving
+  the business's own money out of the only channel that reaches a person would
+  have defeated the re-filing.
+- **Texel keeps a standing interest**: the moment it takes its first sale, that
+  money lands in the same blocked balance.
+
+### ALERTS
+
+1. **`texel-release` — T-012, 6 d, and today is the collision T-013 predicted
+   four days ago.** The routine fires `0 10 * * 3` at **15:13Z today**, its only
+   run before the **v0.2.2 target of Sat 2026-09-26** — a date that falls on a
+   day it never runs. Its own SKILL.md §0 freezes it on any row 3+ days old, and
+   it owns **two**: T-008 (12 d) and T-012 (6 d). So the run ~1.5 h from now can
+   ship the stranded 0.2.1, or date-refuse, and cannot reach v0.2.2 either way.
+   **What must not happen is the third instance of this file's oldest defect** —
+   a date arriving, nothing shipping, and the file being ticked anyway (T-003,
+   T-006, T-012).
+2. **`texel-release` — the version lag is 7 days old and now has a third
+   witness.** Logged-out page serves `texel-0.2.0.zip, 187 kB`; File download
+   counts lists only 0.1.0 and 0.2.0, *"uploaded 14 days ago"*, **0 downloads
+   each**; and **`devlog.rss` holds exactly 2 items, newest 2026-09-10**. RSS is
+   the right instrument here because itch's *Updated* field moves on any edit
+   while the feed moves only on a real release — so **the page's last release
+   signal is 13 days old.**
+3. **`texel-funnel` — T-019, and its only run before the 09-26 deadline is Fri
+   09-25.** The row requires a dated decision in `funnel/LOG.md` **before**
+   2026-09-26; `texel-funnel` fires `0 10 * * 5`, so it has **exactly one slot**
+   and no slack. Measured today, day 4.5 of 7: **Texel Material Palettes still
+   does not appear in Texel's referrer table at all — 0 referred visits,
+   lifetime**, against a pre-registered floor of 3 and a target of 5. Its own
+   traffic is healthy (37 views / 10 downloads / 4 collections). **This is the
+   third instance of the pattern T-013 named** — a weekly owner handed a date set
+   somewhere else — and it is flagged rather than opened as a row, because T-019
+   already carries the deadline and a duplicate would split it.
+4. **`texel-support` — no run visible as of this read, and it crosses the 48 h
+   line in ~4 h with nothing scheduled to catch it.** Last run
+   **2026-09-21T18:06Z**; `list_task_runs` shows nothing since, and `nextRunAt`
+   has moved to **2026-09-24T13:24Z**, so today's 13:24Z slot appears to have
+   passed unfired. Stated provisionally, because run 11 established twice that
+   *"task X did not fire"* is not falsifiable from this tool alone within an
+   unmeasured lag. **Not called an ALERT for lateness today**: the gap is 43.6 h
+   against a 48 h line and this routine does not get to round up. The arithmetic
+   is published instead — **18:06Z today is when it crosses, and the next
+   scheduled run is 19 hours after that.** One of those two days was the
+   fleet-wide outage (A-037).
+
+### §A — is it even live?
+
+| check | reading | verdict |
+|---|---|---|
+| public + published | HTTP 200, `Status: Released`, no draft banner | PASS |
+| price vs ROADMAP milestone | `Buy Now $9.95 USD or more` — launch milestone | PASS |
+| AI disclosure | `AI Assisted, Code, Graphics` | PASS |
+| gallery | 10 `screenshot_list` images | PASS |
+| download file vs `dist/` | page serves **`texel-0.2.0.zip` 187 kB**; disk holds **`texel-0.2.1.zip` 197,505 B** | **FAIL — T-012, 7th day** |
+
+### §B — the numbers
+
+Full row and workings in `LEDGER.md` (2026-09-23 13:49Z). The four things that
+matter:
+
+**1. Revenue is $0.00 and it is confirmed against the real ledger, not inferred.**
+`/dashboard/purchases` reads **$76.37 / 13 payments**; the 13 row amounts sum to
+**exactly $76.37**; **0 case-insensitive `texel` matches** on the page. The store
+ledger moved since this file last looked (was $71.16 / 12) and **the 13th payment
+is not Texel's** — it is UI Pack Vol. 1's 8th. Both live zips read **0 downloads**.
+
+**2. The decline is real, and this is the first run entitled to say so.** The
+page is now old enough for a matched six-versus-six: **09-11 46 → 09-17 74 = +28
+(4.47/day)** against **09-17 74 → 09-23 83 = +9 (1.54/day)**. Ratio **0.35**.
+Mean since baseline **3.59/day**, down from 3.98, 4.33 and 6.8 on the three
+preceding readings. Nine views against twenty-eight over matched windows is not
+the five-view delta runs 10 and 11 were reopened for, and every window since
+09-15 has moved the same way.
+
+**3. It still separates neither hypothesis, because the experiment designed to
+separate them has not started.** Run 10's design needed a window with **our own
+channels live**. What went live on 2026-09-21T18:13Z was a **Material Palettes**
+beat; **the last beat about Texel itself is 2026-09-16 — seven days.** The itch
+shelves have referred **zero** new visits in six days (`tools/new-and-popular` 9,
+`tools/newest` 5, both frozen since 09-17), our palettes page has referred
+**zero** lifetime, and Bluesky in-app taps cannot appear in a referrer table at
+all. The only mover in the whole table is **`duckduckgo.com` 9 → 10**.
+
+**4. Conversion: 0 sales / 83 views = 0.00%, and the gate that would judge it
+cannot fire in time.** §B's rule needs 200+ views — **117 more**: ~2026-12-08 at
+this leg's 1.54/day, ~2026-10-26 at the since-baseline mean, ~2027-01-12 at the
+last two days' 1.05/day. **The 14-day-zero-sales rule needs 30 days live:
+2026-10-09, sixteen days out.** On a page that has taken **0 sales in all 13.6 of
+its days**, that rule reaches its decision first, on every rate. This routine is
+not pre-judging it here — it is saying which instrument will actually decide, so
+the date is not a surprise.
+
+*Method note, carried from `LEDGER.md`:* the impressions tile now renders **140
+7d Impressions and no CTR**. Run 11 retired it as a daily point estimate in
+favour of *"a cumulative click count over multi-week windows"*; clicks =
+impressions × CTR, so **that method is currently unexecutable**. No row opened —
+no nameable owner.
+
+### §C — did the other four produce?
+
+Intervals read from each task's own `cronExpression`, never from `OPERATIONS.md`.
+
+| routine | cadence | last run | late? | artifact |
+|---|---|---|---|---|
+| `texel-support` | daily `15 8 * * *` | 2026-09-21T18:06Z | **43.6 h — under the 48 h line, crosses at 18:06Z today** | `SUPPORT.md` written 09-21 18:16Z — produced for that run |
+| `texel-marketing` | daily `15 15 * * *` | 2026-09-21T20:20Z | no — next slot 20:20Z today | `promo/POSTED.md` written 09-21 20:27Z, and **T-018's deliverable verified on the public AppView** |
+| `texel-release` | **weekly** `0 10 * * 3` | 2026-09-16T18:00Z | **no — next slot is 15:13Z TODAY** | `ROADMAP.md` last written 09-17 (by this routine, a factual correction). Its 09-16 run's artifact is **T-012** |
+| `texel-funnel` | **weekly** `0 10 * * 5` | 2026-09-19T06:14Z | no — next slot Fri 09-25 | `funnel/LOG.md` written 09-19, drop 2 shipped |
+
+**Neither weekly routine is late**, and that is checked against its own cron
+rather than a bare 48 h test — the clause added 2026-09-14 after three runs had
+to talk the same misfire back down. **2026-09-22 is missing from every one of
+them** because no scheduled task on this machine ran at all that day; fleet-wide,
+**A-037**, not duplicated here.
+
+### §D — is the roadmap slipping?
+
+Next unshipped target: **v0.2.2 "Brush, the rest", 2026-09-26 — three days out.**
+
+No v0.2.2 work is logged. `ROADMAP.md` already prices the release honestly
+(*"the honest reading is that v0.2.2 ships partial on 26 Sep"*) and already
+records that **one release run remains before it**. That run is **15:13Z today**,
+and it is frozen by T-008 and T-012 under its own SKILL.md §0. **T-013 is open
+against exactly this and has been for four days; no new row is opened.** The date
+is not moved here — that is `texel-release`'s call and it must say why in the
+devlog.
+
+The version actually behind the page is **v0.2.1**, built 2026-09-16 and never
+uploaded. Until it ships, every tick in `ROADMAP.md`'s v0.2.1 section is true of
+the code and false of the store.
+
+---
+
 ## 2026-09-21 — run 11 (a catch-up at 18:02Z; the 06:45 slots on 09-20 and 09-21 were both eaten by a host outage)
 
 **VERDICT: DEGRADED — the listing is correct in every respect it was correct in

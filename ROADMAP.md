@@ -147,6 +147,88 @@ other routines before it was owned, which is the part worth not repeating.
 > a stroke already produces. The gate was being paid for the bugfix either way,
 > so the marginal cost was the feature, not a second gate.
 
+### DATA LOSS — reopening a .blend and touching the canvas erases the art · **JUMPS THE QUEUE**
+
+**Found 2026-09-23 by `texel-support`, reproduced against `dist/texel-0.2.0.zip`,
+the zip the store is serving right now.** `START-HERE.html` ships a promise to
+the buyer — *"Crashes and data loss jump the queue and ship as a patch rather
+than waiting for the next feature release"* — so this section is placed above
+v0.2.2 rather than inside it. **The version number is `texel-release`'s call,
+not this desk's**; what is asked is that it rides the next upload, whichever
+number that upload carries.
+
+**What a buyer does, and what they get.** Paint a texture with Texel. Save the
+.blend. Quit. Come back, open the file, click **Paint On This Texture** — the
+add-on's own re-entry button — and make one edit. The artwork is gone, replaced
+by an empty canvas.
+
+**Measured, in a genuinely fresh Blender process (not a simulated one):**
+
+```
+[reopened]                red=256   ← the art is intact in the .blend
+[tex_doc.get(create=False)] -> None ← no document exists in this session
+[canvas handed to the tools] 32x32 palette=1 nonzero_px=0   ← blank
+[after one flush]         red=0  distinct=1  (0,0,0,0) x1024 ← wiped
+```
+
+**The mechanism, and why packing does not save you.** `tex_doc._DOCS` is a
+module-level dict, so it is empty in every new session. `Doc.__init__` builds a
+blank `Canvas(w, h)` and **never calls the `load_from_image()` that sits eleven
+lines below it in the same file.** Every route back into an existing texture
+calls `tex_doc.get(img)` with `create=True` — `texel.paint` (`tex_paint.py:84`),
+`texel.show_canvas` and `texel.pick_texture` (`tex_extra.py:253`),
+`texel.canvas_new` (`tex_paint.py:190`) — and every edit ends in
+`Doc.flush()`, which writes the whole canvas over the image. So the blank canvas
+is not a display state; it is the source of truth the next flush commits.
+
+`load_from_image()` is reachable from exactly one operator, `texel.file_changed`,
+whose poll requires a doc to already exist **and** the image to have a file on
+disk. The default canvas from `texel.add_cube` has neither.
+
+**This is not Blender's generated-image behaviour, and the two were separated by
+test rather than argued about.** A second, milder defect does sit there —
+`texel.add_cube` and `texel.canvas_new` create the canvas with
+`bpy.data.images.new()`, which is `source=GENERATED`, unpacked, no filepath, and
+Blender regenerates it on reopen (verified: `has_data=False`, the painted pixels
+gone before Texel is involved). But **packing the image fixes that one and does
+not fix this one**: with `img.pack()` done before saving, the texture reopens
+byte-intact at `red=256`, and the first Texel edit still wipes it to `red=0`.
+The loss above is the add-on's, on a correctly-saved file.
+
+**The fix is already in the file, and it is one call site.** Rehydrating the doc
+restores the exact behaviour a user expects:
+
+```
+[as-shipped]              doc nonzero_px=0    → flush wipes
+[after load_from_image()] doc nonzero_px=256 palette=2 → flush preserves, red=256
+```
+
+- Have `tex_doc.get()` call `load_from_image()` when it creates a `Doc` for an
+  image that already carries pixels, **or** register a `bpy.app.handlers.load_post`
+  handler that drops `_DOCS` and rehydrates on demand. There is no `load_post`
+  handler in the build today — `frame_change_post` in `tex_anim.py` is the only
+  handler the add-on registers.
+- **Do not make the call unconditional.** `load_from_image()` fails loudly past
+  the 255-colour palette ceiling by design (its own docstring: *"Fails loudly
+  past the palette ceiling rather than silently quantising"*), so a photographic
+  texture will raise. On that failure the correct outcome is to **refuse to bind
+  the canvas and say why** — never to hand the tools a blank document, which is
+  the current behaviour and is what destroys the work.
+- **Consider packing the canvas at creation** (`img.pack()` in `texel.add_cube`
+  and `texel.canvas_new`), which closes the milder defect, and saying in
+  `START-HERE.html` that a Texel canvas needs packing or **Save Canvas To Disk**
+  — the add-on ships `texel.file_place` for exactly this and never tells anyone
+  to use it.
+
+**`tex_doc.py` is byte-identical in `dist/texel-0.2.1.zip` (sha1 `7d5ed7b3f21a`,
+2,775 B in both), so the stranded 0.2.1 does not fix this.** It is new work.
+
+**Reproduction scripts:** `repro/dataloss_20260923/phase{1,2,3,5,6}.py`, run on
+Blender **4.5.9 LTS** against the extracted shipped zip. Phase 4 drove it through
+a GUI Blender and is **not** cited as evidence: it reopened inside the same
+process, so `_DOCS` survived and the test proved nothing about a fresh session.
+Phases 5 and 6 are the fresh-process ones.
+
 ### v0.2.2 — "Brush", the rest · target 2026-09-26
 Four items, not five - **Mirror Y was never outstanding** (shipped in v0.1.0;
 this list was stale) and **radial symmetry shipped in v0.2.1**. Each remaining

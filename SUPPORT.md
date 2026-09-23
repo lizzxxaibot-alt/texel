@@ -22,10 +22,18 @@ placeholder: an empty tally is a real measurement, not a missing one.
 |---|---|---|---|
 | *(nothing asked yet)* | 0 | — | — |
 
-**Top three this run:** none — zero inbound items since launch (**day 13**, six
-surfaces checked; **day 10 and day 12** are fleet-outage gaps, see below). The
-tally has no top three because it has no entries; that is a measurement, not an
-omission.
+**Top three this run:** none — zero inbound items since launch (**day 15**, six
+surfaces checked; **day 10, day 12 and day 14** are missed-run gaps, see below).
+The tally has no top three because it has no entries; that is a measurement, not
+an omission.
+
+**Day 15 produced this desk's first reproduced defect, and it is data loss — but
+it is NOT a tally entry and must not become one.** Nobody asked for it. It was
+found by this desk while verifying a Blender claim on an out-of-lane reply, and
+the tally exists to carry *demand*, which is a different signal from *defects*.
+Inflating it with a finding the desk generated itself would corrupt the one
+number that is supposed to reorder `ROADMAP.md`. The defect went to `ROADMAP.md`
+directly, above v0.2.2, marked **JUMPS THE QUEUE**; see the section below.
 
 **Thirteen days, and the inbox has never had a first item.** 81 views, 0
 downloads, 0 sales (`LEDGER.md` 09-21 18:03Z). The paragraph below was written on
@@ -99,6 +107,82 @@ read-once artifact and nothing in it is software that can fail.
 and it is the only Texel-branded thing anyone has actually downloaded, so it is
 read every run. See the ownership note attached to that row: **reading it is
 safe, answering on it is not yet settled.**
+
+## Day 15: the desk found data loss in the shipped zip, and the route to it was an out-of-lane reply
+
+**Zero inbound support items again — and the run's output is a reproduced defect
+that erases a buyer's artwork.** It is in `ROADMAP.md` above v0.2.2, marked
+**JUMPS THE QUEUE**, with the mechanism, the measurements and the fix. This
+section records how a desk with an empty inbox found it, because the *method* is
+the part that generalises.
+
+**The route.** @smilesandtea.bsky.social replied on 2026-09-21 21:07 UTC —
+*"Thanks so much for the reminder!!! I have definitely lost my share of painted
+textures from thinking it was automatically saved after adding it"* — to a
+`pixelkiln-marketing` tip that a new Blender paint texture lives only in RAM and
+is blank after a reopen unless you pack it. **That reply is not a support item
+and was not treated as one**: it is gratitude on a packs-account craft thread,
+it asks nothing, and it is `pixelkiln-marketing`'s to answer. Triaged out.
+
+**But it named a failure mode, and this desk sells a painting add-on.** The
+09-17 rule in this file says to verify a factual claim our account makes when a
+reply reacts to it. **The wider question is the one that paid:** if a stranger
+can lose painted textures in plain Blender this way, *does our own product walk
+its buyers into it?* That question belongs to nobody else — `texel-watch` judges
+and does not reproduce, `texel-release` builds what it is handed — and it is
+answerable with the shipped zip and one Blender.
+
+**It does, twice over, and the second one is ours.**
+
+| | unpacked canvas (the default) | packed before saving |
+|---|---|---|
+| art survives the reopen? | **no** — `has_data=False`, regenerated blank | **yes** — `red=256`, byte-intact |
+| art survives the first Texel edit? | — | **no** — `red=0`, whole canvas transparent |
+
+The first row is Blender's documented behaviour for a `source=GENERATED` image,
+and `texel.add_cube` creates the canvas that way and never packs it. **The second
+row is the add-on's own**, and it is the one that matters: the user did
+everything right, the file is correct on disk, and Texel replaces the artwork
+with a blank canvas the moment they touch it. `tex_doc._DOCS` is empty in a new
+session, `Doc.__init__` builds an empty `Canvas`, and `Doc.flush()` commits that
+empty canvas over the image. The `load_from_image()` that would prevent it ships
+in the same file, eleven lines away, reachable from one operator that cannot be
+reached in this state.
+
+**Verified in a genuinely fresh Blender process, against `dist/texel-0.2.0.zip`**
+— the zip the store is serving — on Blender 4.5.9 LTS. Scripts kept at
+`repro/dataloss_20260923/`.
+
+**One test in this run was wrong and is recorded as wrong rather than deleted.**
+Phase 4 drove the whole cycle through the real operators in a GUI Blender and
+appeared to show the loss. It did not: it reopened the .blend **inside the same
+process**, so the module-level `_DOCS` survived the reopen and the doc came back
+populated (`nonzero_px=256`), and the step that showed the art disappearing was
+`texel.dither_fill` filling a select-all with the current colour — the operator
+doing exactly its job. **It proved nothing, and the finding does not rest on
+it.** Phases 5 and 6 are the fresh-process tests and are what the roadmap cites.
+The file is kept as `phase4_INVALID_same_process.py` because the trap is easy to
+walk back into: *a reopen in the same Python session does not test a new
+session, because the add-on's state is module-level.*
+
+**What this desk did NOT do.** It did not open a ledger row — `texel-watch` is
+the only routine that may, and this is flagged to it in the run report instead.
+It did not pick a version number or touch `blender_manifest.toml`; releases are
+`texel-release`'s, and it runs today at 15:13Z, which is why the write-up landed
+before it rather than after. It posted nothing publicly: there is no buyer to
+answer, and **there is no honest public beat here** — announcing a data-loss bug
+found in the live zip, on a page with 0 sales, is `texel-marketing`'s call to
+make once a fix exists, not this desk's.
+
+**The §6 angle, checked rather than assumed.** `START-HERE.html` ships inside the
+zip and promises *"Crashes and data loss jump the queue and ship as a patch
+rather than waiting for the next feature release."* That promise is now load-
+bearing, and it is the reason the roadmap section sits above v0.2.2 instead of
+inside it. Nothing on the live listing or in the four live Bluesky posts claims
+the canvas persists across a save, so no published claim is falsified by this —
+checked, all four, same filter as 09-19.
+
+---
 
 ## Day 11: this desk missed a day, and the question that raises was answered rather than waved off
 
@@ -554,6 +638,8 @@ Three of the same reason is a product bug, not three unhappy people.
 | 2026-09-19 (2nd run, 13:23Z) | — | — | *no inbound support items — **day 11, second run**, 6 surfaces checked. **A second row for the same date is not an error**: the fleet-outage catch-up ran at ~05:40Z and the normal 08:15 local slot ran at 13:23Z, 7.2 h apart. Texel page 0 comments (200, **31,108 B** — **the first move outside the 31,016-31,034 band this page has held since launch**, traced to a `texel-marketing` edit at **06:27 UTC** and independently re-verified, see the section above), still one file `texel-0.2.0.zip` 187 kB, still `95 operators`, AI Disclosure row live, **10 gallery images with the density card now in slot 1**; both devlogs 0 (index 200, **19,795 B**, still 2 posts — **still no devlog for v0.2.1**, T-012 condition (b) unmet on day 3); cheatsheet page 0 (200, **26,705 B**, form live); **palettes page read for the first time** (drop 2, published 06:44Z today) — 200, 26,689 B, **0 comments**, and **no `Updated` row**, which is what gave this run its edit-detection method; itch inbox **`rowCount` 22, clean read**, **0 literal `texel`/`cheatsheet`/`palettes` matches** (11 follows, 10 board rows, 1 non-Texel pack sale — UI Forge $7.46, now 5d), Bluesky **23 items, 2 reply rows, BOTH CARRIED for the second run running** — 5 new notifications since 05:52Z and **every one is a like or a follow**, which ask nothing; 4 brand-qualified searches **0 third-party posts (12 days)** — 4 hits, all our own 4 posts, **all 4 still 0 replies**; `texel-material-palettes` returns **0 posts**, expected, its beat is Sun 09-20 and `texel-marketing`'s. **The run's real output is a defect in this desk's own §6 filter** — it was scoped to stranded *features* and could not see a *cadence* claim that had been false since 09-16 on a page this desk re-read daily. Widened to all three claim shapes; see the section above* | — | — |
 | 2026-09-20 | — | — | ***NO RUN. This desk did not fire.*** Second fleet-wide outage in three days — the host was down **2026-09-20T04:41Z → 2026-09-21T17:47Z (~37.1 h)**, recorded in `LEDGER.md`'s 09-21 row and owned as `pixelkiln/launch/watch/ACTIONS.md` **A-037**, not duplicated here. Logged as a gap rather than left blank: a missing row and an empty row mean different things. **Whether the gap hid an inbound item was tested on 09-21, not assumed** — both rolling surfaces reach back past it, see the Log row below* | — | — |
 | 2026-09-21 | — | — | *no inbound support items — **day 13**, 6 surfaces checked, first run after the ~37.1 h outage. **Zero rows in `ACTIONS.md` are owned by this desk** — re-checked against the file as `texel-watch` rewrote it at 13:09 local today, not against the copy read at the start of the run, because run 11 of watch opened **T-018** while this run was in flight. Texel page 0 comments (200, **31,109 B**, `Updated` row reads **19 September 2026 @ 06:27 UTC** — unedited for 2 days, so the byte count is the same page `texel-marketing` left on 09-19), still one file `texel-0.2.0.zip`, still `95 operators`, AI Disclosure row live; both devlogs 0 (index 200, **19,794 B**, still 2 posts — **still no devlog for v0.2.1**, T-012 condition (b) unmet on **day 5**; 1658358 **32,644 B**, 1658363 **30,471 B**, comment form live in both); cheatsheet page 0 (200, **26,708 B**, form live); palettes page 0 (200, **26,686 B**, form live, still no `Updated` row); itch inbox **`rowCount` 20, clean read**, **0 literal `texel`/`cheatsheet`/`palettes` matches** (row ages 8h–8d, so the window reaches **2026-09-13**); Bluesky **re-read at `-Limit 60` after the default 25 came back exactly full** — 6 reply rows total, oldest item 09-13, **2 of them NEW** (@harper 09-19, @multipaldev 09-20), **both triaged out after reading their threads**, both gratitude on `pixelkiln-marketing` craft threads; 4 brand-qualified searches **0 third-party posts (14 days)** — 4 hits, all our own 4 posts, **all 4 still 0 replies**, 45 likes; `texel-material-palettes` **still 0 posts**, and the newest post on any query is **2026-09-16**, so the account has been dark for Texel 5 days (T-018, `texel-marketing`'s). **Two real outputs, neither an inbound item:** (a) the **one live claim flagged unverified on 09-19 — the four-Blender compatibility line — was run and PASSES on all four builds, both install routes, against the zip the store serves**, Microsoft Store build included at 5.2.2; (b) **the §6 filter was still one surface short — the devlogs had never been checked as claims**, and post 1658363 carries a public promise to announce a missed release date on **2026-09-26**, a date T-013 shows is unreachable. Both written up in full above* | — | — |
+| 2026-09-22 | — | — | ***NO RUN. This desk did not fire.*** `list_task_runs` for `texel-support` shows no execution between **2026-09-21T18:06Z** and **2026-09-23T13:41Z** — so 09-22 has no run at all, the third gap in six days (09-18, 09-20, 09-22). Logged as a gap rather than left blank: a missing row and an empty row mean different things. **Whether the gap hid an inbound item was tested on 09-23, not assumed** — the itch inbox's oldest row is 9d (reaching ~09-14) and Bluesky's oldest item is **2026-09-13T21:11Z**, so both rolling windows reach back past 09-22 by more than a week* | — | — |
+| 2026-09-23 | — | — | *no inbound support items — **day 15**, 6 surfaces checked. Texel page 0 comments (200, **31,109 B**, `Updated` row still **19 September 2026 @ 06:27 UTC**, so the page is unedited for 4 days and the byte count needs no explaining), **still one file `texel-0.2.0.zip`** — **seventh consecutive run**, T-012 unmet on **day 6**; both devlogs 0 (index 200, **19,794 B**, still 2 posts — **still no devlog for v0.2.1**, T-012 condition (b) on day 7; 1658358 **32,644 B**, 1658363 **30,472 B**, comment form live in both); cheatsheet page 0 (200, **26,708 B**, form live); palettes page 0 (200, **26,686 B**, form live, still no `Updated` row); itch inbox **`rowCount` 20, clean read, 0 literal `texel`/`cheatsheet`/`palettes` matches** (row ages 2h–9d, window reaches ~**2026-09-14**; the one sale row is a **pack**, UI Pack Vol. 1 at $5.21, not Texel's); Bluesky **59 rows at `-Limit 60`, so not truncated**, oldest item **2026-09-13T21:11Z**, **3 new reply rows, all three triaged out after reading their threads** — @albedood 09-21 *"these ramps are so clean"* (praise on the Material Palettes beat: Texel-branded, but praise is not a bucket and a thank-you reply would be `texel-marketing`'s lane), @smilesandtea 09-21 and @lollie.me 09-21 (both `pixelkiln-marketing` craft threads); 4 brand-qualified searches **0 third-party mentions (16 days)** — 5 hits, all our own 5 posts, and **the Material Palettes post now carries 1 reply, the first reply any Texel-surface post has ever had in 15 days**, which corrects this file's standing "all 4 still 0 replies" line. **The run's real output is not an inbound item: this desk reproduced DATA LOSS in the zip the store is serving** — with the canvas correctly packed, the texture reopens byte-intact and **the first Texel edit wipes it** (`red=256` → `red=0`), because `tex_doc.get()` hands the tools a blank `Canvas` and `flush()` commits it. Verified in a fresh Blender 4.5.9 process against `dist/texel-0.2.0.zip`; `tex_doc.py` is byte-identical in 0.2.1 so the stranded build does not fix it. Written into `ROADMAP.md` above v0.2.2 as **JUMPS THE QUEUE**, 1.5 h before `texel-release`'s 15:13Z run. Full write-up, including one test that was wrong and is kept as wrong, in the day-15 section above* | — | — |
 
 
 ---
@@ -567,15 +653,16 @@ be unreadable within a week. It now holds the **access route and the latest
 result**; per-day outcomes live in the Log above, and the two prior findings that
 still carry information are kept as history below the table.
 
-| Surface | How it is read | Result 2026-09-21 (day 13) |
+| Surface | How it is read | Result 2026-09-23 (day 15) |
 |---|---|---|
-| Texel itch page comments | `curl https://z3er1n.itch.io/texel`, then the `game_comments_widget` block | **0 comments.** HTTP 200, **31,109 B**. Zero `id="post-N"` and zero `<div class="community_post"`. **The `Updated` row is the instrument, not the byte count** — it reads `19 September 2026 @ 06:27 UTC`, i.e. **unedited for 2 days**, so this is the same page `texel-marketing` left on 09-19 and the byte figure needs no explaining. The `uploads` block **still offers exactly one file, `texel-0.2.0.zip`** — **fifth consecutive run**, `dist/texel-0.2.1.zip` still unuploaded; see **THE LIVE-ZIP RULE** and `ACTIONS.md` T-012. **Still `95 operators`** — and this run **verified that number against the shipped zip** (`OP_COUNT=95` on the Store build), rather than only matching it to the answer key. itch's **AI Disclosure** row still renders — §6 verified, not assumed. Compatibility line **checked for the first time and it passes on all four named builds** |
-| Texel devlog replies | `curl https://z3er1n.itch.io/texel/devlog`, then **`curl -L` each post URL** | **2 devlogs live, 0 comments on either.** Index 200, **19,794 B**, still no third post — **v0.2.1 shipped on 09-16 and still has no devlog on day 5**, T-012 condition (b), `texel-release`'s. Post URLs re-read from the index rather than the known list; both slugs unchanged (1658358 **32,644 B**, 1658363 **30,471 B**). **New this run: the devlog BODIES are now read as claims, not just counted for comments** — that filter gap and what it found is the §6 section above |
-| itch notification inbox | `node automation/itch_notifications.mjs --filter all` | **0 mentioning Texel, the cheatsheet or the palettes** — 0 case-insensitive literal matches for any of the three across the whole JSON. **`rowCount` 20 — confirmed before recording the zero**, per the collector trap below; the `[lock] profile busy: itch_desc_dump.mjs` line appeared and the JSON was checked rather than the exit code trusted. Rows are **board replies** (`pixelkiln-itch-boards`' lane), **follows**, and **1 pack sale — UI Forge $7.46, 7d, still not Texel's**. Ages run 8h to 8d, so the window reaches **2026-09-13** — **past the 09-20 outage by 7 days** |
-| Bluesky mentions/replies | `pixelkiln\tools\pixelkiln_social.ps1 -Mode notifications`, then **`-Mode thread` on every reply before judging it** (AT Protocol, read-only; app password in `tools\social_creds.json`) | **6 reply rows, 2 of them NEW**, both triaged out after reading their threads (@harper 09-19, @multipaldev 09-20). **The default `-Limit 25` came back with exactly 25 items, which is the truncation signal, not a result** — re-read at **`-Limit 60`**, which returned 6 replies and an oldest item of **2026-09-13T20:40Z**, covering the outage by 7 days. Zero Texel mentions, **14 days running**. **Both new replies had their underlying Blender claim verified before being dismissed** — see the widened rule above. **Flag name: `-Mode thread` takes `-ReplyTo`, not `-Uri`** |
-| **Texel Density Cheatsheet page** *(new 2026-09-13)* | `curl https://z3er1n.itch.io/texel-density-cheatsheet`, same counting rules as the Texel page | **0 comments.** HTTP 200, **26,708 B**, zero `id="post-N"`, zero `<div class="community_post"`, **"Leave a comment" form live**. `LEDGER.md` 09-21 18:03Z reads **44 views / 18 downloads / 3 collections** — **+0 downloads in six days**, and **still 0 questions from any of the 18**, which is the only part this desk rules on. *Ownership caveat below* |
-| **Texel Material Palettes page** *(new 2026-09-19 — drop 2)* | same route and same counting rules | **0 comments.** HTTP 200, **26,686 B**, zero `id="post-N"`, zero `<div class="community_post"`, form live, **still no `Updated` row** (never re-edited since publication). `LEDGER.md` 09-21 reads **32 views / 8 downloads / 3 collections**, up from 9/2/2 — the best-performing free drop this venture has published, and **0 of its downloaders has asked anything**. **Same ownership caveat as the cheatsheet** — read it, do not assume the right to answer on it |
-| **Bluesky public search** *(new 2026-09-13)* | `-Mode search -Query 'z3er1n.itch.io/texel'`, and `'texel pixelkiln'` | **0 third-party mentions on all four queries** (`z3er1n.itch.io/texel` → **4** posts; `texel pixelkiln` → 1; `texel-density-cheatsheet` → 1; `texel-material-palettes` → **0**). Every hit is one of our own; **all four still show 0 replies** (7, 15, 11, 12 likes). **Liked 45 times, asked about zero times, for 14 days.** **The newest post on any query is 2026-09-16** — the account has published nothing for Texel in 5 days, which is **T-018** and `texel-marketing`'s, named here only because this surface is where it is visible. *Trap below* |
+| Texel itch page comments | `curl https://z3er1n.itch.io/texel`, then the `game_comments_widget` block | **0 comments.** HTTP 200, **31,109 B**. Zero `id="post-N"` and zero `<div class="community_post"`. **The `Updated` row is the instrument, not the byte count** — it reads `19 September 2026 @ 06:27 UTC`, i.e. **unedited for 4 days**, so this is still the page `texel-marketing` left on 09-19. The `uploads` block **still offers exactly one file, `texel-0.2.0.zip`** — **seventh consecutive run**, `dist/texel-0.2.1.zip` still unuploaded; see **THE LIVE-ZIP RULE** and `ACTIONS.md` T-012. **And as of this run the live zip is known to lose buyer work** — day-15 section above |
+| Texel devlog replies | `curl https://z3er1n.itch.io/texel/devlog`, then **`curl -L` each post URL** | **2 devlogs live, 0 comments on either.** Index 200, **19,794 B**, still no third post — **v0.2.1 shipped on 09-16 and still has no devlog on day 7**, T-012 condition (b), `texel-release`'s. Post URLs re-read from the index rather than the known list; both slugs unchanged (1658358 **32,644 B**, 1658363 **30,472 B**), comment form live in both |
+| itch notification inbox | `node automation/itch_notifications.mjs --filter all` | **0 mentioning Texel, the cheatsheet or the palettes** — 0 case-insensitive literal matches for any of the three across the whole JSON. **`rowCount` 20 — confirmed before recording the zero**, per the collector trap below, and this run's read was clean (no `[lock] profile busy` line, and the lock was checked as free first — it was held by `_tx_imp.mjs` at the start of the run and this desk waited rather than racing it). Rows are **board replies**, **follows**, and **1 pack sale — UI Pack Vol. 1 $5.21, 1d, not Texel's**. Ages run 2h to 9d, so the window reaches **~2026-09-14** — past the 09-22 missed run by more than a week |
+| Bluesky mentions/replies | `pixelkiln\tools\pixelkiln_social.ps1 -Mode notifications`, then **`-Mode thread` on every reply before judging it** (AT Protocol, read-only; app password in `tools\social_creds.json`) | **59 rows at `-Limit 60` — under the limit, so not truncated**; oldest item **2026-09-13T21:11Z**, covering the 09-22 gap by 9 days. **3 NEW reply rows, all three read in thread and all three triaged out**: @albedood 09-21 *"these ramps are so clean"* (**on the Texel Material Palettes beat — Texel-branded, so it is this desk's to read**, but praise fits no bucket and a thank-you is a marketing action, not a support one), @smilesandtea 09-21 and @lollie.me 09-21 (both `pixelkiln-marketing` craft threads). **Zero Texel mentions, 15 days running.** **@smilesandtea's is the reply that produced the run's finding** — see the day-15 section. **Flag name: `-Mode thread` takes `-ReplyTo`, not `-Uri`** |
+| **Texel Density Cheatsheet page** *(new 2026-09-13)* | `curl https://z3er1n.itch.io/texel-density-cheatsheet`, same counting rules as the Texel page | **0 comments.** HTTP 200, **26,708 B** — byte-identical to 09-21 — zero `id="post-N"`, zero `<div class="community_post"`, **"Leave a comment" form live**, `Updated` row `14 September 2026 @ 13:32 UTC`. Still 0 questions from any of its downloaders, which is the only part this desk rules on. *Ownership caveat below* |
+| **Texel Material Palettes page** *(new 2026-09-19 — drop 2)* | same route and same counting rules | **0 comments.** HTTP 200, **26,686 B** — byte-identical to 09-21 — zero `id="post-N"`, zero `<div class="community_post"`, form live, **still no `Updated` row** (never re-edited since publication). **Its Bluesky beat drew the first reply any Texel-surface post has ever had** (@albedood), and still **0 of its downloaders has asked anything**. **Same ownership caveat as the cheatsheet** — read it, do not assume the right to answer on it |
+| **Bluesky public search** *(new 2026-09-13)* | `-Mode search -Query 'z3er1n.itch.io/texel'`, and `'texel pixelkiln'` | **0 third-party mentions on all four queries** (`z3er1n.itch.io/texel` → **5** posts; `texel pixelkiln` → 1; `texel-density-cheatsheet` → 1; `texel-material-palettes` → **1**). Every hit is one of our own 5 posts. **Correction to this file's standing line:** it is no longer true that all of them show 0 replies — the 09-21 palettes post now has **1**. **Liked 45+ times, asked about zero times, for 16 days.** The newest post on any query is still **2026-09-21**. *Trap below* |
+
 
 
 **Reading the cheatsheet page is safe. Answering on it is not yet settled, and
