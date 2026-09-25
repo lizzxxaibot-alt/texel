@@ -78,12 +78,19 @@ class TEXEL_OT_check_tileable(_DocOp):
         d = _doc(context)
         c = d.canvas
         r = T.tile_seam_score(c.flatten(), c.w, c.h, c.palette)
-        if r["seamless"]:
-            msg = "Seamless: both edge pairs match exactly"
-        else:
-            msg = (f"{r['score']}% - wrap edge changes by {r['h_wrap']:.0f}/"
-                   f"{r['v_wrap']:.0f} vs the texture's own worst "
-                   f"{r['h_worst']:.0f}/{r['v_worst']:.0f} (h/v)")
+        # The pass used to read "Seamless: both edge pairs match exactly". That
+        # sentence named a measurement the function does not take - it compares
+        # mean colour distance across the wrap against the harshest interior
+        # transition, and never tests the edges for equality - and it was being
+        # printed over a tile whose moss patch is sliced flat at the edge
+        # (reproduced 2026-09-23 and 2026-09-24). Both branches now say what was
+        # measured, show the same four numbers, and name the method's limit.
+        head = "No seam found" if r["seamless"] else f"Seam likely - {r['score']}%"
+        msg = (f"{head}\n"
+               f"wrap {r['h_wrap']:.0f}/{r['v_wrap']:.0f} vs interior "
+               f"{r['h_worst']:.0f}/{r['v_worst']:.0f} (h/v)\n"
+               f"heuristic: a break smaller than this texture's own "
+               f"contrast will not show up")
         context.scene.texel.status = msg
         self.report({"INFO"} if r["seamless"] else {"WARNING"}, msg)
         return {"FINISHED"}

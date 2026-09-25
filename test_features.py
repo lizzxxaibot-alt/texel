@@ -109,6 +109,19 @@ with bpy.context.temp_override(**ctx):
     check("tiling reported something", bool(bpy.context.scene.texel.status),
           bpy.context.scene.texel.status)
     print(f"[info] tiling: {bpy.context.scene.texel.status}")
+    # The pass message used to read "Seamless: both edge pairs match exactly".
+    # tile_seam_score never compares the edges for equality - it compares mean
+    # colour distance across the wrap against the harshest interior transition -
+    # so the sentence claimed a measurement that was not taken, and it said it
+    # over a tile with a moss patch sliced flat at the edge (reproduced
+    # 2026-09-23 by texel-support, and again 2026-09-24 here). A heuristic must
+    # not report itself as a proof.
+    _st = bpy.context.scene.texel.status
+    check("the tiling pass does not claim the edges match exactly",
+          "exactly" not in _st.lower(), _st)
+    check("the tiling pass states it is a heuristic", "heuristic" in _st.lower(), _st)
+    check("the tiling pass shows its numbers either way",
+          any(ch.isdigit() for ch in _st), _st)
     check("flip", bpy.ops.texel.flip_canvas(axis="H") == {"FINISHED"})
     check("rotate", bpy.ops.texel.rotate_canvas() == {"FINISHED"})
     check("shift_wrap", bpy.ops.texel.shift_wrap(half=True) == {"FINISHED"})
@@ -187,9 +200,37 @@ check("symmetry off leaves one texel one texel",
 st.symmetry = 8
 lit = stroke_points(st, [(2, 8)], 17, 17)
 check("symmetry=8 turns one texel into eight", len(lit) == 8, lit)
-check("all eight sit the same distance from the centre",
-      len({round(((x - 8) ** 2 + (y - 8) ** 2) ** 0.5, 3) for x, y in lit}) == 1,
-      sorted(lit))
+# The check that used to sit here asked that all eight be the SAME distance
+# from the centre, and it has failed since the hour it was written (2026-09-16,
+# in the release that also reported itself green). It is unsatisfiable, not
+# unmet: x^2 + y^2 = 36 has only the four axial integer solutions, so no grid
+# point whatsoever lies at radius 6 on a diagonal. The rotation lands at
+# (8+-4.243, 8+-4.243) and the nearest texel is (4, 4), radius 5.657.
+#
+# Snapping the diagonals out to (4, 5) to recover radius 6 would be WORSE art -
+# it is 0.76 texels from the true rotation where (4, 4) is 0.34 - so the code is
+# right and the assertion was wrong. What eight-fold symmetry does guarantee on
+# a grid is below, and both halves discriminate: swapping round() for int() in
+# symmetry_points breaks the invariance (it yields (3, 3) against (12, 3)) and
+# pushes the radius error to 1.07.
+CENTRE = 8.0
+
+
+def _turned(pts):
+    """The set rotated a quarter turn about the canvas centre."""
+    return {(int(CENTRE - (y - CENTRE)), int(CENTRE + (x - CENTRE))) for x, y in pts}
+
+
+def _flipped(pts):
+    """The set reflected in the leading diagonal."""
+    return {(int(CENTRE + (y - CENTRE)), int(CENTRE + (x - CENTRE))) for x, y in pts}
+
+
+check("the eight are closed under a quarter turn", _turned(lit) == set(lit), sorted(lit))
+check("the eight are closed under a diagonal flip", _flipped(lit) == set(lit), sorted(lit))
+check("every one is the nearest texel to its true rotation",
+      max(abs(((x - 8) ** 2 + (y - 8) ** 2) ** 0.5 - 6.0) for x, y in lit) <= 0.5 * 2 ** 0.5,
+      sorted((round(((x - 8) ** 2 + (y - 8) ** 2) ** 0.5, 3), x, y) for x, y in lit))
 check("the original texel is among them", (2, 8) in lit, sorted(lit))
 check("the scene properties reach core.raster unchanged",
       lit == R.symmetry_points([(2, 8)], 17, 17, False, False, 8), lit)
