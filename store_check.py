@@ -45,8 +45,32 @@ RUNNER = os.path.join(STARTUP, "zz_texel_store_check.py")
 ALIAS = r"shell:AppsFolder\BlenderFoundation.Blender_ppwjx1n5r4v9t!Blender"
 
 HEADLESS = ["test_blender", "test_addon", "test_features", "test_showcase",
-            "test_sprite", "test_anim", "test_install"]
+            "test_sprite", "test_anim", "test_persist", "test_install"]
 GUI = ["test_panels", "test_keys", "test_workspace", "test_e2e"]
+
+# Suites that need no Blender at all, so their absence from the two lists above
+# is correct rather than stale.
+PURE = {"test_raster", "test_canvas", "test_palette", "test_select",
+        "test_edges", "test_report"}
+
+
+def check_no_suite_left_behind() -> None:
+    """Every test_*.py on disk must be in a list above, or in PURE.
+
+    These are hand-written lists, and `build.py` already carries the same guard
+    for the same reason - core/report.py existed, was not in the list, and
+    shipped a zip that failed to import. This ran on 2026-09-24 against a stale
+    list: test_persist.py was added on 09-23, guards the data-loss fix, and the
+    Store build - the one install path no other script can reach - was not
+    running it. A suite missing from a list looks exactly like a suite passing.
+    """
+    known = set(HEADLESS) | set(GUI) | PURE
+    stale = sorted(f[:-3] for f in os.listdir(HERE)
+                   if f.startswith("test_") and f.endswith(".py")
+                   and f[:-3] not in known)
+    if stale:
+        sys.exit(f"suites exist but store_check.py does not run them: {stale}. "
+                 "Add each to HEADLESS, to GUI, or to PURE if it needs no Blender.")
 
 # NOTE: this is a template rendered into a real file, so every backslash and
 # every brace here is consumed twice. Keep it escape-free - chr(10) rather than
@@ -153,6 +177,7 @@ def one(job, budget=300):
 
 
 def main():
+    check_no_suite_left_behind()
     jobs = sys.argv[1:] or (HEADLESS + GUI)
     os.makedirs(WORK, exist_ok=True)
     made_startup = not os.path.isdir(STARTUP)

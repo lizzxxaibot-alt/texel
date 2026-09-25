@@ -250,7 +250,9 @@ class TEXEL_OT_show_canvas(Operator):
         for area in context.screen.areas:
             if area.type == "IMAGE_EDITOR":
                 area.spaces.active.image = img
-                tex_doc.get(img)
+                if tex_doc.get(img) is None:
+                    self.report({"ERROR"}, "This texture has more than 255 colours, so it cannot be opened as an indexed canvas. Reduce it to 255 or fewer first")
+                    return {"CANCELLED"}
                 self.report({"INFO"}, f"Showing {img.name}")
                 return {"FINISHED"}
         self.report({"INFO"}, "No Image Editor open - use the Texel workspace")

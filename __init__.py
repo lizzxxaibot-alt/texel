@@ -27,7 +27,9 @@ from . import (tex_props, tex_doc, tex_pick, tex_paint, tex_layers,
                tex_extra, tex_tools, tex_showcase, tex_sprite, tex_anim, tex_keys,
                tex_ui)
 
-_MODULES = (tex_props, tex_paint, tex_layers, tex_density, tex_palette,
+# tex_doc is first: it owns the load_post/save_pre handlers that keep a canvas
+# alive across a save, so it must be registered before anything can bind one.
+_MODULES = (tex_doc, tex_props, tex_paint, tex_layers, tex_density, tex_palette,
             tex_select, tex_zones, tex_setup, tex_extra, tex_tools, tex_showcase,
             tex_sprite, tex_anim, tex_keys, tex_ui)
 

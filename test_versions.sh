@@ -18,7 +18,7 @@ declare -a REPORT
 
 # headless suites only: the GUI ones need a window, and a second Blender opening
 # windows while the first is mid-run makes the results meaningless
-SUITES="test_blender test_addon test_features test_showcase test_sprite test_anim"
+SUITES="test_blender test_addon test_features test_showcase test_sprite test_anim test_persist"
 
 for BL in "$TOOLS"/blender-*/blender.exe; do
   [ -x "$BL" ] || continue

@@ -86,6 +86,9 @@ class TEXEL_OT_paint(Operator):
             self.report({"WARNING"}, "No canvas: open an image, or give the object an image texture")
             return {"CANCELLED"}
         self.doc = tex_doc.get(img)
+        if self.doc is None:
+            self.report({"ERROR"}, "This texture has more than 255 colours, so it cannot be opened as an indexed canvas. Reduce it to 255 or fewer first")
+            return {"CANCELLED"}
         if self.doc.canvas.w != img.size[0] or self.doc.canvas.h != img.size[1]:
             self.doc = tex_doc.Doc(img)
             tex_doc._DOCS[img.name] = self.doc
@@ -191,7 +194,9 @@ class TEXEL_OT_canvas_new(Operator):
         img = bpy.data.images.new(self.name, self.size, self.size, alpha=True)
         img.pixels.foreach_set([0.0] * (self.size * self.size * 4))
         img.update()
-        tex_doc.get(img)
+        if tex_doc.get(img) is None:
+            self.report({"ERROR"}, "Could not create a canvas for this image")
+            return {"CANCELLED"}
         if context.space_data and context.space_data.type == "IMAGE_EDITOR":
             context.space_data.image = img
         self.report({"INFO"}, f"Canvas {self.size}x{self.size} created")

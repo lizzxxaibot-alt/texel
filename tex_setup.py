@@ -135,7 +135,9 @@ class TEXEL_OT_add_cube(Operator):
         tex.location = (-400, 200)
         nt.links.new(tex.outputs["Color"], nt.nodes["Principled BSDF"].inputs["Base Color"])
         obj.data.materials.append(mat)
-        tex_doc.get(img)
+        if tex_doc.get(img) is None:
+            self.report({"ERROR"}, "Could not create a canvas for this cube")
+            return {"CANCELLED"}
         self.report({"INFO"}, f"Cube with a {self.texture}px canvas, nearest-neighbour")
         return {"FINISHED"}
 
@@ -280,6 +282,8 @@ class TEXEL_OT_workspace_create(Operator):
         square stones read correctly whichever way the face lands.
         """
         doc = tex_doc.get(img)
+        if doc is None:
+            return
         c = doc.canvas
         L = c.layers[c.active]
         w, h = c.w, c.h
