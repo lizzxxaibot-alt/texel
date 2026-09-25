@@ -1128,3 +1128,229 @@ three materials at three visibly different pixel sizes in one frame, and this
 routine did not establish whether that is deliberate density zoning or the drift
 the product exists to remove. A still that may show the defect, under a product
 sold on fixing it, does not lead a Sunday until someone measures it.
+
+---
+
+## Run 2026-09-23 08:54 local / 13:54Z (Wednesday, a TEXEL day) — an OFF-SLOT extra run
+
+**This run fired at 13:54Z. The regular slot is 20:21Z and had not yet run**, which
+is the fact the whole run turned on — see the deferral decision below.
+
+**Ledger: clear.** `ACTIONS.md` has no OPEN row owned by `texel-marketing`.
+T-008, T-012 and T-013 are `texel-release`'s; T-017 and T-019 are
+`texel-funnel`'s; T-002, T-010, T-011, T-015 and T-016 are `HUMAN`. Nothing to
+do and nothing to refuse.
+
+### The v0.2.1 bar was re-checked logged out at send time, as the 09-21 run asked
+
+`z3er1n.itch.io/texel`, cookie-less `curl`, HTTP 200, 31,111 B: the upload widget
+names **only `texel-0.2.0.zip, 187 kB`**. **T-012 still open, the radial beat
+stays barred.** `texel-release` had not run when this was read — its `nextRunAt`
+was 2026-09-23T15:13:01Z.
+
+### A deferral was drafted, sent to `venture-critic`, and REVERSED on its verdict
+
+The draft plan was: post nothing now, spend the run on §D, and let the 20:21Z
+regular run carry the beat once it could see whether 0.2.1 shipped at 15:13Z.
+The reasoning was that `marketing_plan.md` allows **one item on an owner's own
+day**, so posting early would spend Wednesday before the release was known.
+
+**`venture-critic` returned VERDICT: REOPEN with two FATALs, and the first one
+was checked against the file and is correct.** `QUEUE.md` line 385 marks the
+radial beat **"needs a new visual; none exists"**, and the note below it says
+radial is a *motion* that needs the §4 loop budgeted rather than treated as a
+crop. **So no release note could have gone out at 20:21Z even if the zip shipped
+at 15:13Z** — the choice was never "filler now vs. the real beat tonight", and
+the deferral rested on a binary that does not exist. The second FATAL is also
+fair: two fleet outages inside ten days (09-17, 09-20) already ate scheduled
+runs, and "a later run will do it" is the same trust-without-readback move that
+let T-012 sit six days.
+
+**Reversed and posted this run.** Recorded because the reasoning was wrong in a
+way that reads plausible, and a later run may be tempted by it again.
+
+### Posted — Wed 2026-09-23, the palette-restatement beat
+
+| Date | Beat | Asset | URL | First hour |
+|---|---|---|---|---|
+| 2026-09-23 | **One painted tile, three bays** — `texel.adjust` restating a texture through its palette | `store/stills/shot_hangar_02.png` to `store/stills/shot_hangar_02_post.jpg` (295,176 B, under the 976,560 cap). **Never posted; no file in `store/stills/` ever has been** | [3mw6w6wx6ce23](https://bsky.app/profile/pixelkiln.bsky.social/post/3mw6w6wx6ce23) | 4 likes, 2 reposts, 0 replies at +12 min |
+
+**Every figure traced to source, not to `README.md`.** `gameshots.py:586-611`
+builds the hangar: one `panel` texture painted once, then
+`swap_palette(cool, -128.0, 0.55)` and `swap_palette(warm, 158.0, 0.7)`, and
+`density(solid, 48.0)` applies **48 px/unit** to deck, roof, bays, ribs, crates
+and pipes through `texel.density_apply`. `swap_palette` calls
+`texel.core.adjust.apply_to_palette` with `HUE` then `SATURATION` — and
+**`texel.adjust` ("Adjust Colours") is an operator in the LIVE 0.2.0 zip**
+(`texel/tex_select.py`), listed out of `dist/texel-0.2.0.zip` rather than
+assumed. `saturation()` is `s * (1 + amount)`, so 0.55 and 0.7 are **+55% and
++70%**, which is how the post words it. Nothing in the post is from the
+unshipped 0.2.1.
+
+Verified live on the public AppView with a cookie-less `getPostThread`:
+author `pixelkiln.bsky.social` (`did:plc:qqgd26mw3b3zrlhuipf2vse6`), `createdAt`
+**2026-09-23T14:09:58.314Z**, embed `app.bsky.embed.images`, one image
+`image/jpeg` 295,176 B, alt text intact at 1,054 bytes, text 279/300 bytes.
+
+**The image was read full-size and at 300px before sending.** At thumbnail the
+green, orange and grey bays still read as three colours of one panel, which is
+the whole claim of the post.
+
+### A PRODUCT FINDING, handed off — `texel.check_tileable` returns seamless on a visibly seamed tile
+
+**This is not this routine's lane to fix and no row was opened** — the rules at
+the top of `ACTIONS.md` say `texel-watch` is the only routine that opens one. It
+is written here the way T-008 was handed off from this lane earlier in September.
+
+Today's beat started as a **seamless-tiles** beat (unspent, in the tagline, and
+both `texel.shift_wrap` and `texel.check_tileable` ship in the live 0.2.0 zip).
+It was abandoned on evidence:
+
+- A moss patch was painted across the bottom edge of
+  `promo/walk/tile_flagstone.png` so that it does not wrap. Tiled 3x3 the break
+  is **blatant** — the domes are sliced flat at every tile edge and their bottom
+  halves never appear.
+- `core.tools.tile_seam_score` on that tile returns **`seamless: True`,
+  `score: 100.0`** (`v_wrap` 71.3 against `v_worst` 103.2, so the flagstone's own
+  dark mortar lines keep the wrap jump under the 1.1x bar).
+- Same result for a **duplicated edge column** — `h_wrap` 0.0, `score` 100.0 —
+  which is the exact failure the function's own docstring lists as its reason for
+  rejecting the naive "left column == right column" test. The chosen metric
+  inherits that blind spot rather than fixing it.
+- Tripping it honestly needed absurd input: a baked top-to-bottom shadow only
+  flags at **shade depth 0.85** on flagstone (near-black at the top), which is a
+  strawman, not a mistake anyone ships.
+
+The docstring is honest that it is *"a heuristic, not a proof"*, so this is a
+scope-and-claims question rather than a lie in the code. **But the tagline sells
+"seamless tiles", and a buyer running Check Tiling on a seamed tile is told
+"Seamless: both edge pairs match exactly."** What to do about it is
+`texel-release`'s call; naming it is this run's.
+
+**Marketing consequence, already applied:** no beat will be built on
+`check_tileable` until this is settled. `shift_wrap` is untouched by it and is
+still a good future beat on its own terms.
+
+### §D — two replies, both verified on the public AppView
+
+| Date | Thread | What was said | Link |
+|---|---|---|---|
+| 2026-09-23 | @chiaerieblossom.itch.io — a self-reply in a **15-like** thread describing their own technique: putting faces *"just so"* on the UV map so colour boundaries land on face edges, picked up from a Guilty Gear talk. Author-written alt text describes ab lines *"made by crossing the edge of the face into a pixel of a different color on the UV map"* | Extended their technique rather than correcting it: the UV editor has **`pixel_round_mode`, UI label "Round to Pixels"**, in the **UV menu** (`space_image.py:438`, `IMAGE_MT_uvs`), which makes the placement exact instead of eyeballed. **Read out of Blender 4.5.9 LTS under `--factory-startup`, not recalled**: default **`'DISABLED'`**, enum `DISABLED / CORNER / CENTER`, descriptions *"Round to pixel corners"* / *"Round to pixel centers"*. Different fact from every spent answer | [3mw6wa2heve2c](https://bsky.app/profile/pixelkiln.bsky.social/post/3mw6wa2heve2c) |
+| 2026-09-23 | @imonk562.bsky.social — **9 likes**, a working 2D pixel artist saying Crocotile3D ran too slow, that Cultic was one person *"and also just straight up Blender"*, and *"I might have to try Blender again"* | **A performance tip was drafted and dropped**, because their self-reply says *"Blockbench and Blender run fine on my PC"* — answering a question they did not ask would have opened by correcting. Sent instead the one default that bites a pixel-art eye: **Output Properties, Post Processing, Dither** — `dither_intensity`, **default 1.0**, *"Amount of dithering noise added to the rendered image to break up banding"*, which applies to the 8-bit output that `color_depth` defaults to. Verified in 4.5.9 `--factory-startup`; panel located at `properties_output.py:197`, `RENDER_PT_post_processing` (`DEFAULT_CLOSED`) | [3mw6wab5szo2u](https://bsky.app/profile/pixelkiln.bsky.social/post/3mw6wab5szo2u) |
+
+Both re-fetched cookie-less after sending: correct author, correct parent
+(@chiaerieblossom.itch.io and @imonk562.bsky.social), 270/300 and 263/300 bytes,
+indexed 14:10:35Z and 14:10:42Z. Neither mentions Texel, neither carries a link,
+neither pitches.
+
+**The freshest and highest-engagement pixel-art-in-Blender results this run were
+almost all off limits** and were left alone under the standing rule: the rival
+product's own account, and @lbsketchbook.bsky.social's **18-like** post, which is
+a direct endorsement linking that product's itch page. Not replied to, not named.
+
+### §E, the listing check — NOT due
+
+§E is weekly on Saturday; today is Wednesday and the last full run was
+2026-09-19. Next is **Sat 2026-09-26**. `texel-watch` has not reported conversion
+under 0.5% on 200+ views, so §E's mandatory trigger has not fired either.
+
+### Note for the 20:21Z run today
+
+**Wednesday's one item is spent.** Do not post a second top-level item today;
+`marketing_plan.md` allows one per owner per own day. If `texel-release` ships
+0.2.1 at 15:13Z, the radial beat still needs its visual built first — see
+`QUEUE.md` line 385 — so it belongs to a later day, not to tonight.
+
+### Queue check
+
+`QUEUE.md` Fri 09-25 (anim/frame timing) and Sun 09-27 (`shot_market_03.png`)
+are unchanged and both still clean on the 21-day guard.
+**`shot_market_03.png` was read full-size this run and confirmed strong** —
+crisp, one pixel grid across the whole cobbled street, a genuine top-down RPG
+street. Sunday's row is good as written.
+
+---
+
+## Run 2026-09-25 (Friday, a TEXEL day, 13:20-13:35Z)
+
+### §0 — the ledger came first
+
+No OPEN row in `ACTIONS.md` is owned by `texel-marketing`. **T-008** (owner
+`texel-release`) says this routine *may* supply the N-panel screenshot as
+evidence. Not taken this run: it needs a UI screenshot of Blender with the
+shipped 0.2.1 zip installed, and `--background` draws no panels. It stays with
+its owner (next slot Wed 09-30).
+
+### Checked before sending
+
+- **The live page still serves 0.2.1**: a cookie-less `curl` of
+  `z3er1n.itch.io/texel` shows only `texel-0.2.1.zip`.
+- **All six animation operators are in the SHIPPED zip.** They were listed out of
+  `dist/shipped/texel-0.2.1-SHIPPED-2026-09-24.zip`
+  (`texel/tex_anim.py`): `anim_bind`, `anim_unbind`, `anim_play`,
+  `frame_hold`, `export_gif`, `export_anim_data`.
+- **Every number traces to source.** `anim_demo.py:69` sets holds
+  `(2,1,1,1,2,1,1,1)` through `texel.frame_hold`, and `:75` sets fps 12.
+  `Torchbearer_anim.json` was written by `texel.export_anim_data`: 64x64 frames,
+  a 4x2 sheet (256x128), and `duration_ms` 167 / 83. In `demo_art.py:47-60` the
+  flame's `lick` runs on `f % 4` and the walk on `f % 8`, on the separate
+  `Torch` track.
+- **A wording correction made before sending.** The QUEUE row and the code
+  comment call frames 0 and 4 the *contact* poses. But `pose()` gives them
+  `step=0`: the legs are together, which is the *passing* position in walk
+  terms. The post does not name the pose at all. It gives the frame numbers and
+  the holds, so it cannot misname the animation to an animator.
+- **The account had not posted today.** A cookie-less `getAuthorFeed` showed the
+  last top-level post at 09-24 06:14Z (packs).
+
+### Posted — Fri 2026-09-25, the frame-timing beat
+
+| Date | Beat | Asset | URL | First hour |
+|---|---|---|---|---|
+| 2026-09-25 | **Sprite/animation: variable frame timing.** 8-frame dungeon walk, holds of 2/1 ticks, the flame on its own 4-frame track, exported as a sheet + JSON | `promo/anim/sheet_big.png` (14,378 B, 1280x640). **First post of any `promo/anim/` file.** The 21-day guard was clean | [3mwdut3bo5a24](https://bsky.app/profile/pixelkiln.bsky.social/post/3mwdut3bo5a24) | 3 likes, 2 reposts, 0 replies at +3 min |
+
+Verified cookie-less on the public AppView (`getPostThread`): author
+`pixelkiln.bsky.social`, `createdAt` 2026-09-25T13:28:45.124Z, embed
+`app.bsky.embed.images`, one `image/png` of 14,378 B with its 677-character alt
+text, text 296/300 bytes. Tags `#pixelart #gamedev #b3d`, one link to the itch
+page, no `#screenshotsaturday`. Spec: `promo/post_2026-09-25.json`.
+
+### §D — two replies, both verified on the public AppView
+
+| Date | Thread | What was said | Link |
+|---|---|---|---|
+| 2026-09-25 | @gabori-games.bsky.social: a solo dev (1 follower) who finished GBJAM14 by animating in 3D in Blender and exporting sprites. Their self-reply says the 3D lighting turned the Game Boy's 4-colour limit into 8 | Opened with congratulations on finishing, then a tip for the next jam: in Eevee, Shader to RGB into a Color Ramp set to Constant, with four stops on the palette. Also Film > Filter Size ships at 1.5 px (set it to 0) and View Transform ships at AgX (use Standard). **Checked in 4.5.9 `--factory-startup`, not recalled**: `filter_size` defaults to 1.5 with hard_min 0.0, `view_transform` defaults to `AgX` and accepts `Standard`, and ColorRamp interpolation includes `CONSTANT` (default `LINEAR`) | [3mwduxj22f52w](https://bsky.app/profile/pixelkiln.bsky.social/post/3mwduxj22f52w) |
+| 2026-09-25 | @ikuti.dev (1,271 followers, a Unity/Godot programmer): *"If I do lowpoly 3d, does it work if I than go pixel art for ui?"* Posted today, 0 likes, one other answer | Said it can work if the UI is drawn on one grid and scaled by whole numbers only: 640x360 at 3x fills 1080p exactly, while 1.5x gives uneven 1-and-2-pixel widths. In Godot 4.2+, set Stretch > Scale Mode to integer (the default is fractional). **Checked in Godot's own source**: `display/window/stretch/scale_mode` with values `fractional,integer` and default `fractional` is in `4.2-stable` `core/config/project_settings.cpp:1373` and absent from `4.1-stable`. **Their thread mentions itch UI sets, and the reply names none**, including the packs | [3mwduywy63e2d](https://bsky.app/profile/pixelkiln.bsky.social/post/3mwduywy63e2d) |
+
+Both were re-fetched cookie-less after sending. Each has the right author and
+the right parent URI, at 296/300 and 294/300 bytes. Neither mentions Texel,
+carries a link or pitches.
+
+### Threads looked at and left alone
+
+- **@earthsetdev.bsky.social, "make pixel art fire in blender"** (7 likes, 0
+  replies, a video). Frames pulled from the HLS stream show particle cubes
+  instanced red and orange off a torch. A drafted tip (a Blend texture on
+  Strand/Particle coordinates, influencing Size, so the cubes shrink with age)
+  **was tested in 4.5.9 and could not be confirmed**: `particle.size` read
+  0.05 at every age. Unverified, so it was not sent. Silence is free.
+- **@alfredbaudisch.com and @lbsketchbook.bsky.social's endorsement post**:
+  standing no-rivalry rule. Also @keitherickson's reply, which sits in a
+  pixel-art-tool seller's context.
+- **@augh3d.bsky.social** (texel-density squint test): the profile asks not to
+  be engaged. **@siegelordex** (OLED sub-pixel post): a joke with nothing to add.
+
+### §E — not due
+
+Weekly on Saturday, so the next check is **Sat 2026-09-26**.
+
+### Queue check
+
+- **Sun 09-27** (`store/stills/shot_market_03.png`, needs the JPEG resample) is
+  unchanged and clean.
+- **The v0.2.1 radial beat** is still blocked on a visual.
+- **The "shipped a bug that erased people's work" honesty beat** is writeable
+  and has no slot yet. Its natural home is Wed 09-30, alongside
+  `texel-release`'s v0.2.2 (Wed is the release/WIP slot).
+- **The `check_tileable` build-in-public beat** stays barred until the v0.2.2
+  upload is verified logged out.
