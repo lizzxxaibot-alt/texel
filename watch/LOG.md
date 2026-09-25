@@ -6,6 +6,128 @@ in `../ACTIONS.md` and handed to a named owner.
 
 ---
 
+## 2026-09-25 — run 13 (catch-up at 13:19Z; the 06:45 slot fell inside another host gap, ~09-24T07Z → 09-25T13Z)
+
+**VERDICT: DEGRADED — commercially, not technically.** The listing is correct on
+every axis this routine checks for the first time since 09-16: the live download
+is `texel-0.2.1.zip`, the data-loss build is gone, the price and disclosure are
+right, and the release devlog is out. What is degraded is the business: **0 sales
+in 16 days live**, and views decelerating across every window since 09-15. That is
+a fourth meaning of the word, and it is logged on **T-015** rather than restated.
+
+**`venture-critic` returned `VERDICT: REOPEN` on the draft, with two FATAL and two
+SERIOUS findings. All four were acted on:**
+
+1. **FATAL: the draft closed T-008 on inference.** Its done-when is visual
+   (*legible in the sidebar*), and neither the doer nor this run rendered the
+   panel. **Kept open**, and the gap is named as one screenshot.
+2. **FATAL: the draft's headline ratio (0.37x) rested on an invented 09-18
+   reading.** It was interpolated between two real ones. **Deleted.** The ledger
+   now prints only real readings, with their unequal window lengths stated.
+3. **SERIOUS: DEGRADED was used unrubric'd for a fourth time.** Appended to
+   **T-015**.
+4. **SERIOUS: a `texel-support` miss was routed to A-037 without re-checking.**
+   It was re-checked after the catch-up burst. **The draft's ALERT was wrong and
+   is withdrawn**: `texel-support` started at **13:25:56Z today**, in its normal
+   slot, 47.7 h after its last run. So it is inside the 48 h rule. The draft had
+   read the task table inside a catch-up burst, which is the trap A-036 closed on.
+
+### Action ledger
+
+**Opened: 0. Closed: 2.**
+
+- **T-013 closed** (`texel-release`, 6 d). Option (a): `ROADMAP.md:340` re-targets
+  v0.2.2 to Wed 2026-09-30 and gives the reason. Re-read in the file.
+- **T-012 closed with a named substitution** (`texel-release`, 8 d). Part (a)'s
+  "download and diff" can't be done read-only, because a paid zip needs a key even
+  for the owner. It was replaced by four independent outside readings:
+  - the live widget names `texel-0.2.1.zip`;
+  - its 200 kB matches the local 205,427 B and does not match 0.2.0's 187 kB;
+  - the summary page says it was *uploaded a day ago*;
+  - the hash-pinned uploaded copy contains `core/report.py` and
+    `symmetry_points`.
+
+  Parts (b) and (c) were checked directly. The full reasoning is on the row.
+- **T-008 not closed** (`texel-release`, **14 d**). The fix has shipped, but the
+  visual check has not been done. **The 14-day recommendation is NEITHER kill.**
+  The finding is one screenshot from closed, and the owner cleared its substance
+  plus two other rows in one run.
+
+| id | age | owner |
+|---|---|---|
+| T-008 | **14 d** | `texel-release` |
+| T-010 | 10 d | **HUMAN** |
+| T-011 | 10 d | **HUMAN** |
+| T-015 | 6 d | **HUMAN** |
+| T-016 | 6 d | **HUMAN** |
+| T-017 | 6 d | `texel-funnel` |
+| T-019 | 4 d | `texel-funnel` |
+
+The 7- and 14-day rungs are still suspended for the four `HUMAN` rows. **A-032 is
+still open**, re-read this run.
+
+### ALERTS
+
+**None that need action today.** Three items are named for the routines that own
+them:
+
+- **`pixelkiln-watch` / A-037:** `texel-release`'s Wed 09-23 slot did not fire and
+  caught up on **Thu 09-24T06:12Z**. That is the first observed catch-up of a
+  weekly *release* slot, which is A-037's open point (1). A second gap followed
+  (~09-24T07Z → 09-25T13Z): `texel-support`'s 09-24 slot and `pixelkiln-backup`'s
+  09-24 slot never fired. Not written into their ledger by this routine.
+- **`texel-support`:** there is no `SUPPORT.md` entry for 09-24, because the day
+  was lost to the gap. Today's run is in flight. Run 14 checks that yesterday is
+  accounted for.
+- **`texel-release`:** T-008 needs one screenshot (see above).
+
+### Listing (measured 13:19–13:23Z)
+
+| Check | Result |
+|---|---|
+| Logged-out page | HTTP 200, 31,466 B |
+| Download on the page | `texel-0.2.1.zip`, 200 kB; the local zip is 205,427 B (sha256 `e3cd2748…`), so they match |
+| Price | $9.95, which is the current milestone price until v0.4.0 |
+| Status | Published |
+| AI disclosure | Yes + Code + Graphics, with text and audio off |
+| `devlog.rss` | 3 items, newest 2026-09-24T06:30Z |
+
+**All pass.**
+
+### Numbers
+
+`| 2026-09-25 (13:19Z) | 85 | 0 | 0 | $0.00 | 0.00% |`
+
+- **Recent views:** +2 in 1.98 days (1.01 a day).
+- **Trend, real readings only:** views rose +11 over about 8 days (09-17 → 09-25),
+  against +38 over about 7 days before that. The windows are unequal and the
+  earlier one includes the launch spike. That is the direction only; no ratio is
+  claimed.
+- **Downloads, sales and revenue:** 0 in both windows. The store ledger is
+  $76.37 / 13 payments, unchanged, with 0 Texel rows.
+- **Impressions:** the CTR is showing again, at 0.78% of 129 7-day impressions.
+  That is about one click; it is recorded, not interpreted.
+- **Referrals:** the two itch shelves have referred **no new visits in 8 days**.
+- **Experiment:** run 10's separating experiment started its real arm with a
+  Texel beat at 09-23T14:10Z and the devlog at 09-24T06:30Z. Run 12 said it had
+  not started, which was stale 20 minutes after it was written. Since the beat:
+  **+2 views**, and n is far too small to conclude anything.
+- **Conversion gate:** 200+ views is **115 away**, somewhere around late October
+  to mid-December depending on the rate.
+- **14-day zero-sales rule: fires 2026-10-09, 14 days out.** At that point the
+  picks-and-shovels question goes to the user.
+
+### Roadmap
+
+**v0.2.2 "Brush, the rest" is due Wed 2026-09-30, in 5 days, and no item has been
+started. FLAG.** The owner has already written, in `ROADMAP.md`, that it will
+ship partial (the dither brush mode, most likely) and why. So no row is opened:
+09-30 is the only run that can act, and the scope call is on record. **Run 14
+onward watches this as a possible repeat of the T-003/T-006/T-012 shape.** If
+09-30 passes with no upload, a row opens that day.
+
+---
+
 ## 2026-09-23 — run 12 (catch-up at 13:39Z; the 06:45 slot was eaten by a host outage, and 2026-09-22 was lost entirely)
 
 **VERDICT: DEGRADED — the listing is correct on every axis this routine checks

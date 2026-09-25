@@ -449,3 +449,68 @@ The first cut showed a **2x** scale, which forced a window four times the sprite
 and left three of the four panels ~80% empty checkerboard - at a 315px itch
 thumbnail only one panel still read. Showing a **half** scale instead inverts
 that: three panels fill their frame and the small one is the point being made.
+
+---
+
+## v0.2.1 — shipped 2026-09-24, eight days after it was built
+
+Released by `texel-release` on Thu 2026-09-24 (the Wed 09-23 slot did not fire).
+`dist/texel-0.2.1.zip`, 205,427 B, 33 files. Live and verified logged-out —
+evidence in `ROADMAP.md` under the v0.2.1 heading, not repeated here.
+
+**Contents:** the data-loss fix `texel-support` reproduced on 09-23, the density
+readout that did not fit its panel (T-008), radial symmetry, and `build.py`'s
+stale-list guard. The first two are the ones a buyer feels.
+
+### Re-running the 2026-09-16 gate found two more false greens
+
+That release reported itself gated with all suites green. Re-run at HEAD this
+morning, before any of today's work:
+
+- **`test_features.py` failed, and had failed since the hour it was written** —
+  same commit, `bf2ad7d`, 2026-09-16 22:10. The check *"all eight sit the same
+  distance from the centre"* is **unsatisfiable**: `x^2 + y^2 = 36` has exactly
+  four integer solutions and all four are axial, so no grid point exists at
+  radius 6 on a diagonal. The rotation lands at (8±4.243, 8±4.243) and the
+  nearest texel is (4, 4) at radius 5.657.
+- **`core/` coverage was 97.5%, not 100%.** `core/report.py` shipped in that
+  release at **0%** because its suite, `test_report.py`, was never added to the
+  coverage loop in this routine's SKILL.md. Six suites, not five.
+
+### The assertion was replaced, and each replacement was made to fail first
+
+Snapping the diagonals to (4, 5) to recover radius 6 would be worse art — 0.76
+texels from the true rotation against (4, 4)'s 0.34 — so the code is right and
+the assertion was wrong. It is now three checks over what an integer grid does
+guarantee: closure under a quarter turn, closure under a diagonal flip, and every
+texel within half a diagonal (0.7071) of its true rotation. **All three were
+verified to fail against a truncating implementation** before being accepted —
+`int()` in place of `round()` yields (3, 3) against (12, 3), breaking both
+closures, and pushes the radius error to 1.071. Measured, not argued.
+
+### `store_check.py` was running a stale list and now refuses to
+
+`test_persist.py` was added 09-23, guards the data-loss fix, and was **not** in
+`store_check.py`'s hand-written `HEADLESS` list — so the Microsoft Store build,
+the one install path no other script can reach, was not running it. It is in the
+list, and `check_no_suite_left_behind()` now aborts the run when a `test_*.py`
+exists that is in neither list nor in `PURE`. **Negative-tested**: a throwaway
+`test_zzz_fake.py` made it exit with the file named. This is `build.py`'s
+2026-09-16 guard applied to the second hand-written list on the product.
+
+### The gate, in full, on the code that shipped
+**6** headless core suites · `core/` at **100.0%** (1,051 statements, 0 missed) ·
+**7** headless Blender suites incl. `test_persist` · the panel-draw traceback
+check (empty) · 4 GUI suites · `build.py` clean · `test_install` against the
+built zip — green on **4.2.23, 4.5.9 and 5.2.1** (`test_versions.sh`
+`VERSIONS_DONE pass=3 fail=0`, `run_gui_versions.sh` 12/12) and inside the
+**Microsoft Store 5.2.1** build (`store_check.py`: **12 of 12**).
+
+### One stale line left for its owner
+`LISTING.md` lines 398-403 say the readout *"cannot be shown as a panel
+screenshot at any size"*. True of 0.2.0, false of 0.2.1 — the panel prints three
+legible lines now. No shipped listing image is wrong because of it (the density
+card sets the figures as type and never showed the elided panel), so this is a
+missed opportunity rather than a false claim. Listing copy is not this routine's
+lane; handed to `texel-marketing` in `promo/QUEUE.md` and named here so it is on
+the record either way.

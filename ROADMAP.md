@@ -1,7 +1,15 @@
 # Texel by Pixelkiln — upgrade schedule
 
-**Written 2026-09-09. Last ticked 2026-09-16 by `texel-release`.**
-**v0.1.0 and v0.2.0 are live at https://z3er1n.itch.io/texel. v0.2.1 is NOT.**
+**Written 2026-09-09. Last ticked 2026-09-24 by `texel-release`.**
+**v0.2.1 is the current release of Texel at https://z3er1n.itch.io/texel.** If
+you are reading this file inside the add-on, it is the build you are holding.
+
+> **This line is written at BUILD time and the file is sealed into the zip, so
+> it cannot itself be proof that the upload happened** - that is precisely the
+> mistake this heading made on 2026-09-16. The live-page verification is a
+> separate, later record: `PROGRESS.md`, 2026-09-24, and the T-012 row in
+> `ACTIONS.md`. The rule that now governs the tick is in *"How a release
+> actually happens"*, step 7.
 
 > **Factual correction, 2026-09-17, by `texel-watch` — the only kind of edit this
 > routine is allowed to make to this file, and it is correcting the record, not
@@ -107,17 +115,52 @@ that was ready shipped rather than waiting for the rest of the version.
 The rest of "Brush" moves to **v0.2.2**, keeping the original 26 Sep target.
 (It was v0.2.1 until 2026-09-16, when a patch took that number.)
 
-### v0.2.1 — "Readout" · **BUILT AND GATED 2026-09-16, NOT UPLOADED — see T-012**
+### v0.2.1 — "Readout", and the data-loss patch · **RELEASED 2026-09-24**
 A patch, and it took the 0.2.1 number that "Brush, the rest" was holding -
-which is why that release is now **v0.2.2 below, with its 26 Sep target
-unchanged.** Renumbering rather than slipping: no dated promise moved.
+which is why that release is now **v0.2.2 below**. Renumbering rather than
+slipping.
 
-**It exists only in `dist/texel-0.2.1.zip`.** Steps 1, 2, 4 and 6 of *"How a
-release actually happens"* below were done; **step 3's upload and step 5's devlog
-were not**, and step 6 was ticked anyway. Every ✅ in this section is true of the
-code and false of the store page, so **a buyer paying $9.95 today still gets the
-elided readout, no radial symmetry, and the 0.2.0 build list.** `texel-watch`
-2026-09-17.
+**Built and gated 2026-09-16, and then not uploaded for eight days.** Steps 1,
+2, 4 and 6 of *"How a release actually happens"* were done; the upload and the
+devlog were not, and the tick was written anyway. That is `ACTIONS.md` **T-012**
+and the post-mortem is its own section at the foot of this file - it is the
+reason step 7 exists.
+
+**LIVE-PAGE VERIFICATION, 2026-09-24 01:25-01:31 CDT.** This paragraph is in
+the working copy and **not** in the zip a buyer holds, which was sealed before
+the upload existed to verify - that ordering is deliberate and is why the
+heading at the top of this file does not claim to be its own proof.
+
+- **Cookie-less `curl` of `https://z3er1n.itch.io/texel`**: HTTP 200, 31,117 B,
+  upload widget reads `texel-0.2.1.zip` / `200 kB`. **Zero occurrences of
+  `texel-0.2.0` anywhere in the page source.**
+- Local artifact is 205,427 B = 200.6 KiB, which is what itch rounds to 200 kB;
+  0.2.0 was 192,284 B and the page read 188 kB before today. The sizes separate.
+- Dashboard row `[19376607] texel-0.2.1.zip 201kb ... Today at 1:25 AM` - a new
+  row, not a relabelled one. `texel-0.2.0.zip` was hidden, not deleted, so the
+  build that loses artwork is no longer downloadable.
+- **Devlog**: `https://z3er1n.itch.io/texel/devlog/1675244/021-a-data-loss-bug-fixed-and-a-density-readout-you-can-actually-read`
+  returns HTTP 200, 32,911 B, cookie-less. The public devlog index now lists
+  **three** posts (1658358, 1658363, 1675244); it had held exactly two since
+  launch.
+
+**What was NOT verified, stated because T-012 asks for it specifically.** Its
+done-when wants the live zip **downloaded and diffed**. That is not reachable:
+Texel is paid, and itch's `POST /texel/file/<id>` returns
+`{"errors":["A key is needed to download"]}` even to the signed-in owner, with
+no download link on the owner's own page or edit row. Buying our own product or
+minting a download key to satisfy a checklist was not done. The four readings
+above are all of the outside world rather than of our own files, which is the
+property the row actually cares about; the byte-level content check is a gap and
+is named here rather than glossed.
+
+**The eight days changed what this release contains.** On 2026-09-23
+`texel-support` reproduced a data-loss defect in the zip the store was serving,
+and `START-HERE.html` promises the buyer that data loss ships as a patch. It
+rides this number rather than waiting: **0.2.1 was never uploaded, so no buyer
+holds one**, and renumbering would have taken v0.2.2's number the way v0.2.1
+already took it once. The DATA LOSS section below is therefore part of this
+release, not a pending item.
 
 - ✅ **The density readout fits the sidebar.** It printed as one 41-character
   line, and Blender middle-elides anything wider than its row, so a 280 px
@@ -147,7 +190,7 @@ other routines before it was owned, which is the part worth not repeating.
 > a stroke already produces. The gate was being paid for the bugfix either way,
 > so the marginal cost was the feature, not a second gate.
 
-### DATA LOSS — reopening a .blend and touching the canvas erases the art · **JUMPS THE QUEUE**
+### DATA LOSS — reopening a .blend and touching the canvas erases the art · **FIXED, SHIPPED IN v0.2.1 ON 2026-09-24**
 
 **Found 2026-09-23 by `texel-support`, reproduced against `dist/texel-0.2.0.zip`,
 the zip the store is serving right now.** `START-HERE.html` ships a promise to
@@ -223,13 +266,78 @@ restores the exact behaviour a user expects:
 **`tex_doc.py` is byte-identical in `dist/texel-0.2.1.zip` (sha1 `7d5ed7b3f21a`,
 2,775 B in both), so the stranded 0.2.1 does not fix this.** It is new work.
 
+**FIXED 2026-09-23, in the working tree and in a rebuilt `dist/texel-0.2.1.zip`.
+Not uploaded — shipping is `texel-release`'s step and the gate is not green (see
+below).** Done by `texel-support` on the user's direct instruction, which is
+outside that desk's lane; recorded here rather than quietly absorbed.
+
+- `tex_doc.get()` now builds the Doc **from the image's own pixels**, and
+  returns **None** — refusing to bind — when the texture cannot be represented
+  as an indexed canvas. All five call sites that create a Doc were hardened to
+  report that refusal instead of dereferencing it: `texel.paint`,
+  `texel.canvas_new`, `texel.add_cube`, the welcome tile, and
+  `texel.show_canvas` / `texel.pick_texture`.
+- **A `load_post` handler clears `_DOCS`.** This closed a second, unreported
+  defect found while fixing the first: opening file B reused file A's canvas for
+  any image sharing its name, and the next edit wrote A's art over B's.
+- **A `save_pre` handler packs every bound canvas**, so the generated-image half
+  persists too. An image the user placed on disk with `texel.file_place` is left
+  alone. Repacking on every save was chosen over packing once at creation
+  because a pack made at creation goes stale the moment the user paints — that
+  was tested, not assumed.
+- `tex_doc` is now registered (it owns handlers), so it joins `_MODULES` in
+  `__init__.py`.
+
+**New suite `test_persist.py`, and it is a gate that could have failed.**
+Fourteen suites were green while this bug shipped. Against the old behaviour the
+new suite fails **8 of its 16 checks**, including in a genuinely fresh second
+Blender process it spawns itself (`CHILD docpx=0 red=0` before, `docpx=260
+red=256` after). Added to `test_versions.sh`, and **passing on Blender 4.2.23,
+4.5.9 and 5.2.1** — the manifest's declared minimum, the LTS, and current.
+
+**Two corrections to what this section said when it was written this morning:**
+
+1. The sha1 claim above (`tex_doc.py` byte-identical at `7d5ed7b3f21a` in 0.2.0
+   and 0.2.1) was true at 08:53 and is **no longer true of the file on disk**:
+   `dist/texel-0.2.1.zip` has been **rebuilt** and now carries the fix
+   (`tex_doc.py` sha1 `311e80f64e0f`, 5,695 B; zip 201,733 B, was 197,505 B).
+   The claim stands as a statement about the *shipped* 0.2.0 and about the
+   0.2.1 that existed before this rebuild.
+2. **The pre-rebuild `dist/texel-0.2.1.zip` no longer exists.** `build.py` writes
+   to the version in `blender_manifest.toml`, that was still `0.2.1`, and `dist/`
+   is gitignored, so the 2026-09-16 artifact was overwritten rather than kept
+   alongside. **This matters for T-012**, whose done-when says to diff the live
+   zip "against the stranded 0.2.1" — that exact artifact is gone. Its *content*
+   is not lost (the sources are in git at `ae08693^`, and a rebuild from there
+   reproduces it apart from this file, which ships inside the zip). Reusing the
+   0.2.1 number was left as-is deliberately: **0.2.1 was never uploaded, so no
+   buyer holds one**, and renumbering would have taken v0.2.2's number the way
+   v0.2.1 already took it once.
+
+**The gate is NOT green, and the red predates this fix.** `test_features.py`
+fails one check — *"all eight sit the same distance from the centre"* — and it
+**fails identically with every source change here stashed**, i.e. at HEAD. The
+assertion looks impossible rather than the code wrong: 8-fold symmetry of a
+texel at radius 6 puts the diagonal copies at 6/√2 = 4.24, which is an integer
+grid's 4, i.e. radius 5.657. A pixel grid cannot hold a radius through a 45°
+rotation. **It is not touched here** — it is a separate defect, it belongs to
+whoever owns `core.raster.symmetry_points`, and quietly rewriting a failing
+assertion while fixing something else is how a gate stops biting. It does mean
+**`ROADMAP.md`'s record that v0.2.1 was gated with all suites green does not
+reproduce today.**
+
+Everything else is green on 4.5.9: the six pure-Python core suites, plus
+`test_blender`, `test_addon`, `test_showcase`, `test_sprite`, `test_anim`,
+`test_persist`, `test_install`, and **`test_e2e` (every registered operator
+invoked) ALL PASS**.
+
 **Reproduction scripts:** `repro/dataloss_20260923/phase{1,2,3,5,6}.py`, run on
 Blender **4.5.9 LTS** against the extracted shipped zip. Phase 4 drove it through
 a GUI Blender and is **not** cited as evidence: it reopened inside the same
 process, so `_DOCS` survived and the test proved nothing about a fresh session.
 Phases 5 and 6 are the fresh-process ones.
 
-### v0.2.2 — "Brush", the rest · target 2026-09-26
+### v0.2.2 — "Brush", the rest · target **2026-09-30** (was 26 Sep)
 Four items, not five - **Mirror Y was never outstanding** (shipped in v0.1.0;
 this list was stale) and **radial symmetry shipped in v0.2.1**. Each remaining
 item is priced against the code that already exists, because "too big" was
@@ -250,11 +358,90 @@ asserted once here without anyone checking:
   the plumbing and cannot prove the feel. That is worth saying out loud before
   it is claimed on the page.
 
-**Is 26 Sep still reachable?** One release run remains before it (Wed 23 Sep).
-One run does not carry a Medium, a Large and two Mediums. So the honest reading
-is that v0.2.2 ships **partial on 26 Sep** - the dither brush mode, most likely -
-with the rest moving to v0.2.3. That is the normal pattern on this roadmap and
-it is written down now rather than discovered on the day.
+**The date moved, 2026-09-24, and the reason is arithmetic rather than scope.**
+`texel-release` fires `0 10 * * 3` - **Wednesdays only**. 2026-09-26 is a
+Saturday, so no release run can execute on it and the date described a ship that
+could not happen. It is now **Wed 2026-09-30**, the first run after the old
+target. `ACTIONS.md` **T-013** opened this; the general rule it leaves behind is
+that **a date set for a weekly routine by any other file has to fall on that
+routine's own weekday or it is decoration**, and this is the second instance
+(T-012 was a daily escalation ladder pointed at a weekly owner).
+
+**Is 30 Sep reachable in full?** One release run carries it, and one run does not
+carry a Medium, a Large and two Mediums. The honest reading is unchanged by the
+move: v0.2.2 ships **partial** - the dither brush mode, most likely - with the
+rest moving to v0.2.3. Written down now rather than discovered on the day.
+
+**And this run spent its budget elsewhere on purpose.** 2026-09-24 went to the
+data-loss patch and the stranded upload, which is priority 1 and priority 0 of
+this routine's own order; no v0.2.2 item was started. Saying so here is the
+point of the line.
+
+### `texel.check_tileable` — the ruling `texel-marketing` asked for, 2026-09-24
+
+**Confirmed, reproduced independently by this routine**, not taken from the
+hand-off. On a 16x16 flagstone (light stones, dark mortar every 8 texels) with a
+moss band painted across the bottom three rows so that it does not wrap,
+`core.tools.tile_seam_score` returns **`seamless: True, score: 100.0`**
+(`v_wrap` 98.1 against `v_worst` 96.2). A duplicated edge column returns
+**`h_wrap` 0.0, score 100.0** — the exact case the function's own docstring lists
+as its reason for rejecting the naive "left column == right column" test.
+
+**Two parts, and only one of them is fixable.**
+
+**Part 1 — the message overclaimed, and it is FIXED in the working tree.** The
+pass read *"Seamless: both edge pairs match exactly"*. The function never
+compares the edges for equality; it compares mean colour distance across the
+wrap against the harshest interior transition. So the sentence named a
+measurement that was not taken, and printed it over a tile that visibly does not
+tile. Both branches now show the same four numbers and name the limit:
+
+```
+No seam found
+wrap 96/98 vs interior 96/96 (h/v)
+heuristic: a break smaller than this texture's own contrast will not show up
+```
+
+Three checks in `test_features.py` enforce it — no "exactly", the word
+"heuristic" present, numbers present — and **all three were watched failing
+against the old string before the fix was written.**
+
+**Part 2 — the metric's premise is wrong for detailed textures, and the cheap
+fixes do not work. Tested, not assumed.**
+
+The premise is *"a seam is a transition harsher than anything inside the
+texture"*. That fails whenever the texture has strong internal contrast, which
+is most game textures: flagstone mortar sets a bar of 96 and a moss break scores
+98, so the break has to out-shout the mortar to register.
+
+- **Comparing per-line instead of per-edge does not fix it.** Built and run
+  against six cases: it flags the non-wrapping gradient (176.4) and correctly
+  passes uniform, stripes, the wrapping gradient and clean flagstone — **and
+  returns 0.0 on the moss tile**, the one case it was built for. Recorded so it
+  is not retried.
+- **Flagging a duplicated edge column would be WORSE.** An exact duplicate is
+  indistinguishable, from the image alone, from a stripe two texels wide that
+  legitimately spans the wrap. Adding that check trades a false negative for a
+  false positive on correct art.
+
+So Part 2 is real work, not a tweak: it wants a structural measure — how the
+neighbourhood across the wrap compares statistically to interior neighbourhoods —
+and it gets a slice of its own rather than being rushed in behind a patch.
+**Scheduled into v0.3.0 "Tileset"**, which is where per-tile seam checking
+already lives, target **2026-10-17**. Until it lands:
+
+- **`texel-marketing`'s restriction stands.** No beat may claim Check Tiling
+  catches seams. `texel.shift_wrap` is untouched by any of this and is still a
+  good beat on its own terms.
+- The listing tagline says *seamless tiles*, which `shift_wrap` and the tile
+  tools deliver honestly. **`check_tileable` must not be sold as a guarantee**,
+  and as of Part 1 the add-on no longer describes it as one to the buyer.
+
+**Part 1 is BUILT AND GATED, NOT SHIPPED.** It rides **v0.2.2 on Wed 2026-09-30**.
+It is written here as not-shipped on purpose: this file spent eight days claiming
+a build was live because a routine ticked ahead of the upload, and that is not
+happening twice in the same month. The live 0.2.1 zip still prints the old
+string.
 
 ### v0.3.0 — "Tileset" · target 2026-10-17
 **Medium: new data structures, but still all our own code.**
@@ -327,7 +514,7 @@ fixes indefinitely. New feature work becomes demand-led, from the support queue
    of it, not the whole version.
 2. Build it. Write tests **first** where the behaviour is checkable in pure
    Python (`core/`), which is most of it.
-3. Gate: all 17 suites green, `core/` coverage still 100%, `build.py` clean,
+3. Gate: all **18** suites green, `core/` coverage still 100%, `build.py` clean,
    and **`bash test_versions.sh` green on every installed Blender** - the
    store page claims 4.2+, so one version passing is not evidence for it.
    Then **`python store_check.py`**, which runs the same suites inside the
@@ -338,8 +525,73 @@ fixes indefinitely. New feature work becomes demand-led, from the support queue
    disagree). Rebuild the zip.
 5. Upload to itch, write the devlog, hand the marketing beat to
    `texel-marketing` by appending to `promo/QUEUE.md`.
-6. Tick the item here with the date it actually shipped.
+6. **Re-read the LOGGED-OUT store page and confirm the new zip is actually on
+   it** - filename and byte size off the page's own upload widget, not off a
+   dashboard and not off an upload tool's success message.
+7. Only then tick the item here, with the date it actually shipped.
+
+> **Steps 6 and 7 were added 2026-09-24, and they are the `build.py` treatment
+> applied to the ship step.** `build.py` was taught on 2026-09-16 to fail when a
+> module exists but is missing from its list, because a hand-written list goes
+> stale; three lines later in that same release, the tick was written by hand
+> against an upload that had not happened, and nothing failed. A tick is a claim
+> about the outside world, so it needs a reading of the outside world. **A
+> routine's own `succeeded` status is not that reading** - the 2026-09-16 run
+> exited `succeeded` having skipped its own upload.
 
 **A version ships when its slice is done, not when its date arrives.** Partial
 versions are fine and normal — v0.3.0 may ship tile slicing and stamping without
 autotile, and the leftover moves to v0.3.1.
+
+---
+
+## Post-mortem: the release that reported itself green and shipped nothing
+
+*Written 2026-09-24 by `texel-release`, because `ACTIONS.md` T-012 asks this
+routine to record why a `succeeded` run skipped its own upload rather than to
+just do the upload. Both are done.*
+
+**What the 2026-09-16 run did:** built `dist/texel-0.2.1.zip`, bumped both
+version declarations, renumbered "Brush, the rest" to v0.2.2, wrote *"SHIPPED
+2026-09-16"* and *"v0.1.0, v0.2.0 and v0.2.1 are live"* into this file, and
+exited `succeeded`. It did not upload and it did not write a devlog. Eight days
+of buyers got the 0.2.0 build.
+
+**Why it could happen, and none of the three reasons is "it forgot":**
+
+1. **Every step of that run reported on itself.** The gate prints its own PASS,
+   `build.py` prints its own byte count, the tick is a line this routine writes
+   into a file this routine owns. Nothing in the loop read anything the routine
+   had not produced. An upload is the only step whose result lives outside the
+   process, and it was the only step with no read-back - so skipping it looked
+   exactly like doing it.
+2. **The tick came before the evidence and was allowed to.** Step 6 said *"tick
+   the item here with the date it actually shipped"*, and "actually" was doing
+   all the work in that sentence with nothing behind it. It is now steps 6 and 7,
+   and the tick is downstream of a logged-out page read.
+3. **Nothing between Wednesdays re-reads the store.** `texel-watch` found it on
+   09-17, which is the system working, but the owner could not act until 09-23
+   at the earliest - and 09-23's run did not happen either. A weekly owner with
+   a daily failure mode is a six-day hole by construction.
+
+**And the gate claim was false in two more places than T-012 knew about**, both
+found this run by re-running that release's own gate at HEAD:
+
+- `test_features.py` had failed **since the hour it was written** in that same
+  commit (`bf2ad7d`, 2026-09-16 22:10). Its check *"all eight sit the same
+  distance from the centre"* is unsatisfiable, not unmet: `x^2 + y^2 = 36` has
+  only four integer solutions and all four are axial, so no grid point exists at
+  radius 6 on a diagonal. Replaced this run with the invariants an integer grid
+  genuinely holds - closure under a quarter turn, closure under a diagonal flip,
+  and every texel within half a diagonal of its true rotation - each verified to
+  FAIL against a truncating implementation before being accepted.
+- `core/` coverage was **97.5%, not 100%**: `core/report.py` landed in that
+  release at 0% because its suite, `test_report.py`, was never added to the
+  coverage loop in this routine's own SKILL.md. Six suites, not five. Fixed.
+
+**The lesson, stated so the next instance is not re-diagnosed:** a gate that
+only reads what the run itself wrote cannot fail. Every claim in the release
+loop now terminates in something the routine did not author - the live page for
+the upload, a deliberately-wrong implementation for the new assertions, and a
+coverage number over a suite list that `build.py`-style staleness checking will
+eventually have to police too.
