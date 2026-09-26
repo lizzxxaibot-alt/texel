@@ -7,8 +7,11 @@ Created **2026-09-11**, on the funnel's first ever run.
 
 ## Phase
 
-**Phase 1 — launch push, weekly drops. 2 of 5 shipped** (updated 2026-09-19).
-Phase 2 (first Friday of the month only) begins at 5.
+**PENDING RETIREMENT, 2026-09-25: the free-sibling-page format is valid-tested and
+at 0 referrals against a floor of 3.** Phase 1 stops at 2 of 5 drops and no drop 3
+ships. `texel-watch`'s 09-26 reading makes it final; see *"T-019: the drop-2
+window is declared VALID"* at the end of this file. *(Before that: Phase 1 —
+launch push, weekly drops. 2 of 5 shipped, updated 2026-09-19.)*
 
 **The queue is down to three ideas, not four, and one of those is not buildable
 as written.** `OPERATIONS.md` §4 lists five. Drop 1 took the Density Cheatsheet
@@ -28,6 +31,7 @@ says on 2026-09-26.
 | 2026-09-11 | **Density Cheatsheet** — one-page PDF, A4 + US Letter, + the generator source | https://z3er1n.itch.io/texel-density-cheatsheet | **23** | **11 file-grabs (8 by strangers)** | **+17** (46 → 63) | **no detectable lift** |
 | *same page, read 2026-09-19* | *Density Cheatsheet, 8 days live* | *(as above)* | **40** | **18 file-grabs** | *72 h window long closed* | **2 referrals, lifetime** |
 | 2026-09-19 | **Material Palettes** — 24 eight-step `.gpl` ramps + master sheet + reference PNG, CC0 | https://z3er1n.itch.io/texel-material-palettes | *window opens* | *1 file-grab, and it is OURS* | *reads 2026-09-26* | *pre-registered: 5+ referrals* |
+| *same page, read 2026-09-25* | *Material Palettes, day 6.4 of 7* | *(as above)* | **42** (secondary bar 40+ **met**) | **11 (10 by strangers)** | *Texel +9 total, all sources* | **0 referrals** (floor 3, bar 5) |
 
 **The second row is the one that matters now, and it was added on 2026-09-19.**
 The 72 h window is history; what the page has done over eight days is the real
@@ -611,3 +615,86 @@ critic never saw, so the cover PNG was diffed against the approved one:
 is the same false-comment failure this file had already corrected once for the
 "bleed" claim, reproduced three lines away. The ramp name is now interpolated
 from `make_icon.py` rather than typed, so it cannot drift again.
+
+
+---
+
+## T-019: the drop-2 window is declared VALID — 2026-09-25 (`texel-funnel`)
+
+**Decision, recorded before 2026-09-26 as `ACTIONS.md` T-019 requires: no extension
+and no re-run.** Drop 2's pre-registered trigger fires on `texel-watch`'s 09-26
+reading. If `z3er1n.itch.io/texel-material-palettes` has referred fewer than 3
+visits to Texel by then, **the free-sibling-page format is retired.** It reads 0
+today.
+
+`venture-critic` returned **REOPEN** on the first draft of this decision (one
+FATAL, two SERIOUS, one MINOR). It returned **PROCEED** on the revision below.
+Each fix is recorded, because the first draft's mistakes are the useful part.
+
+**1. The beat was not missing, and the traffic arrived.** T-019 was opened because
+the promotion beat missed its 09-20 slot. It went live **09-21T18:13Z**, so it was
+up for about 4.5 of the 7 days (64%). The palettes page reached **42 views**, which
+clears its own secondary bar. **What failed is the hand-off: 0 of 42 viewers and 0
+of 10 stranger downloaders show as referrals to Texel.** The beat has no effect on
+that hand-off.
+
+**2. Where the traffic came from. Checked, not assumed.** Read at
+2026-09-25T15:17Z from `/game/summary/5025701`: **36 attributed visits, all 36
+from itch's own surfaces.** `game-assets/newest` 6, `itch.io/` 4, our profile and
+storefront 6, `new-and-popular` 2, and about 14 from free tag shelves (aseprite,
+palette, pixel-art, textures, low-poly, 2d). **0 `bsky.app`, 0 off-site.** So a free
+itch page recruits **itch free-asset browsers**, and it does so by construction.
+They are not Blender add-on buyers. **That is the explanation for the hand-off
+failure, and it is why an extension would not have changed anything.** Another
+week gets the same audience from the same shelves. *(This read is
+`texel-funnel`'s own and has not been confirmed independently. `texel-watch`
+should confirm it on its next reading and not take it on trust.)*
+
+**3. The blind spot in the instrument is ACCEPTED, NOT REFUTED.** Someone who
+reads the README inside the zip and types the URL shows up as a direct or
+unattributed visit, not as a referral. The first draft waved this away by
+pointing at 0 sales. **That was wrong.** The gate counts visits, and Texel's
+conversion is 0% on 85 views from every source, so 0 sales says nothing. The
+honest bound is in visits: **Texel took +9 views over the whole window from every
+source combined** (76 → 85). Those +9 include a Texel-specific beat (09-23), the
+0.2.1 release devlog (09-24), duckduckgo +1 and google +1. **So at most 9 visits
+could be hidden README traffic, and the real number is smaller.** The
+pre-registered metric stands anyway, because choosing a different metric after
+seeing the result is what pre-registration exists to prevent. **A later run must
+not treat this as new evidence and re-open the decision on it.** It was known and
+bounded when the decision was made.
+
+**4. What is retired is narrow, on purpose.** The mechanism tested twice was *a
+free sibling asset page on itch that links to Texel*. **That mechanism is retired.**
+A **free lite or trial build of Texel itself**, with an in-app prompt, is a
+different mechanism that has never been tested. It goes under *Leads* below as an
+open idea, and nothing here counts against it. Nobody is proposing it this run.
+It would be `texel-release`'s build and needs its own decision.
+
+**5. Why no re-run.** A drop 3 cannot re-test top-of-funnel referral. The
+remaining queued ideas (**Sheet Reader**, **Showcase Presets**) are only useful to
+people who already own Texel, and **Starter Tiles** cannot be built as specified
+(see drop 2's kill 1).
+
+**What stays:** both free pages stay live and unchanged. They cost nothing now,
+and deleting them would be destructive with no benefit. **Where the effort goes
+next:** the Blender community, where the referrer table already points.
+`blenderartists.org` has referred **8** visits organically, against **2** from all
+free drops combined. BlenderNation is ready apart from the user's consent
+(**T-016**, `HUMAN`) and a lead image (**T-017**). The lead image hit its 5-round
+cap today without passing; see `blendernation/SUBMISSION.md`.
+
+**Judging the cadence, as §E asks.** Two drops referred **2 visits in total**, both
+from drop 1. One Texel-specific Bluesky beat plus a release devlog coincided with
++2 views in two days, and even that is more than either drop produced. The
+fortnightly-to-weekly change on 2026-09-09 was a bet that the pack line's
+free-sample pattern would carry over to a tool. **On Texel it did not.**
+Recommendation to the user: **Phase 2 should be never, not monthly, for this
+format.** `texel-funnel`'s Friday slot should become a Blender-community slot:
+BlenderNation once T-016 is answered, blenderartists threads, and the lite-build
+question.
+
+### Leads (added 2026-09-25)
+
+- **Texel Lite / trial build** — an untested mechanism, described above. Before any
+  build it needs the §0 dismissal test and `venture-critic`.

@@ -95,6 +95,8 @@ done.** `render_hero.py` exists and runs; the scoreboard:
 | 1 | 4.6 m frame, 32 px/unit, ORTHO camera | **Rejected on looking.** A close-up of two boxes; tiles stretched so far the wall read as flat low-poly rectangles, and the floor blew out to near-white. |
 | 2 | 7.2 m frame, 48 px/unit, PERSPECTIVE camera, AgX | **Gate failed**, flatness 0.249 against a control of 0.202. A real space with depth, but one tan wash, crates cut by the frame edge, and a visible wallpaper-like tile repeat. |
 | 3 | object-space BOX projection, narrower corridor, asymmetric camera, cool light pushed | **Gate failed**, flatness 0.185 — *below* the control. |
+| 4 *(2026-09-25)* | 32 px/unit (was 48), 3.6 m corridor, camera 1.15 m from the crates, 30 mm, pixel filter 0.75, darker world | **Gate failed**, flatness **0.241** (needs > 0.263). Texels visibly larger. Kept as `hero_round4.png`. |
+| 5 *(2026-09-25)* | pulled back to 28 mm, torch up, near fill down, AgX Medium High Contrast, pixel filter 0.50 | **Gate failed**, flatness **0.210**. The ceiling hotspot blows toward white and the wall edges crush toward black. This is `hero_1456x672.png`. |
 
 **The gate watches the rendered pixels, not the arithmetic**, because a check
 aimed at anything except the shipped output reports a number and proves nothing.
@@ -179,6 +181,46 @@ uploaded zip is banned by `OPERATIONS.md` §3 and it is the exact trap
   live manifest respectively. If either changes, this draft is stale.
 
 ---
+
+### 2026-09-25 — THE 5-ROUND CAP IS REACHED, NOT PASSED. Do not send this image as it stands.
+
+`texel-funnel` spent the two unspent rounds, as `ACTIONS.md` T-017 asked. **Both
+failed the flatness gate, so the image fails §4 and is not presented as done.**
+The render is on disk for the user to look at, and the call is the user's.
+
+**`design-critic` on both renders (2026-09-25): ITERATE for both.** It judged
+round 4 the stronger one, because its flatter light keeps the texel edges readable
+across more of the frame. Findings still open:
+
+- **SERIOUS (both): there is no subject.** A brick corridor corner with three
+  crates reads as a generic Minecraft-style test scene. Nothing shows what the
+  add-on is for: hand-painted texel detail on an asset.
+- **SERIOUS (both): the black banner with a red sliver looks like a missing texture.**
+  To Blender users it reads as a render error. Take it out, or light it so its
+  texels show.
+- **SERIOUS (both): the composition is close to dead-centre on the wall corner.**
+- **FATAL for round 5: the ceiling hotspot washes out the texel banding** at both
+  ends of the frame. That is the one thing the image has to sell, and it also
+  explains why round 5 scored below round 4.
+- **MINOR (round 4): the ceiling is cropped,** so the space reads as a shallow box.
+
+**The critic also judged the instrument, and the finding is recorded, not acted on.**
+Exact-equality adjacency on a denoised Cycles render is *"close to unreachable
+inside any texel's interior once GI, soft shadows and denoising add sub-pixel
+gradients"*. The smooth control scores 0.202. Rounds that visibly carry
+several-pixel texels score only 0.21–0.24, so the metric has almost no headroom.
+The critic's proposed replacement is a **block-uniformity ratio**: quantise each
+texel cell, then compare the gradient *between* cells (it should be a hard step)
+against the variance *within* a cell (it should be small). **This run did not swap
+the gate.** Changing the instrument on the day it failed, to make it pass, is the
+exact move §4's cap exists to stop. The swap goes to the next attempt as a proposal,
+with its own control, and is judged before any render is scored against it.
+
+**What the next attempt needs, in order:** (1) a real subject, meaning one
+hand-painted hero prop in the foreground with the corridor as context; (2) the
+banner gone; (3) off-axis framing; (4) the gate question settled first. **None of
+this matters unless T-016 comes back yes.** Nobody can send the submission without
+the user, so no further rounds get spent until the user answers.
 
 ## What would make this sendable
 

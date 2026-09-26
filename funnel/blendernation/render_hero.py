@@ -33,6 +33,12 @@ gradient does not. So after rendering we measure the fraction of horizontally
 adjacent pixel pairs that are exactly equal, and compare it against
 store/stills/env_corridor_02.png as a control - the very image this render
 exists to beat. Failing that comparison fails the build.
+
+ROUNDS 4 AND 5 (2026-09-25) FAILED TOO: 0.241 and 0.210 against a pass line of
+0.263. That uses up the 5-round cap. This file holds the round 5 scene; round 4
+rendered better and is kept as hero_round4.png. The design-critic findings, and
+its doubt about whether this gate can be passed at all on a lit render, are in
+SUBMISSION.md. Read them before running a round 6.
 """
 import math
 import os
@@ -49,7 +55,9 @@ OUT = os.path.join(TEXEL, "funnel", "blendernation", "hero_1456x672.png")
 CONTROL = os.path.join(TEXEL, "store", "stills", "env_corridor_02.png")
 
 RES_X, RES_Y = 1456, 672
-PX_PER_UNIT = 48.0     # texel density every surface in the scene is built at
+PX_PER_UNIT = 32.0     # texel density every surface in the scene is built at
+                       # (round 4: coarser than round 3's 48, so a texel is
+                       # several screen pixels across the near half of frame)
 TILE_PX = 64           # the dungeon source tiles are 64x64
 
 
@@ -114,17 +122,17 @@ clear()
 # ---------------------------------------------------------------- the space
 # A corridor running away from camera: floor, two side walls, a back wall. The
 # depth is what stops this reading as a product shot on a backdrop.
-floor = box("Floor", (7.0, 14.0, 0.2), (0, 3.0, -0.1))
-wall_l = box("WallL", (0.25, 14.0, 3.6), (-2.5, 3.0, 1.8))
-wall_r = box("WallR", (0.25, 14.0, 3.6), (2.5, 3.0, 1.8))
-wall_b = box("WallB", (5.0, 0.25, 3.6), (0, 9.6, 1.8))
-ceiling = box("Ceil", (5.0, 14.0, 0.2), (0, 3.0, 3.3))
+floor = box("Floor", (3.6, 10.0, 0.2), (0, 3.0, -0.1))
+wall_l = box("WallL", (0.25, 10.0, 3.0), (-1.8, 3.0, 1.5))
+wall_r = box("WallR", (0.25, 10.0, 3.0), (1.8, 3.0, 1.5))
+wall_b = box("WallB", (3.6, 0.25, 3.0), (0, 6.2, 1.5))
+ceiling = box("Ceil", (3.6, 10.0, 0.2), (0, 3.0, 3.1))
 
-crate_a = box("CrateA", (0.95, 0.95, 0.95), (-1.30, 2.60, 0.475), rot_z=14)
-crate_b = box("CrateB", (0.66, 0.66, 0.66), (-0.62, 3.25, 0.33), rot_z=-27)
-crate_c = box("CrateC", (0.72, 0.72, 0.72), (1.45, 5.10, 0.36), rot_z=33)
-crate_d = box("CrateD", (0.60, 0.60, 0.60), (-1.36, 2.72, 1.25), rot_z=-8)
-column = box("Column", (0.42, 0.42, 3.3), (1.85, 7.40, 1.65))
+crate_a = box("CrateA", (0.80, 0.80, 0.80), (-1.05, 1.55, 0.40), rot_z=14)
+crate_b = box("CrateB", (0.56, 0.56, 0.56), (-0.40, 2.05, 0.28), rot_z=-27)
+crate_c = box("CrateC", (0.62, 0.62, 0.62), (1.10, 3.90, 0.31), rot_z=33)
+crate_d = box("CrateD", (0.52, 0.52, 0.52), (-1.10, 1.62, 1.06), rot_z=-8)
+column = box("Column", (0.36, 0.36, 3.0), (1.40, 5.20, 1.5))
 
 flag = pixel_mat("Flagstone", os.path.join(SHOTS, "tile_flagstone.png"))
 brick = pixel_mat("Blockwall", os.path.join(SHOTS, "tile_blockwall.png"))
@@ -144,7 +152,7 @@ for ob in (crate_a, crate_b, crate_c, crate_d):
 
 # A banner on the left wall, lifted straight from the dungeon tile set, to give
 # the eye one saturated accent against all the stone.
-banner = box("Banner", (0.06, 0.9, 1.7), (-2.33, 5.6, 2.05))
+banner = box("Banner", (0.06, 0.75, 1.4), (-1.64, 3.9, 1.85))
 banner.data.materials.append(
     pixel_mat("Banner", os.path.join(SHOTS, "tile_banner.png")))
 
@@ -152,32 +160,32 @@ banner.data.materials.append(
 # A warm practical up ahead (the thing a torch would be) and a cool low ambient,
 # so the corridor has a direction to walk toward.
 torch = bpy.data.lights.new("Torch", "POINT")
-torch.energy, torch.shadow_soft_size = 420.0, 0.30
-torch.color = (1.0, 0.72, 0.42)
+torch.energy, torch.shadow_soft_size = 330.0, 0.15
+torch.color = (1.0, 0.66, 0.36)
 to = bpy.data.objects.new("Torch", torch)
-to.location = (0.4, 6.4, 2.45)
+to.location = (0.2, 4.4, 2.2)
 bpy.context.collection.objects.link(to)
 
 near = bpy.data.lights.new("Near", "AREA")
-near.energy, near.size = 90.0, 3.2
-near.color = (1.0, 0.86, 0.70)
+near.energy, near.size = 16.0, 1.6
+near.color = (1.0, 0.82, 0.62)
 no = bpy.data.objects.new("Near", near)
-no.location = (-2.6, -1.4, 3.1)
-no.rotation_euler = (math.radians(52), 0, math.radians(-28))
+no.location = (-1.2, -0.6, 2.7)
+no.rotation_euler = (math.radians(48), 0, math.radians(-24))
 bpy.context.collection.objects.link(no)
 
 cool = bpy.data.lights.new("Cool", "AREA")
-cool.energy, cool.size = 420.0, 7.0
-cool.color = (0.42, 0.58, 1.0)
+cool.energy, cool.size = 140.0, 4.0
+cool.color = (0.40, 0.55, 1.0)
 co = bpy.data.objects.new("Cool", cool)
-co.location = (2.8, -3.4, 2.2)
-co.rotation_euler = (math.radians(74), 0, math.radians(38))
+co.location = (1.6, -2.4, 1.6)
+co.rotation_euler = (math.radians(80), 0, math.radians(30))
 bpy.context.collection.objects.link(co)
 
 world = bpy.data.worlds.new("W")
 world.use_nodes = True
 bg = next(n for n in world.node_tree.nodes if n.type == "BACKGROUND")
-bg.inputs["Color"].default_value = (0.035, 0.042, 0.060, 1.0)
+bg.inputs["Color"].default_value = (0.012, 0.015, 0.024, 1.0)
 bg.inputs["Strength"].default_value = 1.0
 bpy.context.scene.world = world
 
@@ -186,14 +194,14 @@ bpy.context.scene.world = world
 # as a flat product shot; a game screenshot has convergence in it.
 cam_d = bpy.data.cameras.new("Cam")
 cam_d.type = "PERSP"
-cam_d.lens = 34.0
+cam_d.lens = 28.0
 cam = bpy.data.objects.new("Cam", cam_d)
-cam.location = (1.35, -3.2, 1.35)
+cam.location = (0.70, -1.70, 1.05)
 bpy.context.collection.objects.link(cam)
 bpy.context.scene.camera = cam
 
 target = bpy.data.objects.new("Target", None)
-target.location = (-0.75, 4.2, 1.05)
+target.location = (-0.40, 3.4, 1.10)
 bpy.context.collection.objects.link(target)
 con = cam.constraints.new("TRACK_TO")
 con.target = target
@@ -205,6 +213,9 @@ sc = bpy.context.scene
 sc.render.engine = "CYCLES"
 sc.cycles.samples = 220
 sc.cycles.use_denoising = True
+# Round 4: a narrower pixel filter keeps texel edges crisp instead of
+# spreading each one across a 1.5 px Gaussian.
+sc.cycles.filter_width = 0.50
 sc.render.resolution_x, sc.render.resolution_y = RES_X, RES_Y
 sc.render.resolution_percentage = 100
 sc.render.film_transparent = False
@@ -214,7 +225,7 @@ sc.render.filepath = OUT
 # AgX with base contrast: Standard clipped the warm practical to white in round
 # 1 and took the floor's tile detail with it.
 sc.view_settings.view_transform = "AgX"
-sc.view_settings.look = "AgX - Base Contrast"
+sc.view_settings.look = "AgX - Medium High Contrast"
 
 try:
     sc.cycles.device = "GPU"
