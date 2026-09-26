@@ -6,6 +6,77 @@ in `../ACTIONS.md` and handed to a named owner.
 
 ---
 
+## 2026-09-26 — run 14 (catch-up at ~17:00Z; the 06:45 slot fell inside another host gap, ~09-25T15Z → 09-26T16:49Z)
+
+**VERDICT: DEGRADED, commercially and not technically. This is the fifth use of the word without a rubric, and it is appended to T-015.** The listing passes every check this routine runs. The business does not: **0 sales in 17 days live**, and views are coming in more slowly week on week. **`venture-critic`: PROCEED**, with two SERIOUS findings, both acted on (T-020 opened, T-015 appended). Its MINOR finding is recorded on T-008.
+
+### Action ledger
+
+**Opened: 1. Closed: 2.**
+
+- **T-019 closed** (`texel-funnel`, 5 d). The decision is on record in `funnel/LOG.md`, dated before the deadline. This run re-read the referrer table independently: **palettes → Texel = 0**, against a floor of 3. **The trigger fires, and the free-sibling-itch-page format is retired.** The retirement is narrow: it covers that format only.
+- **T-017 closed** (`texel-funnel`, 7 d), on its cap branch. `SUBMISSION.md` holds the round 4 and round 5 scoreboard, both renders are on disk, and none is sendable. The submission still waits on T-016.
+- **T-020 opened** (`texel-funnel`). The Texel Lite / trial lead needs a cost, a prize and a GO/NO verdict, instead of sitting as a bullet in the log.
+
+| id | age | owner |
+|---|---|---|
+| T-008 | **15 d** | `texel-release`: *neither kill* carried as a named override. It is bounded: if 09-30 passes without the screenshot, run 15+ must pick a kill. |
+| T-010 | 11 d | **HUMAN**. The repo is still `"private": false`, re-read today, and it now also appears as a referrer (1 visit). |
+| T-011 | 11 d | **HUMAN** |
+| T-015 | 7 d | **HUMAN** |
+| T-016 | 7 d | **HUMAN** |
+| T-020 | 0 d | `texel-funnel` |
+
+The 7- and 14-day rungs stay suspended for HUMAN rows, because **A-032 is still open** (re-read this run).
+
+### ALERTS
+
+**None.** Every Texel routine is inside its window, with the interval taken from its cron.
+
+- `texel-support`: last ran 09-25T13:25Z, 27.6 h ago. **Its 09-26 slot did not fire**, and `nextRunAt` is 09-27. That is inside the 48 h rule. Its 09-25 row is written in `SUPPORT.md`.
+- `texel-marketing`: last ran 09-25T13:26Z. Its 09-25 beat is in `POSTED.md` with its asset path. Its next slot is 20:20Z today.
+- `texel-release`: weekly; next slot Wed 09-30.
+- `texel-funnel`: ran Fri 09-25 on time, and its artifact is the T-019 decision.
+
+**For `pixelkiln-watch` / A-037:** this is another host gap. The 06:45 slot for this routine, `texel-support`'s 09-26 slot and `pixelkiln-backup`'s 09-25 slot all missed. It is noted here and not written into their ledger.
+
+**`texel-support`'s dated §6 risk (the 26 September promise) did not trigger.** The 0.2.1 devlog of 09-24 publicly moves v0.2.2 to 30 September and gives the reason, so the promise was honoured before the date.
+
+### Listing (measured ~17:00Z)
+
+| Check | Result |
+|---|---|
+| Logged-out page | HTTP 200, 31,471 B |
+| Download | `texel-0.2.1.zip`, 200 kB, matching the local 205,427 B |
+| Price | $9.95, which is correct for the current milestone |
+| Status | Published |
+| AI disclosure | Yes + Graphics + Code; text and audio off |
+| `devlog.rss` | 3 items, newest 09-24T06:30Z |
+
+**All pass.**
+
+### Numbers
+
+`| 2026-09-26 (17:00Z) | 89 | 0 | 0 | $0.00 | 0.00% |`
+
+- **Last day:** +4 views in 1.15 d.
+- **Seven-day trend:** +13 over 7.2 d (≈1.8/day), against +25 over the prior ~7 d (≈3.6/day). This is the direction only.
+- **Downloads, sales and revenue:** 0 in both windows.
+- **Referrers:** duckduckgo 11 and blenderartists.org 8 are the largest non-itch sources. Both free pages together have sent Texel 2 visits in their lifetime.
+- **Gates:**
+  - The conversion gate is 111 views away.
+  - **The 14-day zero-sales rule fires 2026-10-09**, and on that day the picks-and-shovels question goes to the user.
+
+### Roadmap
+
+**v0.2.2 "Brush, the rest" is due Wed 2026-09-30, 4 days away. FLAG.**
+
+- The only v0.2.2 work so far is the `check_tileable` string fix, which is built and gated but not shipped.
+- The owner has already written that the release ships partial.
+- No row is open yet. **One opens on 09-30 if there is no upload.**
+
+---
+
 ## 2026-09-25 — run 13 (catch-up at 13:19Z; the 06:45 slot fell inside another host gap, ~09-24T07Z → 09-25T13Z)
 
 **VERDICT: DEGRADED — commercially, not technically.** The listing is correct on
