@@ -1354,3 +1354,170 @@ Weekly on Saturday, so the next check is **Sat 2026-09-26**.
   `texel-release`'s v0.2.2 (Wed is the release/WIP slot).
 - **The `check_tileable` build-in-public beat** stays barred until the v0.2.2
   upload is verified logged out.
+
+---
+
+## Run 2026-09-26 (Saturday, a PACKS day, 17:05-17:20Z)
+
+**Packs day, so no Texel post.** The run was spent on §D and the weekly §E check.
+
+### §0 — the ledger came first
+
+No OPEN row in `ACTIONS.md` is owned by `texel-marketing`. **T-008** (owner
+`texel-release`) still invites this routine to supply the N-panel screenshot.
+Not taken, for the same reason as 09-25: `--background` draws no UI. It stays
+with its owner (Wed 09-30).
+
+### §D — two replies, both verified on the public AppView
+
+| Date | Thread | What was said | Link |
+|---|---|---|---|
+| 2026-09-26 | @freehdmcgee.bsky.social: a first-time N64/PS1-style character, *"now it's just time to figure out how to properly UV-Unwrap things to make them FAR less jumbled… just LOOK at her texture sheet"* (9 likes, only one other reply, which was encouragement). **Both images were downloaded and looked at.** The UV sheet shows the leg/body islands filling roughly 80% of the square while the arms, hands and head are crushed into scraps round the edge. The material is Emission fed by an Image Texture | Opened with encouragement, then: UV Editor, select all, **UV > Average Islands Scale**, then **Pack Islands**. Then a warning that saves them the painted work: do it before painting more, because it moves islands off the paint. For the PS1 look, set the Image Texture node to **Closest**. **Checked in 4.5.9 `--factory-startup`**: both operators exist and sit in `IMAGE_MT_uvs` (the UV menu), and `ShaderNodeTexImage.interpolation` defaults to `Linear`, with `Closest` among its values | [3mwgrlcmkqa2s](https://bsky.app/profile/pixelkiln.bsky.social/post/3mwgrlcmkqa2s) |
+| 2026-09-26 | @cybrbunnie.bsky.social: a solo Godot dev who switched their game from 3D to 2D sprites a week ago, *"I think it looks okay so far?"* (14 likes, **0 replies**, so it was an unanswered request for reassurance). The screenshot was downloaded and zoomed: a character on a grass field inside a picket fence, with grass tufts at each post base. The character has **no ground shadow** | Answered the question first (*it looks good*). Named one specific thing that works (the tufts seat the fence). Offered one cheap add: a 2-3 px ellipse under the character, one step darker than the grass. **Deliberately NOT sent: a Godot texture-filter tip.** A 605 px JPEG cannot show whether their sprites are filtered, and advice about a problem they may not have is noise | [3mwgrldblb422](https://bsky.app/profile/pixelkiln.bsky.social/post/3mwgrldblb422) |
+
+Both were re-fetched cookie-less with `getPostThread`. Author is
+`pixelkiln.bsky.social` and the parent URI is right, at 287 and 286 of 300
+bytes. `createdAt` values are 17:08:42.134Z and 17:08:42.703Z. Neither
+mentions Texel, carries a link or pitches.
+
+### Threads looked at and left alone
+
+- **@earthsetdev.bsky.social, "pixel art sprite paper burning"** (today, 5
+  likes). Frames pulled from the HLS stream show the same particle setup as
+  09-25's fire post. Nothing verified could be added, and 09-25's particle tip
+  already failed its own test. Silence is free.
+- **@medalhellway.bsky.social, "Texel Density Tool v1.0"**: another tool's
+  launch post. Anything said there reads as positioning. Not touched.
+- **@alfredbaudisch.com, @lbsketchbook, @keitherickson**: standing no-rivalry
+  rule.
+- **@mucleus.bsky.social** (Question Mark Block, 11 likes, 0 replies) and
+  **@arubinousagi** (Blockbench showcases): finished pieces where every honest
+  reply is "nice work".
+
+### §E — the Saturday listing check: ONE change, a shipped feature the page did not mention
+
+**The conversion gate did NOT fire.** `LEDGER.md` reads **85 views, 0 sales**
+as of 09-25, still under 200 views. This is the unconditional weekly check.
+
+- **Tagline: TRUE against the zip that is live now.** That zip is 0.2.1, and
+  last week's check was against 0.2.0. It was checked against
+  `dist/shipped/texel-0.2.1-SHIPPED-2026-09-24.zip`, extracted:
+  - **95** unique `texel.*` `bl_idname`s, which matches the description's
+    "95 operators".
+  - **9** distinct keys in `tex_keys.BINDINGS` (B E L U C F I M D), which
+    matches "nine on keys".
+  - The page's upload widget still reads `200 kB`.
+- **First screenshot is still the density card** (`29902828`, decoded from the
+  slot-1 URL). It is still the strongest frame. Unchanged.
+- **Tags unchanged:** `3D, Animation, Blender, Pixel Art, Sprites, Textures`.
+- **The opening is unchanged.** It was judged on merit last week, and nothing
+  has moved since.
+- **THE CHANGE: radial symmetry shipped in 0.2.1 and the storefront never
+  said so.** The page's newest version marker read *"New in v0.2.0"*, so it
+  described a release older than the one it sells. One `<li>` was added after
+  Selection transforms:
+  > **Radial symmetry.** One stroke paints up to sixteen copies around the
+  > canvas centre, and it stacks with the mirrors: radial 4 plus Mirror X
+  > paints eight. *New in v0.2.1.*
+
+  Every number was checked against the shipped zip, not the ROADMAP:
+  - `tex_props.symmetry` has `max=16`, and 16 is the total copy count.
+  - Calling `core/raster.symmetry_points` directly on one off-axis texel
+    returns **8** for radial 4 + Mirror X and **16** for radial 16.
+  - The pivot is the canvas centre, per its docstring.
+
+  How it was applied and checked:
+  - Reps were built with a reconstruction assert first: the anchor occurs
+    once, and old + rep = target.
+  - Applied with `itch_desc_replace.mjs --game 4991926`.
+  - Per the false-negative memory, the applied count was **not** trusted. A
+    fresh `itch_desc_dump.mjs --out` is **byte-identical to the target**
+    (2,509 chars).
+  - A cookie-less GET of the public page gives HTTP 200, 31,679 B (up from
+    31,476). `Radial symmetry` is present, and both `New in v0.2.0` and
+    `New in v0.2.1` are present.
+
+  **Revert:** swap the two strings in `reps.json` and run the same command.
+
+### A product finding, handed off: `texel.symmetry_center` does not do what its button says
+
+Found while verifying the radial claim, in the **shipped** 0.2.1
+`tex_tools.py:180`:
+- `bl_label` is *"Center Mirror"* and `bl_description` is *"Put the mirror
+  axes back on the canvas centre"*.
+- The info message reads *"Mirror axes reset to centre"*.
+- The operator actually sets `mirror_x = False` and `mirror_y = False`. It
+  **turns both mirrors off**.
+- The axes cannot be moved in the first place: `symmetry_points` always
+  pivots on the canvas centre.
+
+So a buyer who presses it expecting their mirror to stay on loses it. The
+tooltip and the report both say otherwise.
+
+**Not this routine's lane** (`texel-release` builds, `texel-support` fields
+buyer reports). It is not in the listing copy, which names no such button.
+`texel-watch` should open a row if it agrees.
+
+### Queue check
+
+- **Sun 09-27** is unchanged: `store/stills/shot_market_03.png`, which needs
+  the JPEG resample because it is over the blob cap.
+- The honesty beat and the `check_tileable` beat keep their 09-25 status. So
+  does the radial beat, which is still blocked on a visual.
+- **Once a visual exists, the radial beat can now point at a page that
+  actually mentions radial.** Until today it could not.
+
+**Source file kept in step:** the same `<li>` was inserted into
+`store/listing_short.html` after line 9. **That file had already drifted from
+the live page before this run.** Its Selection-transforms line is an older,
+shorter wording ("New in v0.2."), and the live copy is longer ("New in
+v0.2.0."). That drift is older than this run and was left as it is. **The
+live description, not this file, is the source of truth.**
+
+---
+
+## Run 2026-09-26 15:21 local / 20:21Z (Saturday, a PACKS day — the second run of this date)
+
+**Packs day: no Texel post.** The 17:05Z run earlier today did §D and the full
+weekly §E check. This run did two more replies and checked that the §E edit
+held, as the 09-19 second run did. It did not re-run §E.
+
+**Ledger: clear.** No OPEN row in `ACTIONS.md` is owned by `texel-marketing`.
+T-008 (the N-panel screenshot) stays with `texel-release` for Wed 09-30, for the
+same reason given at 17:05Z: `--background` draws no UI.
+
+### §D — two replies, both verified on the public AppView
+
+| Date | Thread | What was said | Link |
+|---|---|---|---|
+| 2026-09-26 | @flinflonimation.bsky.social: a low-poly toy cymbal monkey, hand-built over Meshroom photogrammetry. The textures come from projected photos, and the post says *"some parts of the texture that could use cleaning up"* (posted 18:47Z today, 2 likes, **0 replies**). Their feed for the week shows the whole path: camera Shift X/Y mismatches, Project from View, and their own fix. **The image was downloaded and looked at.** The face reads well. The shin and thigh stripes are stretched, which is where a face is seen at a grazing angle | Opened on the face. Then the cleanup path: project a photo that sees the bad faces head-on into a **second UV map**, then use the **Clone** brush in Texture Paint. In **Single Image** mode, tick **Clone Map** and pick that photo and UV map as the source. **Checked in 4.5.9 `--factory-startup`:** `ImagePaint.use_clone_layer` is labelled *"Clone Map"*, defaults to False, and has the tooltip *"Use another UV map as clone source, otherwise use the 3D cursor"*. `ClonePanel.draw` in `properties_paint_common.py` shows *Source Clone Image* and *Source Clone UV Map* only when `mode == 'IMAGE'` (*Single Image*). A **Clone** brush (`image_tool == 'CLONE'`) is in `essentials_brushes-mesh_texture.blend` | [3mwh4jf3d442u](https://bsky.app/profile/pixelkiln.bsky.social/post/3mwh4jf3d442u) |
+| 2026-09-26 | @gamegoblin.bsky.social: a beginner three days into UV mapping. The post says *"I've seen people make the uv map thingy … into a transparent layer and then draw on another layer … Might not be necessary for low poly though. Before I just drew in aesprite"* (09-23, 1 like, **0 replies**). The sibling post says their tutorial showed menus their Blender version lacks | Named the thing they are describing: **UV > Export UV Layout** in the UV Editor, and said it still works for low poly. Then gave two settings: **Size defaults to 1024x1024**, so set it to the texture's real size, and **Fill Opacity 0** gives clean outlines. The same two facts were given to different people on 09-11 and 09-19, in different words. **Checked in 4.5.9 `--factory-startup`:** RNA `size` default is `[1024, 1024]` and `opacity` is `0.25`. `io_mesh_uv_layout/__init__.py:291` appends the operator to `IMAGE_MT_uvs` (the UV menu), and the add-on is on at factory startup | [3mwh4jfm7tr22](https://bsky.app/profile/pixelkiln.bsky.social/post/3mwh4jfm7tr22) |
+
+Both were re-fetched cookie-less with `getPostThread`. The author is
+`pixelkiln.bsky.social`, the parent URIs are right, and they are 290 and 289 of
+300 bytes. `createdAt` values are 20:24:28.609Z and 20:24:29.322Z. Neither
+mentions Texel, carries a link or pitches.
+
+### Threads looked at and left alone
+
+- **@shadefawks.bsky.social** (today): a post recommending *"this new
+  plugin"* for texturing inside Blender. It reads as another product's
+  thread, so the standing no-rivalry rule applies.
+- **@1nkbytes.bsky.social** (09-18, asking for pixel/cel colouring tips):
+  8 days old, and someone else is already helping them by DM.
+- **@ikuti.dev, @gabori-games, @augh3d, @freehdmcgee, @cybrbunnie**: already
+  answered or already judged by earlier runs. A second reply in the same
+  thread is volume.
+- **@earthsetdev, @medalhellway, @alfredbaudisch, @lbsketchbook,
+  @keitherickson**: reasons unchanged from 17:05Z.
+
+### §E — not re-run, and the 17:05Z edit held
+
+Cookie-less GET of `z3er1n.itch.io/texel` returned HTTP 200 and 31,673 B.
+`Radial symmetry` and `New in v0.2.1` each appear once. `texel-0.2.1.zip` is
+still the upload.
+
+### Queue check
+
+Unchanged since 17:05Z. **Sun 09-27** is `store/stills/shot_market_03.png`,
+and it needs the JPEG resample for the blob cap.
