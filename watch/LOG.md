@@ -6,6 +6,68 @@ in `../ACTIONS.md` and handed to a named owner.
 
 ---
 
+## 2026-09-27 — run 15 (11:54Z, in its normal slot)
+
+**VERDICT: DEGRADED (commercial), with the listing technically clean.** Every listing check passes. The business is the problem: **0 sales on day 18 live.** This is the same grounds as runs 13 and 14. The word still has no rubric, and that is **T-015**, not restated here. The last two days of views ran above the weekly rate, but n=8 is too small to read anything from. **No decision was made this run, so `venture-critic` was not called.** Nothing was opened, closed, killed or ranked.
+
+### Action ledger
+
+**Opened: 0. Closed: 0.** No doer has written new evidence on any open row since run 14.
+
+| id | age | owner |
+|---|---|---|
+| T-008 | **16 d** | `texel-release`. The *neither-kill* override is bounded: if 09-30 passes with no screenshot, run 16+ must pick a kill. Its next slot is Wed 09-30. |
+| T-010 | 12 d | **HUMAN**. The repo still appears as a referrer (1). |
+| T-011 | 12 d | **HUMAN** |
+| T-015 | 8 d | **HUMAN** |
+| T-016 | 8 d | **HUMAN** |
+| T-020 | 1 d | `texel-funnel`. Its next slot is Fri 10-02. |
+
+The 7- and 14-day rungs stay suspended for HUMAN rows, because **A-032 is still open** (re-read this run).
+
+### ALERTS
+
+**None.** The intervals come from each task's cron:
+- `texel-support` last ran 09-26T17:02Z. Its 09-26 row ("no inbound, day 18") is in `SUPPORT.md`, and its next slot is 13:24Z today.
+- `texel-marketing` last ran 09-26T20:21Z. That was a packs day (Saturday), and the run is logged in `POSTED.md`. **Today, Sunday, is a Texel beat**, due at 20:20Z. Run 16 checks that it landed.
+- `texel-release` and `texel-funnel` are weekly and inside their windows. Their next slots are 09-30 and 10-02.
+
+### Listing (measured 11:55Z)
+
+| Check | Result |
+|---|---|
+| Logged-out page | HTTP 200, 31,679 B |
+| Download | `texel-0.2.1.zip`, 200 kB, matching local `dist/texel-0.2.1.zip` (205,427 B) |
+| Price | `min_price` $9.95, which is correct for the current milestone |
+| Status | Published |
+| AI disclosure | Yes + Graphics + Code |
+| `devlog.rss` | Newest item is still 09-24T06:30Z |
+
+**All pass.**
+
+### Numbers
+
+`| 2026-09-27 (11:55Z) | 93 | 0 | 0 | $0.00 | 0.00% |`
+
+- **Last day:** +4 views in 0.79 d.
+- **Seven-day trend:** +17 over 8.0 d (≈2.1/day), against +25 over ~7 d (≈3.6/day). The weekly rate is still falling, though the last two days ran at 3.5 and 5.0 per day.
+- **Downloads, sales and revenue:** 0.
+- **Impressions:** 117 over 7 days at 0.85% CTR.
+- **Referrers:** blenderartists is +1, to 9. google.com shows up for the first time, at 2. The referrer table is at its 20-row cap, so rows may be getting cut off from now on.
+- **Gates:**
+  - The conversion gate is 107 views away.
+  - **The 14-day zero-sales rule fires 2026-10-09**, and on that day the picks-and-shovels question goes to the user.
+
+### Roadmap
+
+**v0.2.2 "Brush, the rest" is due Wed 2026-09-30, 3 days away. FLAG, and it is carried from run 14, not new.**
+
+- The only work so far is the `check_tileable` string fix, which is built and gated but not shipped.
+- The owner has already written that the release ships partial.
+- **A row opens on 09-30 if there is no upload.**
+
+---
+
 ## 2026-09-26 — run 14 (catch-up at ~17:00Z; the 06:45 slot fell inside another host gap, ~09-25T15Z → 09-26T16:49Z)
 
 **VERDICT: DEGRADED, commercially and not technically. This is the fifth use of the word without a rubric, and it is appended to T-015.** The listing passes every check this routine runs. The business does not: **0 sales in 17 days live**, and views are coming in more slowly week on week. **`venture-critic`: PROCEED**, with two SERIOUS findings, both acted on (T-020 opened, T-015 appended). Its MINOR finding is recorded on T-008.
