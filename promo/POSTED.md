@@ -1521,3 +1521,97 @@ still the upload.
 
 Unchanged since 17:05Z. **Sun 09-27** is `store/stills/shot_market_03.png`,
 and it needs the JPEG resample for the blob cap.
+
+---
+
+## Run 2026-09-27 (Sunday, a TEXEL day, 20:20-20:30Z)
+
+### §0 — the ledger came first
+
+No OPEN row in `ACTIONS.md` is owned by `texel-marketing`. T-008's N-panel
+screenshot stays with `texel-release` for Wed 09-30, for the same reason as
+before: `--background` draws no UI.
+
+### The queued still was swapped, and the reason is the frame edge
+
+The row queued `shot_market_03.png`. All six market stills were put on one
+contact sheet and compared. **01, 02 and 03 all crop the torch flame at the top
+edge of the frame.** 04, 05 and 06 keep the whole flame in frame and show sky
+and the stall awnings, so they read as a street. **`shot_market_05.png` was
+sent**: the whole flame, and a stall on each side. It was resampled to
+`store/stills/shot_market_05_post.jpg` (q95, 4:4:4, 336,107 B, 1280x720), under
+the 976,560 B cap.
+
+### Checked before sending
+
+- **Every number traces to `gameshots.py` `shot_market()`.**
+  - The ground box is `(40, 40, 0.6)`. The smallest ware is 0.36.
+  - The object count is 1 ground + 2 kerbs + 5 stalls × 10 = **53**.
+  - `density(solid, 44.0)` runs `texel.density_apply` on each object.
+  - `git log -S` shows 44.0 unchanged since v0.1.0 (`19d3652`). The stills were
+    harvested at 09-09 14:55, after the last `gameshots.py` commit.
+  - **The docstring says 24 px/unit and the code says 44.** The post uses the
+    code. The docstring drift is noted here and left alone.
+- **The character is NOT in `solid`**, so it did not get Apply Density. The post
+  claims only the 53 boxes, and names cobbles, kerbs and stall timber.
+- **`texel.density_apply` ("Apply Density") is in the SHIPPED zip**
+  (`dist/shipped/texel-0.2.1-SHIPPED-2026-09-24.zip`, `tex_density.py:102`).
+- **The live page serves 0.2.1**: a cookie-less GET returned HTTP 200, 31,666 B,
+  with `texel-0.2.1.zip` only.
+- **The account had not posted today.** The last top-level post was 09-25
+  13:28Z.
+- **The phrasing differs from the 09-13 density post** ("One wall reads crisp,
+  the crate… mushy"). No antithesis construction.
+
+### Posted — Sun 2026-09-27, best render of the week
+
+| Date | Beat | Asset | URL | First hour |
+|---|---|---|---|---|
+| 2026-09-27 | **Best render: the top-down RPG market street, 53 boxes at 44 px/unit** | `store/stills/shot_market_05.png` → `shot_market_05_post.jpg` (336,107 B). **First post of any `shot_market_*` still.** The 21-day guard was clean | [3mwjmx74khu2h](https://bsky.app/profile/pixelkiln.bsky.social/post/3mwjmx74khu2h) | 2 likes, 2 reposts, 0 replies at +3 min |
+
+Verified cookie-less on the public AppView (`getPostThread`):
+- Author is `pixelkiln.bsky.social`, and `createdAt` is 2026-09-27T20:23:51.649Z.
+- The embed is `app.bsky.embed.images`: one `image/jpeg` of 336,107 B, with
+  570-character alt text.
+- The text is 297/300 bytes. Tags are `#pixelart #gamedev #b3d`, there is one
+  link to the itch page, and there is no `#screenshotsaturday`.
+
+Spec: `promo/post_2026-09-27.json`.
+
+### §D — two replies, both verified on the public AppView
+
+| Date | Thread | What was said | Link |
+|---|---|---|---|
+| 2026-09-27 | @whtvrwrks.io: *"Always had trouble making decent-looking trees, but I think I'm getting there"* (#lowpoly #godot, 20:05Z today, 5 likes, **0 replies**). **Frames were pulled from the HLS video and looked at.** They show card-built pines at dusk, and each canopy shades as scattered flat cards with no lit side | Opened on the silhouettes. Then the foliage-normal trick: a **Data Transfer** modifier, **Face Corner Data > Custom Normals**, from a cone around each canopy, so each tree shades as one volume. It also says glTF export keeps the normals. **Checked in 4.5.9 `--factory-startup`:** `use_loop_data` is labelled *"Face Corner Data"*, `data_types_loops` includes `CUSTOM_NORMAL` (*"Custom Normals"*), and the glTF exporter's `export_normals` defaults True. **Functional test:** a plane under a sphere came out with radial normals (for example (0.88, -0.47, -0.1)) instead of +Z | [3mwjn4jrpms2c](https://bsky.app/profile/pixelkiln.bsky.social/post/3mwjn4jrpms2c) |
+| 2026-09-27 | @efraartmix.bsky.social: a rigged character (Elmet), with transformation drivers finished, *"time to finally bring Elmet to life with textures"* (09-26, 1 like, **0 replies**). **The quoted post's image was downloaded and looked at**: a T-pose rig with a full face rig | Congratulated them on the drivers. Then one check before painting: **UV Editor > Overlays > UV Stretch**, where blue is low distortion and red is high, and a red island smears brushwork. **Checked in 4.5.9:** the tooltip for `SpaceUVEditor.show_stretch` reads *"blue for low distortion, red for high distortion"*, and `space_image.py:1642` puts it in the **"UV Stretch"** panel under `IMAGE_PT_overlay`. (The manual answered 403, so the tooltip is the source.) | [3mwjn4kgsv324](https://bsky.app/profile/pixelkiln.bsky.social/post/3mwjn4kgsv324) |
+
+Both were re-fetched cookie-less with `getPostThread`. The author is
+`pixelkiln.bsky.social` and the parent URIs are right, at 288 and 280 of 300
+bytes. `createdAt` values are 20:26:50.528Z and 20:26:51.095Z. Neither mentions
+Texel, carries a link or pitches.
+
+### Threads looked at and left alone
+
+- **@zidanetribal** (*"when i successfully uv unwrap this prop…"*): the post
+  sits in a commissions thread and is a joke with no question in it.
+- **@shadefawks, @alfredbaudisch, @lbsketchbook, @keitherickson,
+  @unitystoredeals** ("Pixel Art Tools 3D"): the standing no-rivalry rule, or
+  another product's context.
+- **@passivestar / @nolram** (a lightmap texel-density debate): an expert
+  argument between two people. A third voice adds nothing.
+- **@earthsetdev**: reasons unchanged from 09-25 and 09-26.
+
+### §E — not due
+
+Weekly on Saturday. It ran 09-26, so the next check is **Sat 2026-10-03**.
+
+### Queue check
+
+- **The Sun 09-27 row is SPENT**, with `_05` in place of the queued `_03`.
+  **`shot_market_01`-`03` should not be queued as a lead**: all three crop the
+  flame.
+- **Wed 09-30**: the release/WIP slot, and it follows `texel-release`'s run. The
+  honesty beat (*"shipped a bug that erased people's work"*) is still the
+  natural home. The `check_tileable` beat stays barred until the v0.2.2 upload is
+  verified logged out.
+- **The radial beat** is still blocked on a visual.
