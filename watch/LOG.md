@@ -6,6 +6,78 @@ in `../ACTIONS.md` and handed to a named owner.
 
 ---
 
+## 2026-09-28 — run 16 (catch-up at 09-29T02:35Z; the 06:45 slot fell inside another host gap, ~09-28T03:15Z → 09-29T02:28Z)
+
+**VERDICT: DEGRADED (commercial), with the listing technically clean.** Every listing check passes. **0 sales on day 19 live** is the same ground as runs 13–15, and the word still has no rubric (**T-015**). Views rose week on week for the first time, but only through search and itch browse, and n is small. **No decision was made this run, so `venture-critic` was not called.** Nothing was opened, closed, killed or ranked.
+
+### Action ledger
+
+**Opened: 0. Closed: 0.** No doer has written new evidence on any open row since run 15.
+
+| id | age | owner |
+|---|---|---|
+| T-008 | **17 d** | `texel-release`. The *neither-kill* override holds only until Wed 09-30. If that slot passes with no screenshot, run 17+ must pick a kill. |
+| T-010 | 13 d | **HUMAN**. The repo is still a referrer (1). It reaches the 14-day rung tomorrow, and that rung stays suspended while A-032 is open. |
+| T-011 | 13 d | **HUMAN**. Same as T-010: 14 days tomorrow, rung suspended. |
+| T-015 | 9 d | **HUMAN** |
+| T-016 | 9 d | **HUMAN** |
+| T-020 | 2 d | `texel-funnel`. Its next slot is Fri 10-02. |
+
+The 7- and 14-day rungs stay suspended for HUMAN rows because **A-032 is still open** (`pixelkiln/launch/watch/ACTIONS.md:44`, re-read this run).
+
+### ALERTS
+
+**None.** Each interval is taken from the task's cron.
+- `texel-support` last ran 09-27T13:23Z (37 h ago), and its 09-27 row ("no inbound, day 19") is in `SUPPORT.md`. **Its 09-28 slot did not fire.** That is inside 48 h, and the next run is 09-29T13:24Z.
+- `texel-marketing` last ran 09-27T20:21Z. **Sunday's Texel beat landed**: `promo/POSTED.md:1570` has the market-street still `store/stills/shot_market_05.png` and post `3mwjmx74khu2h`. **Monday 09-28 was a Texel beat, and its slot did not fire because of the host gap.** That is 30 h, inside 48 h. The next run is 09-29T20:20Z, which is a packs day, so the next Texel beat is Wed 09-30. **One beat was lost, and it is not recoverable by a rule.** It is noted here and not opened as a row.
+- `texel-release` and `texel-funnel` are weekly and inside their windows. Their next slots are 09-30 and 10-02.
+
+**For `pixelkiln-watch` / A-037:** this is another host gap of about 23 h. `pixelkiln-backup`'s 09-28 slot was last seen at 09-28T03:14Z, and every daily routine then caught up together at 09-29T02:28Z. The gap is noted here and not written into their ledger.
+
+### Listing (measured 02:36Z)
+
+| Check | Result |
+|---|---|
+| Logged-out page | HTTP 200, 31,669 B |
+| Download | `texel-0.2.1.zip`, 200 kB, matching local `dist/texel-0.2.1.zip` (205,427 B) |
+| Price | `min_price` $9.95, which is correct for the current milestone |
+| Status | `game[published]=published` |
+| AI disclosure | Yes + Graphics + Code; text and audio off |
+| `devlog.rss` | 3 items, newest 09-24T06:30Z |
+
+**All pass.**
+
+### Numbers
+
+`| 2026-09-28 (09-29T02:36Z) | 103 | 0 | 0 | $0.00 | 0.00% |`
+
+- **Last reading:** +10 views in 1.61 d (≈6.2/day). This is the third straight day above the weekly rate: 3.5, then 5.0, then 6.2 per day.
+- **7-day trend:** +22 over 7.36 d (≈3.0/day), against +18 over ~7.3 d (≈2.5/day) the week before. **This is the first week-on-week rise.** It is direction only, since n=22.
+- **Where the rise came from:**
+  - duckduckgo +3, to 14
+  - itch.io/ +2
+  - `tools/tag-ai-generated/tag-pixel-art`: 2 visits, new. **These are the first new itch-shelf visits since 09-17.**
+  - yandex: 1, new
+
+  Nothing we own moved, and Bluesky taps cannot appear in this table. **I am not crediting the rise to our channels.**
+- **Downloads, sales and revenue:** 0. Store payments are unchanged at 14 / $81.58, with 0 matches for `texel`.
+- **Impressions:** 110 over 7 days at 0.91% CTR, which is about 1 click.
+- **Method note:** the summary page captions its referrer table *"past 30 days"*. The table has been read as lifetime. The two are the same until 10-09, which is 30 days after launch. From that date on, any lifetime comparison must be checked against the caption first.
+- **Gates:**
+  - The conversion gate is 97 views away.
+  - **The 14-day zero-sales rule fires 2026-10-09, 11 days out**, and on that day the picks-and-shovels question goes to the user.
+
+### Roadmap
+
+**v0.2.2 "Brush, the rest" is due Wed 2026-09-30, 2 days away. FLAG, carried from runs 14 and 15.**
+
+- No new commits since run 15.
+- The only work so far is the `check_tileable` string fix, which is built and gated but not shipped.
+- The owner has already written that the release ships partial.
+- **A row opens on 09-30 if there is no upload**, and **T-008 is decided on the same day.**
+
+---
+
 ## 2026-09-27 — run 15 (11:54Z, in its normal slot)
 
 **VERDICT: DEGRADED (commercial), with the listing technically clean.** Every listing check passes. The business is the problem: **0 sales on day 18 live.** This is the same grounds as runs 13 and 14. The word still has no rubric, and that is **T-015**, not restated here. The last two days of views ran above the weekly rate, but n=8 is too small to read anything from. **No decision was made this run, so `venture-critic` was not called.** Nothing was opened, closed, killed or ranked.
