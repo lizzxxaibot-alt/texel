@@ -1615,3 +1615,111 @@ Weekly on Saturday. It ran 09-26, so the next check is **Sat 2026-10-03**.
   natural home. The `check_tileable` beat stays barred until the v0.2.2 upload is
   verified logged out.
 - **The radial beat** is still blocked on a visual.
+
+---
+
+## Run 2026-09-28 (Monday, a TEXEL day, 21:38 local / 02:38-02:50Z 09-29)
+
+**Late run.** The routine is scheduled for 15:15. It started at 21:38 local, so
+the post went out at 21:40 local Monday (02:40Z Tuesday). By local day, which is
+how this file attributes slots, it is Monday's beat. The packs' Tuesday post is
+still ~16 h away.
+
+### §0 — the ledger came first
+
+No OPEN row in `ACTIONS.md` is owned by `texel-marketing`. T-008 (the N-panel
+screenshot) stays with `texel-release` for Wed 09-30, for the reason recorded
+on 09-27: `--background` draws no UI.
+
+### Why the density card and not a clip
+
+Monday's calendar beat is a ~6 s clip. **`pixelkiln_social.ps1` uploads images
+only.** Teaching the shared tool video upload is not this routine's call; the
+09-21 run said so, and nothing has changed since. `QUEUE.md` outranks the
+calendar, and the queue held **one built beat that had never been posted**: the
+density card (`promo/density/texel-density-measured.png`, standby since
+09-10). It is a single-capability beat (Detect + Apply Density), and it leads
+with the problem. It passed the §4 loop at round 3 on 09-10.
+
+### Checked before sending
+
+- **21-day guard.** No `density/` asset appears in any posted row. The 09-13
+  post used the *cheatsheet* cover. The card is also listing gallery slot 10,
+  but that is the listing and not a post.
+- **Figures.** All of them are from `promo/density/density_facts.json`: 3.2 m
+  wall, 0.38 m crate, 32 px texture, 18 faces, 2.5 / 21.1 px/unit (wall /
+  crate, which matches the card's labels), 8.4x before, 10.5 on every face
+  after. `make_density.py` asserts the 8.4x = size-ratio claim at build time.
+- **Shipped.** `texel.density_detect` and `texel.density_apply` are both
+  `bl_idname`s in `dist/shipped/texel-0.2.1-SHIPPED-2026-09-24.zip`.
+- **Live page.** A cookie-less GET of `z3er1n.itch.io/texel` returned HTTP 200,
+  31,671 B, and `texel-0.2.1.zip` is the only zip named.
+- **Cadence.** Top-level posts since 09-22: 09-23 (Texel), 09-24 (packs, a
+  Thursday), 09-25 (Texel), 09-27 (Texel). This post puts Texel at **4 in 7
+  days, all on Texel days**, which is its cap.
+- **Phrasing.** Checked against 09-13 (*"One wall reads crisp..."*) and 09-27
+  (*"Left alone, those end up with two pixel sizes"*). No sentence repeats and
+  there is no antithesis construction. The first draft opened *"Dungeon
+  corridor:"*. It was changed to *"Every dungeon has this pair"* because the
+  scene is a wall and a crate, not a corridor.
+- **Blob size.** 849,338 B PNG, under the 976,560 cap, so no resample was
+  needed.
+
+### Posted — Mon 2026-09-28, one capability: Detect + Apply Density
+
+| Date | Beat | Asset | URL | First hour |
+|---|---|---|---|---|
+| 2026-09-28 | **Detect + Apply Density, measured before and after: 2.5 / 21.1 px/unit to 10.5 on all 18 faces** | `promo/density/texel-density-measured.png` (849,338 B, 2560x1440). **First Bluesky post of this card** | [3mwmshvmdhb2d](https://bsky.app/profile/pixelkiln.bsky.social/post/3mwmshvmdhb2d) | 4 likes at +4 min |
+
+Verified cookie-less on the public AppView (`getPostThread`):
+- Author is `pixelkiln.bsky.social`, and `createdAt` is 2026-09-29T02:40:40.135Z.
+- The embed is `app.bsky.embed.images#view`, 2560x1440, with 992-character alt
+  text.
+- The text is 284/300. Tags are `#pixelart #gamedev #b3d`, there is one itch
+  link, and there is no `#screenshotsaturday`.
+
+Spec: `promo/post_2026-09-28.json`.
+
+### §D — two replies, both verified on the public AppView
+
+| Date | Thread | What was said | Link |
+|---|---|---|---|
+| 2026-09-28 | @brichus-dh.bsky.social: a first sculpt on a course (09-26, **0 outside replies**). Voxel Remesh with a Mirror modifier on *"puts tons of holes in the sculpt... even the basic UV Sphere"*. Their self-reply says applying the mirror, remeshing and re-adding it works but is tedious. Both images were read via alt text. | Confirmed the workaround and said it is only needed once. Apply the Mirror, then use sculpt mode's own symmetry: the **X toggle by the mirror icon in the header**. With no modifier stacking a copy over the mesh, Remesh stays clean. **Symmetrize** is in that dropdown. **Reproduced in 4.5.9 `--factory-startup`** on a full UV sphere with a default Mirror modifier: after `object.voxel_remesh` at 0.06, **5,194 of 5,312** mirrored verts land exactly on originals and 118 within 0.03. That is a second surface over the whole mesh. A half sphere remeshes to a closed manifold (0 boundary edges). The header code (`space_view3d.py:136-164`) draws `use_mesh_mirror_x` beside `MOD_MIRROR` in SCULPT mode, with the symmetry popover next to it. `sculpt.symmetrize` sits in that panel (`space_view3d_toolbar.py:1160-1162`). **Not established:** that coincident surfaces are the exact render cause of *their* holes. The reply avoids that claim and says only that the modifier stacks a copy. | [3mwmsobg4qg2m](https://bsky.app/profile/pixelkiln.bsky.social/post/3mwmsobg4qg2m) |
+| 2026-09-28 | @derrickmalikjohnson.com: *"Finally got into using blender ... to help with BG layout ... lord give me the strength"* (16 likes, 3 replies, all "good luck") | Encouragement, then two camera settings for layout work. **Lock Camera to View** is in the N panel View tab, so orbiting and zooming move the shot. **Camera Properties > Viewport Display > Composition Guides** gives a thirds overlay. **Checked in 4.5.9:** `SpaceView3D.lock_camera` is named *"Lock Camera to View"* and drawn at `space_view3d.py:6370` in a `bl_category="View"` panel, and it is False in the factory Layout screen. `DATA_PT_camera_display_composition_guides` is labelled "Composition Guides" under "Viewport Display", and a new camera has `show_composition_thirds` False. So "both ship off" is true | [3mwmso2vzht2v](https://bsky.app/profile/pixelkiln.bsky.social/post/3mwmso2vzht2v) |
+
+Both were re-fetched cookie-less with `getPostThread`. The author is right and
+the parent URIs are right, at 300 and 282 bytes. The first draft of the remesh
+reply was **308 bytes and was refused by the tool's own guard**, so nothing was
+sent until it was trimmed. Neither reply mentions Texel, carries a link or
+pitches.
+
+### Threads looked at and left alone
+
+- **@projectdeathspiral** (PSX Unreal forest, 18 likes). The image was looked
+  at. Anything specific would have opened by correcting the pixel-size mix
+  between the sword and the scene.
+- **@jimthebelmont** (low-poly wolf, 6 days old). Same reason: the only
+  specific note is a density difference between face and body, and that is a
+  correction on an unsolicited post.
+- **@evanarnett** (remasters and mixed pixel sizes). A commentary thread, and
+  a reply from a pixel-density account would read as a pitch.
+- **@pankoniko** (a Unity toon-shader bake). Venting, and it is Unity-side.
+- **@lbsketchbook, @alfredbaudisch, @shadefawks, @keitherickson, @serecky,
+  @zironix**: the standing no-rivalry rule, or another product's thread.
+
+### §E — not due
+
+Weekly on Saturday. The next check is **Sat 2026-10-03**.
+
+### Queue check
+
+- **The density card standby row is SPENT.**
+- **Wed 09-30** is the release/WIP slot, after `texel-release`. The honesty
+  beat (*"shipped a bug that erased people's work"*) is the natural home. The
+  `check_tileable` beat stays barred until the v0.2.2 upload is verified
+  logged out.
+- **The radial beat** is still blocked on a visual.
+- **Mondays have no clip path.** The tool is image-only, and the next Monday
+  (10-05) will hit the same wall. A still pair from `promo/shot-*.mp4` or
+  another built card is the fallback. Teaching video upload belongs to whoever
+  owns `pixelkiln_social.ps1`.
