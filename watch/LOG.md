@@ -6,6 +6,129 @@ in `../ACTIONS.md` and handed to a named owner.
 
 ---
 
+## 2026-09-30 — run 18 (22:02Z, late: the 06:45 slot fell in a host gap, ~09-29T19:07Z → 09-30T21:56Z)
+
+**VERDICT: DEGRADED (commercial), with the listing technically clean.** Every listing check passes, and there have been **0 sales on day 21 live**. The host gap delayed every routine. **`texel-release` caught up at 22:06:26Z and is running now**, so v0.2.2 and T-008 are both being decided by that run, not missed.
+
+### Action ledger
+
+**Opened: 0. Closed: 0.**
+
+**Correction, recorded rather than hidden:** a draft of this run killed T-008 and opened T-021 ("v0.2.2 missed its target, the slot never fired"). Both rested on a false premise. `list_task_runs` did not show the catch-up `texel-release` run until after 22:06Z. Both edits were reverted with `git checkout` within minutes. The diff was only this run's three lines.
+
+- **T-008 was not killed, and this is not an extension.** The row now carries a run-18 note.
+  - Run 14's bound was "the 09-30 `texel-release` run ends without the screenshot path". That run is executing right now.
+  - **Pre-committed:** if that run ends with no screenshot path in the row, **run 19 kills the finding, not the routine**. It will be recorded as KILLED with the visual check UNVERIFIED, never as done. No host gap and no further argument extends it.
+  - `venture-critic` reviewed the carry draft and returned REOPEN, on the grounds that it was a fourth deferral. That was correct against the facts it was given, which were that no run had occurred. The facts changed, and the bound is now being applied as written.
+  - Watch did not take the screenshot itself. The task file forbids doing the work, and the ledger allows closing only against doer evidence.
+
+| id | age | owner |
+|---|---|---|
+| T-008 | **19 d** | `texel-release`. Its run is in progress now, and run 19 decides. |
+| T-010 | 15 d | **HUMAN**. The 14-day rung is suspended while A-032 is open. |
+| T-011 | 15 d | **HUMAN**. Same as T-010. |
+| T-015 | 11 d | **HUMAN** |
+| T-016 | 11 d | **HUMAN** |
+| T-020 | 4 d | `texel-funnel`. Next slot Fri 10-02. |
+
+### ALERTS
+
+**None.**
+
+- `texel-release` is running. It started 09-30T22:06:26Z in the catch-up burst.
+  - **For `pixelkiln-watch` / A-037:** this is the first observed case of a weekly Wednesday `texel-release` slot falling inside an outage, and **it was caught up**, about 7 h after its slot.
+  - `nextRunAt` had already rolled to 10-07 before it fired. So `nextRunAt` is not evidence that a missed slot was dropped.
+- `texel-marketing` last ran 09-29T02:38Z, which is inside 48 h.
+  - Its 09-29 and 09-30 slots fell in the gap.
+  - **Wednesday 09-30 was a Texel beat, and no post is in `promo/POSTED.md` yet.** It may still catch up in this burst.
+- `texel-support` caught up at 22:04Z. Its 09-29 row is at `SUPPORT.md:648`.
+- `texel-funnel` is inside its window.
+
+### Listing (measured 22:05–22:08Z)
+
+| Check | Result |
+|---|---|
+| Logged-out page | HTTP 200, 31,675 B |
+| Download | `texel-0.2.1.zip`, 200 kB, matching local `dist/texel-0.2.1.zip` (205,427 B) |
+| Price | `min_price` $9.95, correct for the current milestone |
+| Status | `game[published]=published` |
+| AI disclosure | Yes + Graphics + Code; audio and text off |
+
+**All pass.**
+
+### Numbers
+
+`| 2026-09-30 (22:05Z) | 108 | 0 | 0 | $0.00 | 0.00% |`
+
+- **7-day trend:** +25 over 7.35 d (≈3.4/day), against +13 over ~8 d (≈1.6/day) the week before. Views are up for the second week running. That is direction only, on n=25.
+- **Downloads, sales and revenue:** 0.
+- **Referrers and impressions:** not read this run.
+- **Payments source:** the analytics *Project totals* sum to 13 payments / $72.66 store-wide. Earlier rows read 14 / $81.58 from `/dashboard/purchases`. The two are **not reconciled**, and none of either is Texel.
+- **Gates:**
+  - Conversion gate: 92 views away.
+  - **The 14-day zero-sales rule fires 2026-10-09, 9 days out.**
+
+### Roadmap
+
+- **v0.2.2 "Brush, the rest" is due today, 09-30.** Its release run is in progress, and the owner has already said it ships partial.
+- Run 19 checks whether a `texel-0.2.2.zip` is live. **If it is not, and there is no dated ROADMAP line, run 19 opens the row.**
+
+---
+
+## 2026-09-29 — run 17 (11:53Z, in its normal slot)
+
+**VERDICT: DEGRADED (commercial), with the listing technically clean.** Every listing check passes. **0 sales on day 20 live**, same ground as runs 13–16; the word still has no rubric (**T-015**). **No decision was made this run, so `venture-critic` was not called.** Nothing was opened, closed, killed or ranked.
+
+### Action ledger
+
+**Opened: 0. Closed: 0.** No doer wrote new evidence on any open row since run 16.
+
+| id | age | owner |
+|---|---|---|
+| T-008 | **18 d** | `texel-release`. **Decision day is tomorrow, Wed 09-30.** If that slot passes with no screenshot, run 18 picks a kill — no further extension. |
+| T-010 | **14 d** | **HUMAN**. Reaches the 14-day rung today; the rung stays **suspended** because A-032 is open (`pixelkiln/launch/watch/ACTIONS.md:44`, re-read this run). The repo is still a referrer (1). |
+| T-011 | **14 d** | **HUMAN**. Same: 14-day rung reached, suspended under A-032. |
+| T-015 | 10 d | **HUMAN** |
+| T-016 | 10 d | **HUMAN** |
+| T-020 | 3 d | `texel-funnel`. Next slot Fri 10-02. |
+
+### ALERTS
+
+**None.** Intervals from each task's cron:
+- `texel-support` last ran 09-29T02:37Z; its 09-28 row ("no inbound, day 20") is at `SUPPORT.md:647`. Next slot 13:24Z today.
+- `texel-marketing` last ran 09-29T02:38Z and **the Monday 09-28 beat landed**: `promo/POSTED.md:1672`, asset `promo/density/texel-density-measured.png`, post `3mwmshvmdhb2d`, `createdAt` 09-29T02:40Z. **Correction to run 16**, which read two minutes before that run started and wrote that Monday's beat was lost — it was not. Next slot 20:20Z today (a packs day); next Texel beat Wed 09-30.
+- `texel-release` (`0 10 * * 3`, last 09-24) and `texel-funnel` (`0 10 * * 5`, last 09-25) are inside their windows; next slots 09-30 and 10-02.
+
+### Listing (measured 11:55Z)
+
+| Check | Result |
+|---|---|
+| Logged-out page | HTTP 200, 31,671 B |
+| Download | `texel-0.2.1.zip`, 200 kB, matching local `dist/texel-0.2.1.zip` (205,427 B) |
+| Price | `min_price` $9.95, correct for the current milestone |
+| Status | `game[published]=published` |
+| AI disclosure | Yes + Graphics + Code |
+| `devlog.rss` | 3 items, newest 09-24T06:30Z |
+
+**All pass.**
+
+### Numbers
+
+`| 2026-09-29 (11:55Z) | 104 | 0 | 0 | $0.00 | 0.00% |`
+
+- **Last reading:** +1 view in 0.39 d. The run of above-weekly days does not extend; n=1, nothing read into it.
+- **7-day trend:** +23 over 7.74 d (≈3.0/day) against +18 over ~7.3 d (≈2.5/day). Same direction as run 16; direction only.
+- **Downloads, sales, revenue:** 0. Store payments 14 / $81.58, unchanged, 0 `texel` matches.
+- **Impressions:** 117 at 0.85% CTR — identical to run 15's pair, where run 16 read 110 / 0.91%. The tile moves inside a day; recorded, not interpreted.
+- **Referrers:** only move is google.com to 3. Table at its 20-row cap.
+- **Gates:** conversion gate 96 views away. **The 14-day zero-sales rule fires 2026-10-09, 10 days out.**
+
+### Roadmap
+
+**v0.2.2 "Brush, the rest" is due Wed 2026-09-30, 1 day away. FLAG, carried from runs 14–16.** No commits to the add-on since run 16; the only work is the unshipped `check_tileable` string fix, and the owner has written that it ships partial. **Run 18 opens a row if 09-30 passes with no upload, and decides T-008 the same day.**
+
+---
+
 ## 2026-09-28 — run 16 (catch-up at 09-29T02:35Z; the 06:45 slot fell inside another host gap, ~09-28T03:15Z → 09-29T02:28Z)
 
 **VERDICT: DEGRADED (commercial), with the listing technically clean.** Every listing check passes. **0 sales on day 19 live** is the same ground as runs 13–15, and the word still has no rubric (**T-015**). Views rose week on week for the first time, but only through search and itch browse, and n is small. **No decision was made this run, so `venture-critic` was not called.** Nothing was opened, closed, killed or ranked.
