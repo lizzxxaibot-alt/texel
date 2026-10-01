@@ -241,6 +241,70 @@ check("radial 4 with Mirror X is eight-fold",
       stroke_points(st, [(3, 5)], 17, 17))
 st.mirror_x, st.symmetry = False, 1
 
+# ---------------------------------------------------------- dither brush mode
+# Same reason as above: `commit_stroke` is the module-level body of `_commit`,
+# so this drives the real write path - scene properties in, layer texels out -
+# rather than re-testing core.raster.dither_hit, which test_raster.py owns.
+from texel.tex_paint import commit_stroke
+
+check("dither defaults OFF, so existing strokes are unchanged", st.dither == "OFF", st.dither)
+check("the brush offers every core pattern",
+      {i.identifier for i in st.bl_rna.properties["dither"].enum_items}
+      == {"OFF", "CHECKER", "QUARTER", "THREE", "BAYER"})
+
+bpy.ops.texel.canvas_new(size=16, name="Dith")
+dimg = bpy.data.images["Dith"]
+ddoc = tex_doc.get(dimg)
+dl = ddoc.canvas.layers[0]
+blue = ddoc.canvas.add_colour((0, 0, 255, 255))
+green = ddoc.canvas.add_colour((0, 255, 0, 255))
+box = R.rect(2, 2, 9, 9, filled=True)
+
+
+def _painted(idx):
+    return {(x, y) for y in range(16) for x in range(16) if dl.get(x, y) == idx}
+
+
+st.brush_size, st.dither = 1, "OFF"
+commit_stroke(ddoc, st, box, blue)
+check("dither OFF paints the whole stroke", _painted(blue) == set(box), len(_painted(blue)))
+
+st.dither = "CHECKER"
+commit_stroke(ddoc, st, box, green)
+g = _painted(green)
+check("CHECKER paints exactly half the stroke", len(g) == 32, len(g))
+check("CHECKER lands on the canvas grid", all((x + y) % 2 == 0 for x, y in g), sorted(g))
+check("the skipped texels keep what was under them",
+      _painted(blue) == set(box) - g, len(_painted(blue)))
+
+# two overlapping strokes must agree - the grid is the canvas's, not the stroke's
+st.dither = "BAYER"
+st.dither_level = 4
+commit_stroke(ddoc, st, R.rect(0, 0, 7, 7, filled=True), 0)
+commit_stroke(ddoc, st, R.rect(3, 5, 10, 12, filled=True), 0)   # offset not a multiple of 4
+cleared = {(x, y) for y in range(16) for x in range(16) if dl.get(x, y) == 0}
+check("overlapping Bayer strokes share one grid",
+      all(R.dither_hit("BAYER", x, y, 4) for x, y in cleared if 2 <= x <= 9 and 2 <= y <= 9),
+      sorted(cleared))
+
+# a wide brush is dithered per stamped texel, not per stroke point
+dl.px = bytearray(len(dl.px))
+st.brush_size, st.brush_shape, st.dither = 4, "SQUARE", "QUARTER"
+commit_stroke(ddoc, st, [(6, 6)], blue)
+b = _painted(blue)
+check("a 4px QUARTER stamp paints 4 of its 16 texels", len(b) == 4, sorted(b))
+check("they are the QUARTER texels", all(x % 2 == 0 and y % 2 == 0 for x, y in b), sorted(b))
+st.brush_size, st.dither = 1, "OFF"
+
+def _rgba(x, y):                                   # bpy is bottom-up
+    i = ((15 - y) * 16 + x) * 4
+    return tuple(round(v * 255) for v in dimg.pixels[i:i + 4])
+
+
+check("the dithered stroke reaches the image",
+      _rgba(6, 6) == (0, 0, 255, 255) and _rgba(5, 6)[3] == 0,
+      (_rgba(6, 6), _rgba(5, 6)))
+
 texel.unregister()
 print()
 if fails:

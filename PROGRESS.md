@@ -514,3 +514,53 @@ card sets the figures as type and never showed the elided panel), so this is a
 missed opportunity rather than a false claim. Listing copy is not this routine's
 lane; handed to `texel-marketing` in `promo/QUEUE.md` and named here so it is on
 the record either way.
+
+---
+
+## v0.2.2 — "Dither brush", shipped 2026-09-30
+
+Released by `texel-release`'s catch-up run on its target day (the Wednesday slot
+fell in a host outage). `dist/texel-0.2.2.zip`, 209,944 B, 33 files. Live and
+verified logged-out — evidence under the v0.2.2 heading in `ROADMAP.md`.
+
+**Why this slice:** no crash or data-loss report in `SUPPORT.md`, and the demand
+tally is empty, so priority 3 — the next roadmap slice. Dither was the item the
+0.2.1 devlog had already named as most likely.
+
+**Contents:** `core.raster.dither_hit` (CHECKER / QUARTER / THREE, the three
+masks lifted out of `TEXEL_OT_dither_fill`, plus a nested 4x4 Bayer map at
+0-16 sixteenths); `scene.texel.dither` + `dither_level`; `tex_paint._stamp`
+tests the pattern per stamped texel at its absolute canvas position; the brush
+body moved to module-level `commit_stroke` so a test can reach the real write
+path; Dither Fill now calls the same function. Plus the `check_tileable`
+message fix built on 09-24. No new operator (count unchanged). `README.md` and
+`START-HERE.html` updated — the START-HERE version table had been wrong since
+0.2.1 (it still listed dither under v0.2.1).
+
+**Tests were written first and watched failing:** 30 new checks in
+`test_raster.py` (coverage, nesting, the checker identity at 8/16, tiling
+period, clamping, unknown-pattern refusal) and 10 in `test_features.py` driving
+`commit_stroke` against a live canvas. A mutation — keying the pattern on the
+stroke instead of the canvas — made 3 of the Blender checks fail. The first
+overlap check used a second stroke offset by (4, 4), a multiple of the Bayer
+period, so it could not have caught that mutation; the offset is (3, 5) now.
+
+### A trap this run hit: stale bytecode after a same-size edit
+The mutation was reverted with `sed` to a string of **identical length** within
+the same second, and Blender kept loading the mutated `__pycache__` .pyc — the
+gate went red on correct source. Deleting `__pycache__` fixed it. When a test
+result contradicts the source you are reading, clear the bytecode before
+debugging the code.
+
+### T-008 cleared in the same run
+The ledger row (sidebar readout legibility) needed one screenshot. Taken from
+the **extracted shipped zip**, GUI Blender 4.5.9, 280 px sidebar: all three
+lines unelided (`shots/t008/shipped-0.2.2/crop_f3_1.00.png`).
+
+### The gate, in full, on the code that shipped
+6 headless core suites · `core/` at **100.0%** (1,064 statements, 0 missed) ·
+7 headless Blender suites · panel-draw traceback check (0 lines) · 4 GUI suites
+(`test_e2e`: every registered operator invoked) · `build.py` · `test_install` —
+green on **4.2.23, 4.5.9, 5.2.1** (`test_versions.sh` `VERSIONS_DONE pass=3
+fail=0`, `run_gui_versions.sh` 12/12) and inside the **Microsoft Store 5.2.1**
+build (`store_check.py` `STORE_DONE pass=12 fail=0`).

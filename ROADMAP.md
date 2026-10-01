@@ -337,7 +337,35 @@ a GUI Blender and is **not** cited as evidence: it reopened inside the same
 process, so `_DOCS` survived and the test proved nothing about a fresh session.
 Phases 5 and 6 are the fresh-process ones.
 
-### v0.2.2 — "Brush", the rest · target **2026-09-30** (was 26 Sep)
+### v0.2.2 — "Dither brush" · **RELEASED 2026-09-30**, partial as forecast
+**What this zip carries:** dither patterns as a brush mode - the three
+hand-authored masks (50/25/75%) and a 4x4 Bayer map at 1-15 sixteenths, keyed on
+absolute canvas x/y so overlapping strokes share one grid, applied per stamped
+texel so a wide brush dithers inside itself, and honoured by every painting tool
+(Pencil, Eraser, Line, Rect, Ellipse, Fill). The masks moved into
+`core.raster.dither_hit`, and **Dither Fill now draws from the same function**,
+so fill and brush cannot drift apart. Also the Check Tiling message fix
+(Part 1 below). No new operator; the count is unchanged.
+
+**What did not make it, and where it went:** the dithered gradient, custom
+stamps and tablet pressure move to **v0.2.3, target Wed 2026-10-07** - the next
+release slot - and that may ship partial too. The gradient now has its
+ramp-to-dither mapping for free (Bayer levels are nested, so a ramp is a level
+per texel); what it still needs is the two-point drag.
+
+**Live-page read-back, 2026-09-30 (the gate, taken before this tick was
+written):** cookie-less GET of `z3er1n.itch.io/texel` → HTTP 200, 31,677 B; the
+upload widget reads **`texel-0.2.2.zip` 205 kB** and names no other file.
+Local `dist/texel-0.2.2.zip` = 209,944 B, sha256 `5c1acb5e…80587115`, pinned at
+`dist/shipped/texel-0.2.2-SHIPPED-2026-09-30.zip`; upload id 19492797; 0.2.1
+hidden, not deleted. Devlog **1684470** live logged-out and first in
+`devlog.rss`. The run was the catch-up for the Wed slot the host outage ate.
+
+### v0.2.3 — "Brush", the rest · target **2026-10-07**
+The three items left from the list below: dithered gradient, custom stamp from a
+selection, tablet pressure.
+
+#### The original v0.2.2 list, kept for the pricing
 Four items, not five - **Mirror Y was never outstanding** (shipped in v0.1.0;
 this list was stale) and **radial symmetry shipped in v0.2.1**. Each remaining
 item is priced against the code that already exists, because "too big" was
@@ -437,7 +465,7 @@ already lives, target **2026-10-17**. Until it lands:
   tools deliver honestly. **`check_tileable` must not be sold as a guarantee**,
   and as of Part 1 the add-on no longer describes it as one to the buyer.
 
-**Part 1 is BUILT AND GATED, NOT SHIPPED.** It rides **v0.2.2 on Wed 2026-09-30**.
+**Part 1 rides v0.2.2, released 2026-09-30.** (Until that date it read "BUILT AND GATED, NOT SHIPPED".)
 It is written here as not-shipped on purpose: this file spent eight days claiming
 a build was live because a routine ticked ahead of the upload, and that is not
 happening twice in the same month. The live 0.2.1 zip still prints the old

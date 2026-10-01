@@ -35,6 +35,19 @@ class TexelSettings(bpy.types.PropertyGroup):
     pixel_perfect: BoolProperty(
         name="Pixel Perfect", default=True,
         description="Drop L-shaped corner texels from freehand strokes")
+    dither: EnumProperty(
+        name="Dither", default="OFF",
+        description="Paint only some texels of each stamp, on a grid fixed to the "
+                    "canvas so overlapping strokes line up",
+        items=[("OFF", "Solid", "Paint every texel"),
+               ("CHECKER", "50%", "Alternating texels"),
+               ("QUARTER", "25%", "Every fourth texel"),
+               ("THREE", "75%", "Three of four texels"),
+               ("BAYER", "Bayer", "4x4 ordered dither at any density")])
+    dither_level: IntProperty(
+        name="Density", default=8, min=1, max=15,
+        description="Bayer coverage in sixteenths - 8 is a checker. Each step "
+                    "adds texels to the one below it and never moves any")
     filled: BoolProperty(name="Filled", default=False,
                          description="Fill shapes instead of outlining them")
     tolerance: IntProperty(name="Tolerance", default=0, min=0, max=255,

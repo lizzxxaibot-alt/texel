@@ -39,6 +39,11 @@ def _draw_tools(layout, s):
     row.prop(s, "pixel_perfect", text="", icon="MOD_SMOOTH")
     if s.brush_size > 1:
         col.prop(s, "brush_shape", text="")
+    if s.tool != "PICK":
+        r = col.row(align=True)
+        r.prop(s, "dither", text="")
+        if s.dither == "BAYER":
+            r.prop(s, "dither_level", text="")
     if s.tool in {"RECT", "ELLIPSE"}:
         col.prop(s, "filled")
     if s.tool == "FILL":

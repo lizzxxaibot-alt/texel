@@ -270,6 +270,52 @@ check("a multi-texel stroke keeps its own order",
 check("segments below 1 are treated as off",
       R.symmetry_points([(1, 2)], W, H, False, False, 0) == [(1, 2)])
 
+# --- dither as a brush mode (v0.2.2). The pattern is keyed on ABSOLUTE canvas
+# x/y, not on the stroke, so two strokes that overlap land on one coherent grid
+# instead of two out-of-phase checkers - which is the whole point of a dither.
+check("dither OFF paints every texel",
+      all(R.dither_hit("OFF", x, y) for x in range(4) for y in range(4)))
+cells = [(x, y) for y in range(8) for x in range(8)]
+def share(pattern, level=8):
+    return sum(R.dither_hit(pattern, x, y, level) for x, y in cells) / len(cells)
+check("CHECKER covers half", share("CHECKER") == 0.5, share("CHECKER"))
+check("QUARTER covers a quarter", share("QUARTER") == 0.25, share("QUARTER"))
+check("THREE covers three quarters", share("THREE") == 0.75, share("THREE"))
+check("CHECKER never puts two painted texels side by side",
+      not any(R.dither_hit("CHECKER", x, y) and R.dither_hit("CHECKER", x + 1, y)
+              for x, y in cells))
+# the three hand-authored masks are the exact ones Dither Fill has always drawn,
+# so the fill and the brush agree texel for texel
+check("hand masks match Dither Fill's historic rules",
+      all(R.dither_hit("CHECKER", x, y) == ((x + y) % 2 == 0)
+          and R.dither_hit("QUARTER", x, y) == (x % 2 == 0 and y % 2 == 0)
+          and R.dither_hit("THREE", x, y) == (not (x % 2 == 1 and y % 2 == 1))
+          for x, y in cells))
+for lv in range(0, 17):
+    check(f"Bayer level {lv} covers {lv}/16", share("BAYER", lv) == lv / 16,
+          share("BAYER", lv))
+check("Bayer levels are nested: a texel painted at N stays painted at N+1",
+      all(not R.dither_hit("BAYER", x, y, lv) or R.dither_hit("BAYER", x, y, lv + 1)
+          for x, y in cells for lv in range(16)))
+check("Bayer 8/16 is exactly the checker",
+      all(R.dither_hit("BAYER", x, y, 8) == R.dither_hit("CHECKER", x, y)
+          for x, y in cells))
+check("Bayer tiles every 4 texels",
+      all(R.dither_hit("BAYER", x, y, 5) == R.dither_hit("BAYER", x + 4, y + 8, 5)
+          for x, y in cells))
+check("Bayer 4/16 spreads out: no two painted texels touch",
+      not any(R.dither_hit("BAYER", x, y, 4) and R.dither_hit("BAYER", x + dx, y + dy, 4)
+              for x, y in cells for dx, dy in ((1, 0), (0, 1), (1, 1), (1, -1))))
+check("level outside 0..16 is clamped, not an error",
+      share("BAYER", -3) == 0.0 and share("BAYER", 99) == 1.0)
+check("negative coordinates keep the grid (mirror strokes can go there)",
+      R.dither_hit("CHECKER", -1, 0) == R.dither_hit("CHECKER", 1, 0))
+try:
+    R.dither_hit("PLAID", 0, 0)
+    check("an unknown pattern is refused, not silently painted solid", False)
+except ValueError:
+    check("an unknown pattern is refused, not silently painted solid", True)
+
 print()
 if fails:
     print(f"{len(fails)} FAILED: {fails}"); sys.exit(1)

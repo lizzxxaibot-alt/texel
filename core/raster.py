@@ -292,6 +292,35 @@ def brush_mask(size: int, shape: str = "SQUARE") -> list[Point]:
             pts.append((x, y))
     return pts
 
+# Ordered-dither threshold map. Painting a texel when its cell is below `level`
+# gives exactly level/16 coverage, and every level contains the one below it,
+# so stepping the level up a ramp adds texels and never moves any.
+BAYER4 = ((0, 8, 2, 10),
+          (12, 4, 14, 6),
+          (3, 11, 1, 9),
+          (15, 7, 13, 5))
+
+
+def dither_hit(pattern: str, x: int, y: int, level: int = 8) -> bool:
+    """Whether a dithered brush paints the texel at (x, y).
+
+    Keyed on absolute canvas coordinates, never on the stroke, so every stroke
+    lands on the same grid. CHECKER, QUARTER and THREE are the hand-authored
+    masks Dither Fill has always used; BAYER is the 4x4 ordered map at
+    `level` sixteenths.
+    """
+    if pattern == "OFF":
+        return True
+    if pattern == "CHECKER":
+        return (x + y) % 2 == 0
+    if pattern == "QUARTER":
+        return x % 2 == 0 and y % 2 == 0
+    if pattern == "THREE":
+        return not (x % 2 == 1 and y % 2 == 1)
+    if pattern == "BAYER":
+        return BAYER4[y % 4][x % 4] < max(0, min(16, int(level)))
+    raise ValueError(f"unknown dither pattern {pattern!r}")
+
 
 def flood_fill(get_px, w: int, h: int, sx: int, sy: int, target, tolerance: int = 0,
                contiguous: bool = True) -> list[Point]:

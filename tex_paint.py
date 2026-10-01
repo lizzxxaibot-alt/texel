@@ -11,16 +11,21 @@ from .tex_props import rgba_bytes
 _MASK_CACHE = {}
 
 
-def _stamp(layer, x, y, idx, size, w, h, shape="SQUARE"):
+def _stamp(layer, x, y, idx, size, w, h, shape="SQUARE", dither="OFF", level=8):
     """Stamp the brush centred on (x, y). Masks are cached - a 32px round brush
-    is 800 offsets and recomputing it per texel of a stroke is wasteful."""
+    is 800 offsets and recomputing it per texel of a stroke is wasteful.
+
+    Dither is tested per stamped texel at its canvas position, not per stroke
+    point, so a wide brush dithers inside itself and the texels it skips keep
+    whatever was under them."""
     key = (size, shape)
     mask = _MASK_CACHE.get(key)
     if mask is None:
         mask = R.brush_mask(size, shape)
         _MASK_CACHE[key] = mask
     for dx, dy in mask:
-        layer.set(x + dx, y + dy, idx)
+        if dither == "OFF" or R.dither_hit(dither, x + dx, y + dy, level):
+            layer.set(x + dx, y + dy, idx)
 
 
 
@@ -36,6 +41,19 @@ def stroke_points(s, pts, w, h):
     with a real property group.
     """
     return R.symmetry_points(pts, w, h, s.mirror_x, s.mirror_y, s.symmetry)
+
+
+def commit_stroke(doc, s, pts, idx):
+    """Stamp `pts` onto the active layer with the scene's brush and flush.
+
+    The body of `_commit`, at module level for the same reason as
+    `stroke_points`: it is the only way a test reaches the real write path."""
+    layer = doc.canvas.layers[doc.canvas.active]
+    w, h = doc.canvas.w, doc.canvas.h
+    for x, y in stroke_points(s, pts, w, h):
+        _stamp(layer, x, y, idx, s.brush_size, w, h, s.brush_shape,
+               s.dither, s.dither_level)
+    doc.flush()
 
 
 class TEXEL_OT_paint(Operator):
@@ -72,12 +90,8 @@ class TEXEL_OT_paint(Operator):
 
     def _commit(self, context, pts):
         s = context.scene.texel
-        layer = self.doc.canvas.layers[self.doc.canvas.active]
-        w, h = self.doc.canvas.w, self.doc.canvas.h
         idx = 0 if s.tool == "ERASER" else self.colour_index
-        for x, y in stroke_points(s, pts, w, h):
-            _stamp(layer, x, y, idx, s.brush_size, w, h, s.brush_shape)
-        self.doc.flush()
+        commit_stroke(self.doc, s, pts, idx)
 
     # -- modal -------------------------------------------------------------
     def invoke(self, context, event):

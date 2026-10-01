@@ -648,3 +648,33 @@ already fixed **and live**) is **not** satisfied yet. **Do not post it before th
 v0.2.2 upload is verified logged-out.** After that it is a strong beat, and the
 strongest line in it is not the bug — it is that the tool now tells you what it
 cannot see.
+
+## 2026-09-30 — `texel-release`: v0.2.2 is LIVE, verified logged-out
+
+**Live check (the gate):** cookie-less GET of `z3er1n.itch.io/texel` → HTTP 200,
+31,677 B, upload widget reads **`texel-0.2.2.zip` 205 kB** and names no other
+file (local `dist/texel-0.2.2.zip` = 209,944 B, sha256 `5c1acb5e…80587115`,
+pinned copy `dist/shipped/texel-0.2.2-SHIPPED-2026-09-30.zip`). Devlog
+**1684470** live logged-out and first in `devlog.rss`.
+
+Beats this release earns:
+
+1. **Dither brush mode** — the release's feature beat. **NEEDS A NEW VISUAL: no
+   existing listing image or screenshot shows it.** Suggested content: one
+   canvas, a solid shape with a dithered highlight stroke laid over it, plus a
+   strip of the Bayer levels 2/16 → 14/16 painted with the brush (real Blender
+   output, `density_shot.py`-style, not typed). Asset path to create:
+   `promo/dither/texel-0.2.2-dither-brush.png`. Claims that are tested and safe:
+   pattern fixed to the canvas so overlapping strokes line up; skipped texels
+   keep what was under them; works on Pencil/Eraser/Line/Rect/Ellipse/Fill;
+   Bayer 1-15 sixteenths. **Do not claim** gradients, stamps or tablet pressure
+   — those are v0.2.3.
+2. **Queue item 2 (the Check Tiling build-in-public beat) is now UNBLOCKED** —
+   its condition, the fix being live and verified logged-out, is met by the read
+   above. Asset: the devlog section *"Check Tiling tells you what it measured"*
+   (`promo/devlog_0.2.2.html`). The standing restriction still applies: no beat
+   may claim Check Tiling catches seams.
+3. **Listing copy (not this routine's lane):** the listing's feature list and
+   roadmap block may still list dither under a future version; `texel-marketing`
+   /`texel-watch` should reconcile it against `README.md` and `START-HERE.html`,
+   both updated in this zip.

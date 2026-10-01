@@ -138,6 +138,11 @@ Texel is not only a 3D texture tool:
   target, because pixel artists work to limits.
 - **Brush shapes**: square, round and diamond. Square is right at 1px; round is
   what you want above about 3 texels; diamond suits isometric work.
+- **Dither brush mode** (0.2.2): every tool except Pick can paint through a
+  50%, 25% or 75% mask, or a 4x4 Bayer map at 1-15 sixteenths. The pattern is
+  fixed to the canvas, not the stroke, so overlapping strokes line up; the
+  texels a stroke skips keep what was under them. Also works with Eraser and
+  Fill.
 - **Layer opacity** blends properly.
 
 ## Licence

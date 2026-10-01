@@ -345,12 +345,7 @@ class TEXEL_OT_dither_fill(_DocOp):
             for x in range(c.w):
                 if (x, y) not in sel:
                     continue
-                if self.density == "CHECKER":
-                    hit = (x + y) % 2 == 0
-                elif self.density == "QUARTER":
-                    hit = (x % 2 == 0) and (y % 2 == 0)
-                else:
-                    hit = not ((x % 2 == 1) and (y % 2 == 1))
+                hit = R.dither_hit(self.density, x, y)
                 layer.set(x, y, primary if hit else other)
                 n += 1
         d.flush()
