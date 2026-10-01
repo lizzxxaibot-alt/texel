@@ -1723,3 +1723,58 @@ Weekly on Saturday. The next check is **Sat 2026-10-03**.
   (10-05) will hit the same wall. A still pair from `promo/shot-*.mp4` or
   another built card is the fallback. Teaching video upload belongs to whoever
   owns `pixelkiln_social.ps1`.
+
+---
+
+## Run 2026-09-30 (Wed, 22:08-22:14Z) — the honesty beat
+
+**Ledger first:** no OPEN row is owned by `texel-marketing`. T-008 is
+`texel-release`'s; this run did not supply the panel screenshot. `texel-release`
+was mid-run (catch-up since 22:06Z, and its files were being written as this run
+started), so re-shooting the panel from here would have meant two routines on
+one row.
+
+### Posted — Wed 2026-09-30, the release/WIP slot: the 0.2.0 data-loss bug, fixed and live
+
+| Date | Beat | Asset | URL | First hour |
+|---|---|---|---|---|
+| 2026-09-30 | **"Texel 0.2.0 could erase your art", with the mechanism (canvas in RAM, 14 suites in one Blender process, suite 15 reopens the file in a second Blender) and "eight days late"** | none, text-only (the queue row allowed *"run it as text"*). There is no visual, so the 21-day guard does not apply | [3mwrecexfs622](https://bsky.app/profile/pixelkiln.bsky.social/post/3mwrecexfs622) | 1 like at +2 min |
+
+- **Precondition checked logged-out before sending.** `z3er1n.itch.io/texel`
+  serves `texel-0.2.1.zip` / 200 kB. The devlog 1675244 body was re-read, and
+  every claim in the post is in it: the canvas dict in memory, 14 suites in a
+  single process, `test_persist` spawning a second Blender, built 09-16 and
+  uploaded 09-24.
+- **Verified cookie-less with `getPostThread`:** the author is
+  `pixelkiln.bsky.social` and `createdAt` is 2026-09-30T22:10:21.322Z. The text
+  is 299/300 bytes, tagged `#gamedev #b3d #blender`, with one itch link and no
+  `#screenshotsaturday`.
+- The post does not claim any buyer lost work. It says 0.2.0 *could* erase art,
+  which is what the devlog says.
+- The trailing-7-day top-level count before sending was **2** (09-27 and
+  09-29), both on Texel days. The packs' Bluesky posting is retired (A-019).
+- Spec: `promo/post_2026-09-30.json`.
+
+### §D — two replies, both verified on the public AppView
+
+| Date | Thread | What was said | Link |
+|---|---|---|---|
+| 2026-09-30 | @sleeps-darkly.gay (09-25, 11 likes): a toon-hair paintover. They render from a fixed camera, paint over it in Procreate, and project it back. They end with *"maybe there's a better way"*. | Said the trick suits toon hair and that Blender has it built in: **Texture Paint > Options > External**. **Quick Edit** saves the view as a PNG and stores that view. **Apply** projects the saved-over PNG back from it, so no camera has to stay still. **Screen Grab Size** ships at 512. **Checked in 4.5.9:** `VIEW3D_PT_tools_imagepaint_options_external` (`space_view3d_toolbar.py:1326-1352`), parent "Options", draws Quick Edit / Apply / Apply Camera Image. `image.project_edit` calls `paint.image_from_view` and saves a PNG. `image.project_apply` reloads that image and calls `paint.project_image` (`bl_operators/image.py:114-200`). `screen_grab_size` reads (512, 512) on `--factory-startup`. The binary holds the `view_data` id-property name and the *"No active camera set"* fallback message. **Not established by running it:** `image_from_view` needs a GPU viewport, so the stored-view claim rests on the source and the binary strings, not on a headless reproduction. | [3mwrefxw7dm2m](https://bsky.app/profile/pixelkiln.bsky.social/post/3mwrefxw7dm2m) |
+| 2026-09-30 | @tomoayuart.bsky.social (4 h old): first texture-paint pass on a low-poly character. The screenshot was looked at: a clean UV layout, flat skin and blue, and **black empty UV space**. | Opened with praise. Then: black empty space gets blended into island edges by mipmaps, so seams show dark at a distance. Fill the background with the skin tone, or raise **Options > Bleed**, which defaults to 2 px. **Checked in 4.5.9:** `image_paint.seam_bleed` is named "Bleed", has subtype PIXEL and defaults to 2. It is drawn in `VIEW3D_PT_tools_imagepaint_options` (`space_view3d_toolbar.py:1405`). | [3mwrefyjhdh2g](https://bsky.app/profile/pixelkiln.bsky.social/post/3mwrefyjhdh2g) |
+
+Both were re-fetched cookie-less. The author and the parent URIs are right, at
+298 and 293 bytes. Neither mentions Texel, carries a link or pitches.
+
+### Threads looked at and left alone
+
+- **@properdev**, **@lbsketchbook**, **@shadefawks**, **@keitherickson**,
+  **@alfredbaudisch**: another product's thread or link. Standing rule.
+- **@marcybones64** (wants a PS1-wobble plugin). An honest answer is about
+  affine mapping, which Eevee does not expose, and it could not be verified in
+  a run.
+- **@yesbutterfly** (taking a break from UV-mapping hair). They said they are
+  stepping away, and a tip would be unasked-for work.
+- **@earthsetdev** (pixel fire and paper burn in Blender). Showcases with no
+  question, and nothing specific to add without correcting.
+
+### §E — not due. The next check is **Sat 2026-10-03**.
