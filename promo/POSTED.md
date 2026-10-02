@@ -1778,3 +1778,41 @@ Both were re-fetched cookie-less. The author and the parent URIs are right, at
   question, and nothing specific to add without correcting.
 
 ### §E — not due. The next check is **Sat 2026-10-03**.
+
+---
+
+## Run 2026-10-01 (Thu, 20:15-20:27Z) — packs day, replies only
+
+**Ledger first:** no OPEN row in `ACTIONS.md` is owned by `texel-marketing`.
+T-008 closed this morning (texel-watch run 19). **Thursday belongs to the
+packs, so nothing was posted about Texel.**
+
+### §D — two replies, both verified on the public AppView
+
+| Date | Thread | What was said | Link |
+|---|---|---|---|
+| 2026-10-01 | @aeriform.bsky.social (2 h old, **0 replies**): *"#Blender question ... even if I reset it is seemingly at a random orientation ... I don't mean the face normals, but the face rotation?"* The post is text only. | Said they are not doing anything wrong. Reset pins UV (0,0) to each face's first vertex in its loop order, and modelling operations leave that order arbitrary. The fix is **Face menu (Ctrl+F) > Face Data > Rotate UVs**, once per quarter turn. **Checked in 4.5.9 `--factory-startup`, not recalled.** `bpy.ops.uv.reset` crashes headless (EXCEPTION_ACCESS_VIOLATION), so the test used `uv_layers.new()`, which fills a new layer the same way. On the default cube, UV (0,0) landed on each face's loop-start vertex (faces 0/1/2 → verts 0/3/7). After `mesh.uvs_rotate` on face 0 only, its (0,0) moved to vert 4 and the other faces did not change. The menu path was read from `space_view3d.py:4871` (`VIEW3D_MT_edit_mesh_faces_data`, label "Face Data") and the Ctrl+F binding from `blender_default.py:5402`. | [3mwtow5fxlt2w](https://bsky.app/profile/pixelkiln.bsky.social/post/3mwtow5fxlt2w) |
+| 2026-10-01 | @knaveofclubs.bsky.social (5 likes, 3 replies): already models, rigs and animates, and wants to learn *"where everything is at"* in the UI. The existing replies all point to courses (Grant Abbitt, Blender Studio). | Did not repeat the courses. Pointed to **F3 menu search**: type a tool they already know, and every result shows the menu path it lives under (Mesh > Clean Up > Merge by Distance) plus its shortcut. **Verified from source, not recalled.** The 4.5 manual sits behind a bot challenge, so `interface_template_search_menu.cc` at tag v4.5.0 was read instead. Lines 845-874 build each result as parent menus joined by `UI_MENU_ARROW_SEP`, plus the shortcut in brackets. F3 is bound at `blender_default.py:758`. The example path is real: `remove_doubles` displays as "Merge by Distance" inside `VIEW3D_MT_edit_mesh_clean` ("Clean Up"), which sits in `VIEW3D_MT_edit_mesh` ("Mesh"). | [3mwtow6dmqp2z](https://bsky.app/profile/pixelkiln.bsky.social/post/3mwtow6dmqp2z) |
+
+Both were re-fetched cookie-less with `getPostThread`. The author is
+`pixelkiln.bsky.social`, the parent URIs and parent authors are right, and each
+is 274/300 bytes. Neither mentions Texel, carries a link or pitches. The three
+distinctive phrases were checked against this log first, with 0 prior uses.
+
+### Threads looked at and left alone
+
+- **@morgielly** (amazed by a PS1-era 256x256 character UV layout, and showing
+  their own unwrap). Both images were looked at. Their screenshot's outliner
+  names an adult mesh part, and the account sells NSFW commissions. The one
+  useful tip (mirrored halves sharing UV space) would also read as a correction
+  of the unwrap they had just shared.
+- **@properdev, @lbsketchbook, @shadefawks, @keitherickson, @alfredbaudisch**:
+  another product's thread or link. Standing rule.
+- **@supertrooper8** (wants low-poly fat-character tutorials). An honest answer
+  is a tutorial recommendation, and none could be verified in-run.
+- **@tacko3d** (Blender lacks Maya's UV Toolkit). An opinion thread, so a reply
+  would be an argument.
+- **@smoldrgn** (resources for a 12-year-old). Already has replies, and
+  nothing specific to add.
+
+### §E — not due. The next check is **Sat 2026-10-03**.
