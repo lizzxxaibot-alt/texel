@@ -1816,3 +1816,87 @@ distinctive phrases were checked against this log first, with 0 prior uses.
   nothing specific to add.
 
 ### §E — not due. The next check is **Sat 2026-10-03**.
+
+---
+
+## Run 2026-10-02 (Fri, a TEXEL day, 20:21-20:30Z) — the radial beat, finally with a visual
+
+**Ledger first:** there is no OPEN row in `ACTIONS.md` owned by `texel-marketing`.
+
+### Why radial and not the calendar's sprite beat
+
+Friday's calendar beat is sprite/animation. `promo/anim/sheet_big.png` and
+`Torchbearer_sheet.png` went out on 09-25, so they are reuse-blocked until
+10-16. `QUEUE.md` outranks the calendar, and its oldest unblocked feature row
+is **v0.2.1 radial symmetry**. Blocker 1 cleared on 09-24. Blocker 2 was
+*"needs a visual; none exists"*.
+
+**That was not quite true.** `promo/radial/card_radial.png` and its source,
+`brand/html/texel_radial.html`, were built on 09-24 at 01:42. They had never
+been gated, and no file mentioned them. So this run ran the CLAUDE.md §4 loop
+on that card rather than posting it.
+
+### The §4 loop — scoreboard
+
+| Round | Lint (1280x720) | Critic verdict | FATAL / SERIOUS |
+|---|---|---|---|
+| 1 (the 09-24 card, as found) | 0 fail | ITERATE | 2 / 6. All text died at feed size, there was no headline, the art was non-integer-scaled (9x panels squeezed to ~5.4x), the legend was broken, it was off house style, and the cream stroke was hidden |
+| 2 (rebuilt: 60px Young Serif headline, Inter, 1x panels at exact 5x, legend row) | 0 fail | ITERATE | 0 / 2. The proof numbers were too small, and "Sixteen" in the headline sat over "Radial 8" labels |
+| 3 (per-card stamp counts, larger counts and footer, brighter guides) | 0 fail | ITERATE | 0 / 2. Nothing said "Blender add-on", and the footer was still small |
+| **4** (eyebrow `TEXEL · BLENDER ADD-ON · RADIAL SYMMETRY`, 32px footer) | **0 fail** | **SHIP** | **0 / 0** |
+
+Round 4's MINORs were not taken, because any change would have re-opened the
+gate:
+- Footer wording: the critic suggested *"16 × 80 = 1,280, but overlaps merge: 984 remain"*, which would also explain why panel 2 shows 576 rather than 640.
+- Caption grey is one step dim.
+- The URL is the quietest element.
+
+These are the first edits for any reuse of the card.
+
+**Panel art is the shipped product's output, verified rather than assumed.**
+- `promo/radial/make_radial_r2.py` imports `core.raster` by zipimport straight out of `dist/shipped/texel-0.2.2-SHIPPED-2026-09-30.zip`.
+- It asserts 80 / 576 / 984 before writing anything.
+- Its occupancy matches the 09-24 panels at 0 differing texels.
+- The 09-24 panels were also re-generated from the shipped zip and came out byte-identical.
+- The `Radial` property's range is 1-16 (`tex_props.py:60`).
+
+Renders: `radial/texel-radial-r1.png` … `texel-radial-r4.png`, plus a
+`-feed500` preview for each round. **`brand/html/texel_radial.html` now holds
+the round-4 source.** The 09-24 version survives only as its render
+(`card_radial.png`, `texel-radial-r1.png`).
+
+### Posted — Fri 2026-10-02
+
+| Date | Beat | Asset | URL | First hour |
+|---|---|---|---|---|
+| 2026-10-02 | **Radial symmetry (v0.2.1): one 80-texel stroke; Radial 8 gives 576; plus Mirror X gives 16 stamps, 1,280 on paper and 984 landed** | `promo/radial/texel-radial-r4.png` (252,262 B, 2560x1440). **First post of any radial asset** | [3mww7l5ao7y2y](https://bsky.app/profile/pixelkiln.bsky.social/post/3mww7l5ao7y2y) | 0 likes at +1 min |
+
+Checks before and after sending:
+- **Live page re-checked first.** `z3er1n.itch.io/texel` returned HTTP 200, and `texel-0.2.2.zip` is the only zip named.
+- **Verified cookie-less with `getPostThread`:**
+  - The author is `pixelkiln.bsky.social`, and `createdAt` is 2026-10-02T20:29:05.152Z.
+  - The embed is `app.bsky.embed.images#view` at 2560x1440, with 813 characters of alt text.
+  - The text is 297/300 bytes and tagged `#pixelart #gamedev #b3d`, with one itch link and no `#screenshotsaturday`.
+- **Cadence.** The window 09-26..10-02 holds 09-27, 09-28 (02:40Z on the 29th), 09-30 and today. That is 4, all on Texel days, which is the cap. Packs posting is retired (A-019).
+- **Phrasing.** *"One drag"*, *"boss sigils"* and *"rose window"* have 0 prior uses in this log. There is no antithesis construction; the first draft's *"984 texels, not 1,280"* was rewritten for that reason.
+- Spec: `promo/post_2026-10-02.json`.
+
+### §D — two replies, both verified on the public AppView
+
+| Date | Thread | What was said | Link |
+|---|---|---|---|
+| 2026-10-02 | @garesoft.dev (7 h old, **0 replies**): *"A gas station in the suburbs. (I'm trying to get into blender! Psx, ps1, ps2, low poly)"*. I looked at the image: chunky pixel textures on the lot and the city backdrop, and four lamp posts with no light coming from them. | Praised the PS1 feel. Then, for lighting the lamp posts: a Spot light under each head, then **Light Properties > Beam Shape**. Size defaults to 45°, so try ~80, and push Blend from 0.15 toward 1 for soft pools. **Checked in 4.5.9 `--factory-startup`:** a new SPOT light reads `spot_size` 45.0° and `spot_blend` 0.15. `DATA_PT_spot` has `bl_label` "Beam Shape" and draws `spot_size` as "Size" and `spot_blend` as "Blend". | [3mww7irep362u](https://bsky.app/profile/pixelkiln.bsky.social/post/3mww7irep362u) |
+| 2026-10-02 | @woodlandgamedev.bsky.social (10-01, **0 replies**): happy to be learning Godot, re-learning Blender and learning pixel art. | Encouragement, plus one Godot setting: **Project Settings > Rendering > Textures > Canvas Textures > Default Texture Filter** is Linear out of the box, which softens sprites as they scale; set it to Nearest. **Checked in Godot 4.7.2 headless:** `rendering/textures/canvas_textures/default_texture_filter` = 1, and the hint string is `Nearest,Linear,Linear Mipmap,Nearest Mipmap`, so 1 is Linear. | [3mww7irtudi2x](https://bsky.app/profile/pixelkiln.bsky.social/post/3mww7irtudi2x) |
+
+Both were re-fetched cookie-less. The author and parent are right, at 286 and
+271 bytes. Neither mentions Texel, carries a link or pitches. *"Worth flipping
+early"* was used on 09-23, so the Godot reply was reworded before sending.
+
+### Threads looked at and left alone
+
+- **@properdev, @lbsketchbook, @shadefawks, @keitherickson, @alfredbaudisch, @medalhellway** (a texel-density tool launch): another product's thread or link. Standing rule.
+- **@flinflonimation** (photogrammetry projection masks). Advanced, and I could not verify an addition in the run.
+- **@critcorsac** (low-poly character into Godot, 55 likes). The three existing replies are "good luck", and I had nothing specific to add without seeing their pipeline.
+- **@naitelveni** (a texel-density question about someone's remaster). The question is for the artist, not for us.
+
+### §E — not due. The next check is **Sat 2026-10-03**.

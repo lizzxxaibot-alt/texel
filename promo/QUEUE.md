@@ -607,7 +607,7 @@ Devlog is live and public:
 
 | Queued | Slot | Beat | Asset | Angle | Posted |
 |---|---|---|---|---|---|
-| 2026-09-24 | **next Texel slot** | **v0.2.1 — radial symmetry** *(the 09-16 row above, unblocked)* | ⚠ **still needs a visual; none exists** | Unchanged from the 09-16 row. Blocker 1 is cleared; **blocker 2 — a visual that shows radial actually repeating a stroke — is not**, and this routine is not building it for you. | |
+| 2026-09-24 | **next Texel slot** | **v0.2.1 — radial symmetry** *(the 09-16 row above, unblocked)* | ⚠ **still needs a visual; none exists** | Unchanged from the 09-16 row. Blocker 1 is cleared; **blocker 2 — a visual that shows radial actually repeating a stroke — is not**, and this routine is not building it for you. | **POSTED Fri 2026-10-02 20:29Z**: [3mww7l5ao7y2y](https://bsky.app/profile/pixelkiln.bsky.social/post/3mww7l5ao7y2y), with `promo/radial/texel-radial-r4.png`. An ungated card built 09-24 was found and taken through the §4 loop, and it passed at round 4. See POSTED.md 10-02. |
 | 2026-09-24 | **your call on timing** | **"I shipped a bug that erased people's work, and fourteen green test suites did not see it"** | ⚠ needs a visual, or run it as text | **This is the honesty beat the account is good at (09-08, 11 likes; 09-12, 9 likes), and unlike queue item 2 below, the defect is FIXED and SHIPPED — so the precedent both of those set is satisfied.** The mechanism is the interesting part and it is short: the canvas lived in a dict in memory, memory does not survive quitting Blender, so reopening built a blank canvas and the first stroke committed it over the artwork. Every suite ran in ONE Blender process, where the canvas is still in memory — the fifteenth suite spawns a second process and that is the only reason it can see anything. **Do not soften it and do not bury the eight days** (built 09-16, uploaded 09-24); the devlog says both out loud already and a post that says less than the devlog reads worse than one that says more. Figures you may use, all verified: 15 suites, 3 Blender versions plus the Store build, 205,427 B zip. | **POSTED Wed 2026-09-30 22:10Z, text-only**. [3mwrecexfs622](https://bsky.app/profile/pixelkiln.bsky.social/post/3mwrecexfs622) was verified on the AppView after the live page was re-checked (0.2.1, 200 kB). See POSTED.md 09-30. The *check_tileable* honesty beat (queue item 2) is **separate and still barred** until the v0.2.2 upload is verified logged-out. |
 
 **A stale line in `LISTING.md`, for whoever owns that copy.** Lines 398-403 say
@@ -678,3 +678,11 @@ Beats this release earns:
    roadmap block may still list dither under a future version; `texel-marketing`
    /`texel-watch` should reconcile it against `README.md` and `START-HERE.html`,
    both updated in this zip.
+
+## 2026-10-02 — `texel-marketing`: radial SPENT; what is left
+
+- **Radial is spent** (posted 10-02, see the row above). The visual existed after all, but had never been gated or logged, so 09-24's *"none exists"* was wrong.
+- **Dither brush (0.2.2)** still needs a visual. It is the next feature beat. `promo/radial/make_radial_r2.py` is the pattern to follow: zipimport `core.raster` from the shipped zip and assert counts. Make one panel and size it for the 500px feed from the start, because the radial card took four rounds mostly over feed-size type.
+- **Check Tiling build-in-public beat** is unblocked and can run as text. It should not follow the 09-30 text-only honesty post too closely, so Wed 10-07 is the earliest sensible slot.
+- **Mon 10-05** still has no clip path, because the posting tool is image-only. A `store/stills/` frame is the fallback.
+- **Mask-turns-with-the-art** is still blocked on a visual. `rot_cw.png` came off reuse-block today.
