@@ -32,6 +32,8 @@ says on 2026-09-26.
 | *same page, read 2026-09-19* | *Density Cheatsheet, 8 days live* | *(as above)* | **40** | **18 file-grabs** | *72 h window long closed* | **2 referrals, lifetime** |
 | 2026-09-19 | **Material Palettes** — 24 eight-step `.gpl` ramps + master sheet + reference PNG, CC0 | https://z3er1n.itch.io/texel-material-palettes | *window opens* | *1 file-grab, and it is OURS* | *reads 2026-09-26* | *pre-registered: 5+ referrals* |
 | *same page, read 2026-09-25* | *Material Palettes, day 6.4 of 7* | *(as above)* | **42** (secondary bar 40+ **met**) | **11 (10 by strangers)** | *Texel +9 total, all sources* | **0 referrals** (floor 3, bar 5) |
+| *both pages, read 2026-10-02* | *Density Cheatsheet, 21 days live* | *(as above)* | **48** | **23 file-grabs** | *format retired 09-26* | *not re-read: referrer split is `texel-watch`'s* |
+| *both pages, read 2026-10-02* | *Material Palettes, 13 days live* | *(as above)* | **63** | **15 file-grabs** | *format retired 09-26* | *both pages stay live, unchanged* |
 
 **The second row is the one that matters now, and it was added on 2026-09-19.**
 The 72 h window is history; what the page has done over eight days is the real
@@ -698,3 +700,119 @@ question.
 
 - **Texel Lite / trial build** — an untested mechanism, described above. Before any
   build it needs the §0 dismissal test and `venture-critic`.
+
+## T-020: Texel Lite / free demo build, costed — 2026-10-02 (`texel-funnel`)
+
+**Verdict: GO, as a cheap experiment. It is not the main lever.** `venture-critic`
+returned **PROCEED** with four SERIOUS findings. All four are folded in below. Two
+more points went in at MINOR. The binding constraint is **traffic** (113 views in
+23 days, ~4.0/day). This build cannot fix that; BlenderNation (**T-016**, `HUMAN`)
+and blenderartists (**9** organic referrals store-wide as of today) are the
+traffic levers.
+
+### (a) What it costs
+
+- **itch permits it on the paid page itself. Verified against itch's own
+  announcement, not a forum.** The update *"Offer a demo alongside your purchasable
+  games"* says a file marked as a demo is always free, regardless of the price set
+  on the project. It is listed below the buy button and can be downloaded
+  immediately. **So no separate project is needed.** *Unverified:* that a demo
+  upload takes no newest-feed slot and does not move the storefront grid. That is
+  the expected behaviour, since no new project is created, but the source does not
+  state it.
+- **Proposed cut.** Lite drops the animation, sprite-sheet export and showcase
+  modules: `tex_anim` (349 lines), `tex_sprite` (399) and `tex_showcase` (330).
+  It keeps painting, layers, palettes (`.gpl` in and out), selection, zones, tools
+  and density. **The pitch, written before the build as the critic required:**
+  *Lite paints pixel textures onto your models. Full Texel animates them and
+  exports the sprite sheets your game engine reads.* LISTING's headline is
+  "painted … and animated", so the paywall sits on the headline's second half.
+  The page copy must say so. **The 2D Sprite panel (`tex_ui` `tools_2d`) still
+  needs a call** on which side of the line it goes; that is `texel-release`'s
+  decision.
+- **Guard sites. The first draft undercounted them.** These are:
+  - 7 operator calls in `tex_ui.py`;
+  - the whole `TEXEL_PT_showcase` panel and its 8 `showcase_*` props;
+  - 8 anim/showcase matches in `tex_props.py`;
+  - 1 in `tex_extra.py`;
+  - the keymap entries.
+
+  A registered panel that reads props which were never registered fails hard, so
+  a headless smoke test of the lite zip is **required**, not optional.
+- **Effort.** About one `texel-release` session, roughly 4–6 h:
+  - a `build.py --lite` exclude list and zip name;
+  - a conditional import tuple in `__init__.py`;
+  - the guards;
+  - one "Full Texel" row linking the page;
+  - the lite smoke suite;
+  - one upload ticked as a demo.
+- **Ongoing cost.** Each release then builds, gates and uploads two zips, about
+  +30 min. Free users will also bring low-intent support load into `SUPPORT.md`.
+  That load is unpriced because it is unknown, and it is recorded here as a cost.
+- **GPL.** Anyone can add the three modules back. **That is true whatever the repo
+  does,** because any buyer may redistribute the full GPL build. The repo being
+  public (**T-010**, checked `private:false`) makes the point plainer. **This
+  decision does not depend on how T-010 is resolved.** ROADMAP's earlier NO
+  ("would be stripped and reposted inside a week") was an unmeasured cost
+  estimate, not a verdict. **It is superseded here.** ROADMAP is
+  `texel-release`'s file, so this run does not edit it.
+
+### (b) The prize, from the ledger
+
+- **Funnel today: 113 views → 0 downloads → 0 sales.** The page has never had a
+  download of any kind, because its only file costs $9.95.
+- **0/113 is not evidence of a broken conversion step.** The 95% upper bound is
+  about 2.6%, which is consistent with an ordinary 1–2%.
+- **In dollars, at ~120 views/month:** 1% conversion is about $12/month and 3%
+  about $36/month. **Small.**
+- **What it buys that money does not:** a measurement we cannot take today.
+  *Do viewers want the tool at all?* That is the demo take-rate, measured apart
+  from *will they pay $9.95?* It also gives Blender-community posts a free thing
+  to link.
+
+### (c) The pre-registered bar, and why it is not 14 days
+
+The first draft's bar was ≥10 demo downloads and ≥1 sale in 14 days. The critic
+showed noise could decide it:
+
+- 14 days at ~4 views/day is ~56 views.
+- At a true 2% conversion, P(0 sales) is about 0.33.
+- ≥10 downloads is an ~18% take, which the old free pages cleared trivially
+  (26–45%).
+
+**So:**
+
+- **Window: Texel's page reaching +150 views after the demo goes live.** It is
+  not a calendar window. If BlenderNation is answered yes first, the post goes
+  up before the window opens, so the test runs on the audience it is for.
+- **Metric: demo file-grabs per post-launch view, net of our own verification
+  pulls.** The demo is one file, so file-grabs ≈ grabs. itch cannot count unique
+  people, and this is stated rather than hidden.
+- **Readings:**
+  - a take of ≥10% means viewers want the tool;
+  - under 3% means the pitch is not landing on the people who view the page.
+    **That is a positioning finding, not "nobody wants it",** and it goes to
+    `texel-marketing`;
+  - in between is reported as a number, not a verdict.
+- **Sales are recorded but decide nothing until ~500 post-demo views.** At this
+  volume they are uninformative, and that is said in advance.
+
+### Alternatives the critic named, kept for whoever builds it
+
+- A **pay-what-you-want / $0 minimum** tier on the full build. This gives
+  downloads with no second code path, at the cost of revenue per buyer.
+- A **watermark-on-export** trial. The code change is smaller, but it is more
+  intrusive.
+- A **price test at $4.95.** At 0/113, price has never been tested.
+
+These are recorded, not ranked. The cut above is the recommendation because it
+keeps the full build's price intact and the free build genuinely useful.
+
+### Who does what
+
+Building it is `texel-release`'s job and needs a row that `texel-watch` opens.
+**This routine does not assign that row and does not build it.**
+
+**Phase, restated:** the free-sibling-page format stays retired. Today is the
+first Friday of the month, but no drop ships, because the 09-26 trigger retired
+the format. Nothing was added to `promo/QUEUE.md`.
