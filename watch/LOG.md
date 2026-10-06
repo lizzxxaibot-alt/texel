@@ -6,6 +6,173 @@ in `../ACTIONS.md` and handed to a named owner.
 
 ---
 
+## 2026-10-05 — run 22 (catch-up, fired 10-06T04:50Z after a host gap; there was no 10-04 run)
+
+**VERDICT: DEGRADED (commercial, and a host gap).** The listing is clean. There are still **0 sales on day 26 live**, and views went flat week-on-week. The machine was off from ~10-03T13:30Z to 10-06T04:41Z, so `texel-support` and `texel-marketing` each missed slots. That is one host-gap cause, not two routine failures.
+
+### Action ledger
+
+**Opened: 0. Closed: 0.** T-022 has no `DONE?` note, which is expected: its owner's slot is 10-07 and has not come round.
+
+| id | age | owner |
+|---|---|---|
+| T-010 | 20 d | **HUMAN**. The 14-day rung is suspended until A-032 closes. A-032 is still in `pixelkiln/launch/watch/ACTIONS.md` Open (line 44, re-read this run). |
+| T-011 | 20 d | **HUMAN**. Suspended, as T-010. |
+| T-015 | 16 d | **HUMAN**. Suspended, as T-010. |
+| T-016 | 16 d | **HUMAN**. Suspended, as T-010. It is still the only measured traffic lever on the table (BlenderNation). |
+| T-022 | 2 d | `texel-release`. Default slot is Wed 10-07; hard bound is the 10-14 slot. |
+
+### ALERTS
+
+- **Host gap: the app was closed for ~2.6 days. Owner: HUMAN, already filed as A-032 / A-037 on the Pixelkiln ledger, so no new row.** On 10-06T04:41–04:50Z every Pixelkiln routine and this one show a fresh `lastRunAt`. Two Texel doers do not:
+  - **`texel-support`** (`15 8 * * *`) last ran **10-03T13:24Z**, ~63 h ago. That is past the 48 h test. Its last artifact is the 10-03 day-25 row at `SUPPORT.md:652`. The 10-04 and 10-05 rows do not exist.
+  - **`texel-marketing`** (`15 15 * * *`) last ran **10-02T20:21Z**, ~80 h ago. Three slots were missed: Sat 10-03 (the §E weekly check, last written as "next check is Sat 2026-10-03" at `promo/POSTED.md:1902`), the **Sun 10-04 Texel beat** and the **Mon 10-05 Texel beat**. Neither beat was posted, so two of this week's four Texel posts are lost.
+  - **Neither has caught up**, although the other routines did at 04:41Z. That matches the A-037 defect class: catch-up is real, but it does not fire for every task. The next native slots are support 10-06T13:25Z and marketing 10-06T20:21Z. Run 23 checks both left artifacts.
+- `texel-release` (`0 10 * * 3`, last 09-30T22:06Z, next 10-07) and `texel-funnel` (`0 10 * * 5`, last 10-02T15:07Z, next 10-09) are **not late**.
+
+### Listing (measured 10-06T04:50–04:52Z)
+
+| Check | Result |
+|---|---|
+| Logged-out page | HTTP 200, 31,966 B |
+| Download | `texel-0.2.2.zip`, 205 kB, matching local `dist/texel-0.2.2.zip` (209,944 B). The three older uploads are `hidden=on`. |
+| Price | `game[min_price]` $9.95, correct until v0.4.0 |
+| Status | `game[published]=published` |
+| AI disclosure | `ai_generated=yes`, graphics on, code on |
+
+**All pass.**
+
+### Numbers
+
+`| 2026-10-05 (10-06T04:52Z) | 124 | 0 | 0 | $0.00 | 0.00% |`
+
+- **7-day trend:** 09-29T11:55Z 104 → 124 is **+20 over ~6.7 d (≈3.0/day)**. The previous week, 81 → 104, was **+23 over ~7.7 d (≈3.0/day)**. Views are **flat**; the rise four readings running did not extend. The last 2.7 days ran at ≈2.6/day.
+- **Downloads, sales and revenue:** 0. Store-wide is $81.58 / 14 payments, unchanged since 09-27, with **no Texel row**. **Collections:** 4.
+- **Conclusion:** the views that had been accelerating have stopped, and none of them converted. The conversion gate is **76 views away**, and at ~3/day it would not be reached before ~10-30. The 10-09 call will be made below the threshold where this ledger can name cover, price or copy.
+- **14-day zero-sales rule:** fires **2026-10-09, 4 days out**. It is a stop/continue call for the user. **Correction to run 21:** with no 10-04 run, 10-09 is run **26**, not 27. Run 26 puts the call through `venture-critic` before recording it.
+
+### Roadmap
+
+- **v0.2.3 "Brush, the rest" (stamps, tablet pressure), target Wed 2026-10-07, 2 days out.** No work is logged, which is expected for a weekly Wednesday slot. T-022 defaults Lite into the same slot. Run 24 checks that `texel-release` either shipped v0.2.3 or moved its date in writing.
+
+---
+
+## 2026-10-03 — run 21 (~11:51Z start, in its normal slot)
+
+**VERDICT: DEGRADED (commercial), with the listing clean and every doer on schedule.** Views are up for a fourth reading in a row, and there are still **0 sales on day 24 live**. The 14-day zero-sales rule fires 10-09, 6 days out. The word has no rubric; that is **T-015**.
+
+### Action ledger
+
+**Opened: 1. Closed: 1.**
+
+- **T-020 CLOSED** against `funnel/LOG.md` *T-020: Texel Lite / free demo build, costed* (2026-10-02). It was read in the file, not taken from the DONE? note. The entry carries (a) the cost, (b) the prize from the ledger, and (c) GO, with `venture-critic` PROCEED attached.
+- **T-022 OPENED**, owner `texel-release`, to build and ship the Lite demo.
+  - `venture-critic` returned **REOPEN** on the first draft, with five SERIOUS findings. All five are folded into the row:
+    - **No default.** Lite now takes the 10-07 slot ahead of v0.2.3 unless `texel-release` writes a measured reason against it.
+    - **No outer bound.** It must ship by the 10-14 slot, or that run writes a dated refusal.
+    - **No STOP branch.** If the 10-09 call is STOP, the row dies with no build owed.
+    - **Unpriced premise.** The row says plainly that the bottleneck is traffic, not conversion, and that the demo adds no views by itself.
+    - **Done-when holes.** The row now names a public-page re-read, a smoke test on the zip as uploaded with an assertion that the cut modules are absent, page copy that states what Lite lacks, and a baseline of 117 views / 0 downloads.
+  - **Recorded now:** a 10-07 Lite ships two days before the 10-09 call and gives no evidence for it.
+- **Record correction:** two orphan lines were deleted from the `ACTIONS.md` Open table (`range 2.5 - 21.1` / `8.4x spread…`). They were the tail of T-008's old open row, left behind when run 19 moved it to Closed, and they broke the table. The closed T-008 row already carries that text in full.
+- **Correction to run 20:** it said T-015 "has no A-032 suspension". That was wrong. `ACTIONS.md` names T-010, T-011, T-015 and T-016 as suspended, and **A-032 is still in `pixelkiln/launch/watch/ACTIONS.md` Open (line 44, re-read)**. So T-015 and T-016 reaching 14 d today does **not** trigger the kill-or-kill recommendation. They resume at their true ages on the day A-032 closes.
+
+| id | age | owner |
+|---|---|---|
+| T-010 | 18 d | **HUMAN**. The 14-day rung is suspended until A-032 closes. |
+| T-011 | 18 d | **HUMAN**. Suspended, as T-010. |
+| T-015 | 14 d | **HUMAN**. Suspended, as T-010. |
+| T-016 | 14 d | **HUMAN**. Suspended, as T-010. It is still the only measured traffic lever on the table (BlenderNation). |
+| T-022 | 0 d | `texel-release`. Default slot is 10-07; hard bound is 10-14. |
+
+### ALERTS
+
+**None.** All four doers ran inside their cron windows, and each left an artifact:
+- **`texel-support`** last ran 10-02T13:25Z. Its day-24 "no inbound" row is at `SUPPORT.md:651`.
+- **`texel-marketing`** last ran 10-02T20:21Z. The Friday beat landed with an asset, `promo/radial/texel-radial-r4.png`, and the spec `promo/post_2026-10-02.json`.
+- **`texel-release`** (`0 10 * * 3`) last ran 09-30T22:06Z. Its next slot is 10-07, so it is not late.
+- **`texel-funnel`** (`0 10 * * 5`) last ran 10-02T15:07Z. It produced the T-020 entry. No drop shipped, which is correct because that format is retired.
+
+### Listing (measured ~11:58–12:05Z)
+
+| Check | Result |
+|---|---|
+| Logged-out page | HTTP 200, 31,945 B |
+| Download | `texel-0.2.2.zip`, 205 kB, matching local `dist/texel-0.2.2.zip` (209,944 B) |
+| Price | `game[min_price]` $9.95, correct until v0.4.0 |
+| Status | `game[published]=published` |
+| AI disclosure | `ai_generated=yes`, graphics on, code on |
+
+**All pass.**
+
+### Numbers
+
+`| 2026-10-03 (~12:00Z) | 117 | 0 | 0 | $0.00 | 0.00% |`
+
+- **7-day trend:** 09-26T17:00Z 89 → 117 is **+28 over ~6.8 d (≈4.1/day)**, against +13 over ~7.2 d (≈1.8/day) the week before. Views are up again. That is direction only.
+- **Downloads, sales and revenue:** 0. `/dashboard/purchases` shows $81.58 / 14 payments store-wide and **no Texel row**. **Collections:** 4, unchanged.
+- **Conclusion:** traffic is rising and none of it has converted. The conversion gate is **83 views away**, so this run still cannot say whether the cover, the price or the copy is at fault.
+- **14-day zero-sales rule:** fires **2026-10-09**. It is a stop/continue call for the user. Run 27 puts it through `venture-critic` before recording it.
+
+### Roadmap
+
+- **Next is v0.2.3 "Brush, the rest" (stamps, tablet pressure), target Wed 2026-10-07, 4 days out.** No work is logged, which is expected for a weekly Wednesday slot.
+- **T-022 now defaults Lite into that same slot.** If `texel-release` takes the default, v0.2.3 slips. Moving the date and explaining it in the devlog is `texel-release`'s call. Run 26 checks that it was made in writing.
+
+---
+
+## 2026-10-02 — run 20 (~11:53Z, in its normal slot)
+
+**VERDICT: DEGRADED (commercial), with the listing clean and every doer on schedule.** Views are up for a third week, and there are still **0 sales on day 23 live**. The 14-day zero-sales rule fires 10-09.
+
+### Action ledger
+
+**Opened: 0. Closed: 0.**
+
+| id | age | owner |
+|---|---|---|
+| T-010 | 17 d | **HUMAN**. The 14-day rung is suspended while A-032 is open. |
+| T-011 | 17 d | **HUMAN**. Same as T-010. |
+| T-015 | 13 d | **HUMAN**. **Reaches 14 d tomorrow.** Run 21 must recommend killing the finding or escalating it to the user; it has no A-032 suspension. |
+| T-016 | 13 d | **HUMAN**. Same as T-015. |
+| T-020 | 6 d | `texel-funnel`. Its slot is today, ~15:07Z. |
+
+### ALERTS
+
+**None.** All four doers are inside their cron windows, and each left an artifact:
+- **`texel-support`** last ran 10-01T13:25Z. Its day-23 "no inbound" row is at `SUPPORT.md:650`. Next slot is today ~13:25Z.
+- **`texel-marketing`** last ran 10-01T20:21Z. Thursday is a packs day, and its replies-only run is logged at `promo/POSTED.md:1784`. Next is a Friday Texel beat, today ~20:21Z.
+- **`texel-release`** (`0 10 * * 3`) last ran 09-30T22:06Z and shipped v0.2.2. Its next slot is 10-07.
+- **`texel-funnel`** (`0 10 * * 5`) last ran 09-25. Its next slot is today, so it is not late.
+
+### Listing (measured 11:54–11:58Z)
+
+| Check | Result |
+|---|---|
+| Logged-out page | HTTP 200, 31,942 B |
+| Download | `texel-0.2.2.zip`, 205 kB, matching local `dist/texel-0.2.2.zip` (209,944 B) |
+| Price | `game[min_price]` $9.95, correct until v0.4.0. The `$15` on the page is itch's "$15 or less" breadcrumb, not a price. |
+| Status | `game[published]=published` |
+| AI disclosure | `ai_generated=yes`, graphics on, code on |
+
+**All pass.**
+
+### Numbers
+
+`| 2026-10-02 (11:54Z) | 113 | 0 | 0 | $0.00 | 0.00% |`
+
+- **7-day trend:** +28 over ~6.94 d (≈4.0/day), against +9 over ~6.06 d (≈1.5/day) the week before. Views are up for a third week. That is direction only.
+- **Downloads, sales and revenue:** 0. **Collections:** 4, unchanged.
+- **Conclusion:** traffic is rising and has not converted at all. The conversion gate is still **87 views away**, so this run cannot yet say whether the cover, the price or the copy is at fault.
+- **14-day zero-sales rule:** fires **2026-10-09, 7 days out**. It is a stop/continue call for the user. Run 27 puts it through `venture-critic` before recording it.
+
+### Roadmap
+
+- **Next is v0.2.3 "Brush, the rest" (stamps, tablet pressure), target Wed 2026-10-07, 5 days out.**
+- No v0.2.3 work has been logged since 09-30. That is expected: `texel-release` is a weekly Wednesday slot, and it builds inside that slot. **Not flagged.** If the 10-07 run ends without a zip or a dated ROADMAP line, run 26 opens a row.
+
+---
+
 ## 2026-10-01 — run 19 (~11:55Z, in its normal slot)
 
 **VERDICT: DEGRADED (commercial), with the listing clean and the release cycle working.** v0.2.2 is live and T-008 is closed. There are still **0 sales on day 22 live**. The 14-day zero-sales rule fires 10-09.
