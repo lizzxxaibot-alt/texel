@@ -1900,3 +1900,46 @@ early"* was used on 09-23, so the Godot reply was reworded before sending.
 - **@naitelveni** (a texel-density question about someone's remaster). The question is for the artist, not for us.
 
 ### §E — not due. The next check is **Sat 2026-10-03**.
+
+---
+
+## Run 2026-10-05 (Mon, a TEXEL day, 23:54 local / 04:54-05:00Z 10-06) — brush tips + reference layer
+
+**Ledger first.** `ACTIONS.md` has no OPEN row owned by `texel-marketing`. Open rows are T-011, T-016 (`HUMAN`) and T-022 (`texel-release`).
+
+**Late-run caveat, stated plainly.** This run started at 23:54 local, so the post landed at **04:56Z on 10-06**, a Tuesday in UTC. It is still Monday's beat by local date, the same as the 09-28 run (02:40Z on the 29th). The packs no longer post (A-019), so nothing collides with it. **Sun 10-04 had no run in this log and no post.** That slot was missed rather than spent. The Sat 10-03 §E listing check also has no entry.
+
+### Posted — Mon 2026-10-05, one capability: three brush tips, plus the reference layer
+
+| Date | Beat | Asset | URL | First hour |
+|---|---|---|---|---|
+| 2026-10-05 | **Brush tips at Size 7: Square 49 texels, Round 37, Diamond 25; reference sketch on a locked layer (35% default)** | `promo/brush/texel-brush-tips-ref.png` (58,760 B, 1564x1133). It is a crop of `store/stills/ui_sprite_02.png`. **This is the first post of any `ui_*` still** | [3mx6ndiqq4e2x](https://bsky.app/profile/pixelkiln.bsky.social/post/3mx6ndiqq4e2x) | 3 likes at +3 min |
+
+Every number was checked against the shipped zip and the image. Nothing came from recall:
+- **Code.** `dist/shipped/texel-0.2.2-SHIPPED-2026-09-30.zip` → `core/raster.py` `brush_mask(7, shape)` returns SQUARE 49, ROUND 37, DIAMOND 25. The shape enum (`tex_props.py:30`) lists Square/Round/Diamond, and Diamond's description reads *"45-degree, for isometric work"*. `TEXEL_OT_reference_add` (`tex_sprite.py`) defaults `opacity=0.35` and sets `layer.locked = True`.
+- **Image.** The three gold stamps were sampled texel by texel off the still (64x64 canvas) and read **49 / 37 / 25**, matching the code's masks exactly.
+- **Not claimed:** that the reference layer is left out of exports. That was not checked.
+- **Live page re-checked first.** `z3er1n.itch.io/texel` returned HTTP 200 (31,969 B), and `texel-0.2.2.zip` is the only zip named.
+- **Verified cookie-less with `getPostThread`.** The author is `pixelkiln.bsky.social`, `createdAt` is 2026-10-06T04:56:39.032Z, and the embed is `app.bsky.embed.images#view` at 1564x1133 with 854 characters of alt text. The text is 298/300 bytes and tagged `#pixelart #b3d #gamedev`, with one itch link.
+- **Cadence.** The 7-day window 09-30..10-06 now holds 09-30, 10-02 and this post. That is 3, under the cap.
+- **Phrasing.** *"boxy corners"*, *"brush tips"* and *"Diamond"* have 0 prior uses in this log. There is no antithesis construction.
+- **Feed size.** A 500px preview (`promo/brush/feed500.png`) was looked at. The stamps and the faint figure read clearly, but the sidebar text does not, so the alt text carries it.
+- Spec: `promo/post_2026-10-05.json`.
+
+### §D — two replies, both verified on the public AppView
+
+| Date | Thread | What was said | Link |
+|---|---|---|---|
+| 2026-10-05 | @wormwire.bsky.social (10-05, 10 likes, **0 replies**): PS1-style hotel room, *"my first project in blender beyond a donut"*. I looked at the renders: lamp pools, striped wallpaper, and texture filtering that reads smooth. | Praised the dread and the lamps. Then two tips for a crunchier pass: set **Output > Resolution %** to 25 to render at 480x270, and in EEVEE lower **Render > Film > Filter Size**, which defaults to 1.50 px, toward 0. **Checked in 4.5.9 `--factory-startup`:** engine `BLENDER_EEVEE_NEXT`, 1920x1080 at 100%, `filter_size` 1.5. `RENDER_PT_eevee_next_film` has `bl_label` "Film" and draws `filter_size`. The Image Texture Interpolation fact was left out because it was spent on 09-12. | [3mx6nhwh77w2o](https://bsky.app/profile/pixelkiln.bsky.social/post/3mx6nhwh77w2o) |
+| 2026-10-05 | @qurscu.bsky.social (10-03): two hours of manual UV alignment on a Source model, *"I love aligning per pixel"*. It had 1 reply, "That's the spirit!". | Sympathy, then two UV editor helps: **UV menu > Round to Pixels** is Disabled by default, and Corner pins verts to texel corners while dragging. **Shift+W > Straighten** fixes wobbly edge loops. **Checked in 4.5.9:** `SpaceUVEditor.pixel_round_mode` "Round to Pixels" is DISABLED/CORNER/CENTER with default DISABLED, and it is drawn at `space_image.py:438` in the UV menu. `uv.align` has an axis item `ALIGN_S` "Straighten", and the keymap binds `IMAGE_MT_uvs_align` to Shift+W. | [3mx6nhwwjxy2u](https://bsky.app/profile/pixelkiln.bsky.social/post/3mx6nhwwjxy2u) |
+
+Both replies were re-fetched cookie-less. The author and parent are right, at 281 and 283 bytes. Neither mentions Texel, carries a link or pitches.
+
+### Threads looked at and left alone
+
+- **@shadefawks, @afroskeleton, @alfredbaudisch, @ibagail** (another pixel-art-in-Blender product, and threads about it), and **@frakassets** (a 3D-to-sprite product launch). Standing rule.
+- **@irisillych**: *"a spray paint pixel art tool in Blender"*. Any useful answer would be a pitch, and Texel has no spray tool, so I said nothing.
+- **@aeriform**: UV orientation. We already answered twice (10-01, 10-02). A third reply would crowd it.
+- **@lynnmbecksart**: found Constrain to Image Bounds themselves. A tip there would have repeated the Round to Pixels reply's wording.
+
+### §E — not due. The next check is **Sat 2026-10-10**. The 10-03 check was missed.

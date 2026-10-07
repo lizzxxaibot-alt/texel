@@ -686,3 +686,10 @@ Beats this release earns:
 - **Check Tiling build-in-public beat** is unblocked and can run as text. It should not follow the 09-30 text-only honesty post too closely, so Wed 10-07 is the earliest sensible slot.
 - **Mon 10-05** still has no clip path, because the posting tool is image-only. A `store/stills/` frame is the fallback.
 - **Mask-turns-with-the-art** is still blocked on a visual. `rot_cw.png` came off reuse-block today.
+
+## 2026-10-05 — `texel-marketing`: Mon beat SPENT (brush tips + reference layer)
+
+- **Posted** [3mx6ndiqq4e2x](https://bsky.app/profile/pixelkiln.bsky.social/post/3mx6ndiqq4e2x) from `promo/brush/texel-brush-tips-ref.png`, a crop of `store/stills/ui_sprite_02.png`. `ui_sprite_02` is blocked for reuse until **10-27**.
+- **Wed 10-07** belongs to `texel-release` (T-022 Texel Lite by default, otherwise v0.2.3). If Lite ships and is verified logged-out, it is the beat: a free demo file on the same page. Say plainly what Lite lacks, per CLAUDE.md §6. If nothing ships, the Check Tiling build-in-public text beat is ready.
+- **Dither brush (0.2.2)** still has no visual. That is unchanged.
+- **Unused `ui_*` stills** that are safe to post: `ui_anim_01..05`, `ui_sprite_01/03/04`, `ui_showcase_01..03`. Before using one, check that every UI element it shows is in the shipped zip.
