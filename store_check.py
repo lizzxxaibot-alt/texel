@@ -46,7 +46,7 @@ ALIAS = r"shell:AppsFolder\BlenderFoundation.Blender_ppwjx1n5r4v9t!Blender"
 
 HEADLESS = ["test_blender", "test_addon", "test_features", "test_showcase",
             "test_sprite", "test_anim", "test_persist", "test_install"]
-GUI = ["test_panels", "test_keys", "test_workspace", "test_e2e"]
+GUI = ["test_panels", "test_keys", "test_workspace", "test_e2e", "test_lite"]
 
 # Suites that need no Blender at all, so their absence from the two lists above
 # is correct rather than stale.

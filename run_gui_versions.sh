@@ -8,7 +8,7 @@ for BL in "$TOOLS"/blender-*/blender.exe; do
   [ -x "$BL" ] || continue
   VER=$("$BL" --version 2>/dev/null | head -1 | sed 's/Blender //;s/ .*//')
   echo "=== Blender $VER ==="
-  for t in test_panels test_keys test_workspace test_e2e; do
+  for t in test_panels test_keys test_workspace test_e2e test_lite; do
     printf "  %-16s " "$t"
     out=$("$BL" --factory-startup --python "$t.py" 2>&1)
     if echo "$out" | grep -qE "ALL PASS"; then echo "pass"

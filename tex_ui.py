@@ -1,7 +1,7 @@
 """Panels. Same layout in both editors, drawn from one function."""
 import bpy
 from bpy.types import Panel
-from . import tex_doc
+from . import tex_doc, tex_edition
 from .core import report
 
 
@@ -57,6 +57,18 @@ def _draw_tools(layout, s):
     col.operator("texel.shortcuts_restore", text="Restore Defaults", icon="LOOP_BACK")
 
 
+def _draw_full_only(layout, what):
+    """What Lite draws where a paid panel would be.
+
+    The panel stays, so a Lite user sees that the feature exists and where it
+    lives, rather than finding out from the store page after they have left it.
+    """
+    col = layout.column(align=True)
+    col.label(text=f"{what} are in full Texel.", icon="LOCKED")
+    col.operator("wm.url_open", text="Get full Texel",
+                 icon="URL").url = tex_edition.FULL_URL
+
+
 class _Base:
     bl_category = "Texel"
     bl_region_type = "UI"
@@ -83,6 +95,9 @@ class TEXEL_PT_sprite(_Base, Panel):
     bl_parent_id = "TEXEL_PT_tools_2d"
 
     def draw(self, context):
+        if tex_edition.LITE:
+            _draw_full_only(self.layout, "Sprite tools")
+            return
         s = context.scene.texel
         img = context.space_data.image
         doc = tex_doc.get(img, create=False) if img else None
@@ -279,6 +294,9 @@ class TEXEL_PT_showcase(_Base, Panel):
     bl_parent_id = "TEXEL_PT_tools_3d"
 
     def draw(self, context):
+        if tex_edition.LITE:
+            _draw_full_only(self.layout, "Showcase renders")
+            return
         s = context.scene.texel
         col = self.layout.column(align=True)
         col.prop(s, "showcase_preset", text="")

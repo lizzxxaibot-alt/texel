@@ -1,8 +1,10 @@
 # Texel by Pixelkiln — upgrade schedule
 
-**Written 2026-09-09. Last ticked 2026-09-24 by `texel-release`.**
-**v0.2.1 is the current release of Texel at https://z3er1n.itch.io/texel.** If
-you are reading this file inside the add-on, it is the build you are holding.
+**Written 2026-09-09. Last edited 2026-10-07 by `texel-release`.**
+**This file was sealed into the v0.2.3 build on 2026-10-07** (and into the free
+Texel Lite demo of the same version). Whether that build is live is recorded
+outside this file, in `PROGRESS.md`; see the note below for why. Texel is sold at
+https://z3er1n.itch.io/texel.
 
 > **This line is written at BUILD time and the file is sealed into the zip, so
 > it cannot itself be proof that the upload happened** - that is precisely the
@@ -361,9 +363,61 @@ Local `dist/texel-0.2.2.zip` = 209,944 B, sha256 `5c1acb5e…80587115`, pinned a
 hidden, not deleted. Devlog **1684470** live logged-out and first in
 `devlog.rss`. The run was the catch-up for the Wed slot the host outage ate.
 
-### v0.2.3 — "Brush", the rest · target **2026-10-07**
+### v0.2.3 — the Diamond brush fix · **RELEASED 2026-10-07**, with the free Texel Lite demo
+**Live-page read-back, 2026-10-07 ~16:00Z (the gate, taken before this tick was
+written; this line is NOT in the 0.2.3 zip, which says "built"):** cookie-less
+GET of `z3er1n.itch.io/texel` → HTTP 200, 32,876 B. The paid upload widget reads
+**`texel-0.2.3.zip` 207 kB** (upload id 19619535; local 212,461 B, sha256
+`b736afda…21899919`, pinned at `dist/shipped/texel-0.2.3-SHIPPED-2026-10-07.zip`).
+The `for_demo` block reads **`texel-lite-demo-0.2.3.zip` 195 kB** (id 19619539).
+That file was pulled back anonymously and is **byte-identical** to `dist/lite/`
+(sha256 `562f83c9…08fa0f907`). `test_lite.py` passes on the downloaded copy. An
+anonymous request for the paid id returns *"A key is needed to download"*.
+0.2.2 and Lite 0.2.2 are hidden, not deleted. Devlog **1696051** is live
+logged-out and first in `devlog.rss`.
+
+**What this zip carries:** the Diamond brush fix below, and nothing else that
+changes painting. The build also carries the switch that produces the free
+**Texel Lite** demo (`tex_edition.py`, `build.py --lite`); in full Texel that
+switch is off and changes nothing. No new operator; the count is unchanged.
+
+**What slipped, and why:** the dithered gradient, custom stamps and tablet
+pressure were targeted for today and **did not make it. They move to v0.2.4,
+target Wed 2026-10-14.** This slot went to Texel Lite, the free demo
+(`ACTIONS.md` **T-022**, `funnel/LOG.md` *T-020*). The page has had about 125
+views and no download of any kind, because its only file cost $9.95. Lite
+measures whether viewers want the tool at all. No buyer has asked for any of
+the three brush items, so a demand test came ahead of them.
+
+### v0.2.4 — "Brush", the rest · target **2026-10-14**
 The three items left from the list below: dithered gradient, custom stamp from a
 selection, tablet pressure.
+
+#### BUG — Diamond brush is wrong at every even size; Size 2 paints nothing · found by `texel-support` 2026-10-07 · **FIXED IN v0.2.3**
+**Fix, 2026-10-07 (`texel-release`):** the candidate fix below, as written:
+`+0.5` at even sizes, `+0.25` kept at odd. The test came first and failed on the
+shipped code: `test_raster.py` now walks **every shape at Sizes 1–64** and asserts
+each mask is non-empty, holds the cursor texel, stays in its box and never
+shrinks as the size grows. Diamond now stamps 1, 4, 5, 12, 13, 24, 25, 40.
+Odd sizes are unchanged (3, 5, 7, 9 → 5, 13, 25, 41, asserted). The old
+checks only sampled sizes 5, 7 and 9, all odd, and that is how this shipped.
+
+**Reproduced in the shipped zip**, not the tree: `dist/texel-0.2.2.zip`
+installed into Blender 4.5.9 headless, `tex_paint._stamp` called at each size.
+Diamond stamps **1, 0, 5, 4, 13, 12, 25, 24** texels for Sizes 1–8. **Size 2
+paints nothing at all**, Size 4 stamps a 2×2 square, and every even size stamps
+*fewer* texels than the odd size below it. Square and Round are fine.
+**Cause** (`core/raster.py` `brush_mask`): at even sizes the centre `c` falls
+between texels, so the nearest texels sit at Manhattan distance 1.0 while the
+cut-off is `r + 0.25` (0.75 at Size 2). **Candidate fix, checked only as
+arithmetic:** use `r + 0.5` at even sizes (keep `+0.25` at odd). That gives 1, 4,
+5, 12, 13, 24, 25, 40, which rises with size. Needs a headless test asserting
+non-empty and monotonic masks for every shape at Sizes 1–64.
+**Not a patch that jumps the queue.** No crash and no lost work: the brush
+silently does nothing or too little, and the user can see it. It rides the next
+release. If v0.2.3 has already shipped when this is read, it rolls to the release
+after. **No date was promised.** The public reply (Bluesky, @xrtech.dev
+2026-10-07) said only "fixed in the next release".
 
 #### The original v0.2.2 list, kept for the pricing
 Four items, not five - **Mirror Y was never outstanding** (shipped in v0.1.0;
@@ -520,9 +574,14 @@ forever.
 - **Customisable keymaps.** Moved into v0.1. Registering a keymap is a small job,
   it is the most visible thing the reference product had that we did not, and
   "everything is a sidebar button" is the first complaint a power user makes.
-- **A free "lite" build.** The add-on is GPL, so a crippled version would be
+- ~~**A free "lite" build.** The add-on is GPL, so a crippled version would be
   stripped and reposted inside a week. The free tier is *content* instead —
-  `texel-funnel` ships palettes, tiles and cheatsheets.
+  `texel-funnel` ships palettes, tiles and cheatsheets.~~ **Superseded
+  2026-10-02** (`funnel/LOG.md` *T-020*). That NO rested on an unmeasured cost.
+  Any buyer may redistribute the full GPL build anyway, so the repost risk exists
+  whether or not Lite does. **Texel Lite shipped 2026-10-07** as a free demo file
+  on the paid page: painting, layers, palettes, selection, zones, tools and
+  density. It leaves out `tex_anim`, `tex_sprite` and `tex_showcase`.
 
 ---
 
@@ -550,12 +609,17 @@ fixes indefinitely. New feature work becomes demand-led, from the support queue
    Windows users get Blender, and its ACL means no other script can reach it.
    **Any red gate = no ship.**
 4. Bump `blender_manifest.toml` and `bl_info` together (`build.py` fails if they
-   disagree). Rebuild the zip.
+   disagree). Rebuild the zip, **and the Lite demo with `build.py --lite`**
+   (`dist/lite/`). `test_lite.py` gates it and runs inside every
+   version script.
 5. Upload to itch, write the devlog, hand the marketing beat to
    `texel-marketing` by appending to `promo/QUEUE.md`.
 6. **Re-read the LOGGED-OUT store page and confirm the new zip is actually on
    it** - filename and byte size off the page's own upload widget, not off a
-   dashboard and not off an upload tool's success message.
+   dashboard and not off an upload tool's success message. **Both zips**: the
+   paid one, and the Lite demo, uploaded with `itch_upload.mjs --demo`. The demo
+   is free, so pull it back anonymously and `cmp` it against `dist/lite/`. Then
+   hide the superseded Lite file the same way as the paid one.
 7. Only then tick the item here, with the date it actually shipped.
 
 > **Steps 6 and 7 were added 2026-09-24, and they are the `build.py` treatment

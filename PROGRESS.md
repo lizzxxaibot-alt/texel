@@ -564,3 +564,79 @@ lines unelided (`shots/t008/shipped-0.2.2/crop_f3_1.00.png`).
 green on **4.2.23, 4.5.9, 5.2.1** (`test_versions.sh` `VERSIONS_DONE pass=3
 fail=0`, `run_gui_versions.sh` 12/12) and inside the **Microsoft Store 5.2.1**
 build (`store_check.py` `STORE_DONE pass=12 fail=0`).
+
+## 2026-10-07 — v0.2.3 and Texel Lite (`texel-release`)
+
+**Order of work:** ledger row **T-022** (Texel Lite) first, per §0. It was
+shipped and verified as `texel-lite-demo-0.2.2.zip` (~15:46Z) before anything
+else was touched. With the slot still open, the **Diamond even-size bug**
+`texel-support` found this morning shipped as v0.2.3, and Lite was rebuilt at
+0.2.3 alongside it. Dithered gradient, stamps and tablet pressure slipped to
+v0.2.4 (Wed 10-14). The devlog says so.
+
+### How Lite is built
+- `tex_edition.py` holds `LITE = False` in the tree. `build.py --lite` rewrites
+  it to `True` inside the zip and leaves out `tex_anim`, `tex_sprite` and
+  `tex_showcase`.
+- `__init__.py` imports those three only when `LITE` is False. The flag is
+  checked rather than catching ImportError, so a full build missing a module
+  fails instead of quietly becoming Lite.
+- `tex_ui.py`: the Sprite and Showcase panels draw `_draw_full_only()` in Lite,
+  one line plus a *Get full Texel* button to `mintworks.cc/texel`.
+- `build.py --lite` also renames the manifest and `bl_info` to *Texel Lite*,
+  prepends a what's-missing block to README, and replaces START-HERE's "Thank
+  you for buying" paragraph. Every rewrite must match exactly once, or the build
+  stops. A zip carrying a paid module is refused. Output goes to `dist/lite/`,
+  because `test_install.py` installs the last zip in `dist/` and
+  `texel-lite-…` would sort after `texel-0…`.
+- The name has "demo" in it because `itch_upload.mjs --demo` refuses any file
+  without it.
+
+### `test_lite.py`, and the version of it that could not fail
+It runs on the unpacked zip and never on the tree. Its checks:
+- no paid file in the zip;
+- none of the paid modules' **20** operators registers (the list is derived from
+  source);
+- all **75** free operators register;
+- paint reaches the image;
+- in the GUI, both stub panels draw.
+
+**The first GUI version passed with the Texel sidebar tab never selected.**
+The screenshot showed the Item tab and the splash screen. Nothing drew, so
+nothing could fail. It now re-forces the tab every tick and wraps
+`_draw_full_only` in a counter; "the stub actually drew" is a check. Same family
+as `gates-must-watch-the-shipped-pixel`.
+
+The suite is in `test_versions.sh`, `run_gui_versions.sh` and `store_check.py`
+(the last refuses to run with an unlisted `test_*.py`).
+
+### Gate run 2 was red, and the ship waited for run 3
+I added a START-HERE check while the 0.2.3 gate was running, against zips built
+before the START-HERE rewrite existed. `test_lite` went red on 4.2, 4.5, 5.2 and
+the Store build, and correctly so. Nothing shipped on those results. Run 3 used
+fresh zips, hashed at the start and re-checked at the end (`sha256sum -c` OK).
+Results: 6 core suites; `core/` at **100.0%** (1,064 statements); 9 headless and
+5 GUI suites on 4.5.9 with **0 tracebacks**; `test_versions.sh` pass=3 fail=0;
+`run_gui_versions.sh` 15/15; `store_check.py` **13/13**.
+
+### A trap this run hit
+`store_check.log` from the previous gate run still ended in `ALLDONE`. A wait
+loop keyed on that marker returned instantly and printed old results as new.
+Before trusting a done-marker, delete the log or compare its mtime.
+
+### Stale shipped docs, fixed in passing
+- `ROADMAP.md`'s header said *"v0.2.1 is the current release"*, false since
+  09-30.
+- `START-HERE.html` said **v0.2.0** and told buyers to keep
+  `texel-0.2.0.zip` zipped, both since 0.2.1. The filename row is now
+  version-free, because a hard-coded version is how it went stale.
+
+### Live-page verification
+Recorded in `ROADMAP.md` under v0.2.3 and in `ACTIONS.md` T-022.
+- Paid zip: `texel-0.2.3.zip` 207 kB, sha256 `b736afda…`.
+- Demo: `texel-lite-demo-0.2.3.zip` 195 kB, pulled back anonymously and
+  byte-identical, sha256 `562f83c9…`.
+- The paid file's anonymous request is refused.
+- Devlog **1696051** is live.
+- **4 of the demo's downloads are this run's verification pulls** (2 per Lite
+  file).

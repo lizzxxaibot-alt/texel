@@ -11,7 +11,7 @@ on the Blender Python API must be.
 bl_info = {
     "name": "Texel",
     "author": "Mintworks",
-    "version": (0, 2, 2),
+    "version": (0, 2, 3),
     "blender": (4, 2, 0),
     "location": "Image Editor / 3D Viewport > Sidebar (N) > Texel",
     "description": "Pixel-perfect pixel art painting, layers and texel density",
@@ -22,26 +22,35 @@ bl_info = {
 import importlib
 import sys
 
+from . import tex_edition
 from . import (tex_props, tex_doc, tex_pick, tex_paint, tex_layers,
                tex_density, tex_palette, tex_select, tex_zones, tex_setup,
-               tex_extra, tex_tools, tex_showcase, tex_sprite, tex_anim, tex_keys,
-               tex_ui)
+               tex_extra, tex_tools, tex_keys, tex_ui)
+
+# The free Lite build ships without these three files, so they cannot be in the
+# import above. The flag is checked rather than catching ImportError: a full
+# build missing one of them must fail loudly, not quietly turn into Lite.
+if tex_edition.LITE:
+    _PAID = ()
+else:
+    from . import tex_showcase, tex_sprite, tex_anim
+    _PAID = (tex_showcase, tex_sprite, tex_anim)
 
 # tex_doc is first: it owns the load_post/save_pre handlers that keep a canvas
 # alive across a save, so it must be registered before anything can bind one.
-_MODULES = (tex_doc, tex_props, tex_paint, tex_layers, tex_density, tex_palette,
-            tex_select, tex_zones, tex_setup, tex_extra, tex_tools, tex_showcase,
-            tex_sprite, tex_anim, tex_keys, tex_ui)
+_MODULES = ((tex_doc, tex_props, tex_paint, tex_layers, tex_density, tex_palette,
+             tex_select, tex_zones, tex_setup, tex_extra, tex_tools)
+            + _PAID + (tex_keys, tex_ui))
 
 
 def _reload():
     """Re-import every submodule. Blender caches them between add-on reloads,
     so without this an edit to a submodule silently does nothing."""
     from .core import raster, canvas, uvmap, palette, select, adjust, tools
-    for m in (raster, canvas, uvmap, palette, select, adjust, tools, tex_props, tex_doc,
-              tex_pick, tex_paint, tex_layers, tex_density, tex_palette,
-              tex_select, tex_zones, tex_setup, tex_extra, tex_tools, tex_showcase,
-              tex_sprite, tex_anim, tex_keys, tex_ui):
+    for m in (raster, canvas, uvmap, palette, select, adjust, tools, tex_edition,
+              tex_props, tex_doc, tex_pick, tex_paint, tex_layers, tex_density,
+              tex_palette, tex_select, tex_zones, tex_setup, tex_extra, tex_tools,
+              *_PAID, tex_keys, tex_ui):
         importlib.reload(m)
 
 
