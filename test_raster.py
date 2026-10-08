@@ -215,6 +215,30 @@ check("even sizes work too", len(R.brush_mask(4, "ROUND")) > 0)
 check("unknown shape falls back to square",
       len(R.brush_mask(5, "NONSENSE")) == 25)
 
+# Every size, not two sample sizes. Only 5, 7 and 9 were checked, all odd, so
+# the Diamond brush shipped stamping NOTHING at Size 2 and fewer texels at every
+# even size than at the odd size below it (1, 0, 5, 4, 13, 12 ...) - found by
+# texel-support on 2026-10-07 in the shipped 0.2.2 zip.
+for _sh in ("SQUARE", "ROUND", "DIAMOND"):
+    _prev, _bad = 0, []
+    for _n in range(1, 65):
+        _m = R.brush_mask(_n, _sh)
+        _lo = -(_n // 2)
+        if (not _m or (0, 0) not in _m or len(_m) < _prev
+                or not all(_lo <= v <= _lo + _n - 1 for p in _m for v in p)):
+            _bad.append((_n, len(_m)))
+        _prev = len(_m)
+    check(f"{_sh} sizes 1-64: non-empty, centred, in its box, never shrinking",
+          not _bad, _bad[:6])
+check("diamond 2 paints its 2x2, not nothing", len(R.brush_mask(2, "DIAMOND")) == 4,
+      len(R.brush_mask(2, "DIAMOND")))
+check("diamond 4 is 12: the 4x4 minus its corners",
+      sorted(R.brush_mask(4, "DIAMOND")) == sorted(
+          (x, y) for x in range(-2, 2) for y in range(-2, 2)
+          if abs(x + 0.5) + abs(y + 0.5) <= 2), len(R.brush_mask(4, "DIAMOND")))
+check("odd diamonds unchanged by the even-size fix",
+      [len(R.brush_mask(n, "DIAMOND")) for n in (3, 5, 7, 9)] == [5, 13, 25, 41])
+
 # ------------------------------------------------------------- symmetry
 # Mirror lived in tex_paint as _mirrored() and was therefore only testable by
 # opening Blender. Radial joins it here, in core, where a rotation that lands

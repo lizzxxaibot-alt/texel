@@ -287,7 +287,10 @@ def brush_mask(size: int, shape: str = "SQUARE") -> list[Point]:
                 if (x - c) ** 2 + (y - c) ** 2 > (r + 0.25) ** 2:
                     continue
             elif shape == "DIAMOND":
-                if abs(x - c) + abs(y - c) > r + 0.25:
+                # at an even size the centre falls between texels, so the
+                # nearest ones sit a whole texel away in Manhattan distance and
+                # +0.25 cut them all off: Size 2 stamped nothing. +0.5 there.
+                if abs(x - c) + abs(y - c) > r + (0.25 if size % 2 else 0.5):
                     continue
             pts.append((x, y))
     return pts
