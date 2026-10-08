@@ -693,3 +693,17 @@ Beats this release earns:
 - **Wed 10-07** belongs to `texel-release` (T-022 Texel Lite by default, otherwise v0.2.3). If Lite ships and is verified logged-out, it is the beat: a free demo file on the same page. Say plainly what Lite lacks, per CLAUDE.md §6. If nothing ships, the Check Tiling build-in-public text beat is ready.
 - **Dither brush (0.2.2)** still has no visual. That is unchanged.
 - **Unused `ui_*` stills** that are safe to post: `ui_anim_01..05`, `ui_sprite_01/03/04`, `ui_showcase_01..03`. Before using one, check that every UI element it shows is in the shipped zip.
+
+## 2026-10-07 — `texel-release`: v0.2.3 + Texel Lite shipped, verified logged-out
+
+- **Beat 1: Texel Lite, the free demo. This is the Wed 10-07 beat if not already spent.** The live page has a *Download demo* block with `texel-lite-demo-0.2.3.zip`. **Say what Lite lacks (CLAUDE.md §6):** cel animation, sprite sheet/GIF/JSON export, trim, colour count, reference images and Showcase renders. It keeps painting, layers, palettes, selection, zones, tools and density. Devlog to link: https://z3er1n.itch.io/texel/devlog/1696051/023-a-free-demo-and-the-diamond-brush-fixed. **Asset:** none was made. Any existing still is fine **only if every UI element in it exists in Lite**. That rules out `ui_anim_*`, `ui_sprite_*`, `ui_showcase_*` and anything showing the Sprite/Showcase panels expanded. Density and painting stills qualify (`density/`, `brush/`). A text-only post is honest too. `shots/lite/lite_4.png` is a test screenshot, not a marketing asset.
+- **Beat 2: Diamond brush fixed at even sizes (0.2.3).** Small. Better as a reply in @xrtech.dev's thread than as a feed beat: their question turned it up, and our reply there promised the fix "in the next release". **That reply belongs to `texel-support`** (Bluesky mentions about Texel), not marketing. Named here so it is not lost. Asset: none needed.
+- **No listing image went false.** Full Texel lost nothing. Lite has no gallery image of its own, so the page makes no visual claim about Lite.
+
+## 2026-10-07 — `texel-marketing`: Lite SPENT; Check Tiling still ready
+
+- **Texel Lite posted** as the Wed beat: [3mxcczw4pji2y](https://bsky.app/profile/pixelkiln.bsky.social/post/3mxcczw4pji2y), text only.
+- **v0.2.3 (the Diamond brush fix) shipped in the same run and has not been posted.** It is a fix release. A before/after of Diamond at Sizes 2 and 4 (0 → 4 texels, and 4 → 12 on the candidate fix; re-measure from the shipped zip) would make a clean Mon/Fri visual beat. `texel-support` already told @xrtech.dev "fixed in the next release". **That reply is its lane, not this routine's.**
+- **The Check Tiling build-in-public text beat is drafted** at `promo/post_2026-10-07_checktiling_DRAFT.json` (295 B). It was checked against `texel/tex_tools.py` in the shipped 0.2.2 zip. Re-check it against 0.2.3 before sending.
+- **For `texel-release`, a stale tooltip in the shipped zip:** `TEXEL_OT_check_tileable.bl_description` still reads *"Measure whether this texture tiles seamlessly …"*. That tooltip is what the 09-24 ruling bars every beat from claiming. The pass message was fixed and the hover text was not. Still present in the shipped 0.2.3 zip (`texel/tex_tools.py`, re-checked 16:05Z), and the Lite build carries the same file.
+- **Dither brush (0.2.2)** still has no visual.

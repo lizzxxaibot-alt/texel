@@ -1943,3 +1943,55 @@ Both replies were re-fetched cookie-less. The author and parent are right, at 28
 - **@lynnmbecksart**: found Constrain to Image Bounds themselves. A tip there would have repeated the Round to Pixels reply's wording.
 
 ### §E — not due. The next check is **Sat 2026-10-10**. The 10-03 check was missed.
+
+---
+
+## Run 2026-10-07 (Wed, a TEXEL day, ~15:38-16:05Z) — Texel Lite free demo
+
+**Ledger first.** `ACTIONS.md` had no OPEN row owned by `texel-marketing`. The open rows were T-010, T-011, T-015 and T-016 (`HUMAN`), plus T-022 (`texel-release`, now `DONE?`).
+
+**The slot waited for the release.** `texel-release` started at 15:36:48Z, two minutes before this run, so the Wed beat was held. A background poll of the logged-out page saw `texel-lite-demo-0.2.2.zip` appear at 15:47:45Z. **Nothing was posted until that run reported `succeeded` (16:01:47Z)**, so a file it might still pull would not be promoted. By then the page served `texel-0.2.3.zip` and `texel-lite-demo-0.2.3.zip`.
+
+### Posted — Wed 2026-10-07, release note: Texel Lite
+
+| Date | Beat | Asset | URL | First hour |
+|---|---|---|---|---|
+| 2026-10-07 | **Texel Lite free demo: painting, layers, palettes, selections, zones, texel density on Blender 4.2+; it leaves out cel animation, sprite sheet/GIF export and Showcase renders** | text only (spec `promo/post_2026-10-07.json`) | [3mxcczw4pji2y](https://bsky.app/profile/pixelkiln.bsky.social/post/3mxcczw4pji2y) | 0 likes at +0 min |
+
+- **Every claim was checked against two sources: the live page's own Lite paragraph** (logged-out, ~15:58Z) **and the pinned shipped zip** `dist/shipped/texel-lite-demo-0.2.2-SHIPPED-2026-10-07.zip`. The zip holds no `tex_anim`, `tex_sprite` or `tex_showcase`. The manifest reads `blender_version_min = "4.2.0"`. The modules present are paint, layers, palette, select, zones and density. That the demo is free and its download is separate comes from `texel-release`'s T-022 `DONE?` evidence, which was taken with an anonymous signed-URL POST.
+- **Deliberately not claimed:** the operator count, trim, colour count and reference images. The post names three omissions and the page names seven, so the post understates what Lite lacks rather than overstates what it has.
+- **No image.** Every unused still shows the Sprite, Anim or Showcase UI, or a Showcase render. All of those are absent from Lite, so they would show a demo user features they do not get.
+- **Verified cookie-less with `getPostThread`.** The author is `pixelkiln.bsky.social`, `createdAt` is 2026-10-07T16:02:59.055Z, the text is 285 bytes, and there are 4 facets (1 link, `#b3d #pixelart #gamedev`).
+- **Cadence.** The 7-day window 10-01..10-07 holds 10-02, 10-05 (04:56Z on the 6th) and this post. That is 3, under the cap.
+- **Phrasing.** *"free demo"*, *"second file"* and *"Texel Lite"* have 0 prior uses in this log. There is no antithesis construction.
+
+### §D — two replies, both verified on the public AppView
+
+| Date | Thread | What was said | Link |
+|---|---|---|---|
+| 2026-10-07 | @rpanich.bsky.social (10-06, 14 likes, **0 replies**): *"I am a fool"*. Goblin-tower flag frames had inflated a Godot texture until the game crashed. I looked at the photo: a sheet of whole towers repeated once per flag frame. | Encouragement, then a structural fix: keep the tower as a static **Sprite2D** with the flag on a child **AnimatedSprite2D**. Each frame then holds only the flag's pixels, and the tower art is stored once. **Checked in Godot 4.7.2 headless:** an AnimatedSprite2D parented to a Sprite2D works, and it has `sprite_frames`. | [3mxcbtdmmsk2x](https://bsky.app/profile/pixelkiln.bsky.social/post/3mxcbtdmmsk2x) |
+| 2026-10-07 | @critcorsac.bsky.social (10-07, **0 replies**): their first 3D game in Godot after only making 2D pixel-art games. They are learning animation blending, 3D cameras and the z axis. | Welcome, then two nodes. **AnimationTree + BlendSpace1D** (idle at 0, then walk and run), driven by `velocity.length()` through `parameters/<name>/blend_position`. **SpringArm3D** as the camera's parent, with Spring Length set to the follow distance, so walls pull the camera in. **Checked in Godot 4.7.2 headless:** a BlendSpace1D named `locomotion` in a BlendTree exposes `parameters/locomotion/blend_position`, and SpringArm3D's default `spring_length` is 1.0, so it has to be set. | [3mxcbte5ryn2p](https://bsky.app/profile/pixelkiln.bsky.social/post/3mxcbte5ryn2p) |
+
+Both replies were re-fetched cookie-less. The author and parent are right, at 284 and 287 bytes. Neither mentions Texel, carries a link or pitches.
+
+### Threads looked at and left alone
+
+- **@shadefawks, @afroskeleton**: threads about another pixel-art-in-Blender product. Standing rule.
+- **@irisillych** (spray-paint tool wish). Same as 10-05: any answer would be a pitch.
+- **@kipperfalcon** (an Aseprite isometric add-on launch). Another product's launch thread.
+- **@mintyroot** ("texel density is a myth…"). A joke, and a density reply from us would read as a pitch.
+- **@alwaysdreamn, @arubinousagi**: art posts with nothing specific to add.
+
+### §E — not due. The next check is **Sat 2026-10-10**. That run should also look at whether the Lite paragraph sits high enough on the page.
+
+---
+
+## Run 2026-10-08 ~01:44Z (20:44 local 10-07): a second firing for the same Wednesday. Nothing posted, nothing replied
+
+**The ledger was checked first.** No OPEN row is owned by `texel-marketing`.
+
+**The Wed slot was already spent.** The ~15:38-16:05Z run above posted the Lite beat and met the two-reply floor. The public author feed (`getAuthorFeed`, posts_no_replies) shows exactly one top-level post on 10-07, `3mxcczw4pji2y`. A second Texel post on the same day would break the one-per-slot cadence, so none was sent. More replies would be allowed, but the day's floor is met and a second batch from one account in a few hours crowds the same feeds. That trade was not worth making.
+
+**Later engagement reading on the Lite post:** at ~+9.7h, 7 likes, 1 repost, 0 replies, 0 quotes (`getPosts`, cookie-less, 01:44Z 10-08).
+
+**§E is not due.** The next check is **Sat 2026-10-10**.

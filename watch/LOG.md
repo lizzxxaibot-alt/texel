@@ -6,6 +6,111 @@ in `../ACTIONS.md` and handed to a named owner.
 
 ---
 
+## 2026-10-07 — run 24 (catch-up, fired 15:34Z after a host gap; the 11:52Z slot did not run)
+
+**VERDICT: DEGRADED (commercial).** The listing is clean and every doer is inside its window, but there are still **0 sales on day 28 live**, views slowed for a second week, and the 14-day zero-sales rule fires in 2 days.
+
+### Action ledger
+
+**Opened: 0. Closed: 0.** No row carries a `DONE?` note.
+
+| id | age | owner |
+|---|---|---|
+| T-010 | 22 d | **HUMAN**. The 14-day rung is suspended until A-032 closes. A-032 and A-037 are still in the Open section of `pixelkiln/launch/watch/ACTIONS.md` (lines 44–45, re-read this run). |
+| T-011 | 22 d | **HUMAN**. Suspended, as T-010. |
+| T-015 | 18 d | **HUMAN**. Suspended, as T-010. DEGRADED here is used on commercial grounds only, with the same meaning as runs 13, 14 and 20–23. |
+| T-016 | 18 d | **HUMAN**. Suspended, as T-010. It is still the only measured traffic lever on the table (BlenderNation). |
+| T-022 | 4 d | `texel-release`. **Its 10-07 run is in progress now**: it started **15:36:48Z** and was still `running` when this entry was written. The row's 3-day freeze counts from 10-07, so it starts today. Run 25 judges what that run did: shipped Lite, wrote a measured reason against it, or shipped nothing. The hard bound is the 10-14 slot. |
+
+### ALERTS
+
+**None.** One near-miss, recorded so the next run does not repeat it:
+
+- **`texel-release` looked late for about two minutes, and it was not.** At 15:35Z `list_scheduled_tasks` showed `lastRunAt` **09-30T22:06Z** and `nextRunAt` already rolled to **10-14T15:13Z**. Read alone, that is "the 10-07 slot passed, no catch-up queued", which is the A-037 defect class. Re-read with `list_task_runs` at ~15:37Z, it showed a catch-up run started **15:36:48Z**. **This was a mid-wave read, the same trap run 22 fell into.** Note for future runs: **during a catch-up wave `nextRunAt` advances before the catch-up fires, so it is not evidence that a slot was skipped.** Before calling a doer late in a wave, wait until the wave has finished and re-read `list_task_runs`.
+- **Host gap, already owned.** `pixelkiln-production` last ran 10-06T16:04Z, and the wave restarted at 10-07T15:24Z, so the host was off for roughly 23 h. On the Texel side it cost this run's in-slot reading. It may also have cost `texel-marketing`'s Tue 10-06 slot, which was not a beat day. Filed as **A-032 / A-037** (HUMAN, Pixelkiln ledger); no new row.
+- **Doer windows:** `texel-support` caught up at 15:34:50Z. Its 10-06 day-28 row is at `SUPPORT.md:655` (0 inbound); today's row is still being written. `texel-marketing` last ran **10-06T04:54Z**, which is inside 48 h; its next slot is today at 20:20Z, and that is the **Wed beat**, which run 25 checks in `promo/POSTED.md`. `texel-funnel` last ran 10-02T15:07Z and is next due 10-09; it is not late. Not this lane, named only: `pixelkiln-backup` last ran 10-06T04:54Z and missed its 10-06 slot. That is `pixelkiln-watch`'s to judge.
+
+### Listing (measured 15:36–15:40Z)
+
+| Check | Result |
+|---|---|
+| Logged-out page `z3er1n.itch.io/texel` | HTTP 200, 31,967 B. `Updated` reads 30 September 2026 @ 22:16 UTC. |
+| Download | One file, `texel-0.2.2.zip`, 205 kB, which matches local `dist/texel-0.2.2.zip` (209,944 B). **No demo file**, so T-022 is not yet live. |
+| Price | The public page shows $9.95. `/game/edit/4991926` has `game[min_price]` $9.95, which is correct until v0.4.0. (`$15` is itch's "$15 or less" breadcrumb.) |
+| Status | `game[published]=published` |
+| AI disclosure | `ai_generated=yes`, graphics on, code on |
+
+**All pass.** The edit form was read with a one-off read-only Playwright script against the persistent profile. `profile.lock` was absent before the read, and the script was deleted afterwards.
+
+### Numbers
+
+`| 2026-10-07 (15:35Z) | 125 | 0 | 0 | $0.00 | 0.00% |`
+
+- **7-day trend:** 09-30T22:05Z 108 → 125 is **+17 over ~6.7 d (≈2.5/day)**. The week before, 83 → 108, was **+25 over ~7.35 d (≈3.4/day)**. Views are **down week-on-week**, and the last day added +1. This is direction only, with n=17.
+- **Downloads, sales and revenue:** all 0. Collections: 4.
+- **Conclusion:** traffic is slowing and none of it converts. The conversion gate is **75 views away**, which at ~2.5/day is about 30 days out. That means the 10-09 call will be made with the listing still undiagnosable as cover, price or copy. Run 26 should state that limit in the call and not imply a diagnosis.
+- **14-day zero-sales rule:** fires **2026-10-09, run 26**. Stop or continue is the user's decision. Run 26 puts its framing through `venture-critic` before recording it. If Lite ships today, it is two days old at the call and is **not evidence for it**, as T-022 already records.
+
+### Roadmap
+
+- **v0.2.3 "Brush, the rest" (stamps, tablet pressure), target Wed 2026-10-07, today.** `texel-release` is running now, and T-022 defaults Lite into this slot. `ROADMAP.md` has not changed since 09-30T17:18 (local time). Run 25 checks that the run either shipped Lite and moved v0.2.3 in writing, shipped v0.2.3 with a measured reason against Lite, or shipped nothing and said why. If v0.2.3 does not ship, it is **7 days late at the next possible slot (10-14)**, and the reason must go in the devlog per ROADMAP.
+
+---
+
+## 2026-10-06 — run 23 (~11:53Z start, in its normal slot)
+
+**VERDICT: DEGRADED (commercial).** The listing is clean and all four doers are now inside their windows, but there are still **0 sales on day 27 live**, views did not move in 7 hours, and the 14-day zero-sales rule fires in 3 days.
+
+### Action ledger
+
+**Opened: 0. Closed: 0.** No row carries a `DONE?` note.
+
+| id | age | owner |
+|---|---|---|
+| T-010 | 21 d | **HUMAN**. 14-day rung suspended until A-032 closes; A-032 still Open at `pixelkiln/launch/watch/ACTIONS.md:44` (re-read this run). |
+| T-011 | 21 d | **HUMAN**. Suspended, as T-010. |
+| T-015 | 17 d | **HUMAN**. Suspended, as T-010. This run uses DEGRADED on commercial grounds only, the same meaning as runs 13, 14 and 20–22. |
+| T-016 | 17 d | **HUMAN**. Suspended, as T-010. Still the only measured traffic lever on the table (BlenderNation). |
+| T-022 | 3 d | `texel-release`. By the row's own text the 3-day freeze runs from the 10-07 slot, not from opening, so it does not bite yet. Default: Lite ships tomorrow; hard bound 10-14. |
+
+### ALERTS
+
+**None new.** One residue of the host gap, already owned:
+
+- **Correction to run 22.** Run 22 said `texel-support` and `texel-marketing` "have not caught up" and read that as the A-037 defect class. **That was true at 04:50Z and false four minutes later:** `list_scheduled_tasks` shows support `lastRunAt` **10-06T04:51:12Z** and marketing **10-06T04:54:13Z**. Both did catch up. Run 22 read the roster mid-wave, before the stagger reached them. No A-037 evidence should be cited from run 22.
+- **Both catch-ups produced artifacts:**
+  - **support:** `SUPPORT.md:653` records 10-04 honestly as *NO RUN RECORDED — a missed-run gap, not a zero*; `:654` is the 10-05 row (day 27, 0 inbound, 2 Bluesky thank-yous triaged out to `pixelkiln-marketing`, which is the right lane).
+  - **marketing:** the Mon 10-05 beat is live (`promo/POSTED.md:1916`, asset `promo/brush/texel-brush-tips-ref.png`, post `3mx6ndiqq4e2x`, verified by the doer with `getPostThread` at 04:56:39Z). The doer itself wrote that **Sun 10-04 was missed, not spent**, and that the **Sat 10-03 §E check was missed**, with the next §E on Sat 10-10.
+- **Net cost of the gap, stated once:** one Texel beat (Sun 10-04) and one weekly listing check. Cause is the host being off, already filed as **A-032 / A-037** (HUMAN, Pixelkiln ledger). No new row.
+- `texel-release` (`0 10 * * 3`, last 09-30T22:06Z, next 10-07T15:13Z) and `texel-funnel` (`0 10 * * 5`, last 10-02T15:07Z, next 10-09T15:06Z) are **not late**. Support and marketing's next native slots are 10-06T13:24Z and 20:20Z.
+
+### Listing (measured ~11:56–12:00Z)
+
+| Check | Result |
+|---|---|
+| Logged-out page | HTTP 200, 31,967 B |
+| Download | `texel-0.2.2.zip`, 205 kB, matching local `dist/texel-0.2.2.zip` (209,944 B) |
+| Price | public page $9.95; `/game/edit/4991926` `game[min_price]` $9.95. Correct until v0.4.0. (The `$15` on the page is itch's "$15 or less" breadcrumb, not a price.) |
+| Status | `game[published]=published` |
+| AI disclosure | `ai_generated=yes`, graphics on, code on (text off) |
+
+**All pass.** Read with a one-off read-only Playwright script against the persistent profile; `profile.lock` was absent before the read; the script was deleted after.
+
+### Numbers
+
+`| 2026-10-06 (11:55Z) | 124 | 0 | 0 | $0.00 | 0.00% |`
+
+- **7-day trend:** 09-29T11:55Z 104 → 124 is **+20 over 7.0 d (≈2.9/day)**, against **+23 over ~7.7 d (≈3.0/day)** the week before. **Flat.** Since the last in-slot reading (10-03, 117) it is +7 over 3 days, ≈2.3/day, the slowest stretch since 09-24. Direction only.
+- **Downloads, sales, revenue:** 0. Collections 4.
+- **Conclusion:** nothing has changed since run 22 except that the pace is softening. Conversion gate is **76 views away**, which at under 3/day is late October, so the 10-09 call will be made with the listing un-diagnosable as cover, price or copy. That is the honest state of the evidence, and run 26 should say so in the call rather than imply a diagnosis.
+- **14-day zero-sales rule:** fires **2026-10-09, 3 days out, run 26.** Stop/continue is the user's decision; run 26 puts its framing through `venture-critic` before recording it.
+
+### Roadmap
+
+- **v0.2.3 "Brush, the rest" (stamps, tablet pressure), target Wed 2026-10-07, tomorrow.** No work logged, which is expected for a weekly slot. T-022 defaults Lite into the same slot. Run 24 checks that `texel-release` either shipped Lite and moved v0.2.3 in writing, shipped v0.2.3 with a measured reason against Lite, or shipped nothing and said why.
+
+---
+
 ## 2026-10-05 — run 22 (catch-up, fired 10-06T04:50Z after a host gap; there was no 10-04 run)
 
 **VERDICT: DEGRADED (commercial, and a host gap).** The listing is clean. There are still **0 sales on day 26 live**, and views went flat week-on-week. The machine was off from ~10-03T13:30Z to 10-06T04:41Z, so `texel-support` and `texel-marketing` each missed slots. That is one host-gap cause, not two routine failures.
