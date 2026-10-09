@@ -34,6 +34,8 @@ says on 2026-09-26.
 | *same page, read 2026-09-25* | *Material Palettes, day 6.4 of 7* | *(as above)* | **42** (secondary bar 40+ **met**) | **11 (10 by strangers)** | *Texel +9 total, all sources* | **0 referrals** (floor 3, bar 5) |
 | *both pages, read 2026-10-02* | *Density Cheatsheet, 21 days live* | *(as above)* | **48** | **23 file-grabs** | *format retired 09-26* | *not re-read: referrer split is `texel-watch`'s* |
 | *both pages, read 2026-10-02* | *Material Palettes, 13 days live* | *(as above)* | **63** | **15 file-grabs** | *format retired 09-26* | *both pages stay live, unchanged* |
+| *both pages, read 2026-10-09* | *Density Cheatsheet, 28 days live* | *(as above)* | **52** (+4/wk) | **23** (+0) | *format retired 09-26* | *referrer split left to `texel-watch`* |
+| *both pages, read 2026-10-09* | *Material Palettes, 20 days live* | *(as above)* | **87** (+24/wk) | **21** (+6) | *format retired 09-26* | *still growing off itch shelves; see 10-09 note* |
 
 **The second row is the one that matters now, and it was added on 2026-09-19.**
 The 72 h window is history; what the page has done over eight days is the real
@@ -816,3 +818,35 @@ Building it is `texel-release`'s job and needs a row that `texel-watch` opens.
 **Phase, restated:** the free-sibling-page format stays retired. Today is the
 first Friday of the month, but no drop ships, because the 09-26 trigger retired
 the format. Nothing was added to `promo/QUEUE.md`.
+
+## Measuring week, 2026-10-09 (`texel-funnel`)
+
+**No open `texel-funnel` rows in `ACTIONS.md`. No drop:** the format was retired
+on 09-26, and today is the second Friday of the month anyway. Nothing was added
+to `promo/QUEUE.md`.
+
+**Readings:** `node automation/itch_analytics.mjs`, *Project totals*, lifetime,
+read at 2026-10-09T21:40Z. `profile.lock` was absent, so no writer held the
+profile.
+
+| page | 10-02 | 10-09 | week |
+|---|---|---|---|
+| Density Cheatsheet | 48 views / 23 grabs | 52 / 23 | +4 / +0 |
+| Material Palettes | 63 / 15 | 87 / 21 | +24 / +6 |
+| Texel (paid page) | 113 views (10-02 ~12:00Z, T-022 baseline) | 126 / 5 grabs | +13 views; all 5 grabs are self-pulls of the Lite demo (T-022) |
+
+**Read it straight:** the palettes page is the only one still growing. It is
+pulling more traffic than Texel itself: +24 views against Texel's +13. Its source
+was itch's free tag shelves the last time anyone read it (09-25). Over 20 days it
+has referred 0 visits to Texel as far as anyone has checked (watch's 09-26
+reading). **Nothing here reopens the 09-26 retirement.** The pages draw itch
+free-asset browsers, and that was the stated reason the format was retired. This
+run did not re-read the per-project referrer split: that is `texel-watch`'s
+reading.
+
+**What actually limits this routine now:** both of the funnel's remaining levers
+sit with a person. One is BlenderNation (**T-016**, `HUMAN`, consent plus
+reCAPTCHA). The other is the stop/continue call (**T-023**, `HUMAN`, opened
+today), and its CONTINUE-REDIRECTED option moves distribution to
+Superhive/Gumroad. Until one of those is answered, this Friday slot has nothing
+it may act on except these readings.
