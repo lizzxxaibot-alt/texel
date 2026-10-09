@@ -6,6 +6,102 @@ in `../ACTIONS.md` and handed to a named owner.
 
 ---
 
+## 2026-10-09 — run 25 (catch-up, fired 21:34Z after a ~42 h host gap; there was no 10-08 run)
+
+**VERDICT: BLOCKED ON A HUMAN DECISION.** The listing is clean and v0.2.3 with the free Lite demo is live. **The zero-sales rule fires today: 30 days live, 0 sales, and 0 genuine downloads including the demo. The picks-and-shovels test is failing for this listing as it is sold now (itch, $9.95).** Whether to stop or continue is the user's call, filed as **T-023**.
+
+*Numbering note: runs 24–26 assumed a 10-08 run 25. None ran because the host was off, so this is run 25. The "run 26 / run 27" references in T-022 and earlier entries mean this run.*
+
+### Action ledger
+
+**Opened: 1 (T-023). Closed: 1 (T-022).**
+
+- **CLOSED T-022 · 6 d · `texel-release`.** Closed on evidence re-read this run, not on the DONE? note:
+  - logged-out page lists `texel-lite-demo-0.2.3.zip` 195 kB as *Download demo* next to the paid `texel-0.2.3.zip` 207 kB;
+  - an anonymous POST returns a signed URL, so the demo is free;
+  - the live description states what Lite lacks;
+  - the demo download counts read separately from the paid file's.
+
+  Full evidence is in the Closed row.
+- **OPENED T-023 · 0 d · HUMAN.** The stop/continue call; framing below.
+
+| id | age | owner |
+|---|---|---|
+| T-010 | 24 d | **HUMAN**. The 14-day rung is suspended until A-032 closes. |
+| T-011 | 24 d | **HUMAN**. Suspended, as T-010. |
+| T-015 | 20 d | **HUMAN**. Suspended, as T-010. |
+| T-016 | 20 d | **HUMAN**. Suspended, as T-010. **BlenderNation is now part of T-023's CONTINUE option.** |
+| T-023 | 0 d | **HUMAN**. Stop/continue call. |
+
+### ALERTS
+
+1. **T-023, HUMAN: the Texel stop/continue call.** Framing below, checked by `venture-critic`. Its first-pass findings were SERIOUS ×5 and NOTE ×3; four fixes were applied, then PROCEED.
+2. **Host gap ~10-08T03:15Z → 10-09T21:26Z (~42 h), already owned as A-032 / A-037 (HUMAN, Pixelkiln ledger). No new row.** Effect on the Texel lane:
+   - `texel-support` missed the 10-08 slot. It caught up at **21:37Z** today.
+   - `texel-marketing` last ran **10-08T01:43Z**, about 44 h ago, so it is inside 48 h. That run was a second firing for Wed 10-07 and posted nothing, so it is not a lost beat. **Today's Fri beat slot (20:20Z) fell inside the gap** and had not caught up when this was written. Run 26 checks `promo/POSTED.md` for a 10-09 row, or a written "missed".
+   - `texel-funnel` (`0 10 * * 5`) missed today's 15:06Z slot with no catch-up, and `nextRunAt` has rolled to 10-16. **It costs nothing:** the free-sibling format was retired 09-26 and no drop was due (`funnel/LOG.md` *Phase*).
+   - **This was read mid-wave** (see run 24's note), so nothing above is called late.
+3. **Self-inflicted count, recorded so it is not mistaken for demand.** This run's anonymous check of the demo URL added **1** to `texel-lite-demo-0.2.3.zip`. All 5 itch "downloads" are self-pulls. **Future runs should check the demo is free with a HEAD on the page's `for_demo` block, not a POST to `/file/`.**
+
+### Listing (measured ~21:35–21:40Z)
+
+| Check | Result |
+|---|---|
+| Logged-out page | HTTP 200, 33,115 B. `Updated` reads 07 Oct 2026 @ 16:00 UTC. |
+| Download | Paid `texel-0.2.3.zip` 207 kB, which matches local `dist/texel-0.2.3.zip` (212,461 B). Demo `texel-lite-demo-0.2.3.zip` 195 kB, free. |
+| Price | `game[min_price]` is $9.95 and the public page shows $9.95. Correct until v0.4.0. |
+| Status | `game[published]=published` |
+| AI disclosure | `ai_generated=yes`, graphics on, code on (text off) |
+
+**All pass.** Read with a one-off read-only Playwright script. `profile.lock` was absent before the read, and the script was deleted afterwards.
+
+### Numbers
+
+`| 2026-10-09 (21:36Z) | 126 | 5 | 0 | $0.00 | 0.00% |` (all 5 downloads are self-pulls; 0 genuine)
+
+- **7-day trend:**
+  - this week: 113 → 126, **+13 over ~7.4 d (≈1.8/day)**;
+  - previous week: 85 → 113, **+28 over ~7.0 d (≈4.0/day)**.
+
+  It is down for the third week running. The counts are tiny and partly reflect launch promotion ending, so this gives direction only.
+- **Since Lite went live (10-07T15:50Z): +1 view, 0 genuine demo downloads.** That is noise. The read-out is pre-registered at +150 views or 2026-11-14.
+- **Conversion:** 0/126. The 200-view gate is 74 views away, so the itch listing still cannot be diagnosed as a cover, price or copy problem.
+
+### The stop/continue framing (T-023), after `venture-critic`
+
+**What the evidence says.** 30 days, 126 views, $0. The free funnel produced downloads on the sibling pages (Palettes 21, Cheatsheet 23; not checked for self-pulls) and **0 referrals to the paid page**. That is the one measured funnel fact. **Traffic is the binding constraint**, and itch has not shown it can supply buyers for a paid Blender add-on.
+
+**What it cannot say.** Whether the product would sell where Blender add-on buyers actually shop. It has never been listed there.
+
+**The record already had the answer, and it went unexecuted for a month.** On 09-09 the scout `app_ventures/research/UNCONSTRAINED_SCOUT_2026-09-09.md` ranked **Rank 3: "Reprice and dual-list Texel onto its real market"**. It named Superhive (formerly Blender Market, 70% to the creator, up to 90%) and Gumroad. It found $9.95 to be about **a third to a fifth** of the live comps (UVPackmaster $44, Hair Tool $52+, Deep Paint $40). Its estimate was **$100–800/mo at $12–40**, unmeasured. None of that reached `ROADMAP.md`. The 30 days since went to v0.2.x features and free sibling pages.
+
+**Constraints on the venue, which are rules to clear and not reasons to skip it (CLAUDE.md §0):**
+- Superhive's AI policy bars products that *rely almost entirely on AI* and may ask for evidence of human modification. Texel is AI-assisted code, disclosed as such, so this needs an honest pre-check.
+- Superhive requires GPL/MIT licensing for add-ons.
+- The application is an account signup, which is **HUMAN**.
+- The Gumroad comps come from an 08-07 scrape and should be re-scraped before anyone relies on them.
+
+**Options for the user:**
+1. **STOP.** Freeze the roadmap and the four Texel routines, and leave the itch listing up passively.
+2. **CONTINUE-REDIRECTED** (watch's recommendation):
+   - pause v0.2.x feature work (v0.2.4 is features for zero users);
+   - send BlenderNation (T-016);
+   - make a price decision against the comps;
+   - clear Superhive's AI and GPL rules, then apply;
+   - cross-list on Gumroad.
+   - **Default: STOP on 2026-11-14 if there is still no sale.** That is the same date as the Lite read-out, so the checkpoint has a default outcome and does not simply lapse.
+3. **CONTINUE as-is.** Not recommended: the weekly loop adds features to a page that got 13 views this week.
+
+**Cost against prize, honestly bounded.** Cross-listing needs almost no new build: the zip exists and is GPL. It needs one human signup, one price decision and a few routine runs of listing work. The prize is the scout's unmeasured $100–800/mo. The four routines' 30-day cost was not measured in hours, and this run does not invent a figure.
+
+### Roadmap
+
+- **v0.2.3 shipped 2026-10-07** (Diamond fix), with Lite. That is verified live above.
+- **v0.2.4 "Brush, the rest" (dithered gradient, custom stamps, tablet pressure): target Wed 2026-10-14, 5 days out.** No work logged, which is normal for a weekly slot. **If the user picks STOP or CONTINUE-REDIRECTED, this slot should not ship features.** That is the user's call via T-023; watch does not move the date.
+
+---
+
+
 ## 2026-10-07 — run 24 (catch-up, fired 15:34Z after a host gap; the 11:52Z slot did not run)
 
 **VERDICT: DEGRADED (commercial).** The listing is clean and every doer is inside its window, but there are still **0 sales on day 28 live**, views slowed for a second week, and the 14-day zero-sales rule fires in 2 days.
