@@ -1995,3 +1995,50 @@ Both replies were re-fetched cookie-less. The author and parent are right, at 28
 **Later engagement reading on the Lite post:** at ~+9.7h, 7 likes, 1 repost, 0 replies, 0 quotes (`getPosts`, cookie-less, 01:44Z 10-08).
 
 **§E is not due.** The next check is **Sat 2026-10-10**.
+
+---
+
+## Run 2026-10-09 (Fri, a TEXEL day, 21:39-21:50Z): the cel grid + onion skin
+
+**Ledger first.** `ACTIONS.md` has no OPEN row owned by `texel-marketing`. The open rows are T-010, T-011, T-015, T-016 and **T-023**, all `HUMAN`. T-023 is the stop/continue call after 30 days with zero sales. **Nothing in it pauses marketing**, and the user has not decided yet, so the Friday beat went out as scheduled. If the user calls STOP, this routine stops posting about Texel from that day on.
+
+**Late run.** The routine is scheduled for 15:15 local. This run started at 16:39 local, and the post landed at 21:42Z, still Friday in both local time and UTC.
+
+### Posted — Fri 2026-10-09, sprite/animation: the cel grid and onion skin
+
+| Date | Beat | Asset | URL | First hour |
+|---|---|---|---|---|
+| 2026-10-09 | **Cel grid: one row per track (Torch, Main, Glow, Cave), one column per frame; Add Frame copies every track forward; onion skin ghosts ±1 frame at 28% on the active row only** | `promo/celgrid/texel-celgrid-onion.png` (70,995 B, 1580x1132, a crop of `store/stills/ui_anim_05.png`) + `promo/celgrid/texel-celgrid-zoom.png` (22,889 B, 765x738, a 3x nearest-neighbour crop of the Frames panel from the same still). **This is the first post of any `ui_anim_*` still.** `ui_anim_05` is reuse-blocked until **10-30**. | [3mxhwx7hcxx2m](https://bsky.app/profile/pixelkiln.bsky.social/post/3mxhwx7hcxx2m) | 2 likes at +2 min |
+
+Every claim was checked against the pinned shipped zip `dist/shipped/texel-0.2.3-SHIPPED-2026-10-07.zip`, not recalled:
+- **Grid.** `tex_ui.py` draws a row per track and a column per frame. `sub.alert = (cel is active)` makes the red cell the cel you paint on. `depress=(f == cur)` makes the blue column the frame on screen. `*` means the cel has pixels.
+- **Add Frame.** `TEXEL_OT_frame_add.copy_previous` is named "Copy Current", `default=True`. `Canvas.add_frame` copies every track's cel from the current frame.
+- **Onion skin.** `Canvas.show_frame` ghosts cels where `abs(l.frame - frame) == 1`, at `opacity 0.28`, and only where `l.track == track`. `TEXEL_OT_frame_show` passes the active cel's track. `onion_skin` defaults to True.
+- **Not claimed:** that the image shows ghosting, or that the flame flickers. Neither can be read off the still. The image shows 4 tracks x 4 frames, which is what the alt text says.
+- **Full Texel only.** Lite stubs the Sprite panel (`tex_edition.LITE` → `_draw_full_only`), and the post makes no claim about Lite.
+- **Live page re-checked first.** A cookie-less GET of `z3er1n.itch.io/texel` returned HTTP 200, 33,119 B, serving `texel-0.2.3.zip` and `texel-lite-demo-0.2.3.zip`.
+- **Verified cookie-less with `getPostThread`.** The author is `pixelkiln.bsky.social` and `createdAt` is 2026-10-09T21:42:41.707Z. The embed is `app.bsky.embed.images#view` with 2 images (1580x1132, 612 characters of alt text; 765x738, 430 characters of alt text). The text is 299/300 bytes, with 4 facets (the itch link and `#pixelart #b3d #gamedev`).
+- **Feed size.** At the 500px preview (`promo/celgrid/feed500.png`) the art reads, but the sidebar grid does not. That is why the grid zoom is the second image.
+- **Cadence.** The 7-day window 10-03..10-09 holds 10-05 (04:56Z on the 6th), 10-07 and this post. That is 3, under the cap.
+- **Phrasing.** *"cel grid"*, *"copies every track forward"* and *"either side at 28%"* have 0 prior uses in this log. There is no antithesis construction.
+- Spec: `promo/post_2026-10-09.json`.
+
+### §D — two replies, both verified on the public AppView
+
+| Date | Thread | What was said | Link |
+|---|---|---|---|
+| 2026-10-09 | @omegachainoboy.bsky.social (10-09, 145 likes, 2 replies): an OC WIP, *"I hope it doesn't look blurry this time"*. The embed is a GIF-presented video with `aspectRatio` 3040x3040. | Praised the piece, then explained the blur. **Measured, not recalled:** the post's own HLS `playlist.m3u8` lists only **360x360 and 720x720** renditions, so 3040 → 720 is a 4.2x non-integer downscale. Advice: export at a whole-number scale of the canvas that lands at or under 720. | [3mxhx2zbg6z2r](https://bsky.app/profile/pixelkiln.bsky.social/post/3mxhx2zbg6z2r) |
+| 2026-10-09 | @bimshwel.bsky.social (10-08, a reply in their own thread): Clip Studio EX5 still lacks a seamless/tiled view, so they go to Aseprite or Paintstorm for it. | Krita's **View > Wrap Around Mode** shows the canvas tiled while you paint, and the PNG goes back to CSP. **Checked against docs.krita.org** (`reference_manual/main_menu/view_menu`): *"show the image as if tiled orthographically"*. No shortcut was claimed, because none could be verified. | [3mxhx2zr7kj2p](https://bsky.app/profile/pixelkiln.bsky.social/post/3mxhx2zr7kj2p) |
+
+Both replies were re-fetched cookie-less with `getPosts`. The author and parent URIs are right, at 296 and 254 bytes. Neither mentions Texel, carries a link or pitches.
+
+### Threads looked at and left alone
+
+- **@alfredbaudisch, @ibagail, @afroskeleton, @shadefawks**: threads about another pixel-art-in-Blender product. Standing rule.
+- **@alexod** (won't use an AI Aseprite tool, makes sprites in Blender). This account discloses AI assistance, so a reply in an anti-AI thread is the wrong room.
+- **@xrtech.dev** (texel density advice). This account is `texel-support`'s contact.
+- **@irisillych** (spray-paint tool wish). Same as 10-05: any answer would be a pitch.
+- **@critcorsac**: we replied to them on 10-07, and a second reply in three days would crowd them.
+- **@andinocturna, @neg981f, @somnorum**: animation showcases with nothing specific to add.
+
+### §E — due **tomorrow, Sat 2026-10-10**. Look at whether the Lite paragraph sits high enough. Read T-023 first: if the user rules CONTINUE-REDIRECTED, the price and venue may change under the page.

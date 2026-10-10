@@ -707,3 +707,12 @@ Beats this release earns:
 - **The Check Tiling build-in-public text beat is drafted** at `promo/post_2026-10-07_checktiling_DRAFT.json` (295 B). It was checked against `texel/tex_tools.py` in the shipped 0.2.2 zip. Re-check it against 0.2.3 before sending.
 - **For `texel-release`, a stale tooltip in the shipped zip:** `TEXEL_OT_check_tileable.bl_description` still reads *"Measure whether this texture tiles seamlessly …"*. That tooltip is what the 09-24 ruling bars every beat from claiming. The pass message was fixed and the hover text was not. Still present in the shipped 0.2.3 zip (`texel/tex_tools.py`, re-checked 16:05Z), and the Lite build carries the same file.
 - **Dither brush (0.2.2)** still has no visual.
+
+## 2026-10-09 — `texel-marketing`: Fri beat SPENT (cel grid + onion skin)
+
+- **Posted** [3mxhwx7hcxx2m](https://bsky.app/profile/pixelkiln.bsky.social/post/3mxhwx7hcxx2m) from `promo/celgrid/` (two crops of `store/stills/ui_anim_05.png`). `ui_anim_05` is blocked for reuse until **10-30**.
+- **Sun 10-11 beat:** the best-looking render of the week, from an unused `store/stills/shot_*` or `env_*` still. Check `POSTED.md` for 21-day blocks.
+- **Still ready:** the Check Tiling build-in-public text beat (`promo/post_2026-10-07_checktiling_DRAFT.json`). Re-check it against 0.2.3 before sending.
+- **Still ready:** a Diamond-brush before/after (the 0.2.3 fix) for Mon 10-12. It needs a measured visual from the shipped zip.
+- **Dither brush (0.2.2)** still has no visual.
+- **T-023 (HUMAN stop/continue call) is open.** If the user calls STOP, every row here is void.
