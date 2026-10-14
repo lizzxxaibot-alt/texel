@@ -6,6 +6,115 @@ in `../ACTIONS.md` and handed to a named owner.
 
 ---
 
+## 2026-10-14 — run 27 (catch-up, 05:33Z; the host was off ~10-10T13:30Z → 10-14T05:20Z, so there were no 10-11, 10-12 or 10-13 runs)
+
+**VERDICT: BLOCKED ON A HUMAN DECISION, AND DEGRADED BY THE OUTAGE.** The listing is clean. **T-023 (stop/continue) is still unanswered at 5 days**, and today is the v0.2.4 release slot, which defaults to feature work while it stays open. Support and marketing lost three and two days to the host gap. The one new number is a single free-demo download that no routine of ours made.
+
+### Action ledger
+
+**Opened: 0. Closed: 0.** No row carries a `DONE?` note. T-023 is not answered in `ACTIONS.md`, `STATE.md` (including its uncommitted diff), `state/texel.md` or `ROADMAP.md`.
+
+| id | age | owner |
+|---|---|---|
+| T-010 | 29 d | **HUMAN**. The 14-day rung stays suspended, because A-032 and A-037 are still Open in `pixelkiln/launch/watch/ACTIONS.md` (re-read this run). |
+| T-011 | 29 d | **HUMAN**. Suspended, as T-010. |
+| T-015 | 25 d | **HUMAN**. Suspended, as T-010. |
+| T-016 | 25 d | **HUMAN**. Suspended, as T-010. It is part of T-023's CONTINUE option. |
+| T-023 | 5 d | **HUMAN**. The stop/continue call. Framing is in run 25; the default STOP checkpoint is 2026-11-14, 31 days out. |
+
+### ALERTS
+
+1. **The v0.2.4 slot fires today (15:13Z) with T-023 open: T-023 · 5 d · HUMAN.** As run 26 warned, `texel-release` will default to v0.2.x feature work, which is the work CONTINUE-REDIRECTED would pause. This is not a new row. If the user wants the slot redirected, today before 15:13Z is the last chance this week.
+2. **Host outage, ~3.7 days, already owned by A-037 (HUMAN, Pixelkiln ledger). No new row.** Doer windows from `list_scheduled_tasks` at 05:33Z:
+   - **Three Texel-lane routines went silent at once, so this is the app being off, not three separate failures.**
+   - **`texel-support`** last ran 10-10T13:25Z (~88 h). It wrote its 10-10 row (`SUPPORT.md:656`, 0 inbound). The 10-11, 10-12 and 10-13 slots were lost. Next run 13:24Z today.
+   - **`texel-marketing`** last ran 10-09T21:39Z (~104 h). The **Sun 10-11 and Mon 10-12 beats were lost**; `promo/POSTED.md`'s newest entry is still Fri 10-09. The Sat 10-10 §E listing check also never ran. Next run 20:20Z today, which is a Wed beat day.
+   - **`pixelkiln-backup`** last ran 10-10T03:14Z.
+   - **The 05:20Z catch-up wave fired the Pixelkiln routines and this one, but none of those three.** That matches the skip pattern A-037 already records.
+   - **`texel-release`** (`0 10 * * 3`) last ran 10-07; its slot is today, so it is not late. **`texel-funnel`** (`0 10 * * 5`) last ran 10-09; its next slot is 10-16, so it is not late.
+
+### Listing (measured 05:34Z)
+
+| Check | Result |
+|---|---|
+| Logged-out page | HTTP 200, 32,948 B. `Updated` reads 07 Oct 2026 @ 16:00 UTC. |
+| Download | Paid `texel-0.2.3.zip` 207 kB, which matches local `dist/texel-0.2.3.zip` (212,461 B). Demo `texel-lite-demo-0.2.3.zip` 195 kB. Its presence was checked on the page HTML only; nothing was downloaded. |
+| Price | `game[min_price]` is $9.95 and the public page shows $9.95. Correct until v0.4.0. |
+| Status | `game[published]=published` |
+| AI disclosure | `ai_generated=yes`, graphics on, code on |
+
+**All pass.** Read with a one-off headless read-only script through `lib.mjs` `launch()`, which handles the profile lock. `profile.lock` was absent before and after the read. The script lives in the session scratchpad, not the repo.
+
+### Numbers
+
+`| 2026-10-14 (05:33Z) | 136 | 6 | 0 | $0.00 | 0.00% |`
+
+- **7-day trend:** this week +11 views (125 → 136, ≈1.7/day) against +17 the week before (≈2.5/day). That is the fifth weekly fall in a row, though the 3.7 days since run 26 ran slightly faster (+9, ≈2.4/day). Direction only.
+- **The new download:** it is on `texel-lite-demo-0.2.3.zip` (3 → 4); paid files are still all 0. It is not this routine's doing, and support's 10-10 row records no download. **It is the first download not traced to us, probably genuine, but it cannot be proven from itch's counts.** One free demo pull is not demand evidence and does not move T-023.
+- **Conversion:** 0/136. The 200-view gate is 64 views away, about 5–6 weeks at current pace, which is still after T-023's 11-14 default.
+
+### Roadmap
+
+- **v0.2.4 "Brush, the rest": target Wed 2026-10-14, today.** The `texel-release` slot is 15:13Z, so this is not late yet; run 28 checks whether it shipped. Its scope depends on T-023 (ALERT 1). Watch does not move the date.
+- **v0.4.0 "Handoff": target 2026-11-14, when the price steps to $14.95.** That is the same day as T-023's default STOP.
+
+---
+
+
+## 2026-10-10 — run 26 (in slot, 11:53Z)
+
+**VERDICT: BLOCKED ON A HUMAN DECISION.** Nothing has changed since run 25. The listing is clean, and all four doers ran and produced. Texel is on day 31 with 0 sales, and **T-023 (stop/continue) is still unanswered**. Until it is, the routines keep running on the old plan.
+
+### Action ledger
+
+**Opened: 0. Closed: 0.** No row carries a `DONE?` note. T-023 is not answered in `ACTIONS.md`, `STATE.md` or `ROADMAP.md`.
+
+| id | age | owner |
+|---|---|---|
+| T-010 | 25 d | **HUMAN**. The 14-day rung stays suspended, because A-032 and A-037 are still Open in `pixelkiln/launch/watch/ACTIONS.md` (re-read this run). |
+| T-011 | 25 d | **HUMAN**. Suspended, as T-010. |
+| T-015 | 21 d | **HUMAN**. Suspended, as T-010. |
+| T-016 | 21 d | **HUMAN**. Suspended, as T-010. It is part of T-023's CONTINUE option. |
+| T-023 | 1 d | **HUMAN**. The stop/continue call. Framing is in run 25. |
+
+### ALERTS
+
+**None new.** One thing is owned already and only cited: **T-023 · 1 d · HUMAN** sets the scope for the next `texel-release` slot. v0.2.4 is due Wed 10-14, 4 days out, and if T-023 is still open then, that slot will default to shipping features.
+
+Doer windows, read from `list_scheduled_tasks` at 11:53Z:
+- **`texel-support`** last ran 10-09T21:37Z; next 13:25Z today. Its 10-09 row is at `SUPPORT.md:655` (0 inbound). The missed 10-08 run is recorded honestly at `:654`.
+- **`texel-marketing`** last ran 10-09T21:39Z. The **Fri 10-09 beat posted** (cel grid / onion skin) at 21:42Z and is verified in `promo/POSTED.md:2007` with its asset path. So run 25's open question about that slot is closed.
+- **`texel-funnel`** (`0 10 * * 5`) caught up at 10-09T21:40Z and wrote `funnel/LOG.md`, which says correctly that both of its levers are HUMAN (T-016, T-023).
+- **`texel-release`** (`0 10 * * 3`) last ran 10-07T15:36Z; the next slot is 10-14. It is not late.
+
+### Listing (measured 11:53–11:57Z)
+
+| Check | Result |
+|---|---|
+| Logged-out page | HTTP 200, 32,953 B. `Updated` reads 07 Oct 2026 @ 16:00 UTC. |
+| Download | Paid `texel-0.2.3.zip` 207 kB, which matches local `dist/texel-0.2.3.zip` (212,461 B). Demo `texel-lite-demo-0.2.3.zip` 195 kB. The demo was **not** downloaded this run, per run 25's note. |
+| Price | `game[min_price]` is $9.95 and the public page shows $9.95. Correct until v0.4.0. |
+| Status | `game[published]=published` |
+| AI disclosure | `ai_generated=yes`, graphics on, code on |
+
+**All pass.** Read with a one-off headless read-only Playwright script through `lib.mjs` `launch()`. `profile.lock` was absent before and after, and the script was deleted afterwards.
+
+### Numbers
+
+`| 2026-10-10 (11:54Z) | 127 | 5 | 0 | $0.00 | 0.00% |` (all 5 downloads are self-pulls; 0 genuine)
+
+- **7-day trend:** +10 views this week (117 → 127, ≈1.4/day) against +28 the week before (≈4.1/day). That is the fourth weekly fall in a row.
+- **Since Lite went live:** +2 views, 0 genuine demo downloads.
+- **Conversion:** 0/127, with 73 views to go to the 200-view gate. At ≈1.4/day the gate is about 7 weeks away, which is **after** T-023's 11-14 default. The itch listing will therefore likely never reach the size where it can be diagnosed as a cover, price or copy problem. That supports run 25's reading that traffic, not the page, is the binding constraint.
+
+### Roadmap
+
+- **v0.2.4 "Brush, the rest": target Wed 2026-10-14, 4 days out.** No work is logged, which is normal for a weekly slot. Its scope depends on T-023 (see ALERTS). Watch does not move the date.
+- **v0.4.0 "Handoff": target 2026-11-14, when the price steps to $14.95.** That is the same date as T-023's default STOP checkpoint.
+
+---
+
+
 ## 2026-10-09 — run 25 (catch-up, fired 21:34Z after a ~42 h host gap; there was no 10-08 run)
 
 **VERDICT: BLOCKED ON A HUMAN DECISION.** The listing is clean and v0.2.3 with the free Lite demo is live. **The zero-sales rule fires today: 30 days live, 0 sales, and 0 genuine downloads including the demo. The picks-and-shovels test is failing for this listing as it is sold now (itch, $9.95).** Whether to stop or continue is the user's call, filed as **T-023**.
