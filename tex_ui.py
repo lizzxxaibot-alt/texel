@@ -35,10 +35,16 @@ def _draw_tools(layout, s):
     col.separator()
     col.prop(s, "colour", text="")
     row = col.row(align=True)
-    row.prop(s, "brush_size")
+    sz = row.row(align=True)
+    sz.active = s.brush_shape != "STAMP"          # a stamp has its own size
+    sz.prop(s, "brush_size")
     row.prop(s, "pixel_perfect", text="", icon="MOD_SMOOTH")
-    if s.brush_size > 1:
+    if s.brush_size > 1 or len(s.stamps) or s.brush_shape == "STAMP":
         col.prop(s, "brush_shape", text="")
+    if s.brush_shape == "STAMP":
+        r = col.row(align=True)
+        r.prop_search(s, "stamp", s, "stamps", text="", icon="BRUSH_DATA")
+        r.operator("texel.custom_brush_remove", text="", icon="REMOVE").name = ""
     if s.tool != "PICK":
         r = col.row(align=True)
         r.prop(s, "dither", text="")
@@ -384,9 +390,7 @@ class TEXEL_PT_canvas(_Base, Panel):
         col.operator("texel.outline_sprite", icon="MESH_CIRCLE")
         col.operator("texel.dither_fill", icon="TEXTURE_DATA")
         col.separator()
-        row = col.row(align=True)
-        row.operator("texel.custom_brush_add", text="Brush From Selection", icon="ADD")
-        row.operator("texel.custom_brush_remove", text="", icon="REMOVE")
+        col.operator("texel.custom_brush_add", text="Stamp From Selection", icon="ADD")
         col.separator()
         row = col.row(align=True)
         row.operator("texel.grid_add", text="Grid Layer", icon="GRID")

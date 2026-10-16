@@ -305,6 +305,100 @@ check("the dithered stroke reaches the image",
       _rgba(6, 6) == (0, 0, 255, 255) and _rgba(5, 6)[3] == 0,
       (_rgba(6, 6), _rgba(5, 6)))
 
+# -------------------------------------------------------------- custom stamps
+# Until 0.2.4 "Brush From Selection" saved into a module dict that nothing ever
+# painted from. These drive the operator and the real write path end to end.
+from texel.core.select import Selection
+from texel.tex_paint import saved_stamp
+
+bpy.ops.texel.canvas_new(size=16, name="Stmp")
+simg = bpy.data.images["Stmp"]
+sdoc = tex_doc.get(simg)
+sl = sdoc.canvas.layers[0]
+PINK, TEAL = (255, 0, 128, 255), (0, 128, 128, 255)
+sl.set(1, 1, sdoc.canvas.add_colour(PINK))
+sl.set(2, 1, sdoc.canvas.add_colour(TEAL))
+sl.set(1, 2, sdoc.canvas.add_colour(TEAL))           # (2, 2) stays clear
+mark = sdoc.canvas.add_colour((9, 9, 9, 255))
+area.type = "IMAGE_EDITOR"                  # the viewport checks above left it 3D
+area.spaces.active.image = simg
+ctx = {"area": area, "region": next(r for r in area.regions if r.type == "WINDOW"),
+       "space_data": area.spaces.active, "screen": bpy.context.screen,
+       "window": bpy.context.window}
+st.tool, st.brush_size, st.dither = "PENCIL", 1, "OFF"
+with bpy.context.temp_override(**ctx):
+    sdoc.canvas.selection = None
+    check("saving a stamp with no selection is refused",
+          bpy.ops.texel.custom_brush_add(name="none") == {"CANCELLED"})
+    sdoc.canvas.selection = Selection(16, 16)
+    sdoc.canvas.selection.add_rect(8, 8, 9, 9)
+    check("saving a selection with nothing painted in it is refused",
+          bpy.ops.texel.custom_brush_add(name="none") == {"CANCELLED"})
+    sdoc.canvas.selection = Selection(16, 16)
+    sdoc.canvas.selection.add_rect(1, 1, 2, 2)
+    check("save stamp", bpy.ops.texel.custom_brush_add(name="leaf") == {"FINISHED"})
+check("the stamp is stored on the scene", "leaf" in st.stamps and "none" not in st.stamps,
+      [i.name for i in st.stamps])
+check("saving switches the brush to the stamp", (st.brush_shape, st.stamp) == ("STAMP", "leaf"),
+      (st.brush_shape, st.stamp))
+
+sl.px = bytearray(len(sl.px))
+sl.set(8, 8, mark)
+commit_stroke(sdoc, st, [(8, 8)], 1)
+check("the stamp paints its own colours, centred like a brush",
+      [sdoc.canvas.palette[sl.get(x, y)] for x, y in ((7, 7), (8, 7), (7, 8))] == [PINK, TEAL, TEAL],
+      [sl.get(x, y) for x, y in ((7, 7), (8, 7), (7, 8))])
+check("its transparent texels leave the canvas alone", sl.get(8, 8) == mark, sl.get(8, 8))
+check("it paints nothing outside its box",
+      sum(1 for v in sl.px if v) == 4, sum(1 for v in sl.px if v))
+
+commit_stroke(sdoc, st, [(8, 8)], 0)
+check("the eraser rubs out the stamp's footprint only",
+      [sl.get(x, y) for x, y in ((7, 7), (8, 7), (7, 8), (8, 8))] == [0, 0, 0, mark],
+      [sl.get(x, y) for x, y in ((7, 7), (8, 7), (7, 8), (8, 8))])
+
+dl.px = bytearray(len(dl.px))
+commit_stroke(ddoc, st, [(4, 4)], 1)
+check("a stamp carries its colours into another canvas's palette",
+      ddoc.canvas.palette[dl.get(3, 3)] == PINK and ddoc.canvas.palette[dl.get(4, 3)] == TEAL,
+      (dl.get(3, 3), dl.get(4, 3), ddoc.canvas.palette))
+
+st.dither = "CHECKER"
+sl.px = bytearray(len(sl.px))
+commit_stroke(sdoc, st, [(8, 8)], 1)
+check("dither applies to a stamp per texel",
+      sl.get(8, 7) == 0 and sl.get(7, 7) != 0 and sl.get(7, 8) == 0,
+      (sl.get(7, 7), sl.get(8, 7), sl.get(7, 8)))
+st.dither = "OFF"
+
+st.tool = "FILL"
+sl.px = bytearray(len(sl.px))
+commit_stroke(sdoc, st, [(8, 8)], mark)
+check("fill keeps the plain brush instead of smearing the stamp",
+      sum(1 for v in sl.px if v) == 1 and sl.get(8, 8) == mark, sum(1 for v in sl.px if v))
+st.tool = "PENCIL"
+
+bad = st.stamps.add()
+bad.name, bad.data = "bad", "{oops"
+st.stamp = "bad"
+check("a damaged saved stamp reads as no stamp", saved_stamp(st) is None)
+sl.px = bytearray(len(sl.px))
+commit_stroke(sdoc, st, [(8, 8)], mark)
+check("and the brush falls back to a plain texel rather than raising",
+      sum(1 for v in sl.px if v) == 1 and sl.get(8, 8) == mark, sum(1 for v in sl.px if v))
+
+st.stamp = "leaf"
+with bpy.context.temp_override(**ctx):
+    check("removing a stamp that does not exist is refused",
+          bpy.ops.texel.custom_brush_remove(name="ghost") == {"CANCELLED"})
+    check("remove the selected stamp", bpy.ops.texel.custom_brush_remove() == {"FINISHED"})
+    check("the next stamp becomes selected", (st.stamp, st.brush_shape) == ("bad", "STAMP"),
+          (st.stamp, st.brush_shape))
+    bpy.ops.texel.custom_brush_remove(name="bad")
+check("removing the last stamp puts the brush back to Square",
+      (len(st.stamps), st.stamp, st.brush_shape) == (0, "", "SQUARE"),
+      (len(st.stamps), st.stamp, st.brush_shape))
+
 texel.unregister()
 print()
 if fails:

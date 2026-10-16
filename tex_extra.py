@@ -10,11 +10,8 @@ from bpy.types import Operator
 from . import tex_doc
 from .core import raster as R
 from .core.canvas import Canvas
-from .core.select import Selection
+from .core.select import Clip, Selection
 from .tex_props import rgba_bytes
-
-_BRUSHES: dict[str, dict] = {}
-
 
 def _doc(context):
     sp = context.space_data
@@ -186,12 +183,16 @@ class TEXEL_OT_palette_sort(_DocOp):
 
 
 # ------------------------------------------------------------ custom brushes
+# Saved on the scene as text (TexelSettings.stamps), not in a module dict: a
+# stamp has to survive closing Blender, and until 0.2.4 these two buttons wrote
+# a dict nothing ever painted from.
 class TEXEL_OT_custom_brush_add(_DocOp):
     bl_idname = "texel.custom_brush_add"
-    bl_label = "Save Custom Brush"
-    bl_description = "Save the current selection as a reusable stamp"
+    bl_label = "Save Stamp"
+    bl_description = ("Save the selected texels, colours included, as a stamp "
+                      "and switch the brush to it")
 
-    name: StringProperty(name="Name", default="Brush")
+    name: StringProperty(name="Name", default="Stamp")
 
     def invoke(self, context, event):
         return context.window_manager.invoke_props_dialog(self)
@@ -202,26 +203,40 @@ class TEXEL_OT_custom_brush_add(_DocOp):
         if sel is None or sel.is_empty():
             self.report({"WARNING"}, "Select the texels you want to save first")
             return {"CANCELLED"}
-        box = sel.bounds()
-        x0, y0, x1, y1 = box
-        layer = d.canvas.layers[d.canvas.active]
-        pts = [(x - x0, y - y0) for y in range(y0, y1 + 1) for x in range(x0, x1 + 1)
-               if (x, y) in sel and layer.get(x, y)]
-        _BRUSHES[self.name] = {"w": x1 - x0 + 1, "h": y1 - y0 + 1, "pts": pts}
-        self.report({"INFO"}, f"Brush '{self.name}': {len(pts)} texels")
+        clip = Clip.from_layer(d.canvas.layers[d.canvas.active], sel, d.canvas.palette)
+        n = len(clip.offsets())
+        if not n:
+            self.report({"WARNING"}, "The selection has no painted texels on this layer")
+            return {"CANCELLED"}
+        s = context.scene.texel
+        item = s.stamps.get(self.name) or s.stamps.add()
+        item.name, item.data = self.name, clip.encode()
+        s.stamp, s.brush_shape = self.name, "STAMP"
+        self.report({"INFO"}, f"Stamp '{self.name}': {n} texels, {clip.w}x{clip.h}. The brush now paints it")
         return {"FINISHED"}
 
 
-class TEXEL_OT_custom_brush_remove(_DocOp):
+class TEXEL_OT_custom_brush_remove(Operator):
     bl_idname = "texel.custom_brush_remove"
-    bl_label = "Remove Custom Brush"
+    bl_label = "Remove Stamp"
+    bl_description = "Delete the selected stamp"
+    bl_options = {"REGISTER", "UNDO"}
 
-    name: StringProperty(name="Name", default="")
+    name: StringProperty(name="Name", default="",
+                         description="Stamp to delete; empty means the one selected")
 
     def execute(self, context):
-        if _BRUSHES.pop(self.name, None) is None:
-            self.report({"WARNING"}, f"No brush called '{self.name}'")
+        s = context.scene.texel
+        name = self.name or s.stamp
+        i = s.stamps.find(name)
+        if i < 0:
+            self.report({"WARNING"}, f"No stamp called '{name}'")
             return {"CANCELLED"}
+        s.stamps.remove(i)
+        if s.stamp == name:
+            s.stamp = s.stamps[0].name if len(s.stamps) else ""
+        if not s.stamp and s.brush_shape == "STAMP":
+            s.brush_shape = "SQUARE"
         return {"FINISHED"}
 
 
@@ -433,6 +448,5 @@ def register():
 
 
 def unregister():
-    _BRUSHES.clear()
     for c in reversed(CLASSES):
         bpy.utils.unregister_class(c)

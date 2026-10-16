@@ -170,6 +170,15 @@ def setup():
     return img
 
 
+def _stamp_state():
+    """The Stamp shape draws a search field and a remove button nothing else
+    draws, so it needs its own state."""
+    s = bpy.context.scene.texel
+    item = s.stamps.add()
+    item.name, item.data = "leaf", '{"w": 1, "h": 1, "px": "01", "palette": [[0,0,0,0],[200,60,60,255]]}'
+    s.stamp, s.brush_shape = "leaf", "STAMP"
+
+
 # Each step puts the UI in a different state, because panels draw different
 # things depending on it. A panel that only breaks when a canvas has frames is
 # still a broken panel.
@@ -180,6 +189,7 @@ STEPS = [
                                           bpy.ops.texel.track_add(name="BG", bottom=True))),
     ("onion skin on", lambda img: setattr(bpy.context.scene.texel, "onion_skin", True)),
     ("big brush", lambda img: setattr(bpy.context.scene.texel, "brush_size", 6)),
+    ("stamp brush", lambda img: _stamp_state()),
     ("rect tool", lambda img: setattr(bpy.context.scene.texel, "tool", "RECT")),
     ("fill tool", lambda img: setattr(bpy.context.scene.texel, "tool", "FILL")),
     ("still move", lambda img: setattr(bpy.context.scene.texel,

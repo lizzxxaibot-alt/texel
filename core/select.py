@@ -5,6 +5,7 @@ rather than a set of points: at 512x512 a set of tuples costs megabytes and
 makes the per-texel test a hash lookup, while this is one index.
 """
 from __future__ import annotations
+import json
 
 from . import raster as R
 from . import tools as T
@@ -169,6 +170,34 @@ class Clip:
                 if sel and not sel.is_empty() and (sx, sy) not in sel:
                     continue
                 px[y * w + x] = layer.get(sx, sy)
+        return cls(w, h, px, palette)
+
+    def offsets(self) -> list[tuple[int, int, int]]:
+        """(dx, dy, palette index) for each opaque texel, so the clip can be
+        painted as a stamp. Centred the way raster.brush_mask centres a brush,
+        so a stamp lands under the cursor where a square brush its size would."""
+        hx, hy = self.w // 2, self.h // 2
+        return [(x - hx, y - hy, v) for y in range(self.h) for x in range(self.w)
+                if (v := self.px[y * self.w + x])]
+
+    def encode(self) -> str:
+        """Text form, for a StringProperty - that is how a stamp gets into a .blend."""
+        return json.dumps({"w": self.w, "h": self.h, "px": self.px.hex(),
+                           "palette": [list(c) for c in self.palette]})
+
+    @classmethod
+    def decode(cls, text: str) -> "Clip":
+        """Inverse of encode. A damaged string raises ValueError rather than
+        painting garbage: the text lives in a .blend anyone can edit."""
+        try:
+            d = json.loads(text)
+            w, h, px = int(d["w"]), int(d["h"]), bytearray.fromhex(d["px"])
+            palette = [tuple(int(v) for v in c) for c in d["palette"]]
+        except (ValueError, KeyError, TypeError) as e:
+            raise ValueError(f"not a saved stamp: {e}") from None
+        if (w < 1 or h < 1 or len(px) != w * h or any(len(c) != 4 for c in palette)
+                or any(v >= len(palette) for v in px)):
+            raise ValueError("saved stamp is damaged")
         return cls(w, h, px, palette)
 
     def paste_into(self, canvas, layer, ox: int, oy: int, transparent_skips=True) -> int:

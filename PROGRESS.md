@@ -640,3 +640,79 @@ Recorded in `ROADMAP.md` under v0.2.3 and in `ACTIONS.md` T-022.
 - Devlog **1696051** is live.
 - **4 of the demo's downloads are this run's verification pulls** (2 per Lite
   file).
+
+## 2026-10-16 — v0.2.4 "Stamps" (`texel-release`, manual catch-up for the lost 10-14 slot)
+
+**Ledger first, per §0:** no open row is owned by `texel-release`. T-010, T-011,
+T-015, T-016 and T-023 are `HUMAN`. **T-023 (stop/continue) is unanswered**, so
+the task file's default applied, which is to build the next roadmap slice. The
+10-14 slot never ran because the host was off ~10-14T05:50Z → 10-16T06:24Z.
+
+**Why stamps, of the three v0.2.4 items:** priority 3 (roadmap). There is no
+crash in `SUPPORT.md`, and no ask has 3+ requests. Scoping found a **dead
+control in the shipped product**. *Brush From Selection* (`texel.custom_brush_add`)
+saved into a module dict, `tex_extra._BRUSHES`, that no paint path ever read,
+and the dict was lost on quit. The listing names custom stamps as upcoming.
+Tablet pressure was smaller, but it would have left the dead button live.
+
+### What changed
+- `core/select.py`: `Clip.offsets()` centres a clip the way `brush_mask` centres
+  a brush. `Clip.encode()`/`decode()` give a text form for a StringProperty;
+  `decode` raises ValueError on any damaged string. **The tests were written first and
+  watched failing** (`AttributeError: 'Clip' object has no attribute 'offsets'`).
+- `tex_props.py`: `TexelStamp` PropertyGroup, `TexelSettings.stamps`
+  (CollectionProperty) + `stamp`, and a **Stamp** item in `brush_shape`.
+- `tex_paint.py`: `saved_stamp()` (decode cached per string; a damaged string
+  returns None, so the brush falls back to plain). `commit_stroke` stamps
+  colours remapped into the target palette, the eraser uses the footprint,
+  dither applies per texel, and **Fill is excluded** because a stamp on every
+  texel of a region smears. `invoke` adds the stamp's colours up front, so a
+  full palette is reported there instead of raising inside the modal handler.
+- `tex_extra.py`: both operators rewired to the scene collection, with
+  `_BRUSHES` deleted. Remove with an empty name deletes the selected stamp and
+  falls back to Square when none are left. **Same idnames, no new operator.**
+- `tex_ui.py`: the Shape menu shows when stamps exist; Stamp draws a
+  `prop_search` field and a remove button; Size goes inactive. The button is
+  renamed "Stamp From Selection".
+- Tests: `test_select.py` +12 checks, `test_features.py` +17 (operator and real
+  write path), `test_persist.py` +1 (a stamp survives save → reopen), and
+  `test_panels.py` gets a new **"stamp brush"** draw state, because no
+  existing state drew the new branch. Its screenshot
+  `shots/panels/panel_05_stamp_brush.png` was read by eye and is clean.
+- Docs sealed in the zip: README (Stamps entry), START-HERE (version and
+  schedule rows), ROADMAP (v0.2.4 BUILT, v0.2.5 = gradient + pressure on 10-21,
+  v0.3.0 moved 10-17 → **10-28**, because 10-17 is a Saturday).
+
+### The gate, in full, on the code that shipped
+6 headless suites pass · `core/` at **100.0%** (1,081 statements, 0 missed) ·
+7 headless Blender suites on 4.5.9, 0 tracebacks · `test_panels` / `test_keys` /
+`test_e2e` 0 tracebacks · `build.py` · `test_install` · `test_lite` on the built
+Lite zip · `test_versions.sh` **pass=3 fail=0** (4.2.23, 4.5.9, 5.2.1) ·
+`run_gui_versions.sh` all pass · `store_check.py` **13/13**. After the gate only
+the sealed docs changed. Both zips were rebuilt, and `test_install` and
+`test_lite` were re-run on the final archives (pass).
+
+### Live-page verification (D.4), taken before ROADMAP/devlog/queue were written
+- Uploaded with `itch_upload.mjs` one file at a time: `texel-0.2.4.zip` (id
+  19795424, hid 0.2.3), then `texel-lite-demo-0.2.4.zip` (id 19795427, `--demo`,
+  hid Lite 0.2.3).
+- **Cookie-less GET `z3er1n.itch.io/texel` → HTTP 200, 32,876 B.** The upload
+  widget lists exactly **`texel-0.2.4.zip` 210 kB** (local 215,561 B, sha256
+  `18dd4571…5d358c01`) and, in the `for_demo` block, **`texel-lite-demo-0.2.4.zip`
+  198 kB** (local 202,977 B, sha256 `f90fb680…acd06772`). No 0.2.3 file is on the page.
+  `Updated` reads 16 October 2026 @ 06:50 UTC.
+- An anonymous POST to `/file/19795424` returns *"A key is needed to download"*.
+- **The demo was NOT pulled back this time,** to keep the demo download count
+  clean (it is the only demand signal, with 2 unattributed pulls so far).
+  Byte identity rests on the widget's filename and size and the pinned copies in
+  `dist/shipped/*-SHIPPED-2026-10-16.zip`.
+- Devlog **1710069** *"0.2.4: stamps from a selection"* is live logged-out, renders as
+  HTML (5 h2, 0 stray `**`), and is first in `devlog.rss`. The first publish attempt
+  failed before save on `--type update`. The valid values are `general_update` /
+  `major_update`.
+
+### Not done / handed off
+- No stamp visual exists. A new one is queued for `texel-marketing` in `promo/QUEUE.md`.
+- `LISTING.md:157` lists stamps as upcoming, so it is stale. Owner `texel-marketing`.
+- **v0.4.0's 2026-11-14 is a Saturday** and is also T-023's default STOP date.
+  It was not moved, because the price step rides it. Left for the T-023 decision.

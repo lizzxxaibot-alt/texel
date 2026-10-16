@@ -5,6 +5,7 @@ from bpy.types import Operator
 
 from . import tex_doc, tex_pick
 from .core import raster as R
+from .core.select import Clip
 from .tex_props import rgba_bytes
 
 
@@ -43,6 +44,29 @@ def stroke_points(s, pts, w, h):
     return R.symmetry_points(pts, w, h, s.mirror_x, s.mirror_y, s.symmetry)
 
 
+_STAMP_CACHE = {}
+
+
+def saved_stamp(s):
+    """The scene's selected stamp as (dx, dy, rgba) offsets, or None.
+
+    Decoded once per distinct saved string, not once per mouse event. A
+    damaged string reads as no stamp, so the brush falls back to a square
+    rather than painting garbage or raising inside the modal handler."""
+    item = s.stamps.get(s.stamp) if s.stamp else None
+    if item is None:
+        return None
+    offs = _STAMP_CACHE.get(item.data)
+    if offs is None:
+        try:
+            clip = Clip.decode(item.data)
+        except ValueError:
+            return None
+        offs = [(dx, dy, clip.palette[v]) for dx, dy, v in clip.offsets()]
+        _STAMP_CACHE[item.data] = offs
+    return offs
+
+
 def commit_stroke(doc, s, pts, idx):
     """Stamp `pts` onto the active layer with the scene's brush and flush.
 
@@ -50,6 +74,20 @@ def commit_stroke(doc, s, pts, idx):
     `stroke_points`: it is the only way a test reaches the real write path."""
     layer = doc.canvas.layers[doc.canvas.active]
     w, h = doc.canvas.w, doc.canvas.h
+    # fill hands over every texel of a region; stamping a pattern on each of
+    # them would smear it, so fill keeps the plain brush
+    offs = saved_stamp(s) if s.brush_shape == "STAMP" and s.tool != "FILL" else None
+    if offs is not None:
+        # a stamp paints its own colours; the eraser (idx 0) rubs out its
+        # footprint. Colours join this canvas's palette once per stroke.
+        remap = {rgba: (doc.canvas.add_colour(rgba) if idx else 0)
+                 for _, _, rgba in offs}
+        for x, y in stroke_points(s, pts, w, h):
+            for dx, dy, rgba in offs:
+                if s.dither == "OFF" or R.dither_hit(s.dither, x + dx, y + dy, s.dither_level):
+                    layer.set(x + dx, y + dy, remap[rgba])
+        doc.flush()
+        return
     for x, y in stroke_points(s, pts, w, h):
         _stamp(layer, x, y, idx, s.brush_size, w, h, s.brush_shape,
                s.dither, s.dither_level)
@@ -124,6 +162,15 @@ class TEXEL_OT_paint(Operator):
             return {"FINISHED"}
 
         self.colour_index = self.doc.canvas.add_colour(rgba_bytes(s.colour))
+        if s.brush_shape == "STAMP" and s.tool not in {"ERASER", "FILL"}:
+            # join the stamp's colours now, where a full palette can be
+            # reported, rather than inside the modal handler mid-stroke
+            try:
+                for _, _, rgba in saved_stamp(s) or ():
+                    self.doc.canvas.add_colour(rgba)
+            except ValueError:
+                self.report({"ERROR"}, "The palette is full, so this stamp's colours cannot be added to it")
+                return {"CANCELLED"}
 
         if s.tool == "FILL":
             flat = self.doc.canvas.flatten()

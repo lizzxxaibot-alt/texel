@@ -78,6 +78,12 @@ img = bpy.data.images["Pixel Cube Texture"]
 paint_square(img)
 check("painted 256 texels", census(img).get(RED) == 256, census(img).get(RED))
 
+# a saved stamp lives on the scene as text; until 0.2.4 it lived in a module
+# dict and was gone the moment Blender closed
+_stamp = bpy.context.scene.texel.stamps.add()
+_stamp.name, _stamp.data = "leaf", '{"w": 1, "h": 1, "px": "01", "palette": [[0,0,0,0],[1,2,3,255]]}'
+bpy.context.scene.texel.stamp = "leaf"
+
 bpy.ops.wm.save_as_mainfile(filepath=blend)
 check("save_pre packed the generated canvas", bool(img.packed_file))
 
@@ -85,6 +91,11 @@ bpy.ops.wm.open_mainfile(filepath=blend)
 img = bpy.data.images["Pixel Cube Texture"]
 check("the art is still in the file after a reopen",
       census(img).get(RED) == 256, census(img).get(RED))
+_st = bpy.context.scene.texel
+check("a saved stamp is still in the file after a reopen",
+      _st.stamp == "leaf" and "leaf" in _st.stamps and '"1, 2, 3' not in _st.stamps["leaf"].data
+      and _st.stamps["leaf"].data.startswith('{"w": 1'),
+      (_st.stamp, [(i.name, i.data) for i in _st.stamps]))
 check("load_post dropped the stale docs", tex_doc._DOCS == {}, list(tex_doc._DOCS))
 
 # ------------------------- 2. the bug: what the first edit of a new session does

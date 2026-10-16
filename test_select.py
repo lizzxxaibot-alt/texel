@@ -4,6 +4,7 @@ import sys
 from core.canvas import Canvas, Layer
 from core.select import Clip, Selection
 from core import adjust as A
+from core import raster as R
 
 fails = []
 
@@ -84,6 +85,46 @@ check("paste is offset correctly", c2.layers[0].get(4, 4) == 0)
 
 empty = Clip.from_layer(Layer("e", 4, 4), None, c.palette)
 check("clip of an empty layer is None", empty is None)
+
+# ---------------------------------------------------------------------- stamps
+# A stamp is a Clip painted as a brush. It has to land under the cursor where a
+# square brush of the same size would, skip its transparent texels, and survive
+# being written into a .blend as text.
+sc = Canvas(8, 8)
+r_ = sc.add_colour((255, 0, 0, 255))
+g_ = sc.add_colour((0, 255, 0, 255))
+sl = sc.layers[0]
+sl.set(2, 2, r_); sl.set(3, 2, g_); sl.set(4, 3, r_)     # (2,3),(3,3),(4,2) stay clear
+ssel = Selection(8, 8)
+ssel.add_rect(2, 2, 4, 3)
+stamp = Clip.from_layer(sl, ssel, sc.palette)
+offs = stamp.offsets()
+check("a stamp keeps only its opaque texels", len(offs) == 3, offs)
+check("a stamp is centred like a brush of its size",
+      {(dx, dy) for dx, dy, _ in offs} == {(-1, -1), (0, -1), (1, 0)}, offs)
+check("every stamp offset sits inside a square brush of its width",
+      {(dx, dy) for dx, dy, _ in offs} <= set(R.brush_mask(3, "SQUARE")), offs)
+check("a stamp keeps its own colours",
+      [stamp.palette[v] for _, _, v in offs] == [(255, 0, 0, 255), (0, 255, 0, 255), (255, 0, 0, 255)],
+      [stamp.palette[v] for _, _, v in offs])
+
+back = Clip.decode(stamp.encode())
+check("a stamp survives encode/decode",
+      (back.w, back.h, bytes(back.px), back.palette)
+      == (stamp.w, stamp.h, bytes(stamp.px), stamp.palette))
+check("decoded palette entries are tuples, so add_colour can find them",
+      all(isinstance(col, tuple) for col in back.palette), back.palette)
+for label, text in (("not JSON", "{oops"), ("not a dict", "[1, 2]"),
+                    ("missing a key", '{"w": 1, "h": 1, "px": "00"}'),
+                    ("pixels do not fill the box", '{"w": 2, "h": 2, "px": "00", "palette": [[0,0,0,0]]}'),
+                    ("an index past the palette", '{"w": 1, "h": 1, "px": "05", "palette": [[0,0,0,0]]}'),
+                    ("a 3-channel colour", '{"w": 1, "h": 1, "px": "00", "palette": [[0,0,0]]}'),
+                    ("a zero-size box", '{"w": 0, "h": 1, "px": "", "palette": [[0,0,0,0]]}')):
+    try:
+        Clip.decode(text)
+        check(f"a damaged stamp is refused: {label}", False)
+    except ValueError:
+        check(f"a damaged stamp is refused: {label}", True)
 
 # ----------------------------------------------------------------- adjustments
 pal = [(0, 0, 0, 0), (100, 150, 200, 255)]

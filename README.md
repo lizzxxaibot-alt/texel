@@ -143,6 +143,12 @@ Texel is not only a 3D texture tool:
   fixed to the canvas, not the stroke, so overlapping strokes line up; the
   texels a stroke skips keep what was under them. Also works with Eraser and
   Fill.
+- **Stamps** (0.2.4): select some texels, press **Stamp From Selection**, and
+  the brush paints that patch in its own colours wherever you click or drag.
+  Transparent texels in the stamp leave the canvas alone; the Eraser rubs out
+  the stamp's footprint; dither modes apply to it. Stamps are saved in the
+  .blend, and the Shape menu's search field picks between them. Fill keeps the
+  plain brush, and mirror/radial symmetry repeats a stamp without flipping it.
 - **Layer opacity** blends properly.
 
 ## Licence

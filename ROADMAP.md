@@ -1,7 +1,7 @@
 # Texel by Pixelkiln — upgrade schedule
 
-**Written 2026-09-09. Last edited 2026-10-07 by `texel-release`.**
-**This file was sealed into the v0.2.3 build on 2026-10-07** (and into the free
+**Written 2026-09-09. Last edited 2026-10-16 by `texel-release`.**
+**This file was sealed into the v0.2.4 build on 2026-10-16** (and into the free
 Texel Lite demo of the same version). Whether that build is live is recorded
 outside this file, in `PROGRESS.md`; see the note below for why. Texel is sold at
 https://z3er1n.itch.io/texel.
@@ -389,9 +389,44 @@ views and no download of any kind, because its only file cost $9.95. Lite
 measures whether viewers want the tool at all. No buyer has asked for any of
 the three brush items, so a demand test came ahead of them.
 
-### v0.2.4 — "Brush", the rest · target **2026-10-14**
-The three items left from the list below: dithered gradient, custom stamp from a
-selection, tablet pressure.
+### v0.2.4 — "Stamps" · **RELEASED 2026-10-16**, two days late, partial as forecast
+**Live-page read-back, 2026-10-16 ~06:55Z (the gate, taken before this tick was
+written; this line is NOT in the 0.2.4 zip, which says "BUILT"):** cookie-less
+GET of `z3er1n.itch.io/texel` → HTTP 200, 32,876 B. The paid upload widget reads
+**`texel-0.2.4.zip` 210 kB** (id 19795424; local 215,561 B, sha256
+`18dd4571…5d358c01`, pinned at `dist/shipped/texel-0.2.4-SHIPPED-2026-10-16.zip`).
+The `for_demo` block reads **`texel-lite-demo-0.2.4.zip` 198 kB** (id 19795427).
+An anonymous request for the paid id returns *"A key is needed to download"*.
+0.2.3 and Lite 0.2.3 are hidden, not deleted. Devlog **1710069** is live
+logged-out and first in `devlog.rss`. Full record: `PROGRESS.md`, 2026-10-16.
+
+**What shipped: custom stamps from a selection.** *Stamp From Selection* saves
+the selected texels, colours included, onto the scene; the brush's Shape menu
+gains **Stamp**, with a search field to pick between saved stamps and a button
+to delete one. The brush then paints the stamp in its own colours under the
+cursor, centred like a square brush its size. Transparent texels leave the
+canvas alone, the Eraser rubs out the footprint, and dither modes apply per
+texel. Stamps are written into the .blend, so they survive a reopen.
+
+**Why stamps first: it was the one item that removed a dead control.** Since
+long before this release the panel carried a *Brush From Selection* button that
+saved into a module dictionary **nothing ever painted from**, and which was
+lost when Blender closed. A buyer pressing it got an "INFO" line and no
+feature. The listing names "custom stamps" as upcoming. Tablet pressure was
+smaller, but shipping it would have left the dead button live another week.
+
+**Limits, stated rather than discovered:** Fill keeps the plain brush (a stamp
+on every texel of a region smears it). Mirror and radial symmetry repeat a stamp
+without flipping it. No new operator: the two existing ids were rewired, so the
+count is unchanged.
+
+**What slipped, and why:** the 10-14 slot never ran. The host was off from
+~10-14T05:50Z to 10-16T06:24Z and the scheduler does not replay a weekly slot;
+this run is a manual catch-up on 10-16. **Dithered gradient and tablet pressure
+move to v0.2.5, target Wed 2026-10-21.**
+
+### v0.2.5 — "Brush", the rest · target **Wed 2026-10-21**
+The two items left from the list below: dithered gradient, tablet pressure.
 
 #### BUG — Diamond brush is wrong at every even size; Size 2 paints nothing · found by `texel-support` 2026-10-07 · **FIXED IN v0.2.3**
 **Fix, 2026-10-07 (`texel-release`):** the candidate fix below, as written:
@@ -510,7 +545,7 @@ So Part 2 is real work, not a tweak: it wants a structural measure — how the
 neighbourhood across the wrap compares statistically to interior neighbourhoods —
 and it gets a slice of its own rather than being rushed in behind a patch.
 **Scheduled into v0.3.0 "Tileset"**, which is where per-tile seam checking
-already lives, target **2026-10-17**. Until it lands:
+already lives, target **2026-10-28** (moved from 10-17 on 2026-10-16). Until it lands:
 
 - **`texel-marketing`'s restriction stands.** No beat may claim Check Tiling
   catches seams. `texel.shift_wrap` is untouched by any of this and is still a
@@ -525,7 +560,12 @@ a build was live because a routine ticked ahead of the upload, and that is not
 happening twice in the same month. The live 0.2.1 zip still prints the old
 string.
 
-### v0.3.0 — "Tileset" · target 2026-10-17
+### v0.3.0 — "Tileset" · target **Wed 2026-10-28** (was 2026-10-17)
+**Moved 2026-10-16.** 10-17 is a Saturday, `texel-release` runs only on
+Wednesdays (the T-013 rule), and v0.2.5 holds 10-21. 10-28 is the first slot
+after that. **Not moved, but flagged for its owner:** v0.4.0's 2026-11-14 is
+also a Saturday, and it is the same day as T-023's default STOP. The price step
+rides that date, so it is left for the T-023 decision rather than moved here.
 **Medium: new data structures, but still all our own code.**
 - Slice an image into a tile grid; a tile palette panel you stamp from
 - Stamp brush with a tile picked from the sheet

@@ -1,6 +1,6 @@
 """Scene-level state. One PropertyGroup, deliberately flat."""
 import bpy
-from bpy.props import (BoolProperty, EnumProperty, FloatProperty,
+from bpy.props import (BoolProperty, CollectionProperty, EnumProperty, FloatProperty,
                        FloatVectorProperty, IntProperty, StringProperty)
 
 TOOLS = [
@@ -20,6 +20,12 @@ TOOLS = [
 ]
 
 
+class TexelStamp(bpy.types.PropertyGroup):
+    """A saved stamp. `data` is core.select.Clip.encode() - text, so it is
+    written into the .blend with the scene and survives a reopen."""
+    data: StringProperty()
+
+
 class TexelSettings(bpy.types.PropertyGroup):
     tool: EnumProperty(name="Tool", items=TOOLS, default="PENCIL")
     colour: FloatVectorProperty(
@@ -31,7 +37,10 @@ class TexelSettings(bpy.types.PropertyGroup):
         name="Shape", default="SQUARE",
         items=[("SQUARE", "Square", "Hard corners - the default, and correct at 1px"),
                ("ROUND", "Round", "Circular - what you want above ~3 texels"),
-               ("DIAMOND", "Diamond", "45-degree, for isometric work")])
+               ("DIAMOND", "Diamond", "45-degree, for isometric work"),
+               ("STAMP", "Stamp", "A saved stamp, painted in its own colours")])
+    stamps: CollectionProperty(type=TexelStamp)
+    stamp: StringProperty(name="Stamp", description="Which saved stamp the brush paints")
     pixel_perfect: BoolProperty(
         name="Pixel Perfect", default=True,
         description="Drop L-shaped corner texels from freehand strokes")
@@ -101,6 +110,7 @@ def rgba_bytes(col) -> tuple[int, int, int, int]:
 
 
 def register():
+    bpy.utils.register_class(TexelStamp)
     bpy.utils.register_class(TexelSettings)
     bpy.types.Scene.texel = bpy.props.PointerProperty(type=TexelSettings)
 
@@ -108,3 +118,4 @@ def register():
 def unregister():
     del bpy.types.Scene.texel
     bpy.utils.unregister_class(TexelSettings)
+    bpy.utils.unregister_class(TexelStamp)
