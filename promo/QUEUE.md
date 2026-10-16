@@ -716,3 +716,29 @@ Beats this release earns:
 - **Still ready:** a Diamond-brush before/after (the 0.2.3 fix) for Mon 10-12. It needs a measured visual from the shipped zip.
 - **Dither brush (0.2.2)** still has no visual.
 - **T-023 (HUMAN stop/continue call) is open.** If the user calls STOP, every row here is void.
+
+## 2026-10-14 05:50Z — `texel-marketing` (an off-hours catch-up firing): Wed slot HELD for the release
+
+- **Nothing posted.** The 10-10..10-13 gap meant Sun 10-11 and Mon 10-12 were never posted. They are not made up today, because one post per slot is the cadence.
+- **Wed 10-14 belongs to `texel-release`'s v0.2.4** (ROADMAP target today, run at 10:00 local). **The 15:15 firing posts it** once the zip is verified logged-out. The claims must come from the shipped zip: stamps and tablet pressure only if they actually shipped.
+- **If v0.2.4 does not ship:** the Check Tiling build-in-public text beat (`promo/post_2026-10-07_checktiling_DRAFT.json`) is the fallback. **One flag before it is sent:** its line *"It never compared them"* sits next to *"It weighs colour change across the wrap"*, and that reads as a comparison of the edges. Re-check the wording against `tex_tools.py` in the shipped zip so the post does not contradict itself.
+- **Still ready:** a Diamond-brush before/after (0.2.3) for Fri/Mon; it needs a measured visual. **Dither brush (0.2.2)** still has no visual.
+- **T-023 (HUMAN stop/continue) is still open.** STOP voids every row here.
+
+## 2026-10-16 06:50Z — `texel-marketing` (off-hours catch-up firing): Fri beat SPENT (Trim to Content)
+
+- **Posted** [3mxxxyt54vq2q](https://bsky.app/profile/pixelkiln.bsky.social/post/3mxxxyt54vq2q) from `promo/trim/` (same-box crops of `store/stills/ui_sprite_03.png` / `ui_sprite_04.png`). Both stills are blocked for reuse until **11-06**.
+- **The 20:20Z firing today does not post.** Friday's slot is spent.
+- **Sun 10-18 beat:** the best render of the week from an unused `store/stills/shot_*` or `env_*` still. Check `POSTED.md` for 21-day blocks.
+- **Still ready:** the Check Tiling build-in-public text beat (`promo/post_2026-10-07_checktiling_DRAFT.json`). Re-check its wording against the shipped 0.2.3 `tex_tools.py` first (flag from 10-14).
+- **Still ready:** a Diamond-brush before/after (0.2.3 fix); it needs a measured visual.
+- **Dither brush (0.2.2)** still has no visual. **Unused `ui_*` stills left:** `ui_anim_01..04`, `ui_sprite_01`, `ui_showcase_01..03`.
+- **T-023 (HUMAN stop/continue) is still open.** STOP voids every row here.
+
+## 2026-10-16 ~07:00Z — `texel-release`: v0.2.4 "Stamps" SHIPPED and verified logged-out
+
+- **Release beat (Sun 10-18 or Mon 10-19; Fri is spent):** stamps from a selection. Select texels, press **Stamp From Selection**, and the brush paints that patch in its own colours. Transparent texels skip, the Eraser rubs out the shape, dither applies, and stamps are saved in the .blend. Link: devlog [1710069](https://z3er1n.itch.io/texel/devlog/1710069/024-stamps-from-a-selection). **Claims only from the shipped zip:** no tablet pressure and no dithered gradient (both moved to v0.2.5, 10-21). Fill keeps the plain brush, and symmetry does not flip a stamp. Do not imply either.
+- **NEW VISUAL NEEDED. No existing asset shows stamps.** The only image is the gate's test screenshot `shots/panels/panel_05_stamp_brush.png`, which shows the panel state (Shape = Stamp, search field) and is not customer art. The beat needs a real before/after: one stamp (leaf, rivet or brick) saved from a selection, then dragged across a texture in Blender. Build it through the `brand-visual` loop.
+- **Listing copy is now stale (owner: `texel-marketing`, listing conversion).** `LISTING.md:157` still lists "custom stamps" as upcoming (*"v0.2.1 — the next release, 26 Sep"*). Stamps are live in 0.2.4, and dithered gradients are 0.2.5 (10-21). Tileset moved 10-17 → **10-28**.
+- **Possible false-claim image (check, owner: `texel-marketing`):** any store still that shows the Tools panel with the old **"Brush From Selection"** button now shows a label 0.2.4 no longer has. The button is now "Stamp From Selection". Not checked image by image by this run.
+- **T-023 (HUMAN stop/continue) is still open.** STOP voids every row here.

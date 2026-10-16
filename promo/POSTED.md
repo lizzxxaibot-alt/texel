@@ -2042,3 +2042,78 @@ Both replies were re-fetched cookie-less with `getPosts`. The author and parent 
 - **@andinocturna, @neg981f, @somnorum**: animation showcases with nothing specific to add.
 
 ### §E — due **tomorrow, Sat 2026-10-10**. Look at whether the Lite paragraph sits high enough. Read T-023 first: if the user rules CONTINUE-REDIRECTED, the price and venue may change under the page.
+
+---
+
+## Run 2026-10-14 (Wed, a TEXEL day, 00:39 local / 05:39-05:50Z): an off-hours catch-up firing. Nothing posted, two replies
+
+**Ledger first.** `ACTIONS.md` has no OPEN row owned by `texel-marketing`. The open rows are T-010, T-011, T-015, T-016 and T-023, all `HUMAN`. T-023 (the stop/continue call) is still undecided: neither `STATE.md` nor `ROADMAP.md` carries a dated ruling.
+
+**Why nothing was posted on a Texel day.** This firing started at 05:39:52Z, nine and a half hours early. It is the first `texel-marketing` run since 10-09 21:39Z, so **10-10 through 10-13 had no run at all**. That cost the Sun 10-11 beat, the Mon 10-12 beat and the Sat 10-10 §E check. The Wednesday beat is defined as the release note *"tied to that morning's `texel-release`"*. `ROADMAP.md` targets **v0.2.4 for today**, and `texel-release` runs at 10:00 local, after this run. Posting a stand-in now would spend the slot before the release can claim it. On 10-08 the later of two same-day firings stood down because the earlier one had posted. So **the Wed beat is left to the 15:15 local firing**. If that firing does not happen, the slot is lost. That loss belongs to the host outage (A-037), not to this decision.
+
+### §D — two replies, both verified on the public AppView
+
+| Date | Thread | What was said | Link |
+|---|---|---|---|
+| 2026-10-14 | @fahbraccini.bsky.social (10-13, 0 likes, 1 reply, which suggested spinning the texture): the best way to make a low-poly car's wheels spin. Rotate the mesh, spin a texture, or flip a texture sheet? | Rotating the mesh is the cheap part, one transform per wheel. The catch is speed: with 5 spokes at 60 fps, past 36° a frame the wheel seems to spin backwards. That's 6 rev/s, about 45 km/h on a 66 cm wheel, so a lot of games rotate the mesh and swap to a blurred wheel above that. **Computed, not recalled:** 5 spokes = 72° spacing, so aliasing starts at half of that, 36°/frame. 36 × 60 / 360 = 6.0 rev/s, and 6 × π × 0.66 m = 12.44 m/s = 44.8 km/h. It does not open by correcting the existing reply. | [3mxstspqdh42d](https://bsky.app/profile/pixelkiln.bsky.social/post/3mxstspqdh42d) |
+| 2026-10-14 | @manicmonk.bsky.social (10-14 05:09Z, 2 likes, **0 replies**): a classwork sprite sheet. They think the idle has too few frames or isn't lined up, *"but it works"*. | Congratulated them, then: six frames is plenty for an idle. Across the last six, the head drifts up to ~90 px left of frame 1, about 120 px of sideways travel in a ~513 px cell, so it slides. Pin the feet to the same spot in every cell. **Measured on their full-size upload** (3080x3814 WebP, 6 columns): the head band of each idle cell was cross-correlated against the first. The shifts were 0, −5, −63, −92, −66 and +31 px, a range of 123 px. The six cells were also looked at side by side (scratch `idle.png`), and the drift is visible. | [3mxstsqa5xe2y](https://bsky.app/profile/pixelkiln.bsky.social/post/3mxstsqa5xe2y) |
+
+Both were re-fetched cookie-less with `getPosts`. The author is `pixelkiln.bsky.social` and both parent URIs are right, at 289 and 268 bytes. Neither mentions Texel, carries a link or pitches.
+
+### Threads looked at and left alone
+
+- **@zaebucca** (#PortfolioDay; a Crocotile3D + Blender Pokémon piece, 68 likes). A pixel-art asset seller's portfolio post. All we could add was praise, and the 3D piece is video we did not inspect.
+- **@critcorsac** (10-13, still learning UV seams). We replied 10-07. A second unprompted reply a week later starts to look like following them.
+- **@alfredbaudisch, @ibagail, @afroskeleton, @shadefawks, @ricciwerty**: threads about, or replying around, another pixel-art-in-Blender product. Standing rule.
+- **@alexod** (anti-AI-tool thread), **@irisillych** (spray-paint wish): same reasons as 10-07 and 10-09.
+- **@sirrandall** (needs a pixel artist for a sprite sheet). Any answer from a studio account is a pitch.
+- **@zerinlabs** (palette-texture tip). It is already a tip, with nothing asked.
+
+### §E — the Sat 10-10 check was **missed** (no run 10-10..10-13). The next scheduled check is **Sat 2026-10-17**. Look at the Lite paragraph's position then, and read T-023 first.
+
+---
+
+## Run 2026-10-16 (Fri, a TEXEL day, 01:41 local / 06:41-06:50Z): an off-hours catch-up firing. Posted the Fri beat, two replies
+
+**Ledger first.** `ACTIONS.md` has no OPEN row owned by `texel-marketing`. Open rows: T-010, T-011, T-015, T-016, T-023, all `HUMAN`. T-023 (stop/continue) is still undecided at 7 days (watch run 28). Nothing in it pauses marketing; if the user calls STOP, this routine stops posting about Texel from that day.
+
+**Why post at 01:41 local instead of holding for the 15:20 in-slot firing.** On 10-14 the off-hours firing held because the release owned that slot. Nothing claims today: `texel-funnel`'s format is retired, and there is no release. Texel had not posted since **10-09**, and the host went down twice this week (A-037), which lost Sun 10-11, Mon 10-12 and Wed 10-14. Holding risked a fourth lost slot to buy a better hour. 06:44Z is European morning. **The 20:20Z firing today must NOT post a second Texel beat.** One post per slot.
+
+### Posted — Fri 2026-10-16, sprite beat: Trim to Content
+
+| Date | Beat | Asset | URL | First hour |
+|---|---|---|---|---|
+| 2026-10-16 | **Trim to Content: the torchbearer's 64x64 canvas (80% empty) trimmed to 25x33; Margin keeps a border** | `promo/trim/texel-trim-before.png` (51,953 B) + `promo/trim/texel-trim-after.png` (50,284 B), both 1590x1110 crops at the same box (500,90)-(2090,1200) of `store/stills/ui_sprite_03.png` and `ui_sprite_04.png`. **First post of any `ui_sprite_03/04` still.** Both blocked for reuse until **11-06** | [3mxxxyt54vq2q](https://bsky.app/profile/pixelkiln.bsky.social/post/3mxxxyt54vq2q) | 3 likes at +2 min |
+
+Every claim was checked, not recalled:
+- **The operator ships.** `texel/tex_sprite.py` in `dist/shipped/texel-0.2.3-SHIPPED-2026-10-07.zip`: `TEXEL_OT_trim`, `bl_label = "Trim to Content"`, crops to `content_bounds()`, `margin` IntProperty default 0, max 64. `tex_ui.py:106` draws it in the Sprite panel. Lite stubs the Sprite panel, and the post makes no claim about Lite.
+- **25x33 was measured off the two stills.** The before canvas spans 1,030 px for 64 texels (x 541-1571, y 133-1162), so 16.09 px/texel. The after canvas is 402 x 530 px at the same zoom (the sprite's saturated bbox is 338 px wide in both). 402/16.09 = 24.98, 530/16.09 = 32.94, so 25x33. **80%:** 1 - 825/4096 = 79.9%.
+- **Not claimed:** anything the still cannot show (status text, sheet export of the trimmed sprite).
+- **Live page re-checked first:** cookie-less GET of `z3er1n.itch.io/texel` → HTTP 200, 32,868 B.
+- **Verified cookie-less with `getPostThread`:** author `pixelkiln.bsky.social`, `createdAt` 2026-10-16T06:44:05.486Z, `app.bsky.embed.images#view` with 2 images (1590x1110 each; 400 and 220 characters of alt text), 4 facets (itch link, `#pixelart #b3d #gamedev`). Text 289/300.
+- **Feed size:** looked at the 500px preview (`promo/trim/feed500_*.png`). The empty margin and the tight canvas both read.
+- **Cadence:** the 7-day window 10-10..10-16 held 0 Texel posts before this one.
+- **Phrasing:** *"Trim to Content"*, *"exports 64x64"* and *"packer"* have 0 prior uses in this log. No antithesis construction.
+- **§4 note:** these are unedited crops of real screenshots, not a designed card, so no lint/critic loop was run, same as the 10-05 and 10-09 crops.
+- Spec: `promo/post_2026-10-16.json`.
+
+### §D — two replies, both verified on the public AppView
+
+| Date | Thread | What was said | Link |
+|---|---|---|---|
+| 2026-10-16 | @jackthemaskedman.bsky.social (10-13, 0 likes, **0 replies**): back to sculpting after years of low poly, only to bake the detail into a texture for the low-poly base mesh. I looked at both images: a full-body anatomy sculpt. | The best excuse to sculpt. Then one bake tip: with **Selected to Active**, **Extrusion defaults to 0**, so detail standing proud of the low-poly surface gets missed; start around 0.02 m at real-world scale and raise it until the gaps close. **Checked in Blender 4.5.9 itself** (the online manual returns 403 to automated reads): `BakeSettings.cage_extrusion` default 0.0, description *"Inflate the active object … nearer to the outside of the selected object meshes"*. The 0.02 m start is offered as a start, not a rule. | [3mxxy45cagj2s](https://bsky.app/profile/pixelkiln.bsky.social/post/3mxxy45cagj2s) |
+| 2026-10-16 | @re-lo.bsky.social (10-13, 9 likes, **0 replies**): *"UV unwrap and texture blockout done."* I looked at the image: a character UV layout beside the T-posed model, with a lot of unused checker space in the layout. | Praised the seams and the blockout. Then a cheap res bump: **UV > Average Islands Scale**, scale the face islands up a touch, then **UV > Pack Islands** to fill the square. **Shortcuts were drafted (Ctrl+A / Ctrl+P) and then cut:** in Blender 4.5.9's `blender_default.py` (lines 1463-1464) both bindings sit under `if params.legacy:`, so they are not in the default keymap. The menu paths were sent instead. | [3mxxy45qztq2p](https://bsky.app/profile/pixelkiln.bsky.social/post/3mxxy45qztq2p) |
+
+Both were re-fetched cookie-less with `getPosts`. The author is `pixelkiln.bsky.social`, both parent URIs are right, and they are 269 and 241 bytes. Neither mentions Texel, carries a link or pitches.
+
+### Threads looked at and left alone
+
+- **@vapnet.zip** (a jam tool for procedural 3D pixel-art mountains in geonodes). Too close to a pixel-art-in-Blender tool; standing rule.
+- **@zerrotajo** (a Blender-Aseprite bridge tool). Another tool's thread; standing rule.
+- **@partnano** (web builds and itch auto-uploads working). The one verifiable tip (butler's HTML page must be set to playable in browser once, per itch.io/docs/butler/pushing.html) is something they have already solved.
+- **@majormcdoom** (skew-the-UVs trick, 192 likes). Nothing verified to add beyond praise.
+- **@critcorsac** (still learning seams). Replied 10-07; a third reply crowds them.
+- **@alfredbaudisch, @afroskeleton, @shadefawks, @ricciwerty**: threads about another pixel-art-in-Blender product. Standing rule.
+- **@kapaent** (looking for a pixel artist). Any answer from a studio account is a pitch.
+
+### §E — not due. The next check is **Sat 2026-10-17**. Read T-023 first, then look at the Lite paragraph's position.
