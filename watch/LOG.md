@@ -6,6 +6,65 @@ in `../ACTIONS.md` and handed to a named owner.
 
 ---
 
+## 2026-10-16 — run 28 (catch-up, ~06:35Z; the host was off again ~10-14T05:50Z → 10-16T06:24Z, so there was no 10-15 run)
+
+**VERDICT: BLOCKED ON A HUMAN DECISION, AND DEGRADED BY A SECOND OUTAGE IN A WEEK.** The listing is clean. **T-023 (stop/continue) is unanswered at 7 days.** The outage cost the v0.2.4 release slot (10-14) and the Wed beat, so Texel has had **no release and no Bluesky beat for a full week**.
+
+### Action ledger
+
+**Opened: 0. Closed: 0.** No open row carries a `DONE?` note. T-023 is not answered in `ACTIONS.md`, `STATE.md` (incl. its uncommitted diff) or `ROADMAP.md`. The HUMAN-row suspension still holds: A-032 and A-037 are both still Open in `pixelkiln/launch/watch/ACTIONS.md` (re-read this run).
+
+| id | age | owner |
+|---|---|---|
+| T-010 | 31 d | **HUMAN** (14-day rung suspended, A-032 open) |
+| T-011 | 31 d | **HUMAN** (suspended) |
+| T-015 | 27 d | **HUMAN** (suspended) |
+| T-016 | 27 d | **HUMAN** (suspended; part of T-023's CONTINUE option) |
+| T-023 | 7 d | **HUMAN**: the stop/continue call. It reaches the 7-day toast rung today, which is suspended with the rest because the toast channel is A-032. Default STOP checkpoint 2026-11-14, 29 days out. |
+
+**No row opened for the missed release slot, and that is a choice.** `texel-release` cannot act before its next slot (Wed 10-21), so a doer row would hit the 3-day freeze on 10-19 against a routine that has had no chance to run. Run 29+ checks the 10-21 run instead (Roadmap below).
+
+### ALERTS
+
+1. **Host outage, ~2 days, the second in a week. Owned by A-037 (HUMAN, Pixelkiln ledger). No new row.** From `list_scheduled_tasks` at ~06:35Z:
+   - **Four Texel-lane routines are silent at once, so the app was off. This is one failure, not four.**
+   - **`texel-support`**: last ran 10-14T05:35Z (~49 h); wrote its 10-14 row (`SUPPORT.md:658`, 0 inbound). The 10-14 in-slot run and 10-15 were lost. Next 13:24Z today.
+   - **`texel-marketing`**: last ran 10-14T05:39Z (~49 h) and **posted nothing on purpose**, holding the Wed beat for the 10-14 release. The release never ran, so the **Wed beat was lost too**. `promo/POSTED.md`'s newest Texel beat is still **Fri 10-09**: Sun 10-11, Mon 10-12 and Wed 10-14 are all gone. Next run 20:20Z today, a Fri beat day.
+   - **`texel-release`** (`0 10 * * 3`): last ran **10-07T15:36Z**. **Its 10-14 slot passed without a run**, and `nextRunAt` is already 10-21, so the scheduler will not make it up. **That makes it late on the task's own rule**, and the cause is the host.
+   - **`pixelkiln-backup`**: last ran 10-14T05:40Z. Nothing was committed after 10-14 00:48 local.
+   - **The 06:24Z catch-up wave fired the Pixelkiln routines and this one, but not support, marketing, release or backup.** That is the skip pattern A-037 already records.
+   - **`texel-funnel`** (`0 10 * * 5`): last ran 10-09; its slot is 15:06Z today, so it is not late.
+2. **T-023 · 7 d · HUMAN.** Cited, not re-described. One new fact for whoever decides: the outage kept the 10-14 slot from defaulting to v0.2.x feature work, so nothing CONTINUE-REDIRECTED would pause has been built. The next slot it can default on is Wed 10-21.
+
+### Listing (measured ~06:38Z)
+
+| Check | Result |
+|---|---|
+| Logged-out page | First curl returned **HTTP 429** (166 B). A retry with a browser UA returned **HTTP 200, 32,867 B**. `Updated` reads 07 Oct 2026 @ 16:00 UTC. |
+| Download | Paid `texel-0.2.3.zip` 207 kB, which matches local `dist/texel-0.2.3.zip` (212,461 B). Demo `texel-lite-demo-0.2.3.zip` 195 kB. Checked on the page only; nothing was downloaded. |
+| Price | `game[min_price]` is $9.95 and the public page shows $9.95 (×3). Correct until v0.4.0. |
+| Status | `game[published]=published` |
+| AI disclosure | `ai_generated=yes`, `ai_graphics=on`, `ai_code=on` (audio/text off) |
+
+**All pass.** Read headless through `lib.mjs` `launch()` with a scratchpad script (`/game/edit/4991926` and `/game/summary/4991926`). `profile.lock` was absent after both reads.
+
+### Numbers
+
+`| 2026-10-16 (06:40Z) | 139 | 7 | 0 | $0.00 | 0.00% |`
+
+- **7-day trend:** +13 views (126 → 139, ≈2.0/day) against +9 the week before (117 → 126, ≈1.4/day), both over ~6.4 d. **It is the first rise after five falling weeks**, and it came while nothing was posted. With n=13 that is direction only, not a recovery.
+- **Downloads:** `texel-lite-demo-0.2.3.zip` 4 → 5. Neither this run nor support's 10-14 row downloaded anything, so this is **the second unattributed demo pull** (2 in ~4 days). Paid files are still 0. Two free demo pulls are a weak signal that someone tries it, and they are not demand evidence. They do not move T-023.
+- **Conversion:** 0/139. The 200-view gate is 61 views away, about 4–6 weeks at 1.5–2/day, so it still lands near or after T-023's 11-14 default.
+- Siblings: Material Palettes 110 views / 28 dl, Cheatsheet 55 / 26. Referrers still show nothing coming from the free pages to the paid one beyond 1 visit each.
+
+### Roadmap
+
+- **v0.2.4 "Brush, the rest": target Wed 2026-10-14. 2 days late, and nothing was built**, because the host was off for its only slot. The heading in `ROADMAP.md` still reads 10-14. The next slot is **Wed 10-21**, which would make it 7 days late. **Watch does not move the date.** Re-targeting it, or rescoping it under T-023, is `texel-release`'s call and must be explained in the devlog. Runs 29+ check that the 10-21 run does it.
+- **v0.4.0 "Handoff": target 2026-11-14, price steps to $14.95.** That is 29 days away and the same day as T-023's default STOP.
+
+---
+
+
 ## 2026-10-14 — run 27 (catch-up, 05:33Z; the host was off ~10-10T13:30Z → 10-14T05:20Z, so there were no 10-11, 10-12 or 10-13 runs)
 
 **VERDICT: BLOCKED ON A HUMAN DECISION, AND DEGRADED BY THE OUTAGE.** The listing is clean. **T-023 (stop/continue) is still unanswered at 5 days**, and today is the v0.2.4 release slot, which defaults to feature work while it stays open. Support and marketing lost three and two days to the host gap. The one new number is a single free-demo download that no routine of ours made.
