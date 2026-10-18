@@ -1,0 +1,22 @@
+[env] blender 4.5.9 LTS  zip texel-0.2.4.zip  from C:\Users\opule\AppData\Local\Temp\texel_trim__e_mfq0b\texel\__init__.py
+[A_f2_tighter_show1] showing frame 1; visible at trim [('Main F1', True), ('Main F2', True)]; trim -> {'FINISHED'}; canvas 31x41
+[A_f2_tighter_show1] opaque before [1271, 231]  after [1271, 231]  LOST [0, 0]
+[A_f2_tighter_show1] bounds before [(10, 10, 40, 50), (20, 20, 30, 40)]  after [(0, 0, 30, 40), (10, 10, 20, 30)]
+[A_f2_tighter_show1] frame2-minus-frame1 offset before (10, 10) after (10, 10)  ALIGNED=True
+[B_f2_tighter_show2] showing frame 2; visible at trim [('Main F1', True), ('Main F2', True)]; trim -> {'FINISHED'}; canvas 31x41
+[B_f2_tighter_show2] opaque before [1271, 231]  after [1271, 231]  LOST [0, 0]
+[B_f2_tighter_show2] bounds before [(10, 10, 40, 50), (20, 20, 30, 40)]  after [(0, 0, 30, 40), (10, 10, 20, 30)]
+[B_f2_tighter_show2] frame2-minus-frame1 offset before (10, 10) after (10, 10)  ALIGNED=True
+[C_disjoint_show1] showing frame 1; visible at trim [('Main F1', True), ('Main F2', True)]; trim -> {'FINISHED'}; canvas 59x59
+[C_disjoint_show1] opaque before [121, 441]  after [121, 441]  LOST [0, 0]
+[C_disjoint_show1] bounds before [(2, 2, 12, 12), (40, 40, 60, 60)]  after [(0, 0, 10, 10), (38, 38, 58, 58)]
+[C_disjoint_show1] frame2-minus-frame1 offset before (38, 38) after (38, 38)  ALIGNED=True
+[D_onion_off_show1] showing frame 1; visible at trim [('Main F1', True), ('Main F2', False)]; trim -> {'FINISHED'}; canvas 11x11
+[D_onion_off_show1] opaque before [121, 441]  after [121, 0]  LOST [0, 441]
+[D_onion_off_show1] bounds before [(2, 2, 12, 12), (40, 40, 60, 60)]  after [(0, 0, 10, 10), None]
+[D_onion_off_show1] frame2-minus-frame1 offset before (38, 38) after None  ALIGNED=False
+[E_3frames_show1] showing frame 1; visible at trim [('Main F1', True), ('Main F2', True), ('Main F3', False)]; trim -> {'FINISHED'}; canvas 14x14
+[E_3frames_show1] opaque before [121, 121, 441]  after [121, 121, 0]  LOST [0, 0, 441]
+[E_3frames_show1] bounds before [(2, 2, 12, 12), (5, 5, 15, 15), (40, 40, 60, 60)]  after [(0, 0, 10, 10), (3, 3, 13, 13), None]
+[E_3frames_show1] frame2-minus-frame1 offset before (3, 3) after (3, 3)  ALIGNED=True
+REPRO_DONE

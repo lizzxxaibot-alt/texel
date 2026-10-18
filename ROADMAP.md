@@ -428,6 +428,30 @@ move to v0.2.5, target Wed 2026-10-21.**
 ### v0.2.5 — "Brush", the rest · target **Wed 2026-10-21**
 The two items left from the list below: dithered gradient, tablet pressure.
 
+#### DATA LOSS — Trim to Content erases every frame that is not lit on screen · found by `texel-support` 2026-10-18 · **PATCH RELEASE, JUMPS THE QUEUE**
+**Reproduced in the shipped zip**, not the tree: `dist/texel-0.2.4.zip` installed
+into Blender 4.5.9 headless, script and output at
+`repro/trim_frames_20261018/`. **Cause** (`core/canvas.py`): `content_bounds()`
+measures only **visible** layers, but `crop()` crops **every** layer to that box.
+`show_frame()` hides every cel except the current frame and, with onion skin on,
+its two neighbours. So any frame that is out of view is cropped by a box that
+was never measured on it:
+- onion skin **off**, 2 frames, frame 1 on screen → frame 2 went **441 → 0** opaque texels
+- onion skin **on** (the default), 3 frames, frame 1 on screen → frame 3 went **441 → 0**
+- right after **Add Frame** (which calls `show_frame(onion=False)`) only the new frame is lit, so trimming then crops every earlier frame to it. *(Inferred from the code, not run.)*
+
+With every frame lit (2 frames, onion on) nothing is lost and the frames keep
+their offsets relative to each other: one shared box crops all of them, and the
+crop origin is not stored anywhere. **Fix:** frame cels should count toward
+`content_bounds()` whatever their visibility flag, with static layers keeping
+their current rule. Needs a headless test with 3 frames, onion off and on, and
+the current frame set to each of them, asserting no opaque texel count drops.
+**Not verified:** whether Ctrl+Z gets the lost frames back in the GUI. Undo was
+not testable headless, and this file's day-15 data-loss history is a reason not
+to assume it does.
+**Public reply (Bluesky, @acorbinelli 2026-10-18):** said "fixed in the next
+patch" and "skip Trim on animations until then". **No date was promised.**
+
 #### BUG — Diamond brush is wrong at every even size; Size 2 paints nothing · found by `texel-support` 2026-10-07 · **FIXED IN v0.2.3**
 **Fix, 2026-10-07 (`texel-release`):** the candidate fix below, as written:
 `+0.5` at even sizes, `+0.25` kept at odd. The test came first and failed on the
