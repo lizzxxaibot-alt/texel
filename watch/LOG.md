@@ -6,6 +6,63 @@ in `../ACTIONS.md` and handed to a named owner.
 
 ---
 
+## 2026-10-18 — run 29 (catch-up, ~21:21Z; the host was off ~10-16T07:00Z → 10-18T21:10Z, so there was no 10-17 run)
+
+**VERDICT: BLOCKED ON A HUMAN DECISION, AND DEGRADED BY THE THIRD OUTAGE IN NINE DAYS.** The listing is clean and **v0.2.4 "Stamps" shipped on 10-16**, two days late, in `texel-release`'s catch-up firing. **T-023 (stop/continue) is unanswered at 9 days.** Support, marketing and backup have been silent ~63 h, and the Sun 10-18 beat is lost.
+
+### Action ledger
+
+**Opened: 0. Closed: 0.** No open row carries a `DONE?` note. T-023 is not answered in `ACTIONS.md`, `STATE.md` or `ROADMAP.md`, and nothing was committed after 10-16. A-032 and A-037 are both still Open in `pixelkiln/launch/watch/ACTIONS.md`, so the 14-day rung stays suspended for every HUMAN row.
+
+| id | age | owner |
+|---|---|---|
+| T-010 | 33 d | **HUMAN** (suspended). New fact: the repo still answers `200` to an unauthenticated `api.github.com/repos/lizzxxaibot-alt/texel`, and it now sends **3 visits in 30 days** to the paid page (1 lifetime at the last reading). People are finding the source. |
+| T-011 | 33 d | **HUMAN** (suspended) |
+| T-015 | 29 d | **HUMAN** (suspended) |
+| T-016 | 29 d | **HUMAN** (suspended; part of T-023's CONTINUE option) |
+| T-023 | 9 d | **HUMAN**: the stop/continue call. Default STOP checkpoint 2026-11-14, 27 days out. |
+
+### ALERTS
+
+1. **Host outage, ~2.6 days, the third in nine days. Owned by A-037 (HUMAN, Pixelkiln ledger). No new row.** From `list_scheduled_tasks` at 21:21Z:
+   - **Three Texel-lane routines are silent at once, so the app was off. This is one failure, not three.** `texel-support` last ran 10-16T06:36Z (~63 h), `texel-marketing` 10-16T06:41Z, and `pixelkiln-backup` 10-16T06:47Z.
+   - **The 21:10Z catch-up wave fired every Pixelkiln routine and this one, but not support, marketing or backup.** That is the skip pattern A-037 already records, for the third time this month.
+   - **Lost:** support's 10-17 and 10-18 desk days, the **Sun 10-18 beat** (whose slot was 20:20Z, during the outage), and two nights of backup. The v0.2.4 release beat that `promo/QUEUE.md` set for "Sun 10-18 or Mon 10-19" now has only Mon, and **it still needs a new visual**: no existing asset shows stamps (queue note, `texel-marketing`).
+   - **`texel-funnel`** (`0 10 * * 5`): last ran 10-09. **Its 10-16 slot passed without a run, and `nextRunAt` is already 10-23, so it is late on the task's own rule.** The cost is nil, because the format is retired and no drop was due (`funnel/LOG.md`, 10-09). The cause is the host.
+   - **`texel-release`** ran its catch-up at 10-16T06:37Z, so it is not late.
+2. **T-023 · 9 d · HUMAN.** Cited, not re-described. The 10-16 release went to v0.2.x feature work (stamps), which is what CONTINUE-REDIRECTED would have paused. The next slot it defaults on is Wed 10-21 (v0.2.5).
+
+### Listing (measured ~21:22–21:25Z)
+
+| Check | Result |
+|---|---|
+| Logged-out page | HTTP 200, 33,142 B (browser UA). `Updated` reads 16 Oct 2026 @ 06:52 UTC. |
+| Download | Paid `texel-0.2.4.zip` **210 kB**, which matches local `dist/texel-0.2.4.zip` (215,561 B). Demo `texel-lite-demo-0.2.4.zip` 198 kB. Checked on the page only; nothing was downloaded. |
+| Price | `game[min_price]` is $9.95 and the public page shows $9.95 (×3; the two "$15" hits are itch's "$15 or less" breadcrumb). Correct until v0.4.0. |
+| Status | `game[published]=published` |
+| AI disclosure | `ai_generated=yes`, `ai_graphics=on`, `ai_code=on` |
+
+**All pass.** `texel-release` flagged a *possible* stale "Brush From Selection" label (0.2.4 renamed it) in a store still. **I checked the live gallery, and the one Blender UI screenshot's Texel panel does not show it**: I looked at a 3× crop of the 9 PNGs and the panel reads Pencil … Pick / Texel Density / Showcase. Not checked: the right-hand Properties column (unreadable at 1280 px) and the cover GIF. **No row.** The other item it flagged, `LISTING.md:157`'s dated "v0.2.1, 26 Sep" roadmap table, **is not on the live page**: the description carries no dated roadmap. It is a stale internal draft, `texel-marketing`'s to refresh before it is ever re-pasted. That is a note, not an alert.
+
+### Numbers
+
+`| 2026-10-18 (21:25Z) | 144 | 7 | 0 | $0.00 | 0.00% |`
+
+- **7-day trend:** +17 views (127 → 144 over ~8.4 d, ≈2.0/day) against +10 the week before (≈1.4/day). **It is the second week up after five down, and n=17, so it is direction only.** The v0.2.4 release and the Fri 10-16 Trim beat both sit inside this window; 2.6 days of +5 afterwards does not show a release bump.
+- **Downloads:** 7, unchanged. Paid files are still 0.
+- **Conversion:** 0/144. The 200-view gate is 56 views away, about 4 weeks at 2/day, which still lands at or after T-023's 11-14 default.
+- **Referrers (30 days):** **chatgpt.com 5 is new to this ledger.** People are asking an assistant and being sent here. It is unattributable and needs no action, but it is a discovery path nobody has written down. github.com → Texel 3 (T-010, above).
+
+### Roadmap
+
+- **v0.2.4 "Stamps": RELEASED 2026-10-16, two days late** (the 10-14 slot was lost to the host), and verified live above. Closed out in the record, not here.
+- **v0.2.5 "Brush, the rest" (dithered gradient, tablet pressure): target Wed 2026-10-21, 3 days out.** No work is logged against it, as expected for a routine that builds only in its Wednesday slot. Run 30+ checks the 10-21 run.
+- **v0.3.0 "Tileset": target Wed 2026-10-28.** `texel-release` moved it from 10-17 (a Saturday) on 10-16 and gave the reason in `ROADMAP.md`. That is its call, and it is correctly recorded.
+- **v0.4.0 "Handoff": target 2026-11-14 (a Saturday), when the price steps to $14.95.** 27 days out, and the same day as T-023's default STOP. `texel-release` left it for the T-023 decision.
+
+---
+
+
 ## 2026-10-16 — run 28 (catch-up, ~06:35Z; the host was off again ~10-14T05:50Z → 10-16T06:24Z, so there was no 10-15 run)
 
 **VERDICT: BLOCKED ON A HUMAN DECISION, AND DEGRADED BY A SECOND OUTAGE IN A WEEK.** The listing is clean. **T-023 (stop/continue) is unanswered at 7 days.** The outage cost the v0.2.4 release slot (10-14) and the Wed beat, so Texel has had **no release and no Bluesky beat for a full week**.
