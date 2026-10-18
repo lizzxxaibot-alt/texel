@@ -2117,3 +2117,46 @@ Both were re-fetched cookie-less with `getPosts`. The author is `pixelkiln.bsky.
 - **@kapaent** (looking for a pixel artist). Any answer from a studio account is a pitch.
 
 ### §E — not due. The next check is **Sat 2026-10-17**. Read T-023 first, then look at the Lite paragraph's position.
+
+## Run 2026-10-18 (Sun, a TEXEL day, 16:26 local / 21:26-21:35Z): the Sunday render, two replies
+
+**Ledger first.** `ACTIONS.md` has no OPEN row owned by `texel-marketing`. Open rows: T-010, T-011, T-015, T-016, T-023, all `HUMAN`. T-023 (stop/continue) is still undecided; nothing in it pauses marketing.
+
+**Why the Sunday render and not the v0.2.4 stamps beat.** `QUEUE.md` offered stamps for "Sun 10-18 or Mon 10-19", and a queued release outranks the calendar. But no visual of stamps exists (the only image is the gate's test screenshot `shots/panels/panel_05_stamp_brush.png`), and the queue row says a new before/after must be built through the `brand-visual` loop. A text-only stamps post would spend the release's one beat on its weakest form. So Sunday took the calendar beat, and **stamps moves to Mon 10-19, once the visual exists.**
+
+### Posted — Sun 2026-10-18, best render of the week: the tavern interior
+
+| Date | Beat | Asset | URL | First hour |
+|---|---|---|---|---|
+| 2026-10-18 | **Tavern interior for a cozy RPG: four 64x64 Texel-painted textures, Apply Density per class (walls/floor 12 texels per unit, tables/benches/barrels 30)** | `store/stills/env_tavern_02.png`, saved as `store/stills/env_tavern_02_post.jpg` (JPEG q95 4:4:4, 338,753 B, 1280x720) for the blob cap. **First post of any `env_tavern_*` still.** Blocked for reuse until **11-08** | [3my6kildxhs2m](https://bsky.app/profile/pixelkiln.bsky.social/post/3my6kildxhs2m) | 2 likes, 2 reposts at +2 min |
+
+Every claim was checked, not recalled:
+- **Four 64x64 textures painted in Texel.** `envs.py` `tex_tavern(size=64)` returns `floor`, `plaster`, `rug`, `barrel`, each built on `core.canvas.Canvas` with `core.raster` and ramps from `core.tools.make_ramp` (present in the shipped `texel-0.2.4-SHIPPED-2026-10-16.zip`, `texel/core/tools.py:128`).
+- **12 and 30.** `render_env.py` `apply_density()` cube-projects every mesh and runs `texel.density_apply` at `ENV["dens"]`; the tavern entry is `dens=(12.0, 30.0)` with `arch={"Floor","Ceiling","Wall"}`, so floor, ceiling and the three walls get 12 and every other mesh gets 30. `envs.py` and `render_env.py` have one commit each (19d3652, 2026-09-09), so the values that rendered the still are the values in the file. The still agrees: the floor planks are visibly coarser than the table planks.
+- **"Apply Density"** is `bl_label` at `texel/tex_density.py:103` in the shipped 0.2.4 zip (also in Lite).
+- **Live page re-checked first:** cookie-less GET of `z3er1n.itch.io/texel` → HTTP 200, 33,141 B.
+- **Verified cookie-less with `getPostThread`:** author `pixelkiln.bsky.social`, `createdAt` 2026-10-18T21:30:59.895Z, `app.bsky.embed.images#view` with 1 image (1280x720, 562 characters of alt text), 5 facets (itch link, `#pixelart #b3d #gamedev #lowpoly`). Text 286/300.
+- **Feed size:** looked at a 500px downsample. The rug, tables and plank grain read.
+- **Cadence:** last Texel post 10-16 (Fri). One post per slot.
+- **Phrasing:** *"Tavern"*, *"cozy RPG"*, *"per class"*, *"plank lines"* have 0 prior uses in this log. No antithesis construction.
+- **§4 note:** an unedited harvested render, not a designed card, so no lint/critic loop, same as the 09-27 market still.
+- Spec: `promo/post_2026-10-18.json`.
+
+### §D — two replies, both verified on the public AppView
+
+| Date | Thread | What was said | Link |
+|---|---|---|---|
+| 2026-10-18 | @sisterrose.bsky.social (10-17, 4-post self-thread, 1 like): *is there an easy way to UV unwrap low poly / pixel art textures?* The second post names the problem: UVs oriented or split oddly, or not scaling right. Replied under that second post. | Same wall here, then two menu items: **UV > Align Rotation** squares each island up to the axes, and **UV > Round to Pixels > Corner** makes every UV you move land on a pixel corner, so island edges sit on the texture's pixel grid. **Checked in Blender 4.5.9 itself:** `bpy.ops.uv.align_rotation` (*"Align the UV island's rotation"*), `SpaceUVEditor.pixel_round_mode` labelled *Round to Pixels*, items Disabled/Corner/Center, *"Round UVs to pixels while editing"*. Both sit in `IMAGE_MT_uvs` (`bl_ui/space_image.py:438, 481`), the UV menu. **Texel not mentioned.** Their question is close to what Texel's Snap UVs does, so per §3a rule 3 it got vanilla Blender answers and no pitch. | [3my6kl6snyl2o](https://bsky.app/profile/pixelkiln.bsky.social/post/3my6kl6snyl2o) |
+| 2026-10-18 | @aquamarovi.bsky.social (10-18 20:54Z, 2 likes, **0 replies**): a Midna model in Blender; 1024 texture "not chunky enough", will try 256. | Acknowledged the Twilight Princess scene they mentioned, then: set the **Image Texture node's Interpolation from Linear (the default) to Closest**, or Blender smooths across every texel. **Checked in Blender 4.5.9:** `ShaderNodeTexImage.interpolation` default `Linear`, items Linear/Closest/Cubic/Smart. | [3my6kl7buos2m](https://bsky.app/profile/pixelkiln.bsky.social/post/3my6kl7buos2m) |
+
+Both were re-fetched cookie-less with `getPosts` (by DID; a handle-form at-URI returns no `posts`). The author is `pixelkiln.bsky.social`, parent and root URIs are right, and they are 249 and 223 bytes. Neither carries a link or pitches.
+
+### Threads looked at and left alone
+
+- **@retrygames** (Tintline 2.2, a low-poly texturing add-on) and **@zironix / @advantage87** (Pigmi). Other Blender texturing tools' threads; standing rule.
+- **@alfredbaudisch** (store links for a pixel-art-in-Blender product). Standing rule.
+- **@controlmole** (every facial expression on one tiny hand-painted texture). Nothing verified to add beyond praise.
+- **@majormcdoom** (skew-the-UVs trick). Already passed 10-16, still nothing to add.
+- **@progressone** (Fiverr ads). Not a conversation.
+
+### §E — the Sat 10-17 check was **missed** (no run that day). Spot check this run instead: the live page carries no roadmap or "upcoming" claims (searched for *Not yet*, *Arrives*, *v0.3*, *v0.4*, *pressure*: none found), so stamps going live made nothing on it false. **`LISTING.md` §"Not in v0.2" is stale** (stamps and radial listed as v0.2.1/26 Sep, tileset 17 Oct). It is internal copy and not on the page, so it was left for a full Saturday pass. The next check is **Sat 2026-10-24**.

@@ -742,3 +742,11 @@ Beats this release earns:
 - **Listing copy is now stale (owner: `texel-marketing`, listing conversion).** `LISTING.md:157` still lists "custom stamps" as upcoming (*"v0.2.1 — the next release, 26 Sep"*). Stamps are live in 0.2.4, and dithered gradients are 0.2.5 (10-21). Tileset moved 10-17 → **10-28**.
 - **Possible false-claim image (check, owner: `texel-marketing`):** any store still that shows the Tools panel with the old **"Brush From Selection"** button now shows a label 0.2.4 no longer has. The button is now "Stamp From Selection". Not checked image by image by this run.
 - **T-023 (HUMAN stop/continue) is still open.** STOP voids every row here.
+
+## 2026-10-18 21:35Z — `texel-marketing`: Sun beat SPENT (tavern render); stamps moves to Mon
+
+- **Posted** [3my6kildxhs2m](https://bsky.app/profile/pixelkiln.bsky.social/post/3my6kildxhs2m) from `store/stills/env_tavern_02.png` (as `_post.jpg`). `env_tavern_02` is blocked for reuse until **11-08**.
+- **Mon 10-19 = the v0.2.4 stamps beat**, if a visual exists by then. It still has none. Build a before/after (one stamp saved from a selection, then painted across a texture) through the `brand-visual` loop. Claims come only from the shipped 0.2.4 zip: no tablet pressure, no dithered gradient, fill keeps the plain brush, symmetry does not flip a stamp. **If there is still no visual by Mon,** send a stamps crop of a real Blender screenshot or move it to Wed 10-21 alongside v0.2.5. Do not post a text-only release beat when the release is visual.
+- **Still ready:** Check Tiling build-in-public text beat (`promo/post_2026-10-07_checktiling_DRAFT.json`); re-check the wording first (flag from 10-14). Diamond-brush before/after (0.2.3) still needs a measured visual. Dither brush (0.2.2) still has no visual.
+- **Old "Brush From Selection" label in store stills (flag from `texel-release`, 10-16):** still not checked image by image.
+- **T-023 (HUMAN stop/continue) is still open.** STOP voids every row here.
