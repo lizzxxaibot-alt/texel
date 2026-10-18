@@ -36,6 +36,8 @@ says on 2026-09-26.
 | *both pages, read 2026-10-02* | *Material Palettes, 13 days live* | *(as above)* | **63** | **15 file-grabs** | *format retired 09-26* | *both pages stay live, unchanged* |
 | *both pages, read 2026-10-09* | *Density Cheatsheet, 28 days live* | *(as above)* | **52** (+4/wk) | **23** (+0) | *format retired 09-26* | *referrer split left to `texel-watch`* |
 | *both pages, read 2026-10-09* | *Material Palettes, 20 days live* | *(as above)* | **87** (+24/wk) | **21** (+6) | *format retired 09-26* | *still growing off itch shelves; see 10-09 note* |
+| *both pages, read 2026-10-18* | *Density Cheatsheet, 37 days live* | *(as above)* | **56** (+4 in 9 d) | **27** (+4) | *format retired 09-26* | *referrer split left to `texel-watch`* |
+| *both pages, read 2026-10-18* | *Material Palettes, 29 days live* | *(as above)* | **112** (+25 in 9 d) | **29** (+8) | *format retired 09-26* | *still the funnel's only growing page; see 10-18 note* |
 
 **The second row is the one that matters now, and it was added on 2026-09-19.**
 The 72 h window is history; what the page has done over eight days is the real
@@ -850,3 +852,43 @@ reCAPTCHA). The other is the stop/continue call (**T-023**, `HUMAN`, opened
 today), and its CONTINUE-REDIRECTED option moves distribution to
 Superhive/Gumroad. Until one of those is answered, this Friday slot has nothing
 it may act on except these readings.
+
+## Measuring week, 2026-10-18 (`texel-funnel`)
+
+**This run fired on Sunday 10-18, not Friday 10-16.** The date is recorded so the
+nine-day gap in the readings below is not mistaken for a weekly one. Why it
+slipped is `pixelkiln-watch`'s question (A-037), not this routine's.
+
+**No open `texel-funnel` rows in `ACTIONS.md`.** The only open rows are `HUMAN`:
+T-010, T-011, T-015, T-016 and T-023. **No drop:** the format was retired on
+09-26, and the third week of the month is not a ship week in any case. Nothing
+was added to `promo/QUEUE.md`.
+
+**Readings:** `node automation/itch_analytics.mjs`, *Project totals*, lifetime,
+read at 2026-10-18T21:33Z. `profile.lock` was absent.
+
+| page | 10-09 | 10-18 | 9 days |
+|---|---|---|---|
+| Density Cheatsheet | 52 views / 23 grabs | 56 / 27 | +4 / +4 |
+| Material Palettes | 87 / 21 | 112 / 29 | +25 / +8 |
+| Texel (paid page) | 126 views / 5 grabs | 144 / 7 | +18 views / +2 grabs |
+
+**Read it straight.** The palettes page is still growing faster than Texel's own
+page: +25 views against +18, and 7 collections against Texel's 4. Its
+store-wide referrer line `itch.io/game-assets/free/tag-aseprite/tag-palette`
+(19) shows it is being found by itch free-asset browsers. That is the audience
+the 09-26 retirement named, so nothing here reopens it.
+
+**Texel's two new grabs are the Lite demo.** `PROGRESS.md` 2026-10-16 records 5
+self-pulls and **2 unattributed demo pulls** as of v0.2.4, and the release
+deliberately did not pull the demo back to verify it. Lifetime 7 = 5 ours + 2
+not ours, so those 2 are the first downloads anyone else has taken from Texel's
+page. Whether they came from the funnel pages is `texel-watch`'s referrer
+reading, and this run did not take it.
+
+**Same limit as 10-09.** Both remaining levers belong to a person: BlenderNation
+(**T-016**) and the stop/continue call (**T-023**, whose default STOP date is
+2026-11-14). Until one of them is answered, this slot can only take readings.
+The next first-Friday slot is **2026-11-06**, and it ships nothing unless T-023
+reopens distribution.
+
