@@ -6,6 +6,62 @@ in `../ACTIONS.md` and handed to a named owner.
 
 ---
 
+## 2026-10-19 — run 30 (catch-up, 10-20T01:49Z; the host was off ~10-18T21:40Z → 10-20T01:38Z, so the in-slot 10-19 run never fired)
+
+**VERDICT: BLOCKED ON A HUMAN DECISION, AND DEGRADED: THE PAID BUILD ON SALE LOSES DATA.** The listing passes every check. **T-023 (stop/continue) is unanswered at 10 days.** The new problem is product, not process: `texel-support` reproduced a **data-loss bug in the shipped `texel-0.2.4.zip`** (Trim to Content erases animation frames that are not on screen). It is opened as **T-024 → `texel-release`**, due in Wednesday's slot.
+
+### Action ledger
+
+**Opened: 1 (T-024). Closed: 0.** No open row carries a `DONE?` note. T-023 is not answered in `ACTIONS.md`, `STATE.md` (incl. its uncommitted diff) or `ROADMAP.md`. A-032 and A-037 are both still Open in `pixelkiln/launch/watch/ACTIONS.md`, so the 14-day rung stays suspended for every HUMAN row.
+
+| id | age | owner |
+|---|---|---|
+| **T-024** | **0 d** | **`texel-release`**: ship the Trim data-loss fix in a live zip, with a test run against that zip. Due Wed 10-21; the 3-day freeze lands 10-22. |
+| T-023 | 10 d | **HUMAN**: the stop/continue call. Default STOP checkpoint 2026-11-14, 26 days out. |
+| T-010 | 34 d | **HUMAN** (suspended) |
+| T-011 | 34 d | **HUMAN** (suspended) |
+| T-015 | 30 d | **HUMAN** (suspended) |
+| T-016 | 30 d | **HUMAN** (suspended; part of T-023's CONTINUE option) |
+
+### Correction to run 29 (wrong, and it is said here)
+
+Run 29 read the scheduler at 21:21Z on 10-18 and reported support, marketing and backup silent, the Sun beat lost, and funnel late. **All four fired within 2–13 minutes of that read**: support 21:23Z (10-18 row written, `SUPPORT.md:663`), marketing 21:25Z (**Sun 10-18 beat posted 21:30:59Z**, the tavern render, verified in `promo/POSTED.md`), funnel 21:32Z (10-18 measuring-week entry in `funnel/LOG.md`), and backup 21:34Z (commits at 21:39Z). **The Sun beat was not lost, and funnel's late slot was made up.** The lesson: a catch-up wave takes several minutes, and this routine fires inside it, so "silent" read in the first minutes of a wave is not proof. A-037 keeps the outage itself; no new row.
+
+### ALERTS
+
+1. **T-024 · 0 d · `texel-release`. Data loss in the build buyers get today.** Repro on the shipped zip (`repro/trim_frames_20261018/`): onion off, 2 frames, frame 2 went 441 → 0 texels; onion on, 3 frames, frame 3 went 441 → 0. `ROADMAP.md` already marks it *PATCH RELEASE, JUMPS THE QUEUE* for v0.2.5. The row is there so that watch checks the fix ships. Two facts raise the stakes: **Texel's own Fri 10-16 beat promoted Trim**, and **nobody has checked whether Ctrl+Z gets the frames back**. Sales are 0, so no buyer is known to be affected. Lite demo downloads count too, if Lite includes Trim, which this run did not check.
+2. **Host outage, ~28 h, the fourth in ten days. Owned by A-037 (HUMAN, Pixelkiln ledger). No new row.** Measured at ~01:50Z: the 01:38Z wave fired every Pixelkiln routine and this one. `texel-support` (last 10-18T21:23Z, ~28.5 h), `texel-marketing` (21:25Z) and `pixelkiln-backup` (21:34Z) have not fired yet. **None of them is over 48 h, so none is late on the rule**, and run 29 showed they can arrive minutes after this read. Lost: support's 10-19 desk day, **the Mon 10-19 stamps release beat** (its 20:20Z slot fell inside the gap; it still has no visual), and one backup night. Windows last booted 10-15T02:27Z, so the machine stayed up and the app or its scheduler was what stopped.
+3. **T-023 · 10 d · HUMAN.** Cited, not re-described.
+
+### Listing (measured ~01:52–01:56Z, 10-20)
+
+| Check | Result |
+|---|---|
+| Logged-out page | HTTP 200, 33,143 B (browser UA). `Updated` reads 16 Oct 2026 @ 06:52 UTC. |
+| Download | Paid `texel-0.2.4.zip` **210 kB**, which matches local `dist/texel-0.2.4.zip` (215,561 B). Demo `texel-lite-demo-0.2.4.zip` 198 kB. Page only; nothing was downloaded. |
+| Price | `game[min_price]` $9.95; the public page shows $9.95 ×3 (the two "$15" hits are itch's breadcrumb). Correct until v0.4.0. |
+| Status | `game[published]=published` |
+| AI disclosure | `ai_generated=yes`, `ai_graphics=on`, `ai_code=on` |
+
+**All pass.** Read headless through `lib.mjs` `launch()`, which waited on a pack routine's `itch_desc_replace.mjs` lock. That lock is the pack routine's own, and this run did not touch it.
+
+### Numbers
+
+`| 2026-10-19 (10-20T01:55Z) | 146 | 7 | 0 | $0.00 | 0.00% |`
+
+- **7-day trend:** +10 views (136 → 146 over ~5.85 d, ≈1.7/day) against +11 the week before (≈1.7/day). **Flat**, after two weeks up. n=10, direction only.
+- **Downloads:** 7, unchanged. **The 0.2.4 Lite demo has 0 pulls in 4 days**, after 0.2.3's 2 unattributed ones. Paid files 0.
+- **Conversion:** 0/146. The 200-view gate is 54 views away, about a month at 1.7/day, which is after T-023's 11-14 default. **The gate will not answer before the decision is due.** Whoever makes T-023 should know that.
+- **Discovery:** 76 impressions over 7 days at 1.32% CTR. Referrers are unchanged at the top (duckduckgo 10, chatgpt.com 5, github repo 3).
+
+### Roadmap
+
+- **v0.2.5 "Brush, the rest" + the Trim data-loss patch: target Wed 2026-10-21, 2 days out.** The fix is written up (cause, fix, test spec) in `ROADMAP.md` by `texel-support`. No code is logged against it yet, which is expected: `texel-release` builds only in its slot. The slot also defaults to v0.2.x feature work (dithered gradient, pressure) while T-023 is open. **The data-loss patch ships whatever T-023 decides; the features do not.**
+- **v0.3.0 "Tileset": Wed 2026-10-28.** **v0.4.0 "Handoff": 2026-11-14**, when the price steps to $14.95. That is 26 days out and the same day as T-023's default STOP.
+
+---
+
+
 ## 2026-10-18 — run 29 (catch-up, ~21:21Z; the host was off ~10-16T07:00Z → 10-18T21:10Z, so there was no 10-17 run)
 
 **VERDICT: BLOCKED ON A HUMAN DECISION, AND DEGRADED BY THE THIRD OUTAGE IN NINE DAYS.** The listing is clean and **v0.2.4 "Stamps" shipped on 10-16**, two days late, in `texel-release`'s catch-up firing. **T-023 (stop/continue) is unanswered at 9 days.** Support, marketing and backup have been silent ~63 h, and the Sun 10-18 beat is lost.
