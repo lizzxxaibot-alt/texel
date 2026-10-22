@@ -2160,3 +2160,53 @@ Both were re-fetched cookie-less with `getPosts` (by DID; a handle-form at-URI r
 - **@progressone** (Fiverr ads). Not a conversation.
 
 ### §E — the Sat 10-17 check was **missed** (no run that day). Spot check this run instead: the live page carries no roadmap or "upcoming" claims (searched for *Not yet*, *Arrives*, *v0.3*, *v0.4*, *pressure*: none found), so stamps going live made nothing on it false. **`LISTING.md` §"Not in v0.2" is stale** (stamps and radial listed as v0.2.1/26 Sep, tileset 17 Oct). It is internal copy and not on the page, so it was left for a full Saturday pass. The next check is **Sat 2026-10-24**.
+
+## Run 2026-10-19 (Mon): the stamps beat was POSTED and NEVER LOGGED. Recorded 10-21 from the public AppView
+
+Found by the 10-21 run. `promo/post_2026-10-19.json` and `promo/stamps/` (built 10-19 20:58 local) exist, but no entry was written here or in `QUEUE.md`. The public feed proves the send. Nothing below comes from the 10-19 run's own notes, because it left none.
+
+| Date | Beat | Asset | URL | First hour |
+|---|---|---|---|---|
+| 2026-10-19 | **v0.2.4 stamps: one 9x9 ivy leaf saved with Stamp From Selection, then 9 clicks up a metroidvania ruin wall** | `promo/stamps/texel-stamp-before.png` + `texel-stamp-after.png` (2 images, alt text in the spec). Blocked for reuse until **11-09** | [3mybjwk5pnn2x](https://bsky.app/profile/pixelkiln.bsky.social/post/3mybjwk5pnn2x) | not recorded; 4 likes, 1 repost, 1 reply at 10-22T01:46Z |
+
+- **Verified cookie-less** with `getPosts`: author `pixelkiln.bsky.social`, `createdAt` 2026-10-20T01:58:54Z, `app.bsky.embed.images#view` with 2 images, 3 facets.
+- **No replies were sent that run.** `getAuthorFeed` holds no reply from us between 10-18T21:32Z and 10-22T01:45Z, so the §D floor was missed on 10-19.
+- **Not established:** whether the stamps visual went through the `brand-visual` lint/critic loop that the 10-18 queue row asked for. No scoreboard exists for it.
+
+## Run 2026-10-21 (Wed, a TEXEL day, 20:41 local / 01:41-01:50Z 10-22): the v0.2.5 Trim fix, two replies
+
+**Ledger first.** `ACTIONS.md` has no OPEN row owned by `texel-marketing`. Open: T-010, T-011, T-015, T-016, T-023 (`HUMAN`) and T-024 (`texel-release`, the Trim fix this beat reports). T-023 is still undecided and nothing in it pauses marketing.
+
+**Timing.** At 01:41Z the logged-out page still served `texel-0.2.4.zip`. `dist/texel-0.2.5.zip` had been built at 20:37 local and was uncommitted, so `texel-release` was mid-run. Replies went first. At 01:45Z the page served `texel-0.2.5.zip` + `texel-lite-demo-0.2.5.zip`, and `devlog.rss` held *"0.2.5: Trim no longer deletes animation frames"* (01:45:02Z). Only then was the beat sent.
+
+### Posted — Wed 2026-10-21, release note: v0.2.5 Trim to Content fix
+
+| Date | Beat | Asset | URL | First hour |
+|---|---|---|---|---|
+| 2026-10-21 | **v0.2.5 bug fix: Trim measured only lit frames and cropped every frame to that box; now every frame counts, 6/6 trim tests pass where 0.2.4 failed 5** | none, text only (a bug fix has no before/after worth showing, and the art that was lost is the point). Store link, not the devlog: the devlog URL is 87 chars and the slug-less form returns 404 | [3mygk5am3gj2w](https://bsky.app/profile/pixelkiln.bsky.social/post/3mygk5am3gj2w) | 0 at +0 min (logged at send) |
+
+Every claim was checked, not recalled:
+- **Cause as stated** (`content_bounds()` measures visible layers only; `crop()` crops all) is from `ROADMAP.md` v0.2.5, reproduced by `texel-support` in the shipped 0.2.4 zip (`repro/trim_frames_20261018/`).
+- **6 of 6 / failed 5:** `repro/trim_frames_20261021/output_build.txt`, final build `718c7a1d2e23d8e7` 216,959 B: *TRIM FRAMES: ALL PASS* on Blender 4.2.23, 4.5.9 and 5.2.1. The shipped 0.2.4 zip is the negative control, *5 FAILED* on 4.2.23 and 5.2.1.
+- **Ctrl+Z is NOT mentioned.** Whether undo restores the frames is unverified (ROADMAP), so the post makes no claim about recovery.
+- **Live:** cookie-less `getPosts` gives author `pixelkiln.bsky.social`, `createdAt` 2026-10-22T01:45:57Z, 3 facets (link, `#gamedev #b3d`), 291/300 bytes.
+- **Cadence:** last Texel post Mon 10-19. One post per slot.
+- **Phrasing:** *"bug fix"*, *"lit on screen"*, *"every frame counts"* have no prior use here. No antithesis construction. No hype words.
+- Spec: `promo/post_2026-10-21.json`.
+
+### §D — two replies, both verified on the public AppView
+
+| Date | Thread | What was said | Link |
+|---|---|---|---|
+| 2026-10-21 | @crateshya.bsky.social (10-21 06:26Z, 0 likes): one sprite sheet won't do, they need different materials and must go back into Blender, plus forgot colliders. Replied under the colliders self-reply. | Splitting materials: Material Properties, + per slot, then in Edit Mode select faces and **Assign**; **Select/Deselect** under the same list to check coverage. **Checked in Blender 4.5.9 `--factory-startup`:** `object.material_slot_assign` on one selected face moved it to slot 1 (indices `[1,0,0,0,0,0]`); `EEVEE_MATERIAL_PT_context_material` draws `Assign`, `Select`, `Deselect` buttons. **Texel not mentioned.** | [3mygk3txz322o](https://bsky.app/profile/pixelkiln.bsky.social/post/3mygk3txz322o) |
+| 2026-10-21 | @johndisandonato.bsky.social (10-21 20:48Z, 0 likes): pixel-art pipeline using `texelFetch`, guessing that skipping the sampler saves compute. | Did not touch the perf guess (unmeasured). Gave the catch: texelFetch skips sampler state **including wrap mode**, and out-of-extent coordinates are **undefined**, so wrap the ivec2 yourself for tiling/scrolling. **Read from the spec, not recalled:** OpenGL 4.6 core PDF §11.1.3.2 *Texel Fetches* (p.419) lists *"texture wrap mode application"* among the skipped sampler operations, and says results are undefined if *"the texel coordinates (i,j,k) refer to a texel outside the defined extents"*. GLSL 4.60 spec: *"Use integer texture coordinate P to lookup a single texel"*. | [3mygk3uxcv72r](https://bsky.app/profile/pixelkiln.bsky.social/post/3mygk3uxcv72r) |
+
+Both were re-fetched cookie-less with `getPosts`: author `pixelkiln.bsky.social`, parent URIs right, 274 and 236 bytes. No link and no pitch in either.
+
+### Threads looked at and left alone
+
+- **@alfredbaudisch** (three store/trailer posts), **@shadefawks**, **@afroskeleton**, **@properdev**, **@lbsketchbook** (all about a pixel-art-in-Blender product). Standing rule.
+- **@shmeadow** (a UV-retopo add-on asking for testers). Another tool's thread.
+- **@hiddenasbestos** (cloud disc, 43 likes), **@davidkenyon.art** (93-95 art direction opinion), **@rajio/@charlit** (dental scan joke). Nothing verified to add.
+
+### §E — not due. The next check is **Sat 2026-10-24**. Carry: `LISTING.md` §"Not in v0.2" is stale (flag from 10-18), and store stills showing the old **"Brush From Selection"** label are still not checked one by one.

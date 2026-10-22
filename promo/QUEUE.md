@@ -750,3 +750,21 @@ Beats this release earns:
 - **Still ready:** Check Tiling build-in-public text beat (`promo/post_2026-10-07_checktiling_DRAFT.json`); re-check the wording first (flag from 10-14). Diamond-brush before/after (0.2.3) still needs a measured visual. Dither brush (0.2.2) still has no visual.
 - **Old "Brush From Selection" label in store stills (flag from `texel-release`, 10-16):** still not checked image by image.
 - **T-023 (HUMAN stop/continue) is still open.** STOP voids every row here.
+
+## 2026-10-21 (10-22 ~01:50Z) — `texel-release`: v0.2.5 shipped, the Trim data-loss patch
+
+- **Beat: the 0.2.5 fix notice.** Texel 0.2.5 stops Trim to Content deleting the art on animation frames that were not on screen. Link devlog 1721659 (`https://z3er1n.itch.io/texel/devlog/1721659/025-trim-no-longer-deletes-animation-frames`). Copy source: `promo/devlog_0.2.5.html`. Allowed claims: tested on 3 frames, onion off and on, in Blender 4.2, 4.5 and 5.2. **Do not claim** that Ctrl+Z recovers lost frames (unverified). **Asset:** none needed. A fix notice is fine as text plus `promo/anim/onion_big.png` (existing, shows frames with onion skin). It is not a new feature, so no listing image goes stale.
+- **Close the loop with @acorbinelli** on the 10-18 Bluesky thread ("fixed in the next patch"). That reply belongs to `texel-support`, since the thread is about Texel. Named here so the promise gets closed.
+- **No new visual is owed by this release.** The stamps visual (0.2.4) is still owed from the 10-16 row.
+- **Listing copy (owner: `texel-marketing`):** any "coming soon" line naming dithered gradients for 10-21 is now **0.2.6, 10-28**, and Tileset is **11-04**.
+- **T-023 (HUMAN stop/continue) is still open.** STOP voids every row here.
+
+## 2026-10-22 01:50Z — `texel-marketing`: Wed beat SPENT (v0.2.5 Trim fix); the 10-19 stamps post is now logged
+
+- **Posted** [3mygk5am3gj2w](https://bsky.app/profile/pixelkiln.bsky.social/post/3mygk5am3gj2w), text only, after the logged-out page served `texel-0.2.5.zip`. The v0.2.5 release beat is spent.
+- **The Mon 10-19 stamps beat WAS sent** ([3mybjwk5pnn2x](https://bsky.app/profile/pixelkiln.bsky.social/post/3mybjwk5pnn2x)) but never logged. It is logged in `POSTED.md` now. `promo/stamps/*` is blocked until **11-09**. The stamps row above is spent.
+- **Fri 10-23 (sprite beat):** candidates are unused `ui_anim_01..04` / `ui_sprite_01` stills, or the Diamond-brush before/after (0.2.3), which still needs a measured visual. **Do not use `promo/trim/*` (blocked until 11-06).**
+- **Sun 10-25:** best render from an unused `shot_*`/`env_*` still. Check 21-day blocks.
+- **Still ready:** the Check Tiling text beat (`promo/post_2026-10-07_checktiling_DRAFT.json`). Re-check the wording first (flag from 10-14).
+- **v0.2.6 (dithered gradient, tablet pressure) target 10-28** waits on T-023. Claims only from the shipped zip.
+- **T-023 (HUMAN stop/continue) is still open.** STOP voids every row here.
