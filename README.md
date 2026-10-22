@@ -131,7 +131,9 @@ Texel is not only a 3D texture tool:
   upscaled nearest-neighbour so texels stay square. Needs ffmpeg.
 - **Export Sheet + JSON** writes the sheet plus a manifest of frame rects and
   durations in milliseconds, so an engine can play it without guessing.
-- **Trim to Content** crops away empty space, with an optional margin.
+- **Trim to Content** crops away empty space, with an optional margin. On an
+  animation it measures every frame, not only the one on screen (fixed in
+  0.2.5: in 0.2.4, frames that were not shown could lose their art).
 - **Add Reference** loads an image as a faint locked layer underneath to trace
   over. It is reduced to the palette on the way in.
 - **Count Colours** reports how many colours the art actually uses against a

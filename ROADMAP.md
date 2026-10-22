@@ -425,10 +425,35 @@ count is unchanged.
 this run is a manual catch-up on 10-16. **Dithered gradient and tablet pressure
 move to v0.2.5, target Wed 2026-10-21.**
 
-### v0.2.5 — "Brush", the rest · target **Wed 2026-10-21**
-The two items left from the list below: dithered gradient, tablet pressure.
+### v0.2.6 — "Brush", the rest · target **Wed 2026-10-28** (was 10-21)
+The two items left from the v0.2.2 list below: dithered gradient, tablet
+pressure. **Moved 2026-10-21:** the 10-21 slot went to the Trim data-loss patch,
+which jumps the queue. Both items also wait on T-023 (the stop/continue call):
+`texel-watch` recommends pausing v0.2.x feature work while that is open.
 
-#### DATA LOSS — Trim to Content erases every frame that is not lit on screen · found by `texel-support` 2026-10-18 · **PATCH RELEASE, JUMPS THE QUEUE**
+### v0.2.5 — the Trim to Content data-loss patch · **RELEASED 2026-10-21** (local; 10-22 ~01:43Z)
+**Live-page read-back, 2026-10-22 ~01:44Z (the gate, taken before this tick was
+written; this line is NOT in the 0.2.5 zip, which says "BUILT"):** cookie-less
+GET of `z3er1n.itch.io/texel` → HTTP 200, 33,187 B. The paid upload widget reads
+**`texel-0.2.5.zip` 211 kB** (id 19938649; local 216,959 B, sha256
+`718c7a1d…55cbac0c`, pinned at `dist/shipped/texel-0.2.5-SHIPPED-2026-10-21.zip`).
+The `for_demo` block reads **`texel-lite-demo-0.2.5.zip` 199 kB** (id 19938653,
+local 204,444 B). An anonymous POST for the paid id returns *"A key is needed to
+download"*. 0.2.4 and Lite 0.2.4 are hidden, not deleted; the dashboard showed
+**0 downloads of the paid 0.2.4** at upload time. Devlog **1721659** is live
+logged-out and first in `devlog.rss`. Full record: `PROGRESS.md`, 2026-10-21.
+
+
+#### DATA LOSS — Trim to Content erases every frame that is not lit on screen · found by `texel-support` 2026-10-18 · **FIXED, SHIPPED IN v0.2.5 ON 2026-10-21**
+**Fix, 2026-10-21 (`texel-release`):** the fix below, as written.
+`Canvas.content_bounds()` now counts a frame cel whatever its visibility flag;
+a hidden **static** layer is still skipped, as before. The test came first and
+failed on the 0.2.4 code (15 checks red): `test_canvas.py` builds 3 frames,
+runs onion skin off and on with each frame current, and asserts the trim box
+covers every frame, no frame loses an opaque texel, and the frames keep their
+offsets. **Run against the zips through the real `texel.trim` operator**
+(`repro/trim_frames_20261021/verify.py`, output in `output_build.txt`): the
+shipped 0.2.4 fails **5 of 6** cases, 0.2.5 passes **6 of 6**.
 **Reproduced in the shipped zip**, not the tree: `dist/texel-0.2.4.zip` installed
 into Blender 4.5.9 headless, script and output at
 `repro/trim_frames_20261018/`. **Cause** (`core/canvas.py`): `content_bounds()`
@@ -569,7 +594,7 @@ So Part 2 is real work, not a tweak: it wants a structural measure — how the
 neighbourhood across the wrap compares statistically to interior neighbourhoods —
 and it gets a slice of its own rather than being rushed in behind a patch.
 **Scheduled into v0.3.0 "Tileset"**, which is where per-tile seam checking
-already lives, target **2026-10-28** (moved from 10-17 on 2026-10-16). Until it lands:
+already lives, target **2026-11-04** (moved from 10-17 on 2026-10-16, then from 10-28 on 2026-10-21). Until it lands:
 
 - **`texel-marketing`'s restriction stands.** No beat may claim Check Tiling
   catches seams. `texel.shift_wrap` is untouched by any of this and is still a
@@ -584,7 +609,9 @@ a build was live because a routine ticked ahead of the upload, and that is not
 happening twice in the same month. The live 0.2.1 zip still prints the old
 string.
 
-### v0.3.0 — "Tileset" · target **Wed 2026-10-28** (was 2026-10-17)
+### v0.3.0 — "Tileset" · target **Wed 2026-11-04** (was 2026-10-28, and 2026-10-17 before that)
+**Moved again 2026-10-21.** The Trim data-loss patch took the 10-21 slot, so
+v0.2.6 takes 10-28 and this moves one Wednesday.
 **Moved 2026-10-16.** 10-17 is a Saturday, `texel-release` runs only on
 Wednesdays (the T-013 rule), and v0.2.5 holds 10-21. 10-28 is the first slot
 after that. **Not moved, but flagged for its owner:** v0.4.0's 2026-11-14 is

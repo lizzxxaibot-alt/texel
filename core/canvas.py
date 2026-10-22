@@ -390,10 +390,15 @@ class Canvas:
         return out
 
     def content_bounds(self) -> tuple[int, int, int, int] | None:
-        """Tight box around every opaque texel on every visible layer."""
+        """Tight box around every opaque texel on every visible layer.
+
+        Frame cels count whatever their visibility flag. show_frame() hides
+        every frame but the current one, and crop() cuts every layer, so
+        measuring only what is lit cropped the unlit frames away (T-024).
+        """
         box = None
         for layer in self.layers:
-            if not layer.visible:
+            if not layer.visible and layer.frame is None:
                 continue
             b = layer.bounds()
             if b is None:

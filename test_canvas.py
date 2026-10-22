@@ -325,6 +325,45 @@ check("add_track on a still canvas makes one cel", c14.add_track("Solo") == 1)
 check("the cel belongs to that track", c14.layers[-1].track == "Solo")
 check("the original layer is untouched", c14.layers[0].frame is None)
 
+# Trim to Content on an animation (T-024). show_frame() hides every cel except
+# the current frame and its onion neighbours, and 0.2.4 measured only visible
+# layers while cropping all of them: an unlit frame lost its art outright.
+# Three frames, onion off and on, each frame current in turn; no frame may
+# lose an opaque texel and the frames must keep their offsets to each other.
+boxes = [(2, 2, 12, 12), (5, 5, 15, 15), (40, 40, 60, 60)]
+for onion in (False, True):
+    for cur in range(3):
+        c15 = Canvas(64, 64)
+        r15 = c15.add_colour((200, 40, 40, 255))
+        for f, (bx0, by0, bx1, by1) in enumerate(boxes):
+            c15.add_frame()
+            for x in range(bx0, bx1 + 1):
+                for y in range(by0, by1 + 1):
+                    c15.cel("Main", f).set(x, y, r15)
+        c15.show_frame(cur, onion=onion)
+        before = [sum(1 for v in c15.cel("Main", f).px if v) for f in range(3)]
+        b = c15.content_bounds()
+        tag = f"onion {'on' if onion else 'off'}, frame {cur + 1} current"
+        check(f"trim box covers every frame ({tag})", b == (2, 2, 60, 60), b)
+        c15.crop(*b)
+        after = [sum(1 for v in c15.cel("Main", f).px if v) for f in range(3)]
+        check(f"trim keeps every frame's art ({tag})", after == before,
+              (before, after))
+        check(f"trim keeps the frames aligned ({tag})",
+              [c15.cel("Main", f).bounds() for f in range(3)]
+              == [(0, 0, 10, 10), (3, 3, 13, 13), (38, 38, 58, 58)])
+
+# a hidden STATIC layer still does not count: hiding one is the user's choice
+c16 = Canvas(16, 16)
+k16 = c16.add_colour((0, 0, 0, 255))
+c16.add_frame()
+c16.cel("Main", 0).set(4, 4, k16)
+c16.layers.insert(0, Layer("Guide", 16, 16))
+c16.layers[0].set(12, 12, k16)
+c16.layers[0].visible = False
+check("a hidden static layer is still skipped", c16.content_bounds() == (4, 4, 4, 4),
+      c16.content_bounds())
+
 print()
 if fails: print(f"{len(fails)} FAILED: {fails}"); sys.exit(1)
 print("CANVAS CORE: ALL PASS")

@@ -1,0 +1,30 @@
+[env] blender 4.5.9 LTS  zip texel-0.2.4-SHIPPED-2026-10-16.zip  from C:\Users\opule\AppData\Local\Temp\texel_trim_m_ieli6f\texel\__init__.py
+[FAIL] onion=off frame 1 current: visible [True, False, False] trim {'FINISHED'} canvas 11x11 opaque [121, 121, 441] -> [121, 64, 0] offsets [(0, 0), (3, 3), None]
+[FAIL] onion=off frame 2 current: visible [False, True, False] trim {'FINISHED'} canvas 11x11 opaque [121, 121, 441] -> [64, 121, 0] offsets [(0, 0), (0, 0), None]
+[FAIL] onion=off frame 3 current: visible [False, False, True] trim {'FINISHED'} canvas 21x21 opaque [121, 121, 441] -> [0, 0, 441] offsets [None, None, (0, 0)]
+[FAIL] onion=on  frame 1 current: visible [True, True, False] trim {'FINISHED'} canvas 14x14 opaque [121, 121, 441] -> [121, 121, 0] offsets [(0, 0), (3, 3), None]
+[ok] onion=on  frame 2 current: visible [True, True, True] trim {'FINISHED'} canvas 59x59 opaque [121, 121, 441] -> [121, 121, 441] offsets [(0, 0), (3, 3), (38, 38)]
+[FAIL] onion=on  frame 3 current: visible [False, True, True] trim {'FINISHED'} canvas 56x56 opaque [121, 121, 441] -> [64, 121, 441] offsets [(0, 0), (0, 0), (35, 35)]
+5 FAILED: ['onion=off frame 1 current', 'onion=off frame 2 current', 'onion=off frame 3 current', 'onion=on  frame 1 current', 'onion=on  frame 3 current']
+---
+[env] blender 4.5.9 LTS  zip texel-0.2.5.zip  from C:\Users\opule\AppData\Local\Temp\texel_trim_sf3lgsf5\texel\__init__.py
+[ok] onion=off frame 1 current: visible [True, False, False] trim {'FINISHED'} canvas 59x59 opaque [121, 121, 441] -> [121, 121, 441] offsets [(0, 0), (3, 3), (38, 38)]
+[ok] onion=off frame 2 current: visible [False, True, False] trim {'FINISHED'} canvas 59x59 opaque [121, 121, 441] -> [121, 121, 441] offsets [(0, 0), (3, 3), (38, 38)]
+[ok] onion=off frame 3 current: visible [False, False, True] trim {'FINISHED'} canvas 59x59 opaque [121, 121, 441] -> [121, 121, 441] offsets [(0, 0), (3, 3), (38, 38)]
+[ok] onion=on  frame 1 current: visible [True, True, False] trim {'FINISHED'} canvas 59x59 opaque [121, 121, 441] -> [121, 121, 441] offsets [(0, 0), (3, 3), (38, 38)]
+[ok] onion=on  frame 2 current: visible [True, True, True] trim {'FINISHED'} canvas 59x59 opaque [121, 121, 441] -> [121, 121, 441] offsets [(0, 0), (3, 3), (38, 38)]
+[ok] onion=on  frame 3 current: visible [False, True, True] trim {'FINISHED'} canvas 59x59 opaque [121, 121, 441] -> [121, 121, 441] offsets [(0, 0), (3, 3), (38, 38)]
+TRIM FRAMES: ALL PASS
+---
+### final build, 718c7a1d2e23d8e7 216959 B
+[env] blender 4.2.23 LTS  zip texel-0.2.5.zip  from C:\Users\opule\AppData\Local\Temp\texel_trim_p3y93axn\texel\__init__.py
+TRIM FRAMES: ALL PASS
+[env] blender 4.5.9 LTS  zip texel-0.2.5.zip  from C:\Users\opule\AppData\Local\Temp\texel_trim_m9a8dhj0\texel\__init__.py
+TRIM FRAMES: ALL PASS
+[env] blender 5.2.1 LTS  zip texel-0.2.5.zip  from C:\Users\opule\AppData\Local\Temp\texel_trim_flu730m7\texel\__init__.py
+TRIM FRAMES: ALL PASS
+### negative control, shipped 0.2.4 on the other two Blenders
+[env] blender 4.2.23 LTS  zip texel-0.2.4-SHIPPED-2026-10-16.zip  from C:\Users\opule\AppData\Local\Temp\texel_trim_bkyvv9ki\texel\__init__.py
+5 FAILED: ['onion=off frame 1 current', 'onion=off frame 2 current', 'onion=off frame 3 current', 'onion=on  frame 1 current', 'onion=on  frame 3 current']
+[env] blender 5.2.1 LTS  zip texel-0.2.4-SHIPPED-2026-10-16.zip  from C:\Users\opule\AppData\Local\Temp\texel_trim_ykycp3t8\texel\__init__.py
+5 FAILED: ['onion=off frame 1 current', 'onion=off frame 2 current', 'onion=off frame 3 current', 'onion=on  frame 1 current', 'onion=on  frame 3 current']

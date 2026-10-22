@@ -716,3 +716,67 @@ the sealed docs changed. Both zips were rebuilt, and `test_install` and
 - `LISTING.md:157` lists stamps as upcoming, so it is stale. Owner `texel-marketing`.
 - **v0.4.0's 2026-11-14 is a Saturday** and is also T-023's default STOP date.
   It was not moved, because the price step rides it. Left for the T-023 decision.
+
+## 2026-10-21 — v0.2.5, the Trim to Content data-loss patch (`texel-release`)
+
+**Ledger first, per §0:** one open row was owned by `texel-release`: **T-024**
+(opened 10-19, 2 days old, so below the freeze line). It was cleared first and
+is the whole of this release. It is set `DONE?` with evidence. T-010, T-011,
+T-015, T-016 and **T-023 (stop/continue) are `HUMAN` and still unanswered.**
+This run started late, ~20:30 local (01:30Z on 10-22).
+
+**Why this, of the three priorities:** priority 1, a reproduced data-loss bug
+(`SUPPORT.md` / `repro/trim_frames_20261018/`). It ships alone as a patch.
+Dithered gradient and tablet pressure move to **v0.2.6 (10-28)**, and v0.3.0
+moves to **11-04**. That also matches T-023's recommended pause on v0.2.x
+feature work while the call is open.
+
+### What changed
+- `core/canvas.py` `content_bounds()`: a frame cel counts whatever its
+  `visible` flag. A hidden **static** layer is still skipped, as the old test
+  asserts. `show_frame()` hides every unlit frame, and `crop()` cuts all
+  layers, so the old rule cropped frames by a box never measured on them.
+- `test_canvas.py`: +19 checks, **written first and watched failing** (15 red
+  on the 0.2.4 code). 3 frames, onion off and on, each frame current: the trim
+  box covers every frame, no frame loses an opaque texel, and the offsets hold.
+  One more check pins the hidden-static-layer rule.
+- `repro/trim_frames_20261021/verify.py`: the same scenario through the real
+  `texel.trim` operator, run on a **zip**. Output is in `output_build.txt`.
+  Shipped 0.2.4 **fails 5/6** on 4.2.23, 4.5.9 and 5.2.1. The 0.2.5 zip
+  (sha256 `718c7a1d…`, the uploaded file) **passes 6/6** on all three.
+- Sealed docs: README (Trim note), START-HERE (v0.2.5 row, v0.2.6 10-28, v0.3
+  11-04), ROADMAP (v0.2.5 BUILT, v0.2.6 and v0.3.0 dates). No new operator.
+
+### The gate, in full
+6 headless suites pass · `core/` at **100.0%** (1,081 statements, 0 missed) ·
+`test_panels` / `test_keys` / `test_e2e` on 4.5.9 with **0 tracebacks** ·
+`run_gui_versions.sh` all pass (4.2.23, 4.5.9, 5.2.1 × panels, keys,
+workspace, e2e, lite) · `build.py` and `build.py --lite` · `test_versions.sh`
+**pass=3 fail=0**, run twice, before and after the docs rebuild ·
+`store_check.py` **13/13** in the Store 5.2.1 · `test_install` and `test_lite`
+pass on the final archives.
+
+### Live-page verification (D.4), taken before ROADMAP/devlog/queue were written
+- `itch_upload.mjs --game 4991926 --expect texel`, one file at a time:
+  `texel-0.2.5.zip` (id 19938649, hid 0.2.4), then `texel-lite-demo-0.2.5.zip`
+  (id 19938653, `--demo`, hid Lite 0.2.4). `profile.lock` was stale (its holder,
+  pid 36744 `itch_desc_dump.mjs`, was no longer running).
+- **Cookie-less GET `z3er1n.itch.io/texel` → HTTP 200, 33,187 B.** The widget
+  lists **`texel-0.2.5.zip` 211 kB** (local 216,959 B) and, under `for_demo`,
+  **`texel-lite-demo-0.2.5.zip` 199 kB** (local 204,444 B, sha256 `4a70de93…`).
+  The only "0.2.4" left on the page is the old devlog's title. An anonymous POST
+  to `/file/19938649` returns *"A key is needed to download"*.
+- **The paid 0.2.4 had 0 downloads** at upload time, per the dashboard. As far
+  as itch can see, no buyer ever held the build with this bug.
+- The demo was **not** pulled back, the same choice as 10-16, to keep the demo
+  count clean. Lite does not include Trim, so the bug never reached it.
+- Devlog **1721659** *"0.2.5: Trim no longer deletes animation frames"* is
+  HTTP 200 logged-out, first in `devlog.rss`, with 0 stray `**`. It credits
+  @acorbinelli and states the slip.
+
+### Not done / open
+- **Ctrl+Z after a 0.2.4 Trim is still unverified.** The devlog says so.
+- No price milestone is crossed. The next one is v0.4.0.
+- A hidden **static** layer still gets cropped by a box that ignores it. That is
+  the documented rule ("trim what you can see") and a user choice, not an
+  invisible frame. It is left for `texel-support` to report if a buyer trips on it.
