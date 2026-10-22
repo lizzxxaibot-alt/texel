@@ -6,6 +6,60 @@ in `../ACTIONS.md` and handed to a named owner.
 
 ---
 
+## 2026-10-21 — run 31 (catch-up, 10-22T01:32Z; the host was off ~10-20T03:40Z → 10-22T01:32Z, so there was no 10-20 run and the in-slot 10-21 run never fired)
+
+**VERDICT: BLOCKED ON A HUMAN DECISION, AND DEGRADED: THE DATA-LOSS FIX MISSED ITS ONLY SLOT THIS WEEK.** The listing passes every check. `texel-release`'s Wed 10-21 slot fell inside the outage and the scheduler now says **next run 10-28**, so the paid `texel-0.2.4.zip` that erases off-screen animation frames (T-024) stays on sale for at least seven more days unless someone presses Run now. **T-023 (stop/continue) is unanswered at 12 days.**
+
+### Action ledger
+
+**Opened: 0. Closed: 0.** No open row carries a `DONE?` note. T-023 is not answered in `ACTIONS.md`, `STATE.md` or `ROADMAP.md`; nothing has been committed since 10-19 22:43 local. A-032 and A-037 are both still Open in `pixelkiln/launch/watch/ACTIONS.md`, so the 14-day rung stays suspended for every HUMAN row.
+
+| id | age | owner |
+|---|---|---|
+| **T-024** | **2 d** | **`texel-release`**. Not done: the live page still serves `texel-0.2.4.zip`, and `ROADMAP.md` holds no test run and no refusal. The 3-day freeze lands 10-22 on a routine whose next slot is 10-28. |
+| T-023 | 12 d | **HUMAN**: the stop/continue call. Default STOP 2026-11-14, 24 days out. |
+| T-010 | 36 d | **HUMAN** (suspended) |
+| T-011 | 36 d | **HUMAN** (suspended) |
+| T-015 | 32 d | **HUMAN** (suspended) |
+| T-016 | 32 d | **HUMAN** (suspended; part of T-023's CONTINUE option) |
+
+### ALERTS
+
+1. **`texel-release` is late on its own rule, and that is what stalls T-024.** `cronExpression` `0 10 * * 3`; `lastRunAt` 10-16T06:37Z; the 10-21 slot (~15:13Z) passed with the host off, and `nextRunAt` is already **2026-10-28T15:13Z**. The cause is the outage (A-037, HUMAN), not the routine, so no new row. **What would get the fix out this week is a person pressing Run now on `texel-release`.** This routine does not do that: starting a build is doing the work. Sales are 0, so no buyer is known to be affected.
+2. **Host outage, ~46 h, the fifth in twelve days. Owned by A-037. No new row.** Read at 01:33Z inside the 01:32Z catch-up wave, which fired every Pixelkiln routine and this one. `texel-support` (last 10-20T01:51Z, 47.7 h) and `texel-marketing` (10-20T01:54Z) had not fired yet, and neither is over 48 h. Run 29 showed they can arrive minutes after this read, so **they are not called late here.** Lost: support's 10-20 and 10-21 desk days, the **Wed 10-21 Texel beat**, and two backup nights (`pixelkiln-backup` last 10-20T03:34Z).
+3. **`texel-marketing`'s 10-20T01:54Z run left no artifact.** `promo/POSTED.md` ends at the Sun 10-18 run; there is no entry for that firing, and no Mon 10-19 stamps beat. So the v0.2.4 release beat has still not been posted five days after release, and it still has no visual. This is one run, not a week, so it is noted and not a "broken" finding. If the next marketing run also leaves nothing, it is.
+4. **T-023 · 12 d · HUMAN.** Cited, not re-described.
+
+### Listing (measured 10-22T01:33–01:40Z)
+
+| Check | Result |
+|---|---|
+| Logged-out page | HTTP 200, 33,183 B (browser UA). `Updated` 16 Oct 2026 @ 06:52 UTC; no draft marker. |
+| Download | Paid `texel-0.2.4.zip` **210 kB**, which matches local `dist/texel-0.2.4.zip` (215,561 B, the newest in `dist/`). Demo `texel-lite-demo-0.2.4.zip` 198 kB. Page only; nothing downloaded. |
+| Price | `game[min_price]` $9.95; the public page shows $9.95 ×3. Correct until v0.4.0. |
+| Status | `game[published]=published` |
+| AI disclosure | `ai_generated=yes`, `ai_graphics=on`, `ai_code=on` |
+
+**All pass.** The edit page was read headless through `lib.mjs` `launch()` with a throwaway read-only script, deleted after use. Nothing was clicked or saved.
+
+### Numbers
+
+`| 2026-10-21 (10-22T01:33Z) | 151 | 7 | 0 | $0.00 | 0.00% |`
+
+- **7-day trend:** +15 views (136 → 151 over ~7.8 d, ≈1.9/day) against +11 the week before (≈1.7/day). **Flat to slightly up**, n=15, direction only.
+- **Downloads:** 7, unchanged since 10-16. Paid payments 0.
+- **Conversion:** 0/151. The 200-view gate is 49 views away, about 11-16 at this rate, **two days after T-023's 11-14 default**. The gate will not answer before the decision is due.
+- Texel's two free funnel pages stand at Density Cheatsheet 57 views / 28 downloads and Material Palettes 115 / 30. The store-wide referrer table has no Texel-specific line in its top 20.
+
+### Roadmap
+
+- **v0.2.5 "Brush, the rest" plus the Trim data-loss patch: target Wed 2026-10-21. Missed by 0 days so far**, because no release run happened. Next possible slot is 10-28 unless someone runs it by hand. No code is logged against it.
+- **v0.3.0 "Tileset": Wed 2026-10-28**, the same slot. If that slot runs, the patch comes first (`ROADMAP.md`: *jumps the queue*), so Tileset is effectively a week behind already.
+- **v0.4.0 "Handoff": 2026-11-14**, when the price steps to $14.95. That is 24 days out and the same day as T-023's default STOP.
+
+---
+
+
 ## 2026-10-19 — run 30 (catch-up, 10-20T01:49Z; the host was off ~10-18T21:40Z → 10-20T01:38Z, so the in-slot 10-19 run never fired)
 
 **VERDICT: BLOCKED ON A HUMAN DECISION, AND DEGRADED: THE PAID BUILD ON SALE LOSES DATA.** The listing passes every check. **T-023 (stop/continue) is unanswered at 10 days.** The new problem is product, not process: `texel-support` reproduced a **data-loss bug in the shipped `texel-0.2.4.zip`** (Trim to Content erases animation frames that are not on screen). It is opened as **T-024 → `texel-release`**, due in Wednesday's slot.
