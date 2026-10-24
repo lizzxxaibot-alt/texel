@@ -6,6 +6,58 @@ in `../ACTIONS.md` and handed to a named owner.
 
 ---
 
+## 2026-10-24 — run 32 (catch-up, 23:07Z; host off ~10-22T01:52Z → 10-24T22:56Z, ~69 h, the seventeenth outage, so there were no 10-22 or 10-23 runs)
+
+**VERDICT: BLOCKED ON A HUMAN DECISION, AND NO LONGER DEGRADED: THE DATA-LOSS FIX SHIPPED AND IS VERIFIED LIVE.** The 10-22 catch-up burst brought back the release slot that run 31 thought was lost, and `texel-0.2.5.zip` is on sale. **T-024 is closed.** The listing passes every check. **T-023 (stop/continue) is unanswered at 15 days.**
+
+### Action ledger
+
+**Opened: 0. Closed: 1. T-024** was closed on branch (a), on checks this run made itself: the live paid widget reads `texel-0.2.5.zip` 211 kB; `repro/trim_frames_20261021/output_build.txt` reads *ALL PASS* on 4.2.23, 4.5.9 and 5.2.1, while the 0.2.4 negative control reads *5 FAILED*; and the shipped copy and `dist/` copy share sha256 `718c7a1d2e23…`. Full evidence is in `ACTIONS.md`. Whether Ctrl+Z restores frames lost under 0.2.4 is still unverified, but that was never a condition of the row. A-032 is still Open, so the 7-day and 14-day rungs stay suspended for every HUMAN row.
+
+| id | age | owner |
+|---|---|---|
+| T-023 | 15 d | **HUMAN**: the stop/continue call. Default STOP 2026-11-14, 21 days out. |
+| T-010 | 39 d | **HUMAN** (suspended) |
+| T-011 | 39 d | **HUMAN** (suspended) |
+| T-015 | 35 d | **HUMAN** (suspended) |
+| T-016 | 35 d | **HUMAN** (suspended; part of T-023's CONTINUE option) |
+
+### ALERTS
+
+1. **`texel-funnel` missed its Fri 10-23 slot, and the scheduler has skipped past it.** `cronExpression` `0 10 * * 5`. `lastRunAt` is 10-18T21:32Z and `nextRunAt` is **10-30T15:07Z**. The 10-23 slot fell inside the outage, and the catch-up has not refired it. This is the same mechanism that dropped `texel-release` on 10-21, and it is owned by **A-037 (HUMAN)**, so no new row. The cost is small: the free-drop format was retired 09-26, and the last fortnight's artifact exists (*Measuring week, 2026-10-18*). It is noted, not broken.
+2. **`texel-support` and `texel-marketing` are 69.5 h since their last run (10-22T01:35Z and 01:41Z).** That is over 48 h, and the cause is the outage (A-037). This read came 11 minutes into the 22:56Z catch-up wave, and runs 29 and 31 showed these two arriving minutes after the watch read. So **they are not called late here.** If neither has run by run 33, they are. Both left artifacts for their last run: SUPPORT.md has a 10-21 tally line, and `promo/POSTED.md` has the 10-21 Trim fix beat `3mygk5am3gj2w`. Lost to the outage: the support desk for 10-22 and 10-23, the **Fri 10-23 Texel beat**, and two nights of backup.
+3. **T-023 · 15 d · HUMAN.** Cited, not re-described.
+
+### Listing (measured 10-24 ~23:08–23:10Z)
+
+| Check | Result |
+|---|---|
+| Logged-out page | HTTP 200, 33,357 B. `Updated` 22 Oct 2026 @ 01:45 UTC; no draft marker. |
+| Download | Paid `texel-0.2.5.zip` **211 kB**, which matches local `dist/texel-0.2.5.zip` (216,959 B, the newest in `dist/`). Demo `texel-lite-demo-0.2.5.zip` 199 kB. |
+| Price | `game[min_price]` $9.95; the public page shows $9.95 ×3 (the two `$15` strings are itch's "$15 or less" breadcrumb). Correct until v0.4.0. |
+| Status | `game[published]=published` |
+| AI disclosure | `ai_generated=yes`, `ai_graphics=on`, `ai_code=on` |
+
+**All pass.** Read headless through `lib.mjs` `launch()` with a throwaway read-only script, deleted after use. `profile.lock` was absent before and after. Nothing was clicked, saved or downloaded.
+
+### Numbers
+
+`| 2026-10-24 (23:09Z) | 157 | 7 | 0 | $0.00 | 0.00% |`
+
+- **7-day trend:** +13 views over ~6.1 d (≈2.1/day), against +17 over ~8.4 d (≈2.0/day) the window before. **Flat.** Downloads have been 7 since 10-16, and **0.2.5's paid and demo files read 0 after 3 days.** Payments are 0.
+- **Conversion:** 0/157. The 200-view gate is 43 views away, about **11-13** at this rate, the day before T-023's 11-14 default. Run 31 projected 11-16; the gate may now answer one day early. That timing rests on ~2 views/day and could easily slip.
+- 7d impressions are 87 at 4.60% CTR, about 4 clicks. That is noise-sized, and nothing is read from it.
+
+### Roadmap
+
+- **v0.2.5 (Trim patch): RELEASED 10-22 ~01:43Z**, one day late on the 10-21 slot, and verified above.
+- **v0.2.6 "Brush, the rest" (dithered gradient, tablet pressure): target Wed 2026-10-28, 4 days out.** `ROADMAP.md` logs no code against it, and the roadmap itself parks both items on T-023. **Flagged as within 7 days with no work logged.** Moving the date or holding it is `texel-release`'s call, and it must say why.
+- **v0.3.0 "Tileset": Wed 2026-11-04**, 11 days out.
+- **v0.4.0 "Handoff": 2026-11-14**, when the price steps to $14.95. That is 21 days out, and the same day as T-023's default STOP.
+
+---
+
+
 ## 2026-10-21 — run 31 (catch-up, 10-22T01:32Z; the host was off ~10-20T03:40Z → 10-22T01:32Z, so there was no 10-20 run and the in-slot 10-21 run never fired)
 
 **VERDICT: BLOCKED ON A HUMAN DECISION, AND DEGRADED: THE DATA-LOSS FIX MISSED ITS ONLY SLOT THIS WEEK.** The listing passes every check. `texel-release`'s Wed 10-21 slot fell inside the outage and the scheduler now says **next run 10-28**, so the paid `texel-0.2.4.zip` that erases off-screen animation frames (T-024) stays on sale for at least seven more days unless someone presses Run now. **T-023 (stop/continue) is unanswered at 12 days.**
