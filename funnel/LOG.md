@@ -38,6 +38,8 @@ says on 2026-09-26.
 | *both pages, read 2026-10-09* | *Material Palettes, 20 days live* | *(as above)* | **87** (+24/wk) | **21** (+6) | *format retired 09-26* | *still growing off itch shelves; see 10-09 note* |
 | *both pages, read 2026-10-18* | *Density Cheatsheet, 37 days live* | *(as above)* | **56** (+4 in 9 d) | **27** (+4) | *format retired 09-26* | *referrer split left to `texel-watch`* |
 | *both pages, read 2026-10-18* | *Material Palettes, 29 days live* | *(as above)* | **112** (+25 in 9 d) | **29** (+8) | *format retired 09-26* | *still the funnel's only growing page; see 10-18 note* |
+| *both pages, read 2026-10-24* | *Density Cheatsheet, 43 days live* | *(as above)* | **57** (+1 in 6 d) | **28** (+1) | *format retired 09-26* | *flat* |
+| *both pages, read 2026-10-24* | *Material Palettes, 35 days live* | *(as above)* | **119** (+7 in 6 d) | **31** (+2) | *format retired 09-26* | *slowing; see 10-24 note* |
 
 **The second row is the one that matters now, and it was added on 2026-09-19.**
 The 72 h window is history; what the page has done over eight days is the real
@@ -892,3 +894,36 @@ reading, and this run did not take it.
 The next first-Friday slot is **2026-11-06**, and it ships nothing unless T-023
 reopens distribution.
 
+## Measuring week, 2026-10-24 (`texel-funnel`)
+
+**This run fired on Saturday 10-24, not Friday 10-23.** It is recorded so the
+six-day gap in the readings below is not read as a weekly one.
+
+**No open `texel-funnel` rows in `ACTIONS.md`.** The only open rows are `HUMAN`:
+T-010, T-011, T-015, T-016 and T-023. **No drop:** the format was retired on
+09-26, and the fourth week of the month is not a ship week in any case. T-023 is
+still undecided; neither `STATE.md` nor `ROADMAP.md` carries a dated decision.
+Nothing was added to `promo/QUEUE.md`.
+
+**Readings:** `node automation/itch_analytics.mjs`, *Project totals*, lifetime,
+read at about 2026-10-24T23:20Z. `profile.lock` was absent.
+
+| page | 10-18 | 10-24 | 6 days |
+|---|---|---|---|
+| Density Cheatsheet | 56 views / 27 grabs | 57 / 28 | +1 / +1 |
+| Material Palettes | 112 / 29 | 119 / 31 | +7 / +2 |
+| Texel (paid page) | 144 views / 7 grabs | 157 / 7 | +13 views / +0 grabs |
+
+**Read it straight.** The palettes page has stopped out-growing Texel: +7 views
+against Texel's +13, after two readings where it led. The cheatsheet is flat. The
+tag shelf `free/tag-aseprite/tag-palette` still sends traffic store-wide (20,
+up from 19), but at about one view a day. Texel's own page took no new grabs this
+week, so the Lite demo's lifetime stays at 5 ours plus 2 not ours. **Nothing here
+reopens the 09-26 retirement**, and the funnel pages are not becoming a traffic
+source in their own right.
+
+**Same limit as the last two readings.** Both remaining levers belong to a person:
+BlenderNation (**T-016**) and the stop/continue call (**T-023**). T-023's default
+STOP date is **2026-11-14**, three weeks out. The next first-Friday slot is
+**2026-11-06**. It ships nothing unless T-023 reopens distribution, and on
+present numbers it would not be worth a grid slot even then.
