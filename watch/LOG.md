@@ -6,6 +6,61 @@ in `../ACTIONS.md` and handed to a named owner.
 
 ---
 
+## 2026-10-26 — run 33 (catch-up, 13:48Z; host off ~10-24T23:30Z → 10-26T13:40Z, ~38 h, the eighteenth outage, so there was no 10-25 run)
+
+**VERDICT: BLOCKED ON A HUMAN DECISION; THE PRODUCT ITSELF IS HEALTHY.** The listing passes every check, all four doers ran inside their windows, and both run-32 alerts resolved. **T-023 (stop/continue) is unanswered at 17 days**, and its 11-14 default is 19 days out.
+
+### Action ledger
+
+**Opened: 0. Closed: 0.** A-032 is still Open, so the 7-day and 14-day rungs stay suspended for every HUMAN row.
+
+| id | age | owner |
+|---|---|---|
+| T-023 | 17 d | **HUMAN**: the stop/continue call. Default STOP 2026-11-14, 19 days out. |
+| T-010 | 41 d | **HUMAN** (suspended) |
+| T-011 | 41 d | **HUMAN** (suspended) |
+| T-015 | 37 d | **HUMAN** (suspended) |
+| T-016 | 37 d | **HUMAN** (suspended; part of T-023's CONTINUE option) |
+
+### Run 32's alerts, resolved
+
+- **`texel-funnel`'s missed Fri 10-23 slot was refired**: `lastRunAt` 10-24T23:17Z, 12 minutes after run 32 read it as skipped. Its artifact is in `funnel/LOG.md` (both sibling pages re-read 10-24). **Not late.**
+- **`texel-support` (10-24T23:11Z) and `texel-marketing` (10-24T23:17Z) both ran** after run 32's read, as run 32 predicted. Both left artifacts: SUPPORT.md has a 10-24 row ("no inbound support items, day 46"), and POSTED.md has the 10-24 run (no Texel post, because Saturday belongs to the packs; two replies verified on the public AppView; one live listing change).
+
+### ALERTS
+
+1. **Forecast, not yet a breach: the scheduler has stepped `texel-support` past today's slot.** `cronExpression` `15 8 * * *` (13:15Z plus jitter). The host came back ~13:40Z, just after that slot, and the catch-up wave did not fire it. `nextRunAt` reads **10-27T13:24Z**. Last run 10-24T23:11Z is 38.6 h old now and **will cross 48 h at 10-26T23:11Z with no run scheduled before 10-27.** That is ~62 h with no desk if nothing changes. This is the A-037 mechanism (catch-up skips a slot), so **no new row: A-037 · HUMAN** owns it. There is no inbound Texel item open, so today's cost is small.
+2. **Lost to the outage:** the **Sun 10-25 Texel beat** (Fri 10-23 was already lost in outage 17, so no Texel beat has gone out since the Wed 10-21 Trim fix post), the 10-25 support desk, and the 10-25 backup (`pixelkiln-backup` `lastRunAt` 10-24T23:19Z). `texel-marketing`'s Mon beat is still due today (`nextRunAt` 10-26T20:20Z). Owner A-037; noted, not a new row.
+3. **T-023 · 17 d · HUMAN.** Cited, not re-described.
+
+### Listing (measured 10-26 ~13:50–13:53Z)
+
+| Check | Result |
+|---|---|
+| Logged-out page | HTTP 200, 33,759 B. `Updated` **24 October 2026 @ 23:24 UTC**. That edit is accounted for: `texel-marketing`'s Saturday §E added the *Dither as a brush mode* and *Stamps* bullets, and both strings are on the live page (1 hit each). |
+| Download | Paid `texel-0.2.5.zip` **211 kB**, which matches local `dist/texel-0.2.5.zip` (216,959 B, the newest in `dist/`). Demo `texel-lite-demo-0.2.5.zip` 199 kB. |
+| Price | `game[min_price]` $9.95; the public page shows $9.95 ×3 (the two `$15` strings are the "$15 or less" breadcrumb). Correct until v0.4.0. |
+| Status | `game[published]=published` |
+| AI disclosure | `ai_generated=yes`, `ai_graphics=on`, `ai_code=on` |
+
+**All pass.** The edit page was read headless through `lib.mjs` `launch()` with a throwaway read-only script, deleted after use. `profile.lock` was absent before and after. Nothing was clicked, saved or downloaded.
+
+### Numbers
+
+`| 2026-10-26 (13:49Z) | 160 | 7 | 0 | $0.00 | 0.00% |`
+
+- **7-day trend:** +14 views over ~6.5 d (≈2.2/day), against +10 over ~5.85 d (≈1.7/day) the window before. **Slightly up, n=14, direction only.** Downloads have been 7 since 10-16. Payments are 0.
+- **Conversion:** 0/160. The 200-view gate is 40 views away, which at ~2/day lands on **11-14 or 11-15**, the same day as T-023's default STOP. The gate cannot answer before the default fires; the decision does not need to wait for it.
+- The free siblings keep moving (Palettes +3 downloads in 1.6 d), and Texel itself does not.
+
+### Roadmap
+
+- **v0.2.6 "Brush, the rest" (dithered gradient, tablet pressure): target Wed 2026-10-28, 2 days out.** `ROADMAP.md` logs no code against it and parks both items on T-023. **Flagged again: within 7 days, no work logged.** Holding or moving it is `texel-release`'s call (`nextRunAt` 10-28T15:13Z), with the reason in the devlog.
+- **v0.3.0 "Tileset": Wed 2026-11-04**, 9 days out.
+- **v0.4.0 "Handoff": 2026-11-14**, when the price steps to $14.95. That is 19 days out, and the same day as T-023's default STOP.
+
+---
+
 ## 2026-10-24 — run 32 (catch-up, 23:07Z; host off ~10-22T01:52Z → 10-24T22:56Z, ~69 h, the seventeenth outage, so there were no 10-22 or 10-23 runs)
 
 **VERDICT: BLOCKED ON A HUMAN DECISION, AND NO LONGER DEGRADED: THE DATA-LOSS FIX SHIPPED AND IS VERIFIED LIVE.** The 10-22 catch-up burst brought back the release slot that run 31 thought was lost, and `texel-0.2.5.zip` is on sale. **T-024 is closed.** The listing passes every check. **T-023 (stop/continue) is unanswered at 15 days.**
