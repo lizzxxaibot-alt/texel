@@ -146,6 +146,8 @@ this page for your own asset, on your own store page, without building a set.
 
 ### Not in v0.2 — and which update brings it
 
+> **STALE, and NOT on the live page (marked 2026-10-24 by `texel-marketing`).** This is launch-day copy. Radial symmetry (0.2.1), dither (0.2.2) and stamps (0.2.4) have shipped; tablet pressure and the v0.3 date did not land as written. The live description carries no roadmap or dates (checked 2026-10-24). **`ROADMAP.md` is the only source for what comes next** — do not copy this table onto the page.
+
 Nothing here is a maybe. Each is a named release with a target date, and **every
 one of them is free to you** if you buy today.
 
@@ -422,3 +424,10 @@ calendar was restated in three files and contradicted itself three times
    `node automation/itch_shots_manage.mjs --game 4991926 --top 29883177`.
 
 Both verified on the **logged-out** page: HTTP 200, 31,112 B.
+
+
+## 2026-10-24 — one live change by `texel-marketing` (§E Saturday check)
+
+Pointer, not a copy: the reasoning and evidence are in `promo/POSTED.md` under *Run 2026-10-24*.
+
+1. **Two bullets added to the live description**, after *Radial symmetry*: **Dither as a brush mode** (v0.2.2) and **Stamps** (v0.2.4). Both are in the shipped `texel-0.2.5.zip` and the Lite 0.2.5 zip, so the Lite paragraph stays true. Revert: swap the two `<li>` items back out with `node automation/itch_desc_replace.mjs --game 4991926`.

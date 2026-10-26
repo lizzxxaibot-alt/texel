@@ -2210,3 +2210,84 @@ Both were re-fetched cookie-less with `getPosts`: author `pixelkiln.bsky.social`
 - **@hiddenasbestos** (cloud disc, 43 likes), **@davidkenyon.art** (93-95 art direction opinion), **@rajio/@charlit** (dental scan joke). Nothing verified to add.
 
 ### §E — not due. The next check is **Sat 2026-10-24**. Carry: `LISTING.md` §"Not in v0.2" is stale (flag from 10-18), and store stills showing the old **"Brush From Selection"** label are still not checked one by one.
+
+## Run 2026-10-24 (Sat, a PACKS day, 18:15 local / 23:15-23:30Z): no Texel post, two replies, one live listing change
+
+**Ledger first.** `ACTIONS.md` has no OPEN row owned by `texel-marketing`. Open: T-010, T-011, T-015, T-016, T-023 (all `HUMAN`). T-024 was closed by watch run 32 tonight. T-023 (stop/continue) is still undecided, and nothing in it pauses marketing.
+
+**No post.** Saturday belongs to the packs. Nothing was taken from `QUEUE.md`. No run was logged for Fri 10-23: the host was off ~10-22T01:52Z to 10-24T22:56Z (watch run 32), so the Fri sprite beat was never sent. It is not being made up today.
+
+### §D: two replies, both verified on the public AppView
+
+| Date | Thread | What was said | Link |
+|---|---|---|---|
+| 2026-10-24 | @controlmole.bsky.social (10-24 16:01Z, 4 likes, **0 replies**): #screenshotsaturday mole spin, *"modelled in blender, flat coloured, rendered tiny and scaled up with no smoothing"*. | Render Properties > Film > Filter Size: a flat-coloured cube at 48x48 in EEVEE came out with 82 colours at the 1.5 px default and exactly 2 at 0, so the edge pixels stay on the palette. **Checked in Blender 4.5.9 `--factory-startup -b`.** `render.filter_size` is labelled *Filter Size*, defaults to 1.5 and has min 0. `RENDER_PT_eevee_next_film` draws it. An emission-only cube against a flat world at 48x48 gave 82 unique colours at 1.5 and 2 at 0.0 (the same at 1 and 16 samples). Cycles' Filter Width bottoms out at 0.01, so the reply names EEVEE only. | [3mynthbqsre2n](https://bsky.app/profile/pixelkiln.bsky.social/post/3mynthbqsre2n) |
+| 2026-10-24 | @donthedeveloper.bsky.social (10-24 02:38Z, 6 likes, 4 replies, all of them general encouragement): starting out with Godot and Blender, and now wants to learn pixel art. | Encouragement, plus Project Settings > Display > Window > Stretch: Mode = viewport, Scale Mode = integer, so the game draws at its base size and scales up in whole steps. **Checked in Godot 4.7.2 headless.** `display/window/stretch/mode` = `disabled` (hint `disabled,canvas_items,viewport`), and `scale_mode` = `fractional` (hint `fractional,integer`). **The Default Texture Filter tip was NOT reused.** It went to @woodlandgamedev on 10-02. | [3mynthc7tyn26](https://bsky.app/profile/pixelkiln.bsky.social/post/3mynthc7tyn26) |
+
+Both were re-fetched with a cookie-less `public.api.bsky.app` `getPosts`. Author `pixelkiln.bsky.social`, `createdAt` 23:21:15Z / 23:21:16Z, parent URIs correct, 280 / 258 bytes. No link and no pitch, and Texel is not mentioned.
+
+### Threads looked at and left alone
+
+- **@alfredbaudisch** (Pixel Art Studio 1.4 release and store posts), **@tajtajima** and **@busterhearts-type9** (both about that product). Standing rule.
+- **@gianlubackdrop** (Substance cage painting) and **@earthsetdev** (pixelover). Other tools' threads.
+- **@majormcdoom** (UV skew). Passed for the third time, still nothing to add.
+
+### §E: the Saturday listing check (done this time)
+
+- **Conversion rule:** not fired. Watch run 32 reads **0/157**, under the 200-view gate.
+- **Truth check against `dist/texel-0.2.5.zip`:** *95 operators* is right (95 unique `bl_idname` in the zip). The live files are `texel-0.2.5.zip` + `texel-lite-demo-0.2.5.zip`. There are no roadmap or date claims (*Not yet / v0.3 / coming soon / upcoming* all absent). Tagline and tags (3D, Animation, Blender, Pixel Art, Sprites, Textures) are still true. Slot 1 is still the density card, which leads with the problem.
+- **CHANGED, LIVE: the description stopped at v0.2.1**, so two shipped features buyers search for were missing from it. Two bullets were added after *Radial symmetry*: **Dither as a brush mode** (50/25/75% or 4x4 Bayer, fixed to the canvas, *New in v0.2.2*) and **Stamps** (Stamp From Selection paints the patch in its own colours, transparent texels leave the canvas alone, *New in v0.2.4*). The wording comes from the README shipped in the 0.2.5 zip. Both features are also in **Lite** 0.2.5 (`texel.dither_fill` is in Lite, and its `tex_ui.py:393` draws *Stamp From Selection*), so the Lite paragraph's *"does not include"* list stays true. The change was applied with `itch_desc_replace.mjs --game 4991926`, 1/1. A fresh dump matches the target except for Redactor's line breaks. The logged-out page at 23:24Z shows *Dither as a brush mode*, *Stamps.* and *New in v0.2.2/v0.2.4*. Pointer in `LISTING.md`.
+- **Tool fix (shared, `automation/`):** `itch_desc_dump.mjs` and `itch_desc_replace.mjs` returned *"(no instance)"*. The edit page now has **two textareas per `.redactor-box`**, and `.redactor-box textarea` picked the unnamed one. Both now select `textarea[name="game[description]"]`. **Eight other scripts use the same selector and were NOT touched:** `itch_board_edit/post/reply`, `itch_crosslink` (it has someone else's uncommitted edits), `itch_desc_fixnums`, `itch_desc_headings`, `itch_devlog`, `itch_devlog_edit`. Any of them may now be silently reading the wrong box.
+- **Carried item, cleared for the live gallery:** none of the 10 live gallery images shows the old *"Brush From Selection"* label. Only g3 shows the sidebar, and it was zoomed to check: it shows Texel Density / Showcase / Layers / Palette / Sprite panels with no stamp button, because it predates stamps. The 57-image `store/stills/` library was **not** checked one by one.
+- **`LISTING.md` §"Not in v0.2"** now carries a STALE banner pointing at `ROADMAP.md`. The table itself was not rewritten, because the dates are `texel-release`'s.
+- **Not done:** no gallery image shows stamps or dither. Adding one means the `brand-visual` loop (lint + critic). That is a candidate for the next Saturday, or for the Mon beat's asset to be reused as a gallery card.
+
+The next §E check is **Sat 2026-10-31**.
+
+## Run 2026-10-26 (Mon, a TEXEL day, 08:52 local / 13:52-14:05Z): the Showcase beat, two replies
+
+**Ledger first.** `ACTIONS.md` has no OPEN row owned by `texel-marketing`. Open: T-010, T-011, T-015, T-016, T-023, all `HUMAN`. T-023 (stop/continue) is still undecided, and nothing in it pauses marketing.
+
+**Why Showcase.** Mon is "one capability". `QUEUE.md` holds no release beat (v0.2.6 targets 10-28). Showcase (`tex_showcase.py`) has been in every paid zip and has **never** been a beat. The poster is image-only, so the "~6s clip" became a two-image before/after. The Fri 10-23 and Sun 10-25 slots were missed (host off, then no firing). They are not made up.
+
+### Posted — Mon 2026-10-26, capability: Build Showcase + Render Showcase
+
+| Date | Beat | Asset | URL | First hour |
+|---|---|---|---|---|
+| 2026-10-26 | **Store-page shot. Left: Blender's default light and Linear filtering smear the texels. Right: Build Showcase (Golden Hour: sun, rim light, bounded haze, Closest forced on), then Render Showcase** | `promo/showcase/texel-showcase-before.jpg` + `texel-showcase-golden.jpg` (JPEG q95 4:4:4, 143,795 / 192,837 B, both 1280x720). These are fresh renders, not stills. The PNG masters and `showcase_still.py` are in the same folder. Blocked for reuse until **11-16** | [3myruuetjpr26](https://bsky.app/profile/pixelkiln.bsky.social/post/3myruuetjpr26) | 3 likes, 4 reposts at +4 min |
+
+Every claim was checked against the shipped `dist/texel-0.2.5.zip`, not recalled:
+- **The render is the product's own output.** `showcase_still.py` loads Texel from the extracted 0.2.5 zip under Blender 4.5.9 `-b --factory-startup`. It runs `texel.showcase_setup` (`bl_label` "Build Showcase", `tex_showcase.py:96`), then `texel.showcase_render` ("Render Showcase", `:264`). Settings: preset `GOLDEN` ("Golden Hour", `tex_props.py:80`), move `STILL`, 64 samples, 1280x720. Log: *"Golden Hour rig built - 1 textures set to nearest-neighbour"*. The rig collection holds Texel Key (SUN), Texel Rim (AREA), Texel Ground, Texel Haze, Texel Focus and Texel Camera.
+- **"Closest filtering forced on":** the texture node was set to `Linear` on purpose before Build, and it read `Closest` after.
+- **"Bounded haze":** the module docstring says *"fog is a BOUNDED box, never a world volume"*. The Texel Haze mesh is that box.
+- **The before is a fair comparison and is described as what it is.** It uses the same camera with the rig objects removed, the texture back on Linear (Blender's default, checked), a dark world, and one 1000 W point light at the factory light's position. The post claims nothing beyond "default light and Linear filtering".
+- **Also visible:** all three meshes were cube-projected, then `texel.density_apply` set them to 32 px/unit (*"6 faces set to 32.0 px/unit"* x3). That is why the planks are the same size on the crates and the platform. The post makes no density claim.
+- **Texture:** a 64x64 plank tile built in the script with `texel.core.tools.make_ramp`. It was not hand-painted in Texel, and the post does not say it was.
+- **Live page re-checked first:** a cookie-less GET of `z3er1n.itch.io/texel` → HTTP 200, 33,763 B, serving `texel-0.2.5.zip` + `texel-lite-demo-0.2.5.zip`. Showcase is a full-version feature. The live Lite paragraph already says Lite lacks *"Showcase renders"*.
+- **Verified cookie-less** with `getPosts`: author `pixelkiln.bsky.social`, `createdAt` 2026-10-26T13:57:08.178Z, `app.bsky.embed.images#view` with 2 images (1280x720, alt text 385 and 465 characters), 5 facets (itch link, `#pixelart #b3d #gamedev #indiedev`). Text is 293/300.
+- **Feed size:** I looked at a 500px downsample of the after image. The planks, the joints and the nail dots read.
+- **Phrasing:** *"store-page shot"*, *"smears"* and *"Build Showcase"* have 0 prior uses in this log. No antithesis construction.
+- **§4 note:** these are unedited renders from the product, not designed cards, so no lint/critic loop. This matches the 10-18 tavern still.
+- **Gap for `texel-release` (not mine to fix):** the README shipped in the 0.2.5 zip never mentions Showcase. The feature is in the zip and in `ROADMAP.md`, and the live page names it, so the post stays within what shipped.
+- Spec: `promo/post_2026-10-26.json`.
+
+### §D — two replies, both verified on the public AppView
+
+| Date | Thread | What was said | Link |
+|---|---|---|---|
+| 2026-10-26 | @drtock.bsky.social (10-23): a Pixeltober NES rat. They exported at 3000% and asked *"okay i guess this is too big?"*, with **0 replies**. | Size is fine. Their 30x copy on the CDN is 870x630 as exported, but only the top fifth arrived and the rest is black, so the upload broke and one retry is worth it. On our posts the feed copy caps at 1000px wide, so 34x (986) is the largest clean scale. **Measured:** I fetched their blob `bafkreier3jm…` from `cdn.bsky.app`: 870x630, a ~148 px green band, then solid black. Their 10x original is 290x210, so the sprite is 29x21. On our own posts, the 1560x1130 stamps PNG is served as `feed_thumbnail` at 1000x724, and today's 1280x720 at 1000x563. Their 290 and 870 images come back at native size. **Also measured, and not in the reply:** the CDN serves even a PNG blob as **lossy** WebP (`VP8 ` chunk; 712 → 5,777 colours; 59% of pixels changed). Texel is not mentioned. | [3myrv3sbter24](https://bsky.app/profile/pixelkiln.bsky.social/post/3myrv3sbter24) |
+| 2026-10-26 | @sillyneve.bsky.social (10-25 16:03Z, 57 likes, 2 replies): a low-poly Minecraft Snow Golem with dither shading, *"What should I model next?"* | Liked the derpy face and the dither in the snow (seen in the video thumbnail). Voted for the Sniffer: it digs torchflower and pitcher plant seeds out of the ground, which gives a dig animation and a tiny flower prop. **Checked** on minecraft.wiki's Sniffer page via its API. A "mossy back" line was dropped because the wiki text did not support it. | [3myrv3srzuo22](https://bsky.app/profile/pixelkiln.bsky.social/post/3myrv3srzuo22) |
+
+Both were re-fetched cookie-less with `getPosts` (by DID): author `pixelkiln.bsky.social`, `createdAt` 14:01:16Z / 14:01:17Z, parent URIs correct, 289 / 220 bytes. Neither has a link or a pitch.
+
+### Threads looked at and left alone
+
+- **@alfredbaudisch** (store and release posts) and **@busterhearts-type9** (about that product). Standing rule.
+- **@retrygames** (Tintline) and **@zerrotajo** (Aseprite Blender Bridge). Threads about other tools.
+- **@nenkanuko** (3D platformer with 2D sprites). The account is mostly NSFW art, and the engine was unknown, so there was nothing verifiable to add.
+- **@sillyneve 10-24** (ToonShift node group). The thumbnail did not show enough for a verified addition.
+- **@spadetale** (Bluesky blurs pixel art). They already found their fix (lossless WebP upload). What the CDN does to a WebP *upload* is unmeasured, so no reply.
+- **@pan-tastique**, **@frozjen**, **@leapopen**. Showcases with nothing specific to add.
+- **A reply at 13:44Z today** (`3myru5xiu2e24`) predates this run. It belongs to another routine and is not counted here.
+
+### §E — not due. The next check is **Sat 2026-10-31**. Carry: no gallery image shows stamps or dither. `promo/showcase/showcase_GOLDEN.png` could become a gallery card, but only through the `brand-visual` loop.
