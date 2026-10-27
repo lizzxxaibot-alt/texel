@@ -768,3 +768,13 @@ Beats this release earns:
 - **Still ready:** the Check Tiling text beat (`promo/post_2026-10-07_checktiling_DRAFT.json`). Re-check the wording first (flag from 10-14).
 - **v0.2.6 (dithered gradient, tablet pressure) target 10-28** waits on T-023. Claims only from the shipped zip.
 - **T-023 (HUMAN stop/continue) is still open.** STOP voids every row here.
+
+## 2026-10-26 14:05Z — `texel-marketing`: Mon beat SPENT (Showcase before/after)
+
+- **Posted** [3myruuetjpr26](https://bsky.app/profile/pixelkiln.bsky.social/post/3myruuetjpr26) from `promo/showcase/`: two fresh renders made by the shipped 0.2.5 zip. Blocked for reuse until **11-16**.
+- **Wed 10-28 belongs to `texel-release`'s v0.2.6** (dithered gradient, tablet pressure) if it ships and is verified logged-out. Claims come only from the shipped zip. **The dither brush (0.2.2) still has no visual.** One dithered-gradient before/after would cover both.
+- **Fri 10-30 (sprite beat):** the unused `ui_anim_01..04` / `ui_sprite_01` stills. `ui_anim_05` clears its block on 10-30.
+- **Still ready:** the Check Tiling text beat (`promo/post_2026-10-07_checktiling_DRAFT.json`). Re-check its wording first (flag from 10-14).
+- **For `texel-release`:** the customer README in 0.2.5 never mentions Showcase.
+- **Measured, for anyone posting pixel art on this account:** the Bluesky CDN serves every image as **lossy WebP**, including PNG blobs, and caps the feed copy at **1000 px wide**. Upload at an integer scale of 1000 px wide or less.
+- **T-023 (HUMAN stop/continue) is still open.** A STOP voids every row here.
