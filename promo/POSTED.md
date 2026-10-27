@@ -2291,3 +2291,27 @@ Both were re-fetched cookie-less with `getPosts` (by DID): author `pixelkiln.bsk
 - **A reply at 13:44Z today** (`3myru5xiu2e24`) predates this run. It belongs to another routine and is not counted here.
 
 ### §E — not due. The next check is **Sat 2026-10-31**. Carry: no gallery image shows stamps or dither. `promo/showcase/showcase_GOLDEN.png` could become a gallery card, but only through the `brand-visual` loop.
+
+## Run 2026-10-26 second firing (Mon, a TEXEL day, 15:22 local / 20:22-20:27Z): no post, two replies
+
+**Ledger first.** No OPEN row owned by `texel-marketing`. Open rows: T-010, T-011, T-015, T-016, T-023, all `HUMAN`.
+
+**No post.** The Mon slot was already used at 13:57Z by this morning's run (`3myruuetjpr26`). A second Texel post the same day would break one-per-slot, so this run only replied.
+
+### §D: two replies, both verified on the public AppView
+
+| Date | Thread | What was said | Link |
+|---|---|---|---|
+| 2026-10-26 | @bryceandrobot.bsky.social (10-22, 6 likes, 1 self-reply): a low-poly cliff/waterfall portfolio piece built from texture atlas tiles, UV animation and vertex colour tinting, going into Godot. Alt text read for all 4 images. | Praised the cave and the material custom-data setup. Then one atlas catch: Godot gives 3D textures mipmaps, and StandardMaterial3D samples Linear Mipmap by default, so at a distance the tiles bleed into their neighbours. A few px of edge padding per tile fixes it. **Checked in Godot `4.5-stable` source, not recalled:** `material.h:572` `texture_filter = TEXTURE_FILTER_LINEAR_WITH_MIPMAPS`. In `resource_importer_texture.cpp:127-147`, a texture flagged as used in 3D with `detect_3d/compress_to` on is reimported with `mipmaps/generate = true`, and `detect_3d/compress_to` defaults to 1 (VRAM Compressed) on the Detect preset (`:262`). | [3mysklfi4sp27](https://bsky.app/profile/pixelkiln.bsky.social/post/3mysklfi4sp27) |
+| 2026-10-26 | @everettesine.bsky.social (10-22, 8 likes, **0 replies**): wants to go past *"simple low poly models with a single image texture"* but is scared. | A small next step: Vertex Paint, then a Color Attribute node and a Mix Color set to Multiply over the image texture. The layer starts white, so nothing changes until you paint dark corners and grime. Same UVs, no new texture. **Checked in Blender 4.5.9 `-b --factory-startup`:** the default cube has 0 colour attributes, and entering `VERTEX_PAINT` creates `Attribute` (CORNER, BYTE_COLOR) filled with (1,1,1,1). `ShaderNodeVertexColor.bl_label` is "Color Attribute". `ShaderNodeMix.blend_type` includes MULTIPLY (default MIX, so it has to be set). `node_add_menu.py:116` labels the menu entry "Mix Color". | [3mysklg3lu727](https://bsky.app/profile/pixelkiln.bsky.social/post/3mysklg3lu727) |
+
+Both re-fetched cookie-less with `getPosts`: author `pixelkiln.bsky.social`, `createdAt` 20:25:48Z / 20:25:49Z, parent URIs correct, 296 / 290 bytes. No link, no pitch, Texel not mentioned.
+
+### Threads looked at and left alone
+
+- **@alfredbaudisch**, **@tajtajima** (about that product), **@busterhearts-type9**: standing rule.
+- **@cerasumchrys** (Ucupaint bake ruining painted normals on cushions): there was not enough in the images or text to name a cause I could check.
+- **@mishotofu** (3D to 32x32 portraits through a Python ruleset): no image was exposed, so I had nothing specific to add.
+- **@controlmole**, **@mrpuplaroid**, **@sillyneve 10-25** (already replied to this morning), **@odinsillydoodle**: showcases, threads already answered, or jokes.
+
+### §E: not due. The next check is **Sat 2026-10-31**.
