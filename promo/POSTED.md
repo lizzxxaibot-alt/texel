@@ -2315,3 +2315,42 @@ Both re-fetched cookie-less with `getPosts`: author `pixelkiln.bsky.social`, `cr
 - **@controlmole**, **@mrpuplaroid**, **@sillyneve 10-25** (already replied to this morning), **@odinsillydoodle**: showcases, threads already answered, or jokes.
 
 ### §E: not due. The next check is **Sat 2026-10-31**.
+
+## Run 2026-10-28 (Wed, a TEXEL day, 11:09 local / 16:09-16:25Z): the v0.2.6 pressure note, two replies
+
+**Ledger first.** `ACTIONS.md` has no OPEN row owned by `texel-marketing`. Open: T-010, T-011, T-015, T-016, T-023 (`HUMAN`) and T-025 (`texel-release`). T-023 is still undecided, and nothing in it pauses marketing.
+
+**Timing.** T-025 (15:58Z) recorded that `texel-release`'s Wednesday run had been missed. At 16:09Z, though, `dist/texel-0.2.6.zip` was 3 minutes old, and ROADMAP, README and the manifest were being edited, so a release run was under way. The logged-out page still served 0.2.5. Replies went first. A poll found `texel-0.2.6.zip` (213 kB = local 218,127 B) + `texel-lite-demo-0.2.6.zip` on the page, and devlog *"0.2.6: tablet pressure for the Pencil and Eraser"* in `devlog.rss`, at **16:21:29Z**. Only then was the beat sent. **T-025's premise is now stale. That is `texel-watch`'s call to make, not this routine's.**
+
+### Posted — Wed 2026-10-28, release note: v0.2.6 tablet pressure
+
+| Date | Beat | Asset | URL | First hour |
+|---|---|---|---|---|
+| 2026-10-28 | **v0.2.6: the pen icon beside Size makes pressure scale Pencil and Eraser from 1 texel up to Size; Size 9 at half pressure paints at 5; off by default; tested with simulated pressure, not on a real tablet** | none, text only. Pressure cannot be shown honestly without a physical tablet, and none was used | [3myx5uzstq22i](https://bsky.app/profile/pixelkiln.bsky.social/post/3myx5uzstq22i) | 0 at +0 min (logged at send) |
+
+Every claim was read from the shipped `dist/texel-0.2.6.zip`, not recalled:
+- **Pen icon beside Size:** `tex_ui.py:42` `sz.prop(s, "use_pressure", text="", icon="STYLUS_PRESSURE")`. **Off by default:** `tex_props.py:42-43`, `default=False`.
+- **Pencil and Eraser, 1 texel up to Size:** README line 154 in the zip. `tex_paint.py:92` applies `R.pressure_size` only when `use_pressure` is set.
+- **Size 9 at half pressure = 5:** `core/raster.py:299` `pressure_size` was executed from the zip's source: 9 → [1,2,5,7,9] at p = 0/.25/.5/.75/1. The docstring says the same.
+- **Simulated only:** README *"Tested with simulated pressure values, not yet on a physical tablet"*. ROADMAP says the same. No claim about feel. Per CLAUDE.md §6, the post says this outright.
+- **Live:** cookie-less `getAuthorFeed` gives author `pixelkiln.bsky.social`, `createdAt` 2026-10-28T16:21:52Z, 300/300 bytes, 4 facets (link, `#gamedev #b3d #pixelart`).
+- **Cadence:** last Texel post Mon 10-26. Nothing top-level today before this one. One post per slot.
+- **Phrasing:** *"pen icon"*, *"half pressure"* and *"simulated"* have 0 prior uses here. No antithesis construction. No hype words.
+- Spec: `promo/post_2026-10-28.json`.
+
+### §D — two replies, both verified on the public AppView
+
+| Date | Thread | What was said | Link |
+|---|---|---|---|
+| 2026-10-28 | @xmenekai.bsky.social (10-27, 2/2 of a thread: *Cult of the Full Moon* approved for the Playdate Catalog after two years. They are moving into Blender for 3D environments, and *"pixel art isn't going anywhere"*). 4 likes, 0 replies. | Congratulations on the Catalog approval. Then a tip: Solid view with Lighting Flat + Color Texture shows a texture unlit, but the default AgX view transform still shifts it, and View Transform: Standard gives the palette back exactly. **Measured in Blender 4.5.9 `-b --factory-startup`:** a 4-texel palette (sRGB 230,51,26 / 26,153,76 / 51,76,230 / 242,217,51), Closest, rendered by Workbench (the Solid-view engine) with `light='FLAT'`, `color_type='TEXTURE'`. Under AgX (the factory default, read off the scene) it came out 206,66,34 / 43,145,75 / 53,102,198 / 196,178,100. Under Standard it came out 230,51,26 / 26,153,77 / 50,76,229 / 241,217,51, within ±1 of the source. This is a different framing and different words from the 09-14 @ultim8nik AgX answer, which was about picked colours in texture painting. | [3myx5en5iof22](https://bsky.app/profile/pixelkiln.bsky.social/post/3myx5en5iof22) |
+| 2026-10-28 | @crochetquests.bsky.social (10-27, 3 likes, **0 replies**): modelled a tower, a door, rocks and a floor; *"Next I'll practice texture painting"*. | A first-session trap: in Texture Paint, the Texture Slots panel says "No Textures" until you press + > Base Color. That creates the image and wires it into the material. Then use Save All Images in the same panel. **Checked in Blender 4.5.9:** `space_view3d_toolbar.py:504` draws *"No Textures"* when the material has no paint images, and `:509` has the `paint.add_texture_paint_slot` + menu (default type `BASE_COLOR`). Running it on the factory cube gave 1 slot and an Image Texture linked into Principled *Base Color*. *Save All Images* (`:548`, `image.save_all_modified`) shows once an image exists. I painted a texel red, ran it, saved and reopened: the image came back `packed=True`, texel (1,0,0,1), so the paint survives. Different from the 09-21 `img.pack()` answer, which used a different operator and different words. | [3myx5enqtpd2n](https://bsky.app/profile/pixelkiln.bsky.social/post/3myx5enqtpd2n) |
+
+Both were re-fetched cookie-less with `getPosts` (by DID): author `pixelkiln.bsky.social`, `createdAt` 16:12:42Z, parent URIs correct, 297 / 288 bytes. No link and no pitch, and Texel is not mentioned.
+
+### Threads looked at and left alone
+
+- **@alfredbaudisch** (Pixel Art Studio 1.4 posts), **@tajtajima**, **@busterhearts-type9** (about that product). Standing rule.
+- **@tylercooleyart** (sci-fi pixel items made in Blender, no alt text, nothing specific verified to add). **@sisterrose** (10-17, UV unwrapping for low-poly pixel textures). The question is close to what Texel does and the thread is 11 days old, so a reply would read as a pitch. **@leyalluna** (speedpaint link), **@fragmentprism** (personal art slump). Nothing verifiable to add.
+- **@donthedeveloper**, **@bryceandrobot**, **@everettesine**: already answered on 10-24 / 10-26.
+
+### §E — not due. The next check is **Sat 2026-10-31**. **New carry:** the live description should get a *Tablet pressure* bullet (*New in v0.2.6*), with the README's "simulated, not a physical tablet" caveat. Check whether `texel-release` already added it before writing one.
