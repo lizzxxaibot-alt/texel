@@ -6,6 +6,63 @@ in `../ACTIONS.md` and handed to a named owner.
 
 ---
 
+## 2026-10-28 — run 34 (catch-up, 15:58Z; host off ~10-27T03:15Z → 10-28T15:49Z, ~36 h, the nineteenth outage, so there was no 10-27 run)
+
+**VERDICT: BLOCKED ON A HUMAN DECISION, AND DEGRADED BY THE OUTAGE.** The listing passes every check, and views ticked up. But the outage cost `texel-support` a second day, and it cost `texel-release` the whole Wednesday slot. **T-023 (stop/continue) is unanswered at 19 days**, and its 11-14 default is 17 days out.
+
+### Action ledger
+
+**Opened: 1 (T-025). Closed: 0.** A-032 is still Open in `pixelkiln/launch/watch/ACTIONS.md`, so the 7-day and 14-day rungs stay suspended for every HUMAN row.
+
+| id | age | owner |
+|---|---|---|
+| **T-025** | 0 d | `texel-release`: v0.2.6's 10-28 date has no run left to meet it. The first opportunity is 11-04. |
+| T-023 | 19 d | **HUMAN**: the stop/continue call. Default STOP 2026-11-14, 17 days out. |
+| T-010 | 43 d | **HUMAN** (suspended) |
+| T-011 | 43 d | **HUMAN** (suspended) |
+| T-015 | 39 d | **HUMAN** (suspended) |
+| T-016 | 39 d | **HUMAN** (suspended; part of T-023's CONTINUE option) |
+
+### ALERTS
+
+1. **`texel-release` missed its slot, and nothing will retry it.** `cronExpression` `0 10 * * 3` puts the slot at ~15:13Z. The host came back at ~15:49Z, and the catch-up wave did not fire it. `lastRunAt` is **10-22T01:35Z** and `nextRunAt` is **11-04T16:13Z**. Its next slot has passed without a run, so **it is late**. The scheduler cause is **A-037 · HUMAN**. The consequence is **T-025 · 0 d · `texel-release`**. A person can press *Run now*; this routine will not.
+2. **`texel-support` is past 48 h, as run 33 forecast.** `cronExpression` `15 8 * * *`. `lastRunAt` 10-26T13:50Z is **50.2 h** old at this read, and `nextRunAt` is 10-29T13:24Z, so the gap will be ~72 h. The mechanism is the same one (the catch-up skipped the slot), so this is **A-037 · HUMAN** and no new row. There is no inbound Texel item open. The 10-26 SUPPORT.md row reads "no inbound support items, day 48", so the cost so far is small.
+3. **Two routines are past their window, not three or more**, so this is not a closed-app verdict. `texel-marketing` (10-26T20:21Z, 43.6 h, `nextRunAt` today 20:20Z, with the Wed Texel beat due) and `texel-funnel` (10-24T23:17Z, weekly, next 10-30) are inside their windows. Lost to the outage: the 10-27 marketing and support runs, and the 10-27 backup (`pixelkiln-backup` `lastRunAt` 10-27T03:14Z; that is not this routine's row).
+
+### Artifacts (running is not producing)
+
+- **support:** SUPPORT.md has a 10-26 row ("no inbound support items, day 48"). There is no 10-27 row, because there was no run.
+- **marketing:** POSTED.md has the **Mon 10-26 Texel beat** (Showcase store-page shot, verified cookie-less with `getPosts`, created 10-26T13:57Z) and a second firing with two replies. The Sun 10-25 beat was lost to outage 18.
+- **funnel:** `funnel/LOG.md` has the *Measuring week, 2026-10-24* entry.
+- **release:** no new ROADMAP tick. The last one is v0.2.5, released 10-21.
+
+### Listing (measured 10-28 ~15:59–16:02Z)
+
+| Check | Result |
+|---|---|
+| Logged-out page | HTTP 200, 33,767 B. `Updated` is still **24 October 2026 @ 23:24 UTC**, so there has been no edit since run 33. |
+| Download | Paid `texel-0.2.5.zip` **211 kB**, which matches local `dist/texel-0.2.5.zip` (216,959 B, the newest in `dist/`). Demo `texel-lite-demo-0.2.5.zip` 199 kB. |
+| Price | `game[min_price]` $9.95; the public page shows $9.95 ×3 (the two `$15` strings are the breadcrumb). Correct until v0.4.0. |
+| Status | `game[published]=published` |
+| AI disclosure | `ai_disclosure[ai_generated]=yes`, `ai_graphics` and `ai_code` checked |
+
+**All pass.** I waited for `profile.lock` before touching the profile: it was held by `itch_audit.mjs` (pid 40148) until 16:00:30Z, then by `itch_notifications.mjs` during the second read, and `launch()` waited for both. The edit page was read headless with a throwaway read-only script, deleted after use. Nothing was clicked, saved or downloaded.
+
+### Numbers
+
+`| 2026-10-28 (16:00Z) | 168 | 8 | 0 | $0.00 | 0.00% |`
+
+- **7-day trend:** +17 views over ~6.6 d (≈2.6/day), against +12 over ~5.8 d (≈2.1/day) the window before. **Up for the second reading running**; n=17, so this is direction only. **Downloads moved 7 → 8**, the first change since 10-16. The analytics reader does not say which file, so I do not count it as a genuine download. Payments are 0.
+- **Conversion:** 0/168. **The 200-view gate is now 32 views away**, which at the current rate lands **~11-06 to 11-09**. That is before T-023's 11-14 default, which corrects run 33's estimate of 11-14/15. The gate may now answer before the default fires. That does not change what T-023 asks: zero sales on 168 views is already the evidence.
+
+### Roadmap
+
+- **v0.2.6 "Brush, the rest": target today, Wed 2026-10-28. Not shipped, and no run is left to ship it** (see T-025). It is 0 days late today and will be 7 days late at the earliest possible run. `ROADMAP.md` parks both items on T-023.
+- **v0.3.0 "Tileset": Wed 2026-11-04**, 7 days out. That is now the same run as v0.2.6. No code is logged.
+- **v0.4.0 "Handoff": 2026-11-14**, when the price steps to $14.95. That is 17 days out, and the same day as T-023's default STOP.
+
+---
+
 ## 2026-10-26 — run 33 (catch-up, 13:48Z; host off ~10-24T23:30Z → 10-26T13:40Z, ~38 h, the eighteenth outage, so there was no 10-25 run)
 
 **VERDICT: BLOCKED ON A HUMAN DECISION; THE PRODUCT ITSELF IS HEALTHY.** The listing passes every check, all four doers ran inside their windows, and both run-32 alerts resolved. **T-023 (stop/continue) is unanswered at 17 days**, and its 11-14 default is 19 days out.
