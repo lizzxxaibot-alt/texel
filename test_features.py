@@ -305,6 +305,25 @@ check("the dithered stroke reaches the image",
       _rgba(6, 6) == (0, 0, 255, 255) and _rgba(5, 6)[3] == 0,
       (_rgba(6, 6), _rgba(5, 6)))
 
+# ------------------------------------------------------------- tablet pressure
+# A mouse reads 1.0, so this is the plumbing a tablet drives, not its feel.
+check("pressure defaults OFF, so existing strokes are unchanged", st.use_pressure is False)
+st.brush_size = 7
+dl.px = bytearray(len(dl.px))
+commit_stroke(ddoc, st, [(8, 8)], blue, 0.2)
+check("with Pressure off the brush ignores a light press",
+      len(_painted(blue)) == 49, len(_painted(blue)))
+st.use_pressure = True
+for _p, _n in ((1.0, 49), (0.5, 16), (0.0, 1)):
+    dl.px = bytearray(len(dl.px))
+    commit_stroke(ddoc, st, [(8, 8)], blue, _p)
+    check(f"with Pressure on, {_p} pressure on a 7 stamps {_n} texels",
+          len(_painted(blue)) == _n, len(_painted(blue)))
+commit_stroke(ddoc, st, [(8, 8)], 0, 0.5)
+check("the eraser narrows with pressure too", len(_painted(blue)) == 0, len(_painted(blue)))
+check("pressure leaves the Size setting alone", st.brush_size == 7, st.brush_size)
+st.brush_size, st.use_pressure = 1, False
+
 # -------------------------------------------------------------- custom stamps
 # Until 0.2.4 "Brush From Selection" saved into a module dict that nothing ever
 # painted from. These drive the operator and the real write path end to end.

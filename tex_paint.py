@@ -67,11 +67,12 @@ def saved_stamp(s):
     return offs
 
 
-def commit_stroke(doc, s, pts, idx):
+def commit_stroke(doc, s, pts, idx, pressure=1.0):
     """Stamp `pts` onto the active layer with the scene's brush and flush.
 
     The body of `_commit`, at module level for the same reason as
-    `stroke_points`: it is the only way a test reaches the real write path."""
+    `stroke_points`: it is the only way a test reaches the real write path.
+    `pressure` only narrows the brush when the Pressure toggle is on."""
     layer = doc.canvas.layers[doc.canvas.active]
     w, h = doc.canvas.w, doc.canvas.h
     # fill hands over every texel of a region; stamping a pattern on each of
@@ -88,8 +89,9 @@ def commit_stroke(doc, s, pts, idx):
                     layer.set(x + dx, y + dy, remap[rgba])
         doc.flush()
         return
+    size = R.pressure_size(s.brush_size, pressure) if s.use_pressure else s.brush_size
     for x, y in stroke_points(s, pts, w, h):
-        _stamp(layer, x, y, idx, s.brush_size, w, h, s.brush_shape,
+        _stamp(layer, x, y, idx, size, w, h, s.brush_shape,
                s.dither, s.dither_level)
     doc.flush()
 
@@ -126,10 +128,10 @@ class TEXEL_OT_paint(Operator):
                     return node.image
         return None
 
-    def _commit(self, context, pts):
+    def _commit(self, context, pts, pressure=1.0):
         s = context.scene.texel
         idx = 0 if s.tool == "ERASER" else self.colour_index
-        commit_stroke(self.doc, s, pts, idx)
+        commit_stroke(self.doc, s, pts, idx, pressure)
 
     # -- modal -------------------------------------------------------------
     def invoke(self, context, event):
@@ -185,7 +187,7 @@ class TEXEL_OT_paint(Operator):
         self.stroke = R.PerfectStroke(start, s.pixel_perfect)
         self.preview_undo = None
         if s.tool in {"PENCIL", "ERASER"}:
-            self._commit(context, [start])
+            self._commit(context, [start], event.pressure)
         else:
             # shapes preview against a snapshot we restore each mouse-move
             self.snapshot = bytearray(self.doc.canvas.layers[self.doc.canvas.active].px)
@@ -213,9 +215,11 @@ class TEXEL_OT_paint(Operator):
                 # back only the texels that can no longer change. Anything it
                 # withholds is still provisional: committing it here would
                 # stamp a corner we cannot rub out afterwards.
+                # a withheld texel lands at the pressure of the event that
+                # releases it, one event late - too small a lag to see
                 new = self.stroke.add(cur)
                 if new:
-                    self._commit(context, new)
+                    self._commit(context, new, event.pressure)
             else:
                 layer = self.doc.canvas.layers[self.doc.canvas.active]
                 layer.px = bytearray(self.snapshot)

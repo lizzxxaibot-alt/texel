@@ -38,6 +38,8 @@ def _draw_tools(layout, s):
     sz = row.row(align=True)
     sz.active = s.brush_shape != "STAMP"          # a stamp has its own size
     sz.prop(s, "brush_size")
+    if s.tool in {"PENCIL", "ERASER"}:
+        sz.prop(s, "use_pressure", text="", icon="STYLUS_PRESSURE")
     row.prop(s, "pixel_perfect", text="", icon="MOD_SMOOTH")
     if s.brush_size > 1 or len(s.stamps) or s.brush_shape == "STAMP":
         col.prop(s, "brush_shape", text="")

@@ -425,11 +425,31 @@ count is unchanged.
 this run is a manual catch-up on 10-16. **Dithered gradient and tablet pressure
 move to v0.2.5, target Wed 2026-10-21.**
 
-### v0.2.6 — "Brush", the rest · target **Wed 2026-10-28** (was 10-21)
-The two items left from the v0.2.2 list below: dithered gradient, tablet
-pressure. **Moved 2026-10-21:** the 10-21 slot went to the Trim data-loss patch,
-which jumps the queue. Both items also wait on T-023 (the stop/continue call):
-`texel-watch` recommends pausing v0.2.x feature work while that is open.
+### v0.2.7 — "Gradient" · target **Wed 2026-11-04**
+The one item left from the v0.2.2 list below: a gradient that dithers between
+two palette indices. *Large*: it needs a two-point drag that does not exist yet.
+It waits on T-023 like everything else here; if the user picks STOP on or
+before 11-14, it does not ship.
+
+### v0.2.6 — "Pressure" · **RELEASED 2026-10-28**, a week late, partial as forecast
+**Live-page read-back, 2026-10-28 ~16:20Z (the gate, taken before this tick was
+written; this line is NOT in the 0.2.6 zip, which says "BUILT"):** cookie-less
+GET of `z3er1n.itch.io/texel` → HTTP 200, 33,774 B. The paid widget reads
+**`texel-0.2.6.zip` 213 kB** (id 20104363; local 218,127 B, sha256
+`90eb3547…f0a0f275`; pinned at `dist/shipped/texel-0.2.6-SHIPPED-2026-10-28.zip`).
+The `for_demo` block reads **`texel-lite-demo-0.2.6.zip` 200 kB** (id 20104384,
+local 205,614 B). An anonymous POST for the paid id returns *"A key is needed to
+download"*. 0.2.5 and Lite 0.2.5 are hidden, not deleted. Devlog **1735570** is
+live logged-out and first in `devlog.rss`.
+Tablet pressure scales the Pencil and Eraser from 1 texel up to Size
+(`core.raster.pressure_size`, a pen toggle beside Size, off by default). The
+dithered gradient is the Large half and moves to v0.2.7. **What the gate can
+and cannot prove:** the tests drive the real write path at pressures 0, 0.5 and
+1.0, so the size mapping is proven; no physical tablet was used, so the *feel*
+is not, and the page must not claim it was. **Why a feature run while T-023 is
+open:** no row, bug or 3+ ask outranks the roadmap, and the default when the
+call is unanswered is the next slice (the 10-16 precedent). It is the smallest
+item, about two hours, and it does not pre-empt the call.
 
 ### v0.2.5 — the Trim to Content data-loss patch · **RELEASED 2026-10-21** (local; 10-22 ~01:43Z)
 **Live-page read-back, 2026-10-22 ~01:44Z (the gate, taken before this tick was
@@ -609,7 +629,10 @@ a build was live because a routine ticked ahead of the upload, and that is not
 happening twice in the same month. The live 0.2.1 zip still prints the old
 string.
 
-### v0.3.0 — "Tileset" · target **Wed 2026-11-04** (was 2026-10-28, and 2026-10-17 before that)
+### v0.3.0 — "Tileset" · target **Wed 2026-11-11** (was 11-04, 10-28, and 10-17 before that)
+**Moved 2026-10-28.** v0.2.6 took 10-28 and v0.2.7 (the gradient) takes 11-04,
+so this moves one Wednesday. 11-11 is three days before T-023's default STOP;
+if the user picks STOP, neither v0.2.7 nor this ships.
 **Moved again 2026-10-21.** The Trim data-loss patch took the 10-21 slot, so
 v0.2.6 takes 10-28 and this moves one Wednesday.
 **Moved 2026-10-16.** 10-17 is a Saturday, `texel-release` runs only on

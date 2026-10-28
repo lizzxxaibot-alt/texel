@@ -780,3 +780,74 @@ pass on the final archives.
 - A hidden **static** layer still gets cropped by a box that ignores it. That is
   the documented rule ("trim what you can see") and a user choice, not an
   invisible frame. It is left for `texel-support` to report if a buyer trips on it.
+
+## 2026-10-28 — v0.2.6 "Pressure" (`texel-release`, ~16:03Z)
+
+**Ledger first, per §0:** one open row was owned by `texel-release`: **T-025**,
+opened earlier the same day. It said this slot would not fire, and it fired five
+minutes after that was written. The row was cleared by the dates below and set to `DONE?`.
+T-010, T-011, T-015, T-016 and **T-023 (stop/continue) are `HUMAN` and still
+unanswered.**
+
+**Why this, of the three priorities:** priority 3. `SUPPORT.md` has no crash and
+no ask with 3+ requests; the tally is two ×1 mechanics questions. T-023 is
+open, so the 10-16 default applied: build the next slice. Of v0.2.6's two
+items, tablet pressure is the small one. The dithered gradient needs a new two-point
+drag, so it moves to **v0.2.7 (Wed 11-04)**, and v0.3.0 moves to
+**Wed 11-11**. Both carry an explicit "not if STOP" under T-023.
+
+### What changed
+- `core/raster.py` `pressure_size(size, pressure)`: rounds to the nearest size
+  and clamps pressure to 0..1, giving a 1-texel floor. **Tests written first and watched
+  failing** (`AttributeError`): +7 checks in `test_raster.py`, covering
+  monotonicity and that every size from 1 to N can be reached.
+- `tex_props.py` `use_pressure` (off by default). `tex_paint.py`:
+  `commit_stroke(..., pressure=1.0)` applies the mapping only when the toggle
+  is on. The modal passes `event.pressure` for Pencil/Eraser only; shapes,
+  Fill and stamps keep their size. `tex_ui.py`: a `STYLUS_PRESSURE` toggle beside
+  Size, shown for Pencil/Eraser and greyed out with Size under a stamp.
+- `test_features.py` +7 checks through the real write path (pressure 0 / 0.5 /
+  1.0 on a size 7 → 1 / 16 / 49 texels, toggle off ignores it, eraser
+  narrows, Size untouched). **First placement was wrong:** it went before
+  *"the dithered stroke reaches the image"* and cleared the layer that check
+  reads, so it showed 1 FAILED. It was moved after that check, not weakened.
+- No new operator. The panel crop `shots/panels/panel_04_big_brush.png` was
+  read by eye: the pen icon sits beside Size, off.
+- Sealed docs: README (Tablet pressure entry), START-HERE (v0.2.6 done, v0.2.7
+  11-04, v0.3 11-11), ROADMAP (v0.2.6 BUILT, v0.2.7 added, v0.3.0 date).
+
+### The gate, in full
+6 headless suites pass · `core/` at **100.0%** (1,084 statements, 0 missed) ·
+7 headless Blender suites on 4.5.9, 0 tracebacks · `test_panels` / `test_keys` /
+`test_e2e` on 4.5.9 with **0 tracebacks**, and `test_panels` traceback grep 0 on 4.2.23 and
+5.2.1 too, because the new icon name is the version risk · `build.py`
+and `build.py --lite` · `test_install` pass on `texel-0.2.6.zip` ·
+`test_versions.sh` **pass=3 fail=0** · `run_gui_versions.sh` all pass (4.2.23,
+4.5.9, 5.2.1 × panels, keys, workspace, e2e, lite) · `store_check.py`
+**13/13**. Nothing changed between the gate and the upload.
+
+### Live-page verification (D.4), taken before ROADMAP/devlog/queue were written
+- `itch_upload.mjs --game 4991926 --expect texel`, one file at a time:
+  `texel-0.2.6.zip` (id 20104363, hid 0.2.5), then `texel-lite-demo-0.2.6.zip`
+  (id 20104384, `--demo`, hid Lite 0.2.5). No `profile.lock`.
+- **Cookie-less GET `z3er1n.itch.io/texel` → HTTP 200, 33,774 B.** The widget lists
+  **`texel-0.2.6.zip` 213 kB** (local 218,127 B, sha256 `90eb3547…f0a0f275`).
+  Under `for_demo` it lists **`texel-lite-demo-0.2.6.zip` 200 kB** (local 205,614 B,
+  sha256 `1639a84a…af58e82`). No 0.2.5 file name is on the page. `Updated`
+  reads 28 October 2026 @ 16:18 UTC. An anonymous POST to `/file/20104363`
+  returns *"A key is needed to download"*. Pinned copies are in
+  `dist/shipped/*-SHIPPED-2026-10-28.zip`.
+- **The dashboard showed Lite 0.2.5 at 1 download** before it was hidden. No
+  routine logged pulling it (10-21 deliberately did not), so it may be the
+  first genuine demo download. That is for `texel-watch` to judge against
+  T-022's read-out.
+- Devlog **1735570** *"0.2.6: tablet pressure for the Pencil and Eraser"* is
+  HTTP 200 logged-out and first in `devlog.rss`. It says that the feel is
+  untested on a physical tablet, that the gradient slipped, and that nobody asked for either feature.
+
+### Not done / open
+- **Not tried on a physical tablet.** No tablet is on this machine.
+- No price milestone is crossed. The next is v0.4.0, whose 11-14 is still a Saturday and
+  T-023's default STOP date, so it is still left for that decision.
+- The queue's README/Showcase hand-off was true. The repo README has a Showcase
+  section now, and it ships in v0.2.7, not in the live 0.2.6 zip.

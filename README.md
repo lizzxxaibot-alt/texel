@@ -151,7 +151,24 @@ Texel is not only a 3D texture tool:
   the stamp's footprint; dither modes apply to it. Stamps are saved in the
   .blend, and the Shape menu's search field picks between them. Fill keeps the
   plain brush, and mirror/radial symmetry repeats a stamp without flipping it.
+- **Tablet pressure** (0.2.6): the pen icon beside Size makes pen pressure
+  scale the Pencil and Eraser from 1 texel up to Size. Off by default. A mouse
+  always presses fully, so with a mouse nothing changes. Tested with simulated
+  pressure values, not yet on a physical tablet.
 - **Layer opacity** blends properly.
+
+## Showcase
+
+For presenting the finished model, in the **Showcase** sub-panel:
+
+- **Build Showcase** frames your mesh with a camera, lights it with one of six
+  moods (Golden Hour, Torchlit, Cool Sci-Fi, Hard Noon, Ice Cavern, Clean
+  Studio), adds bounded haze and forces nearest-neighbour filtering so texels
+  stay sharp. **Clear Showcase** removes all of that and leaves your art alone.
+- **Render Showcase** renders a still or a camera move (Orbit, Push In, Arc).
+  A move is encoded to MP4 when ffmpeg is on your PATH; otherwise you get the
+  PNG frames.
+- Not in the free Texel Lite demo.
 
 ## Licence
 

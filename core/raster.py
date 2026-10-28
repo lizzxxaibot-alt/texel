@@ -295,6 +295,16 @@ def brush_mask(size: int, shape: str = "SQUARE") -> list[Point]:
             pts.append((x, y))
     return pts
 
+
+def pressure_size(size: int, pressure: float) -> int:
+    """Brush size at a tablet pressure, from 1 texel up to `size`.
+
+    Rounded, not floored, so half pressure on a 9 is a 5 and every size in the
+    range is reachable. A mouse reports 1.0, so with no tablet this is `size`.
+    """
+    p = min(1.0, max(0.0, float(pressure)))
+    return max(1, int(size * p + 0.5))
+
 # Ordered-dither threshold map. Painting a texel when its cell is below `level`
 # gives exactly level/16 coverage, and every level contains the one below it,
 # so stepping the level up a ramp adds texels and never moves any.

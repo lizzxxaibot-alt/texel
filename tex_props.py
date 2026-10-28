@@ -39,6 +39,10 @@ class TexelSettings(bpy.types.PropertyGroup):
                ("ROUND", "Round", "Circular - what you want above ~3 texels"),
                ("DIAMOND", "Diamond", "45-degree, for isometric work"),
                ("STAMP", "Stamp", "A saved stamp, painted in its own colours")])
+    use_pressure: BoolProperty(
+        name="Pressure", default=False,
+        description="Tablet pressure scales the pencil and eraser from 1 texel "
+                    "up to Size. A mouse always presses fully")
     stamps: CollectionProperty(type=TexelStamp)
     stamp: StringProperty(name="Stamp", description="Which saved stamp the brush paints")
     pixel_perfect: BoolProperty(

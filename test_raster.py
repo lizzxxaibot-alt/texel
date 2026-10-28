@@ -340,6 +340,21 @@ try:
 except ValueError:
     check("an unknown pattern is refused, not silently painted solid", True)
 
+# ---- tablet pressure -> brush size --------------------------------------
+check("full pressure paints the set size", R.pressure_size(9, 1.0) == 9)
+check("no pressure still paints one texel", R.pressure_size(9, 0.0) == 1)
+check("half pressure on 9 is 5 (rounded, not floored)", R.pressure_size(9, 0.5) == 5,
+      R.pressure_size(9, 0.5))
+check("size 1 never changes, whatever the pressure",
+      all(R.pressure_size(1, p / 20) == 1 for p in range(21)))
+check("pressure outside 0..1 is clamped, not an error",
+      R.pressure_size(6, -0.4) == 1 and R.pressure_size(6, 3.0) == 6)
+_ps = [R.pressure_size(16, p / 100) for p in range(101)]
+check("pressing harder never makes the brush smaller",
+      all(a <= b for a, b in zip(_ps, _ps[1:])))
+check("every size from 1 to the set size is reachable",
+      sorted(set(_ps)) == list(range(1, 17)), sorted(set(_ps)))
+
 print()
 if fails:
     print(f"{len(fails)} FAILED: {fails}"); sys.exit(1)
