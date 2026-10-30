@@ -2354,3 +2354,29 @@ Both were re-fetched cookie-less with `getPosts` (by DID): author `pixelkiln.bsk
 - **@donthedeveloper**, **@bryceandrobot**, **@everettesine**: already answered on 10-24 / 10-26.
 
 ### §E — not due. The next check is **Sat 2026-10-31**. **New carry:** the live description should get a *Tablet pressure* bullet (*New in v0.2.6*), with the README's "simulated, not a physical tablet" caveat. Check whether `texel-release` already added it before writing one.
+
+## Run 2026-10-28 second firing (Wed, a TEXEL day, 15:20 local / 20:20-20:30Z): no post, two replies
+
+**Ledger first.** `ACTIONS.md` has no OPEN row owned by `texel-marketing`. Open: T-010, T-011, T-015, T-016, T-023 (`HUMAN`) and T-025 (`texel-release`).
+
+**No post.** This morning's run already spent the Wed slot at 16:21Z (`3myx5uzstq22i`, v0.2.6 pressure). A second Texel post on the same day would break one-per-slot, so this run only replied.
+
+### §D: two replies, both verified on the public AppView
+
+| Date | Thread | What was said | Link |
+|---|---|---|---|
+| 2026-10-28 | @cobomakesgames.bsky.social (10-28 18:41Z, 9 likes): a top-down pixel-art tree whose shadow comes from an invisible 3D caster with holes for sunlight. Their self-reply asks *"what would you change?"* (the reply went under that question). | Praised the sunlight holes. Then one change: the shadow is the only thing off the pixel grid. Its edge fades over about two art pixels of smooth gradient while the canopy steps in hard blocks. Sampling it once per art pixel, or posterising it to 2-3 tones. **Measured on the video thumbnail (1080x1920), not eyeballed:** canopy luminance steps land ~20-30 screen px apart (art pixel ≈ 20 px), while a row across the shadow's left edge at y=750 ramps 115→61 over ~30-40 px with no step, and y=650 ramps 121→67 over ~20 px. Engine unknown, so the reply names no engine setting. Note: this account posts on a fixed 18:41 / 19:05 schedule with a question self-reply every day. Reach is probably small, but the question was a real invitation. | [3myxlnippyu25](https://bsky.app/profile/pixelkiln.bsky.social/post/3myxlnippyu25) |
+| 2026-10-28 | @stariikat.bsky.social (10-28 04:50Z, 17 likes, **0 replies**): first and second attempts at a Mobian sona model, *"with the help of my friends"*. Both images viewed. The second image shows the newer low-poly model in front, back and side views, in T-pose. | Praised the side-view silhouette (tail and hair spikes). Then one habit before rigging: Ctrl+A > All Transforms so the scale reads 1. With an unapplied Z scale of 3, a 0.1 m Bevel comes out 0.3 m tall. **Checked in Blender 4.5.9 `-b --factory-startup`:** default cube at scale (1,1,3) with Bevel width 0.1 → evaluated world chamfer x 0.1, z 0.3. After `object.transform_apply` the scale is (1,1,1) and the chamfer is 0.1 / 0.1. `space_view3d.py:3165` labels the operator *"All Transforms"* in the Apply menu. A claim about the first-vs-second comparison was cut from the draft because which attempt was which could not be confirmed from the left/right image. | [3myxlnj67xy2u](https://bsky.app/profile/pixelkiln.bsky.social/post/3myxlnj67xy2u) |
+
+Both were re-fetched cookie-less with `getPosts`: author `pixelkiln.bsky.social`, `createdAt` 20:28:12.0Z / 20:28:12.5Z, parent URIs correct, 284 / 266 bytes. No link and no pitch, and Texel is not mentioned. Phrasing checked against this file: no prior *posteris*, *sunlight holes* or *All Transforms*.
+
+### Threads looked at and left alone
+
+- **@teledoor24** (10-28, 0 replies, texture painting a pixel-textured low-poly model): the screenshot's N-panel shows a **Pixel Art Studio** tab, so the standing rule applies. That is the other pixel-art-in-Blender product, and a texturing tip from us there reads as poaching its user.
+- **@maciaz** (10-28, juice box rendered at 1/5 res then upscaled): the draft was the Film > Filter Size tip (re-measured: EEVEE 64 px cube, 83 → 25 colours at 1.5 → 0.01). It was dropped. A zoom of their frame shows edges already mostly hard, so the tip may be redundant. And this account has given that same tip three times (09-25 @gabori-games, 10-05 @wormwire, 10-24 @controlmole). A fourth in four days would make us a one-trick reply account.
+- **@vichimera** (10-21, *"Goodbye texel density"*): the question is literally what Texel does, and the post is ambiguous about what "symmetrical" means. A reply would read as a pitch.
+- **@lep.wtf** (vertex snapping / filtering opinion): a player's preference post, not asking for anything.
+- **@alfredbaudisch**, **@tajtajima**, **@busterhearts-type9**: standing rule. **@misterhapee** (help request with no visible media), **@donkeyshspittle** (eye not rendering, image in a quoted post, cause not determinable), **@comradeyuronk** (vertex painting planned in-engine), **@lowpolybear91**, **@enragedterrier**, **@jptom**, **@xandergeistal**: nothing specific and verifiable to add.
+- **@spriteweaver** (how to show PSX work is human-made): not ours to answer. This account discloses AI assistance on its products.
+
+### §E: not due. The next check is **Sat 2026-10-31**. The carry stands: live description *Tablet pressure* bullet (check `texel-release` first).
