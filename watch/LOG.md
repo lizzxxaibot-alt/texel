@@ -6,6 +6,62 @@ in `../ACTIONS.md` and handed to a named owner.
 
 ---
 
+## 2026-10-30 — run 35 (catch-up, 12:14Z; host off ~10-28T21Z → 10-30T12:00Z, the twentieth outage, so there was no 10-29 run)
+
+**VERDICT: BLOCKED ON A HUMAN DECISION; THE PRODUCT ITSELF IS HEALTHY.** v0.2.6 is live and passes every listing check, all four doers are inside their windows, and T-025 closed. **T-023 (stop/continue) is unanswered at 21 days**; its 11-14 default STOP is 15 days out.
+
+### Action ledger
+
+**Opened: 0. Closed: 1 (T-025).** A-032 is still Open in `pixelkiln/launch/watch/ACTIONS.md`, so the 7-day and 14-day rungs stay suspended for every HUMAN row.
+
+- **T-025 closed** on this run's own checks: `texel-release` fired 10-28T16:03Z (five minutes after run 34's read), the live page serves `texel-0.2.6.zip` 213 kB (= local 218,127 B), and `ROADMAP.md` now dates v0.2.7 Wed 11-04 and v0.3.0 Wed 11-11, both with a T-023 hold. Run 34's alert 1 was a false alarm caused by reading the scheduler minutes too early.
+
+| id | age | owner |
+|---|---|---|
+| T-023 | 21 d | **HUMAN**: the stop/continue call. Default STOP 2026-11-14, 15 days out. |
+| T-010 | 45 d | **HUMAN** (suspended) |
+| T-011 | 45 d | **HUMAN** (suspended) |
+| T-015 | 41 d | **HUMAN** (suspended) |
+| T-016 | 41 d | **HUMAN** (suspended; part of T-023's CONTINUE option) |
+
+### ALERTS
+
+None new. The outage cost the 10-29 `texel-support` and `texel-marketing` runs (no 10-29 rows); that is **A-037 · HUMAN**, not re-filed. Scheduler read 12:14Z: support `lastRunAt` 10-30T12:13Z (firing now), marketing 10-28T20:21Z (≈40 h, next 10-30T20:20Z, a Fri Texel beat), release 10-28T16:03Z (next 11-04), funnel 10-24T23:17Z (weekly, next today 15:06Z). None is past its window. `pixelkiln-backup` last ran 10-28T16:23Z; not this routine's row.
+
+### Artifacts
+
+- **support:** SUPPORT.md 10-28 row, day 50, three logged questions answered, 0 open desk rows. No 10-29 row (no run).
+- **marketing:** POSTED.md has the **Wed 10-28 Texel beat** (`3myx5uzstq22i`, v0.2.6 pressure, 16:21Z) plus a second firing with two replies, correctly not double-posting. Carry: a *Tablet pressure* bullet for the live description, §E check Sat 10-31.
+- **release:** v0.2.6 RELEASED 10-28, live-page read-back recorded in `ROADMAP.md`.
+- **funnel:** *Measuring week, 2026-10-24* entry; next run today.
+
+### Listing (measured 10-30 ~12:14–12:16Z)
+
+| Check | Result |
+|---|---|
+| Logged-out page | HTTP 200, 34,069 B, `Updated` 28 October 2026 @ 16:21 UTC |
+| Download | Paid `texel-0.2.6.zip` **213 kB** = local `dist/texel-0.2.6.zip` 218,127 B (newest). Demo `texel-lite-demo-0.2.6.zip` 200 kB. |
+| Price | `game[min_price]` $9.95; public page $9.95 ×3 (the two `$15` are the breadcrumb). Correct until v0.4.0. |
+| Status | `game[published]=published` |
+| AI disclosure | `ai_generated=yes`, graphics and code both checked |
+
+**All pass.** Edit page read headless through `lib.mjs` `launch()` with a throwaway read-only script (deleted); it waited on `itch_media.mjs`'s lock first. Nothing clicked, saved or downloaded.
+
+### Numbers
+
+`| 2026-10-30 (12:14Z) | 169 | 8 | 0 | $0.00 | 0.00% |`
+
+- **+1 view over 1.84 d**, so the +8 burst on 10-28 did not hold. **7-day trend:** +12 over ~5.55 d (≈2.2/day) vs +13 over ~6.07 d (≈2.1/day). **Flat**; n=12, direction only. Downloads 8, unchanged. Payments 0.
+- **Conversion: 0/169.** The 200-view gate is 31 views out, about **11-13** at this pace, one day before T-023's default. Run 34's 11-06–11-09 estimate rode on the burst and is withdrawn. Zero sales on 169 views is already the evidence T-023 asks a person to act on.
+
+### Roadmap
+
+- **v0.2.7 "Gradient": Wed 2026-11-04**, 5 days out, held on T-023. No code logged yet; the only run that can ship it is 11-04 itself, so "no work logged inside 7 days" is structural for a weekly owner, not a slip.
+- **v0.3.0 "Tileset": Wed 2026-11-11**, 12 days out, held on T-023.
+- **v0.4.0 "Handoff": 2026-11-14** (a Saturday), price step to $14.95, the same day as T-023's default STOP. Left to T-023.
+
+---
+
 ## 2026-10-28 — run 34 (catch-up, 15:58Z; host off ~10-27T03:15Z → 10-28T15:49Z, ~36 h, the nineteenth outage, so there was no 10-27 run)
 
 **VERDICT: BLOCKED ON A HUMAN DECISION, AND DEGRADED BY THE OUTAGE.** The listing passes every check, and views ticked up. But the outage cost `texel-support` a second day, and it cost `texel-release` the whole Wednesday slot. **T-023 (stop/continue) is unanswered at 19 days**, and its 11-14 default is 17 days out.
