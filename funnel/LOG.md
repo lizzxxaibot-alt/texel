@@ -40,6 +40,8 @@ says on 2026-09-26.
 | *both pages, read 2026-10-18* | *Material Palettes, 29 days live* | *(as above)* | **112** (+25 in 9 d) | **29** (+8) | *format retired 09-26* | *still the funnel's only growing page; see 10-18 note* |
 | *both pages, read 2026-10-24* | *Density Cheatsheet, 43 days live* | *(as above)* | **57** (+1 in 6 d) | **28** (+1) | *format retired 09-26* | *flat* |
 | *both pages, read 2026-10-24* | *Material Palettes, 35 days live* | *(as above)* | **119** (+7 in 6 d) | **31** (+2) | *format retired 09-26* | *slowing; see 10-24 note* |
+| *both pages, read 2026-10-30* | *Density Cheatsheet, 49 days live* | *(as above)* | **58** (+1 in 6 d) | **28** (+0) | *format retired 09-26* | *flat* |
+| *both pages, read 2026-10-30* | *Material Palettes, 41 days live* | *(as above)* | **132** (+13 in 6 d) | **36** (+5) | *format retired 09-26* | *picked up again; see 10-30 note* |
 
 **The second row is the one that matters now, and it was added on 2026-09-19.**
 The 72 h window is history; what the page has done over eight days is the real
@@ -927,3 +929,38 @@ BlenderNation (**T-016**) and the stop/continue call (**T-023**). T-023's defaul
 STOP date is **2026-11-14**, three weeks out. The next first-Friday slot is
 **2026-11-06**. It ships nothing unless T-023 reopens distribution, and on
 present numbers it would not be worth a grid slot even then.
+
+## Measuring week, 2026-10-30 (`texel-funnel`)
+
+**This run fired on Friday 10-30, on schedule.**
+
+**No open `texel-funnel` rows in `ACTIONS.md`.** The only open rows are `HUMAN`:
+T-010, T-011, T-015, T-016 and T-023. **No drop:** the format was retired on
+09-26, and the fifth Friday of the month is not a ship week in any case. T-023 is
+still undecided; neither `STATE.md` nor `ROADMAP.md` carries a dated decision.
+Nothing was added to `promo/QUEUE.md`.
+
+**Readings:** `node automation/itch_analytics.mjs`, *Project totals*, lifetime,
+read at about 2026-10-30T15:08Z. `profile.lock` was absent.
+
+| page | 10-24 | 10-30 | 6 days |
+|---|---|---|---|
+| Density Cheatsheet | 57 views / 28 grabs | 58 / 28 | +1 / +0 |
+| Material Palettes | 119 / 31 | 132 / 36 | +13 / +5 |
+| Texel (paid page) | 157 views / 7 grabs | 169 / 8 | +12 views / +1 grab |
+
+**Read it straight.** The palettes page picked up again: +13 views against
+Texel's +12, and 7 collections against Texel's 4. The tag shelf
+`free/tag-aseprite/tag-palette` went from 20 to 25 store-wide, so the palettes
+page is still being found by free-asset browsers on itch, the audience the 09-26
+retirement named. The cheatsheet is flat. Texel took one new grab, so the Lite
+demo's lifetime is 5 ours plus 3 not ours. Whether any of those came from a
+funnel page is `texel-watch`'s referrer reading; this run did not take it.
+**Nothing here reopens the 09-26 retirement.**
+
+**Same limit as the last three readings.** Both remaining levers belong to a
+person: BlenderNation (**T-016**) and the stop/continue call (**T-023**, default
+STOP **2026-11-14**, two weeks out). **The next first-Friday slot is
+2026-11-06.** It ships nothing unless T-023 is decided as a CONTINUE that reopens
+distribution before then. On present numbers a new free sibling page would not
+be worth a grid slot even then.
