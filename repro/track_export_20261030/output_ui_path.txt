@@ -1,0 +1,4 @@
+[a] opacity after setting each frame: [0.28, 0.28, 0.0]
+[a] sheet straight after: gold 32 (0 = Glow out)
+[b] opacity after stepping through frames: [0.28, 0.28, 1.0]
+[b] sheet after stepping: gold 48 of 48

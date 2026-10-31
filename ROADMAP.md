@@ -431,6 +431,25 @@ two palette indices. *Large*: it needs a two-point drag that does not exist yet.
 It waits on T-023 like everything else here; if the user picks STOP on or
 before 11-14, it does not ship.
 
+**Also queued here by `texel-support`, 2026-10-30: hidden tracks still reach
+Export Sprite Sheet.** A buyer-side ask (@wenvikstudios, Bluesky, on the 10-30
+torch beat: *can Torch and Glow be exported as separate layers?*). Reproduced
+on the shipped `texel-0.2.6.zip`, Blender 4.5.9, `repro/track_export_20261030/`:
+the eye toggle removes a Glow cel from the canvas (gold 16 → 0), but the sheet
+still carries it (gold 32 of 32, even with every Glow cel hidden).
+`Canvas.flatten_frame` is documented as *"ignoring current visibility flags"*,
+and only skips `opacity <= 0`. That opacity route is no workaround either: run
+through the real operators (`verify_ui_path.py`), onion skin leaves the other
+frames' cels at 0.28, and stepping frames resets them to 1.0, so the sheet
+reads gold 48 of 48. By code reading, not run (it needs ffmpeg), Export GIF has
+the same gap: `show_frame` sets every cel on a frame visible at opacity 1.
+**Export Sheet + JSON** calls `sprite_sheet`, so it inherits the gap. **No work is lost**, so this is
+not a jump-the-queue patch. **The README's *"Hiding a track is an export"* line
+holds only for the single displayed frame**, so the fix is owed to the README
+as much as to the code. Likely shape: a track-level hide that `show_frame`
+leaves alone, honoured by sheet, JSON and GIF, which also gives the asker a
+sheet per lighting state. The reply told them *"queued for 0.2.7"* and gave no date.
+
 ### v0.2.6 — "Pressure" · **RELEASED 2026-10-28**, a week late, partial as forecast
 **Live-page read-back, 2026-10-28 ~16:20Z (the gate, taken before this tick was
 written; this line is NOT in the 0.2.6 zip, which says "BUILT"):** cookie-less

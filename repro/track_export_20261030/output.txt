@@ -1,0 +1,10 @@
+[env] blender 4.5.9 LTS  zip texel-0.2.6.zip  from C:\Users\opule\AppData\Local\Temp\texel_trk_z74_zn6q\texel\__init__.py
+[setup] tracks ['Main', 'Glow'] frames 2 layers [('Main F1', 'Main', 0), ('Glow F1', 'Glow', 0), ('Main F2', 'Main', 1), ('Glow F2', 'Glow', 1)]
+[0 baseline] displayed image: red 64 gold 16
+[1 eye-hide Glow f0] cel visible=False; displayed image: red 64 gold 0
+[1 eye-hide Glow f0] Export Sprite Sheet 64x32: red 128 gold 32  (both frames' Glow = 32)
+[1b Glow hidden on both frames] Export Sprite Sheet: red 128 gold 32
+[2 Glow opacity 0] Export Sprite Sheet: red 128 gold 0
+[2b base opacity 0] Export Sprite Sheet: red 0 gold 32
+[3 Layers to Images] 4 images: Hero - Glow F1: red 0 gold 16; Hero - Glow F2: red 0 gold 16; Hero - Main F1: red 64 gold 0; Hero - Main F2: red 64 gold 0
+DONE
