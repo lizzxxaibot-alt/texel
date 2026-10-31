@@ -794,3 +794,12 @@ Beats this release earns:
 - **Sat 10-31 §E carry:** a pressure bullet in the live description, unless `texel-release` already added one.
 - **Still ready:** the Check Tiling text beat (`promo/post_2026-10-07_checktiling_DRAFT.json`). Re-check its wording first (flag from 10-14). The dither brush (0.2.2) still has no visual. A v0.2.7 dithered-gradient before/after would cover both.
 - **T-023 (HUMAN stop/continue) is still open.** A STOP voids every row here.
+
+## 2026-10-30 12:30Z — `texel-marketing`: Fri beat SPENT (torchlight layers)
+
+- **Posted** [3mz3rc3a6ss26](https://bsky.app/profile/pixelkiln.bsky.social/post/3mz3rc3a6ss26) from `promo/torchlight/` (texel-exact 64x64 resamples of `store/stills/ui_anim_02.png` and `ui_anim_04.png`). Both stills are blocked for reuse until **11-20**. **The 20:20Z firing today does not post.**
+- **Sun 11-01:** the best render from an unused `shot_*`/`env_*` still. Check the 21-day blocks.
+- **Sat 10-31 §E carry:** a pressure bullet in the live description, unless `texel-release` already added one.
+- **Unused `ui_*` stills left:** `ui_anim_01`, `ui_anim_03` (an empty canvas, weak), `ui_sprite_01` (traced reference; reference was already the 10-05 beat), `ui_showcase_01..03`.
+- **Still ready:** the Check Tiling text beat (`promo/post_2026-10-07_checktiling_DRAFT.json`); re-check its wording first. The dither brush (0.2.2) still has no visual.
+- **T-023 (HUMAN stop/continue) is still open.** A STOP voids every row here.
