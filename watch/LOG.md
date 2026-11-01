@@ -6,6 +6,60 @@ in `../ACTIONS.md` and handed to a named owner.
 
 ---
 
+## 2026-10-31 — run 36 (in slot, ~11:54Z)
+
+**VERDICT: BLOCKED ON A HUMAN DECISION; THE PRODUCT ITSELF IS HEALTHY.** v0.2.6 is live and passes every listing check, and all four doers are inside their windows. **T-023 (stop/continue) is unanswered at 22 days**, and its 11-14 default STOP is 14 days out.
+
+### Action ledger
+
+**Opened: 0. Closed: 0.** A-032 is still Open in `pixelkiln/launch/watch/ACTIONS.md`, so the 7-day and 14-day rungs stay suspended for every HUMAN row. No doer routine owns an open row.
+
+| id | age | owner |
+|---|---|---|
+| T-023 | 22 d | **HUMAN**: the stop/continue call. Default STOP 2026-11-14, 14 days out. |
+| T-010 | 46 d | **HUMAN** (suspended) |
+| T-011 | 46 d | **HUMAN** (suspended) |
+| T-015 | 42 d | **HUMAN** (suspended) |
+| T-016 | 42 d | **HUMAN** (suspended; part of T-023's CONTINUE option) |
+
+### ALERTS
+
+None. Scheduler read ~11:54Z: support `lastRunAt` 10-30T13:25Z (next 10-31T13:24Z), marketing 10-31T11:32Z, release 10-28T16:03Z (weekly, next 11-04), funnel 10-30T15:07Z (weekly, next 11-06). None is past its window.
+
+### Artifacts
+
+- **support:** SUPPORT.md has two 10-30 rows (a no-inbound line, and @wenvikstudios' Torch/Glow export question answered). Its defect was queued for 0.2.7 (commit 10-31 06:40 local).
+- **marketing:** POSTED.md *Run 2026-10-31*: no Texel post (Saturday is a packs day), two replies verified on the AppView, and the §E Saturday check **added the *Tablet pressure* bullet to the live description**. That explains the page's `Updated 31 October 2026 @ 11:38 UTC`. The bullet says it was tested with simulated pressure only, which is honest under §6.
+- **release:** v0.2.6 on 10-28, nothing due until Wed 11-04.
+- **funnel:** *Measuring week, 2026-10-30*: Palettes picked up (+13 in 6 d), Cheatsheet flat.
+
+### Listing (measured 10-31 ~11:54Z)
+
+| Check | Result |
+|---|---|
+| Logged-out page | HTTP 200, 34,392 B, `Updated` 31 Oct 11:38 UTC (marketing's bullet) |
+| Download | Paid `texel-0.2.6.zip` **213 kB** = local `dist/texel-0.2.6.zip` 218,127 B (newest). Demo `texel-lite-demo-0.2.6.zip` 200 kB. |
+| Price | `game[min_price]` $9.95; public page $9.95 ×3. Correct until v0.4.0. |
+| Status | `game[published]=published` |
+| AI disclosure | `ai_generated=yes`, graphics and code checked, audio and text not |
+
+**All pass.** The edit page was read headless through `lib.mjs` `launch()` (no `profile.lock` held) with a throwaway read-only script, since deleted. Nothing was clicked, saved or downloaded.
+
+### Numbers
+
+`| 2026-10-31 (11:54Z) | 169 | 8 | 0 | $0.00 | 0.00% |`
+
+- **+0 views in ~1 d**, the first zero day since 10-06. **7-day trend:** +12 over ~6.53 d (≈1.8/day) against +13 over ~6.07 d (≈2.1/day). **Flat to slightly down**; n=12, so this is direction only. Downloads 8, unchanged. Payments 0.
+- **Conversion: 0/169.** The 200-view gate is 31 views out. At 1.8/day it lands around **11-17**, which is now *after* T-023's 11-14 default. The conversion rule will probably not fire before the stop/continue default does, so T-023 is the only gate left that will decide anything in time.
+
+### Roadmap
+
+- **v0.2.7 "Gradient": Wed 2026-11-04**, 4 days out, held on T-023. One concrete item (the hidden-track export defect) was queued by support on 10-31. No release code has been logged yet; that is structural for a weekly owner whose only run before the date is 11-04 itself.
+- **v0.3.0 "Tileset": Wed 2026-11-11**, 11 days out, held on T-023.
+- **v0.4.0 "Handoff": 2026-11-14**, the price step to $14.95 on the same day as the default STOP. Left to T-023.
+
+---
+
 ## 2026-10-30 — run 35 (catch-up, 12:14Z; host off ~10-28T21Z → 10-30T12:00Z, the twentieth outage, so there was no 10-29 run)
 
 **VERDICT: BLOCKED ON A HUMAN DECISION; THE PRODUCT ITSELF IS HEALTHY.** v0.2.6 is live and passes every listing check, all four doers are inside their windows, and T-025 closed. **T-023 (stop/continue) is unanswered at 21 days**; its 11-14 default STOP is 15 days out.
