@@ -2380,3 +2380,98 @@ Both were re-fetched cookie-less with `getPosts`: author `pixelkiln.bsky.social`
 - **@spriteweaver** (how to show PSX work is human-made): not ours to answer. This account discloses AI assistance on its products.
 
 ### §E: not due. The next check is **Sat 2026-10-31**. The carry stands: live description *Tablet pressure* bullet (check `texel-release` first).
+
+## Run 2026-10-30 (Fri, a TEXEL day, 07:15 local / 12:15-12:30Z): the torchlight layers beat, two replies
+
+**Ledger first.** `ACTIONS.md` has no OPEN row owned by `texel-marketing`. Open: T-010, T-011, T-015, T-016, T-023, all `HUMAN`. T-023 (stop/continue) is still undecided, and nothing in it pauses marketing. No Texel top-level post existed today before this one (the 12:07Z reply on the account belongs to another routine and is not counted here).
+
+### Posted — Fri 2026-10-30, sprite beat: torchlight on its own layers
+
+| Date | Beat | Asset | URL | First hour |
+|---|---|---|---|---|
+| 2026-10-30 | **A 64x64 dungeon corridor, then the torch lit. The flame and light sit on their own layers (Torch, Glow) over the figure and wall; 1,287 of 4,096 texels changed (flame, light, a floor shadow); the rest of the wall is untouched** | `promo/torchlight/texel-torchlight-before.png` (5,506 B) + `texel-torchlight-after.png` (7,669 B), both 960x960. Each is the 64x64 canvas **sampled texel by texel** from `store/stills/ui_anim_02.png` and `ui_anim_04.png` (canvas box 541,131 to 1573,1164, 16.125 px/texel, centre sample), then scaled 15x nearest-neighbour. **First post of either still.** Both blocked for reuse until **11-20** | [3mz3rc3a6ss26](https://bsky.app/profile/pixelkiln.bsky.social/post/3mz3rc3a6ss26) | 2 likes, 2 reposts at +3 min |
+
+Every claim was checked, not recalled:
+- **1,287 of 4,096** was counted by comparing the two sampled 64x64 grids. A diff map (red = changed) shows the changes are the flame, the dithered ring and a floor shadow left of the figure; the wall outside them is identical. The torch handle tip changed too (the flame covers it), so neither the post nor the alt text claims the figure is untouched.
+- **Torch and Glow are layers:** the Layers list in `ui_anim_04` reads Torch F4 / Main F4 / Glow F4 / Cave F4. Layers ship in `dist/texel-0.2.6.zip` (README section Layers: add, remove, reorder, toggle visibility, merge down).
+- **Not claimed:** that these are frame 1 and frame 4 of one file (the before still predates the Torch layer), that the dither was made with the dither brush (the stills predate 0.2.2), or anything about Lite. The images carry no UI, so no stale label can appear (the `ui_anim_04` eye icons render oddly; cropping to the canvas avoided showing them).
+- **Not a repeat of 10-09:** that post used `ui_anim_05` (the same scene with the UI, about the cel grid and onion skin). This one is canvas-only and about layers. `ui_anim_05`'s block expired today; it was not used.
+- **Live page re-checked first:** cookie-less GET of `z3er1n.itch.io/texel` gives HTTP 200, 34,068 B, serving `texel-0.2.6.zip` + `texel-lite-demo-0.2.6.zip`.
+- **Verified cookie-less with `getPosts`:** author `pixelkiln.bsky.social`, `createdAt` 2026-10-30T12:19:50.315Z, `app.bsky.embed.images#view` with 2 images (960x960 each; alt text 319 and 343 characters), 4 facets (itch link, `#pixelart #b3d #gamedev`). Text 296/300.
+- **Phrasing:** *"dungeon corridor"*, *"1,287"* and *"own layers"* have 0 prior uses in this log. No antithesis construction, no hype words.
+- **§4 note:** texel-exact resamples of real screenshots, not a designed card, so no lint/critic loop (same as the 10-16 trim crops).
+- Spec: `promo/post_2026-10-30.json`.
+
+### §D — two replies, both verified on the public AppView
+
+| Date | Thread | What was said | Link |
+|---|---|---|---|
+| 2026-10-30 | @roadietripp.bsky.social (10-29, 3 likes, **0 replies**): scenery for a friend's fic series, *"base geometry is now done and marked for its first UV unwrap"*. Video thumbnail viewed: an interior in Edit Mode with window/door openings, red seams, several objects (Cube, Plane to Plane.003). | Liked the cut-outs. Then a UV trap: Cube Projection fits its **Cube Size** to each object unless you type one in, so a 4 m wall and a 1 m door frame come out at 4x different texel size; set Cube Size in the redo panel and every piece matches. **Measured in Blender 4.5.9 `-b --factory-startup`:** planes of 4 m, 1 m and 2.5 m, cube-projected one at a time with Cube Size unset, each got a UV span of 1.0 on its long side (0.25, 1.0 and 0.4 UV/m). With `cube_size=2.0` all three came out at 0.5 UV/m. RNA: property name "Cube Size", default 1.0, operator "Cube Projection". Different from the spent `average_islands_scale` (09-10, 10-16) and non-uniform-scale (09-15) answers. | [3mz3rg4xcgh25](https://bsky.app/profile/pixelkiln.bsky.social/post/3mz3rg4xcgh25) |
+| 2026-10-30 | @drillimpact.bsky.social (10-30 11:31Z, 3 likes, 1 off-topic reply): *"Green Rat healing item (N64 style)"*. Video thumbnail viewed: a 502-triangle rat with a **96x32 px** eye texture labelled on screen. | Liked the buck teeth and googly eyes. Then a console-legal check: N64 TMEM is 4 KB and a CI palette sits in the top half, so a 96x32 map fits as CI4 (1.5 KB) but not CI8 (3 KB) or RGBA16 (6 KB). 16 colours is plenty for those eyes. **Checked on n64brew.dev, not recalled:** *Reality_Display_Processor* says the RDP "contains 4KB of texture memory (TMEM)"; *Reality_Display_Processor/Commands* says a TLUT base must reside in the upper half of TMEM (byte address 0x800 or greater) and that CI texels are fetched from low TMEM. Arithmetic: 96x32 = 3,072 texels, so 1,536 B at 4 bpp, 3,072 B at 8 bpp (over 2,048), 6,144 B at 16 bpp (over 4,096). A "three colours" line was cut because AA edges on the thumbnail could not be ruled out. | [3mz3riyb75626](https://bsky.app/profile/pixelkiln.bsky.social/post/3mz3riyb75626) |
+
+Both were re-fetched cookie-less with `getPosts`: author `pixelkiln.bsky.social`, `createdAt` 12:22:06Z / 12:23:41Z, parent URIs correct, 277 / 256 bytes. No link, no pitch, Texel not mentioned.
+
+### Threads looked at and left alone
+
+- **@zerrotajo** (10-29, a 3D-to-pixel workflow with Aseprite): another tool's thread; standing rule.
+- **@alfredbaudisch** posts: standing rule.
+- **@azurezeroart** (tombola rendered in Blender instead of rotating an octagon): the account's game content is sexualised, and the only tip to hand (Film filter size) has been given four times already.
+- **@nitewalker11** (Godot PSX bait shop): the only angle was mipmapped Nearest filtering on the far floor. One frame could not confirm they lack it, and the 10-26 reply was already a Godot mipmap answer.
+- **@kommanderkarl** (title opinion), **@dotplus.moe** (bunny WIP, no alt text), **@mell-lama.me** (PSX shader fog room), **@volutedberet** (first Steam release, trailer not watchable here), **@heytibo** (Grease Pencil doodles): nothing specific and verified to add.
+
+### §E — not due. The next check is **Sat 2026-10-31**. Carry: the live description *Tablet pressure* bullet (check `texel-release` first); no gallery image shows stamps or dither.
+
+## Run 2026-10-31 (Sat, a PACKS day, 06:30 local / 11:30-11:45Z): no Texel post, two replies, one live listing change
+
+**Ledger first.** `ACTIONS.md` has no OPEN row owned by `texel-marketing`. Open: T-010, T-011, T-015, T-016, T-023 (all `HUMAN`). T-023 (stop/continue) is still undecided, and nothing in it pauses marketing.
+
+**No post.** Saturday belongs to the packs. Nothing was taken from `QUEUE.md`; the Sun 11-01 still beat is untouched.
+
+### §D: two replies, both verified on the public AppView
+
+| Date | Thread | What was said | Link |
+|---|---|---|---|
+| 2026-10-31 | @maciaz.bsky.social (10-30 23:07Z, 6 likes, **0 replies**): low-poly Game Boy Color with pixel-art textures, translucent purple case, spin-squish loop; *"I'll do GBA SP next"*. The 4 s 720x720 video was pulled and looked at frame by frame: a maze/circuit texture shows through the purple shell. | Praised the pattern showing through the shell (*"very Atomic Purple"*). Then for the SP: put the lid's origin on the hinge (select the hinge edge, Shift+S > Cursor to Selected, then Object > Set Origin > Origin to 3D Cursor) so opening it is a single rotation key. **Checked in Blender 4.5.9 `-b --factory-startup`:** `space_view3d.py:1425` and `:6115` label `view3d.snap_cursor_to_selected` *"Cursor to Selected"* in `VIEW3D_MT_snap` and `VIEW3D_MT_snap_pie`; the keymap binds the pie to Shift+S (`blender_default.py:1727`); `VIEW3D_MT_object` draws *"Set Origin"* (`:2783`) and `ORIGIN_CURSOR` is named *"Origin to 3D Cursor"*. A 2x3x0.2 m lid with its origin moved to the hinge edge, rotated 100 deg: hinge verts drift 2e-8 m. Same lid with the default centre origin: hinge drifts **2.6 m**. The 10-28 pass on this account (Filter Size tip, already given 3x) was a different tip. | [3mz67gfzxk422](https://bsky.app/profile/pixelkiln.bsky.social/post/3mz67gfzxk422) |
+| 2026-10-31 | @kinto-ta.bsky.social (10-30 13:29Z, 2 likes, **0 replies**): ice cream cone, *"I didn't see much difference in quality between Cycles and Eevee"*. Both renders viewed: the cone floats alone over a flat lilac background. | Liked the waffle pattern. Then why they match: it floats alone, so nothing bounces light onto it. On a coloured surface the engines split: a white ball on a red floor got a red underside in Cycles, and in EEVEE only once Render Properties > Raytracing was ticked. **Measured in 4.5.9:** white sphere on a red plane, sun + grey world, 200 px. Underside R-G tint: **Cycles 119**, **EEVEE default 17**, **EEVEE with `use_raytracing` 127** (/255). `scene.eevee.use_raytracing` defaults False; `RENDER_PT_eevee_next_raytracing` (label *"Raytracing"*, `properties_render.py:349`) draws it as the panel header checkbox. **A subsurface-scattering angle was drafted first and dropped:** a sphere at SSS weight 0 vs 0.5 moved the Cycles-EEVEE gap only 0.19 -> 0.41 /255, too small to claim. | [3mz67ggjjsq26](https://bsky.app/profile/pixelkiln.bsky.social/post/3mz67ggjjsq26) |
+
+Both re-fetched cookie-less from `public.api.bsky.app` `getPosts` (it answered from this machine today): author `pixelkiln.bsky.social`, `createdAt` 11:38:07Z / 11:38:08Z, parent URIs correct, 277 / 271 bytes. No link, no pitch, Texel not mentioned. Sent with `pixelkiln/tools/pixelkiln_social.ps1 -Mode reply`.
+
+### Threads looked at and left alone
+
+- **@zerrotajo** (3D-to-pixel workflow with Aseprite): another tool's thread, standing rule.
+- **@3rd-nrg** (flat-colour UV layout, *"Must unwrap... must texture"*): the only tip was palette-style UVs, which sits too close to what our own products do to give without it reading as a lead-in.
+- **@timnuts** (Tower in the Fog, 117 likes, 0 replies), **@soxbux** (first low-poly film, still image), **@tylercooleyart** (Steam wishlist post): nothing specific and verified to add.
+- **@spceter44**, **@blaineritz** (asset-store promo posts): not conversations.
+
+### §E: the Saturday listing check
+
+- **Conversion rule:** not fired. Watch run 35 reads **0/169**, under the 200-view gate (about 11-13 at this pace).
+- **Truth check against `dist/texel-0.2.6.zip`:** the live page (HTTP 200, 34,071 B) serves `texel-0.2.6.zip` + `texel-lite-demo-0.2.6.zip`. *95 operators* is right (95 unique `texel.*` `bl_idname` in the zip). No *Not yet / coming soon / v0.3* claims. Tagline and tags unchanged and still true.
+- **CHANGED, LIVE: the carried *Tablet pressure* bullet.** `texel-release` had not added it. Inserted after *Stamps*: *"Tablet pressure. The pen icon beside Size makes pen pressure scale the Pencil and Eraser from 1 texel up to Size. Off by default, and a mouse always presses fully, so with a mouse nothing changes. Tested with simulated pressure values, not yet on a physical tablet. New in v0.2.6."* Wording and the untested-hardware caveat come from the README in the shipped 0.2.6 zip (lines 154-157). Pressure is also in **Lite 0.2.6** (`core/raster.py:299 pressure_size`, `tex_ui.py:42` draws the `use_pressure` STYLUS_PRESSURE toggle), so the Lite *"does not include"* list stays true. Applied with `itch_desc_replace.mjs --game 4991926`, 1/1; a fresh `itch_desc_dump` is byte-identical to the built target (3,555 chars); the logged-out page re-read at ~11:44Z (34,396 B) shows *Tablet pressure.* and *New in v0.2.6*. Pointer in `LISTING.md`.
+- **Not done, carried:** no gallery image shows stamps, dither or pressure. Adding one is a `brand-visual` loop (lint + critic); `promo/showcase/showcase_GOLDEN.png` is still the candidate.
+
+The next §E check is **Sat 2026-11-07**.
+
+## Run 2026-10-31 second firing (Sat, a PACKS day, 17:54 local / 22:54-23:02Z): no Texel post, two replies
+
+**Ledger first.** `ACTIONS.md` has no OPEN row owned by `texel-marketing`. Open: T-010, T-011, T-015, T-016, T-023 (all `HUMAN`).
+
+**No post.** Saturday belongs to the packs. `QUEUE.md` untouched; the Sun 11-01 still beat stands. §E already ran this morning (see the run above), so it was not repeated.
+
+### §D: two replies, both verified on the public AppView
+
+| Date | Thread | What was said | Link |
+|---|---|---|---|
+| 2026-10-31 | @wildstar25.bsky.social (10-31 21:49Z, 1 like, 1 reply asking for context): *"best way to ensure the weights from these two pieces are the exact same?? ... I cant combine them since they have difference textures"*. Both images viewed: two weight-painted bands meeting at a seam. | Their blocker was the textures, so: join them (Ctrl+J keeps each piece's own material), then Edit Mode, select all, Mesh > Clean Up > Merge by Distance; where seam verts line up each pair becomes one vertex with one weight. **Measured in Blender 4.5.9 `-b --factory-startup`:** two 16-segment bands, materials TexA/TexB, group "Head" at 0.4 / 0.9. After `object.join`: 2 slots, 16 faces each. After `mesh.remove_doubles` (label *"Merge by Distance"*, in `VIEW3D_MT_edit_mesh_clean` *"Clean Up"*): 64 → 48 verts, still 2 slots 16/16, every UV corner preserved, each of the 16 seam verts in exactly one group with one weight. **Data Transfer was tested first and dropped:** it matched the seam exactly (max diff 0.0) but with Nearest Vertex it also overwrote every vertex of the target band, which would wipe their painting. | [3mz7fiuxolt24](https://bsky.app/profile/pixelkiln.bsky.social/post/3mz7fiuxolt24) |
+| 2026-10-31 | @bolicob.bsky.social (10-29, a #Blocktober modular dungeon kit thread, last post 0 replies): *"run the albedo through Aseprite to palletize it and then use the same pallet in a colorized dither shader"*. In-engine screenshots viewed (pillar/wall modules, a screen-space noise dither pass). | Liked the pillar modules. Then: Indexed alone keeps up to 255 colours; run New Palette from Sprite first with a small limit, then Save Palette as a PNG, one pixel per colour, for the shader. **Measured in Aseprite 1.3.18.1 (local build) batch Lua on one of their screenshots:** opened with a 255-colour palette (76,141 unique RGB colours); `ChangePixelFormat{indexed, no dithering}` → **254** indices used. `ColorQuantization{maxColors=16}` then indexed → 15 colours. `Palette:saveAs("pal.png")` → a **15x1** PNG. Labels from `data/strings/en.ini`: *"New Palette from Sprite"* (1724), *"Save Palette"* (1720), both in `palette_popup_menu` (`gui.xml` 1270-1282); *"More Options"* / *"No Dithering"* exist but were left out for length. | [3mz7fivh37322](https://bsky.app/profile/pixelkiln.bsky.social/post/3mz7fivh37322) |
+
+Both re-fetched cookie-less from `public.api.bsky.app` `getPosts`: author `pixelkiln.bsky.social`, `createdAt` 22:59:32Z / 22:59:33Z, parent URIs correct, 266 / 281 bytes. No link, no pitch, Texel not mentioned. Basecoat (titancraft) is a texturing/VTT tool, not a pixel-art-in-Blender product, so the standing rule did not apply.
+
+### Threads looked at and left alone
+
+- **@scoutylanks** (pencil-skirt weight painting, 264 likes): a statement, not a question, from a skilled modeller; no tip I could measure that they would not already know.
+- **@mincedjupiter** (asked @scoutylanks about shoulder rigging): the question was addressed to someone else.
+- **@dualmask** (10-28, pre-rendered sprite idea): the only tip to hand is Film filter size, already given four times.
+- **@alfredbaudisch**, **@tajtajima**, **@zerrotajo**: standing rule. **@mthimmig3d**, **@ibagail**, **@narakaiman**, **@mucleus**, **@timnuts**: nothing specific and verified to add. **@molegato**, **@lowbitlab-assets**, **@hirogamestudio**: promo posts, not conversations.
+
+### §E: done this morning. The next check is **Sat 2026-11-07**.

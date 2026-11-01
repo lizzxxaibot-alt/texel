@@ -431,3 +431,10 @@ Both verified on the **logged-out** page: HTTP 200, 31,112 B.
 Pointer, not a copy: the reasoning and evidence are in `promo/POSTED.md` under *Run 2026-10-24*.
 
 1. **Two bullets added to the live description**, after *Radial symmetry*: **Dither as a brush mode** (v0.2.2) and **Stamps** (v0.2.4). Both are in the shipped `texel-0.2.5.zip` and the Lite 0.2.5 zip, so the Lite paragraph stays true. Revert: swap the two `<li>` items back out with `node automation/itch_desc_replace.mjs --game 4991926`.
+
+
+## 2026-10-31 — one live change by `texel-marketing` (§E Saturday check)
+
+Pointer, not a copy: the reasoning and evidence are in `promo/POSTED.md` under *Run 2026-10-31*.
+
+1. **A *Tablet pressure* bullet added to the live description**, after *Stamps* (*New in v0.2.6*), with the shipped README's "simulated, not yet on a physical tablet" caveat. Pressure is in both `texel-0.2.6.zip` and Lite 0.2.6, so the Lite paragraph stays true. Revert: remove that `<li>` with `node automation/itch_desc_replace.mjs --game 4991926`.
