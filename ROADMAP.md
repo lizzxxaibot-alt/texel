@@ -450,6 +450,15 @@ as much as to the code. Likely shape: a track-level hide that `show_frame`
 leaves alone, honoured by sheet, JSON and GIF, which also gives the asker a
 sheet per lighting state. The reply told them *"queued for 0.2.7"* and gave no date.
 
+**Regression case for this fix, added by `texel-support` 2026-10-31, suggested by
+the asker** (@wenvikstudios, 10-30 17:44Z, same thread): a two-frame file with
+Base, Torch and Glow. Export Sheet with Base alone; add the effect tracks and
+hide them; export again. **The two sheets must match pixel for pixel.** This is
+stricter than the repro's gold-count check, because it catches any leak, not
+just gold texels. `texel-release`: ship 0.2.7 only with this passing on the
+built zip and failing on `texel-0.2.6.zip` (the negative control). The reply on
+Bluesky told the asker it is the regression case for the 0.2.7 fix.
+
 ### v0.2.6 — "Pressure" · **RELEASED 2026-10-28**, a week late, partial as forecast
 **Live-page read-back, 2026-10-28 ~16:20Z (the gate, taken before this tick was
 written; this line is NOT in the 0.2.6 zip, which says "BUILT"):** cookie-less
