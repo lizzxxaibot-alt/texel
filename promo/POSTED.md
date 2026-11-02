@@ -2475,3 +2475,41 @@ Both re-fetched cookie-less from `public.api.bsky.app` `getPosts`: author `pixel
 - **@alfredbaudisch**, **@tajtajima**, **@zerrotajo**: standing rule. **@mthimmig3d**, **@ibagail**, **@narakaiman**, **@mucleus**, **@timnuts**: nothing specific and verified to add. **@molegato**, **@lowbitlab-assets**, **@hirogamestudio**: promo posts, not conversations.
 
 ### §E: done this morning. The next check is **Sat 2026-11-07**.
+
+## Run 2026-11-01 (Sun, a TEXEL day, 16:15 local / 21:15-21:30Z): the Sunday render, two replies
+
+**Ledger first.** `ACTIONS.md` has no OPEN row owned by `texel-marketing`. Open: T-010, T-011, T-015, T-016, T-023 (all `HUMAN`). T-023 (stop/continue) is still undecided, and nothing in it pauses marketing. No top-level post on the account today before this one (`getAuthorFeed` read at 21:22Z; newest item a 10-31 reply).
+
+### Posted — Sun 2026-11-01, best render of the week: the sci-fi corridor
+
+| Date | Beat | Asset | URL | First hour |
+|---|---|---|---|---|
+| 2026-11-01 | **Sci-fi corridor for a station level: panels, floor and crates are 64x64 textures shaded with Generate Ramp; Apply Density at 11 texels per metre on walls/floor/ceiling, 30 on crates** | `store/stills/env_corridor_02.png`, saved as `store/stills/env_corridor_02_post.jpg` (JPEG q95 4:4:4, 239,287 B, 1280x720). **First post of any `env_corridor_*` still.** Blocked for reuse until **11-22** | [3mzbqmmt56a26](https://bsky.app/profile/pixelkiln.bsky.social/post/3mzbqmmt56a26) | 4 likes, 2 reposts at +3 min |
+
+Every claim was checked, not recalled:
+- **64x64 and Generate Ramp.** `envs.py` `tex_corridor(size=64)`: `panel`, `floor`, `crate` are 64x64 canvases whose shades come from `ramp_of()` → `core.tools.make_ramp` (6, 5 and 5 steps). The light strip is 64x16 with three hand-picked colours, so the post names only panels, floor and crates. `make_ramp` is the function behind the **Generate Ramp** operator (`texel.palette_ramp`, `bl_label` at `texel/tex_tools.py:137` in the shipped `dist/texel-0.2.6.zip`); `core/tools.py` in the zip is identical to the working copy (`diff` clean).
+- **11 and 30.** `envs.py:676-679`: corridor `arch={"Floor","Ceiling","Wall"}`, `dens=(11.0, 30.0)`; `render_env.py` `apply_density()` sets 11 on meshes whose name starts with those, 30 on everything else (crates, ribs, pipes, strips, door). One commit on both files (19d3652), so these are the rendered values. Blender units are metres, so *per metre* is the same number as the tavern's *per unit*.
+- **Live page re-checked first:** cookie-less GET of `z3er1n.itch.io/texel` → HTTP 200, 34,393 B, serving `texel-0.2.6.zip` + `texel-lite-demo-0.2.6.zip`.
+- **Verified cookie-less with `getPosts`:** author `pixelkiln.bsky.social`, `createdAt` 2026-11-01T21:23:49.040Z, `app.bsky.embed.images#view`, 1 image 1280x720, alt text 481 characters, 4 facets (itch link, `#pixelart #b3d #gamedev`). Text 294/300.
+- **Feed size:** looked at a 500 px downsample; the panel rivets, floor lines and crate X read.
+- **Cadence:** last Texel post 10-30 (Fri). One post per slot.
+- **Phrasing:** *"Generate Ramp"*, *"texels per metre"*, *"pixel size per object"*, *"station level"* had 0 prior uses as post copy in this log. No antithesis construction, no hype words.
+- **§4 note:** an unedited harvested render, not a designed card, so no lint/critic loop (same as the 09-27 and 10-18 stills).
+- Spec: `promo/post_2026-11-01.json`.
+
+### §D: two replies, both verified on the public AppView
+
+| Date | Thread | What was said | Link |
+|---|---|---|---|
+| 2026-11-01 | @joelsaquarium.bsky.social (11-01 20:38Z, 7 likes, 1 self-reply): a finished, rigged Pokémon Sun/Moon-style trainer model, *"especially the face pixel art"*. All three images viewed: Blender 5.2.2 animation workspace (Eye_Control bone), the UV map, and a strip of **three face expressions stacked vertically** plus a beard. | Congratulated, then: to swap expressions mid-animation, run the face texture's UVs through a Mapping node, key Location Y one face-height per expression, select the keys and press T > Constant so it snaps instead of sliding. **Measured in Blender 5.2.1 LTS `-b --factory-startup`** (their version family): `ShaderNodeMapping` inputs Vector/Location/Rotation/Scale; Location Y keyed 0 / 0.25 / 0.5 at frames 1/10/20 with `CONSTANT` interpolation evaluates 0, 0, 0 at 1/5/9.99 and 0.25 at 10, 0.5 at 20, so it holds then jumps. Enum label *"Constant"*; `blender_default.py:2722` binds `action.interpolation_type` to **T** in the Dope Sheet (2059 for Graph Editor), menu text *"Interpolation Mode"* (`space_dopesheet.py:685`). | [3mzbqrbeg6a26](https://bsky.app/profile/pixelkiln.bsky.social/post/3mzbqrbeg6a26) |
+| 2026-11-01 | @alexanderbirke.bsky.social (11-01 16:28Z, 10 likes, 1 reply): crops the Unity game view in OBS, trims clips in Blender *"because it gives the best quality for a free tool. If you have other suggestions I'd love to hear them!"* | Suggested trimming without a second encode: `ffmpeg -ss 3 -to 7 -i in.mp4 -c copy out.mp4`, frames byte-identical to the recording; catch, a copy cut starts on a keyframe, so leave a second of slack. **Measured with local ffmpeg 9.0:** 10 s x264 test clip, keyframe every 2 s. The `-c copy` cut holds 152 video packets and **all 152 hash-match packets of the source** (`framemd5`, 0 not found); its stream reaches back to the 2 s keyframe (152 frames = 5.07 s, container duration 4.13 s via edit list). Re-encoding the same 3-7 s span with libx264 defaults measured **PSNR 45.4 dB** against the source, so a re-encode does change the pixels. Their question asked for suggestions, so it is an answer, not unsolicited correction. | [3mzbqrbti7f2u](https://bsky.app/profile/pixelkiln.bsky.social/post/3mzbqrbti7f2u) |
+
+Both re-fetched cookie-less from `public.api.bsky.app` `getPosts`: author `pixelkiln.bsky.social`, `createdAt` 21:26:24Z / 21:26:25Z, parent URIs correct, 289 / 266 bytes. No link, no pitch, Texel not mentioned. Sent with `pixelkiln/tools/pixelkiln_social.ps1 -Mode reply`.
+
+### Threads looked at and left alone
+
+- **@alfredbaudisch**, **@tajtajima**, **@zerrotajo**, and posts recommending the Pixel Art Studio add-on: standing rule.
+- **@xrfolio.page** (a curation post), **@lowbitlab-assets**, **@blaineritz**, **@indietooling** (Ucupaint release note), **@molegato**: promo or news, not conversations.
+- **@playstrelka** (kvass barrel, 0 replies), **@steel845** (avatar hair, day 3), **@max-in-a-artbox**, **@cristvoxel**: nothing specific and verified to add in this run.
+
+### §E: not due. The next check is **Sat 2026-11-07**. Carry: no gallery image shows stamps, dither or pressure (`promo/showcase/showcase_GOLDEN.png` is still the candidate; needs the `brand-visual` loop).

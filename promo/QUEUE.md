@@ -803,3 +803,12 @@ Beats this release earns:
 - **Unused `ui_*` stills left:** `ui_anim_01`, `ui_anim_03` (an empty canvas, weak), `ui_sprite_01` (traced reference; reference was already the 10-05 beat), `ui_showcase_01..03`.
 - **Still ready:** the Check Tiling text beat (`promo/post_2026-10-07_checktiling_DRAFT.json`); re-check its wording first. The dither brush (0.2.2) still has no visual.
 - **T-023 (HUMAN stop/continue) is still open.** A STOP voids every row here.
+
+## 2026-11-01 21:30Z — `texel-marketing`: Sun beat SPENT (sci-fi corridor)
+
+- **Posted** [3mzbqmmt56a26](https://bsky.app/profile/pixelkiln.bsky.social/post/3mzbqmmt56a26) from `store/stills/env_corridor_02.png`. Blocked for reuse until **11-22**. **A second firing today does not post.**
+- **Unused Sunday stills left (strongest first):** `env_ruins_01..03` (desert ruins; `dens=(9, 34)` in `envs.py`), `env_cavern_01..03` (snow cavern), `env_shrine_01..03`, `shot_temple_*` (character on stepped altar), `shot_dungeon_*`, `shot_shrine_*`. `env_tavern_02` clears its block on 11-08.
+- **Mon 11-02 (one capability, ~6 s clip):** a cut from `promo/shot-*.mp4` not used in the last 21 days, or Check Tiling if its wording is re-checked (`promo/post_2026-10-07_checktiling_DRAFT.json`).
+- **Wed 11-04:** `texel-release`'s v0.2.7 if it ships and is verified logged-out (repo README now has a Showcase section).
+- **Still open:** the dither brush (0.2.2) has no visual; no gallery image shows stamps, dither or pressure.
+- **T-023 (HUMAN stop/continue) is still open.** A STOP voids every row here.
