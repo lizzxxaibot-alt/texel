@@ -6,6 +6,65 @@ in `../ACTIONS.md` and handed to a named owner.
 
 ---
 
+## 2026-11-02 — run 38 (in slot, ~12:55Z)
+
+**VERDICT: BLOCKED ON A HUMAN DECISION, AND THE FIRST REAL USER JUST SAID THEY CANNOT FIND HOW TO START.** v0.2.6 passes every listing check and all four doers are inside their windows. The page's first-ever comment is a demo user asking for a tutorial. **T-023 (stop/continue) is unanswered at 24 days**; its 11-14 default STOP is 12 days out.
+
+### Action ledger
+
+**Opened: 2 (T-026, T-027). Closed: 0.** A-032 is still Open, so the 7-day and 14-day rungs stay suspended for every HUMAN row.
+
+| id | age | owner |
+|---|---|---|
+| **T-026** | 0 d | `texel-support`: answer the first on-page comment (`Isaque.OS`, no tutorial). Not late; next slot 11-02T14:24Z. |
+| **T-027** | 0 d | `texel-marketing`: give the listing a getting-started section. The docs ship in the zip, but the page never says so. |
+| T-023 | 24 d | **HUMAN**: the stop/continue call. Default STOP 2026-11-14, 12 days out. |
+| T-010 | 48 d | **HUMAN** (suspended) |
+| T-011 | 48 d | **HUMAN** (suspended) |
+| T-015 | 44 d | **HUMAN** (suspended) |
+| T-016 | 44 d | **HUMAN** (suspended; part of T-023's CONTINUE option) |
+
+### ALERTS
+
+None are late. Scheduler read ~12:55Z: support `lastRunAt` 11-01T14:25Z (next 11-02T14:24Z), marketing 11-01T21:21Z (next 11-02T21:20Z), release 10-28T16:03Z (weekly, next 11-04), funnel 10-30T15:07Z (weekly, next 11-06).
+
+**New finding (opened, not an alert): the first real user voice on the page says Texel cannot be learned.** `Isaque.OS`, about 08:50Z today: *"no tutorial of this thing or documentation on how to use it anywhere"*. Over the same window `texel-lite-demo-0.2.6.zip` went from 0 to 2 downloads, and no routine logs pulling it. The claim is half true. `README.md` and `START-HERE.html` ship inside both the paid zip and the demo zip. But the logged-out page has no *tutorial / how to / start here / README* text, so nobody can find them before installing. **For T-023 this is the first evidence about why demo users do not convert.** It is n=1 and it is not a sales signal.
+
+### Artifacts
+
+- **support:** SUPPORT.md has a 11-01 (day 54) entry: no new inbound since 10-30, top-three tie unchanged. The comment came in after that run.
+- **marketing:** POSTED.md has *Run 2026-11-01*, the Sunday Texel beat (sci-fi corridor render), verified on the AppView at 21:23:49Z, spec `promo/post_2026-11-01.json`.
+- **release:** v0.2.6 shipped 10-28; nothing due until Wed 11-04.
+- **funnel:** *Measuring week, 2026-10-30*; next run 11-06.
+
+### Listing (measured 11-02 ~12:55Z)
+
+| Check | Result |
+|---|---|
+| Logged-out page | HTTP 200, 36,258 B (was 34,387; the comment). `Updated` 31 Oct 11:38 UTC |
+| Download | Paid `texel-0.2.6.zip` **213 kB** = local `dist/texel-0.2.6.zip` 218,127 B (newest). Demo `texel-lite-demo-0.2.6.zip` 200 kB. |
+| Price | `game[min_price]` $9.95; public page $9.95 ×3. Correct until v0.4.0. |
+| Status | `game[published]=published` |
+| AI disclosure | `ai_generated=yes`, graphics and code checked, audio and text not |
+
+**All pass.** The edit and summary pages were read headless through `lib.mjs` `launch()` (no `profile.lock` before or after) with throwaway read-only scripts, since deleted. Nothing was clicked, saved, downloaded or answered.
+
+### Numbers
+
+`| 2026-11-02 (12:55Z) | 175 | 10 | 0 | $0.00 | 0.00% |`
+
+- **+6 views in ~1.0 d**, ending two zero days. **7-day trend:** +15 over ~6.96 d (≈2.2/day) against +14 over ~6.5 d (≈2.2/day). **Flat**; n=15, direction only.
+- **Downloads 8 → 10, both on the 0.2.6 demo**, unattributed, most likely the commenter. Every paid file 0. 97 7d impressions, 3.09% CTR.
+- **Conversion: 0/175.** The 200-view gate is 25 views out; at 2.2/day it lands **~11-13**, one day before T-023's default STOP.
+
+### Roadmap
+
+- **v0.2.7 "Gradient": Wed 2026-11-04**, 2 days out, held on T-023. Scoped; no release code logged, which is expected for a weekly owner whose only run before the date is 11-04 itself.
+- **v0.3.0 "Tileset": Wed 2026-11-11**, 9 days out, held on T-023.
+- **v0.4.0 "Handoff": 2026-11-14**, the $14.95 price step on the default-STOP day. Left to T-023.
+
+---
+
 ## 2026-11-01 — run 37 (in slot, ~12:54Z)
 
 **VERDICT: BLOCKED ON A HUMAN DECISION; THE PRODUCT ITSELF IS HEALTHY.** v0.2.6 is live and passes every listing check, and all four doers are inside their windows. **T-023 (stop/continue) is unanswered at 23 days**, and its 11-14 default STOP is 13 days out.
