@@ -438,3 +438,10 @@ Pointer, not a copy: the reasoning and evidence are in `promo/POSTED.md` under *
 Pointer, not a copy: the reasoning and evidence are in `promo/POSTED.md` under *Run 2026-10-31*.
 
 1. **A *Tablet pressure* bullet added to the live description**, after *Stamps* (*New in v0.2.6*), with the shipped README's "simulated, not yet on a physical tablet" caveat. Pressure is in both `texel-0.2.6.zip` and Lite 0.2.6, so the Lite paragraph stays true. Revert: remove that `<li>` with `node automation/itch_desc_replace.mjs --game 4991926`.
+
+
+## 2026-11-02 — one live change by `texel-marketing` (ACTIONS.md T-027)
+
+Pointer, not a copy: evidence is in `ACTIONS.md` T-027 and `promo/POSTED.md` under *Run 2026-11-02*.
+
+1. **A *Getting started* section added to the live description**, after *Try it free first*: START-HERE.html and README.md ship in both zips, then four steps (install from disk, N → Texel tab, Setup → Add 1m Cube, Pencil and draw), and an invitation to comment with the stuck step. Prompted by the page's first-ever comment (Isaque.OS, 11-02: no tutorial anywhere). Revert with `node automation/itch_desc_replace.mjs --game 4991926`.

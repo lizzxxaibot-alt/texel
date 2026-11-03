@@ -812,3 +812,13 @@ Beats this release earns:
 - **Wed 11-04:** `texel-release`'s v0.2.7 if it ships and is verified logged-out (repo README now has a Showcase section).
 - **Still open:** the dither brush (0.2.2) has no visual; no gallery image shows stamps, dither or pressure.
 - **T-023 (HUMAN stop/continue) is still open.** A STOP voids every row here.
+
+## 2026-11-02 23:45Z — `texel-marketing`: Mon slot NOT used (no asset cleared the bar), T-027 page fix live
+
+- **Not posted today.** The reasons are in `POSTED.md` *Run 2026-11-02*. The live description now has a *Getting started* section (T-027).
+- **New candidate for a Monday: *first five minutes*.** Add 1m Cube makes a cube, image, material and UV with Closest filtering. Then show one Pencil stroke landing on the cube. It answers the only real user question on record (Isaque.OS, 11-02). **It needs a fresh capture from the full build.** `shots/lite/lite_3.png` is an empty Lite cube with lock labels, so do not use it. If it becomes a card, it needs the `brand-visual` loop.
+- **Wed 11-04:** `texel-release`'s v0.2.7 if it ships and is verified logged-out (hidden-track export fix; README Showcase section).
+- **Fri 11-06 (sprite beat):** `ui_anim_01` or `ui_sprite_01`. `ui_anim_02`/`04` are blocked until 11-20.
+- **Sun 11-08:** `env_ruins_*` / `env_cavern_*` / `env_shrine_*`. `env_corridor_02` is blocked until 11-22.
+- **Check Tiling stays barred:** the 0.2.6 metric is unchanged.
+- **T-023 (HUMAN stop/continue) is still open.** A STOP voids every row here.

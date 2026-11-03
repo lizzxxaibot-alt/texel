@@ -2513,3 +2513,34 @@ Both re-fetched cookie-less from `public.api.bsky.app` `getPosts`: author `pixel
 - **@playstrelka** (kvass barrel, 0 replies), **@steel845** (avatar hair, day 3), **@max-in-a-artbox**, **@cristvoxel**: nothing specific and verified to add in this run.
 
 ### §E: not due. The next check is **Sat 2026-11-07**. Carry: no gallery image shows stamps, dither or pressure (`promo/showcase/showcase_GOLDEN.png` is still the candidate; needs the `brand-visual` loop).
+
+## Run 2026-11-02 (Mon, a TEXEL day, fired late: ~23:00-23:45Z): ledger row T-027 done, no post, two replies
+
+**Ledger first.** One OPEN row owned by `texel-marketing`: **T-027** (opened today, the listing has no getting-started path). Done and set to `DONE?` with evidence in `ACTIONS.md`: a *Getting started* section is live in the description (START-HERE.html + README.md ship in both zips, then install → N → Texel tab → Setup → Add 1m Cube → Pencil). Cookie-less read: 42,287 B, every key string present. `itch_desc_replace.mjs` printed `applied 0/1`, its known entity false negative; the editor re-dump and logged-out page both show the section. Pointer in `LISTING.md`. Other open rows are `HUMAN` (T-010, T-011, T-015, T-016, T-023) or support's `DONE?` (T-026).
+
+### No Monday post, on purpose
+
+The Monday beat is one capability with a clip. `pixelkiln_social.ps1` posts images only, so Mondays have used stills. **No unused still cleared the bar:**
+- `shots/lite/lite_3.png`, the only onboarding shot (it fits today's getting-started theme), is an empty Lite cube with two "locked, get full Texel" labels. That is weak as a post and reads as an upsell.
+- The density walk (`shots/density/*`) is the same 18-face scene and the same 2.5/21.1 → 10.5 numbers as the 09-28 beat. That would be a repeat in all but filename.
+- **Check Tiling stays barred.** `tile_seam_score` in the shipped `texel-0.2.6.zip` (`core/tools.py:43-99`) is the same wrap-vs-worst-interior metric as 0.2.0 (code read, not re-run), so the moss tile in `promo/tile/` would still report "No seam found". The message is honest now (`tex_tools.py:81-95`), but a visual beat would show the check missing a visible seam.
+- Every unused `env_*` / `shot_*` still is a Sunday render, not a capability.
+
+So the slot was not used. This was a choice, recorded here as one. **For a future Monday:** a *first five minutes* beat (Add 1m Cube → first stroke on the cube, two frames) answers the only real user question on record. It needs a new capture from the full build, not `lite_3`, and the `brand-visual` loop if it becomes a card. Queued in `QUEUE.md`.
+
+### §D: two replies, both verified on the public AppView
+
+| Date | Thread | What was said | Link |
+|---|---|---|---|
+| 2026-11-02 | @lunakibby.northsky.social (11-01 19:56Z): converting heraldry art into pixel-art banner textures for the Minecraft mod Heralds II, 15 min each, *"68 more designs"*. Both images viewed: the source shield (246x244 JPEG) and their GIMP canvas of the result. | Complimented the lion at banner size, then a head start for the other 68: GIMP Image > Scale Image, Interpolation None, then Image > Mode > Indexed, 6 colours, no dithering; *"Still needs cleanup, but not a blank canvas."* **Measured on their own source image:** ImageMagick `-filter point -resize 40x40 +dither -colors 6` (the same operations) keeps both the lion and the stag silhouettes readable (`%TEMP%/bsk/nn_cmp.png`, looked at). **GIMP menu names checked against the GIMP 3.0 manual** (`gimp-image-scale.html`: *Interpolation* list includes *None*; `gimp-image-convert-indexed.html`: Image → Mode → Indexed, *Dithering Options* include *None*). | [3mzeiaa2rin24](https://bsky.app/profile/pixelkiln.bsky.social/post/3mzeiaa2rin24) |
+| 2026-11-02 | @arthurbn.bsky.social (11-02 20:53Z, 3 likes, 0 replies): a Halo Flood Carrier Form modelled in Blockbench, one render viewed. | Specific feedback: the carrier as stacked offset cubes reads bloated with no curved face, and the shadow the top sac throws on the front one, with the darker cavity texture, sells the about-to-burst look. No tip; this was feedback on finished work, and every point is visible in the render. | [3mzeiaajmp324](https://bsky.app/profile/pixelkiln.bsky.social/post/3mzeiaajmp324) |
+
+Both re-fetched cookie-less with `public.api.bsky.app` `getPosts`: author `pixelkiln.bsky.social`, `createdAt` 23:31:42.097Z / 23:31:42.620Z, parent URIs correct, 297 / 224 bytes. No link, no pitch, Texel not mentioned. Sent with `pixelkiln/tools/pixelkiln_social.ps1 -Mode reply`. (The first attempt at the lunakibby reply was refused by the script at 307 bytes. Nothing was sent; the feed was checked before resending.)
+
+### Threads looked at and left alone
+
+- **@dualmask** (10-28, rendering Blender animation as pre-rendered pixel sprites): the parent post is `blockedPost` from this account. Not replied.
+- **@elvisish**, **@alfredbaudisch** (11-02), and every Pixel Art Studio post: standing rule. **@retrygames** (another Blender colour tool's own promo) and **@puszke** (a pixelizer tool launch): product promos, left alone.
+- **@azurezeroart** (tombola; video is an adult-styled game), **@tylercooleyart** (sci-fi items, 5 days old), **@luffistuff** (commission promo), **@shannon-nash** (Nodevember, no image): nothing specific and verified to add.
+
+### §E: not due. The next check is **Sat 2026-11-07**. Carry: (1) no gallery image shows stamps, dither or pressure; (2) the *Tiles that actually tile* bullet still sits over a check with a known blind spot (high-contrast tiles absorb a real seam). The bullet's body ("scores the seam") is accurate. Decide Saturday whether the headline needs softening, against `ROADMAP.md`'s 09-24 ruling.
