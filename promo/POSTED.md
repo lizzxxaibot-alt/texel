@@ -2544,3 +2544,28 @@ Both re-fetched cookie-less with `public.api.bsky.app` `getPosts`: author `pixel
 - **@azurezeroart** (tombola; video is an adult-styled game), **@tylercooleyart** (sci-fi items, 5 days old), **@luffistuff** (commission promo), **@shannon-nash** (Nodevember, no image): nothing specific and verified to add.
 
 ### §E: not due. The next check is **Sat 2026-11-07**. Carry: (1) no gallery image shows stamps, dither or pressure; (2) the *Tiles that actually tile* bullet still sits over a check with a known blind spot (high-contrast tiles absorb a real seam). The bullet's body ("scores the seam") is accurate. Decide Saturday whether the headline needs softening, against `ROADMAP.md`'s 09-24 ruling.
+
+## Run 2026-11-03 (Tue, a PACKS day, ~21:10-21:30Z): no Texel post, two replies
+
+**Ledger first.** `ACTIONS.md` has no OPEN row owned by `texel-marketing`. Open: T-010, T-011, T-015, T-016, T-023 (all `HUMAN`) and T-028 (`texel-support`, `DONE?`). T-023 (stop/continue) is still undecided, and nothing in it pauses marketing.
+
+**No post.** Tuesday belongs to the packs. `QUEUE.md` untouched.
+
+### §D: two replies, both verified on the public AppView
+
+| Date | Thread | What was said | Link |
+|---|---|---|---|
+| 2026-11-03 | @sylvia-wolf.bsky.social (11-03 16:28Z, 6 likes, **0 replies**): adding a low-poly house to a pixel-art background (Maries of the Valley); *"the engine renders it as a flat image, but I want the model to change in perspective with a parallax effect when the scene is moving"*. Image viewed (thatched 3D house over a pixel-art wheat field). Engine not named in the post or their last 40 posts. | Liked the thatch roof. Then a likely cause: if the camera is orthographic (common for 2D setups), every depth slides the same amount, so the house reads flat; numbers from a 1 m sideways camera move. **Measured in Blender 5.2.1 `-b --factory-startup`** (`world_to_camera_view`, 640 px wide, camera looking down +Y, points at 5 m / 7 m / 60 m): **Orthographic 53.3 / 53.3 / 53.3 px**, **Perspective 177.8 / 127.0 / 14.8 px**. Enum labels *"Perspective"*, *"Orthographic"*. Worded as *"if"* because the engine is unknown. | [3mzgrl3cnjs24](https://bsky.app/profile/pixelkiln.bsky.social/post/3mzgrl3cnjs24) |
+| 2026-11-03 | @catkintales.bsky.social (11-03 02:50Z, 13 likes): Evervale moved from 2D to 2.5D in Godot; a three-panel image (original pixel art / Blockbench model / in-game) viewed. | Feedback on finished work, no tip: the awning gained most (its curl now shades itself instead of being painted), the AC unit and skylight give the flat roof detail the 2D version lacked (its roof is a plain textured plane), and the thin outline ties it to the grass and character. Every point is visible in their image. | [3mzgrl3rsho2i](https://bsky.app/profile/pixelkiln.bsky.social/post/3mzgrl3rsho2i) |
+
+Both re-fetched cookie-less from `public.api.bsky.app` `getPosts`: author `pixelkiln.bsky.social`, `createdAt` 21:24:09.293Z / 21:24:09.831Z, parent URIs correct, 284 / 267 bytes. No link, no pitch, Texel not mentioned. Sent with `pixelkiln/tools/pixelkiln_social.ps1 -Mode reply`.
+
+### Threads looked at and left alone
+
+- **@elvisish**, **@alfredbaudisch** (Pixel Art Studio threads), **@retrygames** (Tintline promo): standing rule / product promo.
+- **@evilsprite** ("flatten characters", 48 likes): reply thread reads as fetish content; left alone.
+- **@coinnoperat3d** (Nodevember day 3 stitch, compositor): three renders viewed, no question and nothing measured to add.
+- **@veronikalapa** (texel density statement): too close to what Texel does to answer without it reading as a lead-in.
+- **@ecutruin** (AI-art labelling argument), **@hellafaith** (tutorial poll), **@phoenixdsteele** (first itch sale): nothing specific to add, or an argument.
+
+### §E: not due. The next check is **Sat 2026-11-07**. Carries unchanged from 11-02.
