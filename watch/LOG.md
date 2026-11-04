@@ -6,6 +6,67 @@ in `../ACTIONS.md` and handed to a named owner.
 
 ---
 
+## 2026-11-03 — run 39 (in slot, ~12:53Z)
+
+**VERDICT: BLOCKED ON A HUMAN DECISION; THE LISTING IS HEALTHY AND BOTH OF YESTERDAY'S ROWS ARE DONE.** v0.2.6 passes every listing check, all four doers are inside their windows, and T-026 and T-027 are closed on this routine's own read. The first user replied and may have found a defect (T-028). **T-023 (stop/continue) is unanswered at 25 days**; its 11-14 default STOP is 11 days out.
+
+### Action ledger
+
+**Opened: 1 (T-028). Closed: 2 (T-026, T-027).** A-032 is still Open, so the 7-day and 14-day rungs stay suspended for every HUMAN row.
+
+- **Closed T-026** (`texel-support`): a cookie-less GET of the page shows the comment 17784093 with reply 17786961 under it, and `START-HERE.html` on the page. `SUPPORT.md` logs it and the tally carries it.
+- **Closed T-027** (`texel-marketing`): the same read shows `Getting started` ×1, `press N` ×1, `Add 1m Cube` ×2, `Install from Disk` ×2, `Stuck on a step` ×1. Page `Updated` 02 Nov 23:26 UTC. Too new to say whether it converts.
+
+| id | age | owner |
+|---|---|---|
+| **T-028** | 0 d | `texel-support`: reproduce and answer the follow-up (post 17788568). Not late; next slot 11-03T14:24Z. |
+| T-023 | 25 d | **HUMAN**: the stop/continue call. Default STOP 2026-11-14, 11 days out. |
+| T-010 | 49 d | **HUMAN** (suspended) |
+| T-011 | 49 d | **HUMAN** (suspended) |
+| T-015 | 45 d | **HUMAN** (suspended) |
+| T-016 | 45 d | **HUMAN** (suspended; part of T-023's CONTINUE option) |
+
+### ALERTS
+
+None are late. Scheduler read ~12:53Z: support `lastRunAt` 11-02T14:25Z (next 11-03T14:24Z), marketing 11-02T23:25Z (next 11-03T21:20Z), release 10-28T16:03Z (weekly, next 11-04T16:13Z), funnel 10-30T15:07Z (weekly, next 11-06).
+
+**New finding (opened as T-028, not an alert): the commenter may have hit a defect.** `Isaque.OS` replied about 17:50Z on 11-02, after support's run. They found the docs and worked out that a canvas has to be created first, *"but still, I have to click the "Texel paint" button every time I want to do a single brushstroke"*. They also said the features are *"really cool and very generous, especially with a free demo"*. If one press gives one stroke, painting is unusable and that alone would explain demo users who do not convert. It is n=1, and it may be the paint mode exiting on some input. The owner is `texel-support` (reproduce in the Lite 0.2.6 zip, then answer). A confirmed defect goes to `texel-release` through `ROADMAP.md`. v0.2.7 is due tomorrow, so if this reproduces, it outranks the gradient.
+
+### Artifacts
+
+- **support:** SUPPORT.md has the 11-02 (day 55) entries: the comment, the reply, the tally row. The follow-up came in after that run.
+- **marketing:** POSTED.md *Run 2026-11-02* (Mon, fired late ~23:00-23:45Z): T-027 done, **no post** because no asset cleared the bar (reasons logged; QUEUE.md 23:45Z says the same), and two replies. A documented skip, not a missing artifact.
+- **release:** v0.2.6 shipped 10-28; next slot is Wed 11-04.
+- **funnel:** *Measuring week, 2026-10-30*; next run 11-06.
+
+### Listing (measured 11-03 ~12:53Z)
+
+| Check | Result |
+|---|---|
+| Logged-out page | HTTP 200, 42,147 B (was 36,258; the section and two posts). `Updated` 02 Nov 23:26 UTC |
+| Download | Paid `texel-0.2.6.zip` **213 kB** = local `dist/texel-0.2.6.zip` 218,127 B (newest). Demo `texel-lite-demo-0.2.6.zip` 200 kB. |
+| Price | `game[min_price]` $9.95; public page $9.95 ×3. Correct until v0.4.0. |
+| Status | `game[published]=published` |
+| AI disclosure | `ai_generated=yes`, graphics and code checked, audio and text not |
+
+**All pass.** The edit and summary pages were read headless through `lib.mjs` `launch()` (no `profile.lock` before or after) with a throwaway read-only script, since deleted. Nothing was clicked, saved, downloaded or answered.
+
+### Numbers
+
+`| 2026-11-03 (12:53Z) | 178 | 10 | 0 | $0.00 | 0.00% |`
+
+- **+3 views in ~1.0 d.** **7-day trend:** +10 over ~5.87 d (≈1.7/day) against +17 over ~6.6 d (≈2.6/day). **Down**; n=10, direction only.
+- Downloads 10, unchanged; every paid file 0. Comments 1 → 3 (our reply and the follow-up). 106 7d impressions, 2.83% CTR.
+- **Conversion: 0/178.** The 200-view gate is 22 views out; at 1.7/day it lands **~11-16**, two days after T-023's default STOP. That means the STOP default will be applied before the listing-problem test can run.
+
+### Roadmap
+
+- **v0.2.7 "Gradient": Wed 2026-11-04, tomorrow**, held on T-023. No release code logged, which is expected for a weekly owner whose only run before the date is 11-04 itself. T-028 may displace it if it reproduces.
+- **v0.3.0 "Tileset": Wed 2026-11-11**, 8 days out, held on T-023.
+- **v0.4.0 "Handoff": 2026-11-14**, the $14.95 price step on the default-STOP day. Left to T-023.
+
+---
+
 ## 2026-11-02 — run 38 (in slot, ~12:55Z)
 
 **VERDICT: BLOCKED ON A HUMAN DECISION, AND THE FIRST REAL USER JUST SAID THEY CANNOT FIND HOW TO START.** v0.2.6 passes every listing check and all four doers are inside their windows. The page's first-ever comment is a demo user asking for a tutorial. **T-023 (stop/continue) is unanswered at 24 days**; its 11-14 default STOP is 12 days out.
