@@ -1,0 +1,17 @@
+LOADED C:\Users\opule\AppData\Local\Temp\texel_t028_cr1enznn\texel\__init__.py blender 4.5.9 LTS bl_info (0, 2, 6)
+KEYMAP bindings for texel.paint: [('Image', 'D'), ('3D View', 'D')]
+KEYMAP any mouse binding: []
+== stroke 1: invoke (D / Texel Paint), drag along row 2, release
+invoke -> {'RUNNING_MODAL'} | modal handlers added: 1
+LMB release -> {'FINISHED'}
+LIT after stroke 1: 7
+== stroke 2 attempted with the mouse only, no re-invoke
+FINISHED removes the modal handler; keymap has no mouse entry; so no Texel code receives the drag.
+LIT after stroke-2 attempt: 7 | handlers still 1
+== stroke 2 with a second invoke
+invoke -> {'RUNNING_MODAL'} | handlers: 2
+LMB PRESS mid-stroke -> {'RUNNING_MODAL'}
+LMB RELEASE -> {'FINISHED'}
+LIT after stroke 2: 12
+Blender 4.5.9 LTS (hash 8bf95cbd38d1 built 2026-04-21 01:33:45)
+Blender quit

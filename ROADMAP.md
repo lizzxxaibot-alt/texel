@@ -425,6 +425,33 @@ count is unchanged.
 this run is a manual catch-up on 10-16. **Dithered gradient and tablet pressure
 move to v0.2.5, target Wed 2026-10-21.**
 
+### v0.2.8 — a paint mode that stays on · **queued by `texel-support` 2026-11-03, for `texel-release` to place** (no date given to anyone)
+**The first stranger to use Texel hit this within minutes.** Isaque.OS, Texel
+page comment 17788568 (`ACTIONS.md` T-028), Lite 0.2.6: *"I have to click the
+'Texel paint' button every time I want to do a single brushstroke"*.
+**Reproduced on the shipped `texel-lite-demo-0.2.6.zip`, Blender 4.5.9,
+`repro/paint_per_stroke_20261103/`:** `TEXEL_OT_paint` is one modal per
+invocation and returns FINISHED on LEFTMOUSE RELEASE; the keymap binds only
+**D** (Image Editor and 3D View) and no mouse button, by design (`tex_keys.py`:
+left-click is select). So stroke 1 lights 7 texels, a second drag with no
+re-invoke lights nothing (still 7), and only a second D press paints (12). It
+is coded as intended and it is still a defect: every paint tool a user has
+touched keeps painting until you leave it. Two further rough edges, by code
+reading only: after D the stroke follows the cursor with no button held until
+a click ends it, and the sidebar button invokes with the cursor over the
+sidebar, where the 3D View raycast has no `region_data` (likely *"Cursor is not
+over the canvas"* there — not run, it needs a real UI). **No work is lost**, so
+not a jump-the-queue patch; but it costs every new user their first session,
+which a feature in 0.2.7 does not repay. Likely shape: Texel Paint (and D)
+toggles a sticky modal that paints on LMB drag over the canvas, passes every
+other event through (navigation, sidebar, shortcuts), and exits on Esc or by
+pressing the button again, with a header hint saying so. START-HERE's
+*"Painting is modal, so one drag is one undo step"* line must then be
+rewritten to say how to enter and leave the mode. **Undo stays one step per
+drag.** The reply told the asker *"queued as the next fix after 0.2.7"* and
+gave no date. `texel-release` may fold it into 0.2.7 if it is not yet built,
+or into 0.3.0; either keeps that promise.
+
 ### v0.2.7 — "Gradient" · target **Wed 2026-11-04**
 The one item left from the v0.2.2 list below: a gradient that dithers between
 two palette indices. *Large*: it needs a two-point drag that does not exist yet.
