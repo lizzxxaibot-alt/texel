@@ -6,6 +6,66 @@ in `../ACTIONS.md` and handed to a named owner.
 
 ---
 
+## 2026-11-05 — run 40 (in slot, ~12:55Z, after a host outage)
+
+**VERDICT: DEGRADED.** The listing passes every check, but a host outage from about 11-04T04:15Z to the 11-05 ~12:40Z catch-up cost the whole 11-04 Texel cycle. That includes `texel-release`'s Wednesday slot, so v0.2.7 is a day late and the scheduler will not run it again until 11-11. **T-023 (stop/continue) is still unanswered at 27 days**; its 11-14 default STOP is 9 days out.
+
+### Action ledger
+
+**Opened: 1 (T-029). Closed: 1 (T-028).** A-032 is still Open, so the 7-day and 14-day rungs stay suspended for every HUMAN row.
+
+- **Closed T-028** (`texel-support`): this routine's own cookie-less GET shows reply **17797944** under 17788568 (200, 44,475 B). `SUPPORT.md:687` records the reproduction on the Lite 0.2.6 zip with Blender 4.5.9, and `ROADMAP.md:428` has the v0.2.8 paint-mode entry naming `texel-release`.
+- **Opened T-029** (`texel-release`): the missed 11-04 slot. The owner should set a new v0.2.7 date with the reason and decide whether Gradient or the paint-mode fix ships first.
+
+| id | age | owner |
+|---|---|---|
+| **T-029** | 0 d | `texel-release`. Its next scheduled run is 11-11, so the row will be 6 days old before the owner can act unless a human presses Run now. |
+| T-023 | 27 d | **HUMAN**: stop/continue. Default STOP 2026-11-14. |
+| T-010 | 51 d | **HUMAN** (suspended) |
+| T-011 | 51 d | **HUMAN** (suspended) |
+| T-015 | 47 d | **HUMAN** (suspended) |
+| T-016 | 47 d | **HUMAN** (suspended; part of T-023's CONTINUE option) |
+
+### ALERTS
+
+- **`texel-release` missed Wed 11-04** (`lastRunAt` 10-28T16:03Z, `nextRunAt` 11-11T16:13Z). The 11-04 slot passed with no run, so the weekly test is breached. The cause is the host, not the routine, and the outage belongs to A-037 (HUMAN, Pixelkiln ledger). The consequence is T-029.
+- **The host went down again.** `texel-support` (last 11-03T14:24Z), `texel-marketing` (last 11-03T21:21Z), `texel-watch` and `pixelkiln-backup` (last 11-04T04:14Z) all lost 11-04. Support and marketing are inside 48 h and are due in slot today (14:24Z and 21:20Z), so neither counts as late. `texel-funnel` is weekly and due 11-06.
+
+### Artifacts
+
+- **support:** `SUPPORT.md` 11-03 (day 56): T-028 reproduced and answered, and the tally reordered. No 11-04 entry because of the outage.
+- **marketing:** commit 4230c4f records the Tuesday 11-03 run: no Texel post on a packs day, two replies. No 11-04 run because of the outage.
+- **release:** nothing since v0.2.6 on 10-28. The 11-04 slot was lost (T-029).
+- **funnel:** next run 11-06. Last week's artifact was accepted in run 39.
+
+### Listing (measured 11-05 ~12:55Z)
+
+| Check | Result |
+|---|---|
+| Logged-out page | HTTP 200, 44,475 B, 4 posts. `Updated 2 days ago` |
+| Download | Paid `texel-0.2.6.zip` **213 kB** = local `dist/texel-0.2.6.zip` 218,127 B (newest). Demo `texel-lite-demo-0.2.6.zip` 200 kB |
+| Price | `game[min_price]` $9.95; public page $9.95 ×3. Correct until v0.4.0 |
+| Status | `game[published]=published` |
+| AI disclosure | `ai_generated=yes`, `ai_graphics` and `ai_code` checked |
+
+**All pass.** The checks were read headless through `lib.mjs` `launch()` (`profile.lock` absent before and after) with a throwaway read-only script, since deleted. Nothing was clicked or saved.
+
+### Numbers
+
+`| 2026-11-05 (12:55Z) | 181 | 10 | 0 | $0.00 | 0.00% |`
+
+- **+3 views in ~2.0 d.** **7-day trend:** +13 over ~6.87 d (≈1.9/day), against +17 over ~6.6 d (≈2.6/day) the week before. **Down**; n=13, so this shows direction only.
+- Downloads are still 10 and every paid file is still 0. Impressions were 112 over 7 days (106 at the last reading).
+- **Conversion: 0/181.** The 200-view gate is 19 views away, roughly 11-15 at the current rate. That is the day after T-023's default STOP, unchanged from run 39.
+
+### Roadmap
+
+- **v0.2.7 "Gradient": target Wed 11-04, now 1 day late.** No release run happened, so no work was logged, and the next scheduled slot is 11-11 (7 days late). Moving the date is `texel-release`'s call (T-029). `texel-support` recommends that the v0.2.8 paint-mode fix go ahead of it.
+- **v0.3.0 "Tileset": Wed 11-11**, 6 days out. It now collides with the late v0.2.7 for the same slot.
+- **v0.4.0 "Handoff": 11-14**, the $14.95 price step, which falls on the default-STOP day. Left to T-023.
+
+---
+
 ## 2026-11-03 — run 39 (in slot, ~12:53Z)
 
 **VERDICT: BLOCKED ON A HUMAN DECISION; THE LISTING IS HEALTHY AND BOTH OF YESTERDAY'S ROWS ARE DONE.** v0.2.6 passes every listing check, all four doers are inside their windows, and T-026 and T-027 are closed on this routine's own read. The first user replied and may have found a defect (T-028). **T-023 (stop/continue) is unanswered at 25 days**; its 11-14 default STOP is 11 days out.
