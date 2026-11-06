@@ -96,11 +96,46 @@ def commit_stroke(doc, s, pts, idx, pressure=1.0):
     doc.flush()
 
 
+# The running paint mode, if any: {"token": object, "area": area pointer}.
+# One per Blender session. A second Texel Paint (button or D) in the same
+# editor leaves the mode; in another editor it moves the mode there.
+_SESSION: dict = {}
+
+HINT = "Texel Paint: left-drag paints  |  Esc, D or the Texel Paint button to stop"
+
+
+def paint_mode_on(area=None) -> bool:
+    """True while Texel Paint mode runs (in `area`, when one is given)."""
+    if not _SESSION:
+        return False
+    return area is None or _SESSION.get("area") == area.as_pointer()
+
+
+def over_canvas(area, region, mx, my) -> bool:
+    """Is window point (mx, my) on the drawing region, and not on a panel?
+
+    With region overlap the sidebar and toolbar sit ON TOP of the main region,
+    so being inside the main region's box is not enough: a click on a sidebar
+    button would otherwise paint the texel underneath it."""
+    if not (region.x <= mx < region.x + region.width
+            and region.y <= my < region.y + region.height):
+        return False
+    for r in area.regions:
+        if r.type == "WINDOW" or r.width <= 1 or r.height <= 1:
+            continue
+        if r.x <= mx < r.x + r.width and r.y <= my < r.y + r.height:
+            return False
+    return True
+
+
 class TEXEL_OT_paint(Operator):
     bl_idname = "texel.paint"
     bl_label = "Texel Paint"
-    bl_description = "Paint pixel art onto the active canvas"
-    bl_options = {"REGISTER", "UNDO"}
+    bl_description = ("Enter Texel Paint mode: left-drag paints on the canvas until "
+                      "you press Esc, D, or this button again")
+    # No UNDO here on purpose: the mode pushes one undo step per drag itself.
+    # With UNDO the whole session would also collapse into one step on exit.
+    bl_options = {"REGISTER"}
 
     @classmethod
     def poll(cls, context):
@@ -133,81 +168,174 @@ class TEXEL_OT_paint(Operator):
         idx = 0 if s.tool == "ERASER" else self.colour_index
         commit_stroke(self.doc, s, pts, idx, pressure)
 
-    # -- modal -------------------------------------------------------------
-    def invoke(self, context, event):
+    def _texel(self, context, event):
+        """Texel under the cursor on this mode's canvas region, or None.
+
+        A mode entered from the sidebar button runs with the SIDEBAR as its
+        context region, where a 3D raycast has no view to cast from, so the
+        lookup is pinned to the editor's main region explicitly."""
+        area, region = self._area, self._region
+        if not over_canvas(area, region, event.mouse_x, event.mouse_y):
+            return None
+        with context.temp_override(area=area, region=region):
+            return tex_pick.texel_under_mouse(context, event, self.doc.canvas.w,
+                                              self.doc.canvas.h)
+
+    def _bind(self, context):
+        """The Doc for the canvas this editor shows now, or None with a report.
+
+        Looked up at every press, not once: the user may switch images while
+        the mode is on."""
         img = self._image(context)
         if img is None:
             self.report({"WARNING"}, "No canvas: open an image, or give the object an image texture")
-            return {"CANCELLED"}
-        self.doc = tex_doc.get(img)
-        if self.doc is None:
+            return None
+        doc = tex_doc.get(img)
+        if doc is None:
             self.report({"ERROR"}, "This texture has more than 255 colours, so it cannot be opened as an indexed canvas. Reduce it to 255 or fewer first")
-            return {"CANCELLED"}
-        if self.doc.canvas.w != img.size[0] or self.doc.canvas.h != img.size[1]:
-            self.doc = tex_doc.Doc(img)
-            tex_doc._DOCS[img.name] = self.doc
+            return None
+        if doc.canvas.w != img.size[0] or doc.canvas.h != img.size[1]:
+            doc = tex_doc.Doc(img)
+            tex_doc._DOCS[img.name] = doc
+        return doc
 
+    def _push(self):
+        """One undo step per finished drag, as when one drag was one run."""
+        try:
+            bpy.ops.ed.undo_push(message="Texel Paint")
+        except RuntimeError:
+            pass                     # no undo stack (background): nothing to push
+
+    def _exit(self, context, owned=True):
+        if self.drag:
+            self._end_drag(context, cancel=False)
+        if owned:
+            _SESSION.clear()
+        try:
+            self._area.header_text_set(None)
+        except ReferenceError:
+            pass                     # the editor was closed under us
+        for area in getattr(context.screen, "areas", ()):
+            area.tag_redraw()        # the panel button stops reading "Stop"
+
+    # -- modal -------------------------------------------------------------
+    def invoke(self, context, event):
+        area = context.area
+        if paint_mode_on(area):
+            _SESSION.clear()         # the running mode sees this and leaves
+            for a in context.screen.areas:
+                a.tag_redraw()
+            return {"CANCELLED"}
+        if area is None or area.type not in {"IMAGE_EDITOR", "VIEW_3D"}:
+            self.report({"WARNING"}, "Texel Paint runs in the Image Editor or the 3D Viewport")
+            return {"CANCELLED"}
+        region = next((r for r in area.regions if r.type == "WINDOW"), None)
+        if region is None:
+            return {"CANCELLED"}
+        self.doc = self._bind(context)
+        if self.doc is None:
+            return {"CANCELLED"}
+        self._area, self._region, self.drag = area, region, False
+        self.token = object()
+        _SESSION.clear()             # a mode running in another editor moves here
+        _SESSION.update(token=self.token, area=area.as_pointer())
+        area.header_text_set(HINT)
+        for a in context.screen.areas:
+            a.tag_redraw()
+        context.window_manager.modal_handler_add(self)
+        return {"RUNNING_MODAL"}
+
+    def cancel(self, context):
+        """Blender is removing the handler (a file load, a closed window)."""
+        if _SESSION.get("token") is self.token:
+            _SESSION.clear()
+
+    def _begin(self, context, event, start):
+        """A left press on the canvas: one stroke, or a single-shot pick/fill."""
         s = context.scene.texel
-        w, h = self.doc.canvas.w, self.doc.canvas.h
-        start = tex_pick.texel_under_mouse(context, event, w, h)
-        if start is None:
-            self.report({"INFO"}, "Cursor is not over the canvas")
-            return {"CANCELLED"}
-
-        # picker and fill are single-shot; no modal needed
+        w = self.doc.canvas.w
         if s.tool == "PICK":
-            flat = self.doc.canvas.flatten()
-            i = flat[start[1] * w + start[0]]
+            i = self.doc.canvas.flatten()[start[1] * w + start[0]]
             if i:
                 r, g, b, a = self.doc.canvas.palette[i]
                 s.colour = (r / 255, g / 255, b / 255, a / 255)
-            return {"FINISHED"}
-
-        self.colour_index = self.doc.canvas.add_colour(rgba_bytes(s.colour))
-        if s.brush_shape == "STAMP" and s.tool not in {"ERASER", "FILL"}:
-            # join the stamp's colours now, where a full palette can be
-            # reported, rather than inside the modal handler mid-stroke
-            try:
+            return
+        try:
+            self.colour_index = self.doc.canvas.add_colour(rgba_bytes(s.colour))
+            if s.brush_shape == "STAMP" and s.tool not in {"ERASER", "FILL"}:
+                # join the stamp's colours now, where a full palette can be
+                # reported, rather than mid-stroke
                 for _, _, rgba in saved_stamp(s) or ():
                     self.doc.canvas.add_colour(rgba)
-            except ValueError:
-                self.report({"ERROR"}, "The palette is full, so this stamp's colours cannot be added to it")
-                return {"CANCELLED"}
-
+        except ValueError:
+            self.report({"ERROR"}, "The palette is full, so this colour cannot be added to it")
+            return
         if s.tool == "FILL":
+            h = self.doc.canvas.h
             flat = self.doc.canvas.flatten()
             pal = self.doc.canvas.palette
             get = lambda x, y: pal[flat[y * w + x]]
-            pts = R.flood_fill(get, w, h, start[0], start[1],
-                               rgba_bytes(s.colour), s.tolerance, s.contiguous)
-            self._commit(context, pts)
-            return {"FINISHED"}
-
-        self.start = start
+            self._commit(context, R.flood_fill(get, w, h, start[0], start[1],
+                                               rgba_bytes(s.colour), s.tolerance,
+                                               s.contiguous))
+            self._push()
+            return
+        self.start, self.drag = start, True
         self.stroke = R.PerfectStroke(start, s.pixel_perfect)
-        self.preview_undo = None
         if s.tool in {"PENCIL", "ERASER"}:
             self._commit(context, [start], event.pressure)
         else:
             # shapes preview against a snapshot we restore each mouse-move
             self.snapshot = bytearray(self.doc.canvas.layers[self.doc.canvas.active].px)
-        context.window_manager.modal_handler_add(self)
-        return {"RUNNING_MODAL"}
+
+    def _end_drag(self, context, cancel):
+        s = context.scene.texel
+        if s.tool in {"PENCIL", "ERASER"}:
+            self._commit(context, self.stroke.end())   # never end a texel short
+        elif cancel:
+            self.doc.canvas.layers[self.doc.canvas.active].px = self.snapshot
+        self.doc.flush()
+        self.drag = False
+        if not cancel:
+            self._push()
 
     def modal(self, context, event):
+        if _SESSION.get("token") is not self.token:
+            self._exit(context, owned=False)    # turned off, or moved elsewhere
+            return {"FINISHED"}
+        try:
+            self._area.type
+        except ReferenceError:
+            self._exit(context)
+            return {"FINISHED"}
         s = context.scene.texel
-        w, h = self.doc.canvas.w, self.doc.canvas.h
 
-        if event.type in {"RIGHTMOUSE", "ESC"}:
-            if s.tool not in {"PENCIL", "ERASER"}:
-                self.doc.canvas.layers[self.doc.canvas.active].px = self.snapshot
-            else:
-                self._commit(context, self.stroke.end())   # never end a texel short
-            self.doc.flush()
-            return {"CANCELLED"}
+        if event.type == "ESC" and event.value == "PRESS":
+            if self.drag and s.tool not in {"PENCIL", "ERASER"}:
+                self._end_drag(context, cancel=True)   # Esc mid-shape drops it
+            self._exit(context)
+            return {"FINISHED"}
+
+        if not self.drag:
+            if event.type == "LEFTMOUSE" and event.value == "PRESS":
+                doc = self._bind(context)
+                if doc is None:
+                    return {"PASS_THROUGH"}
+                self.doc = doc
+                start = self._texel(context, event)
+                if start is None:
+                    return {"PASS_THROUGH"}            # a click off the canvas
+                self._begin(context, event, start)
+                return {"RUNNING_MODAL"}
+            return {"PASS_THROUGH"}       # navigate, use the sidebar, shortcuts
+
+        if event.type == "RIGHTMOUSE" and event.value == "PRESS":
+            # right-click mid-drag drops a shape; a pencil stroke just ends
+            self._end_drag(context, cancel=s.tool not in {"PENCIL", "ERASER"})
+            return {"RUNNING_MODAL"}
 
         if event.type == "MOUSEMOVE":
-            cur = tex_pick.texel_under_mouse(context, event, w, h)
+            cur = self._texel(context, event)
             if cur is None:
                 return {"RUNNING_MODAL"}
             if s.tool in {"PENCIL", "ERASER"}:
@@ -227,10 +355,7 @@ class TEXEL_OT_paint(Operator):
             return {"RUNNING_MODAL"}
 
         if event.type == "LEFTMOUSE" and event.value == "RELEASE":
-            if s.tool in {"PENCIL", "ERASER"}:
-                self._commit(context, self.stroke.end())   # the tail is final now
-            self.doc.flush()
-            return {"FINISHED"}
+            self._end_drag(context, cancel=False)      # the tail is final now
         return {"RUNNING_MODAL"}
 
     def _shape(self, s, a, b):

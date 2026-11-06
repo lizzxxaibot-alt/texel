@@ -822,3 +822,12 @@ Beats this release earns:
 - **Sun 11-08:** `env_ruins_*` / `env_cavern_*` / `env_shrine_*`. `env_corridor_02` is blocked until 11-22.
 - **Check Tiling stays barred:** the 0.2.6 metric is unchanged.
 - **T-023 (HUMAN stop/continue) is still open.** A STOP voids every row here.
+
+## 2026-11-05 ~13:15Z — `texel-release`: v0.2.7 SHIPPED and verified logged-out (paint mode + hidden-track fix)
+
+- **Live:** `texel-0.2.7.zip` 218 kB and demo `texel-lite-demo-0.2.7.zip` 206 kB on the logged-out page (13:12Z). Devlog 1754687 is live.
+- **Beat 1, next Texel slot (your call): "Texel Paint stays on now."** This is Isaque.OS's fix: switch painting on once, drag as many strokes as you like, and press Esc or D to stop. **A NEW VISUAL IS NEEDED; none exists.** No shot shows the mode. It needs a capture of two strokes with the button reading *Stop Texel Paint* and the header hint showing. Take it fresh from the full build; `test_paintmode_gui.py`'s Image Editor sequence is a ready script for it. Nothing in the current gallery is made false by this release, because the button still exists under the same name.
+- **Beat 2: "Hide Torch and Glow, export the base."** This is @wenvikstudios's case: the eye hides a whole track, and Sheet, JSON and GIF leave it out. Start from `promo/torchlight/` (the 10-30 torch beat). It needs a before/after sheet pair to show the change; `repro/track_export_20261105/verify.py` builds the data. Whether to reply in the 10-30 thread instead of making a new post is `texel-support`'s call.
+- **For `texel-support`:** Isaque.OS was told *"queued as the next fix after 0.2.7"*. It shipped *in* 0.2.7, so a short follow-up under comment 17788568 is owed.
+- **Dates changed:** Gradient 0.2.8 → Wed 11-11, Tileset 0.3 → 11-18, Handoff 0.4 (the price step to $14.95) → 11-25. Any listing text or post that names **11-14** for the price step is now wrong, because the step is tied to v0.4.0. `texel-marketing` owns the listing.
+- **T-023 (HUMAN stop/continue) is still open.** A STOP voids every row here.

@@ -364,6 +364,74 @@ c16.layers[0].visible = False
 check("a hidden static layer is still skipped", c16.content_bounds() == (4, 4, 4, 4),
       c16.content_bounds())
 
+# ---------------------------------------------- a hidden TRACK stays hidden (0.2.7)
+# The eye on a cel used to clear that one cel's flag, which show_frame() set
+# back on the next frame step, and flatten_frame() never read at all - so a
+# hidden Glow still reached the sprite sheet (repro/track_export_20261030/).
+# Hiding is now per track, the way Aseprite treats a layer, and every export
+# path reads it.
+c17 = Canvas(4, 4)
+b17 = c17.add_colour((40, 40, 40, 255))
+g17 = c17.add_colour((250, 200, 0, 255))
+c17.add_frame()
+c17.add_frame()
+c17.add_track("Glow")
+for f in range(2):
+    c17.cel("Main", f).set(f, 0, b17)
+    c17.cel("Glow", f).set(3, 3, g17)
+check("a new track starts shown", not c17.track_hidden("Glow"))
+check("hiding a track reports its cels", c17.set_track_visible("Glow", False) == 2)
+check("the track reads hidden", c17.track_hidden("Glow"))
+check("every cel of a hidden track is off", not any(
+    l.visible for l in c17.layers if l.track == "Glow"))
+for f in range(2):
+    check(f"flatten_frame leaves a hidden track out (frame {f + 1})",
+          g17 not in c17.flatten_frame(f), list(c17.flatten_frame(f)))
+c17.show_frame(1, onion=True)
+check("show_frame does not bring a hidden track back, onion or not",
+      not any(l.visible for l in c17.layers if l.track == "Glow"))
+check("show_frame still shows the other tracks",
+      c17.cel("Main", 1).visible and c17.cel("Main", 0).visible)
+check("the lit composite has no hidden texel", g17 not in c17.flatten())
+check("an unknown track cannot be hidden", c17.set_track_visible("Nope", False) == 0)
+check("and is not reported hidden", not c17.track_hidden("Nope"))
+check("showing it again reports its cels", c17.set_track_visible("Glow", True) == 2)
+check("a shown track is back in flatten_frame", g17 in c17.flatten_frame(0))
+c17.show_frame(0)
+check("show_frame lights a shown track again", c17.cel("Glow", 0).visible)
+c17.set_track_visible("Glow", False)
+check("trim still measures a hidden track, so it cannot crop it away",
+      c17.content_bounds() == (0, 0, 3, 3), c17.content_bounds())
+c17.remove_track("Glow")
+check("removing a hidden track forgets it", not c17.track_hidden("Glow")
+      and "Glow" not in c17.hidden_tracks)
+
+# the regression case @wenvikstudios proposed, on the core: two frames, export
+# Base alone; add Torch and Glow, hide them, export again; byte-identical.
+def _sheet_bytes(c):
+    return b"".join(bytes(c.flatten_frame(f)) for f in range(c.frame_count()))
+c18 = Canvas(6, 6)
+k18 = c18.add_colour((90, 60, 30, 255))
+c18.add_frame(); c18.add_frame()
+c18.tracks[0] = "Base"
+for l in c18.layers:
+    l.track = "Base"
+for f in range(2):
+    c18.cel("Base", f).set(1 + f, 2, k18)
+alone = _sheet_bytes(c18)
+t18 = c18.add_colour((255, 140, 0, 255))
+for name in ("Torch", "Glow"):
+    c18.add_track(name)
+    for f in range(2):
+        c18.cel(name, f).set(1 + f, 2, t18)      # on top of the base texel
+        c18.cel(name, f).set(5, 5 - f, t18)
+check("the effect tracks change the frames while shown", _sheet_bytes(c18) != alone)
+c18.set_track_visible("Torch", False)
+c18.set_track_visible("Glow", False)
+c18.show_frame(1, onion=True)                    # a frame step, as the UI does
+check("Base alone == Base with Torch and Glow hidden, byte for byte",
+      _sheet_bytes(c18) == alone)
+
 print()
 if fails: print(f"{len(fails)} FAILED: {fails}"); sys.exit(1)
 print("CANVAS CORE: ALL PASS")

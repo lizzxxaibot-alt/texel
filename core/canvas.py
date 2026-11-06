@@ -91,6 +91,7 @@ class Canvas:
         self.selection = None          # core.select.Selection, or None
         self.frame_holds: list[int] = []   # per-frame hold, in timeline frames
         self.tracks: list[str] = []        # named rows, bottom-up
+        self.hidden_tracks: set[str] = set()   # hidden on every frame and export
         self.groups: dict[str, bool] = {}   # group name -> expanded/visible
 
     # ---- palette
@@ -169,6 +170,28 @@ class Canvas:
                 n += 1
         self.groups[name] = visible
         return n
+
+    def set_track_visible(self, name: str, visible: bool) -> int:
+        """Show or hide a whole track, on every frame. Returns its cel count.
+
+        Hiding is per track, the way Aseprite treats a layer, because a cel's
+        own flag is what show_frame() rewrites on every frame step. Hidden
+        tracks stay out of show_frame() and flatten_frame(), so the canvas,
+        the sprite sheet, the JSON and the GIF all agree.
+        """
+        if name not in self.tracks:
+            return 0
+        if visible:
+            self.hidden_tracks.discard(name)
+        else:
+            self.hidden_tracks.add(name)
+        cels = [l for l in self.layers if l.track == name]
+        for l in cels:
+            l.visible = visible
+        return len(cels)
+
+    def track_hidden(self, name: str) -> bool:
+        return name in self.hidden_tracks
 
     def merge_indices(self, indices: list[int]) -> bool:
         """Merge several layers into the lowest of them, preserving stack order."""
@@ -286,6 +309,7 @@ class Canvas:
         if name not in self.tracks:
             return 0
         self.tracks.remove(name)
+        self.hidden_tracks.discard(name)
         keep = [l for l in self.layers if l.track != name]
         n = len(self.layers) - len(keep)
         if keep:                              # never leave a canvas with no layers
@@ -325,7 +349,9 @@ class Canvas:
         for l in self.layers:
             if l.frame is None:
                 continue                       # static layers keep their own state
-            if l.frame == frame:
+            if l.track in self.hidden_tracks:
+                l.visible = False              # hidden on every frame, ghosts too
+            elif l.frame == frame:
                 l.visible, l.opacity = True, 1.0
             elif (onion and abs(l.frame - frame) == 1
                   and (track is None or l.track == track)):
@@ -334,10 +360,13 @@ class Canvas:
                 l.visible = False
 
     def flatten_frame(self, frame: int) -> bytearray:
-        """Composite one frame's cels, ignoring current visibility flags."""
+        """Composite one frame's cels, ignoring per-cel visibility flags.
+
+        Per-cel flags are display state (show_frame sets them), so they are
+        ignored; a hidden TRACK is the user's choice and is left out."""
         out = bytearray(self.w * self.h)
         for l in self.cels_at(frame):
-            if l.opacity <= 0:
+            if l.opacity <= 0 or l.track in self.hidden_tracks:
                 continue
             for n, v in enumerate(l.px):
                 if v:

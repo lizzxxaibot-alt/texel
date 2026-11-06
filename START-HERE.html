@@ -65,7 +65,7 @@
 <header>
   <h1>Texel<span>.</span></h1>
   <div class="sub">Pixel art painted on the model, in Blender — and animated.</div>
-  <div class="ver">v0.2.6 &nbsp;·&nbsp; Pixelkiln</div>
+  <div class="ver">v0.2.7 &nbsp;·&nbsp; Pixelkiln</div>
 </header>
 
 <p><strong>Thank you for buying this.</strong> It is a small tool from a small
@@ -129,8 +129,12 @@ changelog and the roadmap, is at
     stay square instead of being blurred.
     <br><span style="color:var(--dim)">Bringing your own model? Unwrap it, then
     use <strong>Pick Texture</strong> to point Texel at its image.</span></li>
-  <li>Pick a colour and a tool (Pencil is fine) and draw on the cube in the
-    viewport. Strokes land where you point, resolved through the UVs.</li>
+  <li>Pick a colour and a tool (Pencil is fine), press <strong>Texel
+    Paint</strong> (or <kbd>D</kbd> with the mouse over the viewport), and drag on
+    the cube. Paint mode stays on until you press <kbd>Esc</kbd>, <kbd>D</kbd> or
+    the button again, so you can drag as many strokes as you like and still
+    orbit and use the sidebar in between. Strokes land where you point, resolved
+    through the UVs.</li>
   <li>Open an Image Editor beside it to see the flat canvas update as you paint.</li>
 </ol>
 
@@ -191,15 +195,15 @@ changelog and the roadmap, is at
     <td>How much does one undo take back?</td>
     <td>Undo is per <em>action</em>, through Blender's own stack — one
       <kbd>Ctrl</kbd>+<kbd>Z</kbd> takes back a whole fill — which is one
-      action, so that is right. Painting is modal, so one drag is one undo
-      step.</td>
+      action, so that is right. Paint mode stays on across strokes, but each
+      drag is still its own undo step.</td>
   </tr>
   <tr>
     <td>Where are the keyboard shortcuts?</td>
     <td>There are: <kbd>B</kbd> pencil, <kbd>E</kbd> eraser, <kbd>L</kbd> line,
       <kbd>U</kbd> rect, <kbd>C</kbd> ellipse, <kbd>F</kbd> fill, <kbd>I</kbd>
-      picker, <kbd>M</kbd> mirror, <kbd>D</kbd> paint in the Image Editor, and
-      <kbd>D</kbd> to paint in the 3D viewport. Rebind any of them in
+      picker, <kbd>M</kbd> mirror, and <kbd>D</kbd> to turn paint mode on or
+      off, in the Image Editor and the 3D viewport alike. Rebind any of them in
       <strong>Preferences &rarr; Keymap</strong>, search &ldquo;texel&rdquo;.</td>
   </tr>
 </table>
@@ -267,18 +271,24 @@ no pro tier.</p>
       <td><strong>28 Oct 2026, a week late.</strong> Tablet pressure scales the
         Pencil and Eraser from 1 texel up to Size. Off by default</td>
       <td>done</td></tr>
-  <tr><td><strong>v0.2.7</strong> Gradient</td>
-      <td>A gradient that dithers between two palette colours, moved from
-        28 Oct</td>
-      <td>4 Nov 2026</td></tr>
+  <tr><td><strong>v0.2.7</strong> Paint mode</td>
+      <td><strong>5 Nov 2026, a day late.</strong> Texel Paint stays on until
+        you leave it, so every drag paints, and the sidebar button works from
+        the sidebar. A hidden track now stays hidden on every frame and is left
+        out of the sprite sheet, JSON and GIF. Both were asked for by users</td>
+      <td>done</td></tr>
+  <tr><td><strong>v0.2.8</strong> Gradient</td>
+      <td>A gradient that dithers between two palette colours. Moved from
+        4 Nov so the two fixes above could go first</td>
+      <td>11 Nov 2026</td></tr>
   <tr><td><strong>v0.3</strong> Tileset</td>
       <td>Tileset slicing, a tile palette to stamp from, per-tileset seam
         checking, edge-wrap painting, autotile generator</td>
-      <td>11 Nov 2026</td></tr>
+      <td>18 Nov 2026</td></tr>
   <tr><td><strong>v0.4</strong> Handoff</td>
       <td>One-click Godot, Unity and Aseprite export; animation tags; batch
         export</td>
-      <td>14 Nov 2026</td></tr>
+      <td>25 Nov 2026</td></tr>
   <tr><td><strong>v0.5</strong> Lit</td>
       <td>Normal, emission and AO maps generated from the indexed art;
         per-index material slots</td>
@@ -328,7 +338,7 @@ asked for the difference.</strong></p>
 
 
 <footer>
-  <p><strong>Texel</strong> by Pixelkiln · v0.2.6 ·
+  <p><strong>Texel</strong> by Pixelkiln · v0.2.7 ·
      <a href="https://mintworks.cc/texel">mintworks.cc/texel</a></p>
   <p style="margin-top:10px">Texel was built with AI assistance; every feature
      described here was tested in Blender 4.5.9 and the test suite ships in the

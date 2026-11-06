@@ -8,9 +8,12 @@ for BL in "$TOOLS"/blender-*/blender.exe; do
   [ -x "$BL" ] || continue
   VER=$("$BL" --version 2>/dev/null | head -1 | sed 's/Blender //;s/ .*//')
   echo "=== Blender $VER ==="
-  for t in test_panels test_keys test_workspace test_e2e test_lite; do
+  for t in test_panels test_keys test_workspace test_e2e test_lite test_paintmode_gui; do
     printf "  %-16s " "$t"
-    out=$("$BL" --factory-startup --python "$t.py" 2>&1)
+    # only the paint-mode suite drives real input; the flag blocks the mouse
+    # for everyone else, so it is not passed to them
+    flag=""; [ "$t" = test_paintmode_gui ] && flag="--enable-event-simulate"
+    out=$("$BL" --factory-startup $flag --python "$t.py" 2>&1)
     if echo "$out" | grep -qE "ALL PASS"; then echo "pass"
     else
       echo "FAIL"

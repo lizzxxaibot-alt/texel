@@ -53,6 +53,14 @@ GUI = ["test_panels", "test_keys", "test_workspace", "test_e2e", "test_lite"]
 PURE = {"test_raster", "test_canvas", "test_palette", "test_select",
         "test_edges", "test_report"}
 
+# Suites the Store build CANNOT run, each with the reason. Named here and
+# printed on every run, so the gap is a stated limit and not a silent skip.
+NOT_ON_STORE = {
+    "test_paintmode_gui": "needs --enable-event-simulate, a command-line flag, "
+                          "and the Store build cannot be launched with arguments. "
+                          "run_gui_versions.sh runs it on 4.2, 4.5 and 5.2.",
+}
+
 
 def check_no_suite_left_behind() -> None:
     """Every test_*.py on disk must be in a list above, or in PURE.
@@ -64,7 +72,7 @@ def check_no_suite_left_behind() -> None:
     Store build - the one install path no other script can reach - was not
     running it. A suite missing from a list looks exactly like a suite passing.
     """
-    known = set(HEADLESS) | set(GUI) | PURE
+    known = set(HEADLESS) | set(GUI) | PURE | set(NOT_ON_STORE)
     stale = sorted(f[:-3] for f in os.listdir(HERE)
                    if f.startswith("test_") and f.endswith(".py")
                    and f[:-3] not in known)
@@ -189,6 +197,8 @@ def main():
         fh.write(src)
     print(f"runner  -> {RUNNER}")
     print("target  -> Microsoft Store Blender 5.2.1 (launched via the app alias)")
+    for name, why in NOT_ON_STORE.items():
+        print(f"NOT RUN -> {name}: {why}")
     print()
 
     results = []

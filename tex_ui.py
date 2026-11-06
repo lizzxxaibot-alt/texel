@@ -1,8 +1,15 @@
 """Panels. Same layout in both editors, drawn from one function."""
 import bpy
 from bpy.types import Panel
-from . import tex_doc, tex_edition
+from . import tex_doc, tex_edition, tex_paint
 from .core import report
+
+
+def _paint_button(layout, context):
+    """Texel Paint is a mode now (0.2.7), so the button says which state it is in."""
+    on = tex_paint.paint_mode_on(context.area)
+    layout.operator("texel.paint", icon="BRUSH_DATA", depress=on,
+                    text="Stop Texel Paint" if on else "Texel Paint")
 
 
 def _draw_status(layout, text):
@@ -94,7 +101,7 @@ class TEXEL_PT_tools_2d(_Base, Panel):
             self.layout.label(text="No image open", icon="INFO")
             return
         _draw_tools(self.layout, s)
-        self.layout.operator("texel.paint", icon="BRUSH_DATA")
+        _paint_button(self.layout, context)
 
 
 class TEXEL_PT_sprite(_Base, Panel):
@@ -142,6 +149,7 @@ class TEXEL_PT_sprite(_Base, Panel):
 
             for track in reversed(c.tracks):          # top track drawn first
                 name, cells, tail = grid_row()
+                name.active = not c.track_hidden(track)   # greyed when hidden
                 name.label(text=track[:8])
                 for f in range(n):
                     cel = c.cel(track, f)
@@ -189,7 +197,7 @@ class TEXEL_PT_tools_3d(_Base, Panel):
     def draw(self, context):
         s = context.scene.texel
         _draw_tools(self.layout, s)
-        self.layout.operator("texel.paint", icon="BRUSH_DATA")
+        _paint_button(self.layout, context)
 
 
 class TEXEL_PT_layers(_Base, Panel):

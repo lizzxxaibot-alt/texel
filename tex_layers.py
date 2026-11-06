@@ -69,13 +69,25 @@ class TEXEL_OT_layer_select(_LayerOp):
 class TEXEL_OT_layer_toggle(_LayerOp):
     bl_idname = "texel.layer_toggle"
     bl_label = "Toggle Visibility"
+    bl_description = ("Show or hide a layer. On an animation cel it hides the "
+                      "whole track, on every frame and in every export")
     index: IntProperty()
 
     def execute(self, context):
         d = _doc(context)
         if 0 <= self.index < len(d.canvas.layers):
             layer = d.canvas.layers[self.index]
-            layer.visible = not layer.visible
+            if layer.track is not None:
+                # a cel's eye hides its whole track, on every frame and in
+                # every export; a per-cel flag came back on the next frame
+                # step and never reached the sprite sheet (0.2.7)
+                c = d.canvas
+                c.set_track_visible(layer.track, c.track_hidden(layer.track))
+                context.scene.texel.status = (
+                    f"Track '{layer.track}': "
+                    f"{'hidden' if c.track_hidden(layer.track) else 'shown'}")
+            else:
+                layer.visible = not layer.visible
             d.flush()
         return {"FINISHED"}
 

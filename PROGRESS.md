@@ -851,3 +851,123 @@ and `build.py --lite` · `test_install` pass on `texel-0.2.6.zip` ·
   T-023's default STOP date, so it is still left for that decision.
 - The queue's README/Showcase hand-off was true. The repo README has a Showcase
   section now, and it ships in v0.2.7, not in the live 0.2.6 zip.
+
+## 2026-11-05 — v0.2.7 "Paint mode" and the hidden-track fix (`texel-release`, catch-up run, Thu)
+
+**Ledger first, per §0:** one open row was owned by `texel-release`: **T-029**,
+opened the same day. It was cleared in `ROADMAP.md` and set to `DONE?` with
+evidence. T-010, T-011, T-015, T-016 and **T-023 (stop/continue) are `HUMAN` and
+still unanswered.**
+
+**Why this, of the three priorities:** there was no crash or data-loss bug and
+no ask with 3+ requests. Priority 3, the next unshipped slice, was Gradient. **It
+was overridden on demand evidence, and the override is stated in ROADMAP and
+the devlog.** The paint-per-stroke defect (T-028, Isaque.OS, reproduced on Lite
+0.2.6) blocks the second stroke for every new user, and `texel-support`
+recommended it first. The hidden-track defect (@wenvikstudios) was already
+promised for 0.2.7. Gradient → v0.2.8 (Wed 11-11), v0.3.0 → 11-18, v0.4.0 → 11-25.
+
+### What changed
+- **`core/canvas.py`:** added `hidden_tracks`, `set_track_visible()` and
+  `track_hidden()`. `show_frame()` keeps a hidden track's cels off, onion skin
+  included. `flatten_frame()` skips hidden tracks. `remove_track()` forgets the
+  hide. `content_bounds()` still measures hidden tracks on purpose, so Trim
+  cannot crop away hidden art. **Tests written first and watched failing**
+  (`AttributeError`): +20 checks in `test_canvas.py`, including the
+  @wenvikstudios case on the core, byte for byte.
+- `tex_layers.py`: the cel eye toggles the whole track. A static layer's eye is
+  unchanged. `tex_ui.py` greys out a hidden track's name in the cel grid.
+  `tex_extra.py` carries the hide across a resize.
+- **`tex_paint.py`: Texel Paint is a mode.**
+  - Invoke (button or D) enters it. A left click on the canvas starts a stroke,
+    or does a single-shot pick or fill. Every other event is PASS_THROUGH.
+  - Esc, D, or the button again leaves the mode. A second invoke in another
+    editor moves the mode there. `cancel()` clears it when Blender drops the
+    handler.
+  - The hit test is pinned to the editor's WINDOW region via `temp_override`.
+    `over_canvas()` excludes the overlapping sidebar and header regions.
+  - **`UNDO` was removed from `bl_options`; the mode calls `ed.undo_push` once
+    per finished drag.** That keeps the old granularity of one drag per undo
+    step. Whether Blender undo restores the canvas is unchanged and was not
+    re-tested.
+  - The header shows a hint, and the button reads *Stop Texel Paint* while the
+    mode is on. No new operator.
+- **Found while building:** in the shipped 0.2.6, the sidebar Texel Paint button
+  returned CANCELLED every time (*"Cursor is not over the canvas"*: the cursor
+  is over the sidebar). Only D ever painted.
+- Docs sealed in the zip:
+  - README: paint mode, and hiding a track.
+  - START-HERE: the first five minutes, the undo answer, shortcuts, and the
+    roadmap table for v0.2.7 to v0.4.
+  - ROADMAP.
+
+### New tests
+- **`test_features.py`, +27 checks.** They drive the real `TEXEL_OT_paint`
+  methods with synthetic events, using `texel-support`'s repro harness. Covered:
+  two strokes with no re-invoke, pass-through, shape cancel, fill, toggle, move,
+  Esc, `cancel()` and `over_canvas`. They also run the regression case through
+  the real operators.
+- **`test_paintmode_gui.py` is NEW, and the first suite to drive REAL input**
+  (`--enable-event-simulate`). In the Image Editor and the 3D viewport, it
+  enters the mode from the sidebar and paints two strokes with the mouse alone.
+  It checks that a click on the sidebar paints nothing, and that Esc and D work.
+  - 16/16 on 4.2.23, 4.5.9 and 5.2.1, and on the source tree and the built Lite
+    zip.
+  - **Negative control: on `texel-0.2.6.zip`, 11 FAILED**, including the T-028
+    check.
+  - Added to `run_gui_versions.sh`. In `store_check.py` it is listed under
+    `NOT_ON_STORE` with the reason (the Store build cannot take arguments), and
+    the exclusion is printed on every run. The release SKILL.md was updated.
+- `repro/track_export_20261105/verify.py` runs the @wenvikstudios case on a
+  BUILT zip: the sheet and the GIF (decoded with ffmpeg, positive control
+  included). **0.2.7: ALL PASS. 0.2.6: 2 FAILED** (12 channel values differ, and
+  orange appears in the GIF).
+
+### The gate, in full
+- 6 headless suites pass. `core/` is at **100.0%** (1,100 statements, 0 missed).
+- 7 headless Blender suites pass on 4.5.9.
+- `test_panels` traceback grep is **0** on 4.5.9, 4.2.23 and 5.2.1.
+  `test_keys` and `test_e2e` pass on 4.5.9.
+- `build.py` and `--lite` both build. `test_install` passes on
+  `texel-0.2.7.zip`. `test_versions.sh` reads **pass=3 fail=0**.
+- `run_gui_versions.sh` (six suites × three versions): all pass **except
+  `test_e2e` on 4.5.9**, which failed on `palette_lospec` with *"Could not reach
+  Lospec: The read operation timed out"*. That is the network, not the add-on.
+  A re-run on 4.5.9 passed, and Lospec returned Endesga 32.
+- The docs were then edited and the zips rebuilt. `test_install`, the Lite GUI
+  run and the regression case were re-run on the final zips. Then
+  `store_check.py` passed **13/13**.
+
+### Live-page verification (D.4), taken before the ROADMAP tick, devlog and queue
+- Uploaded with `itch_upload.mjs --game 4991926 --expect texel`, one file at a
+  time:
+  - `texel-0.2.7.zip` (id 20300763, 0.2.6 hidden).
+  - `texel-lite-demo-0.2.7.zip` (id 20300785, `--demo`, Lite 0.2.6 hidden).
+  - Other routines held the profile lock (`itch_upload`, `itch_shots_manage`,
+    `itch_media`), and each of our scripts waited for it.
+- **Cookie-less GET of `z3er1n.itch.io/texel` at 13:12Z → HTTP 200, 44,479 B:**
+  - The widget lists **`texel-0.2.7.zip` 218 kB** (local 224,109 B, sha256
+    `a29a1d86…a3aab9de427c`).
+  - The `for_demo` block lists **`texel-lite-demo-0.2.7.zip` 206 kB** (local
+    211,503 B, sha256 `74c0f08b…9b3341e127`).
+  - No 0.2.6 file name is on the page. `Updated` reads 05 November 2026 @ 13:09
+    UTC.
+  - An anonymous POST to `/file/20300763` returns *"A key is needed to
+    download"*.
+  - Pinned copies are in `dist/shipped/*-SHIPPED-2026-11-05.zip`.
+- **The dashboard showed Lite 0.2.6 at 2 downloads before it was hidden.** No
+  routine pulled it. That is for `texel-watch` to judge against T-022's
+  read-out.
+- Devlog **1754687**, *"0.2.7: paint mode stays on, and hidden tracks stay
+  hidden"*, returns HTTP 200 logged-out, renders as HTML (0 stray `**`) and is
+  first in `devlog.rss`. It credits Isaque.OS and @wenvikstudios and says what
+  slipped.
+
+### Not done / open
+- The live description makes no paint-mode claim. The only *"one stroke per
+  press"* text on the page is our 11-03 comment reply (post 17797944), which was
+  true when written. Telling the asker it shipped is `texel-support`'s job.
+- Not tested: whether Blender undo actually restores a Texel stroke (behaviour
+  unchanged; the README wording stands). A physical tablet with the new mode.
+- No price milestone crossed. v0.3.0 and v0.4.0 now fall after T-023's 11-14
+  default STOP.

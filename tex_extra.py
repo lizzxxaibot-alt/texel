@@ -411,6 +411,7 @@ class TEXEL_OT_canvas_resize(_DocOp):
         # of bug this product could ship, because the loss is invisible until
         # you look for the work you already did.
         new.tracks = list(getattr(old, "tracks", []))
+        new.hidden_tracks = set(getattr(old, "hidden_tracks", ()))
         holds = getattr(old, "frame_holds", None)
         if isinstance(holds, list):
             new.frame_holds = list(holds)

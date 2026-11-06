@@ -418,6 +418,205 @@ check("removing the last stamp puts the brush back to Square",
       (len(st.stamps), st.stamp, st.brush_shape) == (0, "", "SQUARE"),
       (len(st.stamps), st.stamp, st.brush_shape))
 
+# ------------------------------------------- paint mode stays on (0.2.7, T-028)
+# The first stranger to use Texel had to press Texel Paint before every stroke:
+# the operator ended on the first mouse release. It is a mode now. This drives
+# the REAL invoke/modal code with synthetic events, the harness texel-support
+# used to reproduce the bug (repro/paint_per_stroke_20261103/); the texel
+# lookup is replaced because background mode has no viewport to raycast into.
+from texel import tex_paint as TP
+
+pimg = bpy.data.images.new("ModeCanvas", 16, 16, alpha=True)
+pimg.pixels.foreach_set([0.0] * 16 * 16 * 4)
+pdoc = tex_doc.get(pimg)
+
+
+class _Ev:
+    def __init__(s, t, v="NOTHING", x=0, y=0):
+        s.type, s.value, s.x, s.y, s.pressure = t, v, x, y, 1.0
+        s.mouse_x, s.mouse_y = x, y
+
+
+class _Region:
+    def __init__(s, t, x, y, w, h):
+        s.type, s.x, s.y, s.width, s.height = t, x, y, w, h
+
+
+class _Area:
+    def __init__(s, ptr):
+        s.ptr, s.type, s.header = ptr, "IMAGE_EDITOR", None
+        s.regions = [_Region("WINDOW", 0, 0, 400, 300), _Region("UI", 300, 0, 100, 300),
+                     _Region("HEADER", 0, 280, 400, 20), _Region("TOOLS", 0, 0, 1, 300)]
+    def as_pointer(s): return s.ptr
+    def header_text_set(s, t): s.header = t
+    def tag_redraw(s): pass
+
+
+class _WM:
+    handlers = 0
+    def modal_handler_add(s, op): _WM.handlers += 1
+
+
+class _Sp:
+    type = "IMAGE_EDITOR"
+    image = pimg
+
+
+area_a, area_b = _Area(1), _Area(2)
+
+
+class _Screen:
+    areas = [area_a, area_b]
+
+
+class _Ctx:
+    space_data = _Sp(); scene = bpy.context.scene; window_manager = _WM()
+    active_object = None; screen = _Screen(); area = area_a
+
+
+class _Op:    # the operator's own methods; a bpy_struct cannot be built by hand
+    def report(s, *a): s.reports.append(a)
+for _k, _v in TP.TEXEL_OT_paint.__dict__.items():
+    if callable(_v) and not _k.startswith("__") and _k not in ("poll", "report"):
+        setattr(_Op, _k, _v)
+# x < 0 stands for "over the sidebar", where there is no texel
+_Op._texel = lambda s, ctx, ev: (ev.x, ev.y) if 0 <= ev.x < 16 else None
+_pushes = []
+_Op._push = lambda s: _pushes.append(1)
+
+pctx = _Ctx()
+ps = pctx.scene.texel
+ps.tool, ps.colour, ps.brush_shape, ps.dither = "PENCIL", (1, 0, 0, 1), "SQUARE", "OFF"
+ps.brush_size, ps.mirror_x, ps.mirror_y, ps.symmetry = 1, False, False, 1
+ps.use_pressure = False
+plit = lambda: sum(1 for v in pdoc.canvas.flatten() if v)
+
+
+def drag(op, y, x0, x1):
+    out = [op.modal(pctx, _Ev("LEFTMOUSE", "PRESS", x0, y))]
+    for x in range(x0 + 1, x1 + 1):
+        out.append(op.modal(pctx, _Ev("MOUSEMOVE", "NOTHING", x, y)))
+    out.append(op.modal(pctx, _Ev("LEFTMOUSE", "RELEASE", x1, y)))
+    return out
+
+
+mop = _Op(); mop.reports = []
+check("Texel Paint enters the mode even with the cursor over the sidebar",
+      mop.invoke(pctx, _Ev("LEFTMOUSE", "PRESS", -5, 2)) == {"RUNNING_MODAL"}, mop.reports)
+check("the mode is on for this editor only",
+      TP.paint_mode_on(area_a) and not TP.paint_mode_on(area_b))
+check("the header says how to leave it", area_a.header == TP.HINT, area_a.header)
+check("entering paints nothing", plit() == 0, plit())
+check("a mouse move with no button held paints nothing",
+      mop.modal(pctx, _Ev("MOUSEMOVE", "NOTHING", 3, 3)) == {"PASS_THROUGH"} and plit() == 0)
+r1 = drag(mop, 2, 1, 7)
+check("stroke 1 paints 7 texels and the mode stays on",
+      plit() == 7 and all(r == {"RUNNING_MODAL"} for r in r1), (plit(), r1))
+r2 = drag(mop, 5, 1, 5)
+check("stroke 2 paints with the mouse alone, no second press of Texel Paint",
+      plit() == 12 and all(r == {"RUNNING_MODAL"} for r in r2), (plit(), r2))
+check("one undo step per drag", len(_pushes) == 2, len(_pushes))
+check("a click off the canvas passes through to the sidebar",
+      mop.modal(pctx, _Ev("LEFTMOUSE", "PRESS", -5, 5)) == {"PASS_THROUGH"} and plit() == 12)
+check("navigation passes through",
+      all(mop.modal(pctx, _Ev(t, "PRESS", 3, 3)) == {"PASS_THROUGH"}
+          for t in ("MIDDLEMOUSE", "WHEELUPMOUSE", "B", "RIGHTMOUSE")))
+ps.tool = "LINE"
+mop.modal(pctx, _Ev("LEFTMOUSE", "PRESS", 1, 9))
+mop.modal(pctx, _Ev("MOUSEMOVE", "NOTHING", 9, 9))
+check("a line previews while dragging", plit() == 21, plit())
+check("right-click mid-drag drops the shape and keeps the mode",
+      mop.modal(pctx, _Ev("RIGHTMOUSE", "PRESS", 9, 9)) == {"RUNNING_MODAL"}
+      and plit() == 12 and len(_pushes) == 2, (plit(), len(_pushes)))
+ps.tool = "FILL"
+check("a fill is one click, one undo step, and the mode stays on",
+      mop.modal(pctx, _Ev("LEFTMOUSE", "PRESS", 0, 15)) == {"RUNNING_MODAL"}
+      and plit() == 256 and len(_pushes) == 3, (plit(), len(_pushes)))
+ps.tool = "PENCIL"
+mop2 = _Op(); mop2.reports = []
+check("pressing Texel Paint again in the same editor leaves the mode",
+      mop2.invoke(pctx, _Ev("D", "PRESS", 3, 3)) == {"CANCELLED"} and not TP.paint_mode_on())
+check("the running mode exits on its next event and clears the header",
+      mop.modal(pctx, _Ev("MOUSEMOVE", "NOTHING", 3, 3)) == {"FINISHED"} and area_a.header is None,
+      area_a.header)
+mop.invoke(pctx, _Ev("D", "PRESS", 3, 3))
+pctx.area = area_b
+mop3 = _Op(); mop3.reports = []
+check("Texel Paint in another editor moves the mode there",
+      mop3.invoke(pctx, _Ev("D", "PRESS", 3, 3)) == {"RUNNING_MODAL"}
+      and TP.paint_mode_on(area_b) and not TP.paint_mode_on(area_a))
+check("the old editor's mode exits without switching the new one off",
+      mop.modal(pctx, _Ev("MOUSEMOVE", "NOTHING", 3, 3)) == {"FINISHED"}
+      and TP.paint_mode_on(area_b))
+mop3.modal(pctx, _Ev("LEFTMOUSE", "PRESS", 2, 0))
+check("Esc mid-stroke keeps the stroke and leaves the mode",
+      mop3.modal(pctx, _Ev("ESC", "PRESS", 2, 0)) == {"FINISHED"}
+      and not TP.paint_mode_on() and area_b.header is None and len(_pushes) == 4,
+      len(_pushes))
+mop3.invoke(pctx, _Ev("D", "PRESS", 3, 3))
+mop3.cancel(pctx)
+check("Blender removing the handler (a file load) clears the mode", not TP.paint_mode_on())
+pctx.area = area_a
+
+# the hit test the mode uses: on the main region, and not under a panel that
+# overlaps it - a click on a sidebar button must not paint the texel beneath
+win = area_a.regions[0]
+check("over_canvas: the middle of the editor is canvas", TP.over_canvas(area_a, win, 150, 150))
+check("over_canvas: an overlapping sidebar is not", not TP.over_canvas(area_a, win, 350, 150))
+check("over_canvas: the header is not", not TP.over_canvas(area_a, win, 150, 290))
+check("over_canvas: a collapsed 1 px toolbar does not block", TP.over_canvas(area_a, win, 0, 150))
+check("over_canvas: outside the editor is not", not TP.over_canvas(area_a, win, 450, 150))
+
+# the hidden-track fix, through the real Export Sprite Sheet operator: the
+# regression case @wenvikstudios proposed (ROADMAP v0.2.7). Two frames; export
+# Base alone; add Torch and Glow, hide them with the eye, step a frame (which
+# used to switch them back on); export again. The sheets must match exactly.
+bpy.ops.texel.canvas_new(size=8, name="Tracks")
+timg = bpy.data.images["Tracks"]
+tdoc = tex_doc.get(timg)
+with bpy.context.temp_override(**ctx):
+    ctx_space = bpy.context.space_data
+    ctx_space.image = timg
+    bpy.ops.texel.frame_add()
+    bpy.ops.texel.frame_add()
+    tc = tdoc.canvas
+    base = tc.add_colour((90, 60, 30, 255))
+    for f in range(2):
+        tc.cel(tc.tracks[0], f).set(1 + f, 2, base)
+
+    def sheet_px():
+        bpy.ops.texel.sprite_sheet(columns=0)
+        sh = bpy.data.images[f"{tdoc.image_name} Sheet"]
+        return list(sh.pixels)
+
+    alone = sheet_px()
+    fire = tc.add_colour((255, 140, 0, 255))
+    for name in ("Torch", "Glow"):
+        bpy.ops.texel.track_add(name=name)
+        for f in range(2):
+            tc.cel(name, f).set(1 + f, 2, fire)
+            tc.cel(name, f).set(7, 7 - f, fire)
+    check("shown effect tracks change the sheet", sheet_px() != alone)
+    for name in ("Torch", "Glow"):
+        cel = tc.cel(name, 0)
+        bpy.ops.texel.layer_toggle(index=tc.layers.index(cel))
+    check("the eye on one cel hides the whole track",
+          tc.track_hidden("Torch") and tc.track_hidden("Glow")
+          and not any(l.visible for l in tc.layers if l.track in ("Torch", "Glow")))
+    bpy.ops.texel.frame_show(index=1)
+    check("a frame step does not switch a hidden track back on",
+          not any(l.visible for l in tc.layers if l.track in ("Torch", "Glow")))
+    check("REGRESSION CASE: Base alone == Base + hidden Torch and Glow, pixel for pixel",
+          sheet_px() == alone)
+    bpy.ops.texel.layer_toggle(index=tc.layers.index(tc.cel("Glow", 0)))
+    check("the eye again shows the track", not tc.track_hidden("Glow")
+          and sheet_px() != alone)
+    st_layer = tc.add_layer("Static")
+    st_layer.frame = st_layer.track = None
+    bpy.ops.texel.layer_toggle(index=tc.layers.index(st_layer))
+    check("a static layer's eye still toggles just that layer",
+          not st_layer.visible and not tc.track_hidden("Static"))
+
 texel.unregister()
 print()
 if fails:

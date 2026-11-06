@@ -44,14 +44,19 @@ Press **N** for the sidebar, then the **Texel** tab. It appears in both the
 
 ## Painting
 
-**New Canvas** makes a square image and opens it. Then pick a tool and hit
-**Paint**:
+**New Canvas** makes a square image and opens it. Then pick a tool and press
+**Texel Paint** (or **D** over the editor). That turns paint mode **on**: every
+left-drag on the canvas paints, and everything else still works as normal -
+navigate, use the sidebar, switch tools with the shortcuts. Press **Esc**, **D**,
+or the button again (it reads *Stop Texel Paint* while the mode is on) to leave
+it. Each drag is one undo step. (Before 0.2.7 the button painted one stroke and
+switched itself off.)
 
 | Tool | What it does |
 |---|---|
 | Pencil | Freehand, one texel per sample |
 | Eraser | Freehand erase back to transparent |
-| Line / Rect / Ellipse | Drag to place. Right-click or Esc cancels |
+| Line / Rect / Ellipse | Drag to place. Right-click mid-drag cancels the shape; Esc cancels it and leaves paint mode |
 | Fill | Flood fill, with tolerance and a contiguous toggle |
 | Pick | Sample a colour off the canvas |
 
@@ -117,8 +122,13 @@ Texel is not only a 3D texture tool:
   28%. Only that track: ghosting an opaque backdrop twice over turns the canvas
   to soup, and you want to see where the character was, not where the wall was.
 - **Hiding a track is an export.** Draw the character and its scenery in one
-  document, then hide the scenery tracks and save — the same file gives you the
+  document, then hide the scenery tracks and export — the same file gives you the
   full frame and a sprite on transparent, with no second copy to keep in sync.
+  The eye beside any cel in the Layers list hides its **whole track, on every
+  frame**, and Export Sprite Sheet, the JSON and the GIF all leave a hidden
+  track out. (Before 0.2.7 the eye hid one cel, came back on the next frame
+  step, and the sheet ignored it.) Trim to Content still measures hidden
+  tracks, so trimming never crops away art you have only hidden.
 - A layer with no frame is **static** — it appears on every frame, which is what
   a fixed backdrop or a traced reference wants.
 - **Export Sprite Sheet** lays every frame out on one image at your chosen

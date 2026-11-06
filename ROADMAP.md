@@ -1,7 +1,7 @@
 # Texel by Pixelkiln — upgrade schedule
 
-**Written 2026-09-09. Last edited 2026-10-16 by `texel-release`.**
-**This file was sealed into the v0.2.4 build on 2026-10-16** (and into the free
+**Written 2026-09-09. Last edited 2026-11-05 by `texel-release`.**
+**This file was sealed into the v0.2.7 build on 2026-11-05** (and into the free
 Texel Lite demo of the same version). Whether that build is live is recorded
 outside this file, in `PROGRESS.md`; see the note below for why. Texel is sold at
 https://z3er1n.itch.io/texel.
@@ -425,7 +425,41 @@ count is unchanged.
 this run is a manual catch-up on 10-16. **Dithered gradient and tablet pressure
 move to v0.2.5, target Wed 2026-10-21.**
 
-### v0.2.8 — a paint mode that stays on · **queued by `texel-support` 2026-11-03, for `texel-release` to place** (no date given to anyone)
+### v0.2.7 — "Paint mode", and the hidden-track fix · **RELEASED 2026-11-05**, one day late, Gradient moved behind it
+**Live-page read-back, 2026-11-05 ~13:12Z (the gate, taken before this tick was
+written; this line is NOT in the 0.2.7 zip, which says "BUILT"):** cookie-less
+GET of `z3er1n.itch.io/texel` → HTTP 200, 44,479 B. The paid widget reads
+**`texel-0.2.7.zip` 218 kB** (id 20300763; local 224,109 B, sha256
+`a29a1d86…a3aab9de427c`; pinned at `dist/shipped/texel-0.2.7-SHIPPED-2026-11-05.zip`).
+The `for_demo` block reads **`texel-lite-demo-0.2.7.zip` 206 kB** (id 20300785,
+local 211,503 B, sha256 `74c0f08b…9b3341e127`). No 0.2.6 file name is on the
+page. An anonymous POST for the paid id returns *"A key is needed to download"*.
+0.2.6 and Lite 0.2.6 are hidden, not deleted. Devlog **1754687** is live
+logged-out and first in `devlog.rss`. Full record: `PROGRESS.md`, 2026-11-05.
+
+**The slot, the new date and the order (`ACTIONS.md` T-029), written 2026-11-05
+by `texel-release`:** the Wed 11-04 slot never ran. The host was off from after
+11-04T04:14Z to the 11-05 ~12:40Z catch-up, and the scheduler does not replay a
+weekly slot. This run is the catch-up on Thu 11-05, so **v0.2.7's new date is
+11-05**. **The order changed:** this release takes the paint-mode fix that was
+queued as v0.2.8, and **Gradient moves to v0.2.8, target Wed 11-11**. Why:
+1. It is the first problem the first outside user ever reported, and it
+   blocks the second brushstroke of every new user's first session. Gradient
+   is a feature no one has asked for.
+2. Building it found the sidebar **Texel Paint** button was worse than
+   reported. From the sidebar it returned CANCELLED every time, because the
+   cursor was over the sidebar and not the canvas, so only **D** ever painted.
+   That was checked on the shipped 0.2.6 in a real window
+   (`test_paintmode_gui.py -- <0.2.6>`, 11 FAILED).
+3. `texel-support` recommended this order (`SUPPORT.md`, 11-03).
+4. The promise to the asker was *"queued as the next fix after 0.2.7"*. The
+   roadmap allowed folding it into 0.2.7, and shipping it sooner keeps that
+   promise.
+
+The hidden-track defect was already promised for 0.2.7, and it ships here
+too. **Both are under T-023**, like everything else here: if the user picks
+STOP on or before 11-14, nothing after this ships.
+
 **The first stranger to use Texel hit this within minutes.** Isaque.OS, Texel
 page comment 17788568 (`ACTIONS.md` T-028), Lite 0.2.6: *"I have to click the
 'Texel paint' button every time I want to do a single brushstroke"*.
@@ -452,14 +486,17 @@ drag.** The reply told the asker *"queued as the next fix after 0.2.7"* and
 gave no date. `texel-release` may fold it into 0.2.7 if it is not yet built,
 or into 0.3.0; either keeps that promise.
 
-### v0.2.7 — "Gradient" · target **Wed 2026-11-04**
+### v0.2.8 — "Gradient" · target **Wed 2026-11-11** (was v0.2.7 on Wed 11-04)
+**Moved 2026-11-05.** The 11-04 slot was lost to a host outage. The 11-05
+catch-up went to the paint-mode fix and the hidden-track fix (v0.2.7 above,
+and the reasons are there). This takes the next Wednesday.
 The one item left from the v0.2.2 list below: a gradient that dithers between
 two palette indices. *Large*: it needs a two-point drag that does not exist yet.
 It waits on T-023 like everything else here; if the user picks STOP on or
 before 11-14, it does not ship.
 
-**Also queued here by `texel-support`, 2026-10-30: hidden tracks still reach
-Export Sprite Sheet.** A buyer-side ask (@wenvikstudios, Bluesky, on the 10-30
+**SHIPPED IN v0.2.7 (2026-11-05), not with Gradient. Queued here by
+`texel-support` on 2026-10-30: hidden tracks still reach Export Sprite Sheet.** A buyer-side ask (@wenvikstudios, Bluesky, on the 10-30
 torch beat: *can Torch and Glow be exported as separate layers?*). Reproduced
 on the shipped `texel-0.2.6.zip`, Blender 4.5.9, `repro/track_export_20261030/`:
 the eye toggle removes a Glow cel from the canvas (gold 16 → 0), but the sheet
@@ -684,7 +721,11 @@ a build was live because a routine ticked ahead of the upload, and that is not
 happening twice in the same month. The live 0.2.1 zip still prints the old
 string.
 
-### v0.3.0 — "Tileset" · target **Wed 2026-11-11** (was 11-04, 10-28, and 10-17 before that)
+### v0.3.0 — "Tileset" · target **Wed 2026-11-18** (was 11-11, 11-04, 10-28, and 10-17 before that)
+**Moved 2026-11-05.** The 11-04 slot was lost to a host outage. The 11-05
+catch-up shipped v0.2.7, so Gradient (v0.2.8) takes 11-11 and this moves one
+Wednesday. 11-18 falls **after** T-023's default STOP on 11-14. If no sale
+arrives and the user does not answer, this does not ship.
 **Moved 2026-10-28.** v0.2.6 took 10-28 and v0.2.7 (the gradient) takes 11-04,
 so this moves one Wednesday. 11-11 is three days before T-023's default STOP;
 if the user picks STOP, neither v0.2.7 nor this ships.
@@ -704,7 +745,11 @@ rides that date, so it is left for the T-023 decision rather than moved here.
   The hardest single thing in this release, which is why the release sits third
   and not first.
 
-### v0.4.0 — "Handoff" · target 2026-11-14 · **price steps to $14.95**
+### v0.4.0 — "Handoff" · target **Wed 2026-11-25** (was 11-14) · **price steps to $14.95**
+**Moved 2026-11-05.** v0.3.0 is now 11-18, and 11-14 was a Saturday, a day
+`texel-release` never runs (the T-013 rule). The next Wednesday after v0.3.0
+is 11-25. The price step stays tied to this **version**, not to a date, so it
+happens when v0.4.0 ships. Like v0.3.0, this is after T-023's default STOP.
 **Harder, because it means being correct about other people's formats.** A wrong
 pivot or a malformed `.meta` is worse than no exporter at all.
 - Godot: atlas + `.tres` sprite-frames with animation names

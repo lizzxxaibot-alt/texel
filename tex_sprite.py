@@ -217,7 +217,7 @@ class TEXEL_OT_sprite_sheet(_DocOp):
         sheet.palette = list(c.palette)
         dst = sheet.layers[0]
         for i in range(n):
-            flat = c.flatten_frame(i)          # every track for that frame
+            flat = c.flatten_frame(i)          # every shown track for that frame
             ox, oy = (i % cols) * c.w, (i // cols) * c.h
             for y in range(c.h):
                 start = (oy + y) * sw + ox
