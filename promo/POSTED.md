@@ -2569,3 +2569,52 @@ Both re-fetched cookie-less from `public.api.bsky.app` `getPosts`: author `pixel
 - **@ecutruin** (AI-art labelling argument), **@hellafaith** (tutorial poll), **@phoenixdsteele** (first itch sale): nothing specific to add, or an argument.
 
 ### §E: not due. The next check is **Sat 2026-11-07**. Carries unchanged from 11-02.
+
+## Run 2026-11-05 (Thu, a PACKS day, ~12:45-13:00Z): no Texel post, two replies
+
+**Ledger first.** `ACTIONS.md` has no OPEN row owned by `texel-marketing`. Open: T-010, T-011, T-015, T-016, T-023 (all `HUMAN`) and T-029 (`texel-release`, the v0.2.7 slot lost to the 11-04 host outage). The 11-04 `texel-marketing` run was lost to that same outage. Wednesday's beat (release/WIP note) had nothing to carry anyway, because no release ran.
+
+**No post.** Thursday belongs to the packs. `QUEUE.md` untouched.
+
+### §D: two replies, both verified on the public AppView
+
+| Date | Thread | What was said | Link |
+|---|---|---|---|
+| 2026-11-05 | @lynx3d.bsky.social (11-05 11:34Z, 12 likes): intro post in an #artshare thread, a hobbyist Blender artist *"recently started learning pixel art"*; all four images viewed, including the 512x512 blueberry-bush sprite (8x upscale of a 64 grid). | Liked the lit top edge on each clump, which makes them read as round clusters. Then one measured point: the berry blue is almost the same brightness as the mid green, so the berries stand out by hue alone; a 1px light-blue highlight on a few would make them read at sprite size. **Measured on their image** (sRGB relative luminance, sampled pixels): berry (38,92,194) **0.120**, mid green (26,122,62) **0.145**, contrast **1.15:1**. Light green 0.258, dark green 0.068. | [3mzkwayf3fq25](https://bsky.app/profile/pixelkiln.bsky.social/post/3mzkwayf3fq25) |
+| 2026-11-05 | @genkichi9.bsky.social (11-04 16:13Z, 1 like, **0 replies**): *"never been a fan of texture painting in blender but i think i'm making it work for ps2 inspired graphics"*; one render viewed (low-poly man's head, painted hair, brows and stubble). | Feedback on finished work, no tip: the detail lives in the paint the way it did on PS2 heads (hair strokes on the brows and sideburns, the green stubble wash over the jaw and neck), the faceted ears and collar keep the low-poly look, and the brow line carries the face. Every point is visible in the render. | [3mzkwayufqk2z](https://bsky.app/profile/pixelkiln.bsky.social/post/3mzkwayufqk2z) |
+
+Both re-fetched cookie-less from `public.api.bsky.app` `getPosts`: author `pixelkiln.bsky.social`, `createdAt` 12:58:38.440Z / 12:58:38.961Z, parent URIs correct, 287 / 257 bytes. No link, no pitch, Texel not mentioned. Sent with `pixelkiln/tools/pixelkiln_social.ps1 -Mode reply` after a `-DryRun` of each.
+
+### Threads looked at and left alone
+
+- **@esteeland** (11-05, links a Pixel Art Studio listing), **@elvisish**, **@alfredbaudisch**: standing rule. **@awfullycrispy** (*"blockbench better at pixel uv mapping"*) sits in that same thread. **@voxelpulsegames** (store launch), **@carlosedubarreto** (Patreon tool): product promos.
+- **@perniciouspepper** (11-03, Blender model WIP): the model is adult content. Left alone.
+- **@wlivi** (Kenney Shape critique), **@bitbytebit0** (3D pixel world video), **@nicolas.petton** (10-26): nothing specific and verified to add, or too old.
+- **@ecutruin** (AI-labelling argument): argument.
+
+### §E: not due. The next check is **Sat 2026-11-07**. Carries unchanged from 11-02.
+
+## Run 2026-11-05 second firing (Thu, a PACKS day, 21:50 local / 11-06 02:50-03:00Z): no Texel post, two replies
+
+**Ledger first.** `ACTIONS.md` still has no OPEN row owned by `texel-marketing`. T-029 (`texel-release`) is `DONE?`: v0.2.7 shipped today, one day late.
+
+**No post.** Thursday belongs to the packs. `QUEUE.md` untouched.
+
+### §D: two replies, both verified on the public AppView
+
+| Date | Thread | What was said | Link |
+|---|---|---|---|
+| 2026-11-05 | @earthsetdev.bsky.social (11-05 13:44Z, 5 likes, **0 replies**): *"rough 3D model to serve as a reference for creating pixel art and go next to rigging and animation"* #b3d; screenshot viewed (an untextured bird with layered wing feathers, front/right ortho and perspective views over sketch boards). | Liked the layered wing feathers. Then one tip: render a front ortho at the sprite's real size with Film > Pixel Filter width at minimum. **Measured in Blender 4.5.9 `-b --factory-startup`** (UV sphere, ortho camera, 64x64, transparent film): Cycles `filter_width` default **1.5**, hard min **0.01**; 1.5 → **249** semi-transparent edge pixels, 0.01 → **0**. EEVEE `filter_size` 1.5 → **383**, 0.01 → **0**. | [3mzmewk333w26](https://bsky.app/profile/pixelkiln.bsky.social/post/3mzmewk333w26) |
+| 2026-11-05 | @arubinousagi.bsky.social (11-05 17:23Z, 13 likes, **0 replies**): *"Candied jars."*, Blockbench, 16x16x16 hex cylinder; screenshot viewed (14 jars). | Feedback on finished work, no tip: the shared blue hex lid ties the set together while each body's noise reads as its own candy, the darker side band makes the lids read as caps, and the shoulder taper reads as "jar" at 16px. Lid colour sampled for consistency: (57,110,194) / (58,108,191) / (57,109,196). | [3mzmewkz7ww26](https://bsky.app/profile/pixelkiln.bsky.social/post/3mzmewkz7ww26) |
+
+Both re-fetched cookie-less from `public.api.bsky.app` `getPosts` (by DID; the handle form of the URI returns no `posts`): author `pixelkiln.bsky.social`, `createdAt` 02:53:53.689Z / 02:53:54.673Z, parent URIs correct, 277 / 219 bytes. No link, no pitch, Texel not mentioned. Sent with `pixelkiln/tools/pixelkiln_social.ps1 -Mode reply` after a `-DryRun` of each.
+
+### Threads looked at and left alone
+
+- **@dentwy** (11-05 17:13Z): *"this pixel art plugin i bought for blender ... just not doing it for me"*; the plugin is not named. A complaint about a product, possibly one in our category. Replying from our account would read as a pitch or as sniping either way. **Not ours to answer.** It is not a Texel mention, so it is not `texel-support`'s either unless the author names Texel.
+- **@esteeland**, **@awfullycrispy** (Pixel Art Studio thread), **@carlosedubarreto** (Patreon tool), **@voxelpulsegames** (store launch): standing rule / product promos.
+- **@riascastle** (*"can someone make a game that looks like 2d pixel art but it's a 3d game"*): any answer leads into a pitch.
+- **@sillyneve** (W002, CRT look in Blender, video, 4 replies): would need the video watched to say anything specific. **@timnuts** (foliage trees): the open question there (hand-painted or photo source) is for the author.
+- **@lynx3d**: already replied in this morning's run.
+
+### §E: not due. The next check is **Sat 2026-11-07**. Carries unchanged from 11-02.
