@@ -2618,3 +2618,42 @@ Both re-fetched cookie-less from `public.api.bsky.app` `getPosts` (by DID; the h
 - **@lynx3d**: already replied in this morning's run.
 
 ### §E: not due. The next check is **Sat 2026-11-07**. Carries unchanged from 11-02.
+
+## Run 2026-11-06 (Fri, a TEXEL day, 19:25-19:40 local / 11-07 01:25-01:40Z): the v0.2.7 hidden-track beat, two replies
+
+**Ledger first.** `ACTIONS.md` has no OPEN row owned by `texel-marketing`. Open: T-010, T-011, T-015, T-016, T-023 (all `HUMAN`). T-029 closed by watch run 41. T-023 (stop/continue) is still undecided; nothing in it pauses marketing. No top-level post on the account since 11-01 (`getAuthorFeed`, 01:29Z).
+
+### Posted — Fri 2026-11-06, sprite beat = `QUEUE.md` v0.2.7 Beat 2 ("Hide Torch and Glow, export the base")
+
+The queue outranks the calendar, and Beat 2 is a sprite beat, so it took Friday. Beat 1 (Texel Paint stays on) still needs a GUI capture.
+
+| Date | Beat | Asset | URL | First hour |
+|---|---|---|---|---|
+| 2026-11-06 | **v0.2.7: the eye hides a whole track; sheet, JSON and GIF leave it out. Torchbearer walk, 8 frames 64x64, exported twice (all four tracks / Torch+Glow hidden)** | `promo/hide/texel-hide-all-tracks.png` + `promo/hide/texel-hide-torch-glow.png` (1280x640 each, 5x nearest-neighbour of the 256x128 exports `sheet_all_256x128.png` / `sheet_hidden_256x128.png`). Blocked for reuse until **11-27** | [3mzoqs42w322f](https://bsky.app/profile/pixelkiln.bsky.social/post/3mzoqs42w322f) | 2 likes, 2 reposts at +2 min |
+
+Every claim was checked, not recalled:
+- **The images are product output, not a card.** `promo/hide/hide_sheet.py` extracts the **shipped `dist/texel-0.2.7.zip`** into a temp dir, builds the torchbearer with `demo_art.py` through the real operators (as `anim_demo.py` does), runs **Export Sheet + JSON** (`texel.export_anim_data`), presses **Toggle Visibility** on the Torch and Glow cels of frame 1, steps to frame 4 with `frame_show` (the step that switched them back on in 0.2.6), and exports again. Blender 4.5.9 `-b --factory-startup`; `set_track_visible` present. Upscaled only, so no §4 card loop (same standing as the 10-16 trim exports).
+- **Measured on the two exports:** 11,578 of 32,768 texels differ (1,287-1,621 per frame); 21 colours → 13, 8 gone, 0 new. Both images were looked at: the second has no flame, no glow ring and no floor shadow; the walk and the wall are unchanged.
+- **"sheet, JSON and GIF"** matches the live devlog 1754687 wording (`promo/devlog_0.2.7.html` line 17) and `repro/track_export_20261105/verify.py`, which checks the sheet and the GIF; only the sheet was re-measured here.
+- **Live page re-checked first:** cookie-less GET of `z3er1n.itch.io/texel` serves `texel-0.2.7.zip` and `texel-lite-demo-0.2.7.zip`.
+- **Verified cookie-less with `getPosts`:** author `pixelkiln.bsky.social`, `createdAt` 2026-11-07T01:31:29.409Z, `app.bsky.embed.images#view`, 2 images 1280x640, alt 271 / 233 characters, 4 facets. Text 299/300 bytes (two drafts at 332 and 306 were refused by the script, nothing sent).
+- **Reuse:** `Torchbearer_sheet.png` (09-25) is the same walk; 42 days ago, outside the 21-day guard. `promo/torchlight/*` (blocked to 11-20) not used.
+- **Phrasing:** *"hides its whole track"*, *"lights it"* had no prior use as post copy. No antithesis, no hype words, no rival named, no user handle tagged (crediting @wenvikstudios is in the devlog; a reply there is `texel-support`'s call).
+- Spec: `promo/post_2026-11-06.json`.
+
+### §D: two replies, both verified on the public AppView
+
+| Date | Thread | What was said | Link |
+|---|---|---|---|
+| 2026-11-06 | @ouromakesgames.bsky.social (11-04, Godot papercraft level with grass-sway shader; *"Still running into some texture bleeding with 3D sprites"*; their follow-up 11-05: *"mostly at sprite edges, I just need to give the sprites some buffer space in the sprite sheet"*). Video sampled with ffmpeg (4 frames looked at: papercraft trees and houses, a 2D character as a 3D sprite). | Complimented the papercraft look. Then: Sprite3D defaults to Linear Mipmap and each mip halves the gutter; a 2 px gap stays clean only through mip 1, 8 px through mip 3; pad for the mips you'll see, or set Texture Filter to Linear on close sprites. **Checked:** `doc/classes/SpriteBase3D.xml` `texture_filter` default **3** = `TEXTURE_FILTER_LINEAR_WITH_MIPMAPS`; inspector labels from `scene/3d/sprite_3d.cpp:700` (*Nearest, Linear, Nearest Mipmap, Linear Mipmap...*). **Measured** (numpy, 2x2 box mips, bilinear sample at sprite A's edge texel, neighbour at gap g): neighbour colour at mip 0..4 — gap 2: 0, 0, 0.19, 0.33, 0.41; gap 8: 0, 0, 0, 0, 0.23; gap 16: all 0. Supports the plan they already stated. | [3mzoqvzqt6j24](https://bsky.app/profile/pixelkiln.bsky.social/post/3mzoqvzqt6j24) |
+| 2026-11-06 | @lionfrompanyu.bsky.social (11-06 05:52Z, 4 likes, 1 reply): *"Have been struggling with Rigify for some days but here I managed to pose my creation"* #b3d #pixelart #lowpoly; image viewed (pixel-textured rabbit girl with pink glasses, blue overalls, posed). | Feedback on finished work, no tip: glare stripes on the glasses read as glass, darker fold bands make the overalls read as denim, the pink inner ears against the orange fur. Every point is visible in the image. | [3mzoqw2odbe2o](https://bsky.app/profile/pixelkiln.bsky.social/post/3mzoqw2odbe2o) |
+
+Both re-fetched cookie-less from `public.api.bsky.app` `getPosts`: author `pixelkiln.bsky.social`, `createdAt` 01:33:41.042Z / 01:33:41.998Z, parent URIs correct, 268 / 255 bytes. No link, no pitch, Texel not mentioned. Sent with `pixelkiln/tools/pixelkiln_social.ps1 -Mode reply` after a `-DryRun` of each.
+
+### Threads looked at and left alone
+
+- **@dentwy** (unnamed paid pixel-art plugin complaint), **@esteeland** (links a rival listing), **@elvisish** / **@alfredbaudisch**: standing rule, as on 11-05.
+- **@localtoybot** (Blockbench vertex-colour wish): pointing at Blender would read as steering. **@thealiviajane** (no image), **@okno-studio**, **@mucleus**: nothing specific and verified to add.
+- **@lionfrompanyu** second post (video): one reply per person this run.
+
+### §E: due **tomorrow, Sat 2026-11-07**. Carries unchanged from 11-02, plus: QUEUE says any listing text naming **11-14** for the price step is now wrong (step tied to v0.4.0, ~11-25). Check the live description for "11-14" first thing Saturday.
