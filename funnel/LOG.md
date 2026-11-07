@@ -42,6 +42,8 @@ says on 2026-09-26.
 | *both pages, read 2026-10-24* | *Material Palettes, 35 days live* | *(as above)* | **119** (+7 in 6 d) | **31** (+2) | *format retired 09-26* | *slowing; see 10-24 note* |
 | *both pages, read 2026-10-30* | *Density Cheatsheet, 49 days live* | *(as above)* | **58** (+1 in 6 d) | **28** (+0) | *format retired 09-26* | *flat* |
 | *both pages, read 2026-10-30* | *Material Palettes, 41 days live* | *(as above)* | **132** (+13 in 6 d) | **36** (+5) | *format retired 09-26* | *picked up again; see 10-30 note* |
+| *both pages, read 2026-11-06* | *Density Cheatsheet, 56 days live* | *(as above)* | **62** (+4 in 7 d) | **31** (+3) | *format retired 09-26* | *flat* |
+| *both pages, read 2026-11-06* | *Material Palettes, 48 days live* | *(as above)* | **163** (+31 in 7 d) | **42** (+6) | *format retired 09-26* | *best week yet; see 11-06 note* |
 
 **The second row is the one that matters now, and it was added on 2026-09-19.**
 The 72 h window is history; what the page has done over eight days is the real
@@ -964,3 +966,49 @@ STOP **2026-11-14**, two weeks out). **The next first-Friday slot is
 2026-11-06.** It ships nothing unless T-023 is decided as a CONTINUE that reopens
 distribution before then. On present numbers a new free sibling page would not
 be worth a grid slot even then.
+
+## Measuring week, 2026-11-06 (`texel-funnel`)
+
+**This run fired on Friday 11-06, on schedule. It is the first Friday of the
+month, the one Phase-2 ship slot, and it ships nothing.**
+
+**No open `texel-funnel` rows in `ACTIONS.md`.** The only open rows are `HUMAN`:
+T-010, T-011, T-015, T-016 and T-023. **Why no drop, in order:** (1) the
+free-sibling-page format was retired on 09-26 and nothing since has reopened it;
+(2) the condition the 10-18 and 10-30 entries set for this slot, a T-023 decision
+that reopens distribution, has not happened. Neither `STATE.md` nor `ROADMAP.md`
+carries a dated T-023 decision. `promo/QUEUE.md` still ends "T-023 ... is still
+open". Nothing was added to `promo/QUEUE.md`.
+
+**Readings:** `node automation/itch_analytics.mjs`, *Project totals*, lifetime,
+read at about 2026-11-06T16:05Z. `profile.lock` was absent.
+
+| page | 10-30 | 11-06 | 7 days |
+|---|---|---|---|
+| Density Cheatsheet | 58 views / 28 grabs | 62 / 31 | +4 / +3 |
+| Material Palettes | 132 / 36 | 163 / 42 | +31 / +6 |
+| Texel (paid page) | 169 views / 8 grabs | 182 / 10 | +13 views / +2 grabs |
+
+**Read it straight.** The palettes page had its best week since launch: +31 views,
+more than twice Texel's +13. Its collections stay at 7, against Texel's 4. The tag
+shelf `free/tag-aseprite/tag-palette` went from 25 to 32 store-wide, so most of
+that growth is itch free-asset browsers finding it, the audience the 09-26
+retirement named. **A page drawing traffic is not a page sending traffic.** Whether
+any of it reaches Texel is `texel-watch`'s per-project referrer reading, and this
+run did not take it. Texel took two new grabs, so the Lite demo's lifetime is 5
+ours plus 5 not ours (this assumes, as the earlier entries did, that every new grab
+is the demo).
+
+**One thing worth saying for whoever makes the T-023 call:** the palettes page now
+has 163 lifetime views to Texel's 182, built with no promotion since 09-19. If
+T-023 comes back as a CONTINUE, the cheapest test left in this routine is not a
+new page. It is a better hand-off on the page that already has the traffic: a
+visible "made for Texel" line and image above the fold, measured by watch's
+referrer row. That is a listing edit on a funnel page, so it is this routine's to
+do, and it waits on T-023 like everything else.
+
+**Same limit as the last four readings.** Both remaining levers belong to a
+person: BlenderNation (**T-016**) and the stop/continue call (**T-023**, default
+STOP **2026-11-14**, eight days out). The next first-Friday slot is
+**2026-12-04**, after that default.
+
