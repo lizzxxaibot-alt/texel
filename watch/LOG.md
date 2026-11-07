@@ -6,6 +6,125 @@ in `../ACTIONS.md` and handed to a named owner.
 
 ---
 
+## 2026-11-07 — run 42 (scheduler catch-up, ~15:30Z; slot ~12:52Z missed)
+
+**VERDICT: BLOCKED ON A HUMAN DECISION; THE LISTING IS HEALTHY.** Every listing check passes on v0.2.7, all four doers are inside their windows, and nothing was opened or closed. **T-023 (stop/continue) is unanswered at 29 days; its default STOP on 2026-11-14 is 7 days out.**
+
+### Action ledger
+
+**Opened: 0. Closed: 0.** A-032 is still Open, so the 7-day and 14-day rungs stay suspended for every HUMAN row.
+
+| id | age | owner |
+|---|---|---|
+| T-023 | 29 d | **HUMAN**: stop/continue. Default STOP 2026-11-14 |
+| T-010 | 53 d | **HUMAN** (suspended) |
+| T-011 | 53 d | **HUMAN** (suspended) |
+| T-015 | 49 d | **HUMAN** (suspended) |
+| T-016 | 49 d | **HUMAN** (suspended; part of T-023's CONTINUE option) |
+
+One new input for T-023, recorded by `texel-support` (`SUPPORT.md:691`), not by this routine: the demo user Isaque.OS wrote on 11-06 (post 17822598) that they would look at the workflow and buy the full version if they liked it. **That is the first stated purchase intent in 59 days. It is a statement, not a sale**, and it does not move the zero-sales rule.
+
+### ALERTS
+
+None for a doer. The only thing that needs action is T-023, which needs the user.
+
+The host appears to have been off again this morning: `texel-watch`, `pixelkiln-watch`, `pixelkiln-itch-audit` and `pixelkiln-itch-boards` all fired together at ~15:26Z, well after their slots. **`texel-support`'s 11-07 14:24Z slot passed with no run** (`lastRunAt` 11-06T14:25Z, `nextRunAt` 11-08T14:24Z). That is ~25 h, inside the 48 h test, so it is not an alert. It becomes one if the 11-08 slot is also missed. The outage itself belongs to A-037 (HUMAN, Pixelkiln ledger).
+
+### Routines (scheduler read 11-07 ~15:28Z)
+
+| Routine | lastRunAt | Next | Artifact |
+|---|---|---|---|
+| support | 11-06T14:25Z | 11-08T14:24Z (11-07 slot missed) | `SUPPORT.md:691`: Isaque.OS remark 17822598 logged, correctly not replied to; 0 open rows owned |
+| marketing | 11-07T01:29Z | 11-07T21:20Z | `promo/POSTED.md:2622`: Fri 11-06 v0.2.7 Beat 2 posted ("Hide Torch and Glow, export the base"), two replies. §E listing check due today (Sat) |
+| release | 11-05T12:53Z | 11-11T16:13Z | v0.2.7 live; ROADMAP v0.2.8 Gradient entry at `ROADMAP.md:489` |
+| funnel | 11-06T16:07Z | 11-13T16:06Z | `funnel/LOG.md`: 11-06 sibling readings logged; ships nothing until T-023 is decided; next first-Friday slot 12-04 |
+
+### Listing (measured 11-07 ~15:30Z)
+
+| Check | Result |
+|---|---|
+| Logged-out page | HTTP 200, 48,574 B. `Updated` 05 Nov 13:10 UTC. No "11-14" / "Nov 14" string on the page |
+| Download | Paid `texel-0.2.7.zip` **218 kB** = local `dist/texel-0.2.7.zip` 224,109 B (newest). Demo `texel-lite-demo-0.2.7.zip` 206 kB |
+| Price | `game[min_price]` $9.95; public page $9.95 ×3. Correct until v0.4.0 (11-25) |
+| Status | `game[published]=published` |
+| AI disclosure | `ai_disclosure[ai_generated]=yes`, `ai_graphics` and `ai_code` checked, `ai_text` and `ai_audio` unchecked |
+
+**All pass.** The edit page was read headless through `lib.mjs` `launch()` with a throwaway read-only script, since deleted. It waited for `itch_audit.mjs` (pid 29784, alive) to release `profile.lock`; the lock was absent after. Nothing was clicked or saved. The first selector pass used the wrong field names and read the disclosure as MISSING. A second pass found the real `ai_disclosure[...]` names, and that second pass is the result reported here.
+
+### Numbers
+
+`| 2026-11-07 (15:31Z) | 184 | 10 | 0 | $0.00 | 0.00% |`
+
+- **+2 views in ~1.1 d.** **7-day trend:** +15 over ~7.15 d (≈2.1/day), against +12 over ~6.53 d (≈1.8/day) the week before. **Slightly up**; n=15, direction only.
+- Downloads 10. **The 0.2.7 demo has 0 pulls in its first 2 days**; every paid file is 0. Sales and revenue are 0.
+- **Conversion: 0/184.** The 200-view gate is 16 views away, about 11-15 at this rate. That is one day after T-023's 11-14 default STOP.
+
+### Roadmap
+
+- **v0.2.8 "Gradient": Wed 11-11**, 4 days out. **Flagged per §D: no work is logged yet.** That is expected for a weekly routine whose only slot is 11-11 itself, so this is a flag and not an alert. If 11-11 passes without a ship or a recorded reason, a row opens against `texel-release`.
+- **v0.3.0 "Tileset": 11-18; v0.4.0 "Handoff" ($14.95 step): 11-25.** Both fall after T-023's default STOP.
+
+---
+
+## 2026-11-06 — run 41 (in slot, ~12:57Z)
+
+**VERDICT: BLOCKED ON A HUMAN DECISION; THE LISTING IS HEALTHY.** v0.2.7 shipped in a 11-05 catch-up and passes every listing check, all four doers are inside their windows, and T-029 is closed on this routine's own read. **T-023 (stop/continue) is unanswered at 28 days; its default STOP on 2026-11-14 is 8 days out.**
+
+### Action ledger
+
+**Opened: 0. Closed: 1 (T-029).** A-032 is still Open, so the 7-day and 14-day rungs stay suspended for every HUMAN row.
+
+- **Closed T-029** (`texel-release`): the public page serves `texel-0.2.7.zip` 218 kB and `texel-lite-demo-0.2.7.zip` 206 kB, with no 0.2.6 name. `ROADMAP.md:428` records the late date, the reason and the new order (Gradient to v0.2.8 on 11-11). `devlog.rss` leads with devlog 1754687. Run 40's "next run 11-11" was wrong: the release catch-up fired at 11-05T12:53Z, four minutes after that read.
+
+| id | age | owner |
+|---|---|---|
+| T-023 | 28 d | **HUMAN**: stop/continue. Default STOP 2026-11-14 |
+| T-010 | 52 d | **HUMAN** (suspended) |
+| T-011 | 52 d | **HUMAN** (suspended) |
+| T-015 | 48 d | **HUMAN** (suspended) |
+| T-016 | 48 d | **HUMAN** (suspended; part of T-023's CONTINUE option) |
+
+### ALERTS
+
+None for a doer. The only thing that needs action is T-023, which needs the user.
+
+### Routines (scheduler read 11-06 ~12:57Z)
+
+| Routine | lastRunAt | Next | Artifact |
+|---|---|---|---|
+| support | 11-05T14:25Z | 11-06T14:24Z | `SUPPORT.md:689-690`: two 11-05 rows, no new inbound; paint-mode tally row marked shipped |
+| marketing | 11-06T02:51Z | 11-06T21:20Z | `promo/POSTED.md`: 11-05 run, no post on a packs day, two replies verified on AppView |
+| release | 11-05T12:53Z | 11-11T16:13Z | v0.2.7 live, ROADMAP ticked, devlog 1754687 |
+| funnel | 10-30T15:07Z | **11-06T16:06Z (today)** | `funnel/LOG.md` 10-30; not late until today's slot passes |
+
+### Listing (measured 11-06 ~12:57Z)
+
+| Check | Result |
+|---|---|
+| Logged-out page | HTTP 200, 48,584 B, 6 posts. `Updated` 05 Nov 13:10 UTC |
+| Download | Paid `texel-0.2.7.zip` **218 kB** = local `dist/texel-0.2.7.zip` 224,109 B (newest). Demo `texel-lite-demo-0.2.7.zip` 206 kB |
+| Price | `game[min_price]` $9.95; public page $9.95 ×3. Correct until v0.4.0 (now 11-25) |
+| Status | `game[published]=published` |
+| AI disclosure | `ai_generated=yes`, `ai_graphics` and `ai_code` checked, `ai_text` unchecked |
+
+**All pass.** The edit page was read headless through `lib.mjs` `launch()` with a throwaway read-only script, since deleted; `profile.lock` was absent before and after. Nothing was clicked or saved. The two `$15` strings on the page are itch's "$15 or less" breadcrumb, not a price.
+
+### Numbers
+
+`| 2026-11-06 (12:57Z) | 182 | 10 | 0 | $0.00 | 0.00% |`
+
+- **+1 view in ~1.0 d.** **7-day trend:** +13 over ~7.0 d (≈1.8/day), against +12 over ~6.5 d (≈1.8/day) the week before. **Flat**; n=13, direction only.
+- Downloads 10, sales 0, revenue $0. Day 1 of v0.2.7, so it is too early to read the release.
+- **Conversion: 0/182.** The 200-view gate is 18 views away, about 11-16 at this rate. That is after T-023's 11-14 default STOP, so the gate will not report before the default decides.
+
+### Roadmap
+
+- **v0.2.7 "Paint mode": RELEASED 11-05**, one day late, reason recorded.
+- **v0.2.8 "Gradient": Wed 11-11**, 5 days out. No work is logged yet, which is normal for a weekly routine whose slot has not come. If nothing is logged by its slot, it gets flagged.
+- **v0.3.0 "Tileset": 11-18; v0.4.0 "Handoff" ($14.95 step): 11-25.** Both fall after T-023's default STOP.
+
+---
+
 ## 2026-11-05 — run 40 (in slot, ~12:55Z, after a host outage)
 
 **VERDICT: DEGRADED.** The listing passes every check, but a host outage from about 11-04T04:15Z to the 11-05 ~12:40Z catch-up cost the whole 11-04 Texel cycle. That includes `texel-release`'s Wednesday slot, so v0.2.7 is a day late and the scheduler will not run it again until 11-11. **T-023 (stop/continue) is still unanswered at 27 days**; its 11-14 default STOP is 9 days out.
