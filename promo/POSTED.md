@@ -2657,3 +2657,36 @@ Both re-fetched cookie-less from `public.api.bsky.app` `getPosts`: author `pixel
 - **@lionfrompanyu** second post (video): one reply per person this run.
 
 ### §E: due **tomorrow, Sat 2026-11-07**. Carries unchanged from 11-02, plus: QUEUE says any listing text naming **11-14** for the price step is now wrong (step tied to v0.4.0, ~11-25). Check the live description for "11-14" first thing Saturday.
+
+## Run 2026-11-07 (Sat, a PACKS day, ~21:00-21:30Z): no Texel post, §E listing check with two live changes, two replies
+
+**Ledger first.** `ACTIONS.md` has no OPEN row owned by `texel-marketing`. Open: T-010, T-011, T-015, T-016, T-023 (all `HUMAN`). T-023 (stop/continue, default STOP 11-14) is still undecided; nothing in it pauses marketing.
+
+**No post.** Saturday belongs to the packs. `QUEUE.md` untouched.
+
+### §E: the Saturday listing check
+
+- **Conversion rule:** not fired. Watch run 42 reads **0/184**, under the 200-view gate (about 11-15, the day after T-023's default STOP).
+- **"11-14" carry:** checked first. The live description contains no "11-14", no date and no price figure; the only price line is *"The price rises at named milestones"*, which stays true with the step tied to v0.4.0. Nothing to change.
+- **Truth check:** logged-out page HTTP 200, 48,576 B, serving `texel-0.2.7.zip` + `texel-lite-demo-0.2.7.zip`. *95 operators* unchanged. Tags (3D, Animation, Blender, Pixel Art, Sprites, Textures) and AI disclosure (AI Assisted: Code, Graphics) still right.
+- **CHANGED, LIVE (1): *Tiles that actually tile.* → *Seam check for tiles.*** plus *"It is a heuristic: a break softer than the texture's own contrast can slip past it."* Carried since 11-02. The old headline promised an outcome; `ROADMAP.md`'s 2026-09-24 ruling shows the check returns `seamless: True` on a moss tile that visibly does not wrap, and the operator now prints that same limit. CLAUDE.md §6: never claim results that were not tested, and here the failing case was tested.
+- **CHANGED, LIVE (2): v0.2.7 added to *Cel animation*:** *"The eye beside a cel hides its whole track on every frame, and the sheet, JSON and GIF leave it out. New in v0.2.7."* `texel-release` shipped 0.2.7 on 11-05 without a description line. Wording from the shipped `dist/texel-0.2.7.zip` README lines 124-131. Cel animation is not in Lite, so the Lite *"does not include"* list stays true.
+- **How applied:** `itch_desc_dump.mjs` → reps asserted to occur once each and reconstruct the target → `itch_desc_replace.mjs --game 4991926` printed **applied 2/2, no stale strings**; a fresh dump matches the target line for line (only line endings differ); logged-out re-read (48,792 B) shows both new strings and no *"actually tile"*. Mirrored into `store/listing_short.html` (which was already older than live, so it is not the live generator). Pointer in `LISTING.md`.
+- **Not done, carried:** no gallery image shows stamps, dither, pressure or hidden tracks. Still a `brand-visual` loop; `promo/showcase/showcase_GOLDEN.png` remains the candidate.
+
+### §D: two replies, both verified on the public AppView
+
+| Date | Thread | What was said | Link |
+|---|---|---|---|
+| 2026-11-07 | @emscotty.bsky.social (11-07 17:49Z, 26 likes, **0 replies**): *"Another 3D/Pixel mash-up with a #Bottle for #pixel_dailies"*. Image viewed (2160x2700; about 17 px per art pixel, so roughly a 124-wide canvas): three blue glass bottles and a glass, checker-dithered, on pink and peach. | Feedback on finished work, no tip: the checker dither on the big bottle's shoulder lets the pink wall show through the blue, which reads as glass; the highlights stay small solid cream blobs, never dithered, so they read as shine. Both visible in the image (pink/blue checker on the left shoulder; solid cream clusters on the right bottle). | [3mzqtjaaovg2q](https://bsky.app/profile/pixelkiln.bsky.social/post/3mzqtjaaovg2q) |
+| 2026-11-07 | @triplezed.bsky.social (11-06 12:28Z, 4 likes, **0 replies**): randomised window emission per mesh island in geometry nodes, noise texture for curtains. Render viewed (1920x1080). | Feedback on finished work, no tip: the vertical noise strips read as fabric behind glass; **7 lit windows out of about 56** (counted on the render: 7 columns x 8 visible rows), one pink, reads as a real building late in the evening. Their method already works; there was no problem to solve. | [3mzqtjb6evv2g](https://bsky.app/profile/pixelkiln.bsky.social/post/3mzqtjb6evv2g) |
+
+Both read back from the author's PDS (`getRecord`: `createdAt` 21:25:32.259Z / 21:25:33.364Z, parent URIs correct, 258 / 239 bytes) and from cookie-less `public.api.bsky.app` `getPosts` (author `pixelkiln.bsky.social`). No link, no pitch, Texel not mentioned. Sent with `pixelkiln/tools/pixelkiln_social.ps1 -Mode reply` after a `-DryRun` of each.
+
+### Threads looked at and left alone
+
+- **@pixor-art** (11-07, a pixel-art-in-Blender product release), **@dentwy**, **@esteeland**, **@elvisish**, **@alfredbaudisch**: standing rule. **@retrygames** (Tintline), **@oleksii-soloviov27** (commission promo), **@justadev-studio**, **@tincle**: promos.
+- **@arubinousagi** (skateboard): replied to them on 11-05; not again so soon.
+- **@okno-studio**, **@mucleus**, **@sillyneve**: nothing specific and verified to add, as before.
+
+### §E: done today. The next check is **Sat 2026-11-14**, the T-023 default-STOP date. If the user has not ruled by then, the check is still owed and runs as normal.

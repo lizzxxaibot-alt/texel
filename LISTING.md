@@ -445,3 +445,12 @@ Pointer, not a copy: the reasoning and evidence are in `promo/POSTED.md` under *
 Pointer, not a copy: evidence is in `ACTIONS.md` T-027 and `promo/POSTED.md` under *Run 2026-11-02*.
 
 1. **A *Getting started* section added to the live description**, after *Try it free first*: START-HERE.html and README.md ship in both zips, then four steps (install from disk, N → Texel tab, Setup → Add 1m Cube, Pencil and draw), and an invitation to comment with the stuck step. Prompted by the page's first-ever comment (Isaque.OS, 11-02: no tutorial anywhere). Revert with `node automation/itch_desc_replace.mjs --game 4991926`.
+
+## 2026-11-07 — two live changes by `texel-marketing` (§E Saturday check)
+
+Pointer, not a copy: reasoning and evidence are in `promo/POSTED.md` under *Run 2026-11-07*.
+
+1. **Headline *Tiles that actually tile.* → *Seam check for tiles.***, plus one clause naming the heuristic's limit (*"a break softer than the texture's own contrast can slip past it"*), the same limit `texel.check_tileable` prints since the 2026-09-24 ruling in `ROADMAP.md`. The old headline promised an outcome the check cannot guarantee. The long-form paragraph above (line ~71) is not live copy; left as history.
+2. **v0.2.7 hide-a-track line appended to *Cel animation*** (*"The eye beside a cel hides its whole track on every frame, and the sheet, JSON and GIF leave it out. New in v0.2.7."*), worded from the shipped `texel-0.2.7.zip` README lines 124-131. Cel animation is not in Lite, so the Lite paragraph stays true.
+
+Both mirrored into `store/listing_short.html`. Revert either with `node automation/itch_desc_replace.mjs --game 4991926`.
