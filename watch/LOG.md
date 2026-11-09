@@ -6,6 +6,127 @@ in `../ACTIONS.md` and handed to a named owner.
 
 ---
 
+## 2026-11-09 — run 44 (scheduler catch-up, ~16:15Z; slot ~12:52Z missed)
+
+**VERDICT: BLOCKED ON A HUMAN DECISION; THE LISTING IS HEALTHY.** Every listing check passes on v0.2.7 and all four doers are inside their windows. Nothing was opened or closed. **T-023 (stop/continue) has gone 31 days without an answer. If nobody answers, it defaults to STOP on 2026-11-14, 5 days from now.**
+
+### Action ledger
+
+**Opened: 0. Closed: 0.** A-032 is still Open, so the 7-day and 14-day rungs stay suspended for every HUMAN row.
+
+| id | age | owner |
+|---|---|---|
+| T-023 | 31 d | **HUMAN**: stop/continue. Default STOP 2026-11-14 |
+| T-010 | 55 d | **HUMAN** (suspended) |
+| T-011 | 55 d | **HUMAN** (suspended) |
+| T-015 | 51 d | **HUMAN** (suspended) |
+| T-016 | 51 d | **HUMAN** (suspended; part of T-023's CONTINUE option) |
+
+No decision on T-023 appears in `STATE.md`, `state/texel.md` or `ROADMAP.md`.
+
+### ALERTS
+
+None for a doer. The host was off again this morning. Every daily routine whose slot fell in the outage fired together at ~16:12Z. That outage belongs to A-037 (HUMAN, Pixelkiln ledger).
+
+- **`texel-support` lost its 11-09 slot (~14:24Z) outright.** The scheduler gives no catch-up, and its next run is 11-10T14:24Z. Its last run was 11-08T19:32Z, ~20.7 h ago. That is inside 48 h, so this is not an alert. It becomes one if 11-10 is also missed.
+- For `pixelkiln-watch`, not this routine: `pixelkiln-backup` has `lastRunAt` 11-08T04:13Z, so its 11-09 04:13Z slot was missed too.
+
+### Routines (scheduler read 11-09 ~16:15Z)
+
+| Routine | lastRunAt | Next | Artifact |
+|---|---|---|---|
+| support | 11-08T19:32Z | 11-10T14:24Z (11-09 slot lost) | `SUPPORT.md:693`: 11-08 "no inbound support items, day 61", 6 posts |
+| marketing | 11-08T21:21Z | 11-09T21:20Z | `promo/POSTED.md:2704`: Sun 11-08 beat (desert ruins, `store/stills/env_ruins_02.png`), verified there via `getPosts` at 21:22:23Z |
+| release | 11-05T12:53Z | 11-11T16:13Z | v0.2.7 live. v0.2.8 Gradient is queued for 11-11 |
+| funnel | 11-06T16:07Z | 11-13T16:06Z | `funnel/LOG.md` 11-06 entry. Waiting on T-023 and T-016 |
+
+### Listing (measured 11-09 ~16:15Z)
+
+| Check | Result |
+|---|---|
+| Logged-out page | HTTP 200, 48,785 B (same size as on 11-08). `Updated` 07 Nov 21:23 UTC. 6 comment posts |
+| Download | Paid `texel-0.2.7.zip` **218 kB** matches local `dist/texel-0.2.7.zip` 224,109 B (the newest). Demo `texel-lite-demo-0.2.7.zip` 206 kB |
+| Price | `game[min_price]` $9.95; public page shows $9.95 ×3. Correct until v0.4.0 (11-25) |
+| Status | `game[published]=published` |
+| AI disclosure | `ai_generated=yes`, `ai_graphics` and `ai_code` checked; text and audio unchecked |
+
+**All pass.** The edit page and summary were read headless through `lib.mjs` `launch()` with a throwaway read-only script, now deleted. Nothing was clicked or saved. `profile.lock` was absent afterwards.
+
+### Numbers
+
+`| 2026-11-09 (16:15Z) | 190 | 10 | 0 | $0.00 | 0.00% |`
+
+- **+0 views in ~0.86 d.** **7-day trend:** +15 over ~7.14 d (≈2.1/day), against +15 over ~6.96 d (≈2.2/day) the week before. **Flat.** The ≈2.9/day reading on 11-08 was noise, as that run warned it might be.
+- Downloads 10, unchanged. The v0.2.7 demo has 0 pulls after 4 days. Sales and revenue are 0.
+- **Conversion: 0/190. The 200-view gate is 10 views away. At ≈2.1/day that is ~11-14, the same day as T-023's default STOP.** If the page reaches 200 views with 0 sales, the §B rule fires (under 0.5% conversion after 200+ views). That rule would add a second, independent signal to the user's T-023 call, not a new row.
+
+### Roadmap
+
+- **v0.2.8 "Gradient": Wed 11-11**, 2 days out. No work is logged yet. That is expected, because `texel-release` only runs on its 11-11 slot. This is a flag, not an alert.
+- **v0.3.0 "Tileset" 11-18; v0.4.0 "Handoff" ($14.95 step) 11-25.** Both fall after T-023's default STOP.
+
+---
+
+## 2026-11-08 — run 43 (scheduler catch-up, ~19:30Z; slot ~12:52Z missed)
+
+**VERDICT: BLOCKED ON A HUMAN DECISION; THE LISTING IS HEALTHY.** Every listing check passes on v0.2.7, all four doers are inside their windows, and nothing was opened or closed. **T-023 (stop/continue) is unanswered at 30 days; its default STOP on 2026-11-14 is 6 days out.**
+
+### Action ledger
+
+**Opened: 0. Closed: 0.** A-032 is still Open, so the 7-day and 14-day rungs stay suspended for every HUMAN row.
+
+| id | age | owner |
+|---|---|---|
+| T-023 | 30 d | **HUMAN**: stop/continue. Default STOP 2026-11-14 |
+| T-010 | 54 d | **HUMAN** (suspended) |
+| T-011 | 54 d | **HUMAN** (suspended) |
+| T-015 | 50 d | **HUMAN** (suspended) |
+| T-016 | 50 d | **HUMAN** (suspended; part of T-023's CONTINUE option) |
+
+No decision on T-023 appears in `STATE.md`, `state/texel.md` or `ROADMAP.md`.
+
+### ALERTS
+
+None for a doer. The host was off again this morning: `pixelkiln-itch-boards`, `-itch-audit`, `-production`, `pixelkiln-watch` and `texel-watch` all fired together at ~19:23-19:30Z, hours after their slots. That outage belongs to A-037 (HUMAN, Pixelkiln ledger).
+
+**`texel-support` missed its 11-08 14:24Z slot.** Correction to run 42: its 11-07 slot was not lost, it ran as a catch-up at 11-07T15:32Z, two minutes after run 42's scheduler read. That puts it ~28 h since its last run, inside the 48 h test, so it is not an alert. Its next slot is 11-09T14:24Z, and missing that one would make it an alert.
+
+### Routines (scheduler read 11-08 ~19:30Z)
+
+| Routine | lastRunAt | Next | Artifact |
+|---|---|---|---|
+| support | 11-07T15:32Z | 11-09T14:24Z (11-08 slot missed) | `SUPPORT.md:692`: 11-07 "no inbound support items, day 60" |
+| marketing | 11-07T21:21Z | 11-08T21:20Z | `promo/POSTED.md:2661`: Sat 11-07, no post (packs day). §E listing check made two live description changes: *"Tiles that actually tile."* became *"Seam check for tiles."* with the heuristic caveat, and a v0.2.7 hidden-track line was added. Re-verified here: the public page has "Seam check for tiles" ×1 and "actually tile" ×0 |
+| release | 11-05T12:53Z | 11-11T16:13Z | v0.2.7 live; v0.2.8 Gradient queued at `ROADMAP.md` |
+| funnel | 11-06T16:07Z | 11-13T16:06Z | `funnel/LOG.md` 11-06 entry; holds on T-023 |
+
+### Listing (measured 11-08 ~19:30Z)
+
+| Check | Result |
+|---|---|
+| Logged-out page | HTTP 200, 48,785 B. `Updated` 07 Nov 21:23 UTC (marketing's description edit) |
+| Download | Paid `texel-0.2.7.zip` **218 kB** = local `dist/texel-0.2.7.zip` 224,109 B (newest). Demo `texel-lite-demo-0.2.7.zip` 206 kB |
+| Price | `game[min_price]` $9.95; public page $9.95 ×3. Correct until v0.4.0 (11-25) |
+| Status | `game[published]=published` |
+| AI disclosure | `ai_disclosure[ai_generated]=yes`, graphics and code checked, text and audio unchecked |
+
+**All pass.** The edit page was read headless through `lib.mjs` `launch()` with a throwaway read-only script, since deleted. Nothing was clicked or saved. `profile.lock` was absent before and after.
+
+### Numbers
+
+`| 2026-11-08 (19:30Z) | 190 | 10 | 0 | $0.00 | 0.00% |`
+
+- **+6 views in ~1.17 d.** **7-day trend:** +21 over ~7.27 d (≈2.9/day), against +9 over ~5.96 d (≈1.5/day) the week before. **Up**, with n=21, so this shows direction only. It follows marketing's 11-07 copy edit, but one day of +6 is inside normal noise and is not attributed to it.
+- Downloads 10, unchanged. Sales and revenue are 0.
+- **Conversion: 0/190.** **The 200-view gate is 10 views away, about 11-11 to 11-13 at this rate. That is now before T-023's 11-14 default STOP**, which was not true in any earlier projection. If it is reached with 0 sales, the §B conversion rule fires (under 0.5% after 200 views). That would be a second, independent signal for the user's T-023 call, not a new row.
+
+### Roadmap
+
+- **v0.2.8 "Gradient": Wed 11-11**, 3 days out. No work is logged yet. That is expected for a weekly routine whose only slot is 11-11, so this is a flag, not an alert.
+- **v0.3.0 "Tileset" 11-18; v0.4.0 "Handoff" ($14.95 step) 11-25.** Both fall after T-023's default STOP.
+
+---
+
 ## 2026-11-07 — run 42 (scheduler catch-up, ~15:30Z; slot ~12:52Z missed)
 
 **VERDICT: BLOCKED ON A HUMAN DECISION; THE LISTING IS HEALTHY.** Every listing check passes on v0.2.7, all four doers are inside their windows, and nothing was opened or closed. **T-023 (stop/continue) is unanswered at 29 days; its default STOP on 2026-11-14 is 7 days out.**
