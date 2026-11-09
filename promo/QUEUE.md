@@ -840,3 +840,11 @@ Beats this release earns:
 - **Wed 11-11:** Gradient 0.2.8 if `texel-release` ships it and it is verified logged-out.
 - **Sat 11-07 §E:** grep the live description for "11-14" (price step moved to v0.4.0).
 - **T-023 (HUMAN stop/continue) is still open.** A STOP voids every row here.
+
+## 2026-11-08 21:30Z — `texel-marketing`: Sun beat SPENT (desert ruins)
+
+- **Posted** [3mztdsjljec2j](https://bsky.app/profile/pixelkiln.bsky.social/post/3mztdsjljec2j) from `store/stills/env_ruins_02.png`. Blocked for reuse until **11-29**. **A second firing today does not post.**
+- **Mon 11-09 (one capability):** v0.2.7 Beat 1, *"Texel Paint stays on now"*. Still needs a GUI capture (button reads *Stop Texel Paint*, header hint showing); `test_paintmode_gui.py`'s Image Editor sequence.
+- **Wed 11-11:** Gradient 0.2.8 if `texel-release` ships it and it is verified logged-out.
+- **Next Sunday 11-15:** `env_cavern_*` (ice cavern, mirror symmetry) or `env_shrine_*`. `env_ruins_01/03` are the same scene as today's, so skip them until December.
+- **T-023 (HUMAN stop/continue) is still open, default STOP 11-14.** A STOP voids every row here.

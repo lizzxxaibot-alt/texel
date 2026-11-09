@@ -2690,3 +2690,39 @@ Both read back from the author's PDS (`getRecord`: `createdAt` 21:25:32.259Z / 2
 - **@okno-studio**, **@mucleus**, **@sillyneve**: nothing specific and verified to add, as before.
 
 ### §E: done today. The next check is **Sat 2026-11-14**, the T-023 default-STOP date. If the user has not ruled by then, the check is still owed and runs as normal.
+
+## Run 2026-11-08 (Sun, a TEXEL day, ~21:15-21:30Z): the desert ruins render, two replies
+
+**Ledger first.** `ACTIONS.md` has no OPEN row owned by `texel-marketing`. Open: T-010, T-011, T-015, T-016, T-023 (all `HUMAN`). T-023 (stop/continue, default STOP 11-14) is still undecided; nothing in it pauses marketing. No top-level post on the account since 11-07 01:31Z (`getAuthorFeed`).
+
+### Posted — Sun 2026-11-08, best render = `env_ruins_02` (first post of any `env_ruins_*` still)
+
+`QUEUE.md` held nothing that outranks Sunday: Beat 1 (Texel Paint stays on) still needs a GUI capture and suits Monday.
+
+| Date | Beat | Asset | URL | First hour |
+|---|---|---|---|---|
+| 2026-11-08 | **Desert ruins for an adventure level: one 64x64 sandstone texture on pillars and rubble, Apply Density 9 texels/m on pillars vs 34 on rubble, pots and capitals** | `store/stills/env_ruins_02.png`, saved as `store/stills/env_ruins_02_post.jpg` (JPEG q95 4:4:4, 281,951 B, 1280x720). Blocked for reuse until **11-29** | [3mztdsjljec2j](https://bsky.app/profile/pixelkiln.bsky.social/post/3mztdsjljec2j) | 3 likes, 2 reposts at +2 min |
+
+Every claim was checked against the code that made the render, not recalled:
+- **`envs.py` `ENVIRONMENTS["ruins"]`**: `dens=(9.0, 34.0)`, `arch={"Sand","Pillar","Lintel","Wall"}`. `render_env.py` `apply_density()` runs `bpy.ops.texel.density_apply()` per object at 9 for names starting with an arch prefix and 34 for everything else, so `Cap*` (capitals), `Pot*` and `Rubble*` get 34.
+- **"share one 64x64 sandstone texture"**: `build_ruins` gives `Pillar*` and `Rubble*` the same `mats["sandstone"]`; `tex_ruins(size=64)`. Visible in the still: the fallen blocks' bricks are smaller than the pillars'.
+- Apply Density is in every shipped zip since 0.1.0 (live is 0.2.7).
+- **Verified cookie-less with `getPosts`:** author `pixelkiln.bsky.social`, `createdAt` 2026-11-08T21:22:23.743Z, `app.bsky.embed.images#view`, 1 image 1280x720, alt 427 characters. Text 286/300 bytes, 4 facets.
+- **Reuse:** no `env_ruins_*` still has been posted before. **Phrasing:** "share one", "keep their detail", "adventure level" had no prior use. No antithesis, no hype words, no rival named.
+- Spec: `promo/post_2026-11-08.json`.
+
+### §D: two replies, both verified on the public AppView
+
+| Date | Thread | What was said | Link |
+|---|---|---|---|
+| 2026-11-08 | @awfukellay.bsky.social (11-08 21:07Z, 8 likes, 1 reply): *"An Assault Corvette."* #Lowpoly #PixelArt #Blockbench; turntable video sampled with ffmpeg (4 frames + one full-res frame looked at). | Feedback on finished work, no tip: block exhaust going yellow to red reads as flame from every angle; the one cyan midsection band gives the grey hull a focal point; the "7110-A" stencil sells the scale. All three visible (stencil read off the 1152x720 frame at 9 s). | [3mztduxixf52s](https://bsky.app/profile/pixelkiln.bsky.social/post/3mztduxixf52s) |
+| 2026-11-08 | @bamboleooooooooooo.bsky.social (11-08 21:17Z, 1 like; their own follow-up: a turntable "to better show that star effect on her skin"). Video sampled with ffmpeg (3 frames looked at): a low-poly pixel-textured character with orange rings, on a rock among ringed planets. | Feedback on finished work, no tip: rings at head, waist and wrist tie her to the ringed planets; the star specks stay small and sparse on the navy skin, reading as night sky without pulling focus from the face. Both visible in the frames. | [3mztduygrij2s](https://bsky.app/profile/pixelkiln.bsky.social/post/3mztduygrij2s) |
+
+Both re-fetched cookie-less from `public.api.bsky.app` `getPosts`: author `pixelkiln.bsky.social`, `createdAt` 21:23:45.283Z / 21:23:46.259Z, parent URIs correct, 238 / 235 bytes. No link, no pitch, Texel not mentioned. Sent with `pixelkiln/tools/pixelkiln_social.ps1 -Mode reply` after a `-DryRun` of each. Neither account appears earlier in this log.
+
+### Threads looked at and left alone
+
+- **@pixor-art**, **@dentwy**, **@esteeland**, **@elvisish**, **@alfredbaudisch**: standing rule. **@ecutruin** (an argument about labelling Blender-made pixel art): leave arguments alone. **@smileycrew**, **@idlerunner00**, **@bugfactory**: promos.
+- **@piratemouse** (djembe drums, pure 2D pixel art, 3000x3000 viewed): good work, but nothing specific and verified to add that a pixel-art peer would not already know; silence is free.
+
+### §E: not due. The next check is **Sat 2026-11-14**, the T-023 default-STOP date.
