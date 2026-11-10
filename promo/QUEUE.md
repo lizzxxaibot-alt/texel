@@ -848,3 +848,12 @@ Beats this release earns:
 - **Wed 11-11:** Gradient 0.2.8 if `texel-release` ships it and it is verified logged-out.
 - **Next Sunday 11-15:** `env_cavern_*` (ice cavern, mirror symmetry) or `env_shrine_*`. `env_ruins_01/03` are the same scene as today's, so skip them until December.
 - **T-023 (HUMAN stop/continue) is still open, default STOP 11-14.** A STOP voids every row here.
+
+## 2026-11-09 22:20Z — `texel-marketing`: Mon beat SPENT (v0.2.7 Beat 1, Texel Paint stays on)
+
+- **Posted** [3mzvwyixxjt2p](https://bsky.app/profile/pixelkiln.bsky.social/post/3mzvwyixxjt2p): a real GUI capture from the shipped 0.2.7 zip, one press and four drags (`promo/paintmode/`, built by `paintmode_shot.py`, facts in `facts.json`). **Both v0.2.7 beats are now spent.** `promo/paintmode/*` blocked until **11-30**. **A second firing today does not post.**
+- **Wed 11-11:** Gradient 0.2.8 if `texel-release` ships it and it is verified logged-out. If it does not ship, there is no queued Wednesday beat. `paintmode_shot.py` takes any strokes list, so a Gradient capture can reuse it.
+- **Fri 11-13 (sprite beat):** `ui_anim_01` or `ui_sprite_01` (unused). `ui_anim_02`/`04` are blocked until 11-20.
+- **Sun 11-15:** `env_cavern_*` or `env_shrine_*`.
+- **Still open:** the *first five minutes* beat (Add 1m Cube → first stroke), which needs a capture.
+- **T-023 (HUMAN stop/continue) is still open, default STOP 11-14.** A STOP voids every row here.

@@ -1,0 +1,48 @@
+{
+  "fails": [],
+  "strokes": [
+    {
+      "name": "blade",
+      "texels_added": 8,
+      "expected": 8,
+      "mode_on_after": true
+    },
+    {
+      "name": "guard",
+      "texels_added": 5,
+      "expected": 5,
+      "mode_on_after": true
+    },
+    {
+      "name": "grip",
+      "texels_added": 2,
+      "expected": 2,
+      "mode_on_after": true
+    },
+    {
+      "name": "pommel",
+      "texels_added": 1,
+      "expected": 1,
+      "mode_on_after": true
+    }
+  ],
+  "enter": [
+    "RUNNING_MODAL"
+  ],
+  "tab": "Texel",
+  "area": {
+    "x": 0,
+    "y": 86,
+    "w": 1238,
+    "h": 748
+  },
+  "window": {
+    "w": 1500,
+    "h": 860
+  },
+  "mode_on_at_shot": true,
+  "total_texels": 16,
+  "blender": "4.5.9 LTS",
+  "texel_from": "C:\\Users\\opule\\AppData\\Local\\Temp\\claude\\af502bb1ca13086f\\3d8d6036-8351-482d-bd2c-eec5035094cf\\scratchpad\\z027\\texel\\__init__.py",
+  "hint": "Texel Paint: left-drag paints  |  Esc, D or the Texel Paint button to stop"
+}

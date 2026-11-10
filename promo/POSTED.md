@@ -2726,3 +2726,37 @@ Both re-fetched cookie-less from `public.api.bsky.app` `getPosts`: author `pixel
 - **@piratemouse** (djembe drums, pure 2D pixel art, 3000x3000 viewed): good work, but nothing specific and verified to add that a pixel-art peer would not already know; silence is free.
 
 ### §E: not due. The next check is **Sat 2026-11-14**, the T-023 default-STOP date.
+
+## Run 2026-11-09 (Mon, a TEXEL day, ~22:05-22:20Z): v0.2.7 Beat 1 "Texel Paint stays on", two replies
+
+**Ledger first.** `ACTIONS.md` has no OPEN row owned by `texel-marketing`. Open: T-010, T-011, T-015, T-016, T-023 (all `HUMAN`). T-023 (stop/continue, default STOP 11-14) is still undecided. No top-level post on the account since 11-08 21:22Z (`getAuthorFeed`).
+
+### Posted — Mon 2026-11-09, one capability = `QUEUE.md` v0.2.7 Beat 1 ("Texel Paint stays on now")
+
+| Date | Beat | Asset | URL | First hour |
+|---|---|---|---|---|
+| 2026-11-09 | **Texel Paint stays on: one press (or D), every left-drag paints until Esc or D. A 16x16 RPG sword in one press and four drags** | `promo/paintmode/shot_editor.png` (1238x748, the Image Editor area cropped from a real Blender window screenshot). Blocked for reuse until **11-30** | [3mzvwyixxjt2p](https://bsky.app/profile/pixelkiln.bsky.social/post/3mzvwyixxjt2p) | 4 likes, 2 reposts at +2 min |
+
+The capture is **real input on the shipped zip**, not a mock:
+- `promo/paintmode/paintmode_shot.py` loads the add-on from an extraction of `dist/texel-0.2.7.zip`, runs Blender 4.5.9 with `--enable-event-simulate`, invokes `texel.paint` **once** from the sidebar, then sends four simulated left-drags (blade 8 cells, guard 5, grip 2, pommel 1). Only `scene.texel.colour` changes between drags.
+- `promo/paintmode/facts.json`: every stroke added exactly its cell count (8/5/2/1), `mode_on_after: true` after each one, 16 texels in total, `RUNNING_MODAL` on entry, the mode still on at the screenshot, sidebar tab `Texel`. The button reads *Stop Texel Paint* and the header shows `TP.HINT`. Both are visible in the PNG, which I looked at.
+- Claims checked against `README.md` §Painting: "press Texel Paint (or D)", "Esc, D, or the button again", "Before 0.2.7 the button painted one stroke and switched itself off".
+- **Live file re-read logged-out: `texel-0.2.7.zip` + `texel-lite-demo-0.2.7.zip`.** One process note: my first version grep returned nothing (curl sent no user agent), and the send was in the same call, so it went out before that check passed. The re-read with a UA confirmed 0.2.7 right after. **Next run: verify before sending, in a separate call.**
+- **Verified cookie-less with `getPosts`:** author `pixelkiln.bsky.social`, `createdAt` 2026-11-09T22:11:04.883Z, `app.bsky.embed.images#view`, 1 image 1238x748, alt 403 characters. Text 264/300 bytes, 4 facets. Spec: `promo/post_2026-11-09.json`.
+- **Reuse:** a new asset. **Phrasing:** "stays on", "one press, four drags", "a click per stroke" had no prior use in post text. No antithesis, no hype words, no rival named.
+
+### §D: two replies, both verified on the public AppView
+
+| Date | Thread | What was said | Link |
+|---|---|---|---|
+| 2026-11-09 | @whooshboom.bsky.social (11-09 11:31Z, 4 likes): WIP rigged pixel-art robot dog in Blender, idle + reared pose, plus a self-reply showing the Krita-assembled cut-out texture sheet. All 3 images viewed (fetched via PDS `getBlob`). | Feedback, no tip: the round shoulder and hip discs still cover the joints in the reared pose, so no gaps open between cut-out parts; the yellow saddle plates with the ladder read as mech armour. Both visible in image 2. | [3mzvx4alla42z](https://bsky.app/profile/pixelkiln.bsky.social/post/3mzvx4alla42z) |
+| 2026-11-09 | @controlmole.bsky.social (11-09 17:00Z, 2 likes): every screen of their ControlMole 3DS homebrew on one sheet (4096x1968, viewed). | Feedback, no tip: the mole's brows carry the mood (smug on Today, happy on the trophy, glaring at the 60-minute limit); locked trophies as grey silhouettes; the disco floor. All on the sheet. Last reply to this account was 10-24. | [3mzvx4bkhca2c](https://bsky.app/profile/pixelkiln.bsky.social/post/3mzvx4bkhca2c) |
+
+Both re-fetched cookie-less from `public.api.bsky.app` `getPosts`: author `pixelkiln.bsky.social`, `createdAt` 22:13:10.000Z / 22:13:11.151Z, parent URIs correct, 262 / 239 bytes. No link, no pitch, Texel not mentioned. Sent with `pixelkiln/tools/pixelkiln_social.ps1 -Mode reply` after a `-DryRun` of each.
+
+### Threads looked at and left alone
+
+- **@pixor-art** (2.4 release) and **@qwartz.app** (a sprite-sheet tool release): standing rule / product promos. **@tsunoagames**, **@dawgstudio**, **@river1shop**, **@toptags**: promos or bots.
+- **@ander-hominem** (Blockbench truck, gallery of 5): fine work, nothing specific I could add beyond praise. **@lionfrompanyu**: replied 11-06. **@bamboleooooooooooo**, **@awfukellay**: replied 11-08.
+
+### §E: not due. The next check is **Sat 2026-11-14**, the T-023 default-STOP date.
