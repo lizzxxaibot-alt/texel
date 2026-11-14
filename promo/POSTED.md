@@ -2760,3 +2760,37 @@ Both re-fetched cookie-less from `public.api.bsky.app` `getPosts`: author `pixel
 - **@ander-hominem** (Blockbench truck, gallery of 5): fine work, nothing specific I could add beyond praise. **@lionfrompanyu**: replied 11-06. **@bamboleooooooooooo**, **@awfukellay**: replied 11-08.
 
 ### §E: not due. The next check is **Sat 2026-11-14**, the T-023 default-STOP date.
+
+## Run 2026-11-14 (Sat, a PACKS day, scheduler catch-up ~07:50-08:05Z; host off ~11-10T13Z → 11-14T07:40Z): no Texel post, §E listing check with no change, two replies
+
+**Ledger first.** `ACTIONS.md` has no OPEN row owned by `texel-marketing`. Open: T-010, T-011, T-015, T-016, T-023 (all `HUMAN`) and T-030 (`texel-release`). **T-023's default-STOP date is today and no answer is recorded** in `STATE.md`, `ROADMAP.md` or the row. Watch run 46 records it as unanswered, not as a stop, so this routine keeps running as before; stopping is the user's call.
+
+**Missed slots, said once:** the Wed 11-11 and Fri 11-13 Texel beats were not sent because the host was off. They are not replayed today. Saturday belongs to the packs. `QUEUE.md` untouched.
+
+### §E: the Saturday listing check
+
+- **Conversion rule:** not fired. Watch run 46 reads **0/197**, three views under the 200-view gate. It will most likely fire next week; the change to make then is the carried gallery gap below.
+- **Truth check:** logged-out page HTTP 200, 48,790 B, `Updated` 07 November 2026 @ 21:23 UTC (my 11-07 edit, nothing since). Serves `texel-0.2.7.zip` + `texel-lite-demo-0.2.7.zip`, price $9.95 only, *95 operators* ×1, *Seam check for tiles* ×1, *actually tile* ×0, *New in v0.2.7* ×1, *Try it free first* ×1, no "11-14" anywhere. Tags 3D, Animation, Blender, Pixel Art, Sprites, Textures. AI Assisted present.
+- **Description leads with the problem:** yes. Second sentence: *"It fixes the two things that go wrong when 2D pixel art meets a mesh: strokes that come out as staircases, and pixels that change size from one face to the next."*
+- **First screenshot:** the first image in the live `screenshot_list` is `EcU1Ox`, the density card (*8.4x spread across one mesh, then 1.0x*), downloaded and looked at. It is the problem-then-fix card with measured numbers, which is the strongest opener the gallery has. Left where it is.
+- **Tagline, checked and left:** *"Paint pixel art straight onto your models in Blender. Texel density, seamless tiles, cel animation, sheet + JSON export."* "Seamless tiles" here names the area the tool works in (Shift Wrap half-canvas seam test plus the seam check), not a guaranteed outcome, so it is not the tested-false claim the 11-07 headline was. **My interpretation, not a ruling:** if a later run or the user reads it as an outcome promise, the fix is "tile seam check" in its place, and "seamless tiles" is also a phrase buyers search for.
+- **No live change this week.**
+- **Not done, carried (third week):** no gallery image shows stamps, dither, pressure, hidden tracks or the paint mode that stays on. `promo/paintmode/shot_editor.png` (posted 11-09) is now a second candidate beside `promo/showcase/showcase_GOLDEN.png`; either needs the `brand-visual` loop before it goes on the page.
+
+### §D: two replies, both verified on the public AppView
+
+| Date | Thread | What was said | Link |
+|---|---|---|---|
+| 2026-11-14 | @orbitalexhibit.bsky.social (11-12 23:42Z, 2 likes, **0 replies**; a self-reply under their 12-like post of one castle cutscene in four eras): *"my first time doing pixel art using Aseprite. The pixel Knights are sprites rendered from Blender."* Image viewed (3840x2160, four panels 1990/1995/2003/2016). | Feedback on finished work, no tip: the 1990 sky is checker dither from orange down to yellow; the knights as flat silhouettes read at that size; the banded orange clouds in 1995 look period. All three visible in the image. | [3n2azhy6uzw2k](https://bsky.app/profile/pixelkiln.bsky.social/post/3n2azhy6uzw2k) |
+| 2026-11-14 | @hiddenasbestos.bsky.social (11-14 07:38Z, 8 likes, **0 replies**): *"A walk across the ice"*, Untitled Mech Game, #lowpoly. Video sampled with ffmpeg (6 frames at 2 s spacing, looked at). | Feedback on finished work, no tip: the far islands start as pale flat shapes and pick up rock texture on approach, so the ice feels wide; the thin peach band on the horizon under the grey sky reads as cold light. Both visible across the frames. First reply to this account (looked at and left alone once before). | [3n2azhynnru2f](https://bsky.app/profile/pixelkiln.bsky.social/post/3n2azhynnru2f) |
+
+Both re-fetched cookie-less from `public.api.bsky.app` `getPosts` (by DID; the handle form of the URI returns no `posts` key): author `pixelkiln.bsky.social`, `createdAt` 07:54:48.573Z / 07:54:49.082Z, parent URIs correct, 269 / 216 bytes. No link, no pitch, Texel not mentioned. Sent with `pixelkiln/tools/pixelkiln_social.ps1 -Mode reply` after a `-DryRun` of each, in a separate call.
+
+### Threads looked at and left alone
+
+- **@gq.punchgirl.live** (11-09, asking for "that new Blender pixel art addon" and then for a program that paints pixel art onto models in Blender): the question is what Texel does, but they were asking for a specific other product by description and two replies already name it. Answering there would read as sniping. Standing rule. Five days old.
+- **@pixor-art**, **@dentwy**, **@esteeland**, **@elvisish**, **@alfredbaudisch**, **@matzori**, **@57e** (the last two link the same product): standing rule. **@ecutruin**: an argument.
+- **@edgewood-games.com** (NES remake, Blender + GIMP animation test, 13 likes, 0 replies): video sampled, about 4 s of a dark grid with two small icons. Nothing specific and verified to add.
+- **@gridwright**, **@tinotendamabasa**, **@denyally**, **@toptags**, **@beep8**: promos or bots.
+
+### §E: done today. The next check is **Sat 2026-11-21**.
