@@ -44,6 +44,8 @@ says on 2026-09-26.
 | *both pages, read 2026-10-30* | *Material Palettes, 41 days live* | *(as above)* | **132** (+13 in 6 d) | **36** (+5) | *format retired 09-26* | *picked up again; see 10-30 note* |
 | *both pages, read 2026-11-06* | *Density Cheatsheet, 56 days live* | *(as above)* | **62** (+4 in 7 d) | **31** (+3) | *format retired 09-26* | *flat* |
 | *both pages, read 2026-11-06* | *Material Palettes, 48 days live* | *(as above)* | **163** (+31 in 7 d) | **42** (+6) | *format retired 09-26* | *best week yet; see 11-06 note* |
+| *both pages, read 2026-11-14* | *Density Cheatsheet, 64 days live* | *(as above)* | **62** (+0 in 8 d) | **31** (+0) | *format retired 09-26* | *dead flat* |
+| *both pages, read 2026-11-14* | *Material Palettes, 56 days live* | *(as above)* | **182** (+19 in 8 d) | **46** (+4) | *format retired 09-26* | *slower than last week; see 11-14 note* |
 
 **The second row is the one that matters now, and it was added on 2026-09-19.**
 The 72 h window is history; what the page has done over eight days is the real
@@ -1011,4 +1013,49 @@ do, and it waits on T-023 like everything else.
 person: BlenderNation (**T-016**) and the stop/continue call (**T-023**, default
 STOP **2026-11-14**, eight days out). The next first-Friday slot is
 **2026-12-04**, after that default.
+
+## Measuring week, 2026-11-14 (`texel-funnel`)
+
+**This run fired on Saturday 11-14, not Friday 11-13.** The host was off from
+about 11-10T13Z to 11-14T07:40Z (`ACTIONS.md` T-030), so this is the catch-up and
+the gap in the readings below is eight days.
+
+**No open `texel-funnel` rows in `ACTIONS.md`.** The open rows are `HUMAN`
+(T-010, T-011, T-015, T-016, T-023) and `texel-release` (T-030). **No drop:** the
+free-sibling-page format was retired on 09-26, and the second week of the month
+is not a ship week in any case. Nothing was added to `promo/QUEUE.md`.
+
+**Readings:** `node automation/itch_analytics.mjs`, *Project totals*, lifetime,
+read at 2026-11-14T07:57Z. `profile.lock` was absent.
+
+| page | 11-06 | 11-14 | 8 days |
+|---|---|---|---|
+| Density Cheatsheet | 62 views / 31 grabs | 62 / 31 | +0 / +0 |
+| Material Palettes | 163 / 42 | 182 / 46 | +19 / +4 |
+| Texel (paid page) | 182 views / 10 grabs | 197 / 10 | +15 views / +0 grabs |
+
+**Read it straight.** The cheatsheet took no views and no grabs in eight days.
+The palettes page slowed from +31 in 7 days to +19 in 8, and collections stay at
+7 against Texel's 4. The store-wide referrer line
+`free/tag-aseprite/tag-palette` reads 30, down from 32, so that table is a
+rolling window and the earlier "went from 25 to 32" readings were never lifetime
+counts. Texel took +15 views and no new grabs, so the Lite demo's lifetime stays
+at 5 ours plus 5 not ours. The *Project totals* row for Texel still shows 0
+purchases. Whether any palettes traffic reached Texel is `texel-watch`'s
+per-project referrer reading, and this run did not take it. **Nothing here
+reopens the 09-26 retirement.**
+
+**Today is T-023's default STOP date, and nobody has answered it.** `STATE.md`
+carries no T-023 line, and `ROADMAP.md` (written by `texel-release`'s catch-up
+this morning) records "no answer to T-023" and holds every feature release.
+This routine does not make that call and has not acted on it either way. The
+two funnel pages stay live and unchanged: taking down a free CC0 page is a
+change to a public listing, and no STOP has been recorded that would ask for
+it. The 11-06 idea (a clearer hand-off to Texel on the palettes page) stays
+parked behind T-023 for the same reason.
+
+**Same limit as the last five readings.** Both remaining levers belong to a
+person: BlenderNation (**T-016**) and the stop/continue call (**T-023**). The
+next first-Friday slot is **2026-12-04**. It ships nothing unless T-023 is
+answered as a CONTINUE that reopens distribution.
 
