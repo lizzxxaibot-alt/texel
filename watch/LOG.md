@@ -6,6 +6,142 @@ in `../ACTIONS.md` and handed to a named owner.
 
 ---
 
+## 2026-11-14 — run 46 (scheduler catch-up, 07:50Z; host off ~11-10T13Z → 11-14T07:40Z, no runs 11-11/12/13)
+
+**VERDICT: BLOCKED ON A HUMAN DECISION; THE LISTING IS HEALTHY.** T-023's default-STOP date is today. Sales are 0 after 66 days and no answer is recorded anywhere. The listing passes every check on v0.2.7. All four doers are behind, and the cause is one host outage of about 3.8 days, not four separate failures.
+
+### Action ledger
+
+**Opened: 1 (T-030). Closed: 0.** A-032 is still in the Open table of `pixelkiln/launch/watch/ACTIONS.md`, so the 7-day and 14-day rungs stay suspended for every HUMAN row.
+
+| id | age | owner |
+|---|---|---|
+| T-023 | 36 d | **HUMAN**: stop/continue. Default date reached today, unanswered |
+| T-030 | 0 d | `texel-release`: status lines in `ROADMAP.md` citing T-023; no feature release without a sale or an answer |
+| T-010 | 60 d | **HUMAN** (suspended) |
+| T-011 | 60 d | **HUMAN** (suspended) |
+| T-015 | 56 d | **HUMAN** (suspended) |
+| T-016 | 56 d | **HUMAN** (suspended; part of T-023's redirect option) |
+
+### T-023 on its default date
+
+This section went through `venture-critic` before it was written. The first draft came back REOPEN with three SERIOUS findings, and all three are applied below.
+
+- **What is recorded:** default date reached, 0 sales, unanswered. **Not recorded: "Texel is stopped."** The 11-14 default was written as the consequence of an option the user never picked. The escalation channel is measured broken (A-032), so the user may never have seen the question. A stop is the user's call.
+- **What is actually running is CONTINUE as-is.** The redirect this routine recommended on 10-09 has not happened in any part for 36 days, because every step needs a person (Superhive signup, the BlenderNation form, the price). In that time the routines shipped v0.2.3 to v0.2.7 on the same itch listing. Calling the recommendation "unchanged" would hide that.
+- **What the numbers carry:** 197 views in 66 days, about 1.8/day, 0 sales at $9.95 on itch. That is a failed test of this listing. It says nothing either way about the product elsewhere.
+- **The redirect is an untested hypothesis, not a finding.** The scout's $25–45 comps are established sellers with hundreds of ratings, were scraped 2026-08-07 and never re-verified, and a new add-on with no reviews does not inherit their price or traffic. The same scout notes Superhive's AI policy is not clearly cleared. Texel's AI disclosure is mandatory (CLAUDE.md §6), so that clause is a named platform risk to read before any signup.
+- **Lite demo read-out (due today):** +72 views since 10-07 and 5 demo downloads not traced to our routines, about 7%. The bar was +150 views with bands at 3% and 10%. The bar did not fill and 7% sits between the bands, so this is inconclusive.
+- **Doing nothing is not neutral.** With no answer, `texel-marketing` posts tonight (21:20Z), `texel-support` runs at 14:24Z, and both repeat daily. Support should keep running while a paid page with commenters is live. The daily marketing beat and the weekly funnel run are the cost that continues by default.
+- **The choice for the user**, any of which closes T-023: STOP (disable the Texel routines, leave the page up or take it down); REDIRECT (read Superhive's AI and GPL terms first, then decide the signup, price and BlenderNation); or CONTINUE as-is, deliberately.
+
+### ALERTS
+
+1. **Host outage ~11-10T13Z → 11-14T07:40Z** (A-037, HUMAN, Pixelkiln ledger; not re-filed here). It accounts for every late routine below. Said once.
+2. **`ROADMAP.md` v0.2.8 target 11-11 has passed with no status** → `texel-release`, **T-030**.
+
+### Routines (scheduler read 11-14 07:50Z)
+
+| Routine | lastRunAt | Next | Artifact |
+|---|---|---|---|
+| support | 11-09T16:17Z (4.6 d) | 11-14T14:24Z | Last entry 11-09. Nothing was missed on itch: the logged-out page has the same six post ids as 11-10. Bluesky mentions were not read (not this routine's lane) |
+| marketing | 11-09T22:08Z (4.4 d) | 11-14T21:20Z | Last beat Mon 11-09. The Wed 11-11 and Fri 11-13 beats were not sent |
+| release | 11-05T12:53Z | 11-18T16:13Z | Wed 11-11 slot lost. v0.2.7 is still the live build |
+| funnel | 11-06T16:07Z | 11-20T16:06Z | Fri 11-13 slot lost. Last entry is the 11-06 measuring week |
+
+`pixelkiln-backup` last ran 11-10T04:14Z, so run 45's log and ledger row and today's are uncommitted and exist only on this disk (for `pixelkiln-watch`, not this routine).
+
+### Listing (cookie-less GET, 11-14 07:50Z)
+
+| Check | Result |
+|---|---|
+| Logged-out page | HTTP 200, 48,797 B. `Updated` 07 November 2026 @ 21:23 UTC. 6 comment posts, none new |
+| Published | Public 200 to an anonymous request; Project totals reads `Published` |
+| Download | Paid `texel-0.2.7.zip` **218 kB** matches local `dist/texel-0.2.7.zip` 224,109 B (the newest). Demo `texel-lite-demo-0.2.7.zip` 206 kB |
+| Price | Public page shows $9.95 ×3. Correct until v0.4.0 |
+| AI disclosure | Public table: `AI Assisted, Code, Graphics` |
+
+**All pass.** The edit form was not opened; price and disclosure were read off the public page.
+
+### Numbers
+
+`| 2026-11-14 (07:51Z) | 197 | 10 | 0 | $0.00 | 0.00% |`
+
+- **+6 views over ~3.79 d** (no readings 11-11 to 11-13). **7-day trend:** +13 over ~6.68 d (≈1.9/day), against +15 over ~7.15 d (≈2.1/day) the week before. **Flat.**
+- Downloads 10, unchanged since 10-28. The v0.2.7 demo has 0 pulls after 9 days. Sales and revenue 0.
+- Store ledger $100.92 / 18 payments (`probe_purchases.mjs`). Payment 18 is Book UI Vol. 8; Project totals gives Texel 0 payments.
+- Conversion 0/197. The §B rule needs 200 views and has not fired.
+
+### Roadmap
+
+- **v0.2.8 "Gradient": target Wed 11-11, 3 days late.** The last `texel-release` run (11-05) shipped v0.2.7; nothing has run since. Next slot 11-18. The date is not moved here.
+- **v0.3.0 "Tileset" 11-18; v0.4.0 "Handoff" ($14.95 step) 11-25.** `ROADMAP.md` itself says v0.3.0 does not ship if there is no sale and no answer. T-030 asks `texel-release` to write that status down and holds feature releases on T-023.
+
+---
+
+## 2026-11-10 — run 45 (in slot, 12:53Z)
+
+**VERDICT: BLOCKED ON A HUMAN DECISION; THE LISTING IS HEALTHY.** Every listing check passes on v0.2.7 and all four doers ran and left their artifacts. Nothing was opened or closed. **T-023 (stop/continue) has gone 32 days without an answer. Its default STOP is 2026-11-14, 4 days from now, and `texel-release` ships v0.2.8 tomorrow unless the answer arrives first.**
+
+### Action ledger
+
+**Opened: 0. Closed: 0.** A-032 is still Open (`pixelkiln-watch` run 53, today), so the 7-day and 14-day rungs stay suspended for every HUMAN row.
+
+| id | age | owner |
+|---|---|---|
+| T-023 | 32 d | **HUMAN**: stop/continue. Default STOP 2026-11-14 |
+| T-010 | 56 d | **HUMAN** (suspended) |
+| T-011 | 56 d | **HUMAN** (suspended) |
+| T-015 | 52 d | **HUMAN** (suspended) |
+| T-016 | 52 d | **HUMAN** (suspended; part of T-023's CONTINUE option) |
+
+No decision on T-023 appears in `STATE.md`, `state/texel.md` or `ROADMAP.md`.
+
+### ALERTS
+
+None. The host was on this morning: this run and `pixelkiln-watch` both fired in slot.
+
+Correction to run 44: `texel-support` did not lose its 11-09 slot. It ran as a catch-up at 11-09T16:17Z, two minutes after run 44's scheduler read. This is the third time a watch read has landed just ahead of a catch-up (T-025, T-029, now this).
+
+### Routines (scheduler read 11-10 12:53Z)
+
+| Routine | lastRunAt | Next | Artifact |
+|---|---|---|---|
+| support | 11-09T16:17Z | 11-10T14:24Z | `SUPPORT.md:694`: 11-09 "no inbound support items, day 62", 6 posts, inbox and Bluesky read |
+| marketing | 11-09T22:08Z | 11-10T21:20Z | `promo/POSTED.md:2730`: Mon 11-09 beat, v0.2.7 "Texel Paint stays on" (`promo/paintmode/`, post `3mzvwyixxjt2p`), two replies |
+| release | 11-05T12:53Z | 11-11T16:13Z | v0.2.7 live. v0.2.8 Gradient is queued for 11-11 |
+| funnel | 11-06T16:07Z | 11-13T16:06Z | `funnel/LOG.md:970`: measuring week 11-06. Waiting on T-023 and T-016 |
+
+All four are inside their own cron intervals. `pixelkiln-backup` ran 11-10T04:14Z and the Texel repo's last commits are from that run.
+
+### Listing (cookie-less GET, 11-10 12:53Z)
+
+| Check | Result |
+|---|---|
+| Logged-out page | HTTP 200, 48,785 B (same as 11-08 and 11-09). `Updated` 07 November 2026 @ 21:23 UTC. 6 comment posts, none new |
+| Published | Public 200 to an anonymous request; Project totals reads `Published`; status `Released`, category `Tool` |
+| Download | Paid `texel-0.2.7.zip` **218 kB** matches local `dist/texel-0.2.7.zip` 224,109 B (the newest). Demo `texel-lite-demo-0.2.7.zip` 206 kB |
+| Price | Public page shows $9.95 ×3. Correct until v0.4.0 (target 11-25) |
+| AI disclosure | Public *More information* table: `AI Assisted, Code, Graphics` |
+
+**All pass.** The edit form was not opened this run; price and disclosure were read off the public page, which is what a buyer sees.
+
+### Numbers
+
+`| 2026-11-10 (12:53Z) | 191 | 10 | 0 | $0.00 | 0.00% |`
+
+- **+1 view in ~0.86 d.** **7-day trend:** +13 over 7.0 d (≈1.9/day), against +10 over ~5.87 d (≈1.7/day) the week before. **Flat.**
+- Downloads 10, unchanged. The v0.2.7 demo has 0 pulls after 5 days. Sales and revenue 0. Store ledger $95.71 / 17 payments, unchanged since 11-07, none of it Texel's.
+- **Conversion: 0/191. The 200-view gate is 9 views away, ~11-15 at this rate**, the day after T-023's default STOP. If it fills with 0 sales, the §B rule (under 0.5% after 200+ views) adds a second signal to the T-023 call, not a new row.
+- **T-022's Lite read-out is due 11-14.** From the 10-07 baseline (125 views, 0 genuine demo downloads): +66 views, 5 demo downloads not traced to our own routines (10 total minus the 5 known self-pulls). The +150-view bar will not fill by 11-14, so that reading will be a number, not a verdict, as the row said.
+
+### Roadmap
+
+- **v0.2.8 "Gradient": Wed 11-11, 1 day out.** No work is logged. That is expected: `texel-release` builds only in its Wednesday slot. Flagged, not an alert. It is the item `ROADMAP.md` prices as *Large* (it needs a two-point drag that does not exist), so a partial or a slip tomorrow would be in line with the file's own forecast.
+- **v0.3.0 "Tileset" 11-18; v0.4.0 "Handoff" ($14.95 step) 11-25.** Both fall after T-023's default STOP.
+
+---
+
 ## 2026-11-09 — run 44 (scheduler catch-up, ~16:15Z; slot ~12:52Z missed)
 
 **VERDICT: BLOCKED ON A HUMAN DECISION; THE LISTING IS HEALTHY.** Every listing check passes on v0.2.7 and all four doers are inside their windows. Nothing was opened or closed. **T-023 (stop/continue) has gone 31 days without an answer. If nobody answers, it defaults to STOP on 2026-11-14, 5 days from now.**
