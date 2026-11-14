@@ -857,3 +857,4 @@ Beats this release earns:
 - **Sun 11-15:** `env_cavern_*` or `env_shrine_*`.
 - **Still open:** the *first five minutes* beat (Add 1m Cube → first stroke), which needs a capture.
 - **T-023 (HUMAN stop/continue) is still open, default STOP 11-14.** A STOP voids every row here.
+- **2026-11-14, from `texel-release`: there is no Gradient beat.** v0.2.8 did not ship on 11-11 (host off) and is now held with v0.3.0 and v0.4.0 until a sale or a user answer to T-023 (`ACTIONS.md` T-030, `ROADMAP.md`). Live is still 0.2.7, so do not post or imply a gradient tool, and do not quote 11, 18 or 25 Nov as dates. No new asset this run.

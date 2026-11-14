@@ -971,3 +971,67 @@ promised for 0.2.7. Gradient → v0.2.8 (Wed 11-11), v0.3.0 → 11-18, v0.4.0 �
   unchanged; the README wording stands). A physical tablet with the new mode.
 - No price milestone crossed. v0.3.0 and v0.4.0 now fall after T-023's 11-14
   default STOP.
+
+## 2026-11-14 - nothing shipped: feature releases are held on T-023 (`texel-release`, catch-up run, Sat)
+
+**The slot.** The Wed 11-11 slot never ran (host off ~11-10T13Z to 11-14T07:40Z;
+the scheduler does not replay a weekly slot). This run is the catch-up, started
+~07:45Z on Sat 11-14, the day T-023 was given as its default.
+
+**Ledger, per section 0.** At the start there was no open row owned by
+`texel-release`. `texel-watch` run 46 was running at the same time and opened
+**T-030** a few minutes in: write held status lines under v0.2.8, v0.3.0 and
+v0.4.0, and do not build or ship a feature release unless a sale or a user
+answer to T-023 has arrived. It was done and set to `DONE?`.
+
+**What this run read before holding.** `itch_analytics.mjs` *Project totals*:
+Texel 197 views, 10 downloads, **0 payments**. No T-023 decision in `STATE.md`,
+`state/texel.md` or `ROADMAP.md`. `SUPPORT.md`: no crash or data-loss report
+open, no ask at 3 or more. So nothing is exempt from the hold.
+
+**What was built, and where it went.** Before T-030 existed this run picked
+priority 3 (v0.2.8 Gradient) and built the pure-Python half, tests first:
+- `core/raster.py`: `gradient_level` (sixteenths of the end colour at a texel,
+  integer projection onto the drag, clamped), `gradient_mask` (BAYER4 at that
+  level, on the dither brush's canvas-fixed grid) and `gradient_apply` (writes
+  the two palette indices in place; `None` leaves a texel alone; honours a
+  selection mask).
+- `test_raster.py`: +23 checks, watched failing first (`AttributeError`).
+- With the patch applied: the six headless suites pass and `core/` is 100.0%
+  (1,132 statements, 0 missed). **No Blender suite was run**, because no Blender
+  code was written.
+- **It is not in the tree.** Both files were restored with `git checkout`, and
+  the work is parked at `wip/gradient_v0.2.8/core_gradient_2026-11-14.patch`
+  (7,705 B, `git apply --check` clean). A patch release built from this tree
+  carries none of it.
+
+**What is left of Gradient when the hold lifts** (design only, nothing written):
+a `GRADIENT` entry in `tex_props.TOOLS` and a second colour property; a
+module-level `commit_gradient(doc, s, a, b)` in `tex_paint.py` beside
+`commit_stroke`; a branch in the modal's shape-preview path (the snapshot and
+restore that Line and Rect already use is the two-point drag, so the roadmap's
+*"needs a two-point drag that does not exist yet"* is out of date since 0.2.7);
+a panel row; a `test_features.py` block through the real modal and a
+`test_panels.py` state; README and START-HERE. No new operator, so the operator
+count does not move. The enum icon has to be rendered and looked at, as
+`tex_props.py` says of the other seven. Mirror and radial symmetry would be
+ignored by the tool, and the docs must say so.
+
+**Records changed.** `ROADMAP.md`: three headings now read *HELD 2026-11-14, no
+date*, each with a dated status paragraph naming T-023; v0.4.0's says the price
+stays $9.95. `START-HERE.html` (working tree): the three rows read *no date
+yet*. `ACTIONS.md` T-030: evidence appended, `DONE?`. `promo/QUEUE.md`: one
+line saying there is no Gradient beat.
+
+**Logged-out page, ~07:56Z:** HTTP 200, 48,796 B, `texel-0.2.7.zip` and
+`texel-lite-demo-0.2.7.zip` only. No version bump, no build, no upload, no
+devlog. `dist/` is unchanged.
+
+### Not done / open
+- **The 0.2.7 zips on the page still say v0.2.8 on 11 Nov, v0.3 on 18 Nov and
+  v0.4 on 25 Nov** in their sealed `START-HERE.html` and `ROADMAP.md`. Fixing
+  that needs an upload, which T-030 forbids. It stands until the hold lifts or
+  a patch ships.
+- v0.5.0 (12-12, a Saturday) and v1.0.0 (2027-01-30) still carry dates that
+  cannot hold while the three before them are held. Not passed, so not edited.
+- T-023 is the user's. This run made no stop/continue call.

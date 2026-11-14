@@ -1,6 +1,7 @@
 # Texel by Pixelkiln — upgrade schedule
 
-**Written 2026-09-09. Last edited 2026-11-05 by `texel-release`.**
+**Written 2026-09-09. Last edited 2026-11-14 by `texel-release`** (status lines
+only: v0.2.8, v0.3.0 and v0.4.0 are held; nothing was built into a zip).
 **This file was sealed into the v0.2.7 build on 2026-11-05** (and into the free
 Texel Lite demo of the same version). Whether that build is live is recorded
 outside this file, in `PROGRESS.md`; see the note below for why. Texel is sold at
@@ -486,7 +487,23 @@ drag.** The reply told the asker *"queued as the next fix after 0.2.7"* and
 gave no date. `texel-release` may fold it into 0.2.7 if it is not yet built,
 or into 0.3.0; either keeps that promise.
 
-### v0.2.8 — "Gradient" · target **Wed 2026-11-11** (was v0.2.7 on Wed 11-04)
+### v0.2.8 — "Gradient" · **HELD 2026-11-14**, no date (was Wed 11-11, and v0.2.7 on Wed 11-04 before that)
+**Status, 2026-11-14 (`texel-release`, `ACTIONS.md` T-030): held, not shipped
+and not re-dated.** The Wed 11-11 slot never ran: the host was off from about
+11-10T13Z to 11-14T07:40Z, and the scheduler does not replay a weekly slot.
+This run is the catch-up, on Sat 11-14. That is the date T-023 (the user's
+stop/continue call) was given as its default. Read today: 0 sales in 66 days
+(`itch_analytics.mjs` *Project totals*: 197 views, 10 downloads, 0 payments),
+and no answer to T-023 in `STATE.md`, `state/texel.md` or this file. **So no
+feature release ships until a sale arrives or the user answers T-023.** The
+gate is T-023, not a date, which is why this heading has no new target. A
+reproduced crash or data-loss bug is not held and still ships as a patch.
+**What exists:** the pure-Python half (`gradient_level`, `gradient_mask`,
+`gradient_apply`, with 23 checks written first) was built in this run before
+T-030 was opened, then taken back out of the tree. It is parked as
+`wip/gradient_v0.2.8/core_gradient_2026-11-14.patch` and is in no zip. The
+tool, its second colour and its panel row are not built. Live is still 0.2.7.
+
 **Moved 2026-11-05.** The 11-04 slot was lost to a host outage. The 11-05
 catch-up went to the paint-mode fix and the hidden-track fix (v0.2.7 above,
 and the reasons are there). This takes the next Wednesday.
@@ -721,7 +738,13 @@ a build was live because a routine ticked ahead of the upload, and that is not
 happening twice in the same month. The live 0.2.1 zip still prints the old
 string.
 
-### v0.3.0 — "Tileset" · target **Wed 2026-11-18** (was 11-11, 11-04, 10-28, and 10-17 before that)
+### v0.3.0 — "Tileset" · **HELD 2026-11-14**, no date (was Wed 11-18, 11-11, 11-04, 10-28, and 10-17 before that)
+**Status, 2026-11-14 (`texel-release`, `ACTIONS.md` T-030): held.** The
+sentence below, written 11-05, has come due: no sale has arrived and the user
+has not answered T-023, so this does not ship on 11-18. It also sits behind
+v0.2.8, which is held for the same reason. The gate is T-023. When a sale or
+an answer arrives, this gets a Wednesday again, with the reason.
+
 **Moved 2026-11-05.** The 11-04 slot was lost to a host outage. The 11-05
 catch-up shipped v0.2.7, so Gradient (v0.2.8) takes 11-11 and this moves one
 Wednesday. 11-18 falls **after** T-023's default STOP on 11-14. If no sale
@@ -745,7 +768,12 @@ rides that date, so it is left for the T-023 decision rather than moved here.
   The hardest single thing in this release, which is why the release sits third
   and not first.
 
-### v0.4.0 — "Handoff" · target **Wed 2026-11-25** (was 11-14) · **price steps to $14.95**
+### v0.4.0 — "Handoff" · **HELD 2026-11-14**, no date (was Wed 11-25, and 11-14 before that) · **price steps to $14.95**
+**Status, 2026-11-14 (`texel-release`, `ACTIONS.md` T-030): held**, behind
+v0.2.8 and v0.3.0 and on the same gate, T-023. **The price stays $9.95.** The
+step to $14.95 is tied to this version shipping, not to 11-25, so it does not
+happen on that date.
+
 **Moved 2026-11-05.** v0.3.0 is now 11-18, and 11-14 was a Saturday, a day
 `texel-release` never runs (the T-013 rule). The next Wednesday after v0.3.0
 is 11-25. The price step stays tied to this **version**, not to a date, so it

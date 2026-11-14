@@ -1,0 +1,158 @@
+diff --git a/core/raster.py b/core/raster.py
+index 534a871..8d1bc9e 100644
+--- a/core/raster.py
++++ b/core/raster.py
+@@ -335,6 +335,66 @@ def dither_hit(pattern: str, x: int, y: int, level: int = 8) -> bool:
+     raise ValueError(f"unknown dither pattern {pattern!r}")
+ 
+ 
++def gradient_level(x: int, y: int, x0: int, y0: int, x1: int, y1: int) -> int:
++    """Sixteenths of the END colour at (x, y), for a drag from (x0, y0) to (x1, y1).
++
++    The texel is projected onto the drag: 0 at or behind the start, 16 at or
++    past the end, rounded to the nearest step between. Integer arithmetic
++    throughout, so the same drag gives the same texels on every machine. A
++    zero-length drag has no direction and is level 0 everywhere.
++    """
++    dx, dy = x1 - x0, y1 - y0
++    d2 = dx * dx + dy * dy
++    if d2 == 0:
++        return 0
++    num = (x - x0) * dx + (y - y0) * dy
++    return max(0, min(16, (32 * num + d2) // (2 * d2)))
++
++
++def gradient_mask(w: int, h: int, x0: int, y0: int, x1: int, y1: int) -> bytearray:
++    """Which texels of a w x h canvas take the END colour of a dithered gradient.
++
++    One byte per texel, row-major, 1 for the end colour and 0 for the start
++    colour. Each texel is tested against BAYER4 at its `gradient_level`, on the
++    same canvas-fixed grid as the dither brush, so a gradient lines up with
++    dithered strokes laid over it and never blends a colour that is not one of
++    the two it was given.
++    """
++    out = bytearray(w * h)
++    dx, dy = x1 - x0, y1 - y0
++    d2 = dx * dx + dy * dy
++    if d2 == 0:
++        return out
++    for y in range(h):
++        cells = BAYER4[y % 4]
++        num = -x0 * dx + (y - y0) * dy
++        row = y * w
++        for x in range(w):
++            if cells[x % 4] < (32 * num + d2) // (2 * d2):
++                out[row + x] = 1
++            num += dx
++    return out
++
++
++def gradient_apply(px: bytearray, mask: bytearray, start: int | None,
++                   end: int | None, keep: bytearray | None = None) -> None:
++    """Write a gradient mask into a layer's index bytes, in place.
++
++    `start` and `end` are palette indices; None leaves those texels as they
++    are, which is how a colour fades into the art already there. `keep` is a
++    selection mask: texels outside it are never touched.
++    """
++    if keep is None and start is not None and end is not None:
++        px[:] = mask.translate(bytes((start, end)) + bytes(254))
++        return
++    for i, hit in enumerate(mask):
++        if keep is not None and not keep[i]:
++            continue
++        idx = end if hit else start
++        if idx is not None:
++            px[i] = idx
++
++
+ def flood_fill(get_px, w: int, h: int, sx: int, sy: int, target, tolerance: int = 0,
+                contiguous: bool = True) -> list[Point]:
+     """Scanline flood fill. `get_px(x, y)` returns an RGBA tuple of 0-255 ints.
+diff --git a/test_raster.py b/test_raster.py
+index 817032e..f2f7890 100644
+--- a/test_raster.py
++++ b/test_raster.py
+@@ -355,6 +355,82 @@ check("pressing harder never makes the brush smaller",
+ check("every size from 1 to the set size is reachable",
+       sorted(set(_ps)) == list(range(1, 17)), sorted(set(_ps)))
+ 
++# ---- gradient: a drag from A to B, dithered between two colours ----------
++# level = sixteenths of the END colour at a texel; mask = which texels take it.
++GL = R.gradient_level
++check("the start texel is all start colour, the end texel all end colour",
++      GL(3, 5, 3, 5, 40, 5) == 0 and GL(40, 5, 3, 5, 40, 5) == 16)
++check("halfway along is level 8",
++      GL(32, 0, 0, 0, 64, 0) == 8 and GL(0, 10, 0, 0, 0, 20) == 8)
++check("behind the start and past the end are clamped, not extrapolated",
++      GL(-50, 0, 0, 0, 64, 0) == 0 and GL(500, 0, 0, 0, 64, 0) == 16)
++check("the level only rises along the drag, and reaches all 17 steps",
++      [GL(x, 0, 0, 0, 64, 0) for x in range(65)]
++      == sorted(GL(x, 0, 0, 0, 64, 0) for x in range(65))
++      and {GL(x, 0, 0, 0, 64, 0) for x in range(65)} == set(range(17)))
++check("texels on one line across the drag share a level (it is a projection)",
++      all(GL(x, y, 0, 0, 64, 0) == GL(x, 0, 0, 0, 64, 0)
++          for x in range(0, 65, 7) for y in (-9, 3, 31)))
++check("a diagonal drag is symmetric about its own axis",
++      all(GL(x, y, 0, 0, 15, 15) == GL(y, x, 0, 0, 15, 15)
++          for x in range(16) for y in range(16)))
++check("a drag works in every direction: reversed, the two ends swap",
++      GL(0, 0, 64, 0, 0, 0) == 16 and GL(64, 0, 64, 0, 0, 0) == 0
++      and GL(5, 20, 5, 20, 5, 0) == 0 and GL(5, 0, 5, 20, 5, 0) == 16)
++check("a click with no drag has no direction: level 0 everywhere, no divide by zero",
++      all(GL(x, y, 4, 4, 4, 4) == 0 for x in range(8) for y in range(8)))
++
++gm = R.gradient_mask(65, 8, 0, 0, 64, 0)
++check("the mask is one byte per texel, 0 or 1", len(gm) == 65 * 8 and set(gm) <= {0, 1})
++check("the mask is the Bayer map at each texel's level, on the canvas grid",
++      all(gm[y * 65 + x] == (R.BAYER4[y % 4][x % 4] < GL(x, y, 0, 0, 64, 0))
++          for x in range(65) for y in range(8)))
++check("the start column is untouched and the end column is solid",
++      not any(gm[y * 65] for y in range(8)) and all(gm[y * 65 + 64] for y in range(8)))
++# x = 6..9 is level 2 and x = 30..33 is level 8 on a 64-texel drag
++check("a 4x4 block at level N holds exactly N end texels",
++      sum(gm[y * 65 + x] for x in range(6, 10) for y in range(4)) == 2
++      and sum(gm[y * 65 + x] for x in range(30, 34) for y in range(4)) == 8,
++      [GL(x, 0, 0, 0, 64, 0) for x in (6, 9, 30, 33)])
++check("the halfway band is the same checker the 50% brush paints",
++      all(gm[y * 65 + x] == R.dither_hit("CHECKER", x, y)
++          for x in range(30, 34) for y in range(8)))
++check("an end texel stays an end texel further along (a ramp adds, never moves)",
++      all(not gm[y * 65 + x] or gm[y * 65 + x + 4]
++          for x in range(61) for y in range(8)))
++check("a vertical drag fills rows the way a horizontal one fills columns",
++      all(R.gradient_mask(8, 65, 0, 0, 0, 64)[y * 8 + x]
++          == (R.BAYER4[y % 4][x % 4] < GL(0, y, 0, 0, 0, 64))
++          for x in range(8) for y in range(65)))
++check("a drag that starts and ends off the canvas still fills the canvas",
++      len(R.gradient_mask(4, 4, -10, 0, 30, 0)) == 16
++      and R.gradient_mask(4, 4, -100, 0, -50, 0) == bytearray([1]) * 16)
++check("a zero-length drag marks nothing", not any(R.gradient_mask(6, 6, 2, 2, 2, 2)))
++
++# gradient_apply writes a mask into a layer's index bytes, in place
++_m = R.gradient_mask(8, 4, 0, 0, 7, 0)
++_px = bytearray([9]) * 32
++R.gradient_apply(_px, _m, 3, 5)
++check("both colours given: every texel becomes one of the two",
++      all(_px[i] == (5 if _m[i] else 3) for i in range(32)), list(_px))
++_px = bytearray([9]) * 32
++R.gradient_apply(_px, _m, 3, None)
++check("no end colour: end texels keep what was under them",
++      all(_px[i] == (9 if _m[i] else 3) for i in range(32)), list(_px))
++_px = bytearray([9]) * 32
++R.gradient_apply(_px, _m, None, 5)
++check("no start colour: start texels keep what was under them",
++      all(_px[i] == (5 if _m[i] else 9) for i in range(32)), list(_px))
++_keep = bytearray(32); _keep[8:16] = b"" * 8
++_px = bytearray([9]) * 32
++R.gradient_apply(_px, _m, 3, 5, _keep)
++check("a selection limits the gradient to its own texels",
++      all(_px[i] == ((5 if _m[i] else 3) if 8 <= i < 16 else 9) for i in range(32)),
++      list(_px))
++_same = bytearray([9]) * 32
++R.gradient_apply(_same, _m, None, None)
++check("neither colour given paints nothing", _same == bytearray([9]) * 32)
++
+ print()
+ if fails:
+     print(f"{len(fails)} FAILED: {fails}"); sys.exit(1)
