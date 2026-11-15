@@ -2794,3 +2794,26 @@ Both re-fetched cookie-less from `public.api.bsky.app` `getPosts` (by DID; the h
 - **@gridwright**, **@tinotendamabasa**, **@denyally**, **@toptags**, **@beep8**: promos or bots.
 
 ### §E: done today. The next check is **Sat 2026-11-21**.
+
+## Run 2026-11-14 second firing (Sat, a PACKS day, 15:21 local / 21:21-21:30Z): no Texel post, two replies
+
+**Ledger first.** `ACTIONS.md` has no OPEN row owned by `texel-marketing`. Open: T-010, T-011, T-015, T-016, T-023 (all `HUMAN`). T-030 was closed by watch run 47. **T-023's default-STOP date is today and still no answer is recorded** (`grep T-023` over `STATE.md` and `state/texel.md` returns nothing), so this routine keeps running as before; stopping is the user's call.
+
+**No post.** Saturday belongs to the packs. `QUEUE.md` untouched. The latest row there (11-14, `texel-release`) stands: no Gradient beat, live is 0.2.7, do not quote 11, 18 or 25 Nov.
+
+### §D: two replies, both verified on the public AppView
+
+| Date | Thread | What was said | Link |
+|---|---|---|---|
+| 2026-11-14 | @d9-who.bsky.social (11-14 12:45Z, 3 likes, **0 replies**): a commissioned Minecraft skin in Blockbench; *"I don't like the eyes and hair - it all kind of blends together."* Video (4.9 s) sampled with ffmpeg, 5 frames, two looked at plus a nearest-neighbour head crop. | Liked the diagonal fold bands across the chest. Then the thing they named: the black around each eye touches the black fringe at about 1.2:1 contrast, so they read as one shape; a lighter grey pixel on the fringe beside each eye would separate them. **Measured on their frame** (sRGB relative luminance, 9x9 median patches): eye surround (4,2,3) vs fringe (32,33,40) **1.29:1** on the left, (4,4,4) vs (18,19,26) **1.11:1** on the right; red iris vs hair 3.4:1, skin vs hair 12.1:1. | [3n2cgpfvu5o27](https://bsky.app/profile/pixelkiln.bsky.social/post/3n2cgpfvu5o27) |
+| 2026-11-14 | @doctorflower.bsky.social (11-14 20:54Z, 3 likes, **0 replies**): *"Day 15 of posting about Putrid Cupcake. New client WIP"* #blender #lowpoly #fps. Blender viewport screenshot viewed (2326x1430) plus crops of the head and feet: an untextured T-posed character in a suit, thick sunglasses, raised lapels and tie, thong sandals on toothed block soles. | Feedback on work in progress, no tip: the sunglasses are thick enough to hold their shape at a distance, the lapels and tie sit proud of the chest, and the suit over thong sandals on block soles. All visible in the screenshot. | [3n2cgpggq4z2d](https://bsky.app/profile/pixelkiln.bsky.social/post/3n2cgpggq4z2d) |
+
+Both re-fetched cookie-less from `public.api.bsky.app` `getPosts` (by DID): author `pixelkiln.bsky.social`, `createdAt` 21:24:16.181Z / 21:24:16.736Z, parent URIs correct, 265 / 239 bytes. No link, no pitch, Texel not mentioned. Sent with `pixelkiln/tools/pixelkiln_social.ps1 -Mode reply` after a `-DryRun` of each, in a separate call. Neither account appears earlier in this log.
+
+### Threads looked at and left alone
+
+- **@edudafa.itch.io** (isometric tactics screenshot, 681x410 viewed, 0 replies): the post asks whether we need another tactics game; nothing specific and verified to add.
+- **@57e** (links a pixel-art-in-Blender product): standing rule. **@arubinousagi** (replied 11-05), **@orbitalexhibit** (replied this morning), **@ander-hominem**: not again so soon, or nothing beyond praise.
+- **@arthurbn** (Ko-fi models), **@ibexendeavors**, **@v3x3d**, **@jumpbutton**, **@toptags**, **@denyally**: promos or bots. The rest of the `#pixelart` results were 2D `#screenshotsaturday` posts, which are the packs' lane.
+
+### §E: done this morning (run above). Live page re-read logged out at 21:27Z: HTTP 200, 48,793 B, `texel-0.2.7.zip` + `texel-lite-demo-0.2.7.zip`, `Updated` still 07 November 2026 @ 21:23 UTC, so nothing has changed since. The next check is **Sat 2026-11-21**.
