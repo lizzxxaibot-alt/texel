@@ -6,6 +6,70 @@ in `../ACTIONS.md` and handed to a named owner.
 
 ---
 
+## 2026-11-14 — run 47 (in slot, 12:53Z; second run today, ~5 h after the catch-up)
+
+**VERDICT: BLOCKED ON A HUMAN DECISION; THE LISTING IS HEALTHY.** Nothing has changed since run 46 except that all four doers ran their catch-ups and left artifacts, and T-030 is closed. T-023 (stop/continue) is unanswered on its default date, with 0 sales after 66 days.
+
+### Action ledger
+
+**Opened: 0. Closed: 1 (T-030).** A-032 is still Open in `pixelkiln/launch/watch/ACTIONS.md`, so the 7-day and 14-day rungs stay suspended for every HUMAN row.
+
+**T-030 closed on this run's own reads:** `ROADMAP.md` v0.2.8, v0.3.0 and v0.4.0 each read *HELD 2026-11-14, no date* with a dated paragraph naming T-023; the logged-out page lists only the 0.2.7 files and its `Updated` stamp is still 11-07; `core/raster.py` has 0 `gradient` matches and the parked patch exists (7,705 B). Starting v0.2.8 before the row existed was not a breach, and backing it out was the right handling.
+
+| id | age | owner |
+|---|---|---|
+| T-023 | 36 d | **HUMAN**: stop/continue. Default date is today, unanswered |
+| T-010 | 60 d | **HUMAN** (suspended) |
+| T-011 | 60 d | **HUMAN** (suspended) |
+| T-015 | 56 d | **HUMAN** (suspended) |
+| T-016 | 56 d | **HUMAN** (suspended; part of T-023's redirect option) |
+
+No T-023 decision appears in `STATE.md`, `state/texel.md` or `ROADMAP.md`. Run 46's framing of the choice stands and is not restated.
+
+### ALERTS
+
+None new. The outage (A-037) ended at 07:40Z and every routine has run since.
+
+One note with no row: the 0.2.7 zips on the page carry 11, 18 and 25 Nov as roadmap dates in their sealed `START-HERE.html` and `ROADMAP.md`. The live page text names none of them (grep, this run). The only fix is an upload, which the hold forbids, so it rides the next one.
+
+### Routines (scheduler read 11-14 12:53Z)
+
+| Routine | lastRunAt | Next | Artifact |
+|---|---|---|---|
+| support | 11-14T07:51Z | 11-14T14:24Z | `SUPPORT.md:695`: 11-14 "no inbound support items, day 67"; inbox and Bluesky windows cover the 11-10 to 11-13 gap |
+| marketing | 11-14T07:52Z | 11-14T21:20Z | `promo/POSTED.md:2764`: Sat is a packs day, so no Texel post; listing check, two replies. The Wed 11-11 and Fri 11-13 beats were lost to the outage and not back-filled |
+| release | 11-14T07:51Z | 11-18T16:13Z | `ROADMAP.md` status lines, `promo/QUEUE.md` "there is no Gradient beat" note (T-030) |
+| funnel | 11-14T07:56Z | 11-20T16:06Z | `funnel/LOG.md:1017`: measuring week 11-14, no drop |
+
+All four ran and all four left an artifact. `pixelkiln-backup` ran 07:57Z; the Texel repo was clean before this run's edits.
+
+### Listing (cookie-less GET, 11-14 12:53Z)
+
+| Check | Result |
+|---|---|
+| Logged-out page | HTTP 200, 48,798 B. `Updated` 07 November 2026 @ 21:23 UTC. 6 comment posts, none new |
+| Published | Public 200 to an anonymous request; Project totals reads `Published` |
+| Download | Paid `texel-0.2.7.zip` **218 kB** matches local `dist/texel-0.2.7.zip` 224,109 B (the newest). Demo `texel-lite-demo-0.2.7.zip` 206 kB (local 211,503 B) |
+| Price | Public page shows $9.95 ×3. Correct: the $14.95 step is tied to v0.4.0, which is held |
+| AI disclosure | Public table: `AI Assisted, Code, Graphics` |
+
+**All pass.** The edit form was not opened.
+
+### Numbers
+
+`| 2026-11-14 (2nd reading, 12:54Z) | 197 | 10 | 0 | $0.00 | 0.00% |`
+
+- **+0 views in ~5 h.** **7-day trend:** +13 over ~6.89 d (≈1.9/day), against +15 over ~7.15 d (≈2.1/day) the week before. **Flat.**
+- Downloads 10 (unchanged since 10-28), sales 0, revenue 0, collections 4.
+- Conversion 0/197. The §B rule needs 200 views; 3 to go, about 11-16. When it fills with 0 sales it adds a second signal to T-023, not a new row.
+
+### Roadmap
+
+- **No dated target is open before v0.5.0 (2026-12-12, 28 days out).** v0.2.8, v0.3.0 and v0.4.0 are held with no date, on T-023. v0.5.0 sits behind all three, so it cannot ship on 12-12 unless the hold lifts; that is not flagged until the date is within 7 days.
+- Live build: v0.2.7, shipped 11-05.
+
+---
+
 ## 2026-11-14 — run 46 (scheduler catch-up, 07:50Z; host off ~11-10T13Z → 11-14T07:40Z, no runs 11-11/12/13)
 
 **VERDICT: BLOCKED ON A HUMAN DECISION; THE LISTING IS HEALTHY.** T-023's default-STOP date is today. Sales are 0 after 66 days and no answer is recorded anywhere. The listing passes every check on v0.2.7. All four doers are behind, and the cause is one host outage of about 3.8 days, not four separate failures.
