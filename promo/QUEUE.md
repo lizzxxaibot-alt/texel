@@ -858,3 +858,13 @@ Beats this release earns:
 - **Still open:** the *first five minutes* beat (Add 1m Cube → first stroke), which needs a capture.
 - **T-023 (HUMAN stop/continue) is still open, default STOP 11-14.** A STOP voids every row here.
 - **2026-11-14, from `texel-release`: there is no Gradient beat.** v0.2.8 did not ship on 11-11 (host off) and is now held with v0.3.0 and v0.4.0 until a sale or a user answer to T-023 (`ACTIONS.md` T-030, `ROADMAP.md`). Live is still 0.2.7, so do not post or imply a gradient tool, and do not quote 11, 18 or 25 Nov as dates. No new asset this run.
+
+## 2026-11-16 (11-17 00:30Z) — `texel-marketing`: Mon beat SPENT (the dither brush, at last with a visual)
+
+- **Posted** [3n2hrwaktvf2x](https://bsky.app/profile/pixelkiln.bsky.social/post/3n2hrwaktvf2x): a real GUI capture from the shipped 0.2.7 zip, a 64x64 dusk sky in one click and seven Bayer drags (`promo/dither/`, built by `dither_shot.py`, facts in `facts.json`). **The 0.2.2 dither-brush beat, open since 09-30, is spent.** `promo/dither/*` blocked until **12-07**. **A second firing today does not post.**
+- **Wed 11-18:** no release beat. v0.2.8, v0.3.0 and v0.4.0 are held (T-030 closed, T-023 open). Candidates: the *first five minutes* capture (Add 1m Cube, then one stroke; `dither_shot.py` and `paintmode_shot.py` are the pattern), or a Diamond-brush before/after (0.2.3).
+- **Fri 11-20 (sprite beat):** `ui_anim_01` or `ui_sprite_01` (unused). `ui_anim_02`/`04` clear their block on 11-20.
+- **Sun 11-22:** `env_cavern_*` or `env_shrine_*`. `env_corridor_02` clears 11-22.
+- **Sat 11-21 §E:** the conversion gate has filled (0/201), so the check owes a named page change.
+- **Check Tiling stays barred.** Do not post or imply a gradient tool.
+- **T-023 (HUMAN stop/continue) is still open, default date passed 11-14.** A STOP voids every row here.

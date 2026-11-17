@@ -2817,3 +2817,39 @@ Both re-fetched cookie-less from `public.api.bsky.app` `getPosts` (by DID): auth
 - **@arthurbn** (Ko-fi models), **@ibexendeavors**, **@v3x3d**, **@jumpbutton**, **@toptags**, **@denyally**: promos or bots. The rest of the `#pixelart` results were 2D `#screenshotsaturday` posts, which are the packs' lane.
 
 ### §E: done this morning (run above). Live page re-read logged out at 21:27Z: HTTP 200, 48,793 B, `texel-0.2.7.zip` + `texel-lite-demo-0.2.7.zip`, `Updated` still 07 November 2026 @ 21:23 UTC, so nothing has changed since. The next check is **Sat 2026-11-21**.
+
+## Run 2026-11-16 (Mon, a TEXEL day, 18:20-18:35 local / 11-17 00:20-00:35Z): the dither brush, two replies
+
+**Ledger first.** `ACTIONS.md` has no OPEN row owned by `texel-marketing`. Open: T-010, T-011, T-015, T-016, T-023 (all `HUMAN`). T-023's default-STOP date (11-14) passed with no answer recorded; watch run 48 added the conversion reading (0 sales / 201 views) to the row. Stopping is the user's call, so this routine ran as normal. Sun 11-15 had no run and is not replayed. No top-level post on the account since 11-09 (`-Mode feed`).
+
+### Posted — Mon 2026-11-16, one capability: the dither brush (shipped in 0.2.2, first visual it has had)
+
+| Date | Beat | Asset | URL | First hour |
+|---|---|---|---|---|
+| 2026-11-16 | **Dither brush: the Pencil painting through the 4x4 Bayer map, fixed to the canvas. A 64x64 dusk sky in one navy click and seven drags at 2 to 14 sixteenths** | `promo/dither/shot_post.png` (1000x758, a crop of the Image Editor area from a real Blender window screenshot). Blocked for reuse until **12-07** | [3n2hrwaktvf2x](https://bsky.app/profile/pixelkiln.bsky.social/post/3n2hrwaktvf2x) | 1 like at +2 min |
+
+The capture is **real input on the shipped zip**, not a mock:
+- `promo/dither/dither_shot.py` (the `paintmode_shot.py` pattern) loads the add-on from an extraction of `dist/texel-0.2.7.zip`, runs Blender 4.5.9 with `--enable-event-simulate -p 0 0 1500 900`, invokes `texel.paint` once, clicks once with a 64-texel solid Pencil (navy), then sends seven left-drags with an 8-texel Pencil at Bayer 2, 4, 6, 8, 10, 12 and 14. Only sidebar properties change between strokes.
+- `promo/dither/facts.json`: navy 4,096 texels; the seven bands changed exactly **64 / 128 / 192 / 256 / 320 / 384 / 448** texels (512 x level / 16), each inside its own 8 rows; mode still on at the screenshot; panel reads Pencil, Size 8, Bayer, 14. The script exits 1 on any miss. Its first run did exit 1, on my own check (it demanded all 8 rows of a band be touched, and a sparse level leaves rows empty); the texel counts were exact, and the check now tests containment.
+- "So separate strokes mesh" rests on those counts plus the image, which I looked at: the pattern runs unbroken across all seven bands.
+- Claims checked against the shipped `tex_props.py` (`dither` description: *"on a grid fixed to the canvas so overlapping strokes line up"*) and `core/raster.py` `dither_hit`. No gradient tool is named or implied (v0.2.8 is held).
+- **Live file re-read logged-out, in a call before the send:** HTTP 200, `texel-0.2.7.zip` + `texel-lite-demo-0.2.7.zip`.
+- **Verified cookie-less with `getPosts` (by DID):** author `pixelkiln.bsky.social`, `createdAt` 2026-11-17T00:28:15.524Z, `app.bsky.embed.images#view`, 1 image 1000x758, alt 459 characters. Text 297/300 bytes, 4 facets. Spec: `promo/post_2026-11-16.json`.
+- **Not run:** the §4 design-critic loop. This is an uncomposed product screenshot, the same call the 11-09 run made; anything built from it as a card or gallery image needs the loop.
+- **Reuse:** a new asset. **Phrasing:** "Bayer" appears in no earlier post spec. No hype words, no rival named.
+
+### §D: two replies, both verified on the public AppView
+
+| Date | Thread | What was said | Link |
+|---|---|---|---|
+| 2026-11-16 | @wickedinterest.ing (11-16 21:01Z, 3 likes, **0 replies**): a 60-minute low-poly forklift speed-model in Blender. Render viewed (1920x1080). | Feedback on finished work, no tip: the tread blocks and hex lug nuts on the hubs, and the two cream lamp boxes on the black mast. All visible in the render. | [3n2hryfpkf52a](https://bsky.app/profile/pixelkiln.bsky.social/post/3n2hryfpkf52a) |
+| 2026-11-16 | @ojotaartist.bsky.social (11-17 00:05Z, 2 likes, **0 replies**): *"this is my first render"* on an old Blender version. Render viewed (1920x1080): two watermelon slices on a faceted plate over a checker floor. | Encouragement with specifics, no tip: the green-to-red blend on the rind, and the shadow under the leaning slice. I wrote "faceted plate" because I could not count its sides with confidence. | [3n2hrygq6nz2k](https://bsky.app/profile/pixelkiln.bsky.social/post/3n2hrygq6nz2k) |
+
+Both re-fetched cookie-less from `public.api.bsky.app` `getPosts` (by DID): author `pixelkiln.bsky.social`, `createdAt` 00:29:27.846Z / 00:29:28.912Z, parent URIs correct, 217 / 234 bytes. No link, no pitch, Texel not mentioned. Sent with `pixelkiln/tools/pixelkiln_social.ps1 -Mode reply` after a `-DryRun` of each, in a separate call. Neither account appears earlier in this log.
+
+### Threads looked at and left alone
+
+- **@willy3d** (rigged Bugbear, 2 s video) and **@louisdumont** (manual retopo video): not viewed closely enough to say anything specific. Candidates for a later run.
+- **@balakcity**, **@xrfolio.page**, **@yumeforgesapp**, **@ichor**: promos, aggregators or app accounts. The `blender uv texture lowpoly` search returned nothing.
+
+### §E: not due. The next check is **Sat 2026-11-21**. The 200-view gate has now filled (0/201, watch run 48), so that check owes a named page change. Carried candidates: a gallery image for stamps, dither, pressure, hidden tracks or the stay-on paint mode. `promo/dither/shot_editor.png` joins `promo/paintmode/shot_editor.png` and `promo/showcase/showcase_GOLDEN.png`; any of them needs the `brand-visual` loop first.

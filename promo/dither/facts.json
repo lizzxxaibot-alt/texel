@@ -1,0 +1,177 @@
+{
+  "fails": [],
+  "strokes": [
+    {
+      "screen_row": 12,
+      "level_16ths": 2,
+      "texels_changed": 64,
+      "expected": 64,
+      "canvas_rows": [
+        8,
+        14
+      ],
+      "mode_on_after": true
+    },
+    {
+      "screen_row": 20,
+      "level_16ths": 4,
+      "texels_changed": 128,
+      "expected": 128,
+      "canvas_rows": [
+        16,
+        22
+      ],
+      "mode_on_after": true
+    },
+    {
+      "screen_row": 28,
+      "level_16ths": 6,
+      "texels_changed": 192,
+      "expected": 192,
+      "canvas_rows": [
+        24,
+        31
+      ],
+      "mode_on_after": true
+    },
+    {
+      "screen_row": 36,
+      "level_16ths": 8,
+      "texels_changed": 256,
+      "expected": 256,
+      "canvas_rows": [
+        32,
+        39
+      ],
+      "mode_on_after": true
+    },
+    {
+      "screen_row": 44,
+      "level_16ths": 10,
+      "texels_changed": 320,
+      "expected": 320,
+      "canvas_rows": [
+        40,
+        47
+      ],
+      "mode_on_after": true
+    },
+    {
+      "screen_row": 52,
+      "level_16ths": 12,
+      "texels_changed": 384,
+      "expected": 384,
+      "canvas_rows": [
+        48,
+        55
+      ],
+      "mode_on_after": true
+    },
+    {
+      "screen_row": 60,
+      "level_16ths": 14,
+      "texels_changed": 448,
+      "expected": 448,
+      "canvas_rows": [
+        56,
+        63
+      ],
+      "mode_on_after": true
+    }
+  ],
+  "enter": [
+    "RUNNING_MODAL"
+  ],
+  "navy_texels": 4096,
+  "navy_index": 1,
+  "tab": "Texel",
+  "area": {
+    "x": 0,
+    "y": 89,
+    "w": 1238,
+    "h": 785
+  },
+  "window": {
+    "w": 1500,
+    "h": 900
+  },
+  "mode_on_at_shot": true,
+  "index_counts": {
+    "1": 2304,
+    "2": 1792
+  },
+  "row_orange": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    16,
+    0,
+    16,
+    0,
+    16,
+    0,
+    16,
+    0,
+    32,
+    0,
+    32,
+    0,
+    32,
+    0,
+    32,
+    0,
+    32,
+    16,
+    32,
+    16,
+    32,
+    16,
+    32,
+    16,
+    32,
+    32,
+    32,
+    32,
+    32,
+    32,
+    32,
+    32,
+    48,
+    32,
+    48,
+    32,
+    48,
+    32,
+    48,
+    32,
+    64,
+    32,
+    64,
+    32,
+    64,
+    32,
+    64,
+    32,
+    64,
+    48,
+    64,
+    48,
+    64,
+    48,
+    64,
+    48
+  ],
+  "blender": "4.5.9 LTS",
+  "texel_from": "C:\\Users\\opule\\AppData\\Local\\Temp\\texel027\\texel\\__init__.py",
+  "panel_at_shot": {
+    "tool": "PENCIL",
+    "size": 8,
+    "dither": "BAYER",
+    "density": 14
+  }
+}
