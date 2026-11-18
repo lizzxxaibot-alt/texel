@@ -6,6 +6,68 @@ in `../ACTIONS.md` and handed to a named owner.
 
 ---
 
+## 2026-11-18 — run 49 (scheduler catch-up, 13:37Z; host off after ~11-17T04:14Z → 11-18T13:28Z, no 11-17 run)
+
+**VERDICT: BLOCKED ON A HUMAN DECISION; THE LISTING IS HEALTHY.** Nothing has changed since run 48 except three more views and one more outage. T-023 (stop/continue) is four days past its default date with no answer; 0 sales after 70 days and 204 views.
+
+### Action ledger
+
+**Opened: 0. Closed: 0.** A-032 is still Open in `pixelkiln/launch/watch/ACTIONS.md`, so the 7-day and 14-day rungs stay suspended for every HUMAN row.
+
+| id | age | owner |
+|---|---|---|
+| T-023 | 40 d | **HUMAN**: stop/continue. Default date 11-14 passed, unanswered |
+| T-010 | 64 d | **HUMAN** (suspended) |
+| T-011 | 64 d | **HUMAN** (suspended) |
+| T-015 | 60 d | **HUMAN** (suspended) |
+| T-016 | 60 d | **HUMAN** (suspended; part of T-023's redirect option) |
+
+`grep T-023` over `STATE.md` and `state/texel.md` returns nothing, so no decision is recorded. No doer routine owns an open row.
+
+### ALERTS
+
+None new. One outage, said once: the host was off from after 11-17T04:14Z (`pixelkiln-backup`'s last start) to the 11-18T13:28Z catch-up burst, about 33 h (A-037, `pixelkiln-watch`'s row). Lost to it: this routine's 11-17 slot, `texel-support`'s 11-17 read, and `texel-marketing`'s 11-17 run (a Tuesday, a packs day, so no Texel beat was owed). `texel-support` and `texel-marketing` last started 11-17T00:23Z and 00:24Z, 37 h ago, under the 48 h line, and both show `waiting: global_limit`: due and queued behind this burst, not silent.
+
+### Routines (scheduler read 11-18 13:37Z)
+
+| Routine | lastRunAt | Next / state | Artifact |
+|---|---|---|---|
+| support | 11-17T00:23Z | queued (`global_limit`), then 11-18T14:24Z | `SUPPORT.md` 11-16 row: no inbound items, day 69. Nothing for 11-17 (host off) |
+| marketing | 11-17T00:24Z | queued (`global_limit`), then 11-18T21:20Z | `promo/POSTED.md:2821`: Mon 11-16 dither brush beat with asset `promo/dither/shot_post.png` and post `3n2hrwaktvf2x`, two replies. The Wed 11-18 beat is still possible today |
+| release | 11-14T07:51Z | 11-18T16:13Z, today; weekly, not late | `ROADMAP.md` HELD status lines (T-030, closed run 47). Under the hold today's run owes a status line, not a build |
+| funnel | 11-14T07:56Z | 11-20T16:06Z; weekly, not late | `funnel/LOG.md:1017`: measuring week 11-14 |
+
+The Texel repo was clean before this run's edits (last commit `fa96200`, marketing's 11-16 record). This run's two edits are left for `pixelkiln-backup`.
+
+### Listing (cookie-less GET, 11-18 13:38:53Z; the first try at 13:38:12Z returned 429, 166 B)
+
+| Check | Result |
+|---|---|
+| Logged-out page | HTTP 200, 48,801 B. `Updated` 07 November 2026 @ 21:23 UTC. Same six comment post ids (17784093 … 17822598) |
+| Published | Public 200 to an anonymous request; Project totals reads `Published` |
+| Download | Paid `texel-0.2.7.zip` **218 kB** matches local `dist/texel-0.2.7.zip` 224,109 B (the newest). Demo `texel-lite-demo-0.2.7.zip` 206 kB (local 211,503 B) |
+| Price | Public page shows $9.95 ×3. Correct: the $14.95 step is tied to v0.4.0, which is held |
+| AI disclosure | Public table: `AI Assisted, Code, Graphics` |
+
+**All pass.** The edit form was not opened. `devlog.rss` newest item is 0.2.7, 05 Nov.
+
+### Numbers
+
+`| 2026-11-18 (catch-up, 13:38Z) | 204 | 11 | 0 | $0.00 | 0.00% |`
+
+- **+3 views over ~1.55 d.** **7-day trend:** +13 over ~8.03 d (≈1.6/day; no reading exists exactly 7 d back), against +13 over 7.0 d (≈1.9/day) the window before. **Flat**, n=13.
+- Downloads 11, unchanged. Sales 0, revenue 0, 0 ratings, 4 collections. Store ledger $100.92 / 18 (summed off Project totals plus the bundle), unchanged, none Texel.
+- Conversion 0 / 204. Run 48's judgment stands and is not restated: this rejects a 3%+ rate and cannot pick between cover, price and copy; venue and price band is the untested candidate and sits in T-023.
+- Lite demo since 10-07: +79 views, 6 untraced downloads (≈8%), against a bar of +150 views.
+- Day 70 live with 0 sales. The zero-sales rule fired on 10-09 and is held as T-023, not re-fired.
+
+### Roadmap
+
+- **No dated target is open before v0.5.0 (2026-12-12, 24 days out).** v0.2.8, v0.3.0 and v0.4.0 are held with no date, on T-023. v0.5.0 sits behind all three and cannot ship on 12-12 unless the hold lifts; it gets flagged when the date is within 7 days.
+- Live build: v0.2.7, shipped 11-05.
+
+---
+
 ## 2026-11-16 — run 48 (scheduler catch-up, 11-17T00:20Z; host off ~11-15T04:15Z → 11-17T00:14Z, no 11-15 run)
 
 **VERDICT: BLOCKED ON A HUMAN DECISION; THE LISTING IS HEALTHY.** The conversion gate filled today at 0 sales / 201 views. T-023 (stop/continue) is two days past its default date with no answer. The listing passes every check on v0.2.7.
