@@ -1,0 +1,139 @@
+{
+  "fails": [],
+  "strokes": [
+    {
+      "face": 0,
+      "tool": "RECT",
+      "texels_changed": 60,
+      "expected": 60,
+      "inside_face_rect": true,
+      "mode_on_after": true
+    },
+    {
+      "face": 0,
+      "tool": "LINE",
+      "texels_changed": 14,
+      "expected": 14,
+      "inside_face_rect": true,
+      "mode_on_after": true
+    },
+    {
+      "face": 1,
+      "tool": "RECT",
+      "texels_changed": 60,
+      "expected": 60,
+      "inside_face_rect": true,
+      "mode_on_after": true
+    },
+    {
+      "face": 1,
+      "tool": "LINE",
+      "texels_changed": 14,
+      "expected": 14,
+      "inside_face_rect": true,
+      "mode_on_after": true
+    },
+    {
+      "face": 2,
+      "tool": "RECT",
+      "texels_changed": 60,
+      "expected": 60,
+      "inside_face_rect": true,
+      "mode_on_after": true
+    },
+    {
+      "face": 2,
+      "tool": "LINE",
+      "texels_changed": 14,
+      "expected": 14,
+      "inside_face_rect": true,
+      "mode_on_after": true
+    }
+  ],
+  "add_cube": {
+    "result": [
+      "FINISHED"
+    ],
+    "object": "Pixel Cube",
+    "dimensions": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "image": "Pixel Cube Texture",
+    "image_size": [
+      64,
+      64
+    ],
+    "interpolation": "Closest",
+    "material": "Pixel Cube Material",
+    "uv_layers": 1,
+    "faces": 6,
+    "canvas_texels_before": 0
+  },
+  "setup_viewport": {
+    "result": [
+      "FINISHED"
+    ],
+    "shading": "MATERIAL"
+  },
+  "face_report": [
+    {
+      "poly": 2,
+      "facing": 0.748,
+      "texel_rect": [
+        24,
+        16,
+        39,
+        31
+      ]
+    },
+    {
+      "poly": 5,
+      "facing": 0.293,
+      "texel_rect": [
+        40,
+        16,
+        55,
+        31
+      ]
+    },
+    {
+      "poly": 3,
+      "facing": 0.2,
+      "texel_rect": [
+        24,
+        0,
+        39,
+        15
+      ]
+    }
+  ],
+  "enter": [
+    "RUNNING_MODAL"
+  ],
+  "fill_texels": 4096,
+  "tab": "Texel",
+  "area": {
+    "x": 0,
+    "y": 89,
+    "w": 1238,
+    "h": 785
+  },
+  "window": {
+    "w": 1500,
+    "h": 900
+  },
+  "mode_on_at_shot": true,
+  "index_counts": {
+    "1": 3874,
+    "2": 222
+  },
+  "palette_used": 2,
+  "blender": "4.5.9 LTS",
+  "texel_from": "C:\\Users\\opule\\AppData\\Local\\Temp\\claude\\af502bb1ca13086f\\a77c49d2-58b6-43ad-8549-3cb7e1d92bdf\\scratchpad\\texel027\\texel\\__init__.py",
+  "panel_at_shot": {
+    "tool": "LINE",
+    "size": 1
+  }
+}

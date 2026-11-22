@@ -454,3 +454,5 @@ Pointer, not a copy: reasoning and evidence are in `promo/POSTED.md` under *Run 
 2. **v0.2.7 hide-a-track line appended to *Cel animation*** (*"The eye beside a cel hides its whole track on every frame, and the sheet, JSON and GIF leave it out. New in v0.2.7."*), worded from the shipped `texel-0.2.7.zip` README lines 124-131. Cel animation is not in Lite, so the Lite paragraph stays true.
 
 Both mirrored into `store/listing_short.html`. Revert either with `node automation/itch_desc_replace.mjs --game 4991926`.
+
+**2026-11-22, live description reordered (`texel-marketing` §E):** *Try it free first* moved from below the feature list to directly under the opening paragraph, same words. Reason and baseline in `promo/POSTED.md` 11-22. Before/after copies: `store/desc_live_2026-11-22_before.html`, `store/desc_live_2026-11-22_after.html`.

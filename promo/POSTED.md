@@ -2853,3 +2853,113 @@ Both re-fetched cookie-less from `public.api.bsky.app` `getPosts` (by DID): auth
 - **@balakcity**, **@xrfolio.page**, **@yumeforgesapp**, **@ichor**: promos, aggregators or app accounts. The `blender uv texture lowpoly` search returned nothing.
 
 ### §E: not due. The next check is **Sat 2026-11-21**. The 200-view gate has now filled (0/201, watch run 48), so that check owes a named page change. Carried candidates: a gallery image for stamps, dither, pressure, hidden tracks or the stay-on paint mode. `promo/dither/shot_editor.png` joins `promo/paintmode/shot_editor.png` and `promo/showcase/showcase_GOLDEN.png`; any of them needs the `brand-visual` loop first.
+
+## Run 2026-11-18 (Wed, a TEXEL day, 07:40-07:50 local / 13:40-13:50Z, an early firing): the first-cube capture, two replies
+
+**Ledger first.** `ACTIONS.md` has no OPEN row owned by `texel-marketing`. Open: T-010, T-011, T-015, T-016, T-023 (all `HUMAN`). T-023 is still unanswered, so this routine ran as normal; stopping is the user's call. No release today: v0.2.8, v0.3.0 and v0.4.0 are held. No top-level post on the account since 11-17 00:28Z (`-Mode feed`).
+
+### Posted — Wed 2026-11-18, WIP note: the first five minutes (Add 1m Cube, then paint on the model)
+
+| Date | Beat | Asset | URL | First hour |
+|---|---|---|---|---|
+| 2026-11-18 | **Where to start: N, Texel tab, Add 1m Cube, Viewport, then a dungeon crate in one Fill click, three Rect drags and three Line drags, painted on the cube in the 3D Viewport** | `promo/firstcube/shot_editor.png` (1238x785, the 3D Viewport area cropped from a real Blender window screenshot). Blocked for reuse until **12-09** | [3n2louivlfz2x](https://bsky.app/profile/pixelkiln.bsky.social/post/3n2louivlfz2x) | 0 likes at +1 min |
+
+The capture is **real input on the shipped zip**, not a mock:
+- `promo/firstcube/firstcube_shot.py` (the `dither_shot.py` pattern, first time in the 3D Viewport) loads the add-on from an extraction of `dist/texel-0.2.7.zip` (sha256 `a29a1d86…`, identical to `dist/shipped/texel-0.2.7-SHIPPED-2026-11-05.zip`), runs Blender 4.5.9 with `--factory-startup --enable-event-simulate -p 0 0 1500 900`, removes the factory objects, runs `texel.add_cube` and `texel.setup_viewport`, invokes `texel.paint` once, then sends one Fill click and, on each of the three faces toward the view, one Rect drag and one Line drag. Strokes go through the add-on's own raycast and UV lookup. Only sidebar properties change between strokes.
+- `promo/firstcube/facts.json`: cube 1 x 1 x 1 m, image 64x64, interpolation `Closest`, 1 UV layer, canvas empty before; Fill changed **4,096** texels; each Rect changed **60** and each Line **14**, all inside its own face's 16x16 texel rect; mode still on after every stroke and at the screenshot; 2 palette indices. It passed on the first run, exit 0.
+- "16x16 a face" is from the three face rects in `facts.json` (16 texels wide each on the 64px canvas). I measured three faces, not six.
+- "The first comment on Texel's page asked where to start" is `SUPPORT.md` 11-02 (Isaque.OS, post 17784093, *the first comment ever posted on the Texel page*). My first draft said "the first question asked about Texel", which is false (Bluesky questions came earlier), and I changed it before the send.
+- The post names the **Viewport** button because without it the viewport stays in Solid shading and the paint does not show. The script removed the factory cube, light and camera first; the post makes no claim about that.
+- I looked at the PNG: the crate, the sidebar with *Stop Texel Paint* and the Setup panel, and the header hint are all visible. The 3D cursor sits on the front brace.
+- **Live file re-read logged-out, in a call before the send:** HTTP 200, 48,797 B, `texel-0.2.7.zip` + `texel-lite-demo-0.2.7.zip`; *Add 1m Cube* x2 on the page.
+- **Verified cookie-less with `getPosts` (by DID):** author `pixelkiln.bsky.social`, `createdAt` 2026-11-18T13:44:14.847Z, `app.bsky.embed.images#view`, 1 image 1238x785, alt 586 characters. Text 296/300 bytes, 4 facets. Spec: `promo/post_2026-11-18.json`.
+- **Not run:** the §4 design-critic loop. This is an uncomposed product screenshot, the same call as 11-09 and 11-16. The image is 1238 px wide, so Bluesky's CDN rescales it to 1000 (the 10-26 note); 11-09 went out the same way.
+- **Reuse:** a new asset. **Phrasing:** "where to start" and "Add 1m Cube" appear in no earlier post spec. No hype words, no rival named.
+
+### §D: two replies, both verified on the public AppView
+
+| Date | Thread | What was said | Link |
+|---|---|---|---|
+| 2026-11-18 | @liberiarcano.bsky.social (11-17 20:05Z, 1 like, **0 replies**): *"Latest progress on the Pumpkin Sword"*, first preview in Blender. 2 of 3 images viewed (front and back). | Feedback on work in progress, no tip: the jack-o'-lantern face, the white curled tendrils against the green leaf collar, the dark vine through the split with the yellow piece in the gap, the seed at the tip. All visible in the images. I wrote "yellow piece" because it looks like a flame from the front and a gourd from the back. | [3n2lowj6mtf2n](https://bsky.app/profile/pixelkiln.bsky.social/post/3n2lowj6mtf2n) |
+| 2026-11-18 | @grexsaurus.bsky.social (11-14 17:47Z, 6 likes, **0 replies**): *"[WIP] Dinosaur leg for my 3D character model."* 2 of 3 images viewed. | Feedback on work in progress, no tip: the thick thigh tapering to a thin shank, the row of bumps down the front of the ankle, the splayed toes. All visible in the images. | [3n2lowjoxpa2d](https://bsky.app/profile/pixelkiln.bsky.social/post/3n2lowjoxpa2d) |
+
+Both re-fetched cookie-less from `public.api.bsky.app` `getPosts` (by DID): author `pixelkiln.bsky.social`, `createdAt` 13:45:22.073Z / 13:45:22.643Z, parent URIs correct, 274 / 236 bytes. No link, no pitch, Texel not mentioned. Sent with `pixelkiln/tools/pixelkiln_social.ps1 -Mode reply` after a `-DryRun` of each, in a separate call. Neither account appears earlier in this log.
+
+### Threads looked at and left alone
+
+- **@57e**, **@matzori**, **@esteeland**, **@alfredbaudisch.com**, **@shadefawks**, **@properdev**, **@afroskeleton**: standing rule (threads about another pixel-art-in-Blender product).
+- **@doctorflower** (replied 11-14), **@arubinousagi** (replied 11-05): not again so soon. **@bramwilliams.co.uk** (Gothic Steel crew, video) and **@skleembof.itch.io**: not viewed, candidates for a later run. **@paultriv**, **@sharon-3d**, **@r3js.org**, **@socketandpivot.com**: promos or repeats.
+
+### §E: not due. The next check is **Sat 2026-11-21**, and it owes a named page change (0/201). `promo/firstcube/shot_editor.png` joins the gallery candidates; it answers the page's only comment, and it needs the `brand-visual` loop before it goes on the page.
+
+## Run 2026-11-18 second firing (Wed, a TEXEL day, 15:21 local / 21:21-21:30Z): no post, two replies
+
+**Ledger first.** `ACTIONS.md` has no OPEN row owned by `texel-marketing`. Open: T-010, T-011, T-015, T-016, T-023 (all `HUMAN`). T-023 is still unanswered, so this routine ran as normal; stopping is the user's call.
+
+**No post.** The early firing this morning (run above) already spent the Wednesday slot. Its post was re-fetched cookie-less at 21:23Z: [3n2louivlfz2x](https://bsky.app/profile/pixelkiln.bsky.social/post/3n2louivlfz2x) live, image embed attached, **6 likes** at +7.6 h. `QUEUE.md` untouched. No release today (v0.2.8, v0.3.0, v0.4.0 held).
+
+### §D: two replies, both verified on the public AppView
+
+| Date | Thread | What was said | Link |
+|---|---|---|---|
+| 2026-11-18 | @irsyakistasakhavi.bsky.social (11-18 04:03Z, 4 likes, **0 replies**): *"learning retopoliogize as much as i can"*, following a tutorial. Blender 5.2.2 screenshot viewed (1920x1080): a retopo head mesh over a sculpt, modifier stack Mirror, Subdivision, Shrinkwrap (target `body`). | Feedback on work in progress, no correction: the loops ring the eye socket and the mouth; Shrinkwrap sits after Subdivision in the stack, so the smoothed mesh stays on the sculpt; the ear is done. All read off the screenshot. | [3n2mij342t32f](https://bsky.app/profile/pixelkiln.bsky.social/post/3n2mij342t32f) |
+| 2026-11-18 | @antro3dcg.bsky.social (11-15 11:45Z, 3 likes, **0 replies**): *"Head texture wip"*. Video (12.6 s) sampled with ffmpeg, 5 frames, three looked at (two front, one side). | Feedback on work in progress, no tip: the darker brown painted where hair locks overlap, the cream tufts inside the ears, the green eyes behind thin round frames, and that it holds in the side view. All visible in the frames. | [3n2mij3mr4r2b](https://bsky.app/profile/pixelkiln.bsky.social/post/3n2mij3mr4r2b) |
+
+Both re-fetched cookie-less from `public.api.bsky.app` `getPosts` (by DID): author `pixelkiln.bsky.social`, `createdAt` 21:23:08.373Z / 21:23:08.949Z, parent URIs correct, 274 / 271 bytes. No link, no pitch, Texel not mentioned. Sent with `pixelkiln/tools/pixelkiln_social.ps1 -Mode reply` after a `-DryRun` of each, in a separate call. Neither account appears earlier in this log.
+
+### Threads looked at and left alone
+
+- **@cizraa** (hair modelling WIP, 0 replies): the second image is a photo of a real person used as reference. Not commenting on that.
+- **@20crinkles** (fight animation, 3.9 s, contact sheet viewed): nothing specific to add beyond praise from eight frames. A candidate for a later run with a proper frame read.
+- **@skleembof.itch.io** (video, not sampled): still a candidate. **@liberiarcano**, **@doctorflower**: replied recently. **@paultriv**: promo repeats. **@koro56maru3**: Japanese-language VRChat thread, nothing verified to add.
+
+### §E: not due. Live page re-read logged out at 21:23Z: HTTP 200, 48,801 B. The next check is **Sat 2026-11-21**, and it owes a named page change (0/201).
+
+## Run 2026-11-22 (Sun, a TEXEL day, 06:20-06:30 local / 12:20-12:30Z, a catch-up firing; host off ~11-18T21:30Z → 11-22T12:16Z): the ice cavern render, the owed §E page change, two replies
+
+**Ledger first.** `ACTIONS.md` has no OPEN row owned by `texel-marketing`. Open: T-010, T-011, T-015, T-016, T-023 (all `HUMAN`). T-023 is still unanswered (`grep T-023` over `STATE.md` and `state/texel.md` returns nothing), so this routine ran as normal; stopping is the user's call.
+
+**Missed slots, said once:** Fri 11-20 (sprite beat) and Sat 11-21 (§E) had no run because the host was off. Friday is not replayed. Saturday's §E owed a named page change, so it is done below. No top-level post on the account since 11-18 13:44Z (`getAuthorFeed`).
+
+### Posted — Sun 2026-11-22, best render = `env_cavern_01` (first post of any `env_cavern_*` still)
+
+| Date | Beat | Asset | URL | First hour |
+|---|---|---|---|---|
+| 2026-11-22 | **Ice cavern for a dungeon crawler: four 64x64 textures (ice, snow, rock, one mirrored crystal), Apply Density 10 texels/m on walls and columns vs 28 on crystals and stalagmites** | `store/stills/env_cavern_01.png`, saved as `store/stills/env_cavern_01_post.jpg` (JPEG q95 4:4:4, 339,711 B, 1280x720). Blocked for reuse until **12-13** | [3n2vm7ne2sl2t](https://bsky.app/profile/pixelkiln.bsky.social/post/3n2vm7ne2sl2t) | 1 like, 1 repost at +2 min |
+
+Every claim was checked against the code that made the render:
+- **`envs.py` `ENVIRONMENTS["cavern"]`**: `dens=(10.0, 28.0)`, `arch={"Snow","Ceiling","Wall","Col"}`. `render_env.py` `apply_density()` runs `texel.density_apply` per object at 10 for arch prefixes and 28 for the rest, so `Crystal*`, `Stalag*` and `Drift*` get 28.
+- **"Four 64x64 textures"**: `tex_cavern(size=64)` returns `ice`, `snow`, `crystal`, `rock`. Rock is the ceiling only, visible along the top edge.
+- **"one crystal, mirrored left to right"**: `tex_cavern` draws the crystal's ellipse and facet lines on the left half and sets each texel's mirror at `size-1-x`. **The generator script did the mirroring, not the Mirror X tool**, so the post states the texture's symmetry and does not say Mirror X painted it.
+- I looked at all three cavern stills and at `env_shrine_02`. `env_cavern_01` separates the six crystals best. The shrine stills were passed over: flat grey sky, and the scene's own label is *"Seamless tiling, verified"*, which the 09-24 ruling bars.
+- **Live file re-read logged-out, in a call before the send:** HTTP 200, 48,803 B, `texel-0.2.7.zip` + `texel-lite-demo-0.2.7.zip`.
+- **Verified cookie-less with `getPosts` (by DID):** author `pixelkiln.bsky.social`, `createdAt` 2026-11-22T12:23:24.762Z, `app.bsky.embed.images#view`, 1 image 1280x720, alt 482 characters. Text 297/300 bytes, 4 facets. Spec: `promo/post_2026-11-22.json`.
+- **Not run:** the §4 design-critic loop. An unmodified store still, the same call as the earlier Sunday renders.
+- **Reuse:** no `env_cavern_*` still has been posted before. **Phrasing:** "dungeon crawler", "facet lines" and "Ice cavern" appear in no earlier post spec (grep). No hype words, no rival named.
+
+### §E: the listing check owed from Sat 11-21, with one live change
+
+- **Conversion rule: fired.** Watch's 11-22 ledger row reads **0 sales / 210 views**, past the 200-view gate.
+- **CHANGED, LIVE: the *Try it free first* paragraph moved from below the eleven-item feature list to directly under the opening paragraph.** Same words, new position; nothing added or removed (before and after are both 4,645 characters with the same characters).
+- **Why this change:** T-022 pre-registered the read-out for the free demo as *"≥10% take = demand; <3% = positioning, which goes to `texel-marketing`"*. Views went 125 → 210 since Lite went live (85 views), and the ledger shows one demo pull in that span that no routine claims (11-16, `texel-lite-demo-0.2.7.zip` 0 → 1). That is about 1%, under the 3% line, so it is mine. The free step sat thirteenth of 27 blocks, after every feature bullet. A visitor unsure about $9.95 now meets the free option second.
+- **How to judge it:** demo downloads per view from here. Baseline at the change: **210 views, 11 downloads** (watch, 11-22T12:17Z). Subtract routine self-pulls as before. At about 1.6 views a day the reading is slow; 30 more views is roughly three weeks.
+- **How applied:** `itch_desc_dump.mjs` → two reps, each asserted to occur once and to reconstruct the target → `--dry` showed no miss → `itch_desc_replace.mjs --game 4991926` printed **applied 2/2, no stale strings** → a fresh dump equals the target exactly → logged-out re-read: HTTP 200, 48,802 B, *Try it free first* ×1 and ahead of *What it does:*, `texel-0.2.7.zip` present, *95 operators* ×1, AI Assisted present, `Updated` 22 November 2026 @ 12:25 UTC.
+- **Revert:** `store/desc_live_2026-11-22_before.html` is the stored description before the edit; `..._after.html` is after.
+- **Truth check, rest of the page:** unchanged since 11-14 apart from this edit (`Updated` read 07 November before it). First screenshot and tagline not re-examined today; the 11-14 notes stand.
+- **Not done, carried (fourth week):** no gallery image shows stamps, dither, pressure, hidden tracks, the stay-on paint mode or the first cube. Candidates: `promo/firstcube/shot_editor.png`, `promo/dither/shot_editor.png`, `promo/paintmode/shot_editor.png`, `promo/showcase/showcase_GOLDEN.png`. Each needs the `brand-visual` loop first. This is the larger change and it has now slipped four checks.
+
+### §D: two replies, both verified on the public AppView
+
+| Date | Thread | What was said | Link |
+|---|---|---|---|
+| 2026-11-22 | @ianatherton.bsky.social (11-21 22:30Z, 16 likes, 1 reply): *"Workin on the bow, 89 tris, 1 aggressively tiling 64x64 texture"*. Both images viewed (the bow in a viewport, 377x721; the texture, 338x316). | Feedback on work in progress, no tip: the strip of diagonal stripes down the side of the sheet reads as twisted cord on the string; the darker bands at the grip break up the grain where the hand goes; 89 tris is plenty for that silhouette. The first two are visible in the images; the third is an opinion. | [3n2vmbcjpvc26](https://bsky.app/profile/pixelkiln.bsky.social/post/3n2vmbcjpvc26) |
+| 2026-11-22 | @nimbuspaw.bsky.social (11-21 01:45Z, 9 likes, **0 replies**): *"Second try with Rigify. It turned out much better than the first attempt."* Render viewed (1080x1920): a jointed robot figure posed against a wall with bar shadows. | Feedback on work in progress, no tip: head tilted, ankles crossed, both hands on the hips without sinking into the mesh; the ball joints at hips and knees. All visible in the render. | [3n2vmbdh7as26](https://bsky.app/profile/pixelkiln.bsky.social/post/3n2vmbdh7as26) |
+
+Both re-fetched cookie-less from `public.api.bsky.app` `getPosts` (by DID): author `pixelkiln.bsky.social`, `createdAt` 12:24:20.321Z / 12:24:21.336Z, parent URIs correct, 228 / 206 bytes. No link, no pitch, Texel not mentioned. Sent with `pixelkiln/tools/pixelkiln_social.ps1 -Mode reply` after a `-DryRun` of each, in a separate call. Neither account appears earlier in this log.
+
+### Threads looked at and left alone
+
+- **@57e**, **@ecutruin**: standing rule / an argument. **@retrygames**, **@cghawk**, **@harning3d**, **@phisato**, **@paultriv**: promos.
+- **@azureboers** (Rattata head, video, 0 replies) and **@mizukiasaka** (roads rebuilt in Geometry Nodes, asking about tree shadows): not viewed; candidates for a later run. **@lowpolybear91**: appears earlier in this log. **@liberiarcano**, **@doctorflower**, **@grexsaurus**, **@antro3dcg**: replied recently.
+
+### §E: done today for 11-21. The next check is **Sat 2026-11-28**.

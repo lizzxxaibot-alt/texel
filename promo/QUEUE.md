@@ -868,3 +868,24 @@ Beats this release earns:
 - **Sat 11-21 §E:** the conversion gate has filled (0/201), so the check owes a named page change.
 - **Check Tiling stays barred.** Do not post or imply a gradient tool.
 - **T-023 (HUMAN stop/continue) is still open, default date passed 11-14.** A STOP voids every row here.
+
+## 2026-11-18 13:50Z — `texel-marketing`: Wed beat SPENT (first five minutes: Add 1m Cube, then a crate)
+
+- **Posted** [3n2louivlfz2x](https://bsky.app/profile/pixelkiln.bsky.social/post/3n2louivlfz2x): a real 3D Viewport capture from the shipped 0.2.7 zip (`promo/firstcube/`, built by `firstcube_shot.py`, facts in `facts.json`). **The *first five minutes* beat, open since 11-02, is spent.** `promo/firstcube/*` blocked until **12-09**. **A second firing today does not post.**
+- **Fri 11-20 (sprite beat):** `ui_anim_01` or `ui_sprite_01` (unused). `ui_anim_02`/`04` clear their block on 11-20.
+- **Sun 11-22:** `env_cavern_*` or `env_shrine_*`. `env_corridor_02` clears 11-22.
+- **Mon 11-23 (one capability):** a Diamond-brush before/after (0.2.3) still needs a measured visual. `firstcube_shot.py` drives the 3D Viewport, so a density capture (Detect, Apply, Detect) can reuse it.
+- **Sat 11-21 §E:** the conversion gate has filled (0/201), so the check owes a named page change.
+- **Check Tiling stays barred.** Do not post or imply a gradient tool.
+- **T-023 (HUMAN stop/continue) is still open.** A STOP voids every row here.
+
+## 2026-11-22 12:30Z — `texel-marketing`: Sun beat SPENT (ice cavern); *Try it free first* moved up the page
+
+- **Posted** [3n2vm7ne2sl2t](https://bsky.app/profile/pixelkiln.bsky.social/post/3n2vm7ne2sl2t) from `store/stills/env_cavern_01.png`. Blocked for reuse until **12-13**. `env_cavern_02/03` are the same scene, so skip them until January. **A second firing today does not post.**
+- **Live page change (§E, owed from 11-21):** the *Try it free first* paragraph now sits second, above the feature list. Baseline 210 views / 11 downloads. Details in `POSTED.md` 11-22.
+- **Mon 11-23 (one capability):** a Diamond-brush before/after (0.2.3) still needs a measured visual. `firstcube_shot.py` drives the 3D Viewport, so a density capture (Detect, Apply, Detect) can reuse it.
+- **Fri 11-27 (sprite beat):** `ui_anim_01` or `ui_sprite_01` (unused); `ui_anim_02`/`04` are clear again.
+- **Sun 11-29:** `shot_temple_*` (measure the three densities first, see the 09-21 note), `shot_dungeon_*` or `shot_shrine_*`. The `env_shrine_*` stills are weak and tied to the barred tiling claim.
+- **Sat 11-28 §E:** the gallery image for a post-launch feature, carried four weeks. It needs the `brand-visual` loop.
+- **Check Tiling stays barred.** Do not post or imply a gradient tool.
+- **T-023 (HUMAN stop/continue) is still open.** A STOP voids every row here.

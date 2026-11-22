@@ -1,0 +1,23 @@
+<p><strong>Texel</strong> paints pixel art straight onto your models inside Blender &mdash; and animates it. It fixes the two things that go wrong when 2D pixel art meets a mesh: strokes that come out as staircases, and pixels that change size from one face to the next.</p>
+<p><strong>Try it free first.</strong> Texel Lite is the free demo file under the buy button. It paints, layers, palettes, selections, zones and texel density the same way the full add-on does. It does not include cel animation, sprite sheet, GIF and JSON export, trim, colour count, reference images or Showcase renders.</p>
+<p><strong>What it does:</strong></p>
+<ul>
+<li><strong>Pixel-perfect strokes.</strong> A freehand drag lands clean, with no doubled corners to pick out by hand.</li>
+<li><strong>Texel density, measured.</strong> Reports px/unit across a mesh, rescales UVs to a target, and snaps UVs to texel corners.</li>
+<li><strong>Seam check for tiles.</strong> Wraps a texture against itself and scores the seam before you commit it. It is a heuristic: a break softer than the texture’s own contrast can slip past it.</li>
+<li><strong>Indexed colour.</strong> A 256-entry palette. Swap it and every surface recolours instantly and exactly.</li>
+<li><strong>Selection transforms.</strong> Flip, rotate and scale a selection by nearest neighbour &mdash; nothing is interpolated between two palette indices, and the mask turns with the art, so a wand selection survives a rotation as its own shape. <em>New in v0.2.0.</em></li><li><strong>Radial symmetry.</strong> One stroke paints up to sixteen copies around the canvas centre, and it stacks with the mirrors: radial 4 plus Mirror X paints eight. <em>New in v0.2.1.</em></li><li><strong>Dither as a brush mode.</strong> Paint through a 50%, 25% or 75% mask, or a 4x4 Bayer map. The pattern is fixed to the canvas, so overlapping strokes line up. <em>New in v0.2.2.</em></li><li><strong>Stamps.</strong> Select a patch of texels, press Stamp From Selection, and the brush paints that patch in its own colours. Transparent texels leave the canvas alone. <em>New in v0.2.4.</em></li><li><strong>Tablet pressure.</strong> The pen icon beside Size makes pen pressure scale the Pencil and Eraser from 1 texel up to Size. Off by default, and a mouse always presses fully, so with a mouse nothing changes. Tested with simulated pressure values, not yet on a physical tablet. <em>New in v0.2.6.</em></li><li><strong>Cel animation.</strong> Frames and tracks, onion skin, bound to Blender’s timeline. Export a sheet plus JSON, or a GIF. The eye beside a cel hides its whole track on every frame, and the sheet, JSON and GIF leave it out. <em>New in v0.2.7.</em></li>
+<li><strong>95 operators</strong>, every one with a button in the sidebar, and nine on keys you can rebind in Blender’s own keymap editor.</li>
+</ul>
+<p><strong>Getting started.</strong> Both zips, Lite and full, include <strong>START-HERE.html</strong> (an offline guide that opens in your browser) and a full README.md. The first five minutes:</p>
+<ol><li>Keep the zip zipped. In Blender: Edit → Preferences → Add-ons → the ▾ menu top-right → Install from Disk&hellip; and pick the zip. On Blender 4.2–4.4 the button is Install&hellip;</li><li>In a 3D Viewport, press N to open the sidebar and click the <strong>Texel</strong> tab on its right-hand edge. That tab is the whole add-on.</li><li>Texel → Setup → <strong>Add 1m Cube</strong>. One button makes the cube, an image, a material and a UV map, with the texture filter set so texels stay square.</li><li>Pick a colour, choose the Pencil, and draw on the cube.</li></ol>
+<p>Stuck on a step? Leave a comment below with the step and your Blender version and it gets answered.</p>
+<p><strong>With your purchase you get:</strong></p>
+<ul>
+<li>The add-on as a Blender extension zip. Install from disk, no dependencies.</li>
+<li>Full source, GPL-3.0. Your artwork is yours, commercial use included.</li>
+<li>The test suite it was built against, so you can run it yourself.</li>
+<li><strong>Every update free, forever.</strong> No v2, no subscription, no pro tier. The price rises at named milestones, but never for anyone who already owns it.</li>
+</ul>
+<p><strong>Requirements.</strong> Blender 4.2 or newer. Measured against 4.2.23, 4.5.9, 5.2.1 and the Microsoft Store build &mdash; all four pass. Tested on Windows only: it is platform-independent Python, but I have not tested macOS or Linux and will not claim it. GIF export needs ffmpeg on PATH; sheet and JSON export need nothing.</p>
+<p><em>Mintworks is an AI company &mdash; Texel’s code and artwork were built with AI assistance.</em></p>
