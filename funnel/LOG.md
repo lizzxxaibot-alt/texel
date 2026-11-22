@@ -46,6 +46,8 @@ says on 2026-09-26.
 | *both pages, read 2026-11-06* | *Material Palettes, 48 days live* | *(as above)* | **163** (+31 in 7 d) | **42** (+6) | *format retired 09-26* | *best week yet; see 11-06 note* |
 | *both pages, read 2026-11-14* | *Density Cheatsheet, 64 days live* | *(as above)* | **62** (+0 in 8 d) | **31** (+0) | *format retired 09-26* | *dead flat* |
 | *both pages, read 2026-11-14* | *Material Palettes, 56 days live* | *(as above)* | **182** (+19 in 8 d) | **46** (+4) | *format retired 09-26* | *slower than last week; see 11-14 note* |
+| *both pages, read 2026-11-22* | *Density Cheatsheet, 72 days live* | *(as above)* | **69** (+7 in 8 d) | **31** (+0) | *format retired 09-26* | *views only, no grabs* |
+| *both pages, read 2026-11-22* | *Material Palettes, 64 days live* | *(as above)* | **197** (+15 in 8 d) | **49** (+3) | *format retired 09-26* | *slowing again; see 11-22 note* |
 
 **The second row is the one that matters now, and it was added on 2026-09-19.**
 The 72 h window is history; what the page has done over eight days is the real
@@ -1059,3 +1061,52 @@ person: BlenderNation (**T-016**) and the stop/continue call (**T-023**). The
 next first-Friday slot is **2026-12-04**. It ships nothing unless T-023 is
 answered as a CONTINUE that reopens distribution.
 
+
+## Measuring week, 2026-11-22 (`texel-funnel`)
+
+**This run fired on Sunday 11-22, not Friday 11-20.** The gap in the readings
+below is eight days. Why the Friday slot slipped is the fleet scheduler's
+question (`pixelkiln-watch`), not this routine's.
+
+**No open `texel-funnel` rows in `ACTIONS.md`.** The five open rows are all
+`HUMAN`: T-010, T-011, T-015, T-016 and T-023. **No drop:** the
+free-sibling-page format was retired on 09-26, and the third week of the month
+is not a ship week in any case. `grep T-023` over `STATE.md`, `state/texel.md`
+and `ROADMAP.md` returns nothing, so the stop/continue call is still
+unanswered. Nothing was added to `promo/QUEUE.md`.
+
+**Readings:** `node automation/itch_analytics.mjs`, *Project totals*, lifetime,
+read at 2026-11-22T12:25:31Z. `profile.lock` was held by `itch_desc_replace.mjs`
+(another routine's write) when the script started; it waited for the lock and
+read 13 seconds later.
+
+| page | 11-14 | 11-22 | 8 days |
+|---|---|---|---|
+| Density Cheatsheet | 62 views / 31 grabs | 69 / 31 | +7 / +0 |
+| Material Palettes | 182 / 46 | 197 / 49 | +15 / +3 |
+| Texel (paid page) | 197 views / 10 grabs | 210 / 11 | +13 views / +1 grab |
+
+**Read it straight.** The palettes page slowed again: +31, +19, +15 over the
+last three readings. Collections stay at 7 against Texel's 4. The store-wide
+referrer line `free/tag-aseprite/tag-palette` reads 34, so the page is still
+being found by itch free-asset browsers, the audience the 09-26 retirement
+named. The cheatsheet took 7 views and no grabs; its grab count has not moved
+since 11-06. Texel took +13 views and one new grab, so the Lite demo's lifetime
+is 5 ours plus 6 not ours (assuming, as before, that every grab is the demo).
+Texel's row still shows 0 payments. Whether any funnel-page traffic reached
+Texel is `texel-watch`'s per-project referrer reading, and this run did not
+take it. **Nothing here reopens the 09-26 retirement.**
+
+**One new line in the store-wide referrer table, named for `texel-watch` and
+not acted on:** `github.com/lizzxxaibot-alt/texel?utm_source=chatgpt.com`, 5
+visits. The table is store-wide, so this run cannot say those 5 landed on
+Texel's page, but the source is Texel's public repo with a ChatGPT tag on it.
+That is new input for **T-010** (the repo's visibility, `HUMAN`): on 09-15 the
+repo had referred 1 visit.
+
+**Same limit as the last six readings.** Both remaining levers belong to a
+person: BlenderNation (**T-016**) and the stop/continue call (**T-023**, whose
+default date passed on 11-14). The 11-06 idea (a clearer hand-off to Texel on
+the palettes page) stays parked behind T-023. The next first-Friday slot is
+**2026-12-04**. It ships nothing unless T-023 is answered as a CONTINUE that
+reopens distribution.
