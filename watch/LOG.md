@@ -6,6 +6,74 @@ in `../ACTIONS.md` and handed to a named owner.
 
 ---
 
+## 2026-11-22 — run 50 (scheduler catch-up, 12:17Z; host off after ~11-18T21:30Z → 11-22T12:16Z, no 11-19/20/21 runs)
+
+**VERDICT: BLOCKED ON A HUMAN DECISION; THE LISTING IS HEALTHY.** Same state as run 49, plus six views and a ~87-hour outage. T-023 (stop/continue) is eight days past its default date with no answer; 0 sales after 74 days and 210 views.
+
+### Action ledger
+
+**Opened: 0. Closed: 0.** A-032 is still Open in `pixelkiln/launch/watch/ACTIONS.md`, so the 7-day and 14-day rungs stay suspended for every HUMAN row.
+
+| id | age | owner |
+|---|---|---|
+| T-023 | 44 d | **HUMAN**: stop/continue. Default date 11-14 passed, unanswered |
+| T-010 | 68 d | **HUMAN** (suspended) |
+| T-011 | 68 d | **HUMAN** (suspended) |
+| T-015 | 64 d | **HUMAN** (suspended) |
+| T-016 | 64 d | **HUMAN** (suspended; part of T-023's redirect option) |
+
+`grep T-023` over `STATE.md` and `state/texel.md` returns nothing, so no decision is recorded. No doer routine owns an open row.
+
+### ALERTS
+
+None new, and none owned by a Texel routine. One outage, said once: the host was off from after ~11-18T21:30Z (`texel-marketing`'s second 11-18 firing, the last activity on disk) to the 11-22T12:16Z catch-up burst, about 87 h. It is the longest gap this log has recorded and belongs to A-037 (`pixelkiln-watch`'s row, HUMAN). Lost to it:
+
+- this routine's 11-19, 11-20 and 11-21 slots;
+- `texel-support`'s reads for the same three days;
+- `texel-marketing`'s **Fri 11-20 sprite beat**, and the Sat 11-21 §E listing check its own `QUEUE.md` says owes a named page change. Thu and Sat were packs days. **Today is Sunday, a Texel day, and the beat is still possible**;
+- `texel-funnel`'s Fri 11-20 slot. It shows `waiting: global_limit`, so a catch-up is queued, not dropped;
+- four `pixelkiln-backup` slots (11-18 evening through 11-21). **The Texel repo has uncommitted work from 11-18 that exists only on this disk:** `PROGRESS.md`, `SUPPORT.md`, `promo/POSTED.md`, `promo/QUEUE.md` and the untracked `promo/firstcube/`. Last commit is `0d70cc2`. Backup is queued (`global_limit`); it is `pixelkiln-backup`'s work and this run did not commit it.
+
+`texel-support` and `texel-marketing` last started 11-18 and are past 48 h, but with five routines silent for one shared reason this is the app being closed, not five failures. Both show `waiting: global_limit`: due and queued behind this burst.
+
+### Routines (scheduler read 11-22 12:17Z)
+
+| Routine | lastRunAt | Next / state | Artifact |
+|---|---|---|---|
+| support | 11-18T14:25Z | queued (`global_limit`), then 11-22T14:24Z | `SUPPORT.md`: two 11-18 rows (catch-up and in-slot), no inbound items, day 71. Nothing for 11-19/20/21 (host off) |
+| marketing | 11-18T21:21Z | queued (`global_limit`), then 11-22T21:20Z | `promo/POSTED.md:2857`: Wed 11-18 first-cube beat, asset `promo/firstcube/`, post `3n2louivlfz2x`, two replies; `:2895` second firing, no post, two replies. No Fri 11-20 post (host off) |
+| release | 11-18T16:13Z | 11-25T16:13Z; weekly, not late | `PROGRESS.md` 11-18: *nothing shipped, the T-023 hold still stands*, with its own reads (205 views, 0 payments, no T-023 answer, no crash report). That is the right artifact under the hold |
+| funnel | 11-14T07:56Z | queued (`global_limit`), then 11-27T16:06Z | `funnel/LOG.md:1017`: measuring week 11-14. The 11-20 slot passed without a run (host off); late by one slot until the queued catch-up starts |
+
+### Listing (cookie-less GET, 11-22 12:17:41Z)
+
+| Check | Result |
+|---|---|
+| Logged-out page | HTTP 200, 48,802 B. `Updated` 07 November 2026 @ 21:23 UTC. Same six comment post ids (17784093 … 17822598) |
+| Published | Public 200 to an anonymous request; Project totals reads `Published` |
+| Download | Paid `texel-0.2.7.zip` **218 kB** matches local `dist/texel-0.2.7.zip` 224,109 B (the newest). Demo `texel-lite-demo-0.2.7.zip` 206 kB |
+| Price | Public page shows $9.95 ×3. Correct: the $14.95 step is tied to v0.4.0, which is held |
+| AI disclosure | Public table: `AI Assisted, Code, Graphics` |
+
+**All pass.** The edit form was not opened. `devlog.rss` newest item is 0.2.7, 05 Nov.
+
+### Numbers
+
+`| 2026-11-22 (catch-up, 12:17Z) | 210 | 11 | 0 | $0.00 | 0.00% |`
+
+- **+6 views over ~3.94 d** (≈1.5/day). **7-day trend:** +13 over ~7.97 d (≈1.6/day; no reading exists exactly 7 d back), against +13 over ~6.89 d (≈1.9/day) the window before. **Flat**, n=13. The outage cost readings, not traffic: the rate through it matches the rate before it.
+- Downloads 11, unchanged since 11-17. Sales 0, revenue 0, 0 ratings, 4 collections. Store ledger $100.92 / 18 (summed off Project totals plus the bundle), unchanged, none Texel.
+- Conversion 0 / 210. Run 48's judgment stands and is not restated.
+- Lite demo since 10-07: +85 views, 6 untraced downloads (≈7%), against a bar of +150 views.
+- Day 74 live with 0 sales. The zero-sales rule fired on 10-09 and is held as T-023, not re-fired.
+
+### Roadmap
+
+- **No dated target is open before v0.5.0 (2026-12-12, 20 days out).** v0.2.8, v0.3.0 and v0.4.0 are held with no date, on T-023. v0.5.0 sits behind all three and cannot ship on 12-12 unless the hold lifts; it gets flagged when the date is within 7 days (from 12-05).
+- Live build: v0.2.7, shipped 11-05. Its sealed `ROADMAP.md` and `START-HERE.html` still name 11, 18 and 25 Nov, all three now passed or about to; the live page text names none of them, and the only fix is an upload the hold forbids (run 47's ruling, unchanged).
+
+---
+
 ## 2026-11-18 — run 49 (scheduler catch-up, 13:37Z; host off after ~11-17T04:14Z → 11-18T13:28Z, no 11-17 run)
 
 **VERDICT: BLOCKED ON A HUMAN DECISION; THE LISTING IS HEALTHY.** Nothing has changed since run 48 except three more views and one more outage. T-023 (stop/continue) is four days past its default date with no answer; 0 sales after 70 days and 204 views.
