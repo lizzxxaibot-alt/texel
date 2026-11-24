@@ -2963,3 +2963,28 @@ Both re-fetched cookie-less from `public.api.bsky.app` `getPosts` (by DID): auth
 - **@azureboers** (Rattata head, video, 0 replies) and **@mizukiasaka** (roads rebuilt in Geometry Nodes, asking about tree shadows): not viewed; candidates for a later run. **@lowpolybear91**: appears earlier in this log. **@liberiarcano**, **@doctorflower**, **@grexsaurus**, **@antro3dcg**: replied recently.
 
 ### §E: done today for 11-21. The next check is **Sat 2026-11-28**.
+
+## Run 2026-11-24 (Tue, a PACKS day, 08:28-08:32 local / 14:28-14:32Z, an early firing): no post, two replies
+
+**Ledger first.** `ACTIONS.md` has no OPEN row owned by `texel-marketing`. Open: T-010, T-011, T-015, T-016, T-023 (all `HUMAN`). T-023 is still unanswered (`grep -c T-023` over `STATE.md` and `state/texel.md` returns 0 and 0), so this routine ran as normal; stopping is the user's call.
+
+**No post: Tuesday is the packs' day.** `QUEUE.md` holds no release beat (v0.2.8, v0.3.0, v0.4.0 held).
+
+**Missed slot, said once:** Mon 11-23 (one capability) has no entry in this log, and `getAuthorFeed` shows no top-level post on the account since 11-22 12:23Z. It is not replayed. The 11-22 cavern post reads 4 likes at +50 h.
+
+### §D: two replies, both verified on the public AppView
+
+| Date | Thread | What was said | Link |
+|---|---|---|---|
+| 2026-11-24 | @awfukellay.bsky.social (11-23 19:38Z, 18 likes, 1 reply): *"i finally got the hang of textures and UVs in Blender... I can get back to painting my pixels, please don't mind the mess i made in the UV editor"*. Screenshot viewed (1920x1017): Blender 5.2.3 Texture Paint workspace, Blender's own *Paint Pixel Art* brush, a destroyer hull with the UV editor beside it. | Feedback on work in progress, no tip: the orange band along the lower hull, the stepped grey plate at the bow with three dark slots, and the hull islands sitting upright in the UV editor so the red stripes follow the pixel rows. All visible in the screenshot. | [3n32u765wlc2f](https://bsky.app/profile/pixelkiln.bsky.social/post/3n32u765wlc2f) |
+| 2026-11-24 | @arctic-wanderer.bsky.social (11-21 20:04Z, 1 like, **0 replies**): *"Borb. One of the bazillion avatar projects I'm working on atm."* Image viewed (1504x918): four views of an anthropomorphic cockatoo sculpt. | Feedback on work in progress, no tip: the crest holds up from the front, side and top views with thin strands behind; the hooked beak in profile; thin bird shanks under a heavy chest. All visible in the image. | [3n32u76oplb2f](https://bsky.app/profile/pixelkiln.bsky.social/post/3n32u76oplb2f) |
+
+Both re-fetched cookie-less from `public.api.bsky.app` `getPosts` (by DID): author `pixelkiln.bsky.social`, `createdAt` 14:29:37.293Z / 14:29:37.849Z, parent URIs correct, 271 / 238 bytes. No link, no pitch, Texel not mentioned. Sent with `pixelkiln/tools/pixelkiln_social.ps1 -Mode reply` after a `-DryRun` of each, in a separate call. **@awfukellay was replied to once before, on 11-08 (16 days ago, a different post)**; @arctic-wanderer appears nowhere earlier in this log. The @awfukellay thread uses Blender's built-in pixel brush and names no product, so the standing rule does not apply to it.
+
+### Threads looked at and left alone
+
+- **@alfredbaudisch.com**: standing rule. **@paultriv**, **@digitalmuse3d**, **@digitalproduction**: promos or news feeds.
+- **@meisam3dfox** (texture painting WIP, 11-20, 0 replies, video) and **@skleembof.itch.io** (video, carried since 11-18): not sampled; candidates for a later run. **@malcolmfletcher** (Eoraptor shaders) and **@whtvrwrks.io** (John of Patmos; replied 09-27): not viewed.
+- **@doctorflower**, **@nimbuspaw**, **@liberiarcano**, **@grexsaurus**: replied recently.
+
+### §E: not due. Live page re-read logged out at 14:30Z: HTTP 200, 48,796 B. The next check is **Sat 2026-11-28**.

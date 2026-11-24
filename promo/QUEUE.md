@@ -889,3 +889,11 @@ Beats this release earns:
 - **Sat 11-28 §E:** the gallery image for a post-launch feature, carried four weeks. It needs the `brand-visual` loop.
 - **Check Tiling stays barred.** Do not post or imply a gradient tool.
 - **T-023 (HUMAN stop/continue) is still open.** A STOP voids every row here.
+
+## 2026-11-24 14:32Z — `texel-marketing`: packs day, no post, two replies
+
+- **Mon 11-23 had no run and is not replayed.** The *one capability* beat (a Diamond-brush before/after, or a density Detect/Apply/Detect capture) carries to **Mon 11-30**.
+- **Wed 11-25:** no release beat (v0.2.8, v0.3.0, v0.4.0 held). Candidates: the density capture via `firstcube_shot.py`, or the Diamond brush with a measured visual. Do not quote 25 Nov as a release date.
+- **Fri 11-27, Sun 11-29, Sat 11-28 §E:** as in the 11-22 entry above.
+- **A second firing today does not post.**
+- **T-023 (HUMAN stop/continue) is still open.** A STOP voids every row here.
