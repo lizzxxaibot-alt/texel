@@ -2988,3 +2988,29 @@ Both re-fetched cookie-less from `public.api.bsky.app` `getPosts` (by DID): auth
 - **@doctorflower**, **@nimbuspaw**, **@liberiarcano**, **@grexsaurus**: replied recently.
 
 ### §E: not due. Live page re-read logged out at 14:30Z: HTTP 200, 48,796 B. The next check is **Sat 2026-11-28**.
+
+## Run 2026-11-24 second firing (Tue, a PACKS day, 15:21 local / 21:21Z): no Texel post, two replies
+
+**Ledger first.** `ACTIONS.md` still has no OPEN row owned by `texel-marketing`. Open: T-010, T-011, T-015, T-016, T-023 (all `HUMAN`).
+
+**No post.** Tuesday belongs to the packs, and the early firing this morning (run above) already said so. `QUEUE.md` untouched. §E not due.
+
+### §D: two replies, both verified on the public AppView
+
+| Date | Thread | What was said | Link |
+|---|---|---|---|
+| 2026-11-24 | @dendelion.bsky.social (11-24 18:29Z, 2 likes, **0 replies**): *"Studying PS1 style modeling"*. Screenshot viewed (806x795): a T-posed low-poly figure in a Blender viewport with face-orientation colours, a reference image of a figure in an R.P.D. vest on a plane beside it. | Feedback on work in progress, no tip: the pairs of loops close together at the elbows and knees, the wedge nose, and the reference standing beside the mesh. The loops, nose and reference are visible in the screenshot; that the loops will hold shape on a bend is an opinion. | [3n33lbnb2u42a](https://bsky.app/profile/pixelkiln.bsky.social/post/3n33lbnb2u42a) |
+| 2026-11-24 | @daquirm1.bsky.social (11-24 17:45Z, 1 like, **0 replies**): *"One of my first renders, a simple low poly well made in Blender"*. Render viewed (1920x1080): a stone well under a shingled roof, crank on the left, rope on the axle. | Feedback on work in progress, no tip: each shingle sits at a slightly different angle; the loose stones on the ground by the right leg; the yellow rope coils against the brown beam. All visible in the render. | [3n33lbns6tl2p](https://bsky.app/profile/pixelkiln.bsky.social/post/3n33lbns6tl2p) |
+
+Both re-fetched cookie-less from `public.api.bsky.app` `getPosts` (by DID): author `pixelkiln.bsky.social`, `createdAt` 21:22:36.284Z / 21:22:36.849Z, parent URIs correct, 256 / 265 bytes. No link, no pitch, Texel not mentioned. Sent with `pixelkiln/tools/pixelkiln_social.ps1 -Mode reply` after a `-DryRun` of each, in a separate call. Neither account appears earlier in this log.
+
+**Four replies today across two firings.** The schedule fired twice again; each firing met its own floor of two.
+
+### Threads looked at and left alone
+
+- **@b-render** (*"Does it look like the reference image?"*, 11-24, video, 1 reply): a direct question, but answering it needs the video watched; candidate for a later run.
+- **@platafg** (nautilus, 30 likes): a quote-post with media, not viewed. **@astralthewerewolf** (first cup and saucer, 11-22, 1 reply): image fetched, not viewed; candidate.
+- **@assethoard**, **@indietooling**, **@retrygames**, **@cghawk**, **@aleniastudios**, **@illora**: promos or product posts. **@shadefawks**, **@timnuts**, **@doctorflower**, **@nimbuspaw**, **@antro3dcg**, **@whtvrwrks.io**: appear earlier in this log.
+- **@mizukiasaka** (Geometry Nodes roads, tree shadows), **@meisam3dfox**, **@skleembof.itch.io**: carried, still not sampled.
+
+### §E: not due. Live page re-read logged out at ~21:22Z: HTTP 200, 48,801 B. The next check is **Sat 2026-11-28**.
