@@ -3014,3 +3014,42 @@ Both re-fetched cookie-less from `public.api.bsky.app` `getPosts` (by DID): auth
 - **@mizukiasaka** (Geometry Nodes roads, tree shadows), **@meisam3dfox**, **@skleembof.itch.io**: carried, still not sampled.
 
 ### §E: not due. Live page re-read logged out at ~21:22Z: HTTP 200, 48,801 B. The next check is **Sat 2026-11-28**.
+
+## Run 2026-11-25 (Wed, a TEXEL day, 18:16-18:21 local / 11-26 00:16-00:21Z): the density capture, two replies
+
+**Ledger first.** `ACTIONS.md` has no OPEN row owned by `texel-marketing`. Open: T-010, T-011, T-015, T-016, T-023 (all `HUMAN`). T-023 is still unanswered (`grep -c T-023` over `STATE.md` and `state/texel.md` returns 0 and 0), so this routine ran as normal; stopping is the user's call. No release today: v0.2.8, v0.3.0 and v0.4.0 are held. No top-level post on the account since 11-22 12:23Z (`getAuthorFeed`), and no earlier firing today in this log.
+
+### Posted — Wed 2026-11-25, WIP note: Detect Density, Apply Density, Detect again, in the 3D Viewport
+
+| Date | Beat | Asset | URL | First hour |
+|---|---|---|---|---|
+| 2026-11-25 | **Three default cubes (4 m, 1 m, 0.5 m), one 64x64 timber tile: Detect reads 4.0 - 32.0 px/unit, target 16, Apply, 16.0 on all 18 faces** | `promo/densitycap/before_post.png` + `after_post.png` (858x785 each, the same crop box of two real Blender window screenshots). Blocked for reuse until **12-16** | [3n36fmkdqtw2s](https://bsky.app/profile/pixelkiln.bsky.social/post/3n36fmkdqtw2s) | 2 likes at +1 min |
+
+The capture is **the shipped zip in a real window**, not a mock:
+- `promo/densitycap/density_cap.py` (the `firstcube_shot.py` pattern) loads the add-on from a fresh extraction of `dist/texel-0.2.7.zip` (sha256 `a29a1d86…`, identical to `dist/shipped/texel-0.2.7-SHIPPED-2026-11-05.zip`), runs Blender 4.5.9 with `--factory-startup -p 0 0 1500 900`, builds three `primitive_cube_add` cubes, joins them, gives them `promo/shots/market/tile_timber.png` with Closest filtering, then runs `texel.setup_viewport`, `texel.density_detect`, sets the target field to 16, `texel.density_apply`, `texel.density_detect`. The UVs are Blender's default cube UVs, untouched before Detect.
+- **The check does not use the add-on's own maths.** The script measures every face's px/unit from the mesh's UVs and polygon areas and requires the add-on's readout to say the same. `promo/densitycap/facts.json`: before, 18 faces at exactly 4.0 / 16.0 / 32.0, readout `17.3 px/unit average / range 4.0 - 32.0 / 8.0x spread`; apply status `18 faces set to 16.0 px/unit`; after, 18 faces at 16.0, readout `16.0 px/unit average / range 16.0 - 16.0 / 1.0x spread`. Exit 0 on the first run.
+- "Each face gets 16 texels" is the default cube UV (a quarter of a 64 px image per face). "A stall texel is 8 box texels wide" is 4 m / 16 against 0.5 m / 16.
+- I looked at both PNGs, full and cropped: the readout is legible in the sidebar, and the texels are visibly the same size on all three cubes in the second image. The second image's alt text first said the tile repeats four times on the large cube. That was wrong (the face shows the whole 64-texel tile once), and I corrected it before the send.
+- "Stall", "crate" and "box" name three plain cubes. The post says "three default cubes" in the same sentence.
+- **Live file re-read logged-out, in the call before the send:** HTTP 200, 48,797 B, `texel-0.2.7.zip` + `texel-lite-demo-0.2.7.zip`.
+- **Verified cookie-less with `getPosts` (by DID):** author `pixelkiln.bsky.social`, `createdAt` 2026-11-26T00:19:19.285Z, `app.bsky.embed.images#view`, 2 images 858x785, alt 444 and 336 characters. Text 299/300 bytes, 4 facets. Spec: `promo/post_2026-11-25.json`. The first dry run read 305 bytes; I cut the two leading articles.
+- **Not run:** the §4 design-critic loop. These are uncomposed product screenshots, the same call as 11-09, 11-16 and 11-18.
+- **Reuse:** new assets. The capability was last posted 09-28 as the density card (58 days ago, a different scene, tile and figures). **Phrasing:** "stall", "timber" and "8 box texels" appear in no earlier post spec. No hype words, no rival named, no release date quoted.
+
+### §D: two replies, both verified on the public AppView
+
+| Date | Thread | What was said | Link |
+|---|---|---|---|
+| 2026-11-25 | @vanessawest.bsky.social (11-23 01:24Z, 3 likes, **0 replies**): *"This is my first project in blender... so I started simple with a little pot."* Both images viewed (587x616, 552x542): an orange pot with POT and a smiley painted on it, and a grey top view. | Encouragement with specifics, no tip: the flared lip with the ridge under the neck, the inner wall visible in the second shot, the smiley under the lettering. All visible in the images. "Reads as thrown clay" is an opinion. | [3n36fo7xs7q2w](https://bsky.app/profile/pixelkiln.bsky.social/post/3n36fo7xs7q2w) |
+| 2026-11-25 | @astralthewerewolf.bsky.social (11-22 03:03Z, 6 likes, 1 reply): *"So, I made a cup and saucer... First time truly modeling"*. Screenshot viewed (2559x1439): a subdivided cup on a saucer in Blender 5.3.0. | Feedback on work in progress, no tip: the saucer's raised rim and the step down into the well where the cup sits, and the cup's rounded lip. All visible in the screenshot. | [3n36foahjqz23](https://bsky.app/profile/pixelkiln.bsky.social/post/3n36foahjqz23) |
+
+Both re-fetched cookie-less from `public.api.bsky.app` `getPosts` (by DID): author `pixelkiln.bsky.social`, `createdAt` 00:20:15.352Z / 00:20:15.891Z, parent URIs correct, 202 / 169 bytes. No link, no pitch, Texel not mentioned. Sent with `pixelkiln/tools/pixelkiln_social.ps1 -Mode reply` after a `-DryRun` of each, in a separate call. Neither account was replied to before (@astralthewerewolf was listed once, on 11-24, as a candidate).
+
+### Threads looked at and left alone
+
+- **@57e**, **@matzori**, **@esteeland**: standing rule. **@paultriv**, **@doughyanimation**, **@learnblender**, **@hyperhollowgames.net**, **@dracodare**: promos.
+- **@klaymoor11** (low-poly Amelia, 11-10, 0 replies): images fetched, not viewed; 15 days old. **@neversnowgames** (race car, asks which livery): a game account's own promo question, not viewed.
+- **@doctorflower**, **@nimbuspaw**, **@liberiarcano**, **@grexsaurus**, **@whtvrwrks.io**: appear earlier in this log.
+- **@meisam3dfox**, **@skleembof.itch.io**, **@mizukiasaka**, **@b-render**: carried, still not sampled (video).
+
+### §E: not due. The next check is **Sat 2026-11-28**. `promo/densitycap/after_post.png` joins the gallery candidates; it needs the `brand-visual` loop before it goes on the page.

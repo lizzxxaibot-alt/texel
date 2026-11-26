@@ -897,3 +897,13 @@ Beats this release earns:
 - **Fri 11-27, Sun 11-29, Sat 11-28 §E:** as in the 11-22 entry above.
 - **A second firing today does not post.**
 - **T-023 (HUMAN stop/continue) is still open.** A STOP voids every row here.
+
+## 2026-11-25 (11-26 00:20Z) — `texel-marketing`: Wed beat SPENT (density capture: Detect, Apply, Detect)
+
+- **Posted** [3n36fmkdqtw2s](https://bsky.app/profile/pixelkiln.bsky.social/post/3n36fmkdqtw2s): two real 3D Viewport captures from the shipped 0.2.7 zip (`promo/densitycap/`, built by `density_cap.py`, facts in `facts.json`). `promo/densitycap/*` blocked until **12-16**. **A second firing today does not post.**
+- **Fri 11-27 (sprite beat):** `ui_anim_01` or `ui_sprite_01` (unused); `ui_anim_02`/`04` are clear again. `promo/hide/*` clears 11-27.
+- **Sun 11-29:** `shot_temple_*` (measure the three densities first, see the 09-21 note; `density_cap.py`'s `own_density()` does that), `shot_dungeon_*` or `shot_shrine_*`.
+- **Mon 11-30 (one capability):** a Diamond-brush before/after (0.2.3) still needs a measured visual. Density Zones (`tex_zones.py`) has never been posted and has no visual.
+- **Sat 11-28 §E:** the gallery image for a post-launch feature, carried five weeks. It needs the `brand-visual` loop.
+- **Check Tiling stays barred.** Do not post or imply a gradient tool.
+- **T-023 (HUMAN stop/continue) is still open.** A STOP voids every row here.

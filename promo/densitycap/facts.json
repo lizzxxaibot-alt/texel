@@ -1,0 +1,93 @@
+{
+  "fails": [],
+  "sizes_m": [
+    4.0,
+    1.0,
+    0.5
+  ],
+  "target": 16.0,
+  "scene": {
+    "faces": 18,
+    "image": "tile_timber.png",
+    "image_size": [
+      64,
+      64
+    ],
+    "interpolation": "Closest",
+    "extension": "REPEAT"
+  },
+  "setup_viewport": {
+    "result": [
+      "FINISHED"
+    ],
+    "shading": "MATERIAL"
+  },
+  "before": {
+    "result": [
+      "FINISHED"
+    ],
+    "readout": [
+      "17.3 px/unit average",
+      "range 4.0 - 32.0",
+      "8.0x spread"
+    ],
+    "target_after_detect": 17.33300018310547,
+    "own": {
+      "faces": 18,
+      "lo": 4.0,
+      "hi": 32.0,
+      "avg": 17.333,
+      "spread": 8.0,
+      "distinct": [
+        4.0,
+        16.0,
+        32.0
+      ]
+    }
+  },
+  "apply": {
+    "result": [
+      "FINISHED"
+    ],
+    "status": "18 faces set to 16.0 px/unit"
+  },
+  "after": {
+    "result": [
+      "FINISHED"
+    ],
+    "readout": [
+      "16.0 px/unit average",
+      "range 16.0 - 16.0",
+      "1.0x spread"
+    ],
+    "target_after_detect": 16.0,
+    "own": {
+      "faces": 18,
+      "lo": 16.0,
+      "hi": 16.0,
+      "avg": 16.0,
+      "spread": 1.0,
+      "distinct": [
+        16.0
+      ]
+    }
+  },
+  "tab": "Texel",
+  "area": {
+    "x": 0,
+    "y": 89,
+    "w": 1238,
+    "h": 785
+  },
+  "window": {
+    "w": 1500,
+    "h": 900
+  },
+  "blender": "4.5.9 LTS",
+  "texel_from": "C:\\Users/opule/AppData/Local/Temp/claude/af502bb1ca13086f/27935e5d-b09e-4267-b607-c3489767cb98/scratchpad/t027\\texel\\__init__.py",
+  "texel_version": [
+    0,
+    2,
+    7
+  ]
+}
