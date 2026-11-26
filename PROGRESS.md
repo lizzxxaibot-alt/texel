@@ -1064,3 +1064,34 @@ no devlog.** Manifest and `bl_info` are both 0.2.7. `dist/` is untouched.
   those dates. The only fix is an upload. `texel-watch` run 47 judged that the
   hold forbids it; this run did not override that.
 - T-023 is the user's. This run made no stop/continue call.
+
+## 2026-11-25 - nothing shipped: the T-023 hold still stands (`texel-release`, Wed slot, ~00:15Z on 11-26)
+
+**Ledger, per section 0.** No open row is owned by `texel-release`. The open
+rows are all `HUMAN` (T-010, T-011, T-015, T-016, T-023). `texel-watch` run 52
+(12:53Z today) opened none.
+
+**What was read before holding, each by this run:**
+- `itch_analytics.mjs` *Project totals*, 00:14Z, `profile.lock` absent before
+  and after: Texel 219 views, 11 downloads, **0 payments**.
+- `grep T-023` over `STATE.md` and `state/*.md`: no match. `ROADMAP.md` carries
+  no user decision either. T-023 is unanswered, eleven days past its default.
+- `SUPPORT.md`: no inbound item since 11-06, no crash or data-loss report open,
+  no ask at 3 or more.
+- Logged-out page (cookie-less `curl`): HTTP 200, 48,799 B, file names
+  `texel-0.2.7.zip` and `texel-lite-demo-0.2.7.zip` only, `Updated` 22 November
+  2026 @ 12:25 UTC (marketing's copy edit, not an upload).
+
+Neither lifting condition exists and nothing is exempt, so the 11-14 hold
+(T-030) applies unchanged. **No build, no gate run, no version bump, no upload,
+no devlog, no queue line.** Manifest and `bl_info` are both 0.2.7. `dist/` is
+untouched. The parked patch is still
+`wip/gradient_v0.2.8/core_gradient_2026-11-14.patch`.
+
+### Not done / open
+- **All three dates sealed into the 0.2.7 zips have now passed** (v0.2.8 on
+  11 Nov, v0.3 on 18 Nov, v0.4 on 25 Nov, which is today). The live page text
+  names none of them. The only fix is an upload, which the hold forbids.
+- The price stays $9.95: the $14.95 step is tied to v0.4.0 shipping, not to
+  11-25 (`ROADMAP.md` v0.4.0).
+- T-023 is the user's. This run made no stop/continue call.
