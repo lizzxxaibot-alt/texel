@@ -6,6 +6,70 @@ in `../ACTIONS.md` and handed to a named owner.
 
 ---
 
+## 2026-11-25 — run 52 (in slot, 12:53Z; no outage since run 51)
+
+**VERDICT: BLOCKED ON A HUMAN DECISION; THE LISTING IS HEALTHY.** Same state as run 51, plus two views. T-023 (stop/continue) is eleven days past its default date with no answer; 0 sales after 77 days and 219 views.
+
+### Action ledger
+
+**Opened: 0. Closed: 0.** A-032 is still Open in `pixelkiln/launch/watch/ACTIONS.md`, so the 7-day and 14-day rungs stay suspended for every HUMAN row.
+
+| id | age | owner |
+|---|---|---|
+| T-023 | 47 d | **HUMAN**: stop/continue. Default date 11-14 passed, unanswered |
+| T-010 | 71 d | **HUMAN** (suspended) |
+| T-011 | 71 d | **HUMAN** (suspended) |
+| T-015 | 67 d | **HUMAN** (suspended) |
+| T-016 | 67 d | **HUMAN** (suspended; part of T-023's redirect option) |
+
+`grep -c T-023` over `STATE.md` and `state/texel.md` returns 0 and 0, so no decision is recorded. No doer routine owns an open row.
+
+### ALERTS
+
+None. All four routines ran inside their intervals and left artifacts, and the first full day without a host outage since 11-18 means nothing was lost to A-037 this cycle.
+
+### Routines (scheduler read 11-25 12:53Z)
+
+| Routine | lastRunAt | Next | Artifact |
+|---|---|---|---|
+| support | 11-24T14:27Z | 11-25T14:24Z | `SUPPORT.md:701`: 11-24 row, no inbound items, with its window-depth check covering the 11-23 gap |
+| marketing | 11-24T21:21Z | 11-25T21:20Z | `promo/POSTED.md:2992`: two 11-24 firings, both *no Texel post, two replies*. Correct: Tuesday is a packs day. Today is Wednesday, a Texel day; `QUEUE.md:896` names the candidates and says not to quote 25 Nov as a release date |
+| release | 11-18T16:13Z | 11-25T16:13Z; weekly, not late | `PROGRESS.md:1039`, 11-18: *nothing shipped, the T-023 hold still stands*. Today's slot is three hours after this run |
+| funnel | 11-22T12:24Z | 11-27T16:06Z; weekly, not late | `funnel/LOG.md:1065`: measuring week 11-22 |
+
+`pixelkiln-backup` ran 11-25T04:13Z and the Texel repo was clean at this run's start (last commit `9961dcb`, 11-25T04:16Z).
+
+### Listing (cookie-less GET, 11-25 12:53:27Z)
+
+| Check | Result |
+|---|---|
+| Logged-out page | HTTP 200, 48,796 B. Same six comment post ids (17784093 … 17822598) |
+| Published | Public 200 to an anonymous request; Project totals reads `Published` |
+| Download | Paid `texel-0.2.7.zip` **218 kB** matches local `dist/texel-0.2.7.zip` 224,109 B (the newest). Demo `texel-lite-demo-0.2.7.zip` 206 kB |
+| Price | Public page shows $9.95 ×3. Correct: the $14.95 step is tied to v0.4.0, which is held |
+| AI disclosure | Public table: `AI Assisted, Code, Graphics` |
+
+**All pass.** The edit form was not opened. `Updated` is still 22 November 2026 @ 12:25 UTC (marketing's copy edit, accounted for in run 51). `devlog.rss` newest item is 0.2.7, 05 Nov.
+
+**Today is 25 Nov, the last of the three dates sealed inside the 0.2.7 zip** (its `ROADMAP.md` and `START-HERE.html` give 25 Nov for v0.4.0 and the price step). From today every release date a holder of that zip can read is in the past. The live page text names none of them and no `14.95` (grep, this run), so the public listing makes no false claim. No holder is a buyer (0 payments); 6 untraced demo pulls may carry it. The only fix is an upload the hold forbids (run 47's ruling), so no row is opened. It is one more cost of T-023 staying unanswered.
+
+### Numbers
+
+`| 2026-11-25 (12:53Z) | 219 | 11 | 0 | $0.00 | 0.00% |`
+
+- **+2 views over ~0.94 d** (≈2.1/day). **7-day trend:** +15 over ~6.97 d (≈2.2/day), against +13 over ~8.03 d (≈1.6/day) the window before. **Slightly up**, n=15, direction only.
+- Downloads 11, unchanged since 11-17. Sales 0, revenue 0, 0 ratings, 4 collections. Store ledger $100.92 / 18 (summed off Project totals plus the bundle), unchanged, none Texel.
+- Conversion 0 / 219. Run 48's judgment stands and is not restated.
+- Lite demo since 10-07: +94 views, 6 untraced downloads (≈6%), against a bar of +150 views.
+- Day 77 live with 0 sales. The zero-sales rule fired on 10-09 and is held as T-023, not re-fired.
+
+### Roadmap
+
+- **No dated target is open before v0.5.0 (2026-12-12, 17 days out).** v0.2.8, v0.3.0 and v0.4.0 are held with no date, on T-023. v0.5.0 sits behind all three and cannot ship on 12-12 unless the hold lifts; it gets flagged when the date is within 7 days (from 12-05).
+- Live build: v0.2.7, shipped 11-05, 20 days ago. `texel-release` fires today at 16:13Z; under the hold the expected artifact is a dated *nothing shipped* entry in `PROGRESS.md`, and run 53 checks for it.
+
+---
+
 ## 2026-11-24 — run 51 (scheduler catch-up, 14:25Z; host off after ~11-22T12:30Z → 11-24T14:18Z, no 11-23 run)
 
 **VERDICT: BLOCKED ON A HUMAN DECISION; THE LISTING IS HEALTHY.** Same state as run 50, plus seven views and a ~50-hour outage. T-023 (stop/continue) is ten days past its default date with no answer; 0 sales after 76 days and 217 views.
